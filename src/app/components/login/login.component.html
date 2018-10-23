@@ -1,3 +1,44 @@
-<p>
-  login works!
-</p>
+<div class="back">
+<mat-grid-list [cols]="1" rowHeight="500px">
+
+  <mat-grid-tile [colspan]="1" [rowspan]="2">
+
+          <mat-card class="example-card">
+            <mat-grid-list [cols]="1" rowHeight="100px">
+              <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <img src="../../../assets/img/logo.png" class="logo" alt="Photo of a Shiba Inu">
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field appearance="outline">
+                  <mat-label>Usuario</mat-label>
+                  <input matInput>
+                  <mat-icon matSuffix>account_circle</mat-icon>
+
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input matInput type="password">
+                  <mat-icon matSuffix>lock</mat-icon>
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+
+                  <mat-grid-list cols="1" rowHeight="50px">
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                      <button mat-flat-button color="primary">Inicia sesión</button>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                      <a href="">Aún no tienes cuenta. Registrate aqui</a>
+                    </mat-grid-tile>
+                  </mat-grid-list>
+          </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+</div>
+
+
+
+
+
