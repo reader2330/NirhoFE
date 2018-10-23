@@ -9,6 +9,10 @@ export class SidebarComponent implements OnInit {
 
   constructor() { }
 
+  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
+
+
+
   ngOnInit() {
   }
 
