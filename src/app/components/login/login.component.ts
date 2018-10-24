@@ -16,8 +16,6 @@ export class LoginComponent implements OnInit {
   }
 
   sendLogin(){
-
-
       this.LoginService.sendLogin(this.params).subscribe((res) =>{
         console.log(res);
       }, (err) => {
@@ -25,12 +23,8 @@ export class LoginComponent implements OnInit {
 
       }, () => {
         console.log("acabe")
-      })
-
-
+      });
     this.router.navigate(['inicio'])
-
-
   }
 
 }

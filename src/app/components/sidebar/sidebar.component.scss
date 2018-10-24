@@ -29,3 +29,17 @@ h1.example-app-name {
      `<body>` to be our scrolling element for mobile layouts. */
   flex: 1 0 auto;
 }
+
+.avatar{
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+
+}
+.avatar img{
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  background-size: cover;
+}

@@ -7,8 +7,16 @@
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav>
       <mat-nav-list>
-        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
+        <div class="avatar">
+          <img src="../../../assets/img/avatar.png" alt="">
+        </div>
+        <mat-list>
+          <mat-list-item> Pepper </mat-list-item>
+          <mat-list-item> Salt </mat-list-item>
+          <mat-list-item> Paprika </mat-list-item>
+        </mat-list>
       </mat-nav-list>
+
     </mat-sidenav>
 
   </mat-sidenav-container>
