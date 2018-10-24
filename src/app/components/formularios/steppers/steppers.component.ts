@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {BreakpointObserver, Breakpoints} from '../../../../../node_modules/@angular/cdk/layout';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  selector: 'app-steppers',
+  templateUrl: './steppers.component.html',
+  styleUrls: ['./steppers.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SteppersComponent implements OnInit {
   mobile = false;
   constructor(breakpointObserver: BreakpointObserver) {
     breakpointObserver.isMatched(('(max-width:450)'));
@@ -18,18 +18,9 @@ export class SidebarComponent implements OnInit {
         this.mobile = false;
       }
     });
-
   }
-
-  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
-
-
 
   ngOnInit() {
   }
-
-
-
-
 
 }

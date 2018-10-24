@@ -10,6 +10,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './modules/material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { FormularioPrimaryComponent } from './components/formularios/formulario-primary/formulario-primary.component';
+import { DataCompanyComponent } from './components/formularios/data-company/data-company.component';
+import { DataProyectComponent } from './components/formularios/data-proyect/data-proyect.component';
+import { DataPeriodComponent } from './components/formularios/data-period/data-period.component';
+import { HeadCountComponent } from './components/formularios/head-count/head-count.component';
+import { OrganigramaComponent } from './components/formularios/organigrama/organigrama.component';
+import { SteppersComponent } from './components/formularios/steppers/steppers.component';
+import { DataContactComponent } from './components/formularios/data-contact/data-contact.component';
 
 
 @NgModule({
@@ -17,7 +25,15 @@ import {HttpClientModule} from '@angular/common/http';
     AppComponent,
     LoginComponent,
     InicioComponent,
-    SidebarComponent
+    SidebarComponent,
+    FormularioPrimaryComponent,
+    DataCompanyComponent,
+    DataProyectComponent,
+    DataPeriodComponent,
+    HeadCountComponent,
+    OrganigramaComponent,
+    SteppersComponent,
+    DataContactComponent
   ],
   imports: [
     BrowserModule,

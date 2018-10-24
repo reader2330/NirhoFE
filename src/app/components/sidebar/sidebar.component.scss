@@ -43,3 +43,21 @@ h1.example-app-name {
   border-radius: 100px;
   background-size: cover;
 }
+
+
+.form-company {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-company > * {
+  width: 100%;
+}
+
+stepper-forms{
+
+  margin-top: 300px;
+
+}
+
+

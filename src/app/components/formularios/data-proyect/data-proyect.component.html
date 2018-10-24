@@ -1,0 +1,38 @@
+<mat-grid-list  [cols]="checkMobileCols()" rowHeight="100px">
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field class="inputForm" appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field class="inputForm" appearance="outline">
+      <mat-label>Numero de empleados</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field class="inputForm" appearance="outline">
+      <mat-label>Numero de participantes</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field class="inputForm" appearance="outline">
+      <mat-label>Sedes</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field class="inputForm" appearance="outline">
+      <mat-label>Frecuencia evaluación</mat-label>
+      <mat-select >
+        <mat-option *ngFor="let time of periods" [value]="time.description">
+          {{time.description}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+
+
+</mat-grid-list>

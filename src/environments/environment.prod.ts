@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlApi: 'https://hola.com'
+  urlApi: 'https://locahost:8080/Nirho/'
 };
