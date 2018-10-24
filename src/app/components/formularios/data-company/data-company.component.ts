@@ -47,6 +47,7 @@ export class DataCompanyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCountries();
   }
 
   checkMobileCols() {
