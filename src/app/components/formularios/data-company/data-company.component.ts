@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../services/catalogs.service';
 
@@ -8,6 +8,7 @@ import {CatalogsService} from '../../../services/catalogs.service';
   styleUrls: ['./data-company.component.scss']
 })
 export class DataCompanyComponent implements OnInit {
+  @Output() cambioStepper = new EventEmitter();
   spins = [
     {
     id: 1,
@@ -61,16 +62,16 @@ export class DataCompanyComponent implements OnInit {
   getCountries() {
     this.CatalogService.getCountries().subscribe((res) =>{
       console.log(res);
-      if (res.data) {
-        this.countries = res.data;
+      if (res) {
+        this.countries = res;
       }
     });
   }
   getGiros() {
     this.CatalogService.getCountries().subscribe((res) => {
       console.log(res);
-      if (res.data) {
-        this.spins   = res.data;
+      if (res) {
+        this.spins   = res;
       }
     });
   }
@@ -90,6 +91,14 @@ export class DataCompanyComponent implements OnInit {
     } else {
       return 2;
     }
+  }
+
+  saveCompany() {
+
+    sessionStorage.setItem('company', JSON.stringify(this.company));
+    this.cambioStepper.emit({'next': '2', 'back': '0'});
+
+
   }
 
 }

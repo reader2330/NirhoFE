@@ -3,22 +3,24 @@
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="inputForm" appearance="outline">
         <mat-label>Nombre</mat-label>
-        <input matInput type="text">
+        <input matInput [(ngModel)]="company.empresa" type="text">
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="inputForm" appearance="outline">
         <mat-label>País</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let country of countries"></mat-option>
+        <mat-select [(ngModel)]="company.pais" >
+          <mat-option *ngFor="let country of countries" [value]="country.id">
+            {{country.descriptionCatalogo}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile>
-    <mat-form-field  style="width: 96%; " appearance="outline">
+    <mat-form-field  class="inputForm" appearance="outline">
       <mat-label>RFC</mat-label>
-      <input type="text" matInput >
+      <input [(ngModel)]="company.rfc" type="text" matInput >
     </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -26,15 +28,15 @@
         <mat-label>Giro</mat-label>
         <mat-select>
           <mat-option *ngFor="let spin of spins" [value]="spin.id">
-            {{spin.description}}
+            {{spin.descriptionCatalogo}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="checkMaxColumns()" [rowspan]="1">
-      <mat-form-field  style="width: 96%; " appearance="outline">
+      <mat-form-field  class="inputForm" appearance="outline">
         <mat-label>Dirección</mat-label>
-        <input type="tel" matInput >
+        <input [(ngModel)]="company.direccion" type="tel" matInput >
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile *ngIf="!mobile">
@@ -44,8 +46,8 @@
 
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <button mat-raised-button >Cancelar <mat-icon>cancel</mat-icon></button>
-      <button mat-raised-button color="primary" style="margin-left: 10px">Siguiente <mat-icon>arrow_forward</mat-icon></button>
+      <button mat-raised-button matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveCompany()">Siguiente <mat-icon>arrow_forward</mat-icon></button>
 
     </mat-grid-tile>
 

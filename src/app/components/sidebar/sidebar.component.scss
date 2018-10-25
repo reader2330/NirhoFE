@@ -44,6 +44,35 @@ h1.example-app-name {
   background-size: cover;
 }
 
+.logo-nav{
+  width: 130px;
+  height: 50px;
+
+}
+
+.logo-nav-mobile{
+  height: 50px;
+  width: 130px;
+}
+.logo-nav-mobile img{
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  margin-left: 20px;
+
+  background-size: cover;
+
+}
+
+.logo-nav img{
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+
+  background-size: cover;
+
+}
+
 
 .form-company {
   display: flex;

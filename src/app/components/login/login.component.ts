@@ -8,7 +8,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  params ={};
+  params = {
+    username: '',
+    password: '',
+  };
 
   constructor(private LoginService:LoginService, private router:Router) { }
 
