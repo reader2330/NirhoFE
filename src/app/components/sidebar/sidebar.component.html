@@ -1,7 +1,20 @@
 
+<mat-toolbar color="#000000">
+          <span *ngIf="!mobile">
+            <div class="logo-nav">
+            <img src="../../../assets/img/logo.png" alt="">
+              </div>
+          </span>
+  <span *ngIf="mobile">
 
+            <div class="logo-nav-mobile">
+              <a (click)="snav.toggle()"><mat-icon >menu</mat-icon></a>
+              <img src="../../../assets/img/logo.png" alt="">
+            </div>
+          </span>
+</mat-toolbar>
 <mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" [opened]="!mobile" #snav>
+  <mat-sidenav mode="side" [opened]="!mobile" [fixedInViewport]="true" [fixedTopGap]="62" [fixedBottomGap]="60"  #snav>
 
     <mat-nav-list>
       <div class="avatar">
@@ -16,22 +29,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="row">
-      <div class="col-sm-12">
-        <mat-toolbar>
-          <span *ngIf="!mobile">
-            <div class="logo-nav">
-            <img src="../../../assets/img/logo.png" alt="">
-              </div>
-          </span>
-          <span *ngIf="mobile">
 
-            <div class="logo-nav-mobile">
-              <a (click)="snav.toggle()"><mat-icon >menu</mat-icon></a>
-              <img src="../../../assets/img/logo.png" alt="">
-            </div>
-          </span>
-        </mat-toolbar>
-      </div>
       <div class="col-sm-12 stepper-forms" >
         <app-steppers></app-steppers>
       </div>
