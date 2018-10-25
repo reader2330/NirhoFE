@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  constructor(private LoginService:LoginService, private router:Router) { }
+  constructor(private LoginService: LoginService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -22,12 +22,12 @@ export class LoginComponent implements OnInit {
       this.LoginService.sendLogin(this.params).subscribe((res) =>{
         console.log(res);
       }, (err) => {
-        if(err) console.log(err);
+        if (err) console.log(err);
 
       }, () => {
-        console.log("acabe")
+        console.log('acabe');
       });
-    this.router.navigate(['inicio'])
+    this.router.navigate(['inicio']);
   }
 
 }

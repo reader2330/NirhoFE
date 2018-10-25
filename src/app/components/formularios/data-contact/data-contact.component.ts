@@ -9,6 +9,16 @@ import {CatalogsService} from '../../../services/catalogs.service';
 })
 export class DataContactComponent implements OnInit {
 
+  contact = {
+    id: 0,
+    celular: 1234,
+    email: '',
+    nombre: '',
+    puesto: '',
+    telefono: 1234,
+    tipoContacto: 1,
+    empresa: {}
+  };
   puestos = [];
   typeContact = [];
   mobile = false;
@@ -54,7 +64,12 @@ export class DataContactComponent implements OnInit {
     } else {
       return 3;
     }
+  }
 
+  saveContact() {
+    const empresa = JSON.parse(sessionStorage.getItem('company'));
+    this.contact.empresa = empresa;
+    sessionStorage.setItem('contact', JSON.stringify(this.contact));
   }
 
 }

@@ -8,7 +8,16 @@ import {CatalogsService} from '../../../services/catalogs.service';
   styleUrls: ['./data-proyect.component.scss']
 })
 export class DataProyectComponent implements OnInit {
-
+  proyect = {
+    idProyecto: 0,
+    nombre: '',
+    numEmpleados: 0,
+    sedes: '',
+    numParticipantes: 0,
+    frecuenciaEval: 0,
+    idEmpresa: {},
+    idContacto: {},
+  };
   periods = [
     {
       id: 1,
@@ -53,6 +62,13 @@ export class DataProyectComponent implements OnInit {
       return 3;
     }
 
+  }
+  saveProyect() {
+    if (sessionStorage.getItem('contact')) {
+      const contact = JSON.parse(sessionStorage.getItem('contact'));
+      this.proyect.idEmpresa = contact.empresa;
+      this.proyect.idContacto = contact;
+    }
   }
 
 }
