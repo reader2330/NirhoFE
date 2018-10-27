@@ -1,0 +1,189 @@
+<mat-accordion>
+
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>book </mat-icon> Datos Proyecto
+      </mat-panel-title>
+      <mat-panel-description>
+
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput  type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>Numero de empleados</mat-label>
+            <input matInput  type="number">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>Numero de participantes</mat-label>
+            <input matInput  type="number">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>Sedes</mat-label>
+            <input  matInput type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>Frecuencia evaluación</mat-label>
+            <mat-select  >
+              <mat-option >
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>business_center </mat-icon> Datos Empresa
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>País</mat-label>
+            <mat-select  >
+              <mat-option >
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field  class="inputForm" appearance="outline">
+            <mat-label>RFC</mat-label>
+            <input type="text" matInput >
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field  class="inputForm" appearance="outline">
+            <mat-label>Dirección</mat-label>
+            <input  type="tel" matInput >
+          </mat-form-field>
+        </div>
+        <div class="col-md-8">
+          <mat-form-field  style="width: 96%; " appearance="outline">
+            <mat-label>Giro</mat-label>
+            <mat-select>
+              <mat-option >
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+
+
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>perm_contact_calendar </mat-icon> Datos Contacto
+      </mat-panel-title>
+      <mat-panel-description>
+
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput  type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>Puesto</mat-label>
+            <mat-select>
+              <mat-option >
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>Tipo de contacto</mat-label>
+            <mat-select >
+              <mat-option >
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field class="inputForm"  appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email"matInput >
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>Celular</mat-label>
+            <input type="tel"  matInput >
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="inputForm" appearance="outline">
+            <mat-label>Telefono</mat-label>
+            <input type="tel"  matInput >
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+
+</mat-accordion>
+

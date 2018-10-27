@@ -18,6 +18,9 @@ import { HeadCountComponent } from './components/formularios/head-count/head-cou
 import { OrganigramaComponent } from './components/formularios/organigrama/organigrama.component';
 import { SteppersComponent } from './components/formularios/steppers/steppers.component';
 import { DataContactComponent } from './components/formularios/data-contact/data-contact.component';
+import {BandejaComponent} from './components/bandeja/bandeja.component';
+import { BandejaDetalleComponent } from './components/bandeja-detalle/bandeja-detalle.component';
+
 
 
 @NgModule({
@@ -33,7 +36,9 @@ import { DataContactComponent } from './components/formularios/data-contact/data
     HeadCountComponent,
     OrganigramaComponent,
     SteppersComponent,
-    DataContactComponent
+    DataContactComponent,
+    BandejaComponent,
+    BandejaDetalleComponent,
   ],
   imports: [
     BrowserModule,
