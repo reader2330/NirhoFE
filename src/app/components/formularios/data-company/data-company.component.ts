@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../services/catalogs.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-data-company',
@@ -8,21 +9,8 @@ import {CatalogsService} from '../../../services/catalogs.service';
   styleUrls: ['./data-company.component.scss']
 })
 export class DataCompanyComponent implements OnInit {
-  @Output() cambioStepper = new EventEmitter();
-  spins = [
-    {
-    id: 1,
-    description: 'Hola'
-    },
-    {
-      id: 2,
-      description: 'Adios'
-    },
-    {
-      id: 3,
-      description: 'Muestra'
-    }
-  ];
+
+  spins = [];
   company = {
     id: null,
     direccion: '',
@@ -33,7 +21,16 @@ export class DataCompanyComponent implements OnInit {
   };
   countries = [];
   mobile = false;
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
+  companyForm = new FormGroup(
+    {
+      direccion: new FormControl('', Validators.required),
+      giro: new FormControl(0, Validators.required),
+      pais: new FormControl(0, Validators.required),
+      rfc: new FormControl('', Validators.required),
+      nombre: new FormControl('', Validators.required)
+    }
+    );
+  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private formBuilder:FormBuilder) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -45,10 +42,21 @@ export class DataCompanyComponent implements OnInit {
         this.checkMobileCols();
       }
     });
+
+
+
+
   }
+
+  get pais() {
+    return this.companyForm.get('pais');
+  }
+
 
   ngOnInit() {
     this.getCountries();
+    this.getGiros();
+
   }
 
   checkMobileCols() {
@@ -61,17 +69,16 @@ export class DataCompanyComponent implements OnInit {
   }
   getCountries() {
     this.CatalogService.getCountries().subscribe((res) =>{
-      console.log(res);
       if (res) {
         this.countries = res;
       }
     });
   }
   getGiros() {
-    this.CatalogService.getCountries().subscribe((res) => {
-      console.log(res);
+    this.CatalogService.getGiros().subscribe((res) => {
       if (res) {
-        this.spins   = res;
+        console.log(res);
+        this.spins = res;
       }
     });
   }
@@ -95,10 +102,11 @@ export class DataCompanyComponent implements OnInit {
 
   saveCompany() {
 
+    this.company = this.companyForm.value;
+    console.log(this.company);
     sessionStorage.setItem('company', JSON.stringify(this.company));
-    this.cambioStepper.emit({'next': '2', 'back': '0'});
-
-
   }
+  cancelCompany(){}
+
 
 }

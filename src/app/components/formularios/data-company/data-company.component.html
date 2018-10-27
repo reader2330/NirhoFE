@@ -1,40 +1,41 @@
-
+<form [formGroup]="companyForm"  >
   <mat-grid-list  [cols]="checkMobileCols()" rowHeight="100px">
+
     <mat-grid-tile [colspan]="checkMobileCols()">
 
       <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">work_outline</mat-icon> Datos empresa</h2>
 
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
 
-      <mat-form-field class="inputForm" appearance="outline">
+      <mat-form-field [formGroup]="companyForm" class="inputForm" appearance="outline">
         <mat-label>Nombre</mat-label>
-        <input matInput [(ngModel)]="company.empresa" type="text">
+        <input matInput formControlName="nombre" type="text" required>
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-form-field class="inputForm" appearance="outline">
+      <mat-form-field [formGroup]="companyForm"class="inputForm" appearance="outline">
         <mat-label>País</mat-label>
-        <mat-select [(ngModel)]="company.pais" >
+        <mat-select formControlName="pais" required >
           <mat-option *ngFor="let country of countries" [value]="country.id">
-            {{country.descriptionCatalogo}}
+            {{country.descripcionCatalogo}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile>
-    <mat-form-field  class="inputForm" appearance="outline">
-      <mat-label>RFC</mat-label>
-      <input [(ngModel)]="company.rfc" type="text" matInput >
-    </mat-form-field>
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>RFC</mat-label>
+        <input formControlName="rfc" type="text" matInput required >
+      </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field  style="width: 96%; " appearance="outline">
         <mat-label>Giro</mat-label>
-        <mat-select>
+        <mat-select formControlName="giro">
           <mat-option *ngFor="let spin of spins" [value]="spin.id">
-            {{spin.descriptionCatalogo}}
+            {{spin.descripcionCatalogo}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -42,7 +43,7 @@
     <mat-grid-tile [colspan]="checkMaxColumns()" [rowspan]="1">
       <mat-form-field  class="inputForm" appearance="outline">
         <mat-label>Dirección</mat-label>
-        <input [(ngModel)]="company.direccion" type="tel" matInput >
+        <input formControlName="direccion" type="tel" matInput required >
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile *ngIf="!mobile">
@@ -52,12 +53,16 @@
 
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <button mat-raised-button matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
-      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveCompany()" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
+      <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveCompany()" [disabled]="!companyForm.valid" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
 
     </mat-grid-tile>
 
   </mat-grid-list>
+
+
+</form>
+
 
 
 

@@ -9,16 +9,17 @@ import {Observable} from 'rxjs';
 })
 export class CatalogsService {
 
-  api = 'http://localhost:8080/Nirho/';
+  api = environment.urlApi;
   header = new HttpHeaders();
+
   constructor(private _http: HttpClient) {
+    this.header.append('Content-Type', 'application/json');
   }
   getCountries(): Observable<any> {
-    this.header.append('Content-Type', 'application/json');
     return this._http.get(this.api + 'catalogo/pais', {headers: this.header});
   }
   getGiros(): Observable<any> {
-    return this._http.get(this.api + 'catalogo/giro');
+    return this._http.get(this.api + 'catalogo/giro',{headers: this.header});
   }
   getPuestos(): Observable<any> {
     return this._http.get(this.api + 'catalogo/tipoContactoEmpresa');

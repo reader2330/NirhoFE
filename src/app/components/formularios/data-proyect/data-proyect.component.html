@@ -1,3 +1,4 @@
+<form [formGroup]="proyectForm"  >
 <mat-grid-list  [cols]="checkMobileCols()" rowHeight="100px">
   <mat-grid-tile [colspan]="checkMobileCols()">
 
@@ -7,33 +8,33 @@
   <mat-grid-tile [colspan]="1" [rowspan]="1">
     <mat-form-field class="inputForm" appearance="outline">
       <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="proyect.nombre" type="text">
+      <input matInput formControlName="nombre" type="text">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="1">
     <mat-form-field class="inputForm" appearance="outline">
       <mat-label>Numero de empleados</mat-label>
-      <input matInput [(ngModel)]="proyect.numEmpleados" type="number">
+      <input matInput formControlName="numEmpleados" type="number">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="1">
     <mat-form-field class="inputForm" appearance="outline">
       <mat-label>Numero de participantes</mat-label>
-      <input matInput [(ngModel)]="proyect.numParticipantes" type="number">
+      <input matInput formControlName="numParticipantes" type="number">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="1">
     <mat-form-field class="inputForm" appearance="outline">
       <mat-label>Sedes</mat-label>
-      <input [(ngModel)]="proyect.sedes" matInput type="text">
+      <input formControlName="sedes" matInput type="text">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="1">
     <mat-form-field class="inputForm" appearance="outline">
       <mat-label>Frecuencia evaluación</mat-label>
-      <mat-select [(ngModel)]="proyect.frecuenciaEval" >
+      <mat-select formControlName="frecuenciaEval" >
         <mat-option *ngFor="let time of periods" [value]="time.id">
-          {{time.descripcionCatalogo}}
+          {{time.description}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -44,11 +45,15 @@
   <mat-grid-tile *ngIf="!mobile">
 
   </mat-grid-tile>
+  <mat-grid-tile *ngIf="!mobile">
+
+  </mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="1">
-    <button mat-raised-button matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
-    <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveCompany()">Siguiente <mat-icon>arrow_forward</mat-icon></button>
+    <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
+    <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveProyect()" [disabled]="!proyectForm.valid" matStepperNext>Guardar y enviar <mat-icon>save</mat-icon></button>
 
   </mat-grid-tile>
 
 
 </mat-grid-list>
+</form>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '../../../../../node_modules/@angular/cdk/layout';
 import {CatalogsService} from '../../../services/catalogs.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-data-contact',
@@ -22,6 +23,16 @@ export class DataContactComponent implements OnInit {
   puestos = [];
   typeContact = [];
   mobile = false;
+  contactForm = new FormGroup(
+    {
+      telefono: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+      puesto: new FormControl(0, Validators.required),
+      tipoContacto: new FormControl(0, Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      nombre: new FormControl('', Validators.required),
+      celular: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+    }
+  );
   constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
@@ -37,6 +48,8 @@ export class DataContactComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getPuestos();
+    this.getTypeContact();
   }
 
   getPuestos() {
@@ -49,7 +62,7 @@ export class DataContactComponent implements OnInit {
 
   }
   getTypeContact() {
-    this.CatalogService.getPuestos().subscribe((res) => {
+    this.CatalogService.getTypeContact().subscribe((res) => {
       console.log(res);
       if (res) {
         this.typeContact = res;
@@ -68,6 +81,7 @@ export class DataContactComponent implements OnInit {
 
   saveContact() {
     const empresa = JSON.parse(sessionStorage.getItem('company'));
+    this.contact = this.contactForm.value;
     this.contact.empresa = empresa;
     sessionStorage.setItem('contact', JSON.stringify(this.contact));
   }
