@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment.prod';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 
@@ -9,10 +9,13 @@ import {Observable} from 'rxjs';
 })
 export class CatalogsService {
 
-  api = environment.urlApi;
-  constructor(private _http: HttpClient) { }
+  api = 'http://localhost:8080/Nirho/';
+  header = new HttpHeaders();
+  constructor(private _http: HttpClient) {
+  }
   getCountries(): Observable<any> {
-    return this._http.get(this.api + 'catalogo/pais');
+    this.header.append('Content-Type', 'application/json');
+    return this._http.get(this.api + 'catalogo/pais', {headers: this.header});
   }
   getGiros(): Observable<any> {
     return this._http.get(this.api + 'catalogo/giro');

@@ -20,6 +20,7 @@ import { SteppersComponent } from './components/formularios/steppers/steppers.co
 import { DataContactComponent } from './components/formularios/data-contact/data-contact.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,7 @@ import { DataContactComponent } from './components/formularios/data-contact/data
     HeadCountComponent,
     OrganigramaComponent,
     SteppersComponent,
-    DataContactComponent
+    DataContactComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,25 +1,26 @@
-<mat-horizontal-stepper [hidden]="mobile" [linear]="false" #stepper>
+<mat-horizontal-stepper  [hidden]="mobile" [linear]="false" #stepper>
   <mat-step >
-    <ng-template matStepLabel>Datos Empresa</ng-template>
-    <app-data-company (cambioStepper)="getResponseChildren($event)" ></app-data-company>
+    <ng-template matStepLabel>Paso 1</ng-template>
+    <app-head-count></app-head-count>
+    <!--<app-data-company (cambioStepper)="getResponseChildren($event)" ></app-data-company>-->
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Datos Contacto</ng-template>
+    <ng-template matStepLabel>Paso 2</ng-template>
     <app-data-contact></app-data-contact>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Datos Proyecto</ng-template>
+    <ng-template matStepLabel>Paso 3</ng-template>
     <app-data-proyect></app-data-proyect>
   </mat-step>
 </mat-horizontal-stepper>
 
 <mat-vertical-stepper  [hidden]="!mobile" [linear]="false" #stepper2>
   <mat-step >
-    <ng-template matStepLabel>Datos de la Empresa</ng-template>
+    <ng-template matStepLabel> Datos de la Empresa</ng-template>
     <app-data-company></app-data-company>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Datos Contacto</ng-template>
+    <ng-template matStepLabel> Datos Contacto</ng-template>
     <app-data-contact></app-data-contact>
   </mat-step>
   <mat-step>
