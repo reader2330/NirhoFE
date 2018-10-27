@@ -23,6 +23,7 @@ import { BandejaDetalleComponent } from './components/bandeja-detalle/bandeja-de
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
