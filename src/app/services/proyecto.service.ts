@@ -21,4 +21,8 @@ export class ProyectoService {
   getProyects(): Observable<Proyecto[]> {
     return this.http.get<Proyecto[]>(this.api + 'proyecto/todos', {headers: this.headers});
   }
+
+  saveHead(data): Observable<any>{
+    return this.http.post(this.api + '/proyecto/head', data, {headers: this.headers} );
+  }
 }

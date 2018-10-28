@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '../../../../../node_modules/@angular/cdk/layout';
 import {CatalogsService} from '../../../services/catalogs.service';
+import {IWorkBook, read, readFile, utils, IWorkSheet} from 'ts-xlsx';
+import {ProyectoService} from '../../../services/proyecto.service';
+import {Participante} from '../../../models/participante';
+
 
 @Component({
   selector: 'app-head-count',
@@ -9,41 +13,50 @@ import {CatalogsService} from '../../../services/catalogs.service';
 })
 export class HeadCountComponent implements OnInit {
   mobile = false;
-  ELEMENT_DATA: PeriodicElement[] = [
-    {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-    {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-    {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-    {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-    {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-    {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-    {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-    {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-    {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-    {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  ];
-  dataSource = this.ELEMENT_DATA;
+  data = [];
+  file: File;
+  showTable = false;
+  dataSource: Participante[] = [];
+  proyects = [];
+  filters = {
+    idProyecto: 0
+  }
 
   displayedColumns: string[] = [
-    'ID',
-    'NIVEL#',
-    'NOMBRES(S)',
+    'NIVEL TEXTO',
+    'NOMBRES',
     'APELLIDO PATERNO',
     'APELLIDO MATERNO',
     'GENERO',
-    'RFC',
     'PUESTO',
     'FECHA DE INGRESO',
-    'ANTIGUEDAD EN EL PUESTO',
-    'NIVEL DE ESCOLARIDAD',
-    'OTROS ESTUDIOS',
     'IDIOMA',
     'NIVEL',
     'CORREO ELECTRONICO',
     'SEDE',
-    'AREA ORGANIZACIONAL'
-  ];
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
+  ];
+  names = [
+    'id',
+  'nivel', 'nivelTexto',
+  'nombres',
+  'aPaterno',
+  'aMaterno',
+  'genero',
+  'rfc',
+  'puesto',
+  'fechaIngreso',
+  'antigPuesto',
+  'nivelEscolaridad',
+  'otrosEstudios',
+  'idioma',
+  'nivelIdioma',
+  'correoElectronico',
+  'sede',
+  'areaOrg'
+  ]
+
+  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectService:ProyectoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -58,6 +71,15 @@ export class HeadCountComponent implements OnInit {
   }
 
   ngOnInit() {
+  this.getProyects();
+
+  }
+
+  getProyects() {
+    this.ProyectService.getProyects().subscribe((res) => {
+      console.log(res);
+      this.proyects = res;
+    });
   }
 
 
@@ -86,8 +108,47 @@ export class HeadCountComponent implements OnInit {
 
   }
 
-  readHead(file: any) {
+  readFile(evt: any) {
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length === 1 && evt.target.accept === ".xlsx") {
+      const reader: FileReader = new FileReader();
+      reader.onload = (e: any) => {
+        /* read workbook */
+        const bstr: string = e.target.result;
+        const wb: IWorkBook = read(bstr, {type: 'binary'});
+        const wsname: string = wb.SheetNames[0];
+        const ws: IWorkSheet = wb.Sheets[wsname];
+        /* save data */
+        this.data = <any>(utils.sheet_to_json(ws, {header: 1}));
+        this.data.shift();
+        this.dataSource = this.data;
+        for (let i = 0; i < this.data.length; i++) {
+          for (let j = 0; j < 18; j++ ) {
+            this.dataSource[i][this.getName(j)] = this.dataSource[i][j];
+          }
+        }
+        console.log(this.dataSource);
+      };
+      reader.readAsBinaryString(target.files[0]);
 
+    }
+  }
+
+  getName(j){
+    return this.names[j];
+  }
+
+  uploadHeadCount() {
+    this.showTable = true;
+  }
+  guardaHead() {
+      let data = {
+        lista: this.dataSource,
+        idProyecto: this.filters.idProyecto
+      }
+      this.ProyectService.saveHead(data).subscribe((res) => {
+        console.log(res);
+      });
   }
 
 
@@ -95,9 +156,3 @@ export class HeadCountComponent implements OnInit {
 
 }
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
