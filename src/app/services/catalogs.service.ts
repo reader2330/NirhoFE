@@ -24,7 +24,7 @@ export class CatalogsService {
   getPuestos(): Observable<any> {
     return this._http.get(this.api + 'catalogo/tipoContactoEmpresa');
   }
-  getTypeContact(): Observable<any>{
+  getTypeContact(): Observable<any> {
     return this._http.get(this.api + 'catalogo/tipoContacto');
   }
 }

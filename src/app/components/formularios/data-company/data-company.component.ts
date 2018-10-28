@@ -23,11 +23,19 @@ export class DataCompanyComponent implements OnInit {
   mobile = false;
   companyForm = new FormGroup(
     {
+      id: new FormControl(null),
+      anioInicioOperaciones: new FormControl(0),
+      facturacionAnual: new FormControl(0),
+      productoServicioEstrella: new FormControl(null),
+      principalesProductosServicios: new FormControl(null),
+      noEmpleadosAdministrativo: new FormControl(0),
+      noEmpleadosOperativo: new FormControl(0),
+      tipoContratacionEmpleados: new FormControl(null),
       direccion: new FormControl('', Validators.required),
       giro: new FormControl(0, Validators.required),
       pais: new FormControl(0, Validators.required),
       rfc: new FormControl('', Validators.required),
-      nombre: new FormControl('', Validators.required)
+      empresa: new FormControl('', Validators.required)
     }
     );
   constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private formBuilder:FormBuilder) {
