@@ -22,7 +22,11 @@ export class ProyectoService {
     return this.http.get<Proyecto[]>(this.api + 'proyecto/todos', {headers: this.headers});
   }
 
-  saveHead(data): Observable<any>{
-    return this.http.post(this.api + '/proyecto/head', data, {headers: this.headers} );
+  saveHead(data): Observable<any> {
+    return this.http.post(this.api + 'participantes/headCount', data, {headers: this.headers} );
+  }
+
+  savePeriod(data): Observable<any> {
+    return this.http.post(this.api + 'proyecto/agignarPeriodoGarantia', data, {headers: this.headers});
   }
 }

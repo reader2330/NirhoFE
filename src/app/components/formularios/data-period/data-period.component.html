@@ -1,3 +1,58 @@
-<p>
-  data-period works!
-</p>
+
+  <mat-grid-list  [cols]="checkMobileCols()" rowHeight="100px">
+
+    <mat-grid-tile [colspan]="checkMobileCols()">
+
+      <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">work_outline</mat-icon> Asignacion del periodo</h2>
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+      <mat-form-field  style="width: 96%; " appearance="outline">
+        <mat-label>Seleccionar proyecto</mat-label>
+        <mat-select [(ngModel)]="proyect">
+          <mat-option *ngFor="let proyect of proyects" [value]="proyect">
+            {{proyect.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <form [formGroup]="periodForm" >
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>Inicio del proyecto</mat-label>
+        <input matInput formControlName="fechaRegistro" type="date" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>Fin del proyecto</mat-label>
+        <input matInput formControlName="fechaFin" type="date" required>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>Dias de garantia </mat-label>
+        <input matInput formControlName="diasGarantia" type="number" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+
+
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-raised-button (click)="cancelPeriod()">Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="savePeriod()" [disabled]="!periodForm.valid" >Siguiente <mat-icon>arrow_forward</mat-icon></button>
+
+    </mat-grid-tile>
+    </form>
+  </mat-grid-list>
+
+
+

@@ -38,7 +38,7 @@ export class DataCompanyComponent implements OnInit {
       empresa: new FormControl('', Validators.required)
     }
     );
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private formBuilder:FormBuilder) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
