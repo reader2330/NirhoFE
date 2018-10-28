@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '../../../../../node_modules/@angular/cdk/layout';
 
 @Component({
@@ -7,6 +7,7 @@ import {BreakpointObserver, Breakpoints} from '../../../../../node_modules/@angu
   styleUrls: ['./steppers.component.scss']
 })
 export class SteppersComponent implements OnInit {
+  @Output() responseChildren = new EventEmitter();
   mobile = false;
 
   control = {
@@ -30,10 +31,8 @@ export class SteppersComponent implements OnInit {
   }
 
   getResponseChildren(evt) {
-
-    this.control.next = evt.next;
-    this.control.back = evt.back;
-
+    console.log(evt);
+    this.responseChildren.emit({value: evt.key});
 
   }
 

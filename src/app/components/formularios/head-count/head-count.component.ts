@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '../../../../../node_modules/@angular/cdk/layout';
 import {CatalogsService} from '../../../services/catalogs.service';
-import {IWorkBook, read, readFile, utils, IWorkSheet} from 'ts-xlsx';
+import {IWorkBook, read, utils, IWorkSheet} from 'ts-xlsx';
 import {ProyectoService} from '../../../services/proyecto.service';
 import {Participante} from '../../../models/participante';
+
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -12,15 +14,16 @@ import {Participante} from '../../../models/participante';
   styleUrls: ['./head-count.component.scss']
 })
 export class HeadCountComponent implements OnInit {
+  @Output () responseHead = new EventEmitter();
   mobile = false;
-  data = [];
+  data: any[] = [];
   file: File;
   showTable = false;
   dataSource: Participante[] = [];
   proyects = [];
   filters = {
     idProyecto: 0
-  }
+  };
 
   displayedColumns: string[] = [
     'NIVEL TEXTO',
@@ -38,7 +41,8 @@ export class HeadCountComponent implements OnInit {
   ];
   names = [
     'id',
-  'nivel', 'nivelTexto',
+  'nivel',
+    'nivelTexto',
   'nombres',
   'aPaterno',
   'aMaterno',
@@ -119,12 +123,11 @@ export class HeadCountComponent implements OnInit {
         const wsname: string = wb.SheetNames[0];
         const ws: IWorkSheet = wb.Sheets[wsname];
         /* save data */
-        this.data = <any>(utils.sheet_to_json(ws, {header: 1}));
+        this.data = <any[]>(utils.sheet_to_json(ws, {header: 1}));
         this.data.shift();
-        this.dataSource = this.data;
-        for (let i = 0; i < this.data.length; i++) {
-          for (let j = 0; j < 18; j++ ) {
-            this.dataSource[i][this.getName(j)] = this.dataSource[i][j];
+        for (let  i = 0; i < this.data.length; i++) {
+          for (let j = 0 ; j < this.data[i].length; j++) {
+            this.changeData(this.data[i], i);
           }
         }
         console.log(this.dataSource);
@@ -134,7 +137,7 @@ export class HeadCountComponent implements OnInit {
     }
   }
 
-  getName(j){
+  getName(j) {
     return this.names[j];
   }
 
@@ -142,13 +145,63 @@ export class HeadCountComponent implements OnInit {
     this.showTable = true;
   }
   guardaHead() {
-      let data = {
-        lista: this.dataSource,
-        idProyecto: this.filters.idProyecto
+    let data = {
+      lista: this.dataSource,
+      idProyecto: this.filters.idProyecto
+    }
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar la información ingresada del proyecto',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        this.ProyectService.saveHead(data).subscribe(() => {
+            Swal(
+              'Listo.',
+              'La información se guardo correctamente',
+              'success'
+            ).then(() => {
+              this.responseHead.emit({value: 1});
+            });
+
+          },
+          (err) => {
+            console.log(err);
+            Swal(
+              'Algo salio mal.',
+              'No se pudo guarda la información',
+              'error'
+            ).then(() => {
+              this.responseHead.emit({value: 1});
+            });
+          });
       }
-      this.ProyectService.saveHead(data).subscribe((res) => {
-        console.log(res);
-      });
+    });
+  }
+  changeData(data, index) {
+    this.dataSource[index] = new Participante();
+    this.dataSource[index].id = data[0];
+    this.dataSource[index].nivel = data[1];
+    this.dataSource[index].nivelTexto = data[2];
+    this.dataSource[index].nombres = data[3];
+    this.dataSource[index].aPaterno = data[4];
+    this.dataSource[index].aMaterno = data[5];
+    this.dataSource[index].genero = data[6];
+    this.dataSource[index].rfc = data[7];
+    this.dataSource[index].puesto = data[8];
+    this.dataSource[index].fechaIngreso = data[9];
+    this.dataSource[index].antigPuesto = data[10];
+    this.dataSource[index].nivelEscolaridad = data[11];
+    this.dataSource[index].otrosEstudios = data[12];
+    this.dataSource[index].idioma = data[13];
+    this.dataSource[index].nivelIdioma = data[14];
+    this.dataSource[index].correoElectronico = data[15];
+    this.dataSource[index].sede = data[16];
+    this.dataSource[index].areaOrg = data[17];
+
   }
 
 

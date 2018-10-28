@@ -10,7 +10,7 @@ import {LoginService} from '../../services/login.service';
 })
 export class SidebarComponent implements OnInit {
   mobile = false;
-  selectModule = 5;
+  selectModule = 7;
   modules = [];
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));
@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit {
     });
   }
   recibirRespuestChildren(evt) {
-
+    console.log(evt);
     if (evt.value) {
       this.selectModule = evt.value;
     }

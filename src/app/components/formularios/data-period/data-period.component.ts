@@ -65,5 +65,8 @@ export class DataPeriodComponent implements OnInit {
       console.log(res);
     });
   }
+  cancelPeriod() {
+
+  }
 
 }

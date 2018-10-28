@@ -34,12 +34,13 @@
   <mat-sidenav-content>
     <div class="row">
 
-      <div class="col-sm-12 stepper-forms" >
-        <app-steppers *ngIf="selectModule == 1"></app-steppers>
-        <app-bandeja  (responseChildren)="recibirRespuestChildren($event)" *ngIf="selectModule == 2"></app-bandeja>
+      <div style="margin-left: 10px" class="col-sm-12 stepper-forms" >
+        <app-steppers (responseChildren)="recibirRespuestChildren($event)"   *ngIf="selectModule == 5"></app-steppers>
+        <app-bandeja  (responseChildren)="recibirRespuestChildren($event)" *ngIf="selectModule == 1"></app-bandeja>
         <app-bandeja-detalle  *ngIf="selectModule == 3"></app-bandeja-detalle>
-        <app-head-count *ngIf="selectModule == 4"></app-head-count>
-        <app-data-period *ngIf="selectModule == 5"></app-data-period>
+        <app-head-count (responseHead)="recibirRespuestChildren($event)" *ngIf="selectModule == 4"></app-head-count>
+        <app-data-period *ngIf="selectModule == 6"></app-data-period>
+        <app-organigrama *ngIf="selectModule == 7"> </app-organigrama>
       </div>
 
     </div>

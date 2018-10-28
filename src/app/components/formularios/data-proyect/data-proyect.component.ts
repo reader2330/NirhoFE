@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '../../../../../node_modules/@angular/cdk/layout';
 import {CatalogsService} from '../../../services/catalogs.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -11,7 +11,7 @@ import {ProyectoService} from '../../../services/proyecto.service';
   styleUrls: ['./data-proyect.component.scss']
 })
 export class DataProyectComponent implements OnInit {
-
+  @Output () response = new EventEmitter();
   proyect = {
     idProyecto: 0,
     nombre: '',
@@ -92,28 +92,31 @@ export class DataProyectComponent implements OnInit {
       if (result.value) {
         if (sessionStorage.getItem('contact')) {
           const contact = JSON.parse(sessionStorage.getItem('contact'));
+          const company = JSON.parse(sessionStorage.getItem('company'));
           this.proyect = this.proyectForm.value;
-          this.proyect.idEmpresa = contact.empresa;
+          this.proyect.idEmpresa = company;
           this.proyect.idContacto = contact;
-          console.log(this.proyect);
-          console.log(this.proyect);
           this.ProyectoService.saveProyect(this.proyect).subscribe((res) => {
             console.log(res);
               Swal(
                 'Listo.',
                 'La información se guardo correctamente',
                 'success'
-              );
-
+              ).then(() => {
+                this.response.emit({key: 1});
+              });
 
             },
             (err) => {
-            console.log(err)
+            console.log(err);
               Swal(
                 'Algo salio mal.',
                 'No se pudo guarda la información',
                 'error'
-              );
+              ).then(() => {
+                this.response.emit({key: 1});
+              });
+
 
             });
 
