@@ -20,5 +20,11 @@ export class LoginService {
   sendLogin(params): Observable<any> {
     return this._http.post(this.api + 'usuario/login', params, {headers: this.header});
   }
+  getModules(): Observable<any> {
+    return this._http.get(this.api + 'usuario/submodulosClb', {headers: this.header});
+  }
+  getUser(): Observable<any> {
+    return this._http.get(this.api + 'proyecto/usuario', {headers: this.header});
+  }
 
 }

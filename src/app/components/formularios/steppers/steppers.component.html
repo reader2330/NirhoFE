@@ -1,12 +1,7 @@
 <mat-horizontal-stepper  [hidden]="mobile" [linear]="false" #stepper>
   <mat-step >
-    <ng-template matStepLabel>Datos Empresa</ng-template>
-    <!--<app-bandeja></app-bandeja>-->
-    <!--<app-bandeja-detalle></app-bandeja-detalle>-->
-    <!--<app-data-company (cambioStepper)="getResponseChildren($event)" ></app-data-company>-->
     <ng-template matStepLabel >Paso 1</ng-template>
-    <!--<app-head-count></app-head-count>-->
-    <app-data-company></app-data-company>
+    <app-data-company (cambioStepper)="getResponseChildren($event)" ></app-data-company>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Paso 2</ng-template>

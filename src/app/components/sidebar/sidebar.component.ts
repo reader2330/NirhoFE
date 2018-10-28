@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Router} from '@angular/router';
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,7 +10,9 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 })
 export class SidebarComponent implements OnInit {
   mobile = false;
-  constructor(breakpointObserver: BreakpointObserver) {
+  selectModule = 2;
+  modules = [];
+  constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -21,11 +25,34 @@ export class SidebarComponent implements OnInit {
 
   }
 
-  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
 
 
 
   ngOnInit() {
+    this.getModules();
+    this.getUser();
+  }
+
+  goModule(opt) {
+    this.selectModule = opt;
+  }
+  getModules() {
+    this.LoginService.getModules().subscribe((res) => {
+      console.log(res);
+      this.modules = res;
+    });
+  }
+  getUser() {
+    this.LoginService.getUser().subscribe((res) => {
+      console.log(res);
+    });
+  }
+  recibirRespuestChildren(evt) {
+
+    if (evt.value) {
+      this.selectModule = evt.value;
+    }
+
   }
 
 

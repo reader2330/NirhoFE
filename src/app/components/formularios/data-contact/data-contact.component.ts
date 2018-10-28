@@ -25,12 +25,14 @@ export class DataContactComponent implements OnInit {
   mobile = false;
   contactForm = new FormGroup(
     {
+      id: new FormControl(null),
       telefono: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       puesto: new FormControl(0, Validators.required),
       tipoContacto: new FormControl(0, Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       nombre: new FormControl('', Validators.required),
       celular: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+      empresa:  new FormControl(null)
     }
   );
   constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
@@ -82,7 +84,7 @@ export class DataContactComponent implements OnInit {
   saveContact() {
     const empresa = JSON.parse(sessionStorage.getItem('company'));
     this.contact = this.contactForm.value;
-    this.contact.empresa = empresa;
+
     sessionStorage.setItem('contact', JSON.stringify(this.contact));
   }
 

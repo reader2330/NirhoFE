@@ -21,10 +21,13 @@
         <img src="../../../assets/img/avatar.png" alt="">
       </div>
       <mat-list>
-        <mat-list-item> Alta de proyecto </mat-list-item>
-        <mat-list-item> Ver proyectos </mat-list-item>
-        <mat-list-item> optional </mat-list-item>
-        <mat-list-item> Bandeja de proyectos </mat-list-item>
+        <mat-list-item *ngFor="let module of modules" (click)="goModule(module.id_submodulo)">
+          {{module.descripcion}}
+        </mat-list-item>
+        <!--<mat-list-item (click)="goModule(1);"> Alta de proyecto </mat-list-item>
+        <mat-list-item (click)="goModule(2);"> Bandeja de proyectos </mat-list-item>
+        <mat-list-item (click)="goModule(3);"> Ver Proyecto </mat-list-item>
+        <mat-list-item (click)="goModule(4);"> Carga de HeadCount </mat-list-item>-->
       </mat-list>
     </mat-nav-list>
   </mat-sidenav>
@@ -32,7 +35,10 @@
     <div class="row">
 
       <div class="col-sm-12 stepper-forms" >
-        <app-steppers></app-steppers>
+        <app-steppers *ngIf="selectModule == 1"></app-steppers>
+        <app-bandeja  (responseChildren)="recibirRespuestChildren($event)" *ngIf="selectModule == 2"></app-bandeja>
+        <app-bandeja-detalle  *ngIf="selectModule == 3"></app-bandeja-detalle>
+        <app-head-count *ngIf="selectModule == 4"></app-head-count>
       </div>
 
     </div>

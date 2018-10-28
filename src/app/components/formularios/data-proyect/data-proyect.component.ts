@@ -15,6 +15,9 @@ export class DataProyectComponent implements OnInit {
   proyect = {
     idProyecto: 0,
     nombre: '',
+    fechaRegistro: null,
+    fechaFin: null,
+    diasGarantia: null,
     numEmpleados: 0,
     sedes: '',
     numParticipantes: 0,
@@ -92,6 +95,7 @@ export class DataProyectComponent implements OnInit {
           this.proyect = this.proyectForm.value;
           this.proyect.idEmpresa = contact.empresa;
           this.proyect.idContacto = contact;
+          console.log(this.proyect);
           console.log(this.proyect);
           this.ProyectoService.saveProyect(this.proyect).subscribe((res) => {
             console.log(res);
