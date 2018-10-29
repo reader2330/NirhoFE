@@ -1,0 +1,35 @@
+
+.mgn5{
+    margin-top: 5px;
+}
+.white{
+    color: white;
+}
+
+.salud{
+    border-right: solid green;
+    padding-bottom: 5%;
+    padding-top: 5%;
+    padding-left: 5%;
+}
+
+.content{
+    padding-top: 50px;
+}
+
+.letter-menu{
+    font-family: 'Lato';
+    font-style: 'Thin';
+    font-size: 15px;
+}
+.letter-submenu{
+    font-family: 'Lato';
+    font-style: normal;
+    font-size: 10px;
+}
+
+@media screen and (max-width: 491px) {
+.content {
+    padding-top: 95px !important;
+    }
+}

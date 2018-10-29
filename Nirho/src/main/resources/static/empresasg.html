@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html ng-app="empresasGerenteModule">
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+.selected {
+    background-color:#E5FAB5;
+    color:#000000;
+    font-weight:bold;
+}
+</style>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <title>CLB - niRHo | Especialistas en Capital Humano</title> -->
+    <title>CLB - niRHo | Especialistas en Capital Humano</title>
+    
+    
+    <link rel="shortcut icon" href="img/favicon.png">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="css/AdminLTE.min.css">
+    <link rel="stylesheet" href="css/skins/skin-green-light.min.css">
+    <!--adminUsuarios css-->
+    <link rel="stylesheet" href="css/nirho/estilos-climaLaboral.css">
+    <link rel="stylesheet" href="css/selectores.css">
+    <script src="js/angular.min.js"></script>
+    <script src="js/empresasGerenteCtrl.js"></script>
+    
+    <link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+    
+</head>
+
+<body class="hold-transition skin-green-light sidebar-mini">
+    <div class="wrapper" ng-controller="empresasGerenteController">
+
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top  navbar-fixed-top" role="navigation">
+                <img src="img/logoPequeño.png" class="mgn5">
+                <span class="white"> niRHo - Clima Laboral</span>
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <span class="">{{data.usuario.fullName}}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" ng-click="logout()" data-toggle="control-sidebarRO"><i class="fa fa-power-off" aria-hidden="true"></i> Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="salud hidden-xs" id="salud">
+                    <img src="img/salud.png" class="img-responsive" alt="Logo">
+                </div>
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu" >
+                    <li class="header" ng-show="selectedRow != null">Empresa Seleccionada</li>
+                    <li class="header" ng-show="selectedRow != null"><b>{{selectedRow.nombreEmpresa}}</b></li>
+                    <li class="treeview">
+                        <a href="" ng-click="redirectEmpresas()"><i class="fa fa-industry" aria-hidden="true"></i> <span>EMPRESAS</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.sidebar-menu -->
+                
+                
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu" ng-show="selectedRow != null">
+                    <li class="header">Estudio IRH</li>
+                    <!--
+                    <li class="treeview">
+                        <a href="#" ng-click="redirectEmpresas()"><i class="fa fa-tasks" aria-hidden="true"></i> 
+                        <span>Administrar Cuestionario de Evaluación</span></a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" ng-click="consultarProyecto()"><i class="fa fa-folder-open" aria-hidden="true"></i> 
+                        <span>Consultar Empresa</span></a>
+                    </li>
+                    -->
+                    <li class="treeview">
+                        <a href="#" ng-click="datosEmpresa()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+                        <span>Consultar Evaluación</span></a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" ng-click="datosPeriodo()"><i class="fa fa-handshake-o" aria-hidden="true"></i> 
+                        <span>Consultar Resultados</span></a>
+                    </li>
+                </ul>
+                <!-- /.sidebar-menu -->
+                
+                
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+     
+                <!-- LISTADO DE EMPRESAS COMIENZA -->
+                <div class="row row1" ng-show="data.opciones.empresasShow">
+                <br/><br/><br/>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <i class="fa fa-industry" aria-hidden="true"></i>
+                        <strong>Empresas que han solicitado evaluación</strong>
+                    </div>
+                </div>
+                <br/>
+                <div align="center" ng-show="data.opciones.empresasShow">
+		          	<table ng-table="tableParams" >
+					    <tr ng-repeat="emp in data.empresasList" 
+					    	ng-class="{'selected':emp == selectedRow}" ng-click="setClickedRow(emp)">
+					        <td title="'Empresa'" filter="{ nombreEmpresa: 'text'}">
+					            {{emp.nombreEmpresa}}</td>
+					        <td title="'RFC'" filter="{ rfc: 'text'}">
+					            {{emp.rfc}}</td>
+					        <td title="'Evaluación'" filter="{ nombreTema: 'text'}">
+					            {{emp.nombreTema}}</td>
+					    </tr>
+					</table>
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
+                </div>
+                <!-- LISTADO DE EMPRESAS TERMINA -->
+				
+				
+				
+				
+				
+				
+				
+				   	         
+            </section>
+            <!-- /.content -->
+        </div>     
+        <!-- /.content-wrapper -->
+        <!-- Add the sidebar's background. This div must be placed
+			immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED JS SCRIPTS -->
+
+    <!-- jQuery 2.2.3 -->
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/selectores.js"></script>
+    
+    <footer class="footer">
+            <table style="width:100%">
+            	<tr>
+            		<td style="text-align:right;">
+                		<img align="left" src="img/logo.png" width="5%">
+		        		<span style="color:#2D2F33;"><b>© niRHo </b></span>
+            		</td>
+            	</tr>
+            </table>
+    </footer>
+    
+</body>
+
+</html>
