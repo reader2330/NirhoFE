@@ -1,18 +1,25 @@
 .example-card {
   max-width: 400px;
-  width: 400px;
+  width: 500px;
   height: 500px;
 }
 .logo{
-  width: 240px;
+  width: 300px;
   height: 100px;
+  border: none;
+
 }
+
+.logo{
+  background-image: url('../../../logo.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+}
+
 .back{
   height: 100%;
   width: 100%;
-  
-
-
 }
 
 .example-header-image {

@@ -68,10 +68,14 @@ export class DataPeriodComponent implements OnInit {
       cancelButtonText: 'No, seguir editando'
     }).then((result) => {
       if (result.value) {
-        this.proyect.fechaRegistro = this.periodForm.value.fechaRegistro;
-        this.proyect.fechaFin = this.periodForm.value.fechaFin;
         this.proyect.diasGarantia = this.periodForm.value.diasGarantia;
-        this.ProyectService.savePeriod(this.proyect).subscribe((res) => {
+        let data = {
+          fechaRegistro: this.periodForm.value.fechaRegistro,
+          fechaFin: this.periodForm.value.fechaFin,
+          proyecto: this.proyect
+        };
+        console.log(data);
+        this.ProyectService.savePeriod(data).subscribe((res) => {
             console.log(res);
             Swal(
               'Listo.',

@@ -7,7 +7,7 @@
       <mat-label>Seleccionar proyecto</mat-label>
       <mat-select [(ngModel)]="proyect">
         <mat-option *ngFor="let proyect of proyects" [value]="proyect">
-          {{proyect.nombre}}
+          {{proyect.fullName}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -16,7 +16,7 @@
     <mat-form-field  style="width: 96%; " appearance="outline">
       <mat-label>Selecciona al consultor</mat-label>
       <mat-select [(ngModel)]="consultor">
-        <mat-option *ngFor="let consultor of consultors" [value]="consultor">
+        <mat-option *ngFor="let consultor of consultores" [value]="consultor">
           {{consultor.nombre}}
         </mat-option>
       </mat-select>

@@ -6,10 +6,12 @@
           <mat-card class="example-card">
             <mat-grid-list [cols]="1" rowHeight="100px">
               <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <img src="../../../assets/img/logo.png" class="logo" alt="Photo of a Shiba Inu">
+                <div class="logo" >
+
+                </div>
               </mat-grid-tile>
               <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-form-field appearance="outline">
+                <mat-form-field >
                   <mat-label>Usuario</mat-label>
                   <input matInput [(ngModel)]="params.username">
                   <mat-icon matSuffix>account_circle</mat-icon>
@@ -17,7 +19,7 @@
                 </mat-form-field>
               </mat-grid-tile>
               <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-form-field appearance="outline">
+                <mat-form-field >
                   <mat-label>Password</mat-label>
                   <input matInput type="password" [(ngModel)]="params.password">
                   <mat-icon matSuffix>lock</mat-icon>

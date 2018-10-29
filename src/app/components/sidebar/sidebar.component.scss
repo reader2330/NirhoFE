@@ -32,47 +32,34 @@
 
 .avatar{
   width: 200px;
+  margin-top: 10px;
   height: 200px;
   border-radius: 100px;
+  background-repeat: no-repeat;
+  background-image: url("../../../avatar.png");
+  background-size: cover;
 
 }
-.avatar img{
-  background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
-  border-radius: 100px;
-  background-size: cover;
-}
+
 
 .logo-nav{
-  width: 130px;
-  height: 50px;
-  margin-left: 30px;
-
+  width: 165px;
+  height: 52px;
+  margin-left: 15px;
+  background-image: url("../../../logo.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .logo-nav-mobile{
-  height: 50px;
-  width: 130px;
-}
-.logo-nav-mobile img{
+  height: 100px;
+  width: 180px;
+  background-image: url("../../../logo_m.png");
   background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
-  margin-left: 20px;
-
-  background-size: cover;
-
 }
 
-.logo-nav img{
-  background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
 
-  background-size: cover;
 
-}
 
 
 .form-company {

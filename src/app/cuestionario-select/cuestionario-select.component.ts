@@ -57,6 +57,7 @@ export class CuestionarioSelectComponent implements OnInit {
           idProyecto: this.proyect['idProyecto'],
           lista: this.selectPregunta
         };
+        console.log(data);
         this.ProyectService.savePreguntas(data).subscribe((res) => {
           Swal(
             'Listo.',
@@ -81,11 +82,13 @@ export class CuestionarioSelectComponent implements OnInit {
 
   getTemas() {
     this.ProyectService.getTemas().subscribe((res) => {
+      console.log(res)
       this.temas = res;
     });
   }
   getPreguntas() {
-    let id = this.temas['id_tema'];
+    console.log(this.tema)
+    let id = this.tema['idTema'];
     this.ProyectService.getPreguntas(id).subscribe((res) => {
       this.preguntas = res;
       for (let pregunta of this.preguntas) {
@@ -102,5 +105,9 @@ export class CuestionarioSelectComponent implements OnInit {
       this.proyects = res;
     });
   }
+  changeSelectProyect(evt){
+    this.getPreguntas();
+  }
+
 
 }

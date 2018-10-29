@@ -173,12 +173,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_formularios_data_contact_data_contact_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/formularios/data-contact/data-contact.component */ "./src/app/components/formularios/data-contact/data-contact.component.ts");
 /* harmony import */ var _components_bandeja_bandeja_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/bandeja/bandeja.component */ "./src/app/components/bandeja/bandeja.component.ts");
 /* harmony import */ var _components_bandeja_detalle_bandeja_detalle_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/bandeja-detalle/bandeja-detalle.component */ "./src/app/components/bandeja-detalle/bandeja-detalle.component.ts");
+/* harmony import */ var angular2_highcharts__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! angular2-highcharts */ "./node_modules/angular2-highcharts/index.js");
+/* harmony import */ var angular2_highcharts__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(angular2_highcharts__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var _cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./cuestionario-select/cuestionario-select.component */ "./src/app/cuestionario-select/cuestionario-select.component.ts");
+/* harmony import */ var _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/asignar-consultor/asignar-consultor.component */ "./src/app/components/asignar-consultor/asignar-consultor.component.ts");
+/* harmony import */ var _components_estadisticas_estadisticas_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/estadisticas/estadisticas.component */ "./src/app/components/estadisticas/estadisticas.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
+
 
 
 
@@ -220,10 +229,14 @@ var AppModule = /** @class */ (function () {
                 _components_formularios_data_contact_data_contact_component__WEBPACK_IMPORTED_MODULE_18__["DataContactComponent"],
                 _components_bandeja_bandeja_component__WEBPACK_IMPORTED_MODULE_19__["BandejaComponent"],
                 _components_bandeja_detalle_bandeja_detalle_component__WEBPACK_IMPORTED_MODULE_20__["BandejaDetalleComponent"],
+                _cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_22__["CuestionarioSelectComponent"],
+                _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_23__["AsignarConsultorComponent"],
+                _components_estadisticas_estadisticas_component__WEBPACK_IMPORTED_MODULE_24__["EstadisticasComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_7__["BrowserAnimationsModule"],
+                angular2_highcharts__WEBPACK_IMPORTED_MODULE_21__["ChartModule"].forRoot(__webpack_require__(/*! highcharts */ "./node_modules/highcharts/highcharts.js")),
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"],
                 _modules_material_material_module__WEBPACK_IMPORTED_MODULE_8__["MaterialModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"],
@@ -235,6 +248,138 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/asignar-consultor/asignar-consultor.component.html":
+/*!*******************************************************************************!*\
+  !*** ./src/app/components/asignar-consultor/asignar-consultor.component.html ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">people_outline</mat-icon> Organigrama</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\">\n        <mat-option *ngFor=\"let proyect of proyects\" [value]=\"proyect\">\n          {{proyect.fullName}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Selecciona al consultor</mat-label>\n      <mat-select [(ngModel)]=\"consultor\">\n        <mat-option *ngFor=\"let consultor of consultores\" [value]=\"consultor\">\n          {{consultor.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n      <button mat-raised-button color=\"primary\" [disabled]=\"!proyect.hasOwnProperty('idProyecto') || !consultor.hasOwnProperty('idUsuario')\">Guarda consultor</button>\n  </mat-grid-tile>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/asignar-consultor/asignar-consultor.component.scss":
+/*!*******************************************************************************!*\
+  !*** ./src/app/components/asignar-consultor/asignar-consultor.component.scss ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYXNpZ25hci1jb25zdWx0b3IvYXNpZ25hci1jb25zdWx0b3IuY29tcG9uZW50LnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/components/asignar-consultor/asignar-consultor.component.ts":
+/*!*****************************************************************************!*\
+  !*** ./src/app/components/asignar-consultor/asignar-consultor.component.ts ***!
+  \*****************************************************************************/
+/*! exports provided: AsignarConsultorComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AsignarConsultorComponent", function() { return AsignarConsultorComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/proyecto.service */ "./src/app/services/proyecto.service.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AsignarConsultorComponent = /** @class */ (function () {
+    function AsignarConsultorComponent(ProyectService) {
+        this.ProyectService = ProyectService;
+        this.response = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.mobile = false;
+        this.proyects = [];
+        this.consultores = [];
+        this.proyect = {};
+        this.consultor = {};
+    }
+    AsignarConsultorComponent.prototype.ngOnInit = function () {
+        this.getProyects();
+        this.getConsultores();
+    };
+    AsignarConsultorComponent.prototype.checkMobileCols = function () {
+        if (this.mobile) {
+            return 1;
+        }
+        else {
+            return 3;
+        }
+    };
+    AsignarConsultorComponent.prototype.getProyects = function () {
+        var _this = this;
+        this.ProyectService.getProyects().subscribe(function (res) {
+            console.log(res);
+            _this.proyects = res;
+        });
+    };
+    AsignarConsultorComponent.prototype.getConsultores = function () {
+        var _this = this;
+        this.ProyectService.getConsultores().subscribe(function (res) {
+            console.log(res);
+            _this.consultores = res;
+        });
+    };
+    AsignarConsultorComponent.prototype.sevaConsultor = function () {
+        var _this = this;
+        sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()({
+            title: '',
+            text: 'Seguro que quieres guardar la información ingresada del proyecto',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si guardar',
+            cancelButtonText: 'No, seguir editando'
+        }).then(function (result) {
+            if (result.value) {
+                var data = {
+                    idProyecto: _this.proyect['idProyecto'],
+                    idUsuario: _this.consultor['idUsuario']
+                };
+                _this.ProyectService.saveConsultor(data).subscribe(function (res) {
+                    console.log(res);
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Listo.', 'La información se guardo correctamente', 'success').then(function () {
+                        _this.response.emit({ key: 1 });
+                    });
+                }, function (err) {
+                    console.log(err);
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Algo salio mal.', 'No se pudo guarda la información', 'error').then(function () {
+                        _this.response.emit({ key: 1 });
+                    });
+                });
+            }
+        });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], AsignarConsultorComponent.prototype, "response", void 0);
+    AsignarConsultorComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-asignar-consultor',
+            template: __webpack_require__(/*! ./asignar-consultor.component.html */ "./src/app/components/asignar-consultor/asignar-consultor.component.html"),
+            styles: [__webpack_require__(/*! ./asignar-consultor.component.scss */ "./src/app/components/asignar-consultor/asignar-consultor.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__["ProyectoService"]])
+    ], AsignarConsultorComponent);
+    return AsignarConsultorComponent;
 }());
 
 
@@ -447,6 +592,110 @@ var BandejaComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__["ProyectoService"]])
     ], BandejaComponent);
     return BandejaComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/estadisticas/estadisticas.component.html":
+/*!*********************************************************************!*\
+  !*** ./src/app/components/estadisticas/estadisticas.component.html ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">people_outline</mat-icon> Organigrama</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\">\n        <mat-option *ngFor=\"let proyect of proyects\" [value]=\"proyect\">\n          {{proyect.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n</mat-grid-list>\n  <div class=\"col-sm-12\" style=\"margin-top: 20px\">\n    <chart [options]=\"options\"></chart>\n\n  </div>\n<div class=\"col-sm-12\">\n  <chart  [options]=\"options2\"> </chart>\n</div>\n<div>\n  <chart [options]=\"options3\"></chart>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/estadisticas/estadisticas.component.scss":
+/*!*********************************************************************!*\
+  !*** ./src/app/components/estadisticas/estadisticas.component.scss ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZXN0YWRpc3RpY2FzL2VzdGFkaXN0aWNhcy5jb21wb25lbnQuc2NzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/components/estadisticas/estadisticas.component.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/estadisticas/estadisticas.component.ts ***!
+  \*******************************************************************/
+/*! exports provided: EstadisticasComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EstadisticasComponent", function() { return EstadisticasComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/proyecto.service */ "./src/app/services/proyecto.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var EstadisticasComponent = /** @class */ (function () {
+    function EstadisticasComponent(ProyectService) {
+        this.ProyectService = ProyectService;
+        this.mobile = false;
+        this.proyects = [];
+        this.options = {
+            title: { text: 'Preguntas' },
+            series: [{
+                    data: [29.9, 71.5, 106.4, 129.2],
+                }]
+        };
+        this.options2 = {
+            chart: { type: 'bar' },
+            title: { text: 'Respuesta' },
+            series: [{
+                    data: [29.9, 71.5, 106.4, 129.2],
+                }]
+        };
+        this.options3 = {
+            chart: { type: 'pie' },
+            title: { text: 'Respuesta' },
+            series: [{
+                    data: [29.9, 71.5, 106.4, 129.2],
+                }]
+        };
+    }
+    EstadisticasComponent.prototype.ngOnInit = function () {
+        this.getProyects();
+    };
+    EstadisticasComponent.prototype.getProyects = function () {
+        var _this = this;
+        this.ProyectService.getProyects().subscribe(function (res) {
+            console.log(res);
+            _this.proyects = res;
+        });
+    };
+    EstadisticasComponent.prototype.checkMobileCols = function () {
+        if (this.mobile) {
+            return 1;
+        }
+        else {
+            return 3;
+        }
+    };
+    EstadisticasComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-estadisticas',
+            template: __webpack_require__(/*! ./estadisticas.component.html */ "./src/app/components/estadisticas/estadisticas.component.html"),
+            styles: [__webpack_require__(/*! ./estadisticas.component.scss */ "./src/app/components/estadisticas/estadisticas.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__["ProyectoService"]])
+    ], EstadisticasComponent);
+    return EstadisticasComponent;
 }());
 
 
@@ -796,6 +1045,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_catalogs_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/catalogs.service */ "./src/app/services/catalogs.service.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _services_proyecto_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/proyecto.service */ "./src/app/services/proyecto.service.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -810,11 +1061,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var DataPeriodComponent = /** @class */ (function () {
     function DataPeriodComponent(breakpointObserver, CatalogService, ProyectService) {
         var _this = this;
         this.CatalogService = CatalogService;
         this.ProyectService = ProyectService;
+        this.response = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.mobile = false;
         this.periodForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
             id: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null),
@@ -856,17 +1109,43 @@ var DataPeriodComponent = /** @class */ (function () {
         });
     };
     DataPeriodComponent.prototype.savePeriod = function () {
-        console.log(this.periodForm.value);
-        this.proyect.fechaRegistro = this.periodForm.value.fechaRegistro;
-        this.proyect.fechaFin = this.periodForm.value.fechaFin;
-        this.proyect.diasGarantia = this.periodForm.value.diasGarantia;
-        console.log(this.proyect);
-        this.ProyectService.savePeriod(this.proyect).subscribe(function (res) {
-            console.log(res);
+        var _this = this;
+        sweetalert2__WEBPACK_IMPORTED_MODULE_5___default()({
+            title: '',
+            text: 'Seguro que quieres guardar la información ingresada del proyecto',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si guardar',
+            cancelButtonText: 'No, seguir editando'
+        }).then(function (result) {
+            if (result.value) {
+                _this.proyect.diasGarantia = _this.periodForm.value.diasGarantia;
+                var data = {
+                    fechaRegistro: _this.periodForm.value.fechaRegistro,
+                    fechaFin: _this.periodForm.value.fechaFin,
+                    proyecto: _this.proyect
+                };
+                console.log(data);
+                _this.ProyectService.savePeriod(data).subscribe(function (res) {
+                    console.log(res);
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_5___default()('Listo.', 'La información se guardo correctamente', 'success').then(function () {
+                        _this.response.emit({ key: 1 });
+                    });
+                }, function (err) {
+                    console.log(err);
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_5___default()('Algo salio mal.', 'No se pudo guarda la información', 'error').then(function () {
+                        _this.response.emit({ key: 1 });
+                    });
+                });
+            }
         });
     };
     DataPeriodComponent.prototype.cancelPeriod = function () {
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], DataPeriodComponent.prototype, "response", void 0);
     DataPeriodComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-data-period',
@@ -1376,7 +1655,7 @@ var HeadCountComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">people_outline</mat-icon> Organigrama</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\">\n        <mat-option *ngFor=\"let proyect of proyects\" [value]=\"proyect\">\n          {{proyect.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n\n\n\n\n\n  </mat-grid-tile>\n</mat-grid-list>\n"
+module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">people_outline</mat-icon> Organigrama</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\">\n        <mat-option *ngFor=\"let proyect of proyects\" [value]=\"proyect\">\n          {{proyect.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <button mat-raised-button (click)=\"getOrganigrama()\">Cargar Organigrama</button>\n  </mat-grid-tile>\n</mat-grid-list>\n    <div class=\"col-sm-12 \">\n      <div *ngFor=\"let level of levels\" class=\"row\">\n        <mat-card style=\"margin-top: 20px\" class=\"col-sm-12\"> <h4 align=\"center\">{{'NIVEL  '+level.nivel}} </h4></mat-card>\n\n        <div  style=\"margin-top: 20px\" *ngFor=\"let people of level.participantes\" [class]=\"getClass(level.participantes)\">\n           <mat-card>{{people.nombre}} <p class=\"text-muted\">{{people.puesto}} </p> </mat-card>\n        </div>\n      </div>\n\n    </div>\n\n\n\n\n\n\n"
 
 /***/ }),
 
@@ -1420,6 +1699,7 @@ var OrganigramaComponent = /** @class */ (function () {
         this.proyects = [];
         this.proyect = {};
         this.mobile = false;
+        this.levels = [];
     }
     OrganigramaComponent.prototype.ngOnInit = function () {
         this.getProyects();
@@ -1431,12 +1711,30 @@ var OrganigramaComponent = /** @class */ (function () {
             _this.proyects = res;
         });
     };
+    OrganigramaComponent.prototype.getOrganigrama = function () {
+        var _this = this;
+        this.ProyectService.getOrganigrama(this.proyect['idProyecto']).subscribe(function (res) {
+            _this.levels = res;
+            console.log(_this.levels);
+        });
+    };
     OrganigramaComponent.prototype.checkMobileCols = function () {
         if (this.mobile) {
             return 1;
         }
         else {
             return 3;
+        }
+    };
+    OrganigramaComponent.prototype.getClass = function (data) {
+        if (data.length > 8) {
+            return 'col-sm-1';
+        }
+        if (data.length > 4 && data.length < 8) {
+            return 'col-sm-2';
+        }
+        if (data.length > 0 && data.length < 4) {
+            return 'col-sm-3';
         }
     };
     OrganigramaComponent = __decorate([
@@ -1615,7 +1913,7 @@ var InicioComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"back\">\n<mat-grid-list [cols]=\"1\" rowHeight=\"500px\">\n\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"2\">\n\n          <mat-card class=\"example-card\">\n            <mat-grid-list [cols]=\"1\" rowHeight=\"100px\">\n              <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n                <img src=\"../../../assets/img/logo.png\" class=\"logo\" alt=\"Photo of a Shiba Inu\">\n              </mat-grid-tile>\n              <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n                <mat-form-field appearance=\"outline\">\n                  <mat-label>Usuario</mat-label>\n                  <input matInput [(ngModel)]=\"params.username\">\n                  <mat-icon matSuffix>account_circle</mat-icon>\n\n                </mat-form-field>\n              </mat-grid-tile>\n              <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n                <mat-form-field appearance=\"outline\">\n                  <mat-label>Password</mat-label>\n                  <input matInput type=\"password\" [(ngModel)]=\"params.password\">\n                  <mat-icon matSuffix>lock</mat-icon>\n                </mat-form-field>\n              </mat-grid-tile>\n            </mat-grid-list>\n\n            <mat-grid-list cols=\"1\" rowHeight=\"50px\">\n              <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n                <button mat-flat-button style=\"background-color: #A1B712; color: white\" (click)=\"sendLogin()\">Inicia sesión</button>\n              </mat-grid-tile>\n              <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n                <a href=\"\">Aún no tienes cuenta. Registrate aqui</a>\n              </mat-grid-tile>\n            </mat-grid-list>\n          </mat-card>\n  </mat-grid-tile>\n</mat-grid-list>\n</div>\n\n\n\n\n\n"
+module.exports = "<div class=\"back\">\n<mat-grid-list [cols]=\"1\" rowHeight=\"500px\">\n\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"2\">\n\n          <mat-card class=\"example-card\">\n            <mat-grid-list [cols]=\"1\" rowHeight=\"100px\">\n              <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n                <img src=\"../../../logo.png\" class=\"logo\" alt=\"Photo of a Shiba Inu\">\n              </mat-grid-tile>\n              <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n                <mat-form-field appearance=\"outline\">\n                  <mat-label>Usuario</mat-label>\n                  <input matInput [(ngModel)]=\"params.username\">\n                  <mat-icon matSuffix>account_circle</mat-icon>\n\n                </mat-form-field>\n              </mat-grid-tile>\n              <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n                <mat-form-field appearance=\"outline\">\n                  <mat-label>Password</mat-label>\n                  <input matInput type=\"password\" [(ngModel)]=\"params.password\">\n                  <mat-icon matSuffix>lock</mat-icon>\n                </mat-form-field>\n              </mat-grid-tile>\n            </mat-grid-list>\n\n            <mat-grid-list cols=\"1\" rowHeight=\"50px\">\n              <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n                <mat-checkbox>Recordar sesión</mat-checkbox>\n              </mat-grid-tile>\n              <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n                <button mat-flat-button style=\"background-color: #A1B712; color: white\" (click)=\"sendLogin()\">Inicia sesión</button>\n              </mat-grid-tile>\n              <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n                <a href=\"\">Aún no tienes cuenta. Registrate aqui</a>\n              </mat-grid-tile>\n\n            </mat-grid-list>\n\n          </mat-card>\n  </mat-grid-tile>\n</mat-grid-list>\n</div>\n\n\n\n\n\n"
 
 /***/ }),
 
@@ -1626,7 +1924,7 @@ module.exports = "<div class=\"back\">\n<mat-grid-list [cols]=\"1\" rowHeight=\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".example-card {\n  max-width: 400px;\n  width: 400px;\n  height: 500px; }\n\n.logo {\n  width: 240px;\n  height: 100px; }\n\n.back {\n  height: 100%;\n  width: 100%;\n  background-image: url('background3.jpg');\n  background-repeat: no-repeat;\n  background-size: cover; }\n\n.example-header-image {\n  background-size: cover; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9sdWlzZmVybmFuZG9hZ3VpcnJlL0Rlc2t0b3AvTmlyaG9GRS9zcmMvYXBwL2NvbXBvbmVudHMvbG9naW4vbG9naW4uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxpQkFBZ0I7RUFDaEIsYUFBWTtFQUNaLGNBQWEsRUFDZDs7QUFDRDtFQUNFLGFBQVk7RUFDWixjQUFhLEVBQ2Q7O0FBQ0Q7RUFDRSxhQUFZO0VBQ1osWUFBVztFQUNYLHlDQUE0RDtFQUM1RCw2QkFBNEI7RUFDNUIsdUJBQXNCLEVBR3ZCOztBQUVEO0VBQ0UsdUJBQXNCLEVBQ3ZCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9sb2dpbi9sb2dpbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5leGFtcGxlLWNhcmQge1xuICBtYXgtd2lkdGg6IDQwMHB4O1xuICB3aWR0aDogNDAwcHg7XG4gIGhlaWdodDogNTAwcHg7XG59XG4ubG9nb3tcbiAgd2lkdGg6IDI0MHB4O1xuICBoZWlnaHQ6IDEwMHB4O1xufVxuLmJhY2t7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IDEwMCU7XG4gIGJhY2tncm91bmQtaW1hZ2U6IHVybCgnLi4vLi4vLi4vYXNzZXRzL2ltZy9iYWNrZ3JvdW5kMy5qcGcnKTtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcblxuXG59XG5cbi5leGFtcGxlLWhlYWRlci1pbWFnZSB7XG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG59XG4iXX0= */"
+module.exports = ".example-card {\n  max-width: 400px;\n  width: 400px;\n  height: 500px; }\n\n.logo {\n  width: 240px;\n  height: 100px; }\n\n.back {\n  height: 100%;\n  width: 100%; }\n\n.example-header-image {\n  background-size: cover; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9sdWlzZmVybmFuZG9hZ3VpcnJlL0Rlc2t0b3AvTmlyaG9GRS9zcmMvYXBwL2NvbXBvbmVudHMvbG9naW4vbG9naW4uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxpQkFBZ0I7RUFDaEIsYUFBWTtFQUNaLGNBQWEsRUFDZDs7QUFDRDtFQUNFLGFBQVk7RUFDWixjQUFhLEVBQ2Q7O0FBQ0Q7RUFDRSxhQUFZO0VBQ1osWUFBVyxFQUlaOztBQUVEO0VBQ0UsdUJBQXNCLEVBQ3ZCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9sb2dpbi9sb2dpbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5leGFtcGxlLWNhcmQge1xuICBtYXgtd2lkdGg6IDQwMHB4O1xuICB3aWR0aDogNDAwcHg7XG4gIGhlaWdodDogNTAwcHg7XG59XG4ubG9nb3tcbiAgd2lkdGg6IDI0MHB4O1xuICBoZWlnaHQ6IDEwMHB4O1xufVxuLmJhY2t7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IDEwMCU7XG4gIFxuXG5cbn1cblxuLmV4YW1wbGUtaGVhZGVyLWltYWdlIHtcbiAgYmFja2dyb3VuZC1zaXplOiBjb3Zlcjtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -1699,7 +1997,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-toolbar color=\"#000000\">\n          <span *ngIf=\"!mobile\">\n            <div class=\"logo-nav\">\n            <img src=\"../../../assets/img/logo.png\" alt=\"\">\n              </div>\n          </span>\n  <span *ngIf=\"mobile\">\n\n            <div class=\"logo-nav-mobile\">\n              <a (click)=\"snav.toggle()\"><mat-icon >menu</mat-icon></a>\n              <img src=\"../../../assets/img/logo.png\" alt=\"\">\n            </div>\n          </span>\n</mat-toolbar>\n<mat-sidenav-container class=\"example-container\">\n  <mat-sidenav mode=\"side\" [opened]=\"!mobile\" [fixedInViewport]=\"true\" [fixedTopGap]=\"62\" [fixedBottomGap]=\"60\"  #snav>\n\n    <mat-nav-list>\n      <div class=\"avatar\">\n        <img src=\"../../../assets/img/avatar.png\" alt=\"\">\n      </div>\n      <mat-list>\n        <mat-list-item *ngFor=\"let module of modules\" (click)=\"goModule(module.id_submodulo)\">\n          {{module.descripcion}}\n        </mat-list-item>\n        <!--<mat-list-item (click)=\"goModule(1);\"> Alta de proyecto </mat-list-item>\n        <mat-list-item (click)=\"goModule(2);\"> Bandeja de proyectos </mat-list-item>\n        <mat-list-item (click)=\"goModule(3);\"> Ver Proyecto </mat-list-item>\n        <mat-list-item (click)=\"goModule(4);\"> Carga de HeadCount </mat-list-item>-->\n      </mat-list>\n    </mat-nav-list>\n  </mat-sidenav>\n  <mat-sidenav-content>\n    <div class=\"row\">\n\n      <div style=\"margin-left: 10px\" class=\"col-sm-12 stepper-forms\" >\n        <app-steppers (responseChildren)=\"recibirRespuestChildren($event)\"   *ngIf=\"selectModule == 5\"></app-steppers>\n        <app-bandeja  (responseChildren)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 1\"></app-bandeja>\n        <app-bandeja-detalle  *ngIf=\"selectModule == 3\"></app-bandeja-detalle>\n        <app-head-count (responseHead)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 4\"></app-head-count>\n        <app-data-period *ngIf=\"selectModule == 6\"></app-data-period>\n        <app-organigrama *ngIf=\"selectModule == 7\"> </app-organigrama>\n      </div>\n\n    </div>\n\n\n  </mat-sidenav-content>\n</mat-sidenav-container>\n"
+module.exports = "\n<mat-toolbar style=\"background: black\" >\n  <a *ngIf=\"mobile\" style=\" color:white\" (click)=\"snav.toggle()\"><mat-icon >menu</mat-icon></a>\n</mat-toolbar>\n<mat-sidenav-container class=\"example-container\">\n  <mat-sidenav mode=\"side\" [opened]=\"!mobile\" [fixedInViewport]=\"false\" [fixedTopGap]=\"62\" [fixedBottomGap]=\"60\"  #snav>\n\n    <mat-nav-list>\n           <span *ngIf=\"!mobile\">\n            <div class=\"logo-nav\">\n            <img src=\"../../../logo.png\" alt=\"\">\n              </div>\n          </span>\n          <span *ngIf=\"mobile\">\n            <div class=\"logo-nav-mobile\">\n              <img src=\"../../../logo.png\" alt=\"\">\n            </div>\n          </span>\n      <div class=\"avatar\">\n        <img src=\"../../../avatar.png\" alt=\"\">\n      </div>\n\n      <mat-list>\n        <mat-list-item>\n          <p style=\"margin-left: 40px\">{{user.fullname || 'Jose Lopez' }}</p>\n        </mat-list-item>\n        <mat-list-item *ngFor=\"let module of modules\" (click)=\"goModule(module.id_submodulo)\">\n          {{module.descripcion}}\n        </mat-list-item>\n        <!--<mat-list-item (click)=\"goModule(1);\"> Alta de proyecto </mat-list-item>\n        <mat-list-item (click)=\"goModule(2);\"> Bandeja de proyectos </mat-list-item>\n        <mat-list-item (click)=\"goModule(3);\"> Ver Proyecto </mat-list-item>\n        <mat-list-item (click)=\"goModule(4);\"> Carga de HeadCount </mat-list-item>-->\n      </mat-list>\n    </mat-nav-list>\n  </mat-sidenav>\n  <mat-sidenav-content>\n    <div class=\"row\">\n\n      <div style=\"margin-left: 10px\" class=\"col-sm-12 stepper-forms\" >\n        <app-steppers (responseChildren)=\"recibirRespuestChildren($event)\"   *ngIf=\"selectModule == 2\"></app-steppers>\n        <app-bandeja  (responseChildren)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 1\"></app-bandeja>\n        <app-bandeja-detalle  *ngIf=\"selectModule == 3\"></app-bandeja-detalle>\n        <app-head-count (responseHead)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 6\"></app-head-count>\n        <app-data-period (response)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 4\"></app-data-period>\n        <app-organigrama (response)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 7\"> </app-organigrama>\n        <app-asignar-consultor *ngIf=\"selectModule == 5\"></app-asignar-consultor>\n        <app-cuestionario-select (response)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 8\" ></app-cuestionario-select>\n        <app-estadisticas *ngIf=\"selectModule == 9\"></app-estadisticas>\n      </div>\n\n    </div>\n\n  </mat-sidenav-content>\n</mat-sidenav-container>\n"
 
 /***/ }),
 
@@ -1710,7 +2008,7 @@ module.exports = "\n<mat-toolbar color=\"#000000\">\n          <span *ngIf=\"!mo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".example-container {\n  position: absolute;\n  top: 60px;\n  bottom: 60px;\n  left: 0;\n  right: 0; }\n\n.example-sidenav {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 200px;\n  background: rgba(255, 0, 0, 0.5); }\n\n.example-header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0; }\n\n.example-footer {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0; }\n\n.avatar {\n  width: 200px;\n  height: 200px;\n  border-radius: 100px; }\n\n.avatar img {\n  background-repeat: no-repeat;\n  height: 100%;\n  width: 100%;\n  border-radius: 100px;\n  background-size: cover; }\n\n.logo-nav {\n  width: 130px;\n  height: 50px; }\n\n.logo-nav-mobile {\n  height: 50px;\n  width: 130px; }\n\n.logo-nav-mobile img {\n  background-repeat: no-repeat;\n  height: 100%;\n  width: 100%;\n  margin-left: 20px;\n  background-size: cover; }\n\n.logo-nav img {\n  background-repeat: no-repeat;\n  height: 100%;\n  width: 100%;\n  background-size: cover; }\n\n.form-company {\n  display: flex;\n  flex-direction: column; }\n\n.form-company > * {\n  width: 100%; }\n\nstepper-forms {\n  margin-top: 300px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9sdWlzZmVybmFuZG9hZ3VpcnJlL0Rlc2t0b3AvTmlyaG9GRS9zcmMvYXBwL2NvbXBvbmVudHMvc2lkZWJhci9zaWRlYmFyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQWtCO0VBQ2xCLFVBQVM7RUFDVCxhQUFZO0VBQ1osUUFBTztFQUNQLFNBQVEsRUFDVDs7QUFFRDtFQUNFLGNBQWE7RUFDYixvQkFBbUI7RUFDbkIsd0JBQXVCO0VBQ3ZCLGFBQVk7RUFDWixpQ0FBZ0MsRUFDakM7O0FBRUQ7RUFDRSxnQkFBZTtFQUNmLE9BQU07RUFDTixRQUFPO0VBQ1AsU0FBUSxFQUNUOztBQUVEO0VBQ0UsZ0JBQWU7RUFDZixVQUFTO0VBQ1QsUUFBTztFQUNQLFNBQVEsRUFDVDs7QUFHRDtFQUNFLGFBQVk7RUFDWixjQUFhO0VBQ2IscUJBQW9CLEVBRXJCOztBQUNEO0VBQ0UsNkJBQTRCO0VBQzVCLGFBQVk7RUFDWixZQUFXO0VBQ1gscUJBQW9CO0VBQ3BCLHVCQUFzQixFQUN2Qjs7QUFFRDtFQUNFLGFBQVk7RUFDWixhQUFZLEVBRWI7O0FBRUQ7RUFDRSxhQUFZO0VBQ1osYUFBWSxFQUNiOztBQUNEO0VBQ0UsNkJBQTRCO0VBQzVCLGFBQVk7RUFDWixZQUFXO0VBQ1gsa0JBQWlCO0VBRWpCLHVCQUFzQixFQUV2Qjs7QUFFRDtFQUNFLDZCQUE0QjtFQUM1QixhQUFZO0VBQ1osWUFBVztFQUVYLHVCQUFzQixFQUV2Qjs7QUFHRDtFQUNFLGNBQWE7RUFDYix1QkFBc0IsRUFDdkI7O0FBRUQ7RUFDRSxZQUFXLEVBQ1o7O0FBRUQ7RUFFRSxrQkFBaUIsRUFFbEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3NpZGViYXIvc2lkZWJhci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5leGFtcGxlLWNvbnRhaW5lciB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiA2MHB4O1xuICBib3R0b206IDYwcHg7XG4gIGxlZnQ6IDA7XG4gIHJpZ2h0OiAwO1xufVxuXG4uZXhhbXBsZS1zaWRlbmF2IHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIHdpZHRoOiAyMDBweDtcbiAgYmFja2dyb3VuZDogcmdiYSgyNTUsIDAsIDAsIDAuNSk7XG59XG5cbi5leGFtcGxlLWhlYWRlciB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgdG9wOiAwO1xuICBsZWZ0OiAwO1xuICByaWdodDogMDtcbn1cblxuLmV4YW1wbGUtZm9vdGVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBib3R0b206IDA7XG4gIGxlZnQ6IDA7XG4gIHJpZ2h0OiAwO1xufVxuXG5cbi5hdmF0YXJ7XG4gIHdpZHRoOiAyMDBweDtcbiAgaGVpZ2h0OiAyMDBweDtcbiAgYm9yZGVyLXJhZGl1czogMTAwcHg7XG5cbn1cbi5hdmF0YXIgaW1ne1xuICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiAxMDAlO1xuICBib3JkZXItcmFkaXVzOiAxMDBweDtcbiAgYmFja2dyb3VuZC1zaXplOiBjb3Zlcjtcbn1cblxuLmxvZ28tbmF2e1xuICB3aWR0aDogMTMwcHg7XG4gIGhlaWdodDogNTBweDtcblxufVxuXG4ubG9nby1uYXYtbW9iaWxle1xuICBoZWlnaHQ6IDUwcHg7XG4gIHdpZHRoOiAxMzBweDtcbn1cbi5sb2dvLW5hdi1tb2JpbGUgaW1ne1xuICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXJnaW4tbGVmdDogMjBweDtcblxuICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xuXG59XG5cbi5sb2dvLW5hdiBpbWd7XG4gIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IDEwMCU7XG5cbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcblxufVxuXG5cbi5mb3JtLWNvbXBhbnkge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xufVxuXG4uZm9ybS1jb21wYW55ID4gKiB7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG5zdGVwcGVyLWZvcm1ze1xuXG4gIG1hcmdpbi10b3A6IDMwMHB4O1xuXG59XG5cblxuIl19 */"
+module.exports = ".example-container {\n  position: absolute;\n  top: 60px;\n  bottom: 60px;\n  left: 0;\n  right: 0;\n  height: 100%; }\n\n.example-sidenav {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 200px;\n  background: rgba(255, 0, 0, 0.5); }\n\n.example-header {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0; }\n\n.example-footer {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0; }\n\n.avatar {\n  width: 200px;\n  height: 200px;\n  border-radius: 100px; }\n\n.avatar img {\n  background-repeat: no-repeat;\n  height: 100%;\n  width: 100%;\n  border-radius: 100px;\n  background-size: cover; }\n\n.logo-nav {\n  width: 130px;\n  height: 50px;\n  margin-left: 30px; }\n\n.logo-nav-mobile {\n  height: 50px;\n  width: 130px; }\n\n.logo-nav-mobile img {\n  background-repeat: no-repeat;\n  height: 100%;\n  width: 100%;\n  margin-left: 20px;\n  background-size: cover; }\n\n.logo-nav img {\n  background-repeat: no-repeat;\n  height: 100%;\n  width: 100%;\n  background-size: cover; }\n\n.form-company {\n  display: flex;\n  flex-direction: column; }\n\n.form-company > * {\n  width: 100%; }\n\nstepper-forms {\n  margin-top: 300px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9sdWlzZmVybmFuZG9hZ3VpcnJlL0Rlc2t0b3AvTmlyaG9GRS9zcmMvYXBwL2NvbXBvbmVudHMvc2lkZWJhci9zaWRlYmFyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsbUJBQWtCO0VBQ2xCLFVBQVM7RUFDVCxhQUFZO0VBQ1osUUFBTztFQUNQLFNBQVE7RUFDUixhQUFZLEVBQ2I7O0FBRUQ7RUFDRSxjQUFhO0VBQ2Isb0JBQW1CO0VBQ25CLHdCQUF1QjtFQUN2QixhQUFZO0VBQ1osaUNBQWdDLEVBQ2pDOztBQUVEO0VBQ0UsZ0JBQWU7RUFDZixPQUFNO0VBQ04sUUFBTztFQUNQLFNBQVEsRUFDVDs7QUFFRDtFQUNFLGdCQUFlO0VBQ2YsVUFBUztFQUNULFFBQU87RUFDUCxTQUFRLEVBQ1Q7O0FBR0Q7RUFDRSxhQUFZO0VBQ1osY0FBYTtFQUNiLHFCQUFvQixFQUVyQjs7QUFDRDtFQUNFLDZCQUE0QjtFQUM1QixhQUFZO0VBQ1osWUFBVztFQUNYLHFCQUFvQjtFQUNwQix1QkFBc0IsRUFDdkI7O0FBRUQ7RUFDRSxhQUFZO0VBQ1osYUFBWTtFQUNaLGtCQUFpQixFQUVsQjs7QUFFRDtFQUNFLGFBQVk7RUFDWixhQUFZLEVBQ2I7O0FBQ0Q7RUFDRSw2QkFBNEI7RUFDNUIsYUFBWTtFQUNaLFlBQVc7RUFDWCxrQkFBaUI7RUFFakIsdUJBQXNCLEVBRXZCOztBQUVEO0VBQ0UsNkJBQTRCO0VBQzVCLGFBQVk7RUFDWixZQUFXO0VBRVgsdUJBQXNCLEVBRXZCOztBQUdEO0VBQ0UsY0FBYTtFQUNiLHVCQUFzQixFQUN2Qjs7QUFFRDtFQUNFLFlBQVcsRUFDWjs7QUFFRDtFQUVFLGtCQUFpQixFQUVsQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvc2lkZWJhci9zaWRlYmFyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmV4YW1wbGUtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDYwcHg7XG4gIGJvdHRvbTogNjBweDtcbiAgbGVmdDogMDtcbiAgcmlnaHQ6IDA7XG4gIGhlaWdodDogMTAwJTtcbn1cblxuLmV4YW1wbGUtc2lkZW5hdiB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICB3aWR0aDogMjAwcHg7XG4gIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAwLCAwLCAwLjUpO1xufVxuXG4uZXhhbXBsZS1oZWFkZXIge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgcmlnaHQ6IDA7XG59XG5cbi5leGFtcGxlLWZvb3RlciB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgYm90dG9tOiAwO1xuICBsZWZ0OiAwO1xuICByaWdodDogMDtcbn1cblxuXG4uYXZhdGFye1xuICB3aWR0aDogMjAwcHg7XG4gIGhlaWdodDogMjAwcHg7XG4gIGJvcmRlci1yYWRpdXM6IDEwMHB4O1xuXG59XG4uYXZhdGFyIGltZ3tcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgaGVpZ2h0OiAxMDAlO1xuICB3aWR0aDogMTAwJTtcbiAgYm9yZGVyLXJhZGl1czogMTAwcHg7XG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG59XG5cbi5sb2dvLW5hdntcbiAgd2lkdGg6IDEzMHB4O1xuICBoZWlnaHQ6IDUwcHg7XG4gIG1hcmdpbi1sZWZ0OiAzMHB4O1xuXG59XG5cbi5sb2dvLW5hdi1tb2JpbGV7XG4gIGhlaWdodDogNTBweDtcbiAgd2lkdGg6IDEzMHB4O1xufVxuLmxvZ28tbmF2LW1vYmlsZSBpbWd7XG4gIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG4gIGhlaWdodDogMTAwJTtcbiAgd2lkdGg6IDEwMCU7XG4gIG1hcmdpbi1sZWZ0OiAyMHB4O1xuXG4gIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG5cbn1cblxuLmxvZ28tbmF2IGltZ3tcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgaGVpZ2h0OiAxMDAlO1xuICB3aWR0aDogMTAwJTtcblxuICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xuXG59XG5cblxuLmZvcm0tY29tcGFueSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG59XG5cbi5mb3JtLWNvbXBhbnkgPiAqIHtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbnN0ZXBwZXItZm9ybXN7XG5cbiAgbWFyZ2luLXRvcDogMzAwcHg7XG5cbn1cblxuXG4iXX0= */"
 
 /***/ }),
 
@@ -1747,8 +2045,9 @@ var SidebarComponent = /** @class */ (function () {
         this.route = route;
         this.LoginService = LoginService;
         this.mobile = false;
-        this.selectModule = 7;
+        this.selectModule = 4;
         this.modules = [];
+        this.user = {};
         breakpointObserver.isMatched(('(max-width:450)'));
         breakpointObserver.observe([
             _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["Breakpoints"].HandsetLandscape, _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["Breakpoints"].HandsetPortrait
@@ -1762,8 +2061,11 @@ var SidebarComponent = /** @class */ (function () {
         });
     }
     SidebarComponent.prototype.ngOnInit = function () {
-        this.getModules();
-        this.getUser();
+        var _this = this;
+        setTimeout(function () {
+            _this.getModules();
+            _this.getUser();
+        }, 1500);
     };
     SidebarComponent.prototype.goModule = function (opt) {
         this.selectModule = opt;
@@ -1776,8 +2078,10 @@ var SidebarComponent = /** @class */ (function () {
         });
     };
     SidebarComponent.prototype.getUser = function () {
+        var _this = this;
         this.LoginService.getUser().subscribe(function (res) {
             console.log(res);
+            _this.user = res;
         });
     };
     SidebarComponent.prototype.recibirRespuestChildren = function (evt) {
@@ -1795,6 +2099,158 @@ var SidebarComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["BreakpointObserver"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _services_login_service__WEBPACK_IMPORTED_MODULE_3__["LoginService"]])
     ], SidebarComponent);
     return SidebarComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/cuestionario-select/cuestionario-select.component.html":
+/*!************************************************************************!*\
+  !*** ./src/app/cuestionario-select/cuestionario-select.component.html ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">library_books</mat-icon> Configuración cuestionario</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 40%; margin-right: 10px\" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\" >\n        <mat-option *ngFor=\"let proyect of proyects\"  [value]=\"proyect\">\n          {{proyect.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n    <mat-form-field  style=\"width: 40%; margin-right: 10px\"    appearance=\"outline\">\n    <mat-label>Seleccionar tema</mat-label>\n    <mat-select [(ngModel)]=\"tema\" (selectionChange) = \"getPreguntas()\">\n      <mat-option *ngFor=\"let tema of temas\" [value]=\"tema\">\n        {{tema.nombre}}\n      </mat-option>\n    </mat-select>\n    </mat-form-field>\n\n\n\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <button *ngIf=\"!preguntas\" mat-button-raised color =\"primary\"> Guardar preguntas</button>\n  </mat-grid-tile>\n</mat-grid-list>\n\n<mat-selection-list class=\"col-sm-10\" style=\"margin-left:100px \" >\n  <mat-list  *ngFor=\"let pregunta of preguntas\">\n    {{pregunta.enunciado+'  '}} <mat-checkbox style=\"margin-left: 10px\" [(ngModel)]=\"pregunta.select\"  ></mat-checkbox>\n  </mat-list>\n</mat-selection-list>\n\n\n\n"
+
+/***/ }),
+
+/***/ "./src/app/cuestionario-select/cuestionario-select.component.scss":
+/*!************************************************************************!*\
+  !*** ./src/app/cuestionario-select/cuestionario-select.component.scss ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2N1ZXN0aW9uYXJpby1zZWxlY3QvY3Vlc3Rpb25hcmlvLXNlbGVjdC5jb21wb25lbnQuc2NzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/cuestionario-select/cuestionario-select.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/cuestionario-select/cuestionario-select.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: CuestionarioSelectComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CuestionarioSelectComponent", function() { return CuestionarioSelectComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/proyecto.service */ "./src/app/services/proyecto.service.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var CuestionarioSelectComponent = /** @class */ (function () {
+    function CuestionarioSelectComponent(ProyectService) {
+        this.ProyectService = ProyectService;
+        this.response = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.mobile = false;
+        this.selectProyect = false;
+        this.proyects = [];
+        this.proyect = {};
+        this.temas = [];
+        this.tema = {};
+        this.select = [];
+        this.preguntas = [];
+        this.selectPregunta = [];
+    }
+    CuestionarioSelectComponent.prototype.ngOnInit = function () {
+        this.getProyects();
+        this.getTemas();
+    };
+    CuestionarioSelectComponent.prototype.checkMobileCols = function () {
+        if (this.mobile) {
+            return 1;
+        }
+        else {
+            return 3;
+        }
+    };
+    CuestionarioSelectComponent.prototype.savePreguntas = function () {
+        var _this = this;
+        sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()({
+            title: '',
+            text: 'Seguro que quieres guardar la información ingresada del proyecto',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si guardar',
+            cancelButtonText: 'No, seguir editando'
+        }).then(function (result) {
+            if (result.value) {
+                for (var _i = 0, _a = _this.preguntas; _i < _a.length; _i++) {
+                    var pregunta = _a[_i];
+                    if (pregunta.select) {
+                        delete pregunta.select;
+                        _this.selectPregunta.push(pregunta);
+                    }
+                }
+                var data = {
+                    idProyecto: _this.proyect['idProyecto'],
+                    lista: _this.selectPregunta
+                };
+                _this.ProyectService.savePreguntas(data).subscribe(function (res) {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Listo.', 'La información se guardo correctamente', 'success').then(function () {
+                        _this.response.emit({ key: 1 });
+                    });
+                }, function (err) {
+                    console.log(err);
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Algo salio mal.', 'No se pudo guarda la información', 'error').then(function () {
+                        _this.response.emit({ key: 1 });
+                    });
+                });
+            }
+        });
+    };
+    CuestionarioSelectComponent.prototype.getTemas = function () {
+        var _this = this;
+        this.ProyectService.getTemas().subscribe(function (res) {
+            _this.temas = res;
+        });
+    };
+    CuestionarioSelectComponent.prototype.getPreguntas = function () {
+        var _this = this;
+        var id = this.temas['id_tema'];
+        this.ProyectService.getPreguntas(id).subscribe(function (res) {
+            _this.preguntas = res;
+            for (var _i = 0, _a = _this.preguntas; _i < _a.length; _i++) {
+                var pregunta = _a[_i];
+                pregunta.select = false;
+            }
+        });
+    };
+    CuestionarioSelectComponent.prototype.getProyects = function () {
+        var _this = this;
+        this.ProyectService.getProyects().subscribe(function (res) {
+            console.log(res);
+            _this.proyects = res;
+        });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], CuestionarioSelectComponent.prototype, "response", void 0);
+    CuestionarioSelectComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-cuestionario-select',
+            template: __webpack_require__(/*! ./cuestionario-select.component.html */ "./src/app/cuestionario-select/cuestionario-select.component.html"),
+            styles: [__webpack_require__(/*! ./cuestionario-select.component.scss */ "./src/app/cuestionario-select/cuestionario-select.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__["ProyectoService"]])
+    ], CuestionarioSelectComponent);
+    return CuestionarioSelectComponent;
 }());
 
 
@@ -2048,6 +2504,24 @@ var ProyectoService = /** @class */ (function () {
     };
     ProyectoService.prototype.savePeriod = function (data) {
         return this.http.post(this.api + 'proyecto/agignarPeriodoGarantia', data, { headers: this.headers });
+    };
+    ProyectoService.prototype.getOrganigrama = function (id) {
+        return this.http.get(this.api + 'participantes/organigrama/', { headers: this.headers, params: { 'idProyecto': id } });
+    };
+    ProyectoService.prototype.getTemas = function () {
+        return this.http.get(this.api + 'cuestionario/temas/', { headers: this.headers, params: { 'idModulo': '1' } });
+    };
+    ProyectoService.prototype.getPreguntas = function (id) {
+        return this.http.get(this.api + 'cuestionario/preguntas', { headers: this.headers, params: { 'idTema': id } });
+    };
+    ProyectoService.prototype.savePreguntas = function (data) {
+        return this.http.post(this.api + 'cuestionario/configurar', data, { headers: this.headers });
+    };
+    ProyectoService.prototype.getConsultores = function () {
+        return this.http.get(this.api + 'usuario/consultores', { headers: this.headers });
+    };
+    ProyectoService.prototype.saveConsultor = function (data) {
+        return this.http.post(this.api + 'proyecto/asignarConsultor', data, { headers: this.headers });
     };
     ProyectoService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

@@ -1,9 +1,7 @@
 
 <form [formGroup]="contactForm"  >
 <mat-grid-list  [cols]="checkMobileCols()" rowHeight="100px">
-  <mat-grid-tile [colspan]="checkMobileCols()">
-    <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">people_outline</mat-icon> Datos contacto</h2>
-  </mat-grid-tile>
+
   <mat-grid-tile [colspan]="1" [rowspan]="1">
     <mat-form-field class="inputForm" appearance="outline">
       <mat-label>Nombre</mat-label>

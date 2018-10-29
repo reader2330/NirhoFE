@@ -16,7 +16,7 @@ export class BandejaDetalleComponent implements OnInit {
   puestos = [];
   tiposContacto = [];
   data: Proyecto;
-  panelOpenState = false;
+  panelOpenState = true;
 
 
   constructor(private CatalogService: CatalogsService) { }

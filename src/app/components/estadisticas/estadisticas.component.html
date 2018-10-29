@@ -13,13 +13,18 @@
     </mat-form-field>
   </mat-grid-tile>
 </mat-grid-list>
-  <div class="col-sm-12" style="margin-top: 20px">
+<div class="row">
+  <div class="col-sm-7" style=" border: 2px black solid">
     <chart [options]="options"></chart>
 
   </div>
-<div class="col-sm-12">
-  <chart  [options]="options2"> </chart>
+  <div class="col-sm-5 " style=" border: 2px black solid">
+    <chart [options]="options3"></chart>
+  </div>
+  <div class="col-sm-12" style="border: 2px black solid">
+    <chart  [options]="options2"> </chart>
+  </div>
 </div>
-<div>
-  <chart [options]="options3"></chart>
-</div>
+
+
+
