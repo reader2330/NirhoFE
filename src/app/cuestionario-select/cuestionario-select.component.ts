@@ -87,7 +87,7 @@ export class CuestionarioSelectComponent implements OnInit {
     });
   }
   getPreguntas() {
-    console.log(this.tema)
+    console.log(this.tema);
     let id = this.tema['idTema'];
     this.ProyectService.getPreguntas(id).subscribe((res) => {
       this.preguntas = res;
