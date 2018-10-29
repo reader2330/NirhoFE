@@ -10,8 +10,9 @@ import {LoginService} from '../../services/login.service';
 })
 export class SidebarComponent implements OnInit {
   mobile = false;
-  selectModule = 8;
+  selectModule = 9;
   modules = [];
+  user = {};
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
@@ -29,8 +30,10 @@ export class SidebarComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getModules();
-    this.getUser();
+    setTimeout(() => {
+      this.getModules();
+      this.getUser();
+    },1500);
   }
 
   goModule(opt) {
@@ -44,7 +47,8 @@ export class SidebarComponent implements OnInit {
   }
   getUser() {
     this.LoginService.getUser().subscribe((res) => {
-      console.log(res);
+      console.log(res)
+      this.user = res;
     });
   }
   recibirRespuestChildren(evt) {

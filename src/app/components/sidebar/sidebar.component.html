@@ -1,26 +1,29 @@
 
-<mat-toolbar color="#000000">
-          <span *ngIf="!mobile">
-            <div class="logo-nav">
-            <img src="../../../assets/img/logo.png" alt="">
-              </div>
-          </span>
-  <span *ngIf="mobile">
-
-            <div class="logo-nav-mobile">
-              <a (click)="snav.toggle()"><mat-icon >menu</mat-icon></a>
-              <img src="../../../assets/img/logo.png" alt="">
-            </div>
-          </span>
+<mat-toolbar style="background: black" >
+  <a *ngIf="mobile" style=" color:white" (click)="snav.toggle()"><mat-icon >menu</mat-icon></a>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" [opened]="!mobile" [fixedInViewport]="true" [fixedTopGap]="62" [fixedBottomGap]="60"  #snav>
+  <mat-sidenav mode="side" [opened]="!mobile" [fixedInViewport]="false" [fixedTopGap]="62" [fixedBottomGap]="60"  #snav>
 
     <mat-nav-list>
+           <span *ngIf="!mobile">
+            <div class="logo-nav">
+            <img src="../../../assets/logo.png" alt="">
+              </div>
+          </span>
+          <span *ngIf="mobile">
+            <div class="logo-nav-mobile">
+              <img src="../../../assets/logo.png" alt="">
+            </div>
+          </span>
       <div class="avatar">
-        <img src="../../../assets/img/avatar.png" alt="">
+        <img src="../../../assets/avatar.png" alt="">
       </div>
+
       <mat-list>
+        <mat-list-item>
+          <p style="margin-left: 40px">{{user.fullname || 'Jose Lopez' }}</p>
+        </mat-list-item>
         <mat-list-item *ngFor="let module of modules" (click)="goModule(module.id_submodulo)">
           {{module.descripcion}}
         </mat-list-item>
@@ -35,13 +38,15 @@
     <div class="row">
 
       <div style="margin-left: 10px" class="col-sm-12 stepper-forms" >
-        <app-steppers (responseChildren)="recibirRespuestChildren($event)"   *ngIf="selectModule == 5"></app-steppers>
+        <app-steppers (responseChildren)="recibirRespuestChildren($event)"   *ngIf="selectModule == 2"></app-steppers>
         <app-bandeja  (responseChildren)="recibirRespuestChildren($event)" *ngIf="selectModule == 1"></app-bandeja>
         <app-bandeja-detalle  *ngIf="selectModule == 3"></app-bandeja-detalle>
-        <app-head-count (responseHead)="recibirRespuestChildren($event)" *ngIf="selectModule == 4"></app-head-count>
-        <app-data-period (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 6"></app-data-period>
-        <app-organigrama *ngIf="selectModule == 7"> </app-organigrama>
+        <app-head-count (responseHead)="recibirRespuestChildren($event)" *ngIf="selectModule == 6"></app-head-count>
+        <app-data-period (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 4"></app-data-period>
+        <app-organigrama (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 7"> </app-organigrama>
+        <app-asignar-consultor *ngIf="selectModule == 5"></app-asignar-consultor>
         <app-cuestionario-select (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 8" ></app-cuestionario-select>
+        <app-estadisticas *ngIf="selectModule == 9"></app-estadisticas>
       </div>
 
     </div>
