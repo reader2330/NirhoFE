@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html ng-app="empresasClienteModule">
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+.selected {
+    background-color:#E5FAB5;
+    color:#000000;
+    font-weight:bold;
+}
+</style>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <title>CLB - niRHo | Especialistas en Capital Humano</title> -->
+    <title>CLB - niRHo | Especialistas en Capital Humano</title>
+    
+    
+    <link rel="shortcut icon" href="img/favicon.png">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="css/AdminLTE.min.css">
+    <link rel="stylesheet" href="css/skins/skin-green-light.min.css">
+    <!--adminUsuarios css-->
+    <link rel="stylesheet" href="css/nirho/estilos-climaLaboral.css">
+    <link rel="stylesheet" href="css/selectores.css">
+    <script src="js/angular.min.js"></script>
+    <script src="js/empresasClienteCtrl.js"></script>
+    
+    <link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+	
+    <link rel="stylesheet" href="css/xeditable.css">
+    <script src="js/xeditable.js"></script>
+    
+    
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    
+</head>
+
+<body class="hold-transition skin-green-light sidebar-mini">
+    <div class="wrapper" ng-controller="empresasClienteController">
+
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top  navbar-fixed-top" role="navigation">
+                <img src="img/logoPequeño.png" class="mgn5">
+                <span class="white"> niRHo - Clima Laboral</span>
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <span class="">{{data.usuario.fullName}}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" ng-click="logout()" data-toggle="control-sidebarRO"><i class="fa fa-power-off" aria-hidden="true"></i> Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="salud hidden-xs" id="salud">
+                    <img src="img/salud.png" class="img-responsive" alt="Logo">
+                </div>
+                
+                
+                <ul class="sidebar-menu" ng-show="data.usuario.rol == 3">
+                
+                    <li class="header" ng-show="selectedRow != null">EMPRESA SELECCIONADA</li>
+                    <li class="header" ng-show="selectedRow != null"><b>{{selectedRow.empresa}}</b></li>
+                    
+                    <li class="header">ESTUDIO DE IRH</li>
+                    <li class="treeview">
+                        <a href="#" ng-click="showEmpresas()"><i class="fa fa-industry" aria-hidden="true"></i> 
+                        <span>Empresas</span></a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#" ng-click="showRegistrarEmpresa()"><i class="fa fa-folder-open" aria-hidden="true"></i> 
+                        <span>Registrar Empresa</span></a>
+                    </li>
+                    
+                    <li class="header" ng-show="selectedRow != null">OPCIONES DE EMPRESA</li>
+                    <li class="treeview" ng-show="selectedRow != null">
+                        <a href="#" ng-click="showDetalleEmpresa()"><i class="fa fa-handshake-o" aria-hidden="true"></i> 
+                        <span>Detalle Empresa</span></a>
+                    </li>
+                    
+                    <li class="treeview" ng-show="selectedRow != null">
+                        <a href="#" ng-click="showEvaluacion()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+                        <span>Llenar Evaluación</span></a>
+		                    
+                    </li>
+                    	<li ng-show="data.opciones.showEvaluacion">
+		                        <a href="#" ng-click="showCuestionario1()"><i class="fa fa-minus" aria-hidden="true"></i> 
+		                        <span>Reclutamiento y selección</span></a>
+		                    </li>
+		                    <li ng-show="data.opciones.showEvaluacion">
+		                        <a href="#" ng-click="showCuestionario2()"><i class="fa fa-minus" aria-hidden="true"></i> 
+		                        <span>Administración de recursos humanos</span></a>
+		                    </li>
+		                    <li ng-show="data.opciones.showEvaluacion">
+		                        <a href="#" ng-click="showCuestionario3()"><i class="fa fa-minus" aria-hidden="true"></i> 
+		                        <span>Desarrollo organizacional</span></a>
+		                    </li>
+		                    <li ng-show="data.opciones.showEvaluacion">
+		                        <a href="#" ng-click="showCuestionario4()"><i class="fa fa-minus" aria-hidden="true"></i> 
+		                        <span>Capacitación</span></a>
+		                    </li>
+                    
+                    <li class="treeview" ng-show="selectedRow != null">
+                        <a href="#" ng-click="showGrafica()	"><i class="fa fa-handshake-o" aria-hidden="true"></i> 
+                        <span>Consultar Resultado</span></a>
+                    </li>
+                </ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+<div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+
+			<!-- DATOS EMPRESA COMIENZA -->
+                <div align="center" ng-show="data.opciones.empresaShow">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <i class="fa fa-industry" aria-hidden="true"></i>
+                        <strong>REGISTRO EMPRESA</strong>
+                    </div>
+                </div>
+
+                <div id="" class="container" style="width:100%;" ng-show="data.opciones.empresaShow">
+                    <div class="row" style="margin-top:20px;">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="panel-body">
+                                <div class="tab-content">
+		                           <div class="tab-pane fade in active" id="datosEmpresa">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 margintop">
+
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">NOMBRE <b class="asterisco">*</b></p>
+                                                <input type="text" ng-model="data.registrarEmpresa.empresa.empresa" class="form-control" required>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">PAÍS</p>
+												    <select style="width:90%;height:55%;" name="comboPais" id="comboPais"
+													    ng-model="data.registrarEmpresa.empresa.pais"
+													    ng-options="option.id as option.descripcionCatalogo for option in data.catPaises">
+													</select>
+                                            </div>
+                                          	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">RFC <b class="asterisco">*</b></p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.empresa.rfc">
+                                            </div>											
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                            	<p class="form-control-label" for="">GIRO</p>
+												    <select style="width:90%;height:55%;" name="comboGirosEmpresa" id="comboGirosEmpresa"
+													    ng-model="data.registrarEmpresa.empresa.giro"
+													    ng-options="option.id as option.descripcionCatalogo for option in data.catGirosEmpresas">
+													</select>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-8 form-group">
+                                                <p class="form-control-label" for="">DIRECCIÓN</p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.empresa.direccion">
+                                            </div>      
+                                            
+                                            
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">NOMBRE DEL RESPONSABLE DEL LLENADO <b class="asterisco">*</b></p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.entrevistado.nombreResponsableLlenado">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">PUESTO DEL RESPONSABLE DEL LLENADO<b class="asterisco">*</b></p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.entrevistado.puestoResponsableLlenado">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">NOMBRE DEL ENTREVISTADOR <b class="asterisco">*</b></p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.entrevistado.nombreEntrevistador">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">NOMBRE DEL ENTREVISTADO<b class="asterisco">*</b></p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.entrevistado.nombreEntrevistado">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">PUESTO DEL ENTREVISTADO<b class="asterisco">*</b></p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.entrevistado.puestoEntrevistado">
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">CORREO ELECTRÓNICO <b class="asterisco">*</b></p>
+                                                <input type="email" class="form-control" ng-model="data.registrarEmpresa.entrevistado.correoElectronico">
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">CELULAR <b class="asterisco">*</b></p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.entrevistado.telefonoCelular">
+                                            </div>
+                                            
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">TELÉFONO OFICINA</p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.entrevistado.telefono_oficina_extension">
+                                            </div>
+                                            
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">AÑO INICIO OPERACIONES</p>
+                                                <input type="number" class="form-control" ng-model="data.registrarEmpresa.empresa.anioInicioOperaciones">
+                                            </div>
+                                            
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">FACTURACIÓN ANUAL</p>
+                                                <input type="number" class="form-control" ng-model="data.registrarEmpresa.empresa.facturacionAnual">
+                                            </div>
+                                            
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">PRODUCTO/SERVICIO ESTRELLA<b class="asterisco">*</b></p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.empresa.productoServicioEstrella">
+                                            </div>
+                                            
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">PRINCIPALES PRODUCTOS/SERVICIOS<b class="asterisco">*</b></p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.empresa.principalesProductosServicios">
+                                            </div>
+                                            
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">NÚMERO DE EMPLEADOS A NIVEL ADMINISTRATIVO</p>
+                                                <input type="number" class="form-control" ng-model="data.registrarEmpresa.empresa.noEmpleadosAdministrativo">
+                                            </div>
+                                            
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">NÚMERO DE EMPLEADOS A NIVEL OPERATIVO</p>
+                                                <input type="number" class="form-control" ng-model="data.registrarEmpresa.empresa.noEmpleadosOperativo">
+                                            </div>
+                                            
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                <p class="form-control-label" for="">TIPO CONTRATACIÓN EMPLEADOS<b class="asterisco">*</b></p>
+                                                <input type="text" class="form-control" ng-model="data.registrarEmpresa.empresa.tipoContratacionEmpleados">
+                                            </div>
+                                            
+                                                                         
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  margin">
+                                                <div class="hidden-xs col-sm-12 col-md-12 col-lg-4 "></div>
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 ">
+                                                        <p for="">CAMPOS REQUERIDOS <b class="asterisco">*</b></p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                        <button class="btn btn-default form-control" ng-click="showOcultarEmpresa()"> CANCELAR <i class="fa fa-ban icon-label"></i></button>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                                        <button class="btn btn-default form-control black-button" 
+                                                        ng-click="registrarEmpresa()"> GUARDAR <i class="fa fa-arrow-right icon-label"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- DATOS EMPRESA TERMINA -->
+
+
+     
+                <!-- LISTADO DE EMPRESAS COMIENZA 
+                -->
+                <div class="row row1" ng-show="false">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <i class="fa fa-industry" aria-hidden="true"></i>
+                        <strong>EMPRESAS</strong>
+                    </div>
+                </div>
+                <div align="center" ng-show="false">
+                					<table ng-table="tableParams" ng-form="rowForm">
+									    <tr ng-repeat="emp in data.empresasList">
+									    <td title="'Empresa'" filter="{ empresa: 'text'}" sortable="'empresa'" 
+									    	ng-switch="emp.isEditing" ng-class="empresa.$dirty ? 'bg-warning' : ''" 
+									    	ng-form="empresa" demo-tracked-table-cell>
+								            <span ng-switch-default class="editable-text">{{emp.empresa}}</span>
+								            <div class="controls" ng-class="empresa.$invalid && empresa.$dirty ? 'has-error' : ''" 
+								            ng-switch-when="true">
+								              <input type="text" name="empresa" ng-model="emp.empresa" 
+								              	class="editable-input form-control input-sm" required />
+								            </div>
+								          </td>
+								          <td title="'RFC'" filter="{ rfc: 'text'}" sortable="'rfc'" 
+									    	ng-switch="emp.isEditing" ng-class="rfc.$dirty ? 'bg-warning' : ''" 
+									    	ng-form="rfc" demo-tracked-table-cell>
+								            <span ng-switch-default class="editable-text">{{emp.rfc}}</span>
+								            <div class="controls" ng-class="rfc.$invalid && rfc.$dirty ? 'has-error' : ''" 
+								            ng-switch-when="true">
+								              <input type="text" name="rfc" ng-model="emp.rfc" 
+								              	class="editable-input form-control input-sm" required />
+								            </div>
+								          </td>
+									        <td title="'Dirección'" filter="{ direccion: 'text'}" sortable="'direccion'">
+									            {{emp.direccion}}</td>
+									        <td title="'Giro'" filter="{ giro: 'text'}" sortable="'giro'">
+									            {{emp.giro}}</td>
+									          <td>
+									            <button class="btn btn-primary btn-sm" ng-click="save(emp, rowForm)" 
+									            	ng-if="emp.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid">
+									            	<span class="glyphicon glyphicon-ok"></span></button>
+									            <button class="btn btn-default btn-sm" ng-click="cancel(emp, rowForm)" 
+									            	ng-if="emp.isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+									            <button class="btn btn-default btn-sm" ng-click="emp.isEditing = true" 
+									            	ng-if="!emp.isEditing"><span class="glyphicon glyphicon-pencil"></span></button>
+									            <button class="btn btn-danger btn-sm" ng-click="del(emp)" 
+									            	ng-if="!emp.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+									          </td>
+									    </tr>
+									</table>
+                	</div>     
+                
+                <!-- LISTADO DE EMPRESAS COMIENZA -->
+                <div align="center" ng-show="data.opciones.consultarEmpresaShow">
+                <br/>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <i class="fa fa-industry" aria-hidden="true"></i>
+                        <strong>Empresas</strong>
+                    </div>
+                </div>
+                <br/>
+                <div align="center" ng-show="data.opciones.consultarEmpresaShow">
+                <p>Selecciona una empresa haciendo "clic" sobre el registro, para poder acceder a las opciones de evaluación</p>
+		          	<table ng-table="tableParams" >
+					    <tr ng-repeat="emp in data.empresasList" 
+					    	ng-class="{'selected':emp == selectedRow}" ng-click="setClickedRow(emp)">
+					        <td title="'Empresa'">
+					            {{emp.empresa}}</td>
+					        <td title="'RFC'" >
+					            {{emp.rfc}}</td>
+					        <td title="'Dirección'" >
+					            {{emp.direccion}}</td>
+					    </tr>
+					</table>
+                <br/><br/><br/>
+                <br/><br/><br/>
+                <br/><br/><br/>
+                </div>
+                
+                <!-- Comienza evaluacion 1 -->
+                <div align="center" ng-show="data.opciones.showCuestionario1 || data.opciones.showCuestionario2
+                || data.opciones.showCuestionario3 || data.opciones.showCuestionario4">
+                <br/><br/><br/>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                        <strong>Reclutamiento y seleccion</strong>
+                    </div>
+                </div>
+                <br/>
+                <div  ng-show="data.opciones.showCuestionario1 || data.opciones.showCuestionario2
+                || data.opciones.showCuestionario3 || data.opciones.showCuestionario4">
+				  <table class="table table-bordered table-hover table-condensed">
+				    <tr style="font-weight: bold">
+				      <td style="width:15%">Estructura organizacional</td>
+				      <td style="width:15%">Documento que debe existir</td>
+				      <td style="width:10%">Cumplimiento</td>
+				      <td style="width:10%">Vigencia</td>
+				      <td style="width:15%">Estado</td>
+				      <td style="width:20%">Observaciones</td>
+				      <td style="width:10%">Inversión aproximada</td>
+				      <td style="width:5%">Edición</td>
+				    </tr>
+				    <tr ng-repeat="pregunta in preguntasCuestionario1List">
+				      <td>
+				          {{ pregunta.enunciado || '' }}
+				      </td>
+				      <td>
+				          {{ pregunta.documentoReferencia || '' }}
+				      </td>
+				      <td>
+				        <!-- editable status (select-local) -->
+				        <span editable-select="pregunta.respuesta.cumplimiento" e-name="cumplimiento" e-form="rowform" 
+				        	e-ng-options="s.value as s.text for s in opcionesCumplimiento">
+				          {{ showCumplimiento(pregunta) }}
+				        </span>
+				      </td>
+				      <td>
+				        <!-- editable status (select-local) -->
+				        <span editable-select="pregunta.respuesta.vigencia" e-name="vigencia" e-form="rowform" 
+				        	e-ng-options="s.value as s.text for s in opcionesVigencia">
+				          {{ showVigencia(pregunta) }}
+				        </span>
+				      </td>
+				      <td>
+				        <!-- editable status (select-local) -->
+				        <span editable-select="pregunta.respuesta.estado" e-name="estado" e-form="rowform" 
+				        	e-ng-options="s.value as s.text for s in opcionesEstado">
+				          {{ showEstado(pregunta) }}
+				        </span>
+				      </td>
+				      <td>
+				        <span editable-text="pregunta.respuesta.observaciones" e-name="observaciones" e-form="rowform">
+				          {{ pregunta.respuesta.observaciones || '' }}
+				        </span>
+				      </td>
+				      <td>
+				        <span editable-text="pregunta.respuesta.inversionAproximada" e-name="inversionAproximada" 
+				        	e-form="rowform">
+				          {{ pregunta.respuesta.inversionAproximada || '' }}
+				        </span>
+				      </td>
+				      <td style="white-space: nowrap">
+				        <!-- form -->
+				        <form editable-form name="rowform" 
+				        onbeforesave="guardarPregunta($data, pregunta.respuesta.idRespuestaPregunta, pregunta.idPregunta)" 
+				        	ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == pregunta">
+				          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+				            guardar
+				          </button>
+				          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" 
+				          	class="btn btn-default">
+				            cancelar
+				          </button>
+				        </form>
+				        <div class="buttons" ng-show="!rowform.$visible">
+				          <button type="button" class="btn btn-primary" ng-click="rowform.$show()">editar</button>
+				        </div>  
+				      </td>
+				    </tr>
+				  </table>
+				
+				</div>
+
+
+
+
+
+                <!-- GRAFICAS COMIENZA -->
+                <!--  
+                <div class="row row1" ng-show="data.opciones.showGrafica">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <i class="fa fa-industry" aria-hidden="true"></i>
+                        <strong>Resultado Evaluación</strong>
+                    </div>
+                </div>
+                <br/><br/><br/>
+                -->
+                <div align="center" ng-show="data.opciones.showGrafica">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <i class="fa fa-industry" aria-hidden="true"></i>
+                        <strong>Resultados</strong>
+                    </div>
+                </div>
+                <div align="center" ng-show="data.opciones.showGrafica" style="height: 380px; width: 560px; margin:auto"> 
+                	<p align="center">
+                		<canvas id="myRadarChart" width="560" height="380" align="center"></canvas>
+                	</p>
+                </div>
+                <div align="center" ng-show="data.opciones.showGrafica"> 
+	   				<div align="center" id="chartContainer" style="height: 90%; width: 600px;"></div>                
+                </div>
+                <br/><br/><br/>
+            </section>
+            <!-- /.content -->
+        </div>     
+        <!-- /.content-wrapper -->
+        <!-- Add the sidebar's background. This div must be placed
+			immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED JS SCRIPTS -->
+
+    <!-- jQuery 2.2.3 -->
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/selectores.js"></script>
+    
+</body>
+
+</html>
