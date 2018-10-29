@@ -1,6 +1,8 @@
 
-<mat-toolbar style="background: black" >
+<mat-toolbar style="background:  black" >
   <a *ngIf="mobile" style=" color:white" (click)="snav.toggle()"><mat-icon >menu</mat-icon></a>
+  <span style="flex: 1 1 auto;"></span>
+  <button mat-raised-button (click)="cerraSesion()"><mat-icon >people_outline</mat-icon>Cerra sesión</button>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
   <mat-sidenav mode="side" [opened]="!mobile" [fixedInViewport]="false" [fixedTopGap]="62" [fixedBottomGap]="60"  #snav>
@@ -37,7 +39,7 @@
   <mat-sidenav-content>
     <div class="row">
 
-      <div style="margin-left: 10px;margin-top: 50px"  class="col-sm-12 stepper-forms" >
+      <div style="margin-left: 20px;margin-top: 50px"  class="col-sm-12 stepper-forms" >
         <app-steppers (responseChildren)="recibirRespuestChildren($event)"   *ngIf="selectModule == 2"></app-steppers>
         <app-bandeja  (responseChildren)="recibirRespuestChildren($event)" *ngIf="selectModule == 1"></app-bandeja>
         <app-bandeja-detalle  *ngIf="selectModule == 3"></app-bandeja-detalle>

@@ -82,7 +82,7 @@ export class CuestionarioSelectComponent implements OnInit {
 
   getTemas() {
     this.ProyectService.getTemas().subscribe((res) => {
-      console.log(res)
+
       this.temas = res;
     });
   }
@@ -101,7 +101,7 @@ export class CuestionarioSelectComponent implements OnInit {
 
   getProyects() {
     this.ProyectService.getProyects().subscribe((res) => {
-      console.log(res);
+
       this.proyects = res;
     });
   }

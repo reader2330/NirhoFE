@@ -56,7 +56,7 @@ export class DataContactComponent implements OnInit {
 
   getPuestos() {
     this.CatalogService.getPuestos().subscribe((res) => {
-      console.log(res);
+
       if (res) {
        this.puestos = res;
       }
@@ -65,7 +65,7 @@ export class DataContactComponent implements OnInit {
   }
   getTypeContact() {
     this.CatalogService.getTypeContact().subscribe((res) => {
-      console.log(res);
+
       if (res) {
         this.typeContact = res;
       }

@@ -10,7 +10,7 @@ import {LoginService} from '../../services/login.service';
 })
 export class SidebarComponent implements OnInit {
   mobile = false;
-  selectModule = 9;
+  selectModule = 1;
   modules = [];
   user = {};
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
@@ -41,22 +41,24 @@ export class SidebarComponent implements OnInit {
   }
   getModules() {
     this.LoginService.getModules().subscribe((res) => {
-      console.log(res);
       this.modules = res;
     });
   }
   getUser() {
     this.LoginService.getUser().subscribe((res) => {
-      console.log(res)
+
       this.user = res;
     });
   }
   recibirRespuestChildren(evt) {
-    console.log(evt);
     if (evt.value) {
       this.selectModule = evt.value;
     }
 
+  }
+
+  cerraSesion(){
+    this.route.navigate([''])
   }
 
 
