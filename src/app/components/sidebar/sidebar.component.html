@@ -39,12 +39,12 @@
         <app-bandeja  (responseChildren)="recibirRespuestChildren($event)" *ngIf="selectModule == 1"></app-bandeja>
         <app-bandeja-detalle  *ngIf="selectModule == 3"></app-bandeja-detalle>
         <app-head-count (responseHead)="recibirRespuestChildren($event)" *ngIf="selectModule == 4"></app-head-count>
-        <app-data-period *ngIf="selectModule == 6"></app-data-period>
+        <app-data-period (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 6"></app-data-period>
         <app-organigrama *ngIf="selectModule == 7"> </app-organigrama>
+        <app-cuestionario-select (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 8" ></app-cuestionario-select>
       </div>
 
     </div>
-
 
   </mat-sidenav-content>
 </mat-sidenav-container>

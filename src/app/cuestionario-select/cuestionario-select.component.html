@@ -1,0 +1,38 @@
+<mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
+  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+    <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">library_books</mat-icon> Configuración cuestionario</h2>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+    <mat-form-field  style="width: 40%; margin-right: 10px" appearance="outline">
+      <mat-label>Seleccionar proyecto</mat-label>
+      <mat-select [(ngModel)]="proyect" >
+        <mat-option *ngFor="let proyect of proyects"  [value]="proyect">
+          {{proyect.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field  style="width: 40%; margin-right: 10px"    appearance="outline">
+    <mat-label>Seleccionar tema</mat-label>
+    <mat-select [(ngModel)]="tema" (selectionChange) = "getPreguntas()">
+      <mat-option *ngFor="let tema of temas" [value]="tema">
+        {{tema.nombre}}
+      </mat-option>
+    </mat-select>
+    </mat-form-field>
+
+
+
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+    <button *ngIf="!preguntas" mat-button-raised color ="primary"> Guardar preguntas</button>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-selection-list class="col-sm-10" style="margin-left:100px " >
+  <mat-list  *ngFor="let pregunta of preguntas">
+    {{pregunta.enunciado+'  '}} <mat-checkbox style="margin-left: 10px" [(ngModel)]="pregunta.select"  ></mat-checkbox>
+  </mat-list>
+</mat-selection-list>
+
+
+

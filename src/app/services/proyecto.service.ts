@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment.prod';
 import {Observable} from 'rxjs';
 import {Proyecto} from '../models/proyecto';
+import {Pregunta} from '../models/pregunta';
+
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,15 @@ export class ProyectoService {
   }
   getOrganigrama(id): Observable<any> {
     return this.http.get(this.api + 'participantes/organigrama/', {headers: this.headers, params: {'idProyecto': id}});
+  }
+  getTemas(): Observable<any> {
+    return this.http.get(this.api + 'cuestionario/temas/', {headers: this.headers, params: {'idProyecto': '1'}});
+  }
+  getPreguntas(id): Observable<Pregunta[]> {
+    return this.http.get<Pregunta[]>(this.api + 'cuestionario/preguntas', {headers: this.headers, params: {'idTema': id }})
+  }
+  savePreguntas(data): Observable<any> {
+    return this.http.post(this.api + 'cuestionario/configurar', data, {headers: this.headers});
   }
 
 }

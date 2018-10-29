@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../services/catalogs.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProyectoService} from '../../../services/proyecto.service';
 import {Proyecto} from '../../../models/proyecto';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-data-period',
@@ -11,6 +12,7 @@ import {Proyecto} from '../../../models/proyecto';
   styleUrls: ['./data-period.component.scss']
 })
 export class DataPeriodComponent implements OnInit {
+  @Output() response = new EventEmitter();
   mobile = false;
   periodForm = new FormGroup(
     {
@@ -56,13 +58,40 @@ export class DataPeriodComponent implements OnInit {
     });
   }
   savePeriod() {
-    console.log(this.periodForm.value);
-    this.proyect.fechaRegistro = this.periodForm.value.fechaRegistro;
-    this.proyect.fechaFin = this.periodForm.value.fechaFin;
-    this.proyect.diasGarantia = this.periodForm.value.diasGarantia;
-    console.log(this.proyect);
-    this.ProyectService.savePeriod(this.proyect).subscribe((res) => {
-      console.log(res);
+
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar la información ingresada del proyecto',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        this.proyect.fechaRegistro = this.periodForm.value.fechaRegistro;
+        this.proyect.fechaFin = this.periodForm.value.fechaFin;
+        this.proyect.diasGarantia = this.periodForm.value.diasGarantia;
+        this.ProyectService.savePeriod(this.proyect).subscribe((res) => {
+            console.log(res);
+            Swal(
+              'Listo.',
+              'La información se guardo correctamente',
+              'success'
+            ).then(() => {
+              this.response.emit({key: 1});
+            });
+          },
+          (err) => {
+            console.log(err);
+            Swal(
+              'Algo salio mal.',
+              'No se pudo guarda la información',
+              'error'
+            ).then(() => {
+              this.response.emit({key: 1});
+            });
+          });
+      }
     });
   }
   cancelPeriod() {

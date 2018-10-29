@@ -21,6 +21,7 @@ import { DataContactComponent } from './components/formularios/data-contact/data
 import {BandejaComponent} from './components/bandeja/bandeja.component';
 import { BandejaDetalleComponent } from './components/bandeja-detalle/bandeja-detalle.component';
 import {ChartModule} from 'angular2-highcharts';
+import { CuestionarioSelectComponent } from './cuestionario-select/cuestionario-select.component';
 
 
 
@@ -41,6 +42,7 @@ import {ChartModule} from 'angular2-highcharts';
     DataContactComponent,
     BandejaComponent,
     BandejaDetalleComponent,
+    CuestionarioSelectComponent,
   ],
   imports: [
     BrowserModule,
