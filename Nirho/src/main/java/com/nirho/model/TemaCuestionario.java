@@ -6,21 +6,16 @@
 package com.nirho.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -45,9 +40,7 @@ public class TemaCuestionario implements Serializable {
     private String nombre;
     @Column(name="descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy = "tema")
-    private List<PreguntaTema> preguntaTemaList;
-
+    
     public TemaCuestionario() {
     }
 
@@ -83,19 +76,10 @@ public class TemaCuestionario implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    @XmlTransient
-    public List<PreguntaTema> getPreguntaTemaList() {
-        return preguntaTemaList;
-    }
-
-    public void setPreguntaTemaList(List<PreguntaTema> preguntaTemaList) {
-        this.preguntaTemaList = preguntaTemaList;
-    }
-
+    
 	@Override
 	public String toString() {
 		return "TemaCuestionario [idTema=" + idTema + ", nombre=" + nombre + ", descripcion=" + descripcion
-				+ ", preguntaTemaList=" + preguntaTemaList + "]";
+				+ "]";
 	}
 }

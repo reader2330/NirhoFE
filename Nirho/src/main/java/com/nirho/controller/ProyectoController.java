@@ -55,6 +55,29 @@ public class ProyectoController {
 		}
 		return proyectos;
 	}
+	
+	@GetMapping(value = "/porConsultor")
+	public List<Proyecto> porConsultor(@RequestParam(name="idUsuario") Integer idUsuario) throws NirhoControllerException{
+		List<Proyecto> proyectos = new ArrayList<>();
+		try {
+			proyectos = proyectoService.obtenerProyectosConsultor(idUsuario);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
+		}
+		return proyectos;
+	}
+	
+	@GetMapping(value = "/deConsultorEnSesion")
+	public List<Proyecto> deConsultorEnSesion(HttpServletRequest request) throws NirhoControllerException{
+		List<Proyecto> proyectos = new ArrayList<>();
+		try {
+			Long id = SessionUtil.getUsuarioSession(request).getId();
+			proyectos = proyectoService.obtenerProyectosConsultor(id.intValue());
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
+		}
+		return proyectos;
+	}
 			
 	@RequestMapping(value = "/porId", method = RequestMethod.GET)
 	@ResponseBody
