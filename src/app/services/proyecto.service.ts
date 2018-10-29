@@ -29,4 +29,8 @@ export class ProyectoService {
   savePeriod(data): Observable<any> {
     return this.http.post(this.api + 'proyecto/agignarPeriodoGarantia', data, {headers: this.headers});
   }
+  getOrganigrama(id): Observable<any> {
+    return this.http.get(this.api + 'participantes/organigrama/', {headers: this.headers, params: {'idProyecto': id}});
+  }
+
 }

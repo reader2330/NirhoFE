@@ -941,6 +941,7 @@ var DataProyectComponent = /** @class */ (function () {
         var _this = this;
         this.CatalogService = CatalogService;
         this.ProyectoService = ProyectoService;
+        this.response = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.proyect = {
             idProyecto: 0,
             nombre: '',
@@ -1017,22 +1018,29 @@ var DataProyectComponent = /** @class */ (function () {
             if (result.value) {
                 if (sessionStorage.getItem('contact')) {
                     var contact = JSON.parse(sessionStorage.getItem('contact'));
+                    var company = JSON.parse(sessionStorage.getItem('company'));
                     _this.proyect = _this.proyectForm.value;
-                    _this.proyect.idEmpresa = contact.empresa;
+                    _this.proyect.idEmpresa = company;
                     _this.proyect.idContacto = contact;
-                    console.log(_this.proyect);
-                    console.log(_this.proyect);
                     _this.ProyectoService.saveProyect(_this.proyect).subscribe(function (res) {
                         console.log(res);
-                        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default()('Listo.', 'La información se guardo correctamente', 'success');
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default()('Listo.', 'La información se guardo correctamente', 'success').then(function () {
+                            _this.response.emit({ key: 1 });
+                        });
                     }, function (err) {
                         console.log(err);
-                        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default()('Algo salio mal.', 'No se pudo guarda la información', 'error');
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default()('Algo salio mal.', 'No se pudo guarda la información', 'error').then(function () {
+                            _this.response.emit({ key: 1 });
+                        });
                     });
                 }
             }
         });
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], DataProyectComponent.prototype, "response", void 0);
     DataProyectComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-data-proyect',
@@ -1149,6 +1157,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ts_xlsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ts-xlsx */ "./node_modules/ts-xlsx/lib/main.browser.js");
 /* harmony import */ var ts_xlsx__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(ts_xlsx__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _services_proyecto_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/proyecto.service */ "./src/app/services/proyecto.service.ts");
+/* harmony import */ var _models_participante__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../models/participante */ "./src/app/models/participante.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_6__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1163,11 +1174,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var HeadCountComponent = /** @class */ (function () {
     function HeadCountComponent(breakpointObserver, CatalogService, ProyectService) {
         var _this = this;
         this.CatalogService = CatalogService;
         this.ProyectService = ProyectService;
+        this.responseHead = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.mobile = false;
         this.data = [];
         this.showTable = false;
@@ -1191,7 +1205,8 @@ var HeadCountComponent = /** @class */ (function () {
         ];
         this.names = [
             'id',
-            'nivel', 'nivelTexto',
+            'nivel',
+            'nivelTexto',
             'nombres',
             'aPaterno',
             'aMaterno',
@@ -1270,10 +1285,9 @@ var HeadCountComponent = /** @class */ (function () {
                 /* save data */
                 _this.data = (ts_xlsx__WEBPACK_IMPORTED_MODULE_3__["utils"].sheet_to_json(ws, { header: 1 }));
                 _this.data.shift();
-                _this.dataSource = _this.data;
                 for (var i = 0; i < _this.data.length; i++) {
-                    for (var j = 0; j < 18; j++) {
-                        _this.dataSource[i][_this.getName(j)] = _this.dataSource[i][j];
+                    for (var j = 0; j < _this.data[i].length; j++) {
+                        _this.changeData(_this.data[i], i);
                     }
                 }
                 console.log(_this.dataSource);
@@ -1288,14 +1302,58 @@ var HeadCountComponent = /** @class */ (function () {
         this.showTable = true;
     };
     HeadCountComponent.prototype.guardaHead = function () {
+        var _this = this;
         var data = {
             lista: this.dataSource,
             idProyecto: this.filters.idProyecto
         };
-        this.ProyectService.saveHead(data).subscribe(function (res) {
-            console.log(res);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_6___default()({
+            title: '',
+            text: 'Seguro que quieres guardar la información ingresada del proyecto',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si guardar',
+            cancelButtonText: 'No, seguir editando'
+        }).then(function (result) {
+            if (result.value) {
+                _this.ProyectService.saveHead(data).subscribe(function () {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_6___default()('Listo.', 'La información se guardo correctamente', 'success').then(function () {
+                        _this.responseHead.emit({ value: 1 });
+                    });
+                }, function (err) {
+                    console.log(err);
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_6___default()('Algo salio mal.', 'No se pudo guarda la información', 'error').then(function () {
+                        _this.responseHead.emit({ value: 1 });
+                    });
+                });
+            }
         });
     };
+    HeadCountComponent.prototype.changeData = function (data, index) {
+        this.dataSource[index] = new _models_participante__WEBPACK_IMPORTED_MODULE_5__["Participante"]();
+        this.dataSource[index].id = data[0];
+        this.dataSource[index].nivel = data[1];
+        this.dataSource[index].nivelTexto = data[2];
+        this.dataSource[index].nombres = data[3];
+        this.dataSource[index].aPaterno = data[4];
+        this.dataSource[index].aMaterno = data[5];
+        this.dataSource[index].genero = data[6];
+        this.dataSource[index].rfc = data[7];
+        this.dataSource[index].puesto = data[8];
+        this.dataSource[index].fechaIngreso = data[9];
+        this.dataSource[index].antigPuesto = data[10];
+        this.dataSource[index].nivelEscolaridad = data[11];
+        this.dataSource[index].otrosEstudios = data[12];
+        this.dataSource[index].idioma = data[13];
+        this.dataSource[index].nivelIdioma = data[14];
+        this.dataSource[index].correoElectronico = data[15];
+        this.dataSource[index].sede = data[16];
+        this.dataSource[index].areaOrg = data[17];
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], HeadCountComponent.prototype, "responseHead", void 0);
     HeadCountComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-head-count',
@@ -1318,7 +1376,7 @@ var HeadCountComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  organigrama works!\n</p>\n"
+module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">people_outline</mat-icon> Organigrama</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\">\n        <mat-option *ngFor=\"let proyect of proyects\" [value]=\"proyect\">\n          {{proyect.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n\n\n\n\n\n  </mat-grid-tile>\n</mat-grid-list>\n"
 
 /***/ }),
 
@@ -1344,6 +1402,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrganigramaComponent", function() { return OrganigramaComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/proyecto.service */ "./src/app/services/proyecto.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1354,10 +1413,31 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var OrganigramaComponent = /** @class */ (function () {
-    function OrganigramaComponent() {
+    function OrganigramaComponent(ProyectService) {
+        this.ProyectService = ProyectService;
+        this.proyects = [];
+        this.proyect = {};
+        this.mobile = false;
     }
     OrganigramaComponent.prototype.ngOnInit = function () {
+        this.getProyects();
+    };
+    OrganigramaComponent.prototype.getProyects = function () {
+        var _this = this;
+        this.ProyectService.getProyects().subscribe(function (res) {
+            console.log(res);
+            _this.proyects = res;
+        });
+    };
+    OrganigramaComponent.prototype.checkMobileCols = function () {
+        if (this.mobile) {
+            return 1;
+        }
+        else {
+            return 3;
+        }
     };
     OrganigramaComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1365,7 +1445,7 @@ var OrganigramaComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./organigrama.component.html */ "./src/app/components/formularios/organigrama/organigrama.component.html"),
             styles: [__webpack_require__(/*! ./organigrama.component.scss */ "./src/app/components/formularios/organigrama/organigrama.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__["ProyectoService"]])
     ], OrganigramaComponent);
     return OrganigramaComponent;
 }());
@@ -1381,7 +1461,7 @@ var OrganigramaComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-horizontal-stepper  [hidden]=\"mobile\" [linear]=\"false\" #stepper>\n  <mat-step >\n    <ng-template matStepLabel >Paso 1</ng-template>\n    <app-data-company (cambioStepper)=\"getResponseChildren($event)\" ></app-data-company>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>Paso 2</ng-template>\n    <app-data-contact></app-data-contact>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>Paso 3</ng-template>\n    <app-data-proyect></app-data-proyect>\n  </mat-step>\n</mat-horizontal-stepper>\n<mat-vertical-stepper  [hidden]=\"!mobile\" [linear]=\"false\" #stepper2>\n  <mat-step >\n    <ng-template matStepLabel> Datos de la Empresa</ng-template>\n    <app-data-company></app-data-company>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel> Datos Contacto</ng-template>\n    <app-data-contact></app-data-contact>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>Datos Proyecto</ng-template>\n    <app-data-proyect></app-data-proyect>\n  </mat-step>\n</mat-vertical-stepper>\n"
+module.exports = "<mat-horizontal-stepper  [hidden]=\"mobile\" [linear]=\"false\" #stepper>\n  <mat-step >\n    <ng-template matStepLabel >Paso 1</ng-template>\n    <app-data-company  ></app-data-company>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>Paso 2</ng-template>\n    <app-data-contact></app-data-contact>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>Paso 3</ng-template>\n    <app-data-proyect  (response)=\"getResponseChildren($event)\"></app-data-proyect>\n  </mat-step>\n</mat-horizontal-stepper>\n<mat-vertical-stepper  [hidden]=\"!mobile\" [linear]=\"false\" #stepper2>\n  <mat-step >\n    <ng-template matStepLabel> Datos de la Empresa</ng-template>\n    <app-data-company></app-data-company>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel> Datos Contacto</ng-template>\n    <app-data-contact></app-data-contact>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>Datos Proyecto</ng-template>\n    <app-data-proyect (response)=\"getResponseChildren($event)\"></app-data-proyect>\n  </mat-step>\n</mat-vertical-stepper>\n"
 
 /***/ }),
 
@@ -1422,6 +1502,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var SteppersComponent = /** @class */ (function () {
     function SteppersComponent(breakpointObserver) {
         var _this = this;
+        this.responseChildren = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.mobile = false;
         this.control = {
             next: 0,
@@ -1442,9 +1523,13 @@ var SteppersComponent = /** @class */ (function () {
     SteppersComponent.prototype.ngOnInit = function () {
     };
     SteppersComponent.prototype.getResponseChildren = function (evt) {
-        this.control.next = evt.next;
-        this.control.back = evt.back;
+        console.log(evt);
+        this.responseChildren.emit({ value: evt.key });
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], SteppersComponent.prototype, "responseChildren", void 0);
     SteppersComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-steppers',
@@ -1614,7 +1699,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-toolbar color=\"#000000\">\n          <span *ngIf=\"!mobile\">\n            <div class=\"logo-nav\">\n            <img src=\"../../../assets/img/logo.png\" alt=\"\">\n              </div>\n          </span>\n  <span *ngIf=\"mobile\">\n\n            <div class=\"logo-nav-mobile\">\n              <a (click)=\"snav.toggle()\"><mat-icon >menu</mat-icon></a>\n              <img src=\"../../../assets/img/logo.png\" alt=\"\">\n            </div>\n          </span>\n</mat-toolbar>\n<mat-sidenav-container class=\"example-container\">\n  <mat-sidenav mode=\"side\" [opened]=\"!mobile\" [fixedInViewport]=\"true\" [fixedTopGap]=\"62\" [fixedBottomGap]=\"60\"  #snav>\n\n    <mat-nav-list>\n      <div class=\"avatar\">\n        <img src=\"../../../assets/img/avatar.png\" alt=\"\">\n      </div>\n      <mat-list>\n        <mat-list-item *ngFor=\"let module of modules\" (click)=\"goModule(module.id_submodulo)\">\n          {{module.descripcion}}\n        </mat-list-item>\n        <!--<mat-list-item (click)=\"goModule(1);\"> Alta de proyecto </mat-list-item>\n        <mat-list-item (click)=\"goModule(2);\"> Bandeja de proyectos </mat-list-item>\n        <mat-list-item (click)=\"goModule(3);\"> Ver Proyecto </mat-list-item>\n        <mat-list-item (click)=\"goModule(4);\"> Carga de HeadCount </mat-list-item>-->\n      </mat-list>\n    </mat-nav-list>\n  </mat-sidenav>\n  <mat-sidenav-content>\n    <div class=\"row\">\n\n      <div class=\"col-sm-12 stepper-forms\" >\n        <app-steppers *ngIf=\"selectModule == 1\"></app-steppers>\n        <app-bandeja  (responseChildren)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 2\"></app-bandeja>\n        <app-bandeja-detalle  *ngIf=\"selectModule == 3\"></app-bandeja-detalle>\n        <app-head-count *ngIf=\"selectModule == 4\"></app-head-count>\n        <app-data-period *ngIf=\"selectModule == 5\"></app-data-period>\n      </div>\n\n    </div>\n\n\n  </mat-sidenav-content>\n</mat-sidenav-container>\n"
+module.exports = "\n<mat-toolbar color=\"#000000\">\n          <span *ngIf=\"!mobile\">\n            <div class=\"logo-nav\">\n            <img src=\"../../../assets/img/logo.png\" alt=\"\">\n              </div>\n          </span>\n  <span *ngIf=\"mobile\">\n\n            <div class=\"logo-nav-mobile\">\n              <a (click)=\"snav.toggle()\"><mat-icon >menu</mat-icon></a>\n              <img src=\"../../../assets/img/logo.png\" alt=\"\">\n            </div>\n          </span>\n</mat-toolbar>\n<mat-sidenav-container class=\"example-container\">\n  <mat-sidenav mode=\"side\" [opened]=\"!mobile\" [fixedInViewport]=\"true\" [fixedTopGap]=\"62\" [fixedBottomGap]=\"60\"  #snav>\n\n    <mat-nav-list>\n      <div class=\"avatar\">\n        <img src=\"../../../assets/img/avatar.png\" alt=\"\">\n      </div>\n      <mat-list>\n        <mat-list-item *ngFor=\"let module of modules\" (click)=\"goModule(module.id_submodulo)\">\n          {{module.descripcion}}\n        </mat-list-item>\n        <!--<mat-list-item (click)=\"goModule(1);\"> Alta de proyecto </mat-list-item>\n        <mat-list-item (click)=\"goModule(2);\"> Bandeja de proyectos </mat-list-item>\n        <mat-list-item (click)=\"goModule(3);\"> Ver Proyecto </mat-list-item>\n        <mat-list-item (click)=\"goModule(4);\"> Carga de HeadCount </mat-list-item>-->\n      </mat-list>\n    </mat-nav-list>\n  </mat-sidenav>\n  <mat-sidenav-content>\n    <div class=\"row\">\n\n      <div style=\"margin-left: 10px\" class=\"col-sm-12 stepper-forms\" >\n        <app-steppers (responseChildren)=\"recibirRespuestChildren($event)\"   *ngIf=\"selectModule == 5\"></app-steppers>\n        <app-bandeja  (responseChildren)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 1\"></app-bandeja>\n        <app-bandeja-detalle  *ngIf=\"selectModule == 3\"></app-bandeja-detalle>\n        <app-head-count (responseHead)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 4\"></app-head-count>\n        <app-data-period *ngIf=\"selectModule == 6\"></app-data-period>\n        <app-organigrama *ngIf=\"selectModule == 7\"> </app-organigrama>\n      </div>\n\n    </div>\n\n\n  </mat-sidenav-content>\n</mat-sidenav-container>\n"
 
 /***/ }),
 
@@ -1662,7 +1747,7 @@ var SidebarComponent = /** @class */ (function () {
         this.route = route;
         this.LoginService = LoginService;
         this.mobile = false;
-        this.selectModule = 1;
+        this.selectModule = 7;
         this.modules = [];
         breakpointObserver.isMatched(('(max-width:450)'));
         breakpointObserver.observe([
@@ -1696,6 +1781,7 @@ var SidebarComponent = /** @class */ (function () {
         });
     };
     SidebarComponent.prototype.recibirRespuestChildren = function (evt) {
+        console.log(evt);
         if (evt.value) {
             this.selectModule = evt.value;
         }
@@ -1709,6 +1795,26 @@ var SidebarComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["BreakpointObserver"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _services_login_service__WEBPACK_IMPORTED_MODULE_3__["LoginService"]])
     ], SidebarComponent);
     return SidebarComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/models/participante.ts":
+/*!****************************************!*\
+  !*** ./src/app/models/participante.ts ***!
+  \****************************************/
+/*! exports provided: Participante */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Participante", function() { return Participante; });
+var Participante = /** @class */ (function () {
+    function Participante() {
+    }
+    return Participante;
 }());
 
 

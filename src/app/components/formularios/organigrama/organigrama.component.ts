@@ -10,7 +10,9 @@ export class OrganigramaComponent implements OnInit {
   proyects = [];
   proyect = {};
   mobile = false;
-  constructor(private ProyectService:ProyectoService) { }
+  levels = []
+  constructor(private ProyectService: ProyectoService) {
+  }
 
   ngOnInit() {
     this.getProyects();
@@ -21,6 +23,14 @@ export class OrganigramaComponent implements OnInit {
       this.proyects = res;
     });
   }
+  getOrganigrama() {
+    this.ProyectService.getOrganigrama(this.proyect['idProyecto']).subscribe( (res)  => {
+      this.levels = res;
+      console.log(this.levels);
+
+
+    });
+  }
 
   checkMobileCols() {
     if (this.mobile) {
@@ -29,6 +39,18 @@ export class OrganigramaComponent implements OnInit {
       return 3;
     }
 
+  }
+
+  getClass(data) {
+    if (data.length > 8 ) {
+      return 'col-sm-1';
+    }
+    if (data.length > 4 && data.length < 8) {
+      return 'col-sm-2';
+    }
+    if (data.length > 0 && data.length < 4) {
+      return 'col-sm-3';
+    }
   }
 
 }

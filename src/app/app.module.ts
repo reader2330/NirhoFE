@@ -20,6 +20,7 @@ import { SteppersComponent } from './components/formularios/steppers/steppers.co
 import { DataContactComponent } from './components/formularios/data-contact/data-contact.component';
 import {BandejaComponent} from './components/bandeja/bandeja.component';
 import { BandejaDetalleComponent } from './components/bandeja-detalle/bandeja-detalle.component';
+import {ChartModule} from 'angular2-highcharts';
 
 
 
@@ -44,6 +45,7 @@ import { BandejaDetalleComponent } from './components/bandeja-detalle/bandeja-de
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ChartModule.forRoot(require('highcharts')),
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
