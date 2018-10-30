@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nirho.dto.ConsultorProyectoDTO;
 import com.nirho.dto.PeriodoCLB;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
@@ -124,10 +125,11 @@ public class ProyectoController {
 	
 	@RequestMapping(value = "/asignarConsultor", method = RequestMethod.POST)
 	@ResponseBody
-	public void asignarConsultor(@RequestBody ConsultorProyectoPK datos) throws NirhoControllerException {
+	public void asignarConsultor(@RequestBody ConsultorProyectoDTO datos) throws NirhoControllerException {
 		logger.info(" ********************************* ConsultorProyecto [" + datos + "] *****************************");
 		try {
-			proyectoService.asignarConsultor(datos);
+			ConsultorProyectoPK conProPK = new ConsultorProyectoPK(new Integer(datos.getIdUsuario()), new Integer(datos.getIdProyecto()));
+			proyectoService.asignarConsultor(conProPK);
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
 		}
