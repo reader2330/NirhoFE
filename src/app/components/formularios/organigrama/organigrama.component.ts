@@ -26,10 +26,32 @@ export class OrganigramaComponent implements OnInit {
   getOrganigrama() {
     this.ProyectService.getOrganigrama(this.proyect['idProyecto']).subscribe( (res)  => {
       this.levels = res;
-      console.log(this.levels);
+
+      this.levels.sort(((a, b) => {
+        if (a.nivel > b.nivel) {
+          return 1;
+        }
+        if (a.nivel < b.nivel) {
+          return -1;
+        }
+      }));
 
 
     });
+  }
+  getColor(level) {
+
+    let colors = [
+      '#A1B712',
+      '#b9d162',
+      '#ccdd91',
+      '#e0ebc2',
+
+    ];
+    let color = colors[level.nivel - 1];
+    console.log(color);
+    return colors[level.nivel - 1];
+
   }
 
   checkMobileCols() {
@@ -52,5 +74,7 @@ export class OrganigramaComponent implements OnInit {
       return 'col-sm-3';
     }
   }
+
+
 
 }

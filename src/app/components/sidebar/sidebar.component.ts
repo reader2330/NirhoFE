@@ -57,7 +57,10 @@ export class SidebarComponent implements OnInit {
 
   }
 
-  cerraSesion(){
+  cerraSesion() {
+    this.LoginService.closeSession().subscribe((res) => {
+      console.log(res);
+    });
     this.route.navigate([''])
   }
 

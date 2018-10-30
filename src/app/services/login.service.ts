@@ -26,5 +26,8 @@ export class LoginService {
   getUser(): Observable<any> {
     return this._http.get(this.api + 'proyecto/usuario', {headers: this.header});
   }
+  closeSession(): Observable<any> {
+    return this._http.get(this.api + 'usuario/logout', {headers: this.header});
+  }
 
 }

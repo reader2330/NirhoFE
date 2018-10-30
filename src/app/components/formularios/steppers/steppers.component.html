@@ -1,19 +1,19 @@
 <mat-horizontal-stepper labelPosition="bottom"  [hidden]="mobile" [linear]="false" #stepper>
   <mat-step >
     <ng-template  matStepLabel >
-      <p >Paso 1 <br>  Datos Empresa</p>
+      <p class="bold">Paso 1 </p><p>Datos Empresa</p>
     </ng-template>
     <app-data-company  ></app-data-company>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>
-      <p >Paso 2 <br>  Datos Contacto</p>
+      <p class="bold">Paso 2   </p> <p>Datos Contacto</p>
     </ng-template>
     <app-data-contact></app-data-contact>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>
-      <p >Paso 3 <br>  Datos Proyecto</p>
+      <p class="bold">Paso 3  </p> <p>Datos Proyecto</p>
     </ng-template>
     <app-data-proyect  (response)="getResponseChildren($event)"></app-data-proyect>
   </mat-step>

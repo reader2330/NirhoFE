@@ -33,10 +33,7 @@ export class HeadCountComponent implements OnInit {
     'GENERO',
     'PUESTO',
     'FECHA DE INGRESO',
-    'IDIOMA',
-    'NIVEL',
-    'CORREO ELECTRONICO',
-    'SEDE',
+
 
   ];
   names = [

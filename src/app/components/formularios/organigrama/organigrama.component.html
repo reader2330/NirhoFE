@@ -18,9 +18,9 @@
 </mat-grid-list>
     <div class="col-sm-12 ">
       <div *ngFor="let level of levels" class="row">
-        <mat-card style="margin-top: 20px" class="col-sm-12"> <h4 align="center">{{'NIVEL  '+level.nivel}} </h4></mat-card>
+        <mat-card style="margin-top: 20px" [ngStyle]="{'background-color':getColor(level)}"  class="col-sm-12"> <h4 align="center">{{'NIVEL  '+level.nivel}} </h4></mat-card>
 
-        <div  style="margin-top: 20px" *ngFor="let people of level.participantes" [class]="getClass(level.participantes)">
+        <div  style="margin-top: 20px; margin-left:20px"   *ngFor="let people of level.participantes" [class]="getClass(level.participantes)">
            <mat-card>{{people.nombre}} <p class="text-muted">{{people.puesto}} </p> </mat-card>
         </div>
       </div>

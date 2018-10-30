@@ -82,7 +82,7 @@ export class DataPeriodComponent implements OnInit {
               'La información se guardo correctamente',
               'success'
             ).then(() => {
-              this.response.emit({key: 1});
+              this.response.emit({value: 1});
             });
           },
           (err) => {
@@ -92,7 +92,7 @@ export class DataPeriodComponent implements OnInit {
               'No se pudo guarda la información',
               'error'
             ).then(() => {
-              this.response.emit({key: 1});
+              this.response.emit({value: 1});
             });
           });
       }
