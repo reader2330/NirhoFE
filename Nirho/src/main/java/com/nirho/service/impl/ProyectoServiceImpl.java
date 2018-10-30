@@ -1,5 +1,6 @@
 package com.nirho.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.logging.Logger;
@@ -26,6 +27,21 @@ public class ProyectoServiceImpl implements ProyectoService {
 		List<Proyecto> lista = null;
 		try {
 			lista = dao.findAll();
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD los proyectos, causa [" + e.getMessage()+ "]");
+		}		
+		return lista;
+	}
+	
+	@Override
+	public List<Proyecto> obtenerProyectosConsultor(Integer idUsuario) throws NirhoServiceException {
+		List<Proyecto> lista = new ArrayList<>();
+		try {
+			List<ConsultorProyecto> listaCP = consulProyDAO.findByIdUsuario(idUsuario);
+			for(ConsultorProyecto cp: listaCP) {
+				lista.add(dao.getOne(cp.getConsultorProyectoPK().getIdProyecto()));
+			}
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al consultar en la BD los proyectos, causa [" + e.getMessage()+ "]");
@@ -71,5 +87,5 @@ public class ProyectoServiceImpl implements ProyectoService {
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
 		}
 	}
-
+	
 }

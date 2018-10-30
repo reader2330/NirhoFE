@@ -35,7 +35,7 @@ public class PreguntaTema implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "de_plantilla")
 	private int dePlantilla;
-	@ManyToOne(cascade = CascadeType.MERGE, fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "id_tema", referencedColumnName = "id_tema")
 	private TemaCuestionario tema;
 	
