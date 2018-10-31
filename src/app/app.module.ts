@@ -24,6 +24,7 @@ import {ChartModule} from 'angular2-highcharts';
 import { CuestionarioSelectComponent } from './cuestionario-select/cuestionario-select.component';
 import { AsignarConsultorComponent } from './components/asignar-consultor/asignar-consultor.component';
 import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
+import { DetallePreguntasComponent } from './components/detalle-preguntas/detalle-preguntas.component';
 
 
 
@@ -48,6 +49,7 @@ import { EstadisticasComponent } from './components/estadisticas/estadisticas.co
     CuestionarioSelectComponent,
     AsignarConsultorComponent,
     EstadisticasComponent,
+    DetallePreguntasComponent,
   ],
   imports: [
     BrowserModule,

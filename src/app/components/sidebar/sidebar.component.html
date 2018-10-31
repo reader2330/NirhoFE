@@ -49,6 +49,7 @@
         <app-asignar-consultor *ngIf="selectModule == 5"></app-asignar-consultor>
         <app-cuestionario-select (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 8" ></app-cuestionario-select>
         <app-estadisticas *ngIf="selectModule == 9"></app-estadisticas>
+        <app-detalle-preguntas *ngIf="selectModule == 10"></app-detalle-preguntas>
       </div>
 
     </div>

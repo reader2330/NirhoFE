@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProyectoService} from '../../../services/proyecto.service';
-import {IEmployee} from 'ng2-org-chart';
+
 
 @Component({
   selector: 'app-organigrama',
