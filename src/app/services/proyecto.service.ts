@@ -49,5 +49,8 @@ export class ProyectoService {
   saveConsultor(data): Observable<any> {
     return this.http.post(this.api + 'proyecto/asignarConsultor', data, {headers: this.headers});
   }
+  getProyectsbyRol(id): Observable<Proyecto[]> {
+    return this.http.get<Proyecto[]>(this.api + 'cuestionario/preguntas', {headers: this.headers, params: {'idUsuario': id }});
+  }
 
 }

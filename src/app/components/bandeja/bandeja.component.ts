@@ -24,13 +24,8 @@ export class BandejaComponent implements OnInit {
 
 
 
-  /** Whether the number of selected elements matches the total number of rows. */
-
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-
-
   ngOnInit() {
+
     this.getProyects();
   }
   getProyects() {
@@ -50,6 +45,25 @@ export class BandejaComponent implements OnInit {
 
     }
   }
+  getUser() {
+    if (sessionStorage.getItem('user')) {
+      let user = JSON.parse(sessionStorage.getItem('user'));
+      if (user.rol !== 3) {
+        this.getProyects();
+      } else {
+        this.getProyects();
+      }
+    } else {
+      this.getProyects();
+    }
+  }
+
+  getProyectsbyRol() {
+    this.ProyectoService.getProyectsbyRol(4).subscribe((res) => {
+        this.proyects = res;
+    });
+  }
+
 
 
 }

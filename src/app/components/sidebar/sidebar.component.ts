@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit {
     setTimeout(() => {
       this.getModules();
       this.getUser();
-    },1500);
+    }, 1500);
   }
 
   goModule(opt) {
@@ -46,8 +46,8 @@ export class SidebarComponent implements OnInit {
   }
   getUser() {
     this.LoginService.getUser().subscribe((res) => {
-
       this.user = res;
+      sessionStorage.setItem('user', JSON.stringify(this.user));
     });
   }
   recibirRespuestChildren(evt) {
@@ -61,7 +61,8 @@ export class SidebarComponent implements OnInit {
     this.LoginService.closeSession().subscribe((res) => {
       console.log(res);
     });
-    this.route.navigate([''])
+    sessionStorage.clear();
+    this.route.navigate(['']);
   }
 
 

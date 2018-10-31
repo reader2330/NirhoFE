@@ -1,4 +1,4 @@
-<mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
+<mat-grid-list [cols]="checkMobileCols()" ro  wHeight="100px">
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">people_outline</mat-icon> Organigrama</h2>
   </mat-grid-tile>
@@ -23,5 +23,5 @@
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
-      <button mat-raised-button color="primary" [disabled]="!proyect.hasOwnProperty('idProyecto') || !consultor.hasOwnProperty('idUsuario')">Guarda consultor</button>
+      <button mat-raised-button color="primary" (click)="saveConsultor()">Guarda consultor</button>
   </mat-grid-tile>
