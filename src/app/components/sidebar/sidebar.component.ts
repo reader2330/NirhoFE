@@ -10,7 +10,7 @@ import {LoginService} from '../../services/login.service';
 })
 export class SidebarComponent implements OnInit {
   mobile = false;
-  selectModule = 7;
+  selectModule = 10;
   modules = [];
   user = {};
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
