@@ -28,6 +28,7 @@ import { EstadisticasComponent } from './components/estadisticas/estadisticas.co
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

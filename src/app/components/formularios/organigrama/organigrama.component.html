@@ -16,7 +16,7 @@
     <button mat-raised-button (click)="getOrganigrama()">Cargar Organigrama</button>
   </mat-grid-tile>
 </mat-grid-list>
-    <div class="col-sm-12 ">
+    <!--<div class="col-sm-12 ">
       <div *ngFor="let level of levels" class="row">
         <mat-card style="margin-top: 20px" [ngStyle]="{'background-color':getColor(level)}"  class="col-sm-12"> <h4 align="center">{{'NIVEL  '+level.nivel}} </h4></mat-card>
 
@@ -25,7 +25,30 @@
         </div>
       </div>
 
+    </div>-->
+<div class="col-sm-12">
+  <div class="row justify-content-md-center">
+    <div class="organigrama">
+
+      <ul>
+        <li *ngFor="let people of level1.participantes">
+          <a href="">{{people.nombre}}</a>
+          <ul>
+            <li *ngFor="let people of level2.participantes">
+              <a href="">{{people.nombre}}</a>
+              <ul>
+                <li *ngFor="let people of level3.participantes"  >
+                  <a href="">{{people.nombre}}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
     </div>
+  </div>
+</div>
 
 
 
