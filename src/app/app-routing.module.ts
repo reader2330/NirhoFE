@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {InicioComponent} from './components/inicio/inicio.component';
 import {SteppersComponent} from './components/formularios/steppers/steppers.component';
+import {AvatarEditComponent} from './components/avatar-edit/avatar-edit.component';
 
 const routes: Routes = [
   {
@@ -14,14 +15,10 @@ const routes: Routes = [
     component: InicioComponent
   },
   {
-    path: 'inicio',
-    component: InicioComponent
-  },
-  {
-    path: 'inicio',
-    component: SteppersComponent,
-    outlet: 'sidebars'
+    path:'avatar-edit',
+    component: AvatarEditComponent
   }
+
 ];
 
 @NgModule({
