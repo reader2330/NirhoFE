@@ -25,6 +25,6 @@ public class CuestionarioConfiguracion  implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "HeadCount [idProyecto=" + idProyecto + ", lista=" + lista + "]";
+		return "CuestionarioConfiguracion [idProyecto=" + idProyecto + ", lista=" + lista + "]";
 	}
 }

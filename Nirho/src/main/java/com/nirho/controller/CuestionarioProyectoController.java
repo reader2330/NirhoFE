@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.dto.CuestionarioConfiguracion;
+import com.nirho.dto.TemaPreguntas;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
@@ -29,6 +30,17 @@ public class CuestionarioProyectoController {
 	TemasModuloService temasService;
 	@Autowired
 	CuestionarioProyectoService cuestionarioService;
+	
+	@GetMapping(value = "/plantilla")
+	public List<TemaPreguntas> plantilla(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
+		List<TemaPreguntas> temas = new ArrayList<>();
+		try {
+			temas = temasService.obtenerPlantillaCuestionario(idModulo);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Sin servicio al obtener los temas del modulo");
+		}
+		return temas;
+	}
 	
 	@GetMapping(value = "/temas")
 	public List<TemaCuestionario> temas(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{

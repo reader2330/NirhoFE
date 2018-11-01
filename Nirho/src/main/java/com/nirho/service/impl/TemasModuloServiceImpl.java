@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.nirho.dao.ModuloDAO;
 import com.nirho.dao.PreguntaTemaDAO;
+import com.nirho.dto.TemaPreguntas;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.PreguntaTema;
 import com.nirho.model.TemaCuestionario;
@@ -45,6 +46,23 @@ public class TemasModuloServiceImpl implements TemasModuloService {
 			throw new NirhoServiceException("Problemas con la BD al obtener las preguntas del tema [" + idTema + "]");
 		}
 		return preguntas;
+	}
+
+	@Override
+	public List<TemaPreguntas> obtenerPlantillaCuestionario(Integer idModulo) throws NirhoServiceException {
+		List<TemaPreguntas> temas = new ArrayList<>();
+		try {
+			for(TemaCuestionario tema: dao.getOne(idModulo).getTemaCuestionarioList()) {
+				TemaPreguntas temaP = new TemaPreguntas();
+				temaP.setTema(tema);
+				temaP.setPreguntas(preguntaDAO.findByIdTema(tema.getIdTema()));
+				temas.add(temaP);
+			}
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas con la BD al obtener los temas del modulo [" + idModulo + "]");
+		}
+		return temas;
 	}
 	
 }
