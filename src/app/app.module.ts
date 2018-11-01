@@ -25,7 +25,11 @@ import { CuestionarioSelectComponent } from './cuestionario-select/cuestionario-
 import { AsignarConsultorComponent } from './components/asignar-consultor/asignar-consultor.component';
 import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 import { DetallePreguntasComponent } from './components/detalle-preguntas/detalle-preguntas.component';
+
+import { EncuestaComponent } from './components/encuesta/encuesta.component';
+
 import { AvatarEditComponent } from './components/avatar-edit/avatar-edit.component';
+
 
 
 
@@ -51,7 +55,11 @@ import { AvatarEditComponent } from './components/avatar-edit/avatar-edit.compon
     AsignarConsultorComponent,
     EstadisticasComponent,
     DetallePreguntasComponent,
+<<<<<<< HEAD
+    EncuestaComponent,
+=======
     AvatarEditComponent,
+>>>>>>> ddbf7b1954aed82679afc76178048e658bebe485
   ],
   imports: [
     BrowserModule,
