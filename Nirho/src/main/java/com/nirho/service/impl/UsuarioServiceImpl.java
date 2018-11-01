@@ -18,7 +18,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Autowired
 	private UsuarioDAO dao;
-
+	
+	@Override
+	public Usuario obtenerUsuario(String username) throws NirhoServiceException {
+		Usuario usuario = null;
+		try {
+			usuario = dao.findByUsername(username).get(0);
+		} catch (Exception e) {
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al obtener el usuarioe [" + username+ "] en la base de datos");
+		}
+		return usuario;
+	}
+	
 	@Override
 	public List<Usuario> obtenerConsultores() throws NirhoServiceException {
 		List<Usuario> consultores = new ArrayList<>();
@@ -30,7 +42,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 		return consultores;
 	}
-	
 
-
+	@Override
+	public void guardarAvatar(Usuario usuario) throws NirhoServiceException {
+		try {
+			dao.update(usuario);
+		} catch (Exception e) {
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
+		}
+	}
 }
