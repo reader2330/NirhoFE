@@ -17,6 +17,7 @@ import com.nirho.dto.TemaPreguntas;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.CuetionarioParticipante;
 import com.nirho.model.PreguntaTema;
 import com.nirho.model.TemaCuestionario;
 import com.nirho.service.CuestionarioProyectoService;
@@ -84,5 +85,27 @@ public class CuestionarioProyectoController {
 			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
 		}
 		return preguntas;
+	}
+	
+	@GetMapping(value = "/participante")
+	public List<CuetionarioParticipante> participante(@RequestParam(name="token") String token) throws NirhoControllerException{
+		List<CuetionarioParticipante> preguntas = new ArrayList<>();
+		try {
+			preguntas = cuestionarioService.obtenerCuestionarioParticipante(token);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
+		}
+		return preguntas;
+	}
+	
+	@RequestMapping(value = "/contestaPregPart", method = RequestMethod.POST)
+	@ResponseBody
+	public void contestaPregPart(@RequestBody CuetionarioParticipante questPart) throws NirhoControllerException {
+		try {
+			cuestionarioService.contestarPregunta(questPart);
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al registrar el cuestionario en la BD");
+		}
+		
 	}
 }

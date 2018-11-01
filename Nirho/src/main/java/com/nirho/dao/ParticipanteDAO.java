@@ -6,4 +6,5 @@ import com.nirho.model.Participante;
 
 public interface ParticipanteDAO extends BaseDAO<Participante, Integer> {
 	List<Participante> findByIdEmpresa(Long idEmpresa);
+	List<Participante> findByRfc(String rfc);
 }

@@ -23,6 +23,7 @@ import com.nirho.model.CuetionarioParticipantePK;
 import com.nirho.model.Participante;
 import com.nirho.model.PreguntaTema;
 import com.nirho.service.CuestionarioProyectoService;
+import com.nirho.util.NirhoUtil;
 
 @Service
 public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoService {
@@ -36,6 +37,9 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	private CuestionarioParticipanteDAO cuestDAO;
 	@Autowired
 	private ProyectoDAO proyectoDAO;
+	@Autowired
+	private CuestionarioParticipanteDAO cuestPartDAO;
+	
 	@Override
 	public void guardar(CuestionarioConfiguracion cuestionario) throws NirhoServiceException {
 		logger.info("************* CuestionarioConfiguracion [" + cuestionario +"] *******************");
@@ -87,6 +91,34 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 			throw new NirhoServiceException("Problemas al obtener los temas en la BD del proyecto [" + idProyecto + "]");
 		}
 		return temasq;
+	}
+
+	@Override
+	public List<CuetionarioParticipante> obtenerCuestionarioParticipante(String token) throws NirhoServiceException {
+		List<CuetionarioParticipante> cuestPart = null;
+		try {
+			String rfc = NirhoUtil.obtenerRFCToken(token);
+			List<Participante> partList = participanteDAO.findByRfc(rfc);
+			if(partList != null && !partList.isEmpty()) {
+				Participante part = partList.get(0);
+				return cuestPartDAO.findByIdParticipante(part.getIdParticipante());
+			}
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas al obtener el cuestionario del participante en la BD oken [" + token + "]");
+		}
+		return cuestPart;
+	}
+
+	@Override
+	public void contestarPregunta(CuetionarioParticipante questPart) throws NirhoServiceException {
+		try {
+			cuestPartDAO.update(questPart);
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas al registrar la respuesta del participante en la BD");
+		}
+		
 	}
 	
 }
