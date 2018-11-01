@@ -40,16 +40,17 @@
     <div class="row">
 
       <div style="margin-left: 20px;margin-top: 50px"  class="col-sm-12 stepper-forms" >
-        <app-steppers (responseChildren)="recibirRespuestChildren($event)"   *ngIf="selectModule == 2"></app-steppers>
         <app-bandeja  (responseChildren)="recibirRespuestChildren($event)" *ngIf="selectModule == 1"></app-bandeja>
-        <app-bandeja-detalle  *ngIf="selectModule == 3"></app-bandeja-detalle>
-        <app-head-count (responseHead)="recibirRespuestChildren($event)" *ngIf="selectModule == 6"></app-head-count>
-        <app-data-period (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 4"></app-data-period>
-        <app-organigrama (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 7"> </app-organigrama>
-        <app-asignar-consultor *ngIf="selectModule == 5"></app-asignar-consultor>
-        <app-cuestionario-select (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 8" ></app-cuestionario-select>
+        <app-steppers (responseChildren)="recibirRespuestChildren($event)"   *ngIf="selectModule == 2"></app-steppers>
+        <app-data-period (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 3"></app-data-period>
+        <app-asignar-consultor *ngIf="selectModule == 4"></app-asignar-consultor>
+        <app-head-count (responseHead)="recibirRespuestChildren($event)" *ngIf="selectModule == 5"></app-head-count>
+        <app-organigrama (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 6"> </app-organigrama>
+        <app-cuestionario-select (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 7" ></app-cuestionario-select>
+        <app-detalle-preguntas *ngIf="selectModule == 8"></app-detalle-preguntas>
         <app-estadisticas *ngIf="selectModule == 9"></app-estadisticas>
-        <app-detalle-preguntas *ngIf="selectModule == 10"></app-detalle-preguntas>
+        <app-bandeja-detalle  *ngIf="selectModule == 10"></app-bandeja-detalle>
+
       </div>
 
     </div>

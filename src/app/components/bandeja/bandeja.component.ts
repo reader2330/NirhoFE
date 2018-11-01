@@ -41,7 +41,7 @@ export class BandejaComponent implements OnInit {
   goDetailProyect(element) {
     if (element) {
       sessionStorage.setItem('detail', JSON.stringify(element));
-      this.responseChildren.emit({value: 3});
+      this.responseChildren.emit({value: 10});
 
     }
   }

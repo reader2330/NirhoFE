@@ -25,6 +25,7 @@ import { CuestionarioSelectComponent } from './cuestionario-select/cuestionario-
 import { AsignarConsultorComponent } from './components/asignar-consultor/asignar-consultor.component';
 import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 import { DetallePreguntasComponent } from './components/detalle-preguntas/detalle-preguntas.component';
+import { EncuestaComponent } from './components/encuesta/encuesta.component';
 
 
 
@@ -50,6 +51,7 @@ import { DetallePreguntasComponent } from './components/detalle-preguntas/detall
     AsignarConsultorComponent,
     EstadisticasComponent,
     DetallePreguntasComponent,
+    EncuestaComponent,
   ],
   imports: [
     BrowserModule,
