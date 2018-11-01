@@ -55,7 +55,7 @@ public class Participante implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
     @Column(name = "antig_puesto")
-    private Long antigPuesto;
+    private Double antigPuesto;
     @Column(name = "nivel_escolaridad")
     private String nivelEscolaridad;
     @Column(name = "otros_estudios")
@@ -71,6 +71,8 @@ public class Participante implements Serializable {
     private String sede;
     @Column(name = "area_org")
     private String areaOrg;
+    @Column(name = "token")
+    private String token;
     @JoinColumn(name = "id_empresa", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Empresa idEmpresa;
@@ -168,11 +170,11 @@ public class Participante implements Serializable {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public Long getAntigPuesto() {
+    public Double getAntigPuesto() {
         return antigPuesto;
     }
 
-    public void setAntigPuesto(Long antigPuesto) {
+    public void setAntigPuesto(Double antigPuesto) {
         this.antigPuesto = antigPuesto;
     }
 
@@ -231,8 +233,16 @@ public class Participante implements Serializable {
     public void setAreaOrg(String areaOrg) {
         this.areaOrg = areaOrg;
     }
+    
+    public String getToken() {
+		return token;
+	}
 
-    public Empresa getIdEmpresa() {
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public Empresa getIdEmpresa() {
         return idEmpresa;
     }
 

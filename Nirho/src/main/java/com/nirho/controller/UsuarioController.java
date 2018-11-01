@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nirho.dao.UsuarioDAO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ClbSubmodulo;
@@ -28,8 +28,7 @@ import com.nirho.util.SessionUtil;
 @RequestMapping( value = "/usuario" )
 public class UsuarioController {
 	public final static Logger logger = Logger.getLogger(UsuarioController.class);
-	@Autowired
-	UsuarioDAO dao;
+	
 	@Autowired
 	RolClbService rolService;
 	@Autowired
@@ -38,17 +37,10 @@ public class UsuarioController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
 	public void login(@RequestBody Usuario usuario, HttpServletRequest request) throws NirhoControllerException {
 		try {
-			List<Usuario> usuarioList = dao.findByUsername(usuario.getUsername());
-			if(usuarioList != null && !usuarioList.isEmpty()) {
-				logger.info("usuario session [" + usuarioList.get(0) +"]");
-				HttpSession httpSession = request.getSession(true);
-				httpSession.setAttribute(SessionConstants.USUARIO_ATTRIBUTE, usuarioList.get(0));
-			} else {
-				throw new NirhoControllerException("Usuario no registrado");
-			}
-		} catch (NirhoControllerException e) {
-			logger.info("Exception [" + e.getMessage() +"]");
-			throw new NirhoControllerException(e.getMessage());
+			Usuario usuarioSession = usuarioService.obtenerUsuario(usuario.getUsername());
+			logger.info("usuario session [" + usuarioSession +"]");
+			HttpSession httpSession = request.getSession(true);
+			httpSession.setAttribute(SessionConstants.USUARIO_ATTRIBUTE, usuarioSession);
 		} catch (Exception e) {
 			logger.info("Exception [" + e.getMessage() +"]");
 			throw new NirhoControllerException("Problemas al conectar con la BD");
@@ -93,5 +85,26 @@ public class UsuarioController {
 	public Usuario getUsuarioLogueado(HttpServletRequest request){
 		Usuario usuarioEnSesion = SessionUtil.getUsuarioSession(request);
 		return usuarioEnSesion;
+	}
+	
+	@RequestMapping(value = "/usuarioEnSesion", method = RequestMethod.GET)
+	@ResponseBody
+	public Usuario getUsuario(HttpServletRequest request) {
+		Usuario usuario = SessionUtil.getUsuarioSession(request);
+		logger.info("Usuario en Session ["+usuario+"]");
+		return usuario;
+	}
+	
+	@RequestMapping(value = "/guardarAvatar", method = RequestMethod.GET)
+	@ResponseBody
+	public void guardarAvatar(HttpServletRequest request, @RequestParam(name="ruta") String ruta) throws NirhoControllerException {
+		try {
+			Usuario usuario = SessionUtil.getUsuarioSession(request);
+			usuario.setAvatar(ruta);
+			usuarioService.guardarAvatar(usuario);
+		} catch (NirhoServiceException e) {
+			logger.info("Exception [" + e.getMessage() +"]");
+			throw new NirhoControllerException("Problemas en la BD al guardar el avatar");
+		}
 	}
 }

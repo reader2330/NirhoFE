@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.nirho.dao.CuestionarioParticipanteDAO;
 import com.nirho.dao.CuestionarioProyectoDAO;
 import com.nirho.dao.ParticipanteDAO;
+import com.nirho.dao.ProyectoDAO;
 import com.nirho.dto.CuestionarioConfiguracion;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoServiceException;
@@ -22,6 +23,7 @@ import com.nirho.model.CuetionarioParticipantePK;
 import com.nirho.model.Participante;
 import com.nirho.model.PreguntaTema;
 import com.nirho.service.CuestionarioProyectoService;
+import com.nirho.util.NirhoUtil;
 
 @Service
 public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoService {
@@ -33,8 +35,14 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	private ParticipanteDAO participanteDAO;
 	@Autowired
 	private CuestionarioParticipanteDAO cuestDAO;
+	@Autowired
+	private ProyectoDAO proyectoDAO;
+	@Autowired
+	private CuestionarioParticipanteDAO cuestPartDAO;
+	
 	@Override
 	public void guardar(CuestionarioConfiguracion cuestionario) throws NirhoServiceException {
+		logger.info("************* CuestionarioConfiguracion [" + cuestionario +"] *******************");
 		try {
 			for(PreguntaTema pregunta: cuestionario.getLista()) {
 				CuestionarioProyecto cp = new CuestionarioProyecto();
@@ -42,11 +50,11 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 						cuestionario.getIdProyecto(), pregunta.getTema().getIdTema(), pregunta.getIdPregunta());
 				cp.setCuestionarioProyectoPK(pk);
 				dao.save(cp);
-				Integer idEmpresa = cp.getProyecto().getIdEmpresa().getId().intValue();
-				for(Participante part: participanteDAO.findByIdEmpresa(Long.parseLong(idEmpresa.toString()))) {
+				Long idEmpresa = proyectoDAO.getOne(cuestionario.getIdProyecto()).getIdEmpresa().getId();
+				for(Participante part: participanteDAO.findByIdEmpresa(idEmpresa)) {
 					CuetionarioParticipante cuestPart = new CuetionarioParticipante();
 					CuetionarioParticipantePK cuestPartPK = new CuetionarioParticipantePK(
-							part.getIdParticipante(), cp.getTemaCuestionario().getIdTema(), cp.getPreguntaTema().getIdPregunta());
+							part.getIdParticipante(), pregunta.getTema().getIdTema(), pregunta.getIdPregunta());
 					cuestPart.setCuetionarioParticipantePK(cuestPartPK);
 					cuestDAO.save(cuestPart);
 				}
@@ -70,14 +78,12 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 					VerTemaQ vtq = new VerTemaQ();
 					vtq.setNombre(cp.getTemaCuestionario().getNombre());
 					List<String> preguntas = new ArrayList<>();
-					logger.info("agregando [" + cp.getPreguntaTema() +"]");
 					preguntas.add(cp.getPreguntaTema().getEnunciado());
 					vtq.setPreguntas(preguntas);
 					mapTemas.put(cp.getTemaCuestionario().getNombre(), vtq);
 				}
 			}
 			for (Map.Entry<String, VerTemaQ> entry : mapTemas.entrySet()) {
-				logger.info(entry.getValue());
 				temasq.add(entry.getValue());
 			}
 		} catch(Exception e) {
@@ -85,6 +91,34 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 			throw new NirhoServiceException("Problemas al obtener los temas en la BD del proyecto [" + idProyecto + "]");
 		}
 		return temasq;
+	}
+
+	@Override
+	public List<CuetionarioParticipante> obtenerCuestionarioParticipante(String token) throws NirhoServiceException {
+		List<CuetionarioParticipante> cuestPart = null;
+		try {
+			String rfc = NirhoUtil.obtenerRFCToken(token);
+			List<Participante> partList = participanteDAO.findByRfc(rfc);
+			if(partList != null && !partList.isEmpty()) {
+				Participante part = partList.get(0);
+				return cuestPartDAO.findByIdParticipante(part.getIdParticipante());
+			}
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas al obtener el cuestionario del participante en la BD oken [" + token + "]");
+		}
+		return cuestPart;
+	}
+
+	@Override
+	public void contestarPregunta(CuetionarioParticipante questPart) throws NirhoServiceException {
+		try {
+			cuestPartDAO.update(questPart);
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas al registrar la respuesta del participante en la BD");
+		}
+		
 	}
 	
 }

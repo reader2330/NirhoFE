@@ -20,5 +20,14 @@ public class ParticipanteDAOImpl extends AbstractDAO<Participante, Integer> impl
 		query.setParameter("idEmpresa", idEmpresa);
 		return query.getResultList();
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Participante> findByRfc(String rfc) {
+		String hql = "FROM Participante p WHERE p.rfc = :rfc";
+		Query query = entityManager.createQuery(hql);
+		query.setParameter("rfc", rfc);
+		return query.getResultList();
+	}
 	
 }

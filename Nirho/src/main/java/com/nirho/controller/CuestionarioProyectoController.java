@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.dto.CuestionarioConfiguracion;
+import com.nirho.dto.TemaPreguntas;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.CuetionarioParticipante;
 import com.nirho.model.PreguntaTema;
 import com.nirho.model.TemaCuestionario;
 import com.nirho.service.CuestionarioProyectoService;
@@ -29,6 +31,17 @@ public class CuestionarioProyectoController {
 	TemasModuloService temasService;
 	@Autowired
 	CuestionarioProyectoService cuestionarioService;
+	
+	@GetMapping(value = "/plantilla")
+	public List<TemaPreguntas> plantilla(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
+		List<TemaPreguntas> temas = new ArrayList<>();
+		try {
+			temas = temasService.obtenerPlantillaCuestionario(idModulo);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Sin servicio al obtener los temas del modulo");
+		}
+		return temas;
+	}
 	
 	@GetMapping(value = "/temas")
 	public List<TemaCuestionario> temas(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
@@ -72,5 +85,27 @@ public class CuestionarioProyectoController {
 			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
 		}
 		return preguntas;
+	}
+	
+	@GetMapping(value = "/participante")
+	public List<CuetionarioParticipante> participante(@RequestParam(name="token") String token) throws NirhoControllerException{
+		List<CuetionarioParticipante> preguntas = new ArrayList<>();
+		try {
+			preguntas = cuestionarioService.obtenerCuestionarioParticipante(token);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
+		}
+		return preguntas;
+	}
+	
+	@RequestMapping(value = "/contestaPregPart", method = RequestMethod.POST)
+	@ResponseBody
+	public void contestaPregPart(@RequestBody CuetionarioParticipante questPart) throws NirhoControllerException {
+		try {
+			cuestionarioService.contestarPregunta(questPart);
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al registrar el cuestionario en la BD");
+		}
+		
 	}
 }
