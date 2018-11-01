@@ -261,7 +261,11 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
 module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">people_outline</mat-icon> Organigrama</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\">\n        <mat-option *ngFor=\"let proyect of proyects\" [value]=\"proyect\">\n          {{proyect.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Selecciona al consultor</mat-label>\n      <mat-select [(ngModel)]=\"consultor\">\n        <mat-option *ngFor=\"let consultor of consultores\" [value]=\"consultor\">\n          {{consultor.fullName}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n      <button mat-raised-button color=\"primary\" (click)=\"saveConsultor()\">Guarda consultor</button>\n  </mat-grid-tile>\n"
+=======
+module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">people_outline</mat-icon> Organigrama</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\">\n        <mat-option *ngFor=\"let proyect of proyects\" [value]=\"proyect\">\n          {{proyect.fullName}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Selecciona al consultor</mat-label>\n      <mat-select [(ngModel)]=\"consultor\">\n        <mat-option *ngFor=\"let consultor of consultores\" [value]=\"consultor\">\n          {{consultor.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n      <button mat-raised-button color=\"primary\" [disabled]=\"!proyect.hasOwnProperty('idProyecto') || !consultor.hasOwnProperty('idUsuario')\">Guarda consultor</button>\n  </mat-grid-tile>\n"
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
 
 /***/ }),
 
@@ -338,7 +342,11 @@ var AsignarConsultorComponent = /** @class */ (function () {
             _this.consultores = res;
         });
     };
+<<<<<<< HEAD
     AsignarConsultorComponent.prototype.saveConsultor = function () {
+=======
+    AsignarConsultorComponent.prototype.sevaConsultor = function () {
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
         var _this = this;
         sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()({
             title: '',
@@ -356,12 +364,20 @@ var AsignarConsultorComponent = /** @class */ (function () {
                 _this.ProyectService.saveConsultor(data).subscribe(function (res) {
                     console.log(res);
                     sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Listo.', 'La información se guardo correctamente', 'success').then(function () {
+<<<<<<< HEAD
                         _this.response.emit({ value: 1 });
+=======
+                        _this.response.emit({ key: 1 });
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
                     });
                 }, function (err) {
                     console.log(err);
                     sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()('Algo salio mal.', 'No se pudo guarda la información', 'error').then(function () {
+<<<<<<< HEAD
                         _this.response.emit({ value: 1 });
+=======
+                        _this.response.emit({ key: 1 });
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
                     });
                 });
             }
@@ -560,6 +576,11 @@ var BandejaComponent = /** @class */ (function () {
         this.displayedColumns = ['nombre', 'empresa', 'empleados', 'participantes', 'periodo', 'frecuenciaEval', 'detail3'];
         this.dataSource = [];
     }
+<<<<<<< HEAD
+=======
+    /** Whether the number of selected elements matches the total number of rows. */
+    /** Selects all rows if they are not all selected; otherwise clear selection. */
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
     BandejaComponent.prototype.ngOnInit = function () {
         this.getProyects();
     };
@@ -577,6 +598,7 @@ var BandejaComponent = /** @class */ (function () {
             this.responseChildren.emit({ value: 3 });
         }
     };
+<<<<<<< HEAD
     BandejaComponent.prototype.getUser = function () {
         if (sessionStorage.getItem('user')) {
             var user = JSON.parse(sessionStorage.getItem('user'));
@@ -597,6 +619,8 @@ var BandejaComponent = /** @class */ (function () {
             _this.proyects = res;
         });
     };
+=======
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", Object)
@@ -1145,12 +1169,20 @@ var DataPeriodComponent = /** @class */ (function () {
                 _this.ProyectService.savePeriod(data).subscribe(function (res) {
                     console.log(res);
                     sweetalert2__WEBPACK_IMPORTED_MODULE_5___default()('Listo.', 'La información se guardo correctamente', 'success').then(function () {
+<<<<<<< HEAD
                         _this.response.emit({ value: 1 });
+=======
+                        _this.response.emit({ key: 1 });
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
                     });
                 }, function (err) {
                     console.log(err);
                     sweetalert2__WEBPACK_IMPORTED_MODULE_5___default()('Algo salio mal.', 'No se pudo guarda la información', 'error').then(function () {
+<<<<<<< HEAD
                         _this.response.emit({ value: 1 });
+=======
+                        _this.response.emit({ key: 1 });
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
                     });
                 });
             }
@@ -1667,7 +1699,11 @@ var HeadCountComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
 module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">people_outline</mat-icon> Organigrama</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\">\n        <mat-option *ngFor=\"let proyect of proyects\" [value]=\"proyect\">\n          {{proyect.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <button mat-raised-button (click)=\"getOrganigrama()\">Cargar Organigrama</button>\n  </mat-grid-tile>\n</mat-grid-list>\n    <div class=\"col-sm-12 \">\n      <div *ngFor=\"let level of levels\" class=\"row\">\n        <mat-card style=\"margin-top: 20px\" [ngStyle]=\"{'background-color':getColor(level)}\"  class=\"col-sm-12\"> <h4 align=\"center\">{{'NIVEL  '+level.nivel}} </h4></mat-card>\n\n        <div  style=\"margin-top: 20px; margin-left:20px\"   *ngFor=\"let people of level.participantes\" [class]=\"getClass(level.participantes)\">\n           <mat-card>{{people.nombre}} <p class=\"text-muted\">{{people.puesto}} </p> </mat-card>\n        </div>\n      </div>\n\n    </div>\n\n\n\n\n\n\n"
+=======
+module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">people_outline</mat-icon> Organigrama</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 96%; \" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\">\n        <mat-option *ngFor=\"let proyect of proyects\" [value]=\"proyect\">\n          {{proyect.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <button mat-raised-button (click)=\"getOrganigrama()\">Cargar Organigrama</button>\n  </mat-grid-tile>\n</mat-grid-list>\n    <div class=\"col-sm-12 \">\n      <div *ngFor=\"let level of levels\"  class=\"row\">\n        <mat-card style=\"margin-top: 20px\" [style]=\"{'background-color':getBackGround(level)}\" class=\"col-sm-12\"> <h4 align=\"center\">{{'NIVEL  '+level.nivel}} </h4></mat-card>\n\n        <div  style=\"margin-top: 20px\" *ngFor=\"let people of level.participantes\" [class]=\"getClass(level.participantes)\">\n           <mat-card>{{people.nombre}} <p class=\"text-muted\">{{people.puesto}} </p> </mat-card>\n        </div>\n      </div>\n\n    </div>\n\n\n\n\n\n\n"
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
 
 /***/ }),
 
@@ -1737,12 +1773,21 @@ var OrganigramaComponent = /** @class */ (function () {
             }));
         });
     };
+<<<<<<< HEAD
     OrganigramaComponent.prototype.getColor = function (level) {
         var colors = [
             '#A1B712',
             '#b9d162',
             '#ccdd91',
             '#e0ebc2',
+=======
+    OrganigramaComponent.prototype.getBackGround = function (level) {
+        var colors = [
+            'e0ebc2',
+            'ccdd91',
+            'b9d162',
+            'a6c732'
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
         ];
         var color = colors[level.nivel - 1];
         console.log(color);
@@ -1789,7 +1834,11 @@ var OrganigramaComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+<<<<<<< HEAD
 module.exports = "<mat-horizontal-stepper labelPosition=\"bottom\"  [hidden]=\"mobile\" [linear]=\"false\" #stepper>\n  <mat-step >\n    <ng-template  matStepLabel >\n      <p class=\"bold\">Paso 1 </p><p>Datos Empresa</p>\n    </ng-template>\n    <app-data-company  ></app-data-company>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>\n      <p class=\"bold\">Paso 2   </p> <p>Datos Contacto</p>\n    </ng-template>\n    <app-data-contact></app-data-contact>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>\n      <p class=\"bold\">Paso 3  </p> <p>Datos Proyecto</p>\n    </ng-template>\n    <app-data-proyect  (response)=\"getResponseChildren($event)\"></app-data-proyect>\n  </mat-step>\n</mat-horizontal-stepper>\n<mat-vertical-stepper  [hidden]=\"!mobile\" [linear]=\"false\" #stepper2>\n  <mat-step >\n    <ng-template matStepLabel> Datos de la Empresa</ng-template>\n    <app-data-company></app-data-company>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel> Datos Contacto</ng-template>\n    <app-data-contact></app-data-contact>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>Datos Proyecto</ng-template>\n    <app-data-proyect (response)=\"getResponseChildren($event)\"></app-data-proyect>\n  </mat-step>\n</mat-vertical-stepper>\n"
+=======
+module.exports = "<mat-horizontal-stepper labelPosition=\"bottom\"  [hidden]=\"mobile\" [linear]=\"false\" #stepper>\n  <mat-step >\n    <ng-template  matStepLabel >\n      <p class=\"bold\">Paso 1 </p><br><p>Datos Empresa</p>\n    </ng-template>\n    <app-data-company  ></app-data-company>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>\n      <p class=\"bold\">Paso 2   </p><br> <p>Datos Contacto</p>\n    </ng-template>\n    <app-data-contact></app-data-contact>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>\n      <p class=\"bold\">Paso 3  </p>  <br><p>Datos Proyecto</p>\n    </ng-template>\n    <app-data-proyect  (response)=\"getResponseChildren($event)\"></app-data-proyect>\n  </mat-step>\n</mat-horizontal-stepper>\n<mat-vertical-stepper  [hidden]=\"!mobile\" [linear]=\"false\" #stepper2>\n  <mat-step >\n    <ng-template matStepLabel> Datos de la Empresa</ng-template>\n    <app-data-company></app-data-company>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel> Datos Contacto</ng-template>\n    <app-data-contact></app-data-contact>\n  </mat-step>\n  <mat-step>\n    <ng-template matStepLabel>Datos Proyecto</ng-template>\n    <app-data-proyect (response)=\"getResponseChildren($event)\"></app-data-proyect>\n  </mat-step>\n</mat-vertical-stepper>\n"
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
 
 /***/ }),
 
@@ -2075,7 +2124,11 @@ var SidebarComponent = /** @class */ (function () {
         this.route = route;
         this.LoginService = LoginService;
         this.mobile = false;
+<<<<<<< HEAD
         this.selectModule = 8;
+=======
+        this.selectModule = 1;
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
         this.modules = [];
         this.user = {};
         breakpointObserver.isMatched(('(max-width:450)'));
@@ -2110,7 +2163,10 @@ var SidebarComponent = /** @class */ (function () {
         var _this = this;
         this.LoginService.getUser().subscribe(function (res) {
             _this.user = res;
+<<<<<<< HEAD
             sessionStorage.setItem('user', JSON.stringify(_this.user));
+=======
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
         });
     };
     SidebarComponent.prototype.recibirRespuestChildren = function (evt) {
@@ -2122,7 +2178,10 @@ var SidebarComponent = /** @class */ (function () {
         this.LoginService.closeSession().subscribe(function (res) {
             console.log(res);
         });
+<<<<<<< HEAD
         sessionStorage.clear();
+=======
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
         this.route.navigate(['']);
     };
     SidebarComponent = __decorate([
@@ -2260,6 +2319,10 @@ var CuestionarioSelectComponent = /** @class */ (function () {
         var _this = this;
         console.log(this.tema);
         var id = this.tema['idTema'];
+<<<<<<< HEAD
+=======
+        console.log(id);
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
         this.ProyectService.getPreguntas(id).subscribe(function (res) {
             _this.preguntas = res;
             for (var _i = 0, _a = _this.preguntas; _i < _a.length; _i++) {
@@ -2565,9 +2628,12 @@ var ProyectoService = /** @class */ (function () {
     ProyectoService.prototype.saveConsultor = function (data) {
         return this.http.post(this.api + 'proyecto/asignarConsultor', data, { headers: this.headers });
     };
+<<<<<<< HEAD
     ProyectoService.prototype.getProyectsbyRol = function (id) {
         return this.http.get(this.api + 'cuestionario/preguntas', { headers: this.headers, params: { 'idUsuario': id } });
     };
+=======
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
     ProyectoService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -2668,4 +2734,8 @@ module.exports = __webpack_require__(/*! /Users/fernando/Desktop/NirhoFE/src/mai
 /***/ })
 
 },[[0,"runtime","vendor"]]]);
+<<<<<<< HEAD
 //# sourceMappingURL=main.js.map
+=======
+//# sourceMappingURL=main.js.map
+>>>>>>> 883cea0da528c65a69232802d51230f2089871bd
