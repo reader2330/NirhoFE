@@ -46,7 +46,7 @@ export class AsignarConsultorComponent implements OnInit {
     });
   }
 
-  sevaConsultor() {
+  saveConsultor() {
     Swal({
       title: '',
       text: 'Seguro que quieres guardar la información ingresada del proyecto',
@@ -67,7 +67,7 @@ export class AsignarConsultorComponent implements OnInit {
             'La información se guardo correctamente',
             'success'
           ).then(() => {
-            this.response.emit({key: 1});
+            this.response.emit({value: 1});
           });
         }, (err) => {
           console.log(err);
@@ -76,7 +76,7 @@ export class AsignarConsultorComponent implements OnInit {
             'No se pudo guarda la información',
             'error'
           ).then(() => {
-            this.response.emit({key: 1});
+            this.response.emit({value: 1});
           });
         });
       }

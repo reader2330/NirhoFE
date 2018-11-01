@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProyectoService} from '../../../services/proyecto.service';
+import {IEmployee} from 'ng2-org-chart';
 
 @Component({
   selector: 'app-organigrama',
@@ -10,7 +11,11 @@ export class OrganigramaComponent implements OnInit {
   proyects = [];
   proyect = {};
   mobile = false;
-  levels = []
+  levels = [];
+  level1 = {};
+  level2 = {};
+  level3 = {};
+  level4 = {};
   constructor(private ProyectService: ProyectoService) {
   }
 
@@ -35,6 +40,15 @@ export class OrganigramaComponent implements OnInit {
           return -1;
         }
       }));
+      console.log(this.levels);
+      this.level1 = this.levels[0];
+      this.level2 = this.levels[1];
+      this.level3 = this.levels[2];
+      this.level4 = this.levels[3];
+      console.log(this.level1);
+      console.log(this.level2);
+      console.log(this.level3);
+
 
 
     });
@@ -74,6 +88,8 @@ export class OrganigramaComponent implements OnInit {
       return 'col-sm-3';
     }
   }
+
+
 
 
 

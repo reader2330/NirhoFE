@@ -33,7 +33,7 @@ export class AvatarEditComponent implements OnInit {
 
   saveAvatar () {
     this.avatar = this.avatarForm.value;
-    console.log("this: ", this.avatar)
+    console.log("this: ", this.avatar);
     Swal({
       title: '',
       text: 'Guardado exitoso',
