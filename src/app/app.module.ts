@@ -55,11 +55,9 @@ import { AvatarEditComponent } from './components/avatar-edit/avatar-edit.compon
     AsignarConsultorComponent,
     EstadisticasComponent,
     DetallePreguntasComponent,
-<<<<<<< HEAD
     EncuestaComponent,
-=======
     AvatarEditComponent,
->>>>>>> ddbf7b1954aed82679afc76178048e658bebe485
+
   ],
   imports: [
     BrowserModule,

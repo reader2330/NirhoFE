@@ -4,6 +4,7 @@ import {LoginComponent} from './components/login/login.component';
 import {InicioComponent} from './components/inicio/inicio.component';
 import {SteppersComponent} from './components/formularios/steppers/steppers.component';
 import {AvatarEditComponent} from './components/avatar-edit/avatar-edit.component';
+import {EncuestaComponent} from './components/encuesta/encuesta.component';
 
 const routes: Routes = [
   {
@@ -15,8 +16,12 @@ const routes: Routes = [
     component: InicioComponent
   },
   {
-    path:'avatar-edit',
+    path: 'avatar-edit',
     component: AvatarEditComponent
+  },
+  {
+    path: 'encuesta/:token',
+    component: EncuestaComponent
   }
 
 ];
