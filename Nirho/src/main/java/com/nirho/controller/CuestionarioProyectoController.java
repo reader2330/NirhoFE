@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.dto.CuestionarioConfiguracion;
+import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.PreguntaTema;
@@ -60,5 +61,16 @@ public class CuestionarioProyectoController {
 			throw new NirhoControllerException("Problemas al registrar el cuestionario en la BD");
 		}
 		
+	}
+	
+	@GetMapping(value = "/verPreguntas")
+	public List<VerTemaQ> verPreguntas(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		List<VerTemaQ> preguntas = new ArrayList<>();
+		try {
+			preguntas = cuestionarioService.verTemasCuestionario(idProyecto);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
+		}
+		return preguntas;
 	}
 }
