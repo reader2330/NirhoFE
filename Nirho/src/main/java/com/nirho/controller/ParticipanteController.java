@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,11 +25,12 @@ import com.nirho.model.Participante;
 import com.nirho.model.Proyecto;
 import com.nirho.service.ParticipanteService;
 import com.nirho.service.ProyectoService;
+import com.nirho.util.NirhoUtil;
 
 @RestController
 @RequestMapping( value = "/participantes" )
 public class ParticipanteController {
-	
+	public final static Logger logger = Logger.getLogger(ParticipanteController.class);
 	@Autowired
 	ParticipanteService participanteService;
 	@Autowired
@@ -57,6 +59,7 @@ public class ParticipanteController {
 	@RequestMapping(value = "/headCount", method = RequestMethod.POST)
 	@ResponseBody
 	public void guardarParticipantes(@RequestBody HeadCount headcount) throws NirhoControllerException {
+		logger.info(" ************************ headcount [" + headcount + "] *****************************");
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(headcount.getIdProyecto());
 			List<ParticipanteHC> participantesHC = headcount.getLista();
@@ -89,7 +92,11 @@ public class ParticipanteController {
 		} catch (ParseException e) {
 			participante.setFechaIngreso(new Date());
 		}
-		//participante.setAntigPuesto(participanteHC.getAntigPuesto());
+		try {
+			participante.setAntigPuesto(new Double(participanteHC.getAntigPuesto()));
+		} catch(Exception e) {
+			logger.info("Exception [" + e.getMessage() + "]");
+		}
 		participante.setNivelEscolaridad(participanteHC.getNivelEscolaridad());
 		participante.setOtrosEstudios(participanteHC.getOtrosEstudios());
 		participante.setIdioma(participanteHC.getIdioma());
@@ -97,6 +104,8 @@ public class ParticipanteController {
 		participante.setCorreoElectronico(participanteHC.getCorreoElectronico());
 		participante.setSede(participanteHC.getSede());
 		participante.setAreaOrg(participanteHC.getAreaOrg());
+		participante.setToken(NirhoUtil.obtenerTokenRFC(participante.getRfc()));
 		return participante;
 	}
+	
 }

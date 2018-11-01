@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.nirho.dao.CuestionarioParticipanteDAO;
 import com.nirho.dao.CuestionarioProyectoDAO;
 import com.nirho.dao.ParticipanteDAO;
+import com.nirho.dao.ProyectoDAO;
 import com.nirho.dto.CuestionarioConfiguracion;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoServiceException;
@@ -33,8 +34,11 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	private ParticipanteDAO participanteDAO;
 	@Autowired
 	private CuestionarioParticipanteDAO cuestDAO;
+	@Autowired
+	private ProyectoDAO proyectoDAO;
 	@Override
 	public void guardar(CuestionarioConfiguracion cuestionario) throws NirhoServiceException {
+		logger.info("************* CuestionarioConfiguracion [" + cuestionario +"] *******************");
 		try {
 			for(PreguntaTema pregunta: cuestionario.getLista()) {
 				CuestionarioProyecto cp = new CuestionarioProyecto();
@@ -42,11 +46,11 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 						cuestionario.getIdProyecto(), pregunta.getTema().getIdTema(), pregunta.getIdPregunta());
 				cp.setCuestionarioProyectoPK(pk);
 				dao.save(cp);
-				Integer idEmpresa = cp.getProyecto().getIdEmpresa().getId().intValue();
-				for(Participante part: participanteDAO.findByIdEmpresa(Long.parseLong(idEmpresa.toString()))) {
+				Long idEmpresa = proyectoDAO.getOne(cuestionario.getIdProyecto()).getIdEmpresa().getId();
+				for(Participante part: participanteDAO.findByIdEmpresa(idEmpresa)) {
 					CuetionarioParticipante cuestPart = new CuetionarioParticipante();
 					CuetionarioParticipantePK cuestPartPK = new CuetionarioParticipantePK(
-							part.getIdParticipante(), cp.getTemaCuestionario().getIdTema(), cp.getPreguntaTema().getIdPregunta());
+							part.getIdParticipante(), pregunta.getTema().getIdTema(), pregunta.getIdPregunta());
 					cuestPart.setCuetionarioParticipantePK(cuestPartPK);
 					cuestDAO.save(cuestPart);
 				}
@@ -70,14 +74,12 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 					VerTemaQ vtq = new VerTemaQ();
 					vtq.setNombre(cp.getTemaCuestionario().getNombre());
 					List<String> preguntas = new ArrayList<>();
-					logger.info("agregando [" + cp.getPreguntaTema() +"]");
 					preguntas.add(cp.getPreguntaTema().getEnunciado());
 					vtq.setPreguntas(preguntas);
 					mapTemas.put(cp.getTemaCuestionario().getNombre(), vtq);
 				}
 			}
 			for (Map.Entry<String, VerTemaQ> entry : mapTemas.entrySet()) {
-				logger.info(entry.getValue());
 				temasq.add(entry.getValue());
 			}
 		} catch(Exception e) {
