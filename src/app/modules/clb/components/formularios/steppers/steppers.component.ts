@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {BreakpointObserver, Breakpoints} from '../../../../../node_modules/@angular/cdk/layout';
+import {BreakpointObserver, Breakpoints} from '../../../../../../../node_modules/@angular/cdk/layout';
 
 @Component({
   selector: 'app-steppers',

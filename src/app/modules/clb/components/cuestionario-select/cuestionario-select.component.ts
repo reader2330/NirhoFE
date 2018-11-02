@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ProyectoService} from '../services/proyecto.service';
-import {Pregunta} from '../models/pregunta';
+import {ProyectoService} from '../../services/proyecto.service';
+import {Pregunta} from '../../models/pregunta';
 import Swal from "sweetalert2";
 
 

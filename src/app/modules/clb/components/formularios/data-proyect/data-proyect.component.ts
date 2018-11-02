@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {BreakpointObserver, Breakpoints} from '../../../../../node_modules/@angular/cdk/layout';
+import {BreakpointObserver, Breakpoints} from '../../../../../../../node_modules/@angular/cdk/layout';
 import {CatalogsService} from '../../../services/catalogs.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2'

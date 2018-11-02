@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {LoginComponent} from './components/login/login.component';
-import {InicioComponent} from './components/inicio/inicio.component';
-import {SteppersComponent} from './components/formularios/steppers/steppers.component';
-import {AvatarEditComponent} from './components/avatar-edit/avatar-edit.component';
-import {EncuestaComponent} from './components/encuesta/encuesta.component';
+import {LoginComponent} from './modules/clb/components/login/login.component';
+import {InicioComponent} from './modules/clb/components/inicio/inicio.component';
+import {SteppersComponent} from './modules/clb/components/formularios/steppers/steppers.component';
+import {AvatarEditComponent} from './modules/clb/components/avatar-edit/avatar-edit.component';
+import {EncuestaComponent} from './modules/clb/components/encuesta/encuesta.component';
 
 const routes: Routes = [
   {
@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'encuesta/:token',
     component: EncuestaComponent
-  }
+  },
+  /*{
+    path: 'IRH/',
+    component: SidebarIrhComponent
+  }*/
 
 ];
 
