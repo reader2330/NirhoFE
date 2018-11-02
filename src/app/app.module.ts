@@ -29,6 +29,7 @@ import { DetallePreguntasComponent } from './modules/clb/components/detalle-preg
 import { EncuestaComponent } from './modules/clb/components/encuesta/encuesta.component';
 
 import { AvatarEditComponent } from './modules/clb/components/avatar-edit/avatar-edit.component';
+import {CLBModule} from './modules/clb/clb.module';
 
 
 
@@ -36,26 +37,6 @@ import { AvatarEditComponent } from './modules/clb/components/avatar-edit/avatar
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    InicioComponent,
-    SidebarComponent,
-    FormularioPrimaryComponent,
-    DataCompanyComponent,
-    DataProyectComponent,
-    DataPeriodComponent,
-    HeadCountComponent,
-    OrganigramaComponent,
-    SteppersComponent,
-    DataContactComponent,
-    BandejaComponent,
-    BandejaDetalleComponent,
-    CuestionarioSelectComponent,
-    AsignarConsultorComponent,
-    EstadisticasComponent,
-    DetallePreguntasComponent,
-    EncuestaComponent,
-    AvatarEditComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -64,6 +45,7 @@ import { AvatarEditComponent } from './modules/clb/components/avatar-edit/avatar
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
+    CLBModule,
     FormsModule,
     ReactiveFormsModule
   ],

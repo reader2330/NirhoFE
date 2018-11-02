@@ -17,14 +17,33 @@ export class CuestionarioSelectComponent implements OnInit {
   proyect = {};
   temas = [];
   tema = {};
+  load = false;
+  save = false;
   select = [];
   preguntas: Pregunta[] = [];
   selectPregunta: Pregunta[] = [];
+  questionNew = {
+    enunciado : ''
+  };
   constructor( private ProyectService: ProyectoService) { }
 
   ngOnInit() {
     this.getProyects();
-    this.getTemas();
+
+  }
+  showPreguntas() {
+    this.load = true;
+    this.ProyectService.getPreguntas(this.proyect['idProyecto']).subscribe((res) => {
+      console.log(res);
+      this.temas = res;
+      this.save = true;
+      for (let tema of this.temas) {
+        for (let question of tema.preguntas) {
+          question.select = false;
+        }
+      }
+      this.load = false;
+    });
   }
 
   checkMobileCols() {
@@ -38,6 +57,7 @@ export class CuestionarioSelectComponent implements OnInit {
   savePreguntas() {
 
 
+
     Swal({
       title: '',
       text: 'Seguro que quieres guardar la información ingresada del proyecto',
@@ -47,12 +67,16 @@ export class CuestionarioSelectComponent implements OnInit {
       cancelButtonText: 'No, seguir editando'
     }).then((result) => {
       if (result.value) {
-        for (let pregunta of this.preguntas) {
-          if (pregunta.select) {
-            delete pregunta.select;
-            this.selectPregunta.push(pregunta);
+        for (let tema of this.temas) {
+          for (let pregunta of tema.preguntas) {
+            if (pregunta.select) {
+              delete pregunta.select;
+              this.selectPregunta.push(pregunta);
+            }
           }
         }
+
+        console.log(this.selectPregunta);
         let data = {
           idProyecto: this.proyect['idProyecto'],
           lista: this.selectPregunta
@@ -64,7 +88,7 @@ export class CuestionarioSelectComponent implements OnInit {
             'La información se guardo correctamente',
             'success'
           ).then(() => {
-            this.response.emit({key: 1});
+            this.response.emit({value: 1});
           });
         }, (err) => {
           console.log(err);
@@ -73,19 +97,13 @@ export class CuestionarioSelectComponent implements OnInit {
             'No se pudo guarda la información',
             'error'
           ).then(() => {
-            this.response.emit({key: 1});
+
           });
         });
       }
     });
   }
 
-  getTemas() {
-    this.ProyectService.getTemas().subscribe((res) => {
-
-      this.temas = res;
-    });
-  }
   getPreguntas() {
     console.log(this.tema);
     let id = this.tema['idTema'];
@@ -105,8 +123,17 @@ export class CuestionarioSelectComponent implements OnInit {
       this.proyects = res;
     });
   }
-  changeSelectProyect(evt){
-    this.getPreguntas();
+
+
+  addPreguntar(tema) {
+    let enunciado = {...this.questionNew};
+    let question = {...tema.preguntas[tema.preguntas.length - 1]};
+    question['enunciado'] = enunciado.enunciado;
+    question['select'] = true;
+    question['idPregunta'] = question['idPregunta'] + 1;
+    tema.preguntas.push(question);
+    console.log(tema.preguntas);
+    this.questionNew.enunciado = '';
   }
 
 

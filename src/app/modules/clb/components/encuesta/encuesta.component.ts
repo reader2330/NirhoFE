@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ProyectoService} from '../../services/proyecto.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-encuesta',
@@ -10,9 +12,23 @@ export class EncuestaComponent implements OnInit {
   temas = [{
     nombre: 'prueba'
   }];
-  constructor() { }
+  token = "";
+
+  constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.getToken();
   }
+
+  getToken() {
+      this.route.params.subscribe((res) => {
+        this.token = res['token'];
+        this.ProyectServices.getPreguntasParticipante(this.token).subscribe((res) => {
+          console.log(res);
+        });
+      });
+
+  }
+
 
 }
