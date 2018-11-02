@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.nirho.dao.CuestionarioParticipanteDAO;
 import com.nirho.dao.CuestionarioProyectoDAO;
 import com.nirho.dao.ParticipanteDAO;
+import com.nirho.dao.PreguntaTemaDAO;
 import com.nirho.dao.ProyectoDAO;
 import com.nirho.dto.CuestionarioConfiguracion;
 import com.nirho.dto.VerTemaQ;
@@ -39,22 +40,31 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	private ProyectoDAO proyectoDAO;
 	@Autowired
 	private CuestionarioParticipanteDAO cuestPartDAO;
+	@Autowired
+	private PreguntaTemaDAO preguntaDAO;
 	
 	@Override
 	public void guardar(CuestionarioConfiguracion cuestionario) throws NirhoServiceException {
 		logger.info("************* CuestionarioConfiguracion [" + cuestionario +"] *******************");
 		try {
 			for(PreguntaTema pregunta: cuestionario.getLista()) {
+				PreguntaTema pregTem = null;
+				pregTem = preguntaDAO.getOne(pregunta.getIdPregunta());
+				logger.info("************* pregTem [" + pregTem +"] *******************");
+				if(pregTem == null) {
+					logger.info("************* Es nueva pregunta [" + pregunta +"] *******************");
+					preguntaDAO.save(pregunta);
+				}
 				CuestionarioProyecto cp = new CuestionarioProyecto();
 				CuestionarioProyectoPK pk = new CuestionarioProyectoPK(
-						cuestionario.getIdProyecto(), pregunta.getTema().getIdTema(), pregunta.getIdPregunta());
+						cuestionario.getIdProyecto(), pregunta.getIdTema().getIdTema(), pregunta.getIdPregunta());
 				cp.setCuestionarioProyectoPK(pk);
 				dao.save(cp);
 				Long idEmpresa = proyectoDAO.getOne(cuestionario.getIdProyecto()).getIdEmpresa().getId();
 				for(Participante part: participanteDAO.findByIdEmpresa(idEmpresa)) {
 					CuetionarioParticipante cuestPart = new CuetionarioParticipante();
 					CuetionarioParticipantePK cuestPartPK = new CuetionarioParticipantePK(
-							part.getIdParticipante(), pregunta.getTema().getIdTema(), pregunta.getIdPregunta());
+							part.getIdParticipante(), pregunta.getIdTema().getIdTema(), pregunta.getIdPregunta());
 					cuestPart.setCuetionarioParticipantePK(cuestPartPK);
 					cuestDAO.save(cuestPart);
 				}

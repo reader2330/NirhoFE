@@ -156,9 +156,9 @@ public class CuestionarioEmpresaController {
 	@ResponseBody
 	public void agregarPregunta(@Valid @RequestBody PreguntaTema preguntaTema) throws NirhoControllerException{
 		try {
-			if(preguntaTema.getIdTema() > 0){
-				preguntaTema.setTema(new TemaCuestionario(preguntaTema.getIdTema()));
-			}
+//			if(preguntaTema.getIdTema() > 0){
+//				preguntaTema.setTema(new TemaCuestionario(preguntaTema.getIdTema()));
+//			}
 			if(preguntaTema.getIdPregunta() != null && preguntaTema.getIdPregunta() > 0){
 				cuestionarioTemaEmpresaService.editarPregunta(preguntaTema);
 			}else{
