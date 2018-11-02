@@ -6,19 +6,37 @@
   <div class="logo-nav">
   </div>
 
-  <div style="margin-top: 10px" class="row col-sm-12">
+  <div style=" width:100%;margin-top: 50px" class="row justify-content-md-center  col-sm-12">
 
-    <mat-accordion>
-      <mat-expansion-panel *ngFor= "let tema of temas">
+    <mat-accordion style=" width:75%;" class="example-headers-align">
+      <mat-expansion-panel *ngFor= "let tema of temas" >
         <mat-expansion-panel-header>
           <mat-panel-title>
                 {{tema.nombre}}
           </mat-panel-title>
           <mat-panel-description>
-            Type your name and age
+            Contesta las preguntas
             <mat-icon color="warn">check_circle_outline</mat-icon>
           </mat-panel-description>
+
         </mat-expansion-panel-header>
+        <mat-panel-description>
+          <mat-list >
+            <h3 mat-subheader>Preguntas</h3>
+            <mat-list-item role="listitem" >
+
+                <div style="margin-left: 600px" class="triste"></div>
+                <mat-icon>save</mat-icon>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item role="listitem" mat-line>Item 1</mat-list-item>
+            <mat-list-item role="listitem">Item 2</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item>
+          </mat-list>
+
+
+
+        </mat-panel-description>
 
 
       </mat-expansion-panel>

@@ -10,15 +10,60 @@ import {ActivatedRoute} from '@angular/router';
 export class EncuestaComponent implements OnInit {
 
   temas = [{
-    nombre: 'prueba'
+    nombre: 'Imagen'
   }];
-  token = "";
+  token = '';
+  dataSource = [{
+    'nom': 1,
+    'enunciado': '¿Como esta México?',
+    'valor1': 0,
+    'valor2': 0,
+    'valor3': 0,
+    'valor4': 0,
+    'valor5': 0
+
+
+  },{
+    'nom': 2,
+    'enunciado': '¿Como ves a México?',
+    'valor1': 0,
+    'valor2': 0,
+    'valor3': 0,
+    'valor4': 0,
+    'valor5': 0
+
+
+  },{
+    'nom': 3,
+    'enunciado': '¿Te gusta  México?',
+    'valor1': 0,
+    'valor2': 0,
+    'valor3': 0,
+    'valor4': 0,
+    'valor5': 0
+
+
+  },
+  ];
+  displayedColumns: string[] = [
+    '#',
+    'ENUNCIADO',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5'
+
+
+
+  ];
 
   constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getToken();
   }
+
 
   getToken() {
       this.route.params.subscribe((res) => {
@@ -29,6 +74,8 @@ export class EncuestaComponent implements OnInit {
       });
 
   }
+
+
 
 
 }
