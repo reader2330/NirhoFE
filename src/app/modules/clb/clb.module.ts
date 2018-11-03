@@ -24,6 +24,9 @@ import {ChartModule} from 'angular2-highcharts';
 import {AppRoutingModule} from '../../app-routing.module';
 import {HttpClientModule} from '../../../../node_modules/@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { PickerModule } from '@ctrl/ngx-emoji-mart'
+
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji'
 
 @NgModule({
   imports: [
@@ -34,7 +37,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EmojiModule,
+    PickerModule
+
   ],
   declarations: [
     LoginComponent,

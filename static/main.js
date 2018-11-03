@@ -247,12 +247,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _node_modules_angular_common_http__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../../node_modules/@angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _ctrl_ngx_emoji_mart__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @ctrl/ngx-emoji-mart */ "./node_modules/@ctrl/ngx-emoji-mart/fesm5/ctrl-ngx-emoji-mart.js");
+/* harmony import */ var _ctrl_ngx_emoji_mart_ngx_emoji__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @ctrl/ngx-emoji-mart/ngx-emoji */ "./node_modules/@ctrl/ngx-emoji-mart/ngx-emoji/fesm5/ctrl-ngx-emoji-mart-ngx-emoji.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -292,7 +296,9 @@ var CLBModule = /** @class */ (function () {
                 _material_material_module__WEBPACK_IMPORTED_MODULE_21__["MaterialModule"],
                 _node_modules_angular_common_http__WEBPACK_IMPORTED_MODULE_24__["HttpClientModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_25__["FormsModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_25__["ReactiveFormsModule"]
+                _angular_forms__WEBPACK_IMPORTED_MODULE_25__["ReactiveFormsModule"],
+                _ctrl_ngx_emoji_mart_ngx_emoji__WEBPACK_IMPORTED_MODULE_27__["EmojiModule"],
+                _ctrl_ngx_emoji_mart__WEBPACK_IMPORTED_MODULE_26__["PickerModule"]
             ],
             declarations: [
                 _components_login_login_component__WEBPACK_IMPORTED_MODULE_2__["LoginComponent"],
@@ -492,6 +498,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _services_login_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/login.service */ "./src/app/modules/clb/services/login.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -504,33 +512,57 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var AvatarEditComponent = /** @class */ (function () {
-    function AvatarEditComponent() {
+    function AvatarEditComponent(LoginService, router) {
+        this.LoginService = LoginService;
+        this.router = router;
         this.avatar = {
             url: String
         };
         this.avatares = [
-            { value: 'avatar1', url: 'logo.png' },
-            { value: 'avatar2', url: 'avatar.png' },
-            { value: 'avatar3', url: 'x1.jpg' }
+            { value: 'avatar1', url: '/logo.png' },
+            { value: 'avatar2', url: '/avatar.png' },
+            { value: 'avatar3', url: '/X2.svg' }
         ];
         this.avatarForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
             url_avatar: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('')
         });
     }
     AvatarEditComponent.prototype.saveAvatar = function () {
+        var _this = this;
         this.avatar = this.avatarForm.value;
-        console.log("this: ", this.avatar);
         sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()({
             title: '',
-            text: 'Guardado exitoso',
-            type: 'success',
-            showCancelButton: false,
-            confirmButtonText: 'Guardar',
-            cancelButtonText: 'Cancelar'
+            text: 'Seguro que quieres ese avatar',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si guardar',
+            cancelButtonText: 'No, seguir editando'
+        }).then(function (result) {
+            if (result.value) {
+                console.log(_this.selectedValue);
+                _this.LoginService.updateAvatar(_this.selectedValue).subscribe(function (res) {
+                    console.log(res);
+                });
+                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()({
+                    title: '',
+                    text: 'Guardado exitoso',
+                    type: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Guardar',
+                    cancelButtonText: 'Cancelar'
+                }).then(function (res) {
+                    _this.router.navigate(['']);
+                });
+            }
         });
     };
     AvatarEditComponent.prototype.ngOnInit = function () {
+        this.LoginService.getUser().subscribe(function (res) {
+            console.log(res);
+        });
     };
     AvatarEditComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -538,7 +570,7 @@ var AvatarEditComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./avatar-edit.component.html */ "./src/app/modules/clb/components/avatar-edit/avatar-edit.component.html"),
             styles: [__webpack_require__(/*! ./avatar-edit.component.scss */ "./src/app/modules/clb/components/avatar-edit/avatar-edit.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_login_service__WEBPACK_IMPORTED_MODULE_3__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], AvatarEditComponent);
     return AvatarEditComponent;
 }());
@@ -784,7 +816,7 @@ var BandejaComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">library_books</mat-icon> Configuración cuestionario</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 40%; margin-right: 10px\" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\" >\n        <mat-option *ngFor=\"let proyect of proyects\"  [value]=\"proyect\">\n          {{proyect.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <button  mat-raised-button  [disabled]=\"!proyect.idProyecto\" (click)=\"showPreguntas()\"> Ver preguntas</button>\n    <button  mat-raised-button color =\"accent\" [disabled]=\"!save\" style=\"color: whitesmoke; margin-left: 10px\"  (click)=\"savePreguntas()\"> Guardar preguntas</button>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-spinner  color=\"accent\" mode=\"indeterminate\" *ngIf=\"load\"></mat-spinner>\n  </mat-grid-tile>\n</mat-grid-list>\n\n<mat-accordion style=\"margin-top: 5px\" *ngIf=\"showPreguntas\">\n\n\n  <mat-expansion-panel *ngFor=\"let tema of temas \">\n    <mat-expansion-panel-header>\n      <mat-panel-title>\n        <mat-icon>book</mat-icon> {{tema.tema.nombre}}\n      </mat-panel-title>\n    </mat-expansion-panel-header>\n    <mat-panel-description>\n      <mat-list role=\"list\" >\n        <mat-list-item role=\"listitem\"  *ngFor=\"let question of tema.preguntas\"><mat-checkbox [(ngModel)] = \"question.select\">{{question.enunciado}}</mat-checkbox></mat-list-item>\n        <mat-list-item><input matInput type=\"text\" placeholder=\"Nueva pregunta\" [(ngModel)]=\"questionNew.enunciado\"><a style=\"margin-left: 10px\" (click)=\"addPreguntar(tema)\"><mat-icon >add_circle_outline</mat-icon ></a></mat-list-item>\n      </mat-list>\n\n    </mat-panel-description>\n\n\n\n  </mat-expansion-panel>\n\n\n</mat-accordion>\n\n\n\n\n"
+module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <h2  class=\"mat-h2 mat-title\" ><mat-icon style=\"margin-top: 1px\">library_books</mat-icon> Configuración cuestionario</h2>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-form-field  style=\"width: 40%; margin-right: 10px\" appearance=\"outline\">\n      <mat-label>Seleccionar proyecto</mat-label>\n      <mat-select [(ngModel)]=\"proyect\" >\n        <mat-option *ngFor=\"let proyect of proyects\"  [value]=\"proyect\">\n          {{proyect.nombre}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <button  mat-raised-button  [disabled]=\"!proyect.idProyecto\" (click)=\"showPreguntas()\"> Ver preguntas</button>\n    <button  mat-raised-button color =\"accent\" [disabled]=\"!save\" style=\"color: whitesmoke; margin-left: 10px\"  (click)=\"savePreguntas()\"> Guardar preguntas</button>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n    <mat-spinner  color=\"accent\" mode=\"indeterminate\" *ngIf=\"load\"></mat-spinner>\n  </mat-grid-tile>\n</mat-grid-list>\n\n<mat-accordion style=\"margin-top: 5px; width: 100%\" *ngIf=\"showPreguntas\">\n\n\n  <mat-expansion-panel *ngFor=\"let tema of temas \">\n    <mat-expansion-panel-header>\n      <mat-panel-title>\n        <mat-icon>book</mat-icon> {{tema.tema.nombre}}\n      </mat-panel-title>\n    </mat-expansion-panel-header>\n    <mat-panel-description>\n      <mat-list role=\"list\" >\n        <mat-list-item role=\"listitem\"  *ngFor=\"let question of tema.preguntas\"><mat-checkbox [(ngModel)] = \"question.select\">{{question.enunciado}}</mat-checkbox></mat-list-item>\n        <mat-list-item><input matInput type=\"text\" placeholder=\"Nueva pregunta\" [(ngModel)]=\"questionNew.enunciado\"><a style=\"margin-left: 10px\" (click)=\"addPreguntar(tema)\"><mat-icon >add_circle_outline</mat-icon ></a></mat-list-item>\n      </mat-list>\n\n    </mat-panel-description>\n\n\n\n  </mat-expansion-panel>\n\n\n</mat-accordion>\n\n\n\n\n"
 
 /***/ }),
 
@@ -1103,7 +1135,7 @@ var DetallePreguntasComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-toolbar style=\"background:  black\" >\n  <span style=\"flex: 1 1 auto;\"></span>\n</mat-toolbar>\n<div class=\"row col-sm-12 justify-content-md-center\">\n  <div class=\"logo-nav\">\n  </div>\n\n  <div style=\"margin-top: 10px\" class=\"row col-sm-12\">\n\n    <mat-accordion>\n      <mat-expansion-panel *ngFor= \"let tema of temas\">\n        <mat-expansion-panel-header>\n          <mat-panel-title>\n                {{tema.nombre}}\n          </mat-panel-title>\n          <mat-panel-description>\n            Type your name and age\n            <mat-icon color=\"warn\">check_circle_outline</mat-icon>\n          </mat-panel-description>\n        </mat-expansion-panel-header>\n\n\n      </mat-expansion-panel>\n\n    </mat-accordion>\n\n\n\n  </div>\n\n</div>\n"
+module.exports = "\n<mat-toolbar style=\"background:  black\" >\n  <span style=\"flex: 1 1 auto;\"></span>\n</mat-toolbar>\n  <mat-grid-list style=\"width: 100%\" [cols]=\"checkMobileCols()\" rowHeight=\"150px\">\n    <mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"1\"  >\n      <div class=\"logo-nav\">\n      </div>\n    </mat-grid-tile>\n    <!--<mat-grid-tile [colspan]=\"checkMobileCols()\" [rowspan]=\"2\" >\n      <mat-accordion  class=\"example-headers-align\">\n        <mat-expansion-panel *ngFor= \"let tema of temas\" >\n          <mat-expansion-panel-header>\n            <mat-panel-title>\n              {{tema.nombre}} <mat-icon style=\"margin-left: 10px\" color=\"accent\">check_circle_outline</mat-icon>\n            </mat-panel-title>\n\n          </mat-expansion-panel-header>\n          <mat-panel-description>\n            <mat-list >\n              <h3 mat-subheader>Preguntas</h3>\n              <mat-list-item role=\"listitem\"  >\n\n\n\n\n              </mat-list-item>\n              <mat-divider></mat-divider>\n              <mat-list-item role=\"listitem\" class=\"example-headers-align\" mat-line>¿Que vale mexico?\n                <mat-radio-group>\n                  <mat-radio-button style=\"margin-left: 10px\">2</mat-radio-button>\n                  <mat-radio-button style=\"margin-left: 10px\">1</mat-radio-button>\n                  <mat-radio-button style=\"margin-left: 10px\">3</mat-radio-button>\n                  <mat-radio-button style=\"margin-left: 10px\">4</mat-radio-button>\n                  <mat-radio-button style=\"margin-left: 10px\">5</mat-radio-button>\n\n                </mat-radio-group></mat-list-item>\n              <mat-list-item role=\"listitem\">Item 2</mat-list-item>\n              <mat-list-item role=\"listitem\">Item 3</mat-list-item>\n            </mat-list>\n\n\n\n          </mat-panel-description>\n\n\n        </mat-expansion-panel>\n\n\n      </mat-accordion>\n    </mat-grid-tile>-->\n\n  <mat-grid-tile style=\"width: 100%\" [colspan]=\"checkMobileCols()\" [rowspan]=\"2\">\n    <mat-accordion [ngStyle]=\"{'width':mobile == true ? '100%':'75%'}\" class=\"example-headers-align\">\n      <mat-expansion-panel *ngFor= \"let tema of temas\" >\n        <mat-expansion-panel-header>\n          <mat-panel-title>\n            {{tema.nombre}} <mat-icon style=\"margin-left: 10px\" color=\"accent\">check_circle_outline</mat-icon>\n          </mat-panel-title>\n\n        </mat-expansion-panel-header>\n        <mat-panel-description style=\"width: 100%\">\n          <table mat-table style=\"width: 100%\" [dataSource]=\"dataSource\" class=\"mat-elevation-z8\">\n\n\n\n            <!--- Note that these columns can be defined in any order.\n                  The actual rendered columns are set as a property on the row definition\" -->\n\n            <!-- Position Column -->\n\n            <!-- Name Column -->\n            <ng-container matColumnDef=\"ENUNCIADO\">\n              <th mat-header-cell *matHeaderCellDef> ENUNCIADO </th>\n              <td mat-cell *matCellDef=\"let element\"> {{element.enunciado}} </td>\n            </ng-container>\n\n            <!-- Weight Column -->\n            <ng-container matColumnDef=\"1\">\n              <th mat-header-cell *matHeaderCellDef>\n                <ngx-emoji  [ngStyle]=\"{'margin-left':mobile == true ? '30px':'200px'}\" [emoji]=\"returnEmoji(1)\" [size]=\"returnSize()\"></ngx-emoji>\n                <ngx-emoji  [ngStyle]=\"{'margin-left':mobile == true ? '5px':'20px'}\" [emoji]=\"returnEmoji(2)\" [size]=\"returnSize()\"></ngx-emoji>\n                <ngx-emoji  [ngStyle]=\"{'margin-left':mobile == true ? '5px':'20px'}\" [emoji]=\"returnEmoji(3)\" [size]=\"returnSize()\"></ngx-emoji>\n                <ngx-emoji  [ngStyle]=\"{'margin-left':mobile == true ? '5px':'20px'}\" [emoji]=\"returnEmoji(4)\" [size]=\"returnSize()\"></ngx-emoji>\n                <ngx-emoji  [ngStyle]=\"{'margin-left':mobile == true ? '5px':'20px'}\" [emoji]=\"returnEmoji(5)\" [size]=\"returnSize()\"></ngx-emoji>\n              </th>\n              <td mat-cell *matCellDef=\"let element\">\n\n                <mat-slider [(ngModel)]=\"element.cuestionarioParticipantePK.respuesta\" [ngStyle]=\"{'margin-left':mobile == true ? '20px':'160px', 'width':mobile == true ? '100px':'250px'}\" min=\"0\" max=\"5\" step=\"1\"  (change)=\"updateValor(element)\" tickInterval=\"10\" thumbLabel ></mat-slider>\n\n              </td>\n            </ng-container>\n\n\n            <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n            <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n          </table>\n        </mat-panel-description>\n      </mat-expansion-panel>\n    </mat-accordion>\n\n  </mat-grid-tile>\n  <mat-grid-tile  style=\"width: 100%\" [colspan]=\"checkMobileCols()\" [rowspan]=\"1\">\n      <button mat-raised-button color=\"accent\" (click)=\"FinishCuestionario()\">Finalizar cuestionario</button>\n  </mat-grid-tile>\n\n\n  </mat-grid-list>\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
 /***/ }),
 
@@ -1114,7 +1146,7 @@ module.exports = "\n<mat-toolbar style=\"background:  black\" >\n  <span style=\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".logo-nav {\n  width: 245px;\n  height: 80px;\n  margin-top: 20px;\n  margin-left: 15px;\n  background-image: url('logo.png');\n  background-size: cover;\n  background-repeat: no-repeat; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9mZXJuYW5kby9EZXNrdG9wL05pcmhvRkUvc3JjL2FwcC9tb2R1bGVzL2NsYi9jb21wb25lbnRzL2VuY3Vlc3RhL2VuY3Vlc3RhLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsYUFBWTtFQUNaLGFBQVk7RUFDWixpQkFBZ0I7RUFDaEIsa0JBQWlCO0VBQ2pCLGtDQUFnRDtFQUNoRCx1QkFBc0I7RUFDdEIsNkJBQTRCLEVBQzdCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9jbGIvY29tcG9uZW50cy9lbmN1ZXN0YS9lbmN1ZXN0YS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5sb2dvLW5hdntcbiAgd2lkdGg6IDI0NXB4O1xuICBoZWlnaHQ6IDgwcHg7XG4gIG1hcmdpbi10b3A6IDIwcHg7XG4gIG1hcmdpbi1sZWZ0OiAxNXB4O1xuICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCIuLi8uLi8uLi8uLi8uLi9sb2dvLnBuZ1wiKTtcbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbn1cbiJdfQ== */"
+module.exports = ".logo-nav {\n  width: 245px;\n  height: 80px;\n  margin-top: 20px;\n  margin-left: 15px;\n  background-image: url('logo.png');\n  background-size: cover;\n  background-repeat: no-repeat; }\n\nexample-headers-align .mat-expansion-panel-header-title,\n.example-headers-align .mat-expansion-panel-header-description {\n  flex-basis: 0; }\n\n.example-headers-align .mat-expansion-panel-header-description {\n  justify-content: space-between;\n  align-items: center; }\n\n.triste {\n  background-image: url('sad.png'); }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9mZXJuYW5kby9EZXNrdG9wL05pcmhvRkUvc3JjL2FwcC9tb2R1bGVzL2NsYi9jb21wb25lbnRzL2VuY3Vlc3RhL2VuY3Vlc3RhLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsYUFBWTtFQUNaLGFBQVk7RUFDWixpQkFBZ0I7RUFDaEIsa0JBQWlCO0VBQ2pCLGtDQUFnRDtFQUNoRCx1QkFBc0I7RUFDdEIsNkJBQTRCLEVBQzdCOztBQUdEOztFQUVFLGNBQWEsRUFDZDs7QUFFRDtFQUNFLCtCQUE4QjtFQUM5QixvQkFBbUIsRUFDcEI7O0FBRUQ7RUFDRSxpQ0FBK0MsRUFDaEQiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGVzL2NsYi9jb21wb25lbnRzL2VuY3Vlc3RhL2VuY3Vlc3RhLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmxvZ28tbmF2e1xuICB3aWR0aDogMjQ1cHg7XG4gIGhlaWdodDogODBweDtcbiAgbWFyZ2luLXRvcDogMjBweDtcbiAgbWFyZ2luLWxlZnQ6IDE1cHg7XG4gIGJhY2tncm91bmQtaW1hZ2U6IHVybChcIi4uLy4uLy4uLy4uLy4uL2xvZ28ucG5nXCIpO1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xuICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xufVxuXG5cbmV4YW1wbGUtaGVhZGVycy1hbGlnbiAubWF0LWV4cGFuc2lvbi1wYW5lbC1oZWFkZXItdGl0bGUsXG4uZXhhbXBsZS1oZWFkZXJzLWFsaWduIC5tYXQtZXhwYW5zaW9uLXBhbmVsLWhlYWRlci1kZXNjcmlwdGlvbiB7XG4gIGZsZXgtYmFzaXM6IDA7XG59XG5cbi5leGFtcGxlLWhlYWRlcnMtYWxpZ24gLm1hdC1leHBhbnNpb24tcGFuZWwtaGVhZGVyLWRlc2NyaXB0aW9uIHtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4udHJpc3RlIHtcbiAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vLi4vLi4vc2FkLnBuZ1wiKTtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -1131,6 +1163,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/proyecto.service */ "./src/app/modules/clb/services/proyecto.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _node_modules_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/@angular/cdk/layout */ "./node_modules/@angular/cdk/esm5/layout.es5.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1143,15 +1178,62 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var EncuestaComponent = /** @class */ (function () {
-    function EncuestaComponent(ProyectServices, route) {
+    function EncuestaComponent(ProyectServices, route, router, breakpointObserver) {
+        var _this = this;
         this.ProyectServices = ProyectServices;
         this.route = route;
+        this.router = router;
+        this.mobile = false;
         this.temas = [{
-                nombre: 'prueba'
+                nombre: 'Imagen'
             }];
-        this.token = "";
+        this.token = '';
+        this.dataSource = [{
+                'nom': 1,
+                'enunciado': '¿Como esta México?',
+                'valor1': 0,
+                'valor2': 0,
+                'valor3': 0,
+                'valor4': 0,
+                'valor5': 0
+            }, {
+                'nom': 2,
+                'enunciado': '¿Como ves a México?',
+                'valor1': 0,
+                'valor2': 0,
+                'valor3': 0,
+                'valor4': 0,
+                'valor5': 0
+            }, {
+                'nom': 3,
+                'enunciado': '¿Te gusta  México?',
+                'valor1': 0,
+                'valor2': 0,
+                'valor3': 0,
+                'valor4': 0,
+                'valor5': 0
+            },
+        ];
+        this.displayedColumns = [
+            'ENUNCIADO',
+            '1',
+        ];
+        breakpointObserver.isMatched(('(max-width:450)'));
+        breakpointObserver.observe([
+            _node_modules_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_3__["Breakpoints"].HandsetLandscape, _node_modules_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_3__["Breakpoints"].HandsetPortrait
+        ]).subscribe(function (result) {
+            if (result.matches) {
+                _this.mobile = true;
+            }
+            else {
+                _this.mobile = false;
+            }
+        });
     }
+    ;
     EncuestaComponent.prototype.ngOnInit = function () {
         this.getToken();
     };
@@ -1161,7 +1243,130 @@ var EncuestaComponent = /** @class */ (function () {
             _this.token = res['token'];
             _this.ProyectServices.getPreguntasParticipante(_this.token).subscribe(function (res) {
                 console.log(res);
+                // this.temas = res;
             });
+        });
+    };
+    EncuestaComponent.prototype.checkMobileCols = function () {
+        if (this.mobile) {
+            return 1;
+        }
+        else {
+            return 4;
+        }
+    };
+    EncuestaComponent.prototype.returnEmoji = function (id) {
+        switch (id) {
+            case 1:
+                if (this.mobile) {
+                    return { id: 'sob', skin: 3, size: 16 };
+                }
+                else {
+                    return { id: 'sob', skin: 3, size: 24 };
+                }
+            case 2:
+                if (this.mobile) {
+                    return { id: 'cry', skin: 3 };
+                }
+                else {
+                    return { id: 'cry', skin: 3 };
+                }
+                ;
+            case 3:
+                if (this.mobile) {
+                    return { id: 'confused', skin: 3 };
+                }
+                else {
+                    return { id: 'confused', skin: 3 };
+                }
+            case 4:
+                if (this.mobile) {
+                    return { id: 'grinning', skin: 3 };
+                }
+                else {
+                    return { id: 'grinning', skin: 3 };
+                }
+            case 5:
+                if (this.mobile) {
+                    return { id: 'hugging_face', skin: 3 };
+                }
+                else {
+                    return { id: 'hugging_face', skin: 3 };
+                }
+        }
+    };
+    EncuestaComponent.prototype.returnSize = function () {
+        if (this.mobile) {
+            return 16;
+        }
+        else {
+            return 24;
+        }
+    };
+    EncuestaComponent.prototype.formatLabel = function (value) {
+        if (!value) {
+            return 0;
+        }
+        switch (value) {
+            case 1:
+                if (this.mobile) {
+                    return { id: 'sob', skin: 3, size: 16 };
+                }
+                else {
+                    return { id: 'sob', skin: 3, size: 24 };
+                }
+            case 2:
+                if (this.mobile) {
+                    return { id: 'cry', skin: 3 };
+                }
+                else {
+                    return { id: 'cry', skin: 3 };
+                }
+            case 3:
+                if (this.mobile) {
+                    return { id: 'confused', skin: 3 };
+                }
+                else {
+                    return { id: 'confused', skin: 3 };
+                }
+            case 4:
+                if (this.mobile) {
+                    return { id: 'grinning', skin: 3 };
+                }
+                else {
+                    return { id: 'grinning', skin: 3 };
+                }
+            case 5:
+                if (this.mobile) {
+                    return { id: 'hugging_face', skin: 3 };
+                }
+                else {
+                    return { id: 'hugging_face', skin: 3 };
+                }
+        }
+        return value;
+    };
+    EncuestaComponent.prototype.updateValor = function (question) {
+        console.log(question);
+        this.ProyectServices.updatePregunta(question).subscribe(function (res) {
+            console.log(res);
+        });
+    };
+    EncuestaComponent.prototype.FinishCuestionario = function () {
+        var _this = this;
+        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default()({
+            title: '',
+            text: 'Seguro que quieres finalizar el cuestionario',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, finalizar',
+            cancelButtonText: 'No, seguir contestando'
+        }).then(function (result) {
+            if (result.value) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default()('Listo.', 'El cuestionario se finalizo correctamente', 'success').then(function () {
+                    _this.router.navigate(['']);
+                });
+            }
         });
     };
     EncuestaComponent = __decorate([
@@ -1170,7 +1375,7 @@ var EncuestaComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./encuesta.component.html */ "./src/app/modules/clb/components/encuesta/encuesta.component.html"),
             styles: [__webpack_require__(/*! ./encuesta.component.scss */ "./src/app/modules/clb/components/encuesta/encuesta.component.scss")]
         }),
-        __metadata("design:paramtypes", [_services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__["ProyectoService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+        __metadata("design:paramtypes", [_services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__["ProyectoService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _node_modules_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_3__["BreakpointObserver"]])
     ], EncuestaComponent);
     return EncuestaComponent;
 }());
@@ -1747,7 +1952,7 @@ var DataPeriodComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form [formGroup]=\"proyectForm\"  >\n<mat-grid-list  [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <mat-form-field class=\"inputForm\" appearance=\"outline\">\n      <mat-label>Nombre</mat-label>\n      <input matInput formControlName=\"nombre\" type=\"text\">\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <mat-form-field class=\"inputForm\" appearance=\"outline\">\n      <mat-label>Numero de empleados</mat-label>\n      <input matInput formControlName=\"numEmpleados\" type=\"number\">\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <mat-form-field class=\"inputForm\" appearance=\"outline\">\n      <mat-label>Numero de participantes</mat-label>\n      <input matInput formControlName=\"numParticipantes\" type=\"number\">\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <mat-form-field class=\"inputForm\" appearance=\"outline\">\n      <mat-label>Sedes</mat-label>\n      <input formControlName=\"sedes\" matInput type=\"text\">\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <mat-form-field class=\"inputForm\" appearance=\"outline\">\n      <mat-label>Frecuencia evaluación</mat-label>\n      <mat-select formControlName=\"frecuenciaEval\" >\n        <mat-option *ngFor=\"let time of periods\" [value]=\"time.id\">\n          {{time.description}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile *ngIf=\"!mobile\">\n\n  </mat-grid-tile>\n  <mat-grid-tile *ngIf=\"!mobile\">\n\n  </mat-grid-tile>\n  <mat-grid-tile *ngIf=\"!mobile\">\n\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <button mat-raised-button (click)=\"cancelCompany()\" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>\n    <button mat-raised-button color=\"primary\" style=\"margin-left: 10px\" (click)=\"saveProyect()\" [disabled]=\"!proyectForm.valid\" matStepperNext>Guardar y enviar <mat-icon>save</mat-icon></button>\n\n  </mat-grid-tile>\n\n\n</mat-grid-list>\n</form>\n"
+module.exports = "<form [formGroup]=\"proyectForm\"  >\n<mat-grid-list  [cols]=\"checkMobileCols()\" rowHeight=\"100px\">\n\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <mat-form-field class=\"inputForm\" appearance=\"outline\">\n      <mat-label>Nombre</mat-label>\n      <input matInput formControlName=\"nombre\" type=\"text\">\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <mat-form-field class=\"inputForm\" appearance=\"outline\">\n      <mat-label>Numero de empleados</mat-label>\n      <input matInput formControlName=\"numEmpleados\" type=\"number\">\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <mat-form-field class=\"inputForm\" appearance=\"outline\">\n      <mat-label>Numero de participantes</mat-label>\n      <input matInput formControlName=\"numParticipantes\" type=\"number\">\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <mat-form-field class=\"inputForm\" appearance=\"outline\">\n      <mat-label>Sedes</mat-label>\n      <input formControlName=\"sedes\" matInput type=\"text\">\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <mat-form-field class=\"inputForm\" appearance=\"outline\">\n      <mat-label>Frecuencia evaluación</mat-label>\n      <mat-select formControlName=\"frecuenciaEval\" >\n        <mat-option *ngFor=\"let time of periods\" [value]=\"time.id\">\n          {{time.description}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile *ngIf=\"!mobile\">\n\n  </mat-grid-tile>\n  <mat-grid-tile *ngIf=\"!mobile\">\n\n  </mat-grid-tile>\n  <mat-grid-tile *ngIf=\"!mobile\">\n\n  </mat-grid-tile>\n  <mat-grid-tile [colspan]=\"1\" [rowspan]=\"1\">\n    <button mat-raised-button (click)=\"cancelCompany()\" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>\n    <button mat-raised-button color=\"primary\" style=\"margin-left: 10px\" (click)=\"saveProyect()\" [disabled]=\"!proyectForm.valid\" matStepperNext>Guardar y enviar <mat-icon>save</mat-icon></button>\n  </mat-grid-tile>\n\n\n</mat-grid-list>\n</form>\n"
 
 /***/ }),
 
@@ -2650,7 +2855,7 @@ var SidebarComponent = /** @class */ (function () {
         this.route = route;
         this.LoginService = LoginService;
         this.mobile = false;
-        this.selectModule = 8;
+        this.selectModule = 1;
         this.modules = [];
         this.user = {};
         breakpointObserver.isMatched(('(max-width:450)'));
@@ -2837,6 +3042,9 @@ var LoginService = /** @class */ (function () {
     LoginService.prototype.closeSession = function () {
         return this._http.get(this.api + 'usuario/logout', { headers: this.header });
     };
+    LoginService.prototype.updateAvatar = function (ruta) {
+        return this._http.get(this.api + '/usuario/guardarAvatar', { headers: this.header, params: { 'ruta': ruta } });
+    };
     LoginService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -2921,6 +3129,9 @@ var ProyectoService = /** @class */ (function () {
     ProyectoService.prototype.getPreguntasParticipante = function (id) {
         return this.http.get(this.api + 'cuestionario/participante', { headers: this.headers, params: { 'token': id } });
     };
+    ProyectoService.prototype.updatePregunta = function (data) {
+        return this.http.post(this.api + 'cuestionario/contestaPregPart', data, { headers: this.headers });
+    };
     ProyectoService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -2979,7 +3190,8 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatCheckboxModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatRadioModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatProgressSpinnerModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatProgressSpinnerModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSliderModule"]
             ],
             declarations: [],
             exports: [
@@ -2999,7 +3211,8 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatCheckboxModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatRadioModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatProgressSpinnerModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatProgressSpinnerModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSliderModule"]
             ]
         })
     ], MaterialModule);

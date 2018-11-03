@@ -23,10 +23,7 @@ const routes: Routes = [
     path: 'encuesta/:token',
     component: EncuestaComponent
   },
-  /*{
-    path: 'IRH/',
-    component: SidebarIrhComponent
-  }*/
+
 
 ];
 

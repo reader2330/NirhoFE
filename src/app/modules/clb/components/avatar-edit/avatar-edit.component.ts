@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2'
+import {LoginService} from '../../services/login.service';
+import {Router} from '@angular/router';
 
 export interface Avatar {
   value: string;
@@ -17,14 +19,14 @@ export class AvatarEditComponent implements OnInit {
 
   avatar = {
     url: String
-  }
+  };
 
   selectedValue : String;
 
   avatares: Avatar[] = [
-    {value: 'avatar1', url: 'logo.png'},
-    {value: 'avatar2', url: 'avatar.png'},
-    {value: 'avatar3', url: 'x1.jpg'}
+    {value: 'avatar1', url: '/logo.png'},
+    {value: 'avatar2', url: '/avatar.png'},
+    {value: 'avatar3', url: '/X2.svg'}
   ];
 
   avatarForm = new FormGroup({
@@ -32,21 +34,43 @@ export class AvatarEditComponent implements OnInit {
   });
 
   saveAvatar () {
+
     this.avatar = this.avatarForm.value;
-    console.log("this: ", this.avatar);
     Swal({
       title: '',
-      text: 'Guardado exitoso',
-      type: 'success',
-      showCancelButton: false,
-      confirmButtonText: 'Guardar',
-      cancelButtonText: 'Cancelar'
-    })
+      text: 'Seguro que quieres ese avatar',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        console.log(this.selectedValue);
+        this.LoginService.updateAvatar(this.selectedValue).subscribe((res) => {
+          console.log(res);
+        });
+
+        Swal({
+          title: '',
+          text: 'Guardado exitoso',
+          type: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'Guardar',
+          cancelButtonText: 'Cancelar'
+        }).then((res) => {
+          this.router.navigate(['']);
+        });
+
+      }
+    });
   }
 
-  constructor() { }
+  constructor(private LoginService: LoginService, private router:Router) { }
 
   ngOnInit() {
+    this.LoginService.getUser().subscribe((res) => {
+      console.log(res);
+    });
   }
 
 }

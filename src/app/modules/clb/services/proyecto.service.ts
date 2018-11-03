@@ -58,5 +58,9 @@ export class ProyectoService {
   getPreguntasParticipante(id): Observable<any> {
     return this.http.get(this.api + 'cuestionario/participante',{headers:this.headers, params: {'token': id}});
   }
+  updatePregunta(data) {
+    return this.http.post(this.api + 'cuestionario/contestaPregPart', data, {headers:this.headers})
+
+  }
 
 }

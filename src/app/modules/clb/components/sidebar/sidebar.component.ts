@@ -10,7 +10,7 @@ import {LoginService} from '../../services/login.service';
 })
 export class SidebarComponent implements OnInit {
   mobile = false;
-  selectModule = 8;
+  selectModule = 1;
   modules = [];
   user = {};
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
@@ -64,9 +64,5 @@ export class SidebarComponent implements OnInit {
     sessionStorage.clear();
     this.route.navigate(['']);
   }
-
-
-
-
 
 }
