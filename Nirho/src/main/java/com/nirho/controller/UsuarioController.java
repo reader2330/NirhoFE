@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,7 @@ import com.nirho.util.SessionConstants;
 import com.nirho.util.SessionUtil;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping( value = "/usuario" )
 public class UsuarioController {
 	public final static Logger logger = Logger.getLogger(UsuarioController.class);
