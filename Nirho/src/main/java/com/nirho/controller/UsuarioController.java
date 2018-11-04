@@ -38,9 +38,15 @@ public class UsuarioController {
 	public void login(@RequestBody Usuario usuario, HttpServletRequest request) throws NirhoControllerException {
 		try {
 			Usuario usuarioSession = usuarioService.obtenerUsuario(usuario.getUsername());
+			if(!SessionUtil.getEncryptMD5(usuario.getPassword().trim()).equals(usuarioSession.getPassword())) {
+				throw new NirhoControllerException("Password incorrecto");
+			}
 			logger.info("usuario session [" + usuarioSession +"]");
 			HttpSession httpSession = request.getSession(true);
 			httpSession.setAttribute(SessionConstants.USUARIO_ATTRIBUTE, usuarioSession);
+		} catch (NirhoControllerException e) {
+			logger.info("Exception [" + e.getMessage() +"]");
+			throw new NirhoControllerException(e.getMessage());
 		} catch (Exception e) {
 			logger.info("Exception [" + e.getMessage() +"]");
 			throw new NirhoControllerException("Problemas al conectar con la BD");
