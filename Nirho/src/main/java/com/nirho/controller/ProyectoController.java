@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ import com.nirho.service.ProyectoService;
 import com.nirho.util.SessionUtil;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping( value = "/proyecto" )
 public class ProyectoController {
 	public final static Logger logger = Logger.getLogger(ProyectoController.class);
