@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `nirhodb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+CREATE DATABASE  IF NOT EXISTS `nirhodb` /*!40100 DEFAULT CHARACTER SET utf8mb4  */;
 USE `nirhodb`;
 -- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
@@ -230,7 +230,7 @@ CREATE TABLE `clb_submodulo` (
   `id_submodulo` int(11) NOT NULL,
   `descripcion` varchar(90) NOT NULL,
   PRIMARY KEY (`id_submodulo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -492,7 +492,7 @@ CREATE TABLE `cuestionario_proyecto` (
   CONSTRAINT `fk_cuest_proy_id_preg` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta_tema` (`id_pregunta`),
   CONSTRAINT `fk_cuest_proy_id_proy` FOREIGN KEY (`id_proyecto`) REFERENCES `proyecto` (`id_proyecto`),
   CONSTRAINT `fk_cuest_proy_id_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema_cuestionario` (`id_tema`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -523,7 +523,7 @@ CREATE TABLE `cuetionario_participante` (
   CONSTRAINT `fk_cuest_part_id_part` FOREIGN KEY (`id_participante`) REFERENCES `participante` (`id_participante`),
   CONSTRAINT `fk_cuest_part_id_preg` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta_tema` (`id_pregunta`),
   CONSTRAINT `fk_cuest_part_id_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema_cuestionario` (`id_tema`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -773,7 +773,7 @@ CREATE TABLE `modulo` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(180) DEFAULT NULL,
   PRIMARY KEY (`id_modulo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -844,7 +844,7 @@ CREATE TABLE `plantilla_cuestionario` (
   KEY `fk_plantilla_proyecto_idx` (`id_modulo`),
   CONSTRAINT `fk_plantilla_proyecto` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id_modulo`),
   CONSTRAINT `fk_plantilla_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema_cuestionario` (`id_tema`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1084,7 +1084,7 @@ CREATE TABLE `rol_clb_submodulo` (
   PRIMARY KEY (`rol`,`id_submodulo`),
   KEY `fk_submodulo_idx` (`id_submodulo`),
   CONSTRAINT `fk_submodulo` FOREIGN KEY (`id_submodulo`) REFERENCES `clb_submodulo` (`id_submodulo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1175,7 +1175,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPxjRIYT8pG0zgzKTilbko-MOv8pSnmO63M9FkOvfHoR9FvInm','consultorventas@nirho.com','CONSULTOR VENTAS','17f82ee224bb3238db809ed4a7a006f0',1,'','consultorventas'),(2,'https://imgur.com/I80W1Q0.png','gerentenirho@nirho.com','GERENTE NIRHO','a16068c1b716a5dfd54b9e59b7bbc95f',2,'','gerentenirho'),(3,'https://raw.githubusercontent.com/fangpenlin/avataaars/HEAD/avataaars-example.png?raw=true','candidato@nirho.com','CANDIDATO','5f4dcc3b5aa765d61d8327deb882cf99',0,'','candidato'),(4,'/img/avatar1.png','consultornirho@nirho.com','CONSULTOR NIRHO','6ba3c78f6ef92b87020886f1476a017d',3,'','consultornirho'),(5,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','empresanirho@nirho.com','EMPRESA NIRHO','5f4dcc3b5aa765d61d8327deb882cf99',4,'','empresanirho'),(6,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','gael2808@hotmail.com','DANILO GARCIA REYES','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'GARD8908281E8'),(7,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','rrensoli@hotmail.com','rene ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'recr581026sm7'),(8,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','jonatan.gallegos@nirho.com','JONATAN GALLEGOS GUTIERREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'GAGA9402198H8'),(9,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','alejandro.barradas@nirho.com','ALEJANDRO BARRADAS PEREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'BAPA890207P96'),(10,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','ventasgdl@nirho.com','MARIA DE LOURDES VALDEZ RODRIGUEZ','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'VARL600331VA4');
+INSERT INTO `usuario` VALUES (1,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPxjRIYT8pG0zgzKTilbko-MOv8pSnmO63M9FkOvfHoR9FvInm','consultorventas@nirho.com','CONSULTOR VENTAS','123',1,'','consultorventas'),(2,'https://imgur.com/I80W1Q0.png','gerentenirho@nirho.com','GERENTE NIRHO','a16068c1b716a5dfd54b9e59b7bbc95f',2,'','gerentenirho'),(3,'https://raw.githubusercontent.com/fangpenlin/avataaars/HEAD/avataaars-example.png?raw=true','candidato@nirho.com','CANDIDATO','5f4dcc3b5aa765d61d8327deb882cf99',0,'','candidato'),(4,'/img/avatar1.png','consultornirho@nirho.com','CONSULTOR NIRHO','6ba3c78f6ef92b87020886f1476a017d',3,'','consultornirho'),(5,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','empresanirho@nirho.com','EMPRESA NIRHO','5f4dcc3b5aa765d61d8327deb882cf99',4,'','empresanirho'),(6,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','gael2808@hotmail.com','DANILO GARCIA REYES','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'GARD8908281E8'),(7,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','rrensoli@hotmail.com','rene ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'recr581026sm7'),(8,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','jonatan.gallegos@nirho.com','JONATAN GALLEGOS GUTIERREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'GAGA9402198H8'),(9,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','alejandro.barradas@nirho.com','ALEJANDRO BARRADAS PEREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'BAPA890207P96'),(10,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','ventasgdl@nirho.com','MARIA DE LOURDES VALDEZ RODRIGUEZ','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'VARL600331VA4');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
