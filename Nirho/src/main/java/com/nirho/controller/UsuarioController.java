@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,7 @@ import com.nirho.util.SessionConstants;
 import com.nirho.util.SessionUtil;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping( value = "/usuario" )
 public class UsuarioController {
 	public final static Logger logger = Logger.getLogger(UsuarioController.class);
@@ -38,9 +40,15 @@ public class UsuarioController {
 	public void login(@RequestBody Usuario usuario, HttpServletRequest request) throws NirhoControllerException {
 		try {
 			Usuario usuarioSession = usuarioService.obtenerUsuario(usuario.getUsername());
+			if(!SessionUtil.getEncryptMD5(usuario.getPassword().trim()).equals(usuarioSession.getPassword())) {
+				throw new NirhoControllerException("Password incorrecto");
+			}
 			logger.info("usuario session [" + usuarioSession +"]");
 			HttpSession httpSession = request.getSession(true);
 			httpSession.setAttribute(SessionConstants.USUARIO_ATTRIBUTE, usuarioSession);
+		} catch (NirhoControllerException e) {
+			logger.info("Exception [" + e.getMessage() +"]");
+			throw new NirhoControllerException(e.getMessage());
 		} catch (Exception e) {
 			logger.info("Exception [" + e.getMessage() +"]");
 			throw new NirhoControllerException("Problemas al conectar con la BD");
