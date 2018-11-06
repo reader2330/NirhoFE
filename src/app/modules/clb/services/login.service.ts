@@ -30,6 +30,9 @@ export class LoginService {
     return this._http.get(this.api + 'usuario/logout', {headers: this.header});
   }
   updateAvatar(ruta): Observable<any> {
-    return this._http.get(this.api + '/usuario/guardarAvatar', {headers: this.header, params: {'ruta': ruta}});
+    return this._http.get(this.api + 'usuario/guardarAvatar', {headers: this.header, params: {'ruta': ruta}});
   }
+
+
+
 }
