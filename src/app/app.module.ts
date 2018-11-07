@@ -31,6 +31,8 @@ import { EncuestaComponent } from './modules/clb/components/encuesta/encuesta.co
 import { AvatarEditComponent } from './modules/clb/components/avatar-edit/avatar-edit.component';
 import {IrhModule} from './modules/irh/irh.module';
 import {CLBModule} from './modules/clb/clb.module';
+import {EvdModule} from './modules/evd/evd.module';
+import { TableClienteEvdComponent } from './modules/evd/components/table-cliente-evd/table-cliente-evd.component';
 
 
 
@@ -38,10 +40,11 @@ import {CLBModule} from './modules/clb/clb.module';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    InicioComponent,
-    SidebarComponent,
-    FormularioPrimaryComponent,
+    //TableClienteEvdComponent,
+    //LoginComponent,
+    //InicioComponent,
+    //SidebarComponent,
+    /*FormularioPrimaryComponent,
     DataCompanyComponent,
     DataProyectComponent,
     DataPeriodComponent,
@@ -56,7 +59,7 @@ import {CLBModule} from './modules/clb/clb.module';
     EstadisticasComponent,
     DetallePreguntasComponent,
     EncuestaComponent,
-    AvatarEditComponent,
+    AvatarEditComponent,*/
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import {CLBModule} from './modules/clb/clb.module';
     CLBModule,
     FormsModule,
     ReactiveFormsModule,
-    IrhModule
+    IrhModule,
+    EvdModule
   ],
   providers: [],
   bootstrap: [AppComponent]
