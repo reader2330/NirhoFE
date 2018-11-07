@@ -36,3 +36,9 @@ import { TableCliente2EvdComponent } from './components/table-cliente2-evd/table
     TableCliente2EvdComponent]
 })
 export class EvdModule { }
+@NgModule({
+  imports: [
+    CommonModule
+  ],
+  declarations: []
+})
