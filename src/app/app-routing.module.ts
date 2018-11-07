@@ -28,7 +28,6 @@ const routes: Routes = [
     path: 'IRH',
     component: InicioIrhComponent
   }
-
 ];
 
 @NgModule({

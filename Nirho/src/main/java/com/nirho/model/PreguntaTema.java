@@ -5,20 +5,16 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "pregunta_tema")
 public class PreguntaTema implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id_pregunta")
 	private Integer idPregunta;
@@ -35,11 +31,8 @@ public class PreguntaTema implements Serializable {
 	private int dePlantilla;
 	@ManyToOne
 	@JoinColumn(name = "id_tema", referencedColumnName = "id_tema")
-	private TemaCuestionario tema;
+	private TemaCuestionario idTema;
 	
-	@Transient
-	private int idTema;
-
 	public PreguntaTema() {
 	}
 
@@ -94,24 +87,16 @@ public class PreguntaTema implements Serializable {
 	public void setDePlantilla(int dePlantilla) {
 		this.dePlantilla = dePlantilla;
 	}
-
-	public TemaCuestionario getTema() {
-		return tema;
-	}
-
-	public void setTema(TemaCuestionario tema) {
-		this.tema = tema;
-	}
 	
-	public int getIdTema() {
+	public TemaCuestionario getIdTema() {
 		return idTema;
 	}
 
-	public void setIdTema(int idTema) {
+	public void setIdTema(TemaCuestionario idTema) {
 		this.idTema = idTema;
 	}
 
 	public String toString(){
-		return "PreguntaTema [idPregunta=" + idPregunta + ", enunciado=" + enunciado + ", tipo=" + tipo + ", dePlantilla=" + dePlantilla + ", idTema=" + tema + "]";
+		return "PreguntaTema [idPregunta=" + idPregunta + ", enunciado=" + enunciado + ", tipo=" + tipo + ", dePlantilla=" + dePlantilla + ", idTema=" + idTema + "]";
 	}
 }

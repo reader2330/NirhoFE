@@ -15,7 +15,7 @@ public class PreguntaTemaDAOImpl extends AbstractDAO<PreguntaTema, Integer> impl
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<PreguntaTema> findByIdTema(Integer idTema) {
-		String hql = "FROM PreguntaTema p WHERE p.tema.idTema = :idTema";
+		String hql = "FROM PreguntaTema p WHERE p.idTema.idTema = :idTema";
 		Query query = entityManager.createQuery(hql);
 		query.setParameter("idTema", idTema);
 		return query.getResultList();

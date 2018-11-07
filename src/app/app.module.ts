@@ -30,6 +30,7 @@ import { EncuestaComponent } from './modules/clb/components/encuesta/encuesta.co
 
 import { AvatarEditComponent } from './modules/clb/components/avatar-edit/avatar-edit.component';
 import {IrhModule} from './modules/irh/irh.module';
+import {CLBModule} from './modules/clb/clb.module';
 
 
 
@@ -64,6 +65,7 @@ import {IrhModule} from './modules/irh/irh.module';
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
+    CLBModule,
     FormsModule,
     ReactiveFormsModule,
     IrhModule

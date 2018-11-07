@@ -38,7 +38,7 @@ export class ProyectoService {
     return this.http.get(this.api + 'cuestionario/temas/', {headers: this.headers, params: {'idModulo': '1'}});
   }
   getPreguntas(id): Observable<Pregunta[]> {
-    return this.http.get<Pregunta[]>(this.api + 'cuestionario/preguntas', {headers: this.headers, params: {'idTema': id }});
+    return this.http.get<Pregunta[]>(this.api + 'cuestionario/plantilla', {headers: this.headers, params: {'idModulo': '1' }});
   }
   savePreguntas(data): Observable<any> {
     return this.http.post(this.api + 'cuestionario/configurar', data, {headers: this.headers});
@@ -51,6 +51,16 @@ export class ProyectoService {
   }
   getProyectsbyRol(id): Observable<Proyecto[]> {
     return this.http.get<Proyecto[]>(this.api + 'cuestionario/preguntas', {headers: this.headers, params: {'idUsuario': id }});
+  }
+  getPreguntasProyect(id): Observable<any> {
+    return this.http.get(this.api + 'cuestionario/verPreguntas', {headers: this.headers, params: {'idProyecto': id}});
+  }
+  getPreguntasParticipante(id): Observable<any> {
+    return this.http.get(this.api + 'cuestionario/participante',{headers:this.headers, params: {'token': id}});
+  }
+  updatePregunta(data) {
+    return this.http.post(this.api + 'cuestionario/contestaPregPart', data, {headers:this.headers})
+
   }
 
 }

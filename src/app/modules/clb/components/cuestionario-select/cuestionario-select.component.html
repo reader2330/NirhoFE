@@ -11,28 +11,40 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field  style="width: 40%; margin-right: 10px"    appearance="outline">
-    <mat-label>Seleccionar tema</mat-label>
-    <mat-select [(ngModel)]="tema" (selectionChange) = "changeSelectProyect($event)">
-      <mat-option *ngFor="let tema of temas" [value]="tema">
-        {{tema.nombre}}
-      </mat-option>
-    </mat-select>
-    </mat-form-field>
-
-
-
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
-    <button  mat-button-raised color ="primary" (click)="savePreguntas()"> Guardar preguntas</button>
+    <button  mat-raised-button  [disabled]="!proyect.idProyecto" (click)="showPreguntas()"> Ver preguntas</button>
+    <button  mat-raised-button color ="accent" [disabled]="!save" style="color: whitesmoke; margin-left: 10px"  (click)="savePreguntas()"> Guardar preguntas</button>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+    <mat-spinner  color="accent" mode="indeterminate" *ngIf="load"></mat-spinner>
   </mat-grid-tile>
 </mat-grid-list>
 
-<mat-selection-list class="col-sm-10" style="margin-left:100px " >
-  <mat-list  *ngFor="let pregunta of preguntas">
-    <mat-checkbox style="margin-right: 10px" [(ngModel)]="pregunta.select"  ></mat-checkbox> {{pregunta.enunciado}}
-  </mat-list>
-</mat-selection-list>
+<mat-accordion style="margin-top: 5px; width: 100%" *ngIf="showPreguntas">
+
+
+  <mat-expansion-panel *ngFor="let tema of temas ">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>book</mat-icon> {{tema.tema.nombre}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-panel-description>
+      <mat-list role="list" >
+        <mat-list-item role="listitem"  *ngFor="let question of tema.preguntas"><mat-checkbox [(ngModel)] = "question.select">{{question.enunciado}}</mat-checkbox></mat-list-item>
+        <mat-list-item><input matInput type="text" placeholder="Nueva pregunta" [(ngModel)]="questionNew.enunciado"><a style="margin-left: 10px" (click)="addPreguntar(tema)"><mat-icon >add_circle_outline</mat-icon ></a></mat-list-item>
+      </mat-list>
+
+    </mat-panel-description>
+
+
+
+  </mat-expansion-panel>
+
+
+</mat-accordion>
+
 
 
 

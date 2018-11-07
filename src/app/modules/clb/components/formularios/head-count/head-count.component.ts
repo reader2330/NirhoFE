@@ -55,7 +55,7 @@ export class HeadCountComponent implements OnInit {
   'correoElectronico',
   'sede',
   'areaOrg'
-  ]
+  ];
 
   constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectService:ProyectoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
