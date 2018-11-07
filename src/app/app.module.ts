@@ -29,6 +29,7 @@ import { DetallePreguntasComponent } from './modules/clb/components/detalle-preg
 import { EncuestaComponent } from './modules/clb/components/encuesta/encuesta.component';
 
 import { AvatarEditComponent } from './modules/clb/components/avatar-edit/avatar-edit.component';
+import {IrhModule} from './modules/irh/irh.module';
 
 
 
@@ -55,7 +56,6 @@ import { AvatarEditComponent } from './modules/clb/components/avatar-edit/avatar
     DetallePreguntasComponent,
     EncuestaComponent,
     AvatarEditComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -65,7 +65,8 @@ import { AvatarEditComponent } from './modules/clb/components/avatar-edit/avatar
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IrhModule
   ],
   providers: [],
   bootstrap: [AppComponent]

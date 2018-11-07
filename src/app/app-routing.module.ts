@@ -5,6 +5,7 @@ import {InicioComponent} from './modules/clb/components/inicio/inicio.component'
 import {SteppersComponent} from './modules/clb/components/formularios/steppers/steppers.component';
 import {AvatarEditComponent} from './modules/clb/components/avatar-edit/avatar-edit.component';
 import {EncuestaComponent} from './modules/clb/components/encuesta/encuesta.component';
+import {InicioIrhComponent} from './modules/irh/components/inicio-irh/inicio-irh.component';
 
 const routes: Routes = [
   {
@@ -23,10 +24,10 @@ const routes: Routes = [
     path: 'encuesta/:token',
     component: EncuestaComponent
   },
-  /*{
-    path: 'IRH/',
-    component: SidebarIrhComponent
-  }*/
+  {
+    path: 'IRH',
+    component: InicioIrhComponent
+  }
 
 ];
 
