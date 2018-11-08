@@ -1,0 +1,83 @@
+<form [formGroup]="enterpriseForm">
+  <h5 style="text-align: center">
+    <mat-icon>folder_open</mat-icon>
+    Undefined table
+  </h5>
+  <hr>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Participante</mat-label>
+          <input matInput placeholder="Placeholder">
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
+
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Actividad</mat-label>
+          <input matInput placeholder="Placeholder">
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-4">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Meta/KPI</mat-label>
+          <mat-select formControlName="pais" required >
+            <mat-option >
+
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-4">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Unidad</mat-label>
+          <mat-select formControlName="pais" required >
+            <mat-option >
+
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-4">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Periodo</mat-label>
+          <mat-select formControlName="pais" required >
+            <mat-option >
+
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+
+      <div class="col-sm-12 col-md-8" >
+        <mat-form-field appearance="outline" style="display: contents">
+          <mat-label>Programado</mat-label>
+          <textarea matInput placeholder="Leave a comment"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-4">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Real</mat-label>
+          <input matInput placeholder="Placeholder">
+        </mat-form-field>
+      </div>
+
+      <button type="button" style="margin-left: 20px" mat-raised-button color="primary">Save me prro</button>
+
+
+    </div>
+  </div>
+
+</form>
+
+

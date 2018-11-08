@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {TrainingModalIrhComponent} from '../../../irh/components/reviews/modals/training-modal-irh/training-modal-irh.component';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {DialogData} from '../../../irh/components/reviews/training-irh/training-irh.component';
+import {TableClient2ModalEvdComponent} from '../modals/table-client2-modal-evd/table-client2-modal-evd.component';
 
 export interface PeriodicElement {
   name: string;
@@ -31,7 +35,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class TableCliente2EvdComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'symbol1', 'symbol2', 'symbol3'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'symbol1', 'symbol2', 'symbol3', 'detail'];
   dataSource = ELEMENT_DATA;
 
   enterpriseForm = new FormGroup(
@@ -40,9 +44,40 @@ export class TableCliente2EvdComponent implements OnInit {
     }
   );
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TableClient2ModalEvdComponent, {
+      width: '750px',
+      height: 'auto'
+      //data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+  }
+
+
 
   ngOnInit() {
+  }
+
+}
+
+@Component({
+  selector: 'app-table-client2-modal-evd',
+  templateUrl: '../modals/table-client2-modal-evd/table-client2-modal-evd.component.html'
+})
+export class DialogOverviewExampleDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

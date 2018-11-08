@@ -13,6 +13,7 @@ import { HeadCountEvdComponent } from './components/head-count-evd/head-count-ev
 import { OrganigramaEvdComponent } from './components/organigrama-evd/organigrama-evd.component';
 import {TableClienteEvdComponent} from './components/table-cliente-evd/table-cliente-evd.component';
 import { TableCliente2EvdComponent } from './components/table-cliente2-evd/table-cliente2-evd.component';
+import { TableClient2ModalEvdComponent } from './components/modals/table-client2-modal-evd/table-client2-modal-evd.component';
 
 @NgModule({
   imports: [
@@ -33,12 +34,17 @@ import { TableCliente2EvdComponent } from './components/table-cliente2-evd/table
     HeadCountEvdComponent,
     OrganigramaEvdComponent,
     TableClienteEvdComponent,
-    TableCliente2EvdComponent]
+    TableCliente2EvdComponent,
+    TableClient2ModalEvdComponent
+  ],
+  entryComponents: [
+    TableClient2ModalEvdComponent
+  ]
 })
 export class EvdModule { }
-@NgModule({
+/*@NgModule({
   imports: [
     CommonModule
   ],
   declarations: []
-})
+})*/
