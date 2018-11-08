@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `nirhodb` /*!40100 DEFAULT CHARACTER SET utf8mb4  */;
-USE `nirhodb`;
 -- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: nirhodb
@@ -230,7 +228,7 @@ CREATE TABLE `clb_submodulo` (
   `id_submodulo` int(11) NOT NULL,
   `descripcion` varchar(90) NOT NULL,
   PRIMARY KEY (`id_submodulo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -326,7 +324,7 @@ CREATE TABLE `conocimiento_vacante` (
 
 LOCK TABLES `conocimiento_vacante` WRITE;
 /*!40000 ALTER TABLE `conocimiento_vacante` DISABLE KEYS */;
-INSERT INTO `conocimiento_vacante` VALUES (2,'CONOCIMIENTOS DE MODA, \nTELAS, DISEÑADORES, ETC',4,'CONOCIMIENTOS DE MODA, \nTELAS, DISEÑADORES, ETC',2);
+INSERT INTO `conocimiento_vacante` VALUES (1,'alksdalk ',4,'lkdjlkg c,mn ',1),(2,'CONOCIMIENTOS DE MODA, \nTELAS, DISEÑADORES, ETC',4,'CONOCIMIENTOS DE MODA, \nTELAS, DISEÑADORES, ETC',2);
 /*!40000 ALTER TABLE `conocimiento_vacante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -374,7 +372,7 @@ CREATE TABLE `contacto` (
   PRIMARY KEY (`id`),
   KEY `FKgdf9c83j3xr4w6k3dc8jcej41` (`id_empresa`),
   CONSTRAINT `FKgdf9c83j3xr4w6k3dc8jcej41` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,7 +381,7 @@ CREATE TABLE `contacto` (
 
 LOCK TABLES `contacto` WRITE;
 /*!40000 ALTER TABLE `contacto` DISABLE KEYS */;
-INSERT INTO `contacto` VALUES (1,'5554359783','rrensoli@comunndad.unam.mx','Rene Rensoli Samayoa','Director General','55446756',34,1),(2,'5566778899','anibal@xlkslks.com.mx','anibal arguelles','dgerente general','23454532',34,2),(3,'45045045045045','lmerchant@admmax.mx','LIC. LETICIA MERCHANT','GERENTE DE RECURSOS HUMANOS','(55) 5255-1093 ext. 111',34,3),(4,'5554332255','alberto@hotmail.com','Alberto Mendoza','Director','23452345',34,4),(5,'5544332211','michel.magallanes@mail.com','Michel Magallanes','Gerente','33221122',34,NULL);
+INSERT INTO `contacto` VALUES (1,'5554359783','rrensoli@comunndad.unam.mx','Rene Rensoli Samayoa','Director General','55446756',34,1),(2,'la{ñdlkgañlg k','anibal@xlkslks.com.mx','anibal arguelles','dgerente general','flw{flks{dflkfg ',34,2),(3,'45045045045045','lmerchant@admmax.mx','LIC. LETICIA MERCHANT','GERENTE DE RECURSOS HUMANOS','(55) 5255-1093 ext. 111',34,3),(4,'ñ{fls{ñfñ','alberto@hotmail.com','Alberto Mendoza','Director','fdñlksñf  ',34,4);
 /*!40000 ALTER TABLE `contacto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -489,10 +487,10 @@ CREATE TABLE `cuestionario_proyecto` (
   PRIMARY KEY (`id_proyecto`,`id_tema`,`id_pregunta`),
   KEY `fk_cuest_proy_id_tema_idx` (`id_tema`),
   KEY `fk_cuest_proy_id_preg_idx` (`id_pregunta`),
-  CONSTRAINT `fk_cuest_proy_id_preg` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta_tema` (`id_pregunta`),
+  CONSTRAINT `fk_cuest_proy_id_preg` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id_pregunta`),
   CONSTRAINT `fk_cuest_proy_id_proy` FOREIGN KEY (`id_proyecto`) REFERENCES `proyecto` (`id_proyecto`),
-  CONSTRAINT `fk_cuest_proy_id_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema_cuestionario` (`id_tema`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  CONSTRAINT `fk_cuest_proy_id_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -521,9 +519,9 @@ CREATE TABLE `cuetionario_participante` (
   KEY `fk_cuest_part_id_tema_idx` (`id_tema`),
   KEY `fk_cuest_part_id_preg_idx` (`id_pregunta`),
   CONSTRAINT `fk_cuest_part_id_part` FOREIGN KEY (`id_participante`) REFERENCES `participante` (`id_participante`),
-  CONSTRAINT `fk_cuest_part_id_preg` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta_tema` (`id_pregunta`),
-  CONSTRAINT `fk_cuest_part_id_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema_cuestionario` (`id_tema`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  CONSTRAINT `fk_cuest_part_id_pregunta` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id_pregunta`),
+  CONSTRAINT `fk_cuest_part_id_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -559,7 +557,7 @@ CREATE TABLE `empresa` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_l7w1xs5k9lurn439riy4hushv` (`empresa`),
   UNIQUE KEY `UK_3r9hog1biuqoka7gqh15rebky` (`rfc`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -568,7 +566,7 @@ CREATE TABLE `empresa` (
 
 LOCK TABLES `empresa` WRITE;
 /*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
-INSERT INTO `empresa` VALUES (1,'Lamartine 289\nCol. Polanco','KKANA S.A. de C.V.',4,9,'RESR901003958',0,'','',0,0,'',0),(2,'Periferico sur 2020\ncol. Perisur\n44444','Ptito s,a. de c.v.',4,9,'RESR901003968',0,'','',0,0,'',0),(3,'TAINE 229 INT 203, COL. CHAPULTEPEC MORALES, DELEGACIÓN MIGUEL HIDALGO, CDMX','ADMMAX, S.A. DE C.V.',6,9,'ADM991220C81',0,'','',0,0,'',0),(4,'z{xcñlkzlck {lcñxkzc\nzxcklzlck \nzxlclcjzkcj \nxckkcjl ','Desarrollos inteligents s.a-',4,9,'RECR581026SM7',0,'','',0,0,'',0),(21,'update emp 289\nCol. Polanco','EmpresaIRH2 S.A. de C.V.',4,9,'RESR901003963',2015,'productoServicioEstrella','principalesProductosServicios',10,10,'tipoContratacionEmpleados',7509682.5),(22,'insert emp 289\nCol. Polanco','EmpresaIRH3 S.A. de C.V.',4,9,'RESR901003965',2015,'productoServicioEstrella','principalesProductosServicios',10,10,'tipoContratacionEmpleados',7509682.5),(29,'INSERTAR emp 289\nCol. Polanco','EmpresaIRH4 S.A. de C.V.',4,9,'RESR901003971',2015,'productoServicioEstrella','principalesProductosServicios',10,10,'tipoContratacionEmpleados',7509682.5),(30,'INSERTAR emp 289\nCol. Polanco','EmpresaIRH21 S.A. de C.V.',4,9,'RESR901003972',2015,'productoServicioEstrella','principalesProductosServicios',10,10,'tipoContratacionEmpleados',7509682.5),(31,'San Pablo Estado de México','Carvid',4,9,'NIC900618N19',0,NULL,NULL,0,0,NULL,0);
+INSERT INTO `empresa` VALUES (1,'Lamartine 289\nCol. Polanco','KKANA S.A. de C.V.',4,9,'RESR901003958',0,'','',0,0,'',0),(2,'Periferico sur 2020\ncol. Perisur\n44444','Ptito s,a. de c.v.',4,9,'RESR901003968',0,'','',0,0,'',0),(3,'TAINE 229 INT 203, COL. CHAPULTEPEC MORALES, DELEGACIÓN MIGUEL HIDALGO, CDMX','ADMMAX, S.A. DE C.V.',6,9,'ADM991220C81',0,'','',0,0,'',0),(4,'z{xcñlkzlck {lcñxkzc\nzxcklzlck \nzxlclcjzkcj \nxckkcjl ','Desarrollos inteligents s.a-',4,9,'RECR581026SM7',0,'','',0,0,'',0),(21,'update emp 289\nCol. Polanco','EmpresaIRH2 S.A. de C.V.',4,9,'RESR901003963',2015,'productoServicioEstrella','principalesProductosServicios',10,10,'tipoContratacionEmpleados',7509682.5),(22,'insert emp 289\nCol. Polanco','EmpresaIRH3 S.A. de C.V.',4,9,'RESR901003965',2015,'productoServicioEstrella','principalesProductosServicios',10,10,'tipoContratacionEmpleados',7509682.5),(29,'INSERTAR emp 289\nCol. Polanco','EmpresaIRH4 S.A. de C.V.',4,9,'RESR901003971',2015,'productoServicioEstrella','principalesProductosServicios',10,10,'tipoContratacionEmpleados',7509682.5),(30,'INSERTAR emp 289\nCol. Polanco','EmpresaIRH21 S.A. de C.V.',4,9,'RESR901003972',2015,'productoServicioEstrella','principalesProductosServicios',10,10,'tipoContratacionEmpleados',7509682.5);
 /*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -773,7 +771,7 @@ CREATE TABLE `modulo` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(180) DEFAULT NULL,
   PRIMARY KEY (`id_modulo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -817,7 +815,7 @@ CREATE TABLE `participante` (
   PRIMARY KEY (`id_participante`),
   KEY `FK_PART_EMPR_idx` (`id_empresa`),
   CONSTRAINT `FK_PART_EMPR` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -826,6 +824,7 @@ CREATE TABLE `participante` (
 
 LOCK TABLES `participante` WRITE;
 /*!40000 ALTER TABLE `participante` DISABLE KEYS */;
+INSERT INTO `participante` VALUES (62,31,1,'Gerente','Juan Carlos',NULL,NULL,'Masculino','JULC781125HEM','Gerente General','0016-10-16',1.970000,'Licenciatura',NULL,'Ingés','Comprensión','rrensoli@hotmail.com','Oficina Central','Corporativo','meh521187cluj'),(63,31,2,'Supervisor','Miriam',NULL,NULL,'Femenino','CAHM741225MDF','Supervisor Producción','0018-03-20',0.550000,'Profesional Técnico',NULL,'Inglés','Lectura','rrensoli58@gmaail.com','Planta','Producción','fdm522147mhac'),(64,31,2,'Supervisor','Karen',NULL,NULL,'Femenino','PERK881004MDF','SupervisorVentas','0017-10-06',1.000000,'Licenciatura',NULL,'Inglés','Lectura','gabriela_vmx@yahoo.com.mx','Planta','Ventas','fdm400188krep'),(65,31,2,'Supervisor','Luis Eduardo',NULL,NULL,'Masculino','COFL870711MDF','Administración','0014-08-08',4.160000,'Licenciatura',NULL,'Inglés','Principiante','juanc.palomarez@outlook.com','Oficina Central','Administración','fdm117078lfoc'),(66,31,2,'Supervisor','Alfredo',NULL,NULL,'Masculino','HEPA751204HEM','Supervisor de Calidad','0012-08-08',6.160000,'Licenciatura',NULL,'Inglés','Comprensión','eistenroman@gmail.com','Planta','Control de Calidad','meh402157apeh'),(67,31,3,'Intendente','Marco',NULL,NULL,'Masculino','ALTM600320HDF','Intendente de Producción','0013-07-24',5.210000,'Técnico','Mantenimiento preventivo y correctivo','Inglés','Principiante','rubenbrab@gmail.com','Planta','Produccón','fdh023006mtla'),(68,31,3,'Intendente','Mario',NULL,NULL,'Masculino','LODM731228HDF','Intendente de Calidad','0012-06-19',6.300000,'Licenciatura',NULL,'Inglés','Principiante','rene.rensoli@sisim.com.mx','Planta','Control de Calidad','fdh822137mdol'),(69,31,3,'Intendente','Susana',NULL,NULL,'Femenino','RODS630221MDF','Jefe de Recursos Humanos','0013-11-01',4.930000,'Licenciatura',NULL,'N/A',NULL,'angeles@nirho.com','Planta','Administración','fdm122036sdor'),(70,31,4,'Operativo','Adriana',NULL,NULL,'Femenino','PEHA900310HEM','Producción turno 1','0016-10-16',1.970000,'Bachillerarto',NULL,'Inglés','Técnico','kabaiss@live.com.mx','Planta','Producción','meh013009ahep'),(71,31,4,'Operativo','Juan ',NULL,NULL,'Masculino','SARRJ751003195','Producción turno 2','0005-10-15',12.980000,'Técnico',NULL,'Inglés','Técnico','aanibal_arguelles_90@hotmail.com','Planta','Producción','591300157jrras'),(72,31,4,'Operativo','Alberto',NULL,NULL,'Masculino','JURA880304HDF','Encargado de Empaques','0016-04-19',2.470000,'Técnico',NULL,'N/A',NULL,'drako_cesar@hotmail.com','Planta','Produccón','fdh403088aruj'),(73,31,4,'Operativo','Araceli',NULL,NULL,'Femenino','HEDA9003MNDF','Calidad Turno 1','0015-06-24',3.290000,'Licenciatura',NULL,'N/A',NULL,'rrensoli@comuidad.unam.mx','Planta','Control de Calidad','fdnm3009adeh'),(74,31,4,'Operativo','Emmanuel',NULL,NULL,'Masculino','LOCE781009HDF','Calidad Turno 2','0009-03-07',9.590000,'Técnico',NULL,'N/A',NULL,'rrensoli@hotmail.com','Planta','Control de Calidad','fdh900187ecol'),(75,31,4,'Operativo','Luis ',NULL,NULL,'Masculino','CAEL800623HDF','Auxiliar administrativo','0013-12-21',4.790000,'Licenciatura',NULL,'Inglés','Principiante','eistenroman@gmail.com','Oficina Central','Administración','fdh326008leac');
 /*!40000 ALTER TABLE `participante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -843,8 +842,8 @@ CREATE TABLE `plantilla_cuestionario` (
   KEY `fk_plantilla_tema_idx` (`id_tema`),
   KEY `fk_plantilla_proyecto_idx` (`id_modulo`),
   CONSTRAINT `fk_plantilla_proyecto` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id_modulo`),
-  CONSTRAINT `fk_plantilla_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema_cuestionario` (`id_tema`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  CONSTRAINT `fk_plantilla_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -855,6 +854,34 @@ LOCK TABLES `plantilla_cuestionario` WRITE;
 /*!40000 ALTER TABLE `plantilla_cuestionario` DISABLE KEYS */;
 INSERT INTO `plantilla_cuestionario` VALUES (1,101),(1,102),(1,103),(1,104),(1,105),(1,106),(1,107),(1,108),(1,109),(1,110),(1,111),(1,112);
 /*!40000 ALTER TABLE `plantilla_cuestionario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pregunta`
+--
+
+DROP TABLE IF EXISTS `pregunta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `pregunta` (
+  `id_pregunta` int(11) NOT NULL,
+  `id_tema` int(11) NOT NULL,
+  `enunciado` varchar(200) NOT NULL,
+  `tipo` int(11) NOT NULL,
+  PRIMARY KEY (`id_pregunta`),
+  KEY `fk_pregunta_tema_idx` (`id_tema`),
+  CONSTRAINT `fk_pregunta_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pregunta`
+--
+
+LOCK TABLES `pregunta` WRITE;
+/*!40000 ALTER TABLE `pregunta` DISABLE KEYS */;
+INSERT INTO `pregunta` VALUES (501,101,'Esta compania es la mejor empresa de sistemas del pais',1),(502,101,'Me siento orgulloso de trabajar en esta compania',1),(503,101,'Nuestros servicios tienen mucho prestigio entre los clientes',1),(504,101,'Esta es una empresa solida',1),(505,101,'Esta es una empresa con futuro',1),(506,101,'Mucha gente desearia tener un trabajo como el que tengo en esta compania',1),(507,101,'A nuestros clientes les interesa adquirir mas de nuestros servicios',1),(508,101,'Entiendo claramente los servicios que brinda la compania a nuestros clientes',1),(509,101,'En esta empresa tengo un trabajo seguro',1),(601,102,'Tu espacio de trabajo se mantienen limpio la mayor parte del tiempo',1),(602,102,'Estoy satisfecho con las condiciones higienicas de los banos ',1),(603,102,'Mi oficina o lugar de trabajo tiene las condiciones adecuadas para trabajar',1),(604,102,'Hay buena vigilancia y seguridad en las instalaciones donde trabajo',1),(605,102,'En mi  trabajo cotidiano utilizo la tecnologia adecuada',1),(606,102,'Cuento con los materiales y el equipo necesario para realizar bien mi trabajo',1),(607,102,'Hay un buen programa de mantenimiento para los equipos de la empresa',1),(608,102,'En caso de una catastrofe se como debo de actuar',1),(701,103,'Puedo hablar con mi jefe directo cuando lo necesito',1),(702,103,'Mi  jefe inmediato es un buen lider de grupo',1),(703,103,'A mi  jefe inmediato le importo como persona',1),(704,103,'En el trabajo tengo a uno de mis mejores amigos',1),(705,103,'Confio plenamente en mi  jefe inmediato',1),(706,103,'Mi jefe inmediato es justo con nosotros',1),(707,103,'En esta empresa los jefes siempre escuchan a los empleados',1),(708,103,'Cuando mi jefe me promete algo lo cumple',1),(709,103,'Confío plenamente en mis companeros de trabajo',1),(801,104,'Entiendo claramente que se espera de mi en el trabajo',1),(802,104,'Mis obligaciones y responsabilidades en el trabajo estan bien definidas',1),(803,104,'Los pizarrones nos proporcionan información util',1),(804,104,'En esta compania los empleados informan a su jefe las cosas',1),(805,104,'importantes que ocurren en su trabajo',1),(806,104,'Los empleados sabemos quienes son los directivos de la empresa',1),(807,104,'Las juntas de trabajo son un excelente medio para informarnos de los aspectos relevantes para nuestro trabajo',1),(808,104,'Hay buena comunicacion entre la compania y sus empleados',1),(809,104,'En esta compania mis opiniones se toman en cuenta',1),(810,104,'Recibo oportunamente la informacion adecuada para hacer mi trabajo',1),(901,105,'Me gusta venir a trabajar cada dia',1),(902,105,'La mision de la empresa me ayuda a comprender que mi trabajo es importante',1),(903,105,'Entiendo la forma en que en mi trabajo contribuye a cumplir los objetivos de la compania',1),(904,105,'Crear un buen ambiente de trabajo es parte de la mision de la empresa',1),(905,105,'Las metas y objetivos de mi area de trabajo estan claramente definidas',1),(906,105,'Los empleados conocen los valores de la compania',1),(907,105,'Los empleados comprenden la misión de la compania',1),(1001,106,'La ultima vez que un companero me pido apoyo, se lo otorgue',1),(1002,106,'En la ultima semana le he dado apoyo a algun companero',1),(1003,106,'Mi jefe inmediato impulsa el trabajo en equipo dentro del area',1),(1004,106,'La ultima vez que le pedi apoyo a un companero de trabajo, recibi la ayuda que necesita',1),(1005,106,'Mis companeros trabajan bien en equipo',1),(1006,106,'Hay un ambiente de cooperacion y ayuda mutua entre los empleados de mi area',1),(1007,106,'Los jefes y gerentes de la empresa están siempre dispuestos a trabajar como un solo equipo',1),(1008,106,'En la ultima semana he recibido el apoyo de alguna persona para realizar mi trabajo',1),(1101,107,'En este ultimo ano dentro del trabajo, he tenido oportunidad de aprender y desarrollarme',1),(1102,107,'Mi  jefe inmediato impulsa mi desarrollo',1),(1103,107,'En la compania hay alguna persona que alienta mi desarrollo',1),(1104,107,'Estoy satisfecho con la capacitacion que recibo para realizar mi trabajo actual',1),(1105,107,'Las personas que ingresan a la compania reciben la capacitacion necesaria para su integracion a la empresa',1),(1106,107,'Esta empresa me da la posibilidad de hacer carrera',1),(1107,107,'La capacitacion que recibi en el ultimo ano me ha ayudado a ser mas productivo en el trabajo',1),(1108,107,'Los ascensos en esta compania se basan en el desempeno',1),(1109,107,'En los ultimos seis meses alguien de mi trabajo ha hablado conmigo sobre',1),(1201,108,'La empresa reconoce y da incentivos al buen desempeno de sus colaboradores',1),(1202,108,'Mi salario en esta compania es igual o mejor que el que podria ganar en otro trabajo similar',1),(1203,108,'En esta empresa recibo un pago justo a cambio de lo que doy en mi trabajo',1),(1204,108,'Estoy satisfecho con el salario que recibo por mi trabajo',1),(1205,108,'Estoy satisfecho con las prestaciones que recibo en esta empresa',1),(1206,108,'Mi salario es justo comparado con el de otras personas en la empresa',1),(1207,108,'Estoy satisfecho con el reconocimiento que recibo por hacer un buen trabajo',1),(1208,108,'En la ultima semana he felicitado a alguien por hacer bien su trabajo',1),(1209,108,'Mi jefe me da reconocimiento cuando hago un buen trabajo',1),(1210,108,'En la ultima semana he recibido algun reconocimiento o felicitacion por mi buen trabajo o desempeno',1),(1301,109,'Siempre que necesito ayuda para atender a un cliente interno y/o externo se a quien recurrir',1),(1302,109,'En la empresa entendemos las necesidades de nuestros clientes',1),(1303,109,'En esta compania hacemos lo que sea necesario para satisfacer los requerimientos de nuestros clientes',1),(1304,109,'Mis companeros de trabajo se caracterizan por su rapida respuesta a  los requerimientos que atienden',1),(1305,109,'El personal de las oficinas brinda apoyo y facilidades.',1),(1306,109,'La empresa siempre cumple lo que ofrece',1),(1307,109,'La empresa mantiene una relacion cercana y amable con los clientes',1),(1308,109,'La empresa visita a cada cliente con la frecuencia debida',1),(1309,109,'La empresa siempre cumple lo que ofrece a sus clientes',1),(1401,110,'Las politicas y procedimientos de la empresa son claros y consistentes',1),(1402,110,'Los planes y metas de crecimiento de la empresa son realistas',1),(1403,110,'Nuestra compania es una empresa bien organizada',1),(1404,110,'Las cargas de trabajo en mi area se distribuyen de manera justa',1),(1405,110,'En esta empresa todo se planea con anticipacion',1),(1406,110,'Nunca trabajo mas horas de lo necesario por culpa de otros',1),(1407,110,'En esta compania no se pierde tiempo esperando para hacer tramites',1),(1408,110,'Me gusta mucho el trabajo que hago en esta empresa',1),(1409,110,'Mi area de trabajo es considerada parte importante de esta empresa',1),(1501,111,'En mi trabajo tengo oportunidad de dedicarme a lo que se hacer mejor',1),(1502,111,'La compania reconoce la importancia del trabajo que yo desempeno',1),(1503,111,'Estoy satisfecho con la participacion que tengo en las decisiones que influyen en mi trabajo',1),(1504,111,'Tengo libertad para tomar decisiones en mi trabajo',1),(1505,111,'Estoy contento con mi horario de trabajo',1),(1506,111,'El personal de mi area de trabajo es altamente apreciado dentro de la empresa',1),(1507,111,'El trabajo que realizo casi nunca me aburre o me cansa',1),(1508,111,'El trabajo en la compania me permite dedicar tiempo suficiente a mi familia y  mis  intereses personales',1),(1601,112,'En esta empresa, todos estamos comprometidos en mejorar la calidad de nuestro trabajo',1),(1602,112,'Mis companeros de trabajo estan comprometidos en ser productivos',1),(1603,112,'Mis companeros de trabajo estan comprometidos a realizar su trabajo con calidad',1),(1604,112,'La empresa hace esfuerzos constantes para continuar mejorando la calidad de nuestros servicios',1),(1605,112,'Nuestras politicas y sistemas de trabajo nos ayudan a dar un servicio de calidad',1),(1606,112,'La compania invierte tiempo y esfuerzo en prevenir problemas',1);
+/*!40000 ALTER TABLE `pregunta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -870,7 +897,9 @@ CREATE TABLE `pregunta_cuestionario_empresa` (
   `id_pregunta` int(11) NOT NULL,
   PRIMARY KEY (`id_pregunta_cuestionario_empresa`),
   KEY `FK_PREGUNTA_CUESTIONARIO_EMPRESA` (`id_cuestionario_empresa`),
-  CONSTRAINT `FK_PREGUNTA_CUESTIONARIO_EMPRESA` FOREIGN KEY (`id_cuestionario_empresa`) REFERENCES `cuestionario_empresa` (`id_cuestionario_empresa`)
+  KEY `FK_PREGUNTA_PREGUNTA_TEMA` (`id_pregunta`),
+  CONSTRAINT `FK_PREGUNTA_CUESTIONARIO_EMPRESA` FOREIGN KEY (`id_cuestionario_empresa`) REFERENCES `cuestionario_empresa` (`id_cuestionario_empresa`),
+  CONSTRAINT `FK_PREGUNTA_PREGUNTA_TEMA` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta_tema` (`id_pregunta`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -892,7 +921,7 @@ DROP TABLE IF EXISTS `pregunta_tema`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `pregunta_tema` (
-  `id_pregunta` int(11) NOT NULL,
+  `id_pregunta` int(11) NOT NULL AUTO_INCREMENT,
   `id_tema` int(11) NOT NULL,
   `enunciado` varchar(180) NOT NULL,
   `tipo` int(1) NOT NULL,
@@ -901,7 +930,7 @@ CREATE TABLE `pregunta_tema` (
   PRIMARY KEY (`id_pregunta`),
   KEY `FK_TEMA_PREGUNTA` (`id_tema`),
   CONSTRAINT `FK_TEMA_PREGUNTA` FOREIGN KEY (`id_tema`) REFERENCES `tema_cuestionario` (`id_tema`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -910,7 +939,7 @@ CREATE TABLE `pregunta_tema` (
 
 LOCK TABLES `pregunta_tema` WRITE;
 /*!40000 ALTER TABLE `pregunta_tema` DISABLE KEYS */;
-INSERT INTO `pregunta_tema` VALUES (1,1,'¿Existe un diagrama en la organizacion?',1,1,'documento'),(2,1,'¿El organigrama esta actualizado y responde a la operacion real de la empresa',1,1,NULL),(3,2,'¿Se cuenta con un proceso documentado y estandarizado de RyS?',1,1,NULL),(401,102,'Tu espacio de trabajo se mantienen limpio la mayor parte del tiempo',1,1,NULL),(402,102,'Estoy satisfecho con las condiciones higienicas de los banos ',1,1,NULL),(501,101,'Esta compania es la mejor empresa de sistemas del pais',1,1,NULL),(502,101,'Me siento orgulloso de trabajar en esta compania',1,1,NULL),(503,101,'Nuestros servicios tienen mucho prestigio entre los clientes',1,1,NULL),(504,101,'Esta es una empresa solida',1,1,NULL),(505,101,'Esta es una empresa con futuro',1,1,NULL),(506,101,'Mucha gente desearia tener un trabajo como el que tengo en esta compania',1,1,NULL),(507,101,'A nuestros clientes les interesa adquirir mas de nuestros servicios',1,1,NULL),(508,101,'Entiendo claramente los servicios que brinda la compania a nuestros clientes',1,1,NULL),(509,101,'En esta empresa tengo un trabajo seguro',1,1,NULL),(510,101,'Tradiciones en el trabajo',1,1,NULL),(603,102,'Mi oficina o lugar de trabajo tiene las condiciones adecuadas para trabajar',1,1,NULL),(604,102,'Hay buena vigilancia y seguridad en las instalaciones donde trabajo',1,1,NULL),(605,102,'En mi  trabajo cotidiano utilizo la tecnologia adecuada',1,1,NULL),(606,102,'Cuento con los materiales y el equipo necesario para realizar bien mi trabajo',1,1,NULL),(607,102,'Hay un buen programa de mantenimiento para los equipos de la empresa',1,1,NULL),(608,102,'En caso de una catastrofe se como debo de actuar',1,1,NULL),(701,103,'Puedo hablar con mi jefe directo cuando lo necesito',1,1,NULL),(702,103,'Mi  jefe inmediato es un buen lider de grupo',1,1,NULL),(703,103,'A mi  jefe inmediato le importo como persona',1,1,NULL),(704,103,'En el trabajo tengo a uno de mis mejores amigos',1,1,NULL),(705,103,'Confio plenamente en mi  jefe inmediato',1,1,NULL),(706,103,'Mi jefe inmediato es justo con nosotros',1,1,NULL),(707,103,'En esta empresa los jefes siempre escuchan a los empleados',1,1,NULL),(708,103,'Cuando mi jefe me promete algo lo cumple',1,1,NULL),(709,103,'Confío plenamente en mis companeros de trabajo',1,1,NULL),(801,104,'Entiendo claramente que se espera de mi en el trabajo',1,1,NULL),(802,104,'Mis obligaciones y responsabilidades en el trabajo estan bien definidas',1,1,NULL),(803,104,'Los pizarrones nos proporcionan información util',1,1,NULL),(804,104,'En esta compania los empleados informan a su jefe las cosas',1,1,NULL),(805,104,'importantes que ocurren en su trabajo',1,1,NULL),(806,104,'Los empleados sabemos quienes son los directivos de la empresa',1,1,NULL),(807,104,'Las juntas de trabajo son un excelente medio para informarnos de los aspectos relevantes para nuestro trabajo',1,1,NULL),(808,104,'Hay buena comunicacion entre la compania y sus empleados',1,1,NULL),(809,104,'En esta compania mis opiniones se toman en cuenta',1,1,NULL),(810,104,'Recibo oportunamente la informacion adecuada para hacer mi trabajo',1,1,NULL),(901,105,'Me gusta venir a trabajar cada dia',1,1,NULL),(902,105,'La mision de la empresa me ayuda a comprender que mi trabajo es importante',1,1,NULL),(903,105,'Entiendo la forma en que en mi trabajo contribuye a cumplir los objetivos de la compania',1,1,NULL),(904,105,'Crear un buen ambiente de trabajo es parte de la mision de la empresa',1,1,NULL),(905,105,'Las metas y objetivos de mi area de trabajo estan claramente definidas',1,1,NULL),(906,105,'Los empleados conocen los valores de la compania',1,1,NULL),(907,105,'Los empleados comprenden la misión de la compania',1,1,NULL),(1001,106,'La ultima vez que un companero me pido apoyo, se lo otorgue',1,1,NULL),(1002,106,'En la ultima semana le he dado apoyo a algun companero',1,1,NULL),(1003,106,'Mi jefe inmediato impulsa el trabajo en equipo dentro del area',1,1,NULL),(1004,106,'La ultima vez que le pedi apoyo a un companero de trabajo, recibi la ayuda que necesita',1,1,NULL),(1005,106,'Mis companeros trabajan bien en equipo',1,1,NULL),(1006,106,'Hay un ambiente de cooperacion y ayuda mutua entre los empleados de mi area',1,1,NULL),(1007,106,'Los jefes y gerentes de la empresa están siempre dispuestos a trabajar como un solo equipo',1,1,NULL),(1008,106,'En la ultima semana he recibido el apoyo de alguna persona para realizar mi trabajo',1,1,NULL),(1101,107,'En este ultimo ano dentro del trabajo, he tenido oportunidad de aprender y desarrollarme',1,1,NULL),(1102,107,'Mi  jefe inmediato impulsa mi desarrollo',1,1,NULL),(1103,107,'En la compania hay alguna persona que alienta mi desarrollo',1,1,NULL),(1104,107,'Estoy satisfecho con la capacitacion que recibo para realizar mi trabajo actual',1,1,NULL),(1105,107,'Las personas que ingresan a la compania reciben la capacitacion necesaria para su integracion a la empresa',1,1,NULL),(1106,107,'Esta empresa me da la posibilidad de hacer carrera',1,1,NULL),(1107,107,'La capacitacion que recibi en el ultimo ano me ha ayudado a ser mas productivo en el trabajo',1,1,NULL),(1108,107,'Los ascensos en esta compania se basan en el desempeno',1,1,NULL),(1109,107,'En los ultimos seis meses alguien de mi trabajo ha hablado conmigo sobre',1,1,NULL),(1201,108,'La empresa reconoce y da incentivos al buen desempeno de sus colaboradores',1,1,NULL),(1202,108,'Mi salario en esta compania es igual o mejor que el que podria ganar en otro trabajo similar',1,1,NULL),(1203,108,'En esta empresa recibo un pago justo a cambio de lo que doy en mi trabajo',1,1,NULL),(1204,108,'Estoy satisfecho con el salario que recibo por mi trabajo',1,1,NULL),(1205,108,'Estoy satisfecho con las prestaciones que recibo en esta empresa',1,1,NULL),(1206,108,'Mi salario es justo comparado con el de otras personas en la empresa',1,1,NULL),(1207,108,'Estoy satisfecho con el reconocimiento que recibo por hacer un buen trabajo',1,1,NULL),(1208,108,'En la ultima semana he felicitado a alguien por hacer bien su trabajo',1,1,NULL),(1209,108,'Mi jefe me da reconocimiento cuando hago un buen trabajo',1,1,NULL),(1210,108,'En la ultima semana he recibido algun reconocimiento o felicitacion por mi buen trabajo o desempeno',1,1,NULL),(1301,109,'Siempre que necesito ayuda para atender a un cliente interno y/o externo se a quien recurrir',1,1,NULL),(1302,109,'En la empresa entendemos las necesidades de nuestros clientes',1,1,NULL),(1303,109,'En esta compania hacemos lo que sea necesario para satisfacer los requerimientos de nuestros clientes',1,1,NULL),(1304,109,'Mis companeros de trabajo se caracterizan por su rapida respuesta a  los requerimientos que atienden',1,1,NULL),(1305,109,'El personal de las oficinas brinda apoyo y facilidades.',1,1,NULL),(1306,109,'La empresa siempre cumple lo que ofrece',1,1,NULL),(1307,109,'La empresa mantiene una relacion cercana y amable con los clientes',1,1,NULL),(1308,109,'La empresa visita a cada cliente con la frecuencia debida',1,1,NULL),(1309,109,'La empresa siempre cumple lo que ofrece a sus clientes',1,1,NULL),(1401,110,'Las politicas y procedimientos de la empresa son claros y consistentes',1,1,NULL),(1402,110,'Los planes y metas de crecimiento de la empresa son realistas',1,1,NULL),(1403,110,'Nuestra compania es una empresa bien organizada',1,1,NULL),(1404,110,'Las cargas de trabajo en mi area se distribuyen de manera justa',1,1,NULL),(1405,110,'En esta empresa todo se planea con anticipacion',1,1,NULL),(1406,110,'Nunca trabajo mas horas de lo necesario por culpa de otros',1,1,NULL),(1407,110,'En esta compania no se pierde tiempo esperando para hacer tramites',1,1,NULL),(1408,110,'Me gusta mucho el trabajo que hago en esta empresa',1,1,NULL),(1409,110,'Mi area de trabajo es considerada parte importante de esta empresa',1,1,NULL),(1501,111,'En mi trabajo tengo oportunidad de dedicarme a lo que se hacer mejor',1,1,NULL),(1502,111,'La compania reconoce la importancia del trabajo que yo desempeno',1,1,NULL),(1503,111,'Estoy satisfecho con la participacion que tengo en las decisiones que influyen en mi trabajo',1,1,NULL),(1504,111,'Tengo libertad para tomar decisiones en mi trabajo',1,1,NULL),(1505,111,'Estoy contento con mi horario de trabajo',1,1,NULL),(1506,111,'El personal de mi area de trabajo es altamente apreciado dentro de la empresa',1,1,NULL),(1507,111,'El trabajo que realizo casi nunca me aburre o me cansa',1,1,NULL),(1508,111,'El trabajo en la compania me permite dedicar tiempo suficiente a mi familia y  mis  intereses personales',1,1,NULL),(1601,112,'En esta empresa, todos estamos comprometidos en mejorar la calidad de nuestro trabajo',1,1,NULL),(1602,112,'Mis companeros de trabajo estan comprometidos en ser productivos',1,1,NULL),(1603,112,'Mis companeros de trabajo estan comprometidos a realizar su trabajo con calidad',1,1,NULL),(1604,112,'La empresa hace esfuerzos constantes para continuar mejorando la calidad de nuestros servicios',1,1,NULL),(1605,112,'Nuestras politicas y sistemas de trabajo nos ayudan a dar un servicio de calidad',1,1,NULL),(1606,112,'La compania invierte tiempo y esfuerzo en prevenir problemas',1,1,NULL);
+INSERT INTO `pregunta_tema` VALUES (1,1,'¿Existe un diagrama en la organizacion?',1,1,'documento'),(2,1,'¿El organigrama esta actualizado y responde a la operacion real de la empresa',1,1,NULL),(3,2,'¿Se cuenta con un proceso documentado y estandarizado de RyS?',1,1,NULL);
 /*!40000 ALTER TABLE `pregunta_tema` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -922,7 +951,7 @@ DROP TABLE IF EXISTS `pregunta_tema_historico`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `pregunta_tema_historico` (
-  `id_pregunta` int(11) NOT NULL,
+  `id_pregunta` int(11) NOT NULL AUTO_INCREMENT,
   `id_tema` int(11) NOT NULL,
   `enunciado` varchar(180) NOT NULL,
   `tipo` int(1) NOT NULL,
@@ -931,7 +960,8 @@ CREATE TABLE `pregunta_tema_historico` (
   `ponderacion` varchar(10) NOT NULL,
   `accion` varchar(10) NOT NULL,
   PRIMARY KEY (`id_pregunta`),
-  KEY `FK_PREGUNTA_HIST` (`id_pregunta`)
+  KEY `FK_PREGUNTA_HIST` (`id_pregunta`),
+  CONSTRAINT `FK_PREGUNTA_HIST` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta_tema` (`id_pregunta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1084,7 +1114,7 @@ CREATE TABLE `rol_clb_submodulo` (
   PRIMARY KEY (`rol`,`id_submodulo`),
   KEY `fk_submodulo_idx` (`id_submodulo`),
   CONSTRAINT `fk_submodulo` FOREIGN KEY (`id_submodulo`) REFERENCES `clb_submodulo` (`id_submodulo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1095,6 +1125,31 @@ LOCK TABLES `rol_clb_submodulo` WRITE;
 /*!40000 ALTER TABLE `rol_clb_submodulo` DISABLE KEYS */;
 INSERT INTO `rol_clb_submodulo` VALUES (1,1),(2,1),(3,1),(1,2),(2,2),(2,3),(2,4),(3,5),(3,6),(3,7),(3,8),(3,9);
 /*!40000 ALTER TABLE `rol_clb_submodulo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tema`
+--
+
+DROP TABLE IF EXISTS `tema`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `tema` (
+  `id_tema` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `descripcion` varchar(190) DEFAULT NULL,
+  PRIMARY KEY (`id_tema`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tema`
+--
+
+LOCK TABLES `tema` WRITE;
+/*!40000 ALTER TABLE `tema` DISABLE KEYS */;
+INSERT INTO `tema` VALUES (101,'Imagen','Tema 01 de Clima Laboral'),(102,'Espacio de trabajo','Tema 02 de Clima Laboral'),(103,'Relaciones','Tema 03 de Clima Laboral'),(104,'Comunicación','Tema 04 de Clima Laboral'),(105,'Misión','Tema 05 de Clima Laboral'),(106,'Trabajo en equipo','Tema 06 de Clima Laboral'),(107,'Capacitación y desarrollo','Tema 07 de Clima Laboral'),(108,'Reconocimiento','Tema 08 de Clima Laboral'),(109,'Servicio al cliente','Tema 09 de Clima Laboral'),(110,'Organización','Tema 10 de Clima Laboral'),(111,'Condiciones de trabajo','Tema 11 de Clima Laboral'),(112,'Calidad','Tema 12 de Clima Laboral');
+/*!40000 ALTER TABLE `tema` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1109,7 +1164,7 @@ CREATE TABLE `tema_cuestionario` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(180) DEFAULT NULL,
   PRIMARY KEY (`id_tema`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1118,7 +1173,7 @@ CREATE TABLE `tema_cuestionario` (
 
 LOCK TABLES `tema_cuestionario` WRITE;
 /*!40000 ALTER TABLE `tema_cuestionario` DISABLE KEYS */;
-INSERT INTO `tema_cuestionario` VALUES (1,'Reclutamiento y Seleccion','Tema de Reclutamiento y Seleccion'),(2,'Administracion de recursos Humanos','Tema de Administracion de recursos Humanos'),(3,'Desarrollo organizacional','Tema de Desarrollo organizacional'),(5,'capacitacion',NULL),(6,'capacitacion1',NULL),(7,'capacitacion1',NULL),(8,'capacitacion1',NULL),(9,'capacitacion1',NULL),(10,'capacitacion1',NULL),(11,'capacitacion1',NULL),(101,'Imagen','Tema 01 de Clima Laboral'),(102,'Espacio de trabajo','Tema 02 de Clima Laboral'),(103,'Relaciones','Tema 03 de Clima Laboral'),(104,'Comunicacion','Tema 04 de Clima Laboral'),(105,'Mision','Tema 05 de Clima Laboral'),(106,'Trabajo en equipo','Tema 06 de Clima Laboral'),(107,'Capacitacion y desarrollo','Tema 07 de Clima Laboral'),(108,'Reconocimiento','Tema 08 de Clima Laboral'),(109,'Servicio al cliente','Tema 09 de Clima Laboral'),(110,'Organizacion','Tema 10 de Clima Laboral'),(111,'Condiciones de trabajo','Tema 11 de Clima Laboral'),(112,'Calidad','Tema 12 de Clima Laboral');
+INSERT INTO `tema_cuestionario` VALUES (1,'Reclutamiento y Seleccion','Tema de Reclutamiento y Seleccion'),(2,'Administracion de recursos Humanos','Tema de Administracion de recursos Humanos'),(3,'Desarrollo organizacional','Tema de Desarrollo organizacional'),(5,'capacitacion',NULL),(6,'capacitacion1',NULL),(7,'capacitacion1',NULL),(8,'capacitacion1',NULL),(9,'capacitacion1',NULL),(10,'capacitacion1',NULL),(11,'capacitacion1',NULL);
 /*!40000 ALTER TABLE `tema_cuestionario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1134,7 +1189,7 @@ CREATE TABLE `tipo_catalogo` (
   `estado` int(11) NOT NULL,
   `nombre_tipo_catalogo` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1175,7 +1230,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPxjRIYT8pG0zgzKTilbko-MOv8pSnmO63M9FkOvfHoR9FvInm','consultorventas@nirho.com','CONSULTOR VENTAS','123',1,'','consultorventas'),(2,'https://imgur.com/I80W1Q0.png','gerentenirho@nirho.com','GERENTE NIRHO','a16068c1b716a5dfd54b9e59b7bbc95f',2,'','gerentenirho'),(3,'https://raw.githubusercontent.com/fangpenlin/avataaars/HEAD/avataaars-example.png?raw=true','candidato@nirho.com','CANDIDATO','5f4dcc3b5aa765d61d8327deb882cf99',0,'','candidato'),(4,'/img/avatar1.png','consultornirho@nirho.com','CONSULTOR NIRHO','6ba3c78f6ef92b87020886f1476a017d',3,'','consultornirho'),(5,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','empresanirho@nirho.com','EMPRESA NIRHO','5f4dcc3b5aa765d61d8327deb882cf99',4,'','empresanirho'),(6,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','gael2808@hotmail.com','DANILO GARCIA REYES','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'GARD8908281E8'),(7,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','rrensoli@hotmail.com','rene ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'recr581026sm7'),(8,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','jonatan.gallegos@nirho.com','JONATAN GALLEGOS GUTIERREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'GAGA9402198H8'),(9,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','alejandro.barradas@nirho.com','ALEJANDRO BARRADAS PEREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'BAPA890207P96'),(10,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','ventasgdl@nirho.com','MARIA DE LOURDES VALDEZ RODRIGUEZ','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'VARL600331VA4');
+INSERT INTO `usuario` VALUES (1,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPxjRIYT8pG0zgzKTilbko-MOv8pSnmO63M9FkOvfHoR9FvInm','consultorventas@nirho.com','CONSULTOR VENTAS','17f82ee224bb3238db809ed4a7a006f0',1,'','consultorventas'),(2,'https://imgur.com/I80W1Q0.png','gerentenirho@nirho.com','GERENTE NIRHO','a16068c1b716a5dfd54b9e59b7bbc95f',2,'','gerentenirho'),(3,'https://raw.githubusercontent.com/fangpenlin/avataaars/HEAD/avataaars-example.png?raw=true','candidato@nirho.com','CANDIDATO','5f4dcc3b5aa765d61d8327deb882cf99',0,'','candidato'),(4,'/img/avatar1.png','consultornirho@nirho.com','CONSULTOR NIRHO','6ba3c78f6ef92b87020886f1476a017d',3,'','consultornirho'),(5,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','empresanirho@nirho.com','EMPRESA NIRHO','5f4dcc3b5aa765d61d8327deb882cf99',4,'','empresanirho'),(6,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','gael2808@hotmail.com','DANILO GARCIA REYES','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'GARD8908281E8'),(7,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','rrensoli@hotmail.com','rene ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'recr581026sm7'),(8,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','jonatan.gallegos@nirho.com','JONATAN GALLEGOS GUTIERREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'GAGA9402198H8'),(9,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','alejandro.barradas@nirho.com','ALEJANDRO BARRADAS PEREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'BAPA890207P96'),(10,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','ventasgdl@nirho.com','MARIA DE LOURDES VALDEZ RODRIGUEZ','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'VARL600331VA4');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1227,4 +1282,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-04 13:32:23
+-- Dump completed on 2018-11-08  6:06:23

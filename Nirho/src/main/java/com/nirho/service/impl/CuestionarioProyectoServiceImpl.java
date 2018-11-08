@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.nirho.dao.CuestionarioParticipanteDAO;
 import com.nirho.dao.CuestionarioProyectoDAO;
 import com.nirho.dao.ParticipanteDAO;
-import com.nirho.dao.PreguntaTemaDAO;
+import com.nirho.dao.PreguntaDAO;
 import com.nirho.dao.ProyectoDAO;
 import com.nirho.dto.CuestionarioConfiguracion;
 import com.nirho.dto.VerTemaQ;
@@ -22,7 +22,7 @@ import com.nirho.model.CuestionarioProyectoPK;
 import com.nirho.model.CuetionarioParticipante;
 import com.nirho.model.CuetionarioParticipantePK;
 import com.nirho.model.Participante;
-import com.nirho.model.PreguntaTema;
+import com.nirho.model.Pregunta;
 import com.nirho.service.CuestionarioProyectoService;
 import com.nirho.util.NirhoUtil;
 
@@ -41,14 +41,14 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	@Autowired
 	private CuestionarioParticipanteDAO cuestPartDAO;
 	@Autowired
-	private PreguntaTemaDAO preguntaDAO;
+	private PreguntaDAO preguntaDAO;
 	
 	@Override
 	public void guardar(CuestionarioConfiguracion cuestionario) throws NirhoServiceException {
 		logger.info("************* CuestionarioConfiguracion [" + cuestionario +"] *******************");
 		try {
-			for(PreguntaTema pregunta: cuestionario.getLista()) {
-				PreguntaTema pregTem = null;
+			for(Pregunta pregunta: cuestionario.getLista()) {
+				Pregunta pregTem = null;
 				pregTem = preguntaDAO.getOne(pregunta.getIdPregunta());
 				logger.info("************* pregTem [" + pregTem +"] *******************");
 				if(pregTem == null) {
@@ -82,15 +82,15 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 			List<CuestionarioProyecto> cuestionario = dao.findByIdProyecto(idProyecto);
 			Map<String, VerTemaQ> mapTemas = new HashedMap<>();
 			for(CuestionarioProyecto cp: cuestionario) {
-				if(mapTemas.get(cp.getTemaCuestionario().getNombre()) != null) {
-					mapTemas.get(cp.getTemaCuestionario().getNombre()).getPreguntas().add(cp.getPreguntaTema().getEnunciado());
+				if(mapTemas.get(cp.getTema().getNombre()) != null) {
+					mapTemas.get(cp.getTema().getNombre()).getPreguntas().add(cp.getPregunta().getEnunciado());
 				} else {
 					VerTemaQ vtq = new VerTemaQ();
-					vtq.setNombre(cp.getTemaCuestionario().getNombre());
+					vtq.setNombre(cp.getTema().getNombre());
 					List<String> preguntas = new ArrayList<>();
-					preguntas.add(cp.getPreguntaTema().getEnunciado());
+					preguntas.add(cp.getPregunta().getEnunciado());
 					vtq.setPreguntas(preguntas);
-					mapTemas.put(cp.getTemaCuestionario().getNombre(), vtq);
+					mapTemas.put(cp.getTema().getNombre(), vtq);
 				}
 			}
 			for (Map.Entry<String, VerTemaQ> entry : mapTemas.entrySet()) {

@@ -3,18 +3,24 @@ package com.nirho.model;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "pregunta_tema")
 public class PreguntaTema implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id_pregunta")
 	private Integer idPregunta;
@@ -29,10 +35,13 @@ public class PreguntaTema implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "de_plantilla")
 	private int dePlantilla;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE, fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_tema", referencedColumnName = "id_tema")
-	private TemaCuestionario idTema;
+	private TemaCuestionario tema;
 	
+	@Transient
+	private int idTema;
+
 	public PreguntaTema() {
 	}
 
@@ -87,16 +96,24 @@ public class PreguntaTema implements Serializable {
 	public void setDePlantilla(int dePlantilla) {
 		this.dePlantilla = dePlantilla;
 	}
+
+	public TemaCuestionario getTema() {
+		return tema;
+	}
+
+	public void setTema(TemaCuestionario tema) {
+		this.tema = tema;
+	}
 	
-	public TemaCuestionario getIdTema() {
+	public int getIdTema() {
 		return idTema;
 	}
 
-	public void setIdTema(TemaCuestionario idTema) {
+	public void setIdTema(int idTema) {
 		this.idTema = idTema;
 	}
 
 	public String toString(){
-		return "PreguntaTema [idPregunta=" + idPregunta + ", enunciado=" + enunciado + ", tipo=" + tipo + ", dePlantilla=" + dePlantilla + ", idTema=" + idTema + "]";
+		return "PreguntaTema [idPregunta=" + idPregunta + ", enunciado=" + enunciado + ", tipo=" + tipo + ", dePlantilla=" + dePlantilla + ", idTema=" + tema + "]";
 	}
 }
