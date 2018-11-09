@@ -3,12 +3,12 @@ package com.nirho.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import com.nirho.model.PreguntaTema;
+import com.nirho.model.Pregunta;
 
 public class CuestionarioConfiguracion  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer idProyecto;
-	private List<PreguntaTema> lista;
+	private List<Pregunta> lista;
 	
 	public Integer getIdProyecto() {
 		return idProyecto;
@@ -16,10 +16,10 @@ public class CuestionarioConfiguracion  implements Serializable {
 	public void setIdProyecto(Integer idProyecto) {
 		this.idProyecto = idProyecto;
 	}
-	public List<PreguntaTema> getLista() {
+	public List<Pregunta> getLista() {
 		return lista;
 	}
-	public void setLista(List<PreguntaTema> lista) {
+	public void setLista(List<Pregunta> lista) {
 		this.lista = lista;
 	}
 	

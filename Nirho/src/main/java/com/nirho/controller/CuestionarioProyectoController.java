@@ -19,8 +19,8 @@ import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.CuetionarioParticipante;
-import com.nirho.model.PreguntaTema;
-import com.nirho.model.TemaCuestionario;
+import com.nirho.model.Pregunta;
+import com.nirho.model.Tema;
 import com.nirho.service.CuestionarioProyectoService;
 import com.nirho.service.TemasModuloService;
 
@@ -46,8 +46,8 @@ public class CuestionarioProyectoController {
 	}
 	
 	@GetMapping(value = "/temas")
-	public List<TemaCuestionario> temas(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
-		List<TemaCuestionario> temas = new ArrayList<>();
+	public List<Tema> temas(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
+		List<Tema> temas = new ArrayList<>();
 		try {
 			temas = temasService.obtenerTemasCuestionario(idModulo);
 		} catch(NirhoServiceException e){
@@ -57,8 +57,8 @@ public class CuestionarioProyectoController {
 	}
 	
 	@GetMapping(value = "/preguntas")
-	public List<PreguntaTema> preguntas(@RequestParam(name="idTema") Integer idTema) throws NirhoControllerException{
-		List<PreguntaTema> preguntas = new ArrayList<>();
+	public List<Pregunta> preguntas(@RequestParam(name="idTema") Integer idTema) throws NirhoControllerException{
+		List<Pregunta> preguntas = new ArrayList<>();
 		try {
 			preguntas = temasService.obtenerPreguntasTema(idTema);
 		} catch(NirhoServiceException e){
