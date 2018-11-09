@@ -38,10 +38,6 @@
       </mat-form-field>
     </mat-grid-tile>
 
-    <mat-grid-tile>
-      <mat-checkbox>Título universitario</mat-checkbox>
-    </mat-grid-tile>
-
    <mat-grid-tile [colspan]="1" [rowspan]="1">
      <mat-form-field class="example-chip-list" appearance="outline">
        <mat-chip-list #chipList>
@@ -92,6 +88,10 @@
                  (matChipInputTokenEnd)="add($event)">
         </mat-chip-list>
       </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-checkbox>Título universitario</mat-checkbox>
     </mat-grid-tile>
 
 

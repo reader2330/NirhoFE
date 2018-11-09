@@ -47,7 +47,7 @@ export class ScholarshipAdmComponent implements OnInit {
     }
   }
 
-  contact = {
+  companyForm = {
     id: 0,
     celular: 1234,
     email: '',
@@ -60,7 +60,7 @@ export class ScholarshipAdmComponent implements OnInit {
   puestos = [];
   typeContact = [];
   mobile = false;
-  contactForm = new FormGroup(
+  companyForm = new FormGroup(
     {
       id: new FormControl(null),
       telefono: new FormControl('', [Validators.required, Validators.maxLength(10)]),
