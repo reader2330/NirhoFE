@@ -1,12 +1,19 @@
+<mat-card>
 <form [formGroup]="enterpriseForm">
-
   <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
-  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
-    <h3>{{mgsInit}}</h3>
+  <mat-card-header>
+
+      <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+        <h3>{{mgsInit}}</h3>
 
 
-  </mat-grid-tile>
-    <mat-card>
+      </mat-grid-tile>
+
+  </mat-card-header>
+    <mat-card-content>
+
+
+    <div formGroupName="empresa">
     <mat-grid-tile  [colspan]="1" [rowspan]="1">
 
       <mat-form-field class="inputForm" appearance="outline">
@@ -50,6 +57,65 @@
         <input formControlName="direccion" type="text" matInput required >
       </mat-form-field>
     </mat-grid-tile>
+
+      <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+        <mat-form-field class="inputForm" appearance="outline">
+          <mat-label>Año inicio operaciones</mat-label>
+          <input matInput formControlName="anioInicioOperaciones" type="text" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+        <mat-form-field class="inputForm" appearance="outline">
+          <mat-label>Facturación anual</mat-label>
+          <input matInput formControlName="facturacionAnual" type="text" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+        <mat-form-field class="inputForm" appearance="outline">
+          <mat-label>Producto/Servicio estrella</mat-label>
+          <input matInput formControlName="productoServicioEstrella" type="text" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+        <mat-form-field class="inputForm" appearance="outline">
+          <mat-label>Principales productos/Servicios</mat-label>
+          <input matInput formControlName="principalesProductosServicios" type="text" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+        <mat-form-field class="inputForm" appearance="outline">
+          <mat-label>Número de empleados a nivel administrativo</mat-label>
+          <input matInput formControlName="noEmpleadosAdministrativo" type="text" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+        <mat-form-field class="inputForm" appearance="outline">
+          <mat-label>Número de empleados a nivel operativo</mat-label>
+          <input matInput formControlName="noEmpleadosOperativo" type="text" required>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+        <mat-form-field class="inputForm" appearance="outline">
+          <mat-label>Tipo contratación empleados</mat-label>
+          <input matInput formControlName="tipoContratacionEmpleados" type="text" required>
+        </mat-form-field>
+      </mat-grid-tile>
+    </div>
+    <div formGroupName="entrevistado">
+
 
     <mat-grid-tile  [colspan]="1" [rowspan]="1">
 
@@ -95,7 +161,7 @@
 
       <mat-form-field class="inputForm" appearance="outline">
         <mat-label>Correo electrónico</mat-label>
-        <input matInput formControlName="correoElectornico" type="text" required>
+        <input matInput formControlName="correoElectronico" type="text" required>
       </mat-form-field>
     </mat-grid-tile>
 
@@ -114,77 +180,21 @@
         <input matInput formControlName="telefono_oficina_extension" type="text" required>
       </mat-form-field>
     </mat-grid-tile>
-
-    <mat-grid-tile  [colspan]="1" [rowspan]="1">
-
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Año inicio operaciones</mat-label>
-        <input matInput formControlName="anioInicioOperaciones" type="text" required>
-      </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile  [colspan]="1" [rowspan]="1">
-
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Facturación anual</mat-label>
-        <input matInput formControlName="facturacionAnual" type="text" required>
-      </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile  [colspan]="1" [rowspan]="1">
-
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Producto/Servicio estrella</mat-label>
-        <input matInput formControlName="productoServicioEstrella" type="text" required>
-      </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile  [colspan]="1" [rowspan]="1">
-
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Principales productos/Servicios</mat-label>
-        <input matInput formControlName="principalesProductosServicios" type="text" required>
-      </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile  [colspan]="1" [rowspan]="1">
-
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Número de empleados a nivel administrativo</mat-label>
-        <input matInput formControlName="noEmpleadosAdministrativo" type="text" required>
-      </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile  [colspan]="1" [rowspan]="1">
-
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Número de empleados a nivel operativo</mat-label>
-        <input matInput formControlName="noEmpleadosOperativo" type="text" required>
-      </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile  [colspan]="1" [rowspan]="1">
-
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Tipo contratación empleados</mat-label>
-        <input matInput formControlName="tipoContratacionEmpleados" type="text" required>
-      </mat-form-field>
-    </mat-grid-tile>
-    </mat-card>
+    </div>
 
 
 
-
-    <!--<mat-grid-tile *ngIf="!mobile">
+    <mat-grid-tile *ngIf="!mobile">
 
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
-      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveCompany()" [disabled]="!companyForm.valid" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
+      <button mat-raised-button (click)="cancelCompany()" >Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveCompany()" [disabled]="!enterpriseForm.valid">Guardar <mat-icon>save</mat-icon></button>
 
-    </mat-grid-tile>-->
-
+    </mat-grid-tile>
+    </mat-card-content>
   </mat-grid-list>
 
-</form>
 
+</form>
+</mat-card>
