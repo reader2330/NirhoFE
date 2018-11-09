@@ -3,7 +3,10 @@
   <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <h3>{{mgsInit}}</h3>
+
+
   </mat-grid-tile>
+    <mat-card>
     <mat-grid-tile  [colspan]="1" [rowspan]="1">
 
       <mat-form-field class="inputForm" appearance="outline">
@@ -167,6 +170,7 @@
         <input matInput formControlName="tipoContratacionEmpleados" type="text" required>
       </mat-form-field>
     </mat-grid-tile>
+    </mat-card>
 
 
 

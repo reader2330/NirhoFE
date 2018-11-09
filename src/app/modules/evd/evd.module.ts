@@ -11,7 +11,6 @@ import { BandejaEvdComponent } from './components/bandeja-evd/bandeja-evd.compon
 import { BandejaDetalleEvdComponent } from './components/bandeja-detalle-evd/bandeja-detalle-evd.component';
 import { HeadCountEvdComponent } from './components/head-count-evd/head-count-evd.component';
 import { OrganigramaEvdComponent } from './components/organigrama-evd/organigrama-evd.component';
-import {TableClienteEvdComponent} from './components/table-cliente-evd/table-cliente-evd.component';
 import { TableCliente2EvdComponent } from './components/table-cliente2-evd/table-cliente2-evd.component';
 import { TableClient2ModalEvdComponent } from './components/modals/table-client2-modal-evd/table-client2-modal-evd.component';
 
@@ -19,7 +18,6 @@ import { TableClient2ModalEvdComponent } from './components/modals/table-client2
   imports: [
     CommonModule,
     MaterialModule,
-    //ChartModule.forRoot(required('highcharts')),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -33,7 +31,7 @@ import { TableClient2ModalEvdComponent } from './components/modals/table-client2
     BandejaDetalleEvdComponent,
     HeadCountEvdComponent,
     OrganigramaEvdComponent,
-    TableClienteEvdComponent,
+
     TableCliente2EvdComponent,
     TableClient2ModalEvdComponent
   ],
