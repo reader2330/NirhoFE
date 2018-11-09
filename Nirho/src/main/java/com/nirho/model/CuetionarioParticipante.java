@@ -6,6 +6,7 @@
 package com.nirho.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -37,10 +38,10 @@ public class CuetionarioParticipante implements Serializable {
     private Participante participante;
     @JoinColumn(name = "id_pregunta", referencedColumnName = "id_pregunta", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private PreguntaTema preguntaTema;
+    private Pregunta pregunta;
     @JoinColumn(name = "id_tema", referencedColumnName = "id_tema", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private TemaCuestionario temaCuestionario;
+    private Tema tema;
 
     public CuetionarioParticipante() {
     }
@@ -85,45 +86,26 @@ public class CuetionarioParticipante implements Serializable {
         this.participante = participante;
     }
 
-    public PreguntaTema getPreguntaTema() {
-        return preguntaTema;
+    public Pregunta getPregunta() {
+        return pregunta;
     }
 
-    public void setPreguntaTema(PreguntaTema preguntaTema) {
-        this.preguntaTema = preguntaTema;
+    public void setPregunta(Pregunta pregunta) {
+        this.pregunta = pregunta;
     }
 
-    public TemaCuestionario getTemaCuestionario() {
-        return temaCuestionario;
+    public Tema getTema() {
+        return tema;
     }
 
-    public void setTemaCuestionario(TemaCuestionario temaCuestionario) {
-        this.temaCuestionario = temaCuestionario;
+    public void setTema(Tema tema) {
+        this.tema = tema;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (cuetionarioParticipantePK != null ? cuetionarioParticipantePK.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CuetionarioParticipante)) {
-            return false;
-        }
-        CuetionarioParticipante other = (CuetionarioParticipante) object;
-        if ((this.cuetionarioParticipantePK == null && other.cuetionarioParticipantePK != null) || (this.cuetionarioParticipantePK != null && !this.cuetionarioParticipantePK.equals(other.cuetionarioParticipantePK))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.nirho.model.CuetionarioParticipante[ cuetionarioParticipantePK=" + cuetionarioParticipantePK + " ]";
-    }
-    
+	@Override
+	public String toString() {
+		return "CuetionarioParticipante [cuetionarioParticipantePK=" + cuetionarioParticipantePK + ", respuesta="
+				+ respuesta + ", respuestaTexto=" + respuestaTexto + ", participante=" + participante + ", pregunta="
+				+ pregunta + ", tema=" + tema + "]";
+	}
 }

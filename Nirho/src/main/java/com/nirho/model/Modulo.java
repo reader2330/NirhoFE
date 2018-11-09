@@ -42,7 +42,7 @@ public class Modulo implements Serializable {
         @JoinColumn(name = "id_modulo", referencedColumnName = "id_modulo")}, inverseJoinColumns = {
         @JoinColumn(name = "id_tema", referencedColumnName = "id_tema")})
     @ManyToMany
-    private List<TemaCuestionario> temaCuestionarioList;
+    private List<Tema> temaList;
 
     public Modulo() {
     }
@@ -80,18 +80,18 @@ public class Modulo implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public List<TemaCuestionario> getTemaCuestionarioList() {
-        return temaCuestionarioList;
+    public List<Tema> getTemaList() {
+        return temaList;
     }
 
-    public void setTemaCuestionarioList(List<TemaCuestionario> temaCuestionarioList) {
-        this.temaCuestionarioList = temaCuestionarioList;
+    public void setTemaList(List<Tema> temaList) {
+        this.temaList = temaList;
     }
 
 	@Override
 	public String toString() {
-		return "Modulo [idModulo=" + idModulo + ", nombre=" + nombre + ", descripcion=" + descripcion
-				+ ", temaCuestionarioList=" + temaCuestionarioList + "]";
+		return "Modulo [idModulo=" + idModulo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", temaList="
+				+ temaList + "]";
 	}
-       
+        
 }
