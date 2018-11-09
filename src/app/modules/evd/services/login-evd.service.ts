@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.prod';
-import {HttpHeaders} from '../../../../../node_modules/@angular/common/http';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginEvdService {
 
   api = environment.urlApi;
   header = new HttpHeaders();
@@ -30,9 +28,6 @@ export class LoginService {
     return this._http.get(this.api + 'usuario/logout', {headers: this.header});
   }
   updateAvatar(ruta): Observable<any> {
-    return this._http.get(this.api + 'usuario/guardarAvatar', {headers: this.header, params: {'ruta': ruta}});
+    return this._http.get(this.api + '/usuario/guardarAvatar', {headers: this.header, params: {'ruta': ruta}});
   }
-
-
-
 }

@@ -11,13 +11,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {ChartModule} from 'angular2-highcharts';
 import {IrhModule} from './modules/irh/irh.module';
 import {CLBModule} from './modules/clb/clb.module';
+import {EvdModule} from './modules/evd/evd.module';
+import { TableClienteEvdComponent } from './modules/evd/components/table-cliente-evd/table-cliente-evd.component';
 
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import {CLBModule} from './modules/clb/clb.module';
     CLBModule,
     FormsModule,
     ReactiveFormsModule,
-    IrhModule
+    IrhModule,
+    EvdModule
   ],
   providers: [],
   bootstrap: [AppComponent]
