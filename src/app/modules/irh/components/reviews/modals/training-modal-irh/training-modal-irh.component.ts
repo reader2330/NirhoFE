@@ -7,7 +7,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./training-modal-irh.component.scss']
 })
 export class TrainingModalIrhComponent implements OnInit {
-
+  mobile = false;
   enterprise = {
     id: null,
     name: '',

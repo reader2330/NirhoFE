@@ -18,12 +18,13 @@ import { OrganizationalDevelopmentModalIrhComponent } from './components/reviews
 import { TrainingIrhComponent } from './components/reviews/training-irh/training-irh.component';
 import { TrainingModalIrhComponent } from './components/reviews/modals/training-modal-irh/training-modal-irh.component';
 import { EnterpriseDetailIrhComponent } from './components/enterprise-detail-irh/enterprise-detail-irh.component';
+import {CLBModule} from '../clb/clb.module';
+import {CuestionarioSelectIRHComponent} from './components/cuestionario-select-irh/cuestionario-select-irh.component';
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
-    //ChartModule.forRoot(required('highcharts')),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -43,7 +44,8 @@ import { EnterpriseDetailIrhComponent } from './components/enterprise-detail-irh
     OrganizationalDevelopmentModalIrhComponent,
     TrainingIrhComponent,
     TrainingModalIrhComponent,
-    EnterpriseDetailIrhComponent
+    EnterpriseDetailIrhComponent,
+    CuestionarioSelectIRHComponent
   ],
   entryComponents: [
     RecruitingModalIrhComponent,

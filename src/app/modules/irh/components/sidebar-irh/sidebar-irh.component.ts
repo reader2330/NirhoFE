@@ -3,6 +3,7 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Router} from '@angular/router';
 import {LoginService} from '../../../clb/services/login.service';
 
+
 @Component({
   selector: 'app-sidebar-irh',
   templateUrl: './sidebar-irh.component.html',
@@ -11,9 +12,11 @@ import {LoginService} from '../../../clb/services/login.service';
 export class SidebarIrhComponent implements OnInit {
 
   mobile = false;
-  selectModule = 1;
+  selectModule = 0;
   modules = [];
   user = {};
+
+
 
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));
@@ -29,10 +32,28 @@ export class SidebarIrhComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.modules.push({
+      id_submodulo: 1,
+      descripcion: 'Bandeja de empresas'
+    }, {
+      id_submodulo: 2,
+      descripcion: 'Alta de empresa'
+    }, {
+      id_submodulo: 3,
+      descripcion: 'Configurar cuestionario'
+    });
   }
 
   goModule(opt) {
+    if (opt == 2) {
+      sessionStorage.clear();
+    }
     this.selectModule = opt;
+  }
+  recibirRespuestChildren(evt) {
+    if (evt.value) {
+      this.selectModule = evt.value;
+    }
   }
 
 }

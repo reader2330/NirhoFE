@@ -7,7 +7,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./enterprise-irh.component.scss']
 })
 export class EnterpriseIrhComponent implements OnInit {
-
+  mobile = false;
   enterprise = {
     id: null,
     name: '',
