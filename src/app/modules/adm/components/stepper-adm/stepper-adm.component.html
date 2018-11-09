@@ -1,0 +1,58 @@
+<mat-horizontal-stepper labelPosition="bottom"  [hidden]="mobile" [linear]="false" #stepper>
+  <mat-step >
+    <ng-template  matStepLabel >
+      <p class="bold">Paso 1 </p><p>Datos Empleado</p>
+    </ng-template>
+    <app-employee-adm></app-employee-adm>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <p class="bold">Paso 2   </p> <p>Datos Contacto</p>
+    </ng-template>
+    <app-contact-adm></app-contact-adm>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <p class="bold">Paso 3  </p> <p>Datos Pago</p>
+    </ng-template>
+    <app-payment-adm></app-payment-adm>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <p class="bold">Paso 4  </p> <p>Escolaridad</p>
+    </ng-template>
+    <app-scholarship-adm></app-scholarship-adm>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <p class="bold">Paso 5  </p> <p>Idiomas</p>
+    </ng-template>
+    <app-languages-adm></app-languages-adm>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <p class="bold">Paso 6  </p> <p>Datos Laborales</p>
+    </ng-template>
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <p class="bold">Paso 7  </p> <p>Documentación</p>
+    </ng-template>
+
+  </mat-step>
+</mat-horizontal-stepper>
+<mat-vertical-stepper  [hidden]="!mobile" [linear]="false" #stepper2>
+  <mat-step >
+    <ng-template matStepLabel> Datos de la Empresa</ng-template>
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel> Datos Contacto</ng-template>
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Datos Proyecto</ng-template>
+
+  </mat-step>
+</mat-vertical-stepper>
