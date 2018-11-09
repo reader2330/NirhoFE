@@ -39,8 +39,63 @@
     </mat-grid-tile>
 
     <mat-grid-tile>
-      <mat-checkbox>Check me!</mat-checkbox>
+      <mat-checkbox>Título universitario</mat-checkbox>
     </mat-grid-tile>
+
+   <mat-grid-tile [colspan]="1" [rowspan]="1">
+     <mat-form-field class="example-chip-list" appearance="outline">
+       <mat-chip-list #chipList>
+         <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                   [removable]="removable" (removed)="remove(fruit)">
+           {{fruit.name}}
+           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+         </mat-chip>
+         <input placeholder="Certificaciones"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)">
+       </mat-chip-list>
+     </mat-form-field>
+   </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-chip-list" appearance="outline">
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(fruit)">
+            {{fruit.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Cursos"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-chip-list" appearance="outline">
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(fruit)">
+            {{fruit.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Oficios"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+
 
     <mat-grid-tile *ngIf="!mobile">
 

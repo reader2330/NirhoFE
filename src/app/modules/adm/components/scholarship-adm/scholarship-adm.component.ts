@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
+import {MatChipInputEvent} from '@angular/material';
+
+
+export interface Fruit {
+  name: string;
+}
 
 @Component({
   selector: 'app-scholarship-adm',
@@ -9,6 +15,37 @@ import {CatalogsService} from '../../../clb/services/catalogs.service';
   styleUrls: ['./scholarship-adm.component.scss']
 })
 export class ScholarshipAdmComponent implements OnInit {
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  //readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  fruits: Fruit[] = [
+  ];
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.fruits.push({name: value.trim()});
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(fruit: Fruit): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+    }
+  }
 
   contact = {
     id: 0,

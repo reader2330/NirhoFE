@@ -12,6 +12,7 @@ import {ChartModule} from 'angular2-highcharts';
 import {IrhModule} from './modules/irh/irh.module';
 import {CLBModule} from './modules/clb/clb.module';
 import {EvdModule} from './modules/evd/evd.module';
+import {AdmModule} from './modules/adm/adm.module';
 
 
 
@@ -32,7 +33,8 @@ import {EvdModule} from './modules/evd/evd.module';
     FormsModule,
     ReactiveFormsModule,
     IrhModule,
-    EvdModule
+    EvdModule,
+    AdmModule
   ],
   providers: [],
   bootstrap: [AppComponent]
