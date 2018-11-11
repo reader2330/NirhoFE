@@ -6,5 +6,5 @@ import com.nirho.model.CuetionarioParticipante;
 import com.nirho.model.CuetionarioParticipantePK;
 
 public interface CuestionarioParticipanteDAO extends BaseDAO<CuetionarioParticipante, CuetionarioParticipantePK> {
-	List<CuetionarioParticipante> findByIdParticipante(Integer idParticipante);
+	List<CuetionarioParticipante> findByParticipanteProyecto(Integer idParticipante, Integer idProyect);
 }

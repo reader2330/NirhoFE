@@ -55,6 +55,9 @@ public class Proyecto implements Serializable {
     private Integer diasGarantia;
     @Column(name = "frecuencia_eval")
     private Long frecuenciaEval;
+    @Basic(optional = false)
+    @Column(name = "id_modulo")
+    private Integer idModulo;
     @JoinColumn(name = "id_empresa", referencedColumnName = "id", nullable=false, updatable=true)
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Empresa idEmpresa;
@@ -64,6 +67,14 @@ public class Proyecto implements Serializable {
     
 	public Integer getIdProyecto() {
 		return idProyecto;
+	}
+	
+	public Integer getIdModulo() {
+		return idModulo;
+	}
+
+	public void setIdModulo(Integer idModulo) {
+		this.idModulo = idModulo;
 	}
 
 	public void setIdProyecto(Integer idProyecto) {

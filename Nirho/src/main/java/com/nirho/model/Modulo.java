@@ -7,7 +7,9 @@ package com.nirho.model;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -43,6 +46,8 @@ public class Modulo implements Serializable {
         @JoinColumn(name = "id_tema", referencedColumnName = "id_tema")})
     @ManyToMany
     private List<Tema> temaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idModulo")
+    private List<Proyecto> proyectoList;
 
     public Modulo() {
     }
@@ -88,6 +93,14 @@ public class Modulo implements Serializable {
         this.temaList = temaList;
     }
 
+    public List<Proyecto> getProyectoList() {
+        return proyectoList;
+    }
+
+    public void setProyectoList(List<Proyecto> proyectoList) {
+        this.proyectoList = proyectoList;
+    }
+    
 	@Override
 	public String toString() {
 		return "Modulo [idModulo=" + idModulo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", temaList="

@@ -13,7 +13,6 @@ import com.nirho.dao.CuestionarioParticipanteDAO;
 import com.nirho.dao.CuestionarioProyectoDAO;
 import com.nirho.dao.ParticipanteDAO;
 import com.nirho.dao.PreguntaDAO;
-import com.nirho.dao.ProyectoDAO;
 import com.nirho.dto.CuestionarioConfiguracion;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoServiceException;
@@ -22,6 +21,7 @@ import com.nirho.model.CuestionarioProyectoPK;
 import com.nirho.model.CuetionarioParticipante;
 import com.nirho.model.CuetionarioParticipantePK;
 import com.nirho.model.Participante;
+import com.nirho.model.ParticipantePK;
 import com.nirho.model.Pregunta;
 import com.nirho.service.CuestionarioProyectoService;
 import com.nirho.util.NirhoUtil;
@@ -36,8 +36,6 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	private ParticipanteDAO participanteDAO;
 	@Autowired
 	private CuestionarioParticipanteDAO cuestDAO;
-	@Autowired
-	private ProyectoDAO proyectoDAO;
 	@Autowired
 	private CuestionarioParticipanteDAO cuestPartDAO;
 	@Autowired
@@ -60,11 +58,11 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 						cuestionario.getIdProyecto(), pregunta.getIdTema().getIdTema(), pregunta.getIdPregunta());
 				cp.setCuestionarioProyectoPK(pk);
 				dao.save(cp);
-				Long idEmpresa = proyectoDAO.getOne(cuestionario.getIdProyecto()).getIdEmpresa().getId();
-				for(Participante part: participanteDAO.findByIdEmpresa(idEmpresa)) {
+				for(Participante part: participanteDAO.findByIdProyecto(cuestionario.getIdProyecto())) {
 					CuetionarioParticipante cuestPart = new CuetionarioParticipante();
 					CuetionarioParticipantePK cuestPartPK = new CuetionarioParticipantePK(
-							part.getIdParticipante(), pregunta.getIdTema().getIdTema(), pregunta.getIdPregunta());
+							part.getParticipantePK().getIdParticipante(), part.getParticipantePK().getIdProyecto(),
+									pregunta.getIdTema().getIdTema(), pregunta.getIdPregunta());
 					cuestPart.setCuetionarioParticipantePK(cuestPartPK);
 					cuestDAO.save(cuestPart);
 				}
@@ -107,15 +105,17 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	public List<CuetionarioParticipante> obtenerCuestionarioParticipante(String token) throws NirhoServiceException {
 		List<CuetionarioParticipante> cuestPart = null;
 		try {
-			String rfc = NirhoUtil.obtenerRFCToken(token);
-			List<Participante> partList = participanteDAO.findByRfc(rfc);
-			if(partList != null && !partList.isEmpty()) {
-				Participante part = partList.get(0);
-				return cuestPartDAO.findByIdParticipante(part.getIdParticipante());
+			ParticipantePK participantePK = NirhoUtil.obtenerParticipanteToken(token);
+			Participante participante = participanteDAO.getOne(participantePK);
+			if(participante != null) {
+				return cuestPartDAO.findByParticipanteProyecto(participante.getParticipantePK().getIdParticipante(), 
+						participante.getParticipantePK().getIdProyecto());
 			}
+		} catch(NirhoServiceException nse) {
+			throw new NirhoServiceException(nse.getMessage());
 		} catch(Exception e) {
 			logger.info("Exception e [" + e.getMessage() +"]");
-			throw new NirhoServiceException("Problemas al obtener el cuestionario del participante en la BD oken [" + token + "]");
+			throw new NirhoServiceException("Problemas al obtener el cuestionario del participante en la BD token [" + token + "]");
 		}
 		return cuestPart;
 	}
