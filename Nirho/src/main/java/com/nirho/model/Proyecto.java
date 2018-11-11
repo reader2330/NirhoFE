@@ -64,6 +64,9 @@ public class Proyecto implements Serializable {
     @JoinColumn(name = "id_contacto", referencedColumnName = "id", nullable=false, updatable=true)
     @ManyToOne(optional = false,  cascade = CascadeType.ALL)
     private Contacto idContacto;
+    @JoinColumn(name = "id_estatus", referencedColumnName = "id_estatus", insertable = false, updatable = false)
+    @ManyToOne
+    private EstatusProyecto idEstatus;
     
 	public Integer getIdProyecto() {
 		return idProyecto;
@@ -161,12 +164,21 @@ public class Proyecto implements Serializable {
 		this.idContacto = idContacto;
 	}
 
+	public EstatusProyecto getIdEstatus() {
+		return idEstatus;
+	}
+
+	public void setIdEstatus(EstatusProyecto idEstatus) {
+		this.idEstatus = idEstatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Proyecto [idProyecto=" + idProyecto + ", nombre=" + nombre + ", numEmpleados=" + numEmpleados
 				+ ", sedes=" + sedes + ", numParticipantes=" + numParticipantes + ", fechaRegistro=" + fechaRegistro
 				+ ", fechaFin=" + fechaFin + ", diasGarantia=" + diasGarantia + ", frecuenciaEval=" + frecuenciaEval
-				+ ", idEmpresa=" + idEmpresa + "]";
+				+ ", idModulo=" + idModulo + ", idEmpresa=" + idEmpresa + ", idContacto=" + idContacto + ", idEstatus="
+				+ idEstatus + "]";
 	}
 	
 }

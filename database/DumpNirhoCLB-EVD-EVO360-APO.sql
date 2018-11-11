@@ -644,6 +644,30 @@ INSERT INTO `entrevistado` VALUES (11,'actualizado','puestoResponsableLlenado','
 UNLOCK TABLES;
 
 --
+-- Table structure for table `estatus_proyecto`
+--
+
+DROP TABLE IF EXISTS `estatus_proyecto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `estatus_proyecto` (
+  `id_estatus` int(11) NOT NULL,
+  `descripcion` varchar(90) DEFAULT NULL,
+  PRIMARY KEY (`id_estatus`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estatus_proyecto`
+--
+
+LOCK TABLES `estatus_proyecto` WRITE;
+/*!40000 ALTER TABLE `estatus_proyecto` DISABLE KEYS */;
+INSERT INTO `estatus_proyecto` VALUES (1,'En captura'),(2,'En asignación'),(3,'En configuración de cuestionario'),(4,'En carga de Head Count'),(5,'En enviado a participantes'),(6,'Vigente'),(7,'Cierre'),(8,'Resultados');
+/*!40000 ALTER TABLE `estatus_proyecto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `experiencia_candidato`
 --
 
@@ -1008,13 +1032,16 @@ CREATE TABLE `proyecto` (
   `dias_garantia` int(11) DEFAULT NULL,
   `frecuencia_eval` decimal(10,0) DEFAULT NULL,
   `id_contacto` bigint(20) NOT NULL,
+  `id_estatus` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_proyecto`),
   KEY `FK_PROYECTO_EMPRESA_idx` (`id_empresa`),
   KEY `FK_PROY_CONTACTO_idx` (`id_contacto`),
   KEY `FK_PROYECTO_MODULO_idx` (`id_modulo`),
+  KEY `FK_PROY_ID_ESTATIUS_idx` (`id_estatus`),
   CONSTRAINT `FK_CONTACTO_PROY` FOREIGN KEY (`id_contacto`) REFERENCES `contacto` (`id`),
   CONSTRAINT `FK_PROYECTO_EMPRESA` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`),
-  CONSTRAINT `FK_PROYECTO_MODULO` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id_modulo`)
+  CONSTRAINT `FK_PROYECTO_MODULO` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id_modulo`),
+  CONSTRAINT `FK_PROY_ID_ESTATIUS` FOREIGN KEY (`id_estatus`) REFERENCES `estatus_proyecto` (`id_estatus`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1024,7 +1051,7 @@ CREATE TABLE `proyecto` (
 
 LOCK TABLES `proyecto` WRITE;
 /*!40000 ALTER TABLE `proyecto` DISABLE KEYS */;
-INSERT INTO `proyecto` VALUES (1,1,'CLIMA LABOLAL KKANA',1,1,'AQUI',1,'2018-10-10 00:00:00','2018-11-22 00:00:00',3,NULL,1),(2,1,'CLIMA LABORAL PTITO',2,1000,'PTITO',50,NULL,NULL,NULL,3,2),(3,1,'CLIMA LABORAL DE CLIMA AUTOMOTRIZ S.A.',3,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 00:00:00','2019-08-09 00:00:00',30,3,3),(4,1,'CLIMA LABORAL TECNOLOGOP',4,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 17:27:41','2018-11-15 00:00:00',10,1,4),(5,1,'CLIMA LABORAL MAGALLANES HERMANOS S.A.',31,238,'LAS 5 SEDES',237,NULL,NULL,NULL,2,5);
+INSERT INTO `proyecto` VALUES (1,1,'CLIMA LABOLAL KKANA',1,1,'AQUI',1,'2018-10-10 00:00:00','2018-11-22 00:00:00',3,NULL,1,1),(2,1,'CLIMA LABORAL PTITO',2,1000,'PTITO',50,NULL,NULL,NULL,3,2,1),(3,1,'CLIMA LABORAL DE CLIMA AUTOMOTRIZ S.A.',3,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 00:00:00','2019-08-09 00:00:00',30,3,3,1),(4,1,'CLIMA LABORAL TECNOLOGOP',4,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 17:27:41','2018-11-15 00:00:00',10,1,4,1),(5,1,'CLIMA LABORAL MAGALLANES HERMANOS S.A.',31,238,'LAS 5 SEDES',237,NULL,NULL,NULL,2,5,4);
 /*!40000 ALTER TABLE `proyecto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1299,4 +1326,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-11 10:55:31
+-- Dump completed on 2018-11-11 13:48:25

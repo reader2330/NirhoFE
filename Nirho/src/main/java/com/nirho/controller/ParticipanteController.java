@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nirho.constant.ProyectoConstants;
 import com.nirho.dto.HeadCount;
 import com.nirho.dto.HeadCountAmpliado;
 import com.nirho.dto.NivelDTO;
@@ -24,9 +25,12 @@ import com.nirho.dto.ParticipanteHC;
 import com.nirho.dto.ParticipanteHCA;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.EstatusProyecto;
 import com.nirho.model.Participante;
 import com.nirho.model.ParticipantePK;
+import com.nirho.model.Proyecto;
 import com.nirho.service.ParticipanteService;
+import com.nirho.service.ProyectoService;
 import com.nirho.util.NirhoUtil;
 
 @RestController
@@ -36,6 +40,8 @@ public class ParticipanteController {
 	public final static Logger logger = Logger.getLogger(ParticipanteController.class);
 	@Autowired
 	ParticipanteService participanteService;
+	@Autowired
+	ProyectoService proyectoService;
 	
 	@GetMapping(value = "/organigrama")
 	public List<NivelDTO> organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
@@ -62,6 +68,9 @@ public class ParticipanteController {
 	public void guardarParticipantes(@RequestBody HeadCount headcount) throws NirhoControllerException {
 		logger.info(" ************************ headcount [" + headcount + "] *****************************");
 		try {
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(headcount.getIdProyecto());
+			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CARGA));
+			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 			List<ParticipanteHC> participantesHC = headcount.getLista();
 			List<Participante> participantes = new ArrayList<>();
 			for(ParticipanteHC p: participantesHC) {
@@ -82,6 +91,9 @@ public class ParticipanteController {
 	public void headCountAmp(@RequestBody HeadCountAmpliado headcount) throws NirhoControllerException {
 		logger.info(" ************************ headcount [" + headcount + "] *****************************");
 		try {
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(headcount.getIdProyecto());
+			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CARGA));
+			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 			List<ParticipanteHCA> participantesHCA = headcount.getLista();
 			List<Participante> participantes = new ArrayList<>();
 			for(ParticipanteHCA p: participantesHCA) {
