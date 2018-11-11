@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {ProyectoService} from '../../../clb/services/proyecto.service';
-//import {IWorkBook, IWorkSheet, read, utils} from 'xlsx';
+import {IWorkBook, IWorkSheet, read, utils} from 'ts-xlsx';
 import Swal from 'sweetalert2';
 import {Participante} from '../../../clb/models/participante';
 

@@ -1,0 +1,115 @@
+<form [formGroup]="companyForm">
+  <mat-grid-list  [cols]="checkMobileCols()" rowHeight="100px">
+
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Nivel de escolaridad</mat-label>
+        <mat-select formControlName="pais" required >
+          <mat-option *ngFor="let country of countries" [value]="country.id">
+            {{country.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Carrera</mat-label>
+        <input matInput formControlName="empresa" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile>
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>Especialidad</mat-label>
+        <input formControlName="rfc" type="text" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Otras capacidades</mat-label>
+        <textarea matInput formControlName="empresa" type="text" required></textarea>
+      </mat-form-field>
+    </mat-grid-tile>
+
+   <mat-grid-tile [colspan]="1" [rowspan]="1">
+     <mat-form-field class="example-chip-list" appearance="outline">
+       <mat-chip-list #chipList>
+         <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                   [removable]="removable" (removed)="remove(fruit)">
+           {{fruit.name}}
+           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+         </mat-chip>
+         <input placeholder="Certificaciones"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)">
+       </mat-chip-list>
+     </mat-form-field>
+   </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-chip-list" appearance="outline">
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(fruit)">
+            {{fruit.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Cursos"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-chip-list" appearance="outline">
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(fruit)">
+            {{fruit.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Oficios"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-checkbox>Título universitario</mat-checkbox>
+    </mat-grid-tile>
+
+
+
+
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px"  matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
+
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+
+</form>

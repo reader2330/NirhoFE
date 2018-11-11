@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {BreakpointObserver, Breakpoints} from '../../../../../../node_modules/@angular/cdk/layout';
+import {CatalogsService} from '../../../clb/services/catalogs.service';
+import {EnterprisesService} from '../../services/enterprises.service';
 
 @Component({
   selector: 'app-enterprise-irh',
@@ -8,14 +11,9 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class EnterpriseIrhComponent implements OnInit {
   mobile = false;
-  enterprise = {
-    id: null,
-    name: '',
-    empresa: '',
-    giro: 0,
-    pais: 0,
-    rfc : '',
-  };
+  mgsInit = '';
+  countries = [];
+  spins = [];
 
   enterpriseForm = new FormGroup(
     {
@@ -59,10 +57,37 @@ export class EnterpriseIrhComponent implements OnInit {
       return 2;
     }
   }
-
-  constructor() { }
+  constructor( breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private EntrepiseService: EnterprisesService) {
+    breakpointObserver.isMatched(('(max-width:450)'));
+    breakpointObserver.observe([
+      Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
+      if (result.matches) {
+        this.mobile = true;
+        this.checkMobileCols();
+      } else {
+        this.mobile = false;
+        this.checkMobileCols();
+      }
+      console.log(this.mobile);
+    });
+  }
 
   ngOnInit() {
+    if (sessionStorage.getItem('detailIRH')) {
+      let data = JSON.parse(sessionStorage.getItem('detailIRH'));
+      console.log(data);
+      this.enterpriseForm.patchValue(data);
+      console.log(this.enterpriseForm.value);
+      this.mgsInit = 'Editar Empresa';
+    }
+    this.CatalogService.getCountries().subscribe(res => {
+      this.countries = res;
+      console.log(res);
+    });
+    this.CatalogService.getGiros().subscribe(res => {
+      this.spins = res;
+      console.log(res);
+    });
   }
 
 }

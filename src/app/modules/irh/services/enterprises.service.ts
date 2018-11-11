@@ -36,5 +36,8 @@ export class EnterprisesService {
   savePreguntas(data): Observable<any> {
     return this.http.post(this.api + 'cuestionario/configurar', data, {headers: this.headers});
   }
+  saveEntripise(data): Observable<any>{
+    return this.http.post(this.api + 'empresa/registrarEmpresaIRH', data, {headers: this.headers});
+  }
 
 }
