@@ -5,6 +5,8 @@ import {InicioComponent} from './modules/clb/components/inicio/inicio.component'
 import {SteppersComponent} from './modules/clb/components/formularios/steppers/steppers.component';
 import {AvatarEditComponent} from './modules/clb/components/avatar-edit/avatar-edit.component';
 import {EncuestaComponent} from './modules/clb/components/encuesta/encuesta.component';
+import {InicioIrhComponent} from './modules/irh/components/inicio-irh/inicio-irh.component';
+import {InicioEvdComponent} from './modules/evd/components/inicio-evd/inicio-evd.component';
 
 const routes: Routes = [
   {
@@ -23,8 +25,14 @@ const routes: Routes = [
     path: 'encuesta/:token',
     component: EncuestaComponent
   },
-
-
+  {
+    path: 'IRH',
+    component: InicioIrhComponent
+  },
+  {
+    path: 'EVD',
+    component: InicioEvdComponent
+  }
 ];
 
 @NgModule({

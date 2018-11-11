@@ -62,6 +62,9 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji'
     DetallePreguntasComponent,
     EncuestaComponent,
     AvatarEditComponent,
+  ],
+  exports: [
+    CuestionarioSelectComponent
   ]
 })
 export class CLBModule { }

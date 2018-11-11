@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import {
   MatButtonModule,
   MatCardModule,
@@ -17,7 +18,9 @@ import {
   MatCheckboxModule,
   MatExpansionModule,
   MatRadioModule,
-  MatProgressSpinnerModule, MatSliderModule
+  MatProgressSpinnerModule,
+  MatSliderModule,
+  MatDialogModule
 } from '@angular/material';
 
 @NgModule({
@@ -39,6 +42,7 @@ import {
     MatCheckboxModule,
     MatExpansionModule,
     MatRadioModule,
+    MatDialogModule,
     MatProgressSpinnerModule,
     MatSliderModule
   ],
@@ -60,6 +64,7 @@ import {
     MatCheckboxModule,
     MatExpansionModule,
     MatRadioModule,
+    MatDialogModule,
     MatProgressSpinnerModule,
     MatSliderModule
   ]

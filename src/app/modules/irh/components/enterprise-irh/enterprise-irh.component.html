@@ -1,0 +1,182 @@
+<form [formGroup]="enterpriseForm">
+
+  <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
+
+    <h3>{{msgI}}</h3>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="empresa" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>País</mat-label>
+        <mat-select formControlName="pais" required >
+          <mat-option >
+
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>RFC</mat-label>
+        <input formControlName="rfc" type="text" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field   appearance="outline">
+        <mat-label>Giro</mat-label>
+        <mat-select formControlName="giro">
+          <mat-option  >
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input formControlName="direccion" type="text" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Nombre del responsable del llenado</mat-label>
+        <input matInput formControlName="nombreResponsableLlenado" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Puesto del responsable del llenado</mat-label>
+        <input matInput formControlName="puestoResponsableLlenado" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Nombre del entrevistador</mat-label>
+        <input matInput formControlName="nombreEntrevistador" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Nombre del entrevistado</mat-label>
+        <input matInput formControlName="nombreEntrevistado" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Puesto del entrevistado</mat-label>
+        <input matInput formControlName="puestoEntrevistado" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput formControlName="correoElectornico" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Celular</mat-label>
+        <input matInput formControlName="telefonoCelular" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Teléfono oficina</mat-label>
+        <input matInput formControlName="telefono_oficina_extension" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Año inicio operaciones</mat-label>
+        <input matInput formControlName="anioinicioOperaciones" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Facturación anual</mat-label>
+        <input matInput formControlName="facturacionAnual" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Producto/Servicio estrella</mat-label>
+        <input matInput formControlName="productoServicioEstrella" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Principales productos/Servicios</mat-label>
+        <input matInput formControlName="principalesProductosServicios" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Número de empleados a nivel administrativo</mat-label>
+        <input matInput formControlName="noEmpleadosAdministrativo" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Número de empleados a nivel operativo</mat-label>
+        <input matInput formControlName="noEmpleadosOperativo" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Tipo contratación empleados</mat-label>
+        <input matInput formControlName="tipoContratacionEmpleados" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <!--<mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveCompany()" [disabled]="!companyForm.valid" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
+
+    </mat-grid-tile>-->
+
+  </mat-grid-list>
+
+</form>
+

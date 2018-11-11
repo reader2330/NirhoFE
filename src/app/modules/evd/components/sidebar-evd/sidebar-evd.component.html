@@ -1,0 +1,54 @@
+
+
+<mat-toolbar style="background:  black" >
+  <a *ngIf="mobile" style=" color:white" (click)="snav.toggle()"><mat-icon >menu</mat-icon></a>
+  <span style="flex: 1 1 auto;"></span>
+  <button mat-raised-button (click)="cerraSesion()"><mat-icon >people_outline</mat-icon>Cerrar sesión</button>
+</mat-toolbar>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" [opened]="!mobile" [fixedInViewport]="false" [fixedTopGap]="62" [fixedBottomGap]="60"  #snav>
+
+    <mat-nav-list>
+           <span *ngIf="!mobile">
+            <div class="logo-nav">
+
+            </div>
+          </span>
+      <span *ngIf="mobile">
+            <div class="logo-nav-mobile">
+
+            </div>
+          </span>
+      <div class="avatar">
+
+      </div>
+
+      <mat-list>
+        <mat-list-item>
+          <p style="margin-left: 40px">{{ 'Jose Lopez' }}</p>
+        </mat-list-item>
+        <mat-list-item *ngFor="let module of modules" (click)="goModule(module.id_submodulo)">
+          <p>{{module.descripcion}}</p>
+        </mat-list-item>
+
+      </mat-list>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="row">
+
+      <div style="margin-left: 20px;margin-top: 50px"  class="col-sm-12 stepper-forms" >
+
+        <!--<app-bandeja-evd></app-bandeja-evd>
+        <app-bandeja-detalle-evd></app-bandeja-detalle-evd>-->
+        <!--<app-head-count-evd></app-head-count-evd>-->
+        <!--<app-organigrama-evd></app-organigrama-evd>-->
+        <!--<app-table-cliente-irh></app-table-cliente-irh>-->
+        <app-table-cliente2-evd></app-table-cliente2-evd>
+
+      </div>
+
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
