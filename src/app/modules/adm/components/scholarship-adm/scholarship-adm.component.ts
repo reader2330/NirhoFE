@@ -20,7 +20,7 @@ export class ScholarshipAdmComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  //readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
   fruits: Fruit[] = [
   ];
 
@@ -47,7 +47,7 @@ export class ScholarshipAdmComponent implements OnInit {
     }
   }
 
-  companyForm = {
+  company = {
     id: 0,
     celular: 1234,
     email: '',
