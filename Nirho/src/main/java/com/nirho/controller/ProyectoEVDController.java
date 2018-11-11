@@ -29,20 +29,21 @@ import com.nirho.util.SessionUtil;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping( value = "/proyecto" )
-public class ProyectoController {
-	public final static Logger logger = Logger.getLogger(ProyectoController.class);
+@RequestMapping( value = "/proyectoEVD" )
+public class ProyectoEVDController {
+	public final static Logger logger = Logger.getLogger(ProyectoEVDController.class);
+	public final static Integer ID_MODULO = 2;
 	
 	@Autowired
 	ProyectoService proyectoService;
 	@Autowired
 	CatalogoService catalogoService;
-		
+	
 	@GetMapping(value = "/todos")
-	public List<Proyecto> todos(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
+	public List<Proyecto> todos() throws NirhoControllerException{
 		List<Proyecto> proyectos = new ArrayList<>();
 		try {
-			proyectos = proyectoService.obtenerProyectosTodos(idModulo);
+			proyectos = proyectoService.obtenerProyectosTodos(ID_MODULO);
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
 		}
@@ -50,11 +51,10 @@ public class ProyectoController {
 	}
 	
 	@GetMapping(value = "/porConsultor")
-	public List<Proyecto> porConsultor(@RequestParam(name="idUsuario") Integer idUsuario,
-								@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
+	public List<Proyecto> porConsultor(@RequestParam(name="idUsuario") Integer idUsuario) throws NirhoControllerException{
 		List<Proyecto> proyectos = new ArrayList<>();
 		try {
-			proyectos = proyectoService.obtenerProyectosConsultor(idUsuario, idModulo);
+			proyectos = proyectoService.obtenerProyectosConsultor(idUsuario, ID_MODULO);
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
 		}
@@ -62,12 +62,11 @@ public class ProyectoController {
 	}
 	
 	@GetMapping(value = "/deConsultorEnSesion")
-	public List<Proyecto> deConsultorEnSesion(HttpServletRequest request,
-								@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
+	public List<Proyecto> deConsultorEnSesion(HttpServletRequest request) throws NirhoControllerException{
 		List<Proyecto> proyectos = new ArrayList<>();
 		try {
 			Long id = SessionUtil.getUsuarioSession(request).getId();
-			proyectos = proyectoService.obtenerProyectosConsultor(id.intValue(), idModulo);
+			proyectos = proyectoService.obtenerProyectosConsultor(id.intValue(), ID_MODULO);
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
 		}
@@ -88,10 +87,10 @@ public class ProyectoController {
 	
 	@RequestMapping(value = "/registrar", method = RequestMethod.POST)
 	@ResponseBody
-	public void registrarProyecto(@RequestBody Proyecto proyecto, @RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException {
+	public void registrarProyecto(@RequestBody Proyecto proyecto) throws NirhoControllerException {
 		logger.info(" ********************************* proyecto [" + proyecto + "] *****************************");
 		try {
-			proyectoService.registrarProyecto(proyecto, idModulo);
+			proyectoService.registrarProyecto(proyecto, ID_MODULO);
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
 		}
@@ -99,7 +98,7 @@ public class ProyectoController {
 		
 	@RequestMapping(value = "/agignarPeriodoGarantia", method = RequestMethod.POST)
 	@ResponseBody
-	public void agignarPeriodoGarantia(@RequestBody PeriodoCLB periodo, @RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException {
+	public void agignarPeriodoGarantia(@RequestBody PeriodoCLB periodo) throws NirhoControllerException {
 		logger.info(" ********************************* periodo [" + periodo + "] *****************************");
 		try {
 			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");			
@@ -111,7 +110,7 @@ public class ProyectoController {
 			}  catch (NullPointerException e) {
 				logger.info("NullPointerExceptio [" + e.getLocalizedMessage() +"]");
 			}
-			proyectoService.registrarProyecto(periodo.getProyecto(), idModulo);
+			proyectoService.registrarProyecto(periodo.getProyecto(), ID_MODULO);
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
 		}
@@ -127,5 +126,5 @@ public class ProyectoController {
 			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
 		}
 	}
-	
+		
 }
