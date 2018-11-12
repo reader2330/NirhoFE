@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {CatalogsService} from '../../../clb/services/catalogs.service';
+import {CatalogsAdmService} from '../../services/catalogs-adm.service';
 
 @Component({
   selector: 'app-employee-adm',
@@ -11,35 +11,36 @@ import {CatalogsService} from '../../../clb/services/catalogs.service';
 export class EmployeeAdmComponent implements OnInit {
 
   spins = [];
-  company = {
+  employee = {
     id: null,
-    direccion: '',
-    empresa: '',
-    giro: 0,
-    pais: 0,
-    rfc : '',
+    nombreCompleto: '',
+    nacionalidad: 0,
+    fechaNacimiento: '',
+    edad: 0,
+    rfc: '',
+    curp: '',
+    nss: '',
+    direccion: ''
   };
-  countries = [];
+  nacionalidades = [];
   mobile = false;
-  companyForm = new FormGroup(
+  employeeForm = new FormGroup(
     {
       id: new FormControl(null),
-      anioInicioOperaciones: new FormControl(0),
-      facturacionAnual: new FormControl(0),
-      productoServicioEstrella: new FormControl(null),
-      principalesProductosServicios: new FormControl(null),
-      noEmpleadosAdministrativo: new FormControl(0),
-      noEmpleadosOperativo: new FormControl(0),
-      tipoContratacionEmpleados: new FormControl(null),
-      direccion: new FormControl('', Validators.required),
-      giro: new FormControl(0, Validators.required),
-      pais: new FormControl(0, Validators.required),
-      rfc: new FormControl('', Validators.required),
-      empresa: new FormControl('', Validators.required)
+      nombreCompleto: new FormControl(null, Validators.required),
+      nacionalidad: new FormControl(0, Validators.required),
+      fechaNacimiento: new FormControl(null, Validators.required),
+      edad: new FormControl(0, Validators.required),
+      rfc: new FormControl(null,
+        Validators.compose([Validators.required, Validators.maxLength(13)])),
+      curp: new FormControl(null,
+        Validators.compose([Validators.required, Validators.maxLength(18)])),
+      nss: new FormControl(null, Validators.required),
+      direccion: new FormControl('', Validators.required)
     }
   );
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogsAdmServices: CatalogsAdmService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -51,10 +52,6 @@ export class EmployeeAdmComponent implements OnInit {
         this.checkMobileCols();
       }
     });
-
-
-
-
   }
 
   checkMobileCols() {
@@ -82,7 +79,22 @@ export class EmployeeAdmComponent implements OnInit {
     }
   }
 
+  getNacionality () {
+    this.CatalogsAdmServices.getNacionality().subscribe((res) => {
+      if (res) {
+        this.nacionalidades = res;
+      }
+    });
+  }
+
+  saveEmployee() {
+    console.log(this.employeeForm.value);
+    this.employee = this.employeeForm.value;
+    sessionStorage.setItem('employee', JSON.stringify(this.employee));
+  }
+
   ngOnInit() {
+    this.getNacionality();
   }
 
 }

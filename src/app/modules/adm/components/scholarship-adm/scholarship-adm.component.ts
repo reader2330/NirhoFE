@@ -3,10 +3,13 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {MatChipInputEvent} from '@angular/material';
+import {CatalogsAdmService} from '../../services/catalogs-adm.service';
 
 
-export interface Fruit {
-  name: string;
+export interface Certificacion {
+  certificaciones: {
+    certificacion: string
+  };
 }
 
 @Component({
@@ -20,8 +23,7 @@ export class ScholarshipAdmComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  //readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruits: Fruit[] = [
+  certificaciones: Certificacion[] = [
   ];
 
   add(event: MatChipInputEvent): void {
@@ -30,7 +32,7 @@ export class ScholarshipAdmComponent implements OnInit {
 
     // Add our fruit
     if ((value || '').trim()) {
-      this.fruits.push({name: value.trim()});
+      this.certificaciones.push({name: value.trim()});
     }
 
     // Reset the input value
@@ -39,40 +41,39 @@ export class ScholarshipAdmComponent implements OnInit {
     }
   }
 
-  remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
+  remove(certificacion: Certific): void {
+    const index = this.certificaciones.indexOf(certificacion);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.certificaciones.splice(index, 1);
     }
   }
 
-  companyForm = {
-    id: 0,
-    celular: 1234,
-    email: '',
-    nombre: '',
-    puesto: '',
-    telefono: 1234,
-    tipoContacto: 1,
-    empresa: {}
+  scholarship = {
+    escolaridad: 0,
+    escolaridadCarrera: '',
+    escolaridadEspecialidad: '',
+    escolaridadCapacidades: '',
+    escolaridadCertificaciones: '',
+    escolaridadCursos: '',
+    escolaridadOficios: '',
+    titulo: false
   };
-  puestos = [];
-  typeContact = [];
+  escolaridades = [];
   mobile = false;
-  companyForm = new FormGroup(
+  scholarshipForm = new FormGroup(
     {
-      id: new FormControl(null),
-      telefono: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      puesto: new FormControl(0, Validators.required),
-      tipoContacto: new FormControl(0, Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      nombre: new FormControl('', Validators.required),
-      celular: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      empresa:  new FormControl(null)
+      escolaridad: new FormControl('', [Validators.required]),
+      escolaridadCarrera: new FormControl('', Validators.required),
+      escolaridadEspecialidad: new FormControl('', Validators.required),
+      escolaridadCapacidades: new FormControl('', [Validators.required]),
+      escolaridadCertificaciones: new FormControl('', Validators.required),
+      escolaridadCursos: new FormControl('', [Validators.required]),
+      escolaridadOficios:  new FormControl(''),
+      titulo:  new FormControl(false)
     }
   );
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogsAdmServices: CatalogsAdmService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -94,7 +95,22 @@ export class ScholarshipAdmComponent implements OnInit {
     }
   }
 
+  getScholarship() {
+    this.CatalogsAdmServices.getScholarship().subscribe((res) => {
+      if (res) {
+        this.escolaridades = res;
+      }
+    });
+  }
+
+  saveScholarship() {
+    console.log(this.scholarshipForm.value);
+    this.scholarship = this.scholarshipForm.value;
+    sessionStorage.setItem('scholarship', JSON.stringify(this.scholarship));
+  }
+
   ngOnInit() {
+    this.getScholarship();
   }
 
 }

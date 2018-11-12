@@ -12,6 +12,9 @@ import { ContactAdmComponent } from './components/contact-adm/contact-adm.compon
 import { PaymentAdmComponent } from './components/payment-adm/payment-adm.component';
 import { ScholarshipAdmComponent } from './components/scholarship-adm/scholarship-adm.component';
 import { LanguagesAdmComponent } from './components/languages-adm/languages-adm.component';
+import { LanguageModalAdmComponent } from './components/language-modal-adm/language-modal-adm.component';
+import { LaborAdmComponent } from './components/labor-adm/labor-adm.component';
+import { LaborModalAdmComponent } from './components/labor-modal-adm/labor-modal-adm.component';
 
 @NgModule({
   imports: [
@@ -31,7 +34,14 @@ import { LanguagesAdmComponent } from './components/languages-adm/languages-adm.
     ContactAdmComponent,
     PaymentAdmComponent,
     ScholarshipAdmComponent,
-    LanguagesAdmComponent
+    LanguagesAdmComponent,
+    LanguageModalAdmComponent,
+    LaborAdmComponent,
+    LaborModalAdmComponent
+  ],
+  entryComponents: [
+    LanguageModalAdmComponent,
+    LaborModalAdmComponent
   ]
 })
 export class AdmModule { }

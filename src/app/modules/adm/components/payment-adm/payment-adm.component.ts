@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
+import {CatalogsAdmService} from '../../services/catalogs-adm.service';
 
 @Component({
   selector: 'app-payment-adm',
@@ -10,32 +11,20 @@ import {CatalogsService} from '../../../clb/services/catalogs.service';
 })
 export class PaymentAdmComponent implements OnInit {
 
-  contact = {
-    id: 0,
-    celular: 1234,
-    email: '',
-    nombre: '',
-    puesto: '',
-    telefono: 1234,
-    tipoContacto: 1,
-    empresa: {}
+  payment = {
+    banco: 0,
+    bancoCuenta: '',
+    bancoClaveInterbancaria: ''
   };
-  puestos = [];
-  typeContact = [];
-  mobile = false;
-  companyForm = new FormGroup(
+  bancos = [];
+  paymentForm = new FormGroup(
     {
-      id: new FormControl(null),
-      telefono: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      puesto: new FormControl(0, Validators.required),
-      tipoContacto: new FormControl(0, Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      nombre: new FormControl('', Validators.required),
-      celular: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      empresa:  new FormControl(null)
+      banco: new FormControl(0, [Validators.required]),
+      bancoCuenta: new FormControl('', Validators.required),
+      bancoClaveInterbancaria: new FormControl('', Validators.required)
     }
   );
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogsAdmServices: CatalogsAdmService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -57,8 +46,23 @@ export class PaymentAdmComponent implements OnInit {
     }
   }
 
+  getBank() {
+    this.CatalogsAdmServices.getBank().subscribe((res) => {
+      if (res) {
+        this.bancos = res;
+      }
+    });
+  }
+
+  saveBank() {
+    console.log(this.paymentForm.value);
+    this.payment = this.paymentForm.value;
+    sessionStorage.setItem('payment', JSON.stringify(this.payment));
+  }
+
 
   ngOnInit() {
+    this.getBank();
   }
 
 }

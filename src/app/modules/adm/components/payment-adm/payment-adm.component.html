@@ -1,13 +1,13 @@
-<form [formGroup]="companyForm">
+<form [formGroup]="paymentForm">
   <mat-grid-list  [cols]="checkMobileCols()" rowHeight="100px">
 
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="inputForm" appearance="outline">
         <mat-label>Banco</mat-label>
-        <mat-select formControlName="pais" required >
-          <mat-option *ngFor="let country of countries" [value]="country.id">
-            {{country.descripcionCatalogo}}
+        <mat-select formControlName="banco" required >
+          <mat-option *ngFor="let banco of bancos" [value]="banco.id">
+            {{banco.descripcionCatalogo}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -18,7 +18,7 @@
 
       <mat-form-field class="inputForm" appearance="outline">
         <mat-label>Número de cuenta</mat-label>
-        <input matInput formControlName="empresa" type="text" required>
+        <input matInput formControlName="bancoCuenta" type="text" required>
       </mat-form-field>
     </mat-grid-tile>
 
@@ -26,7 +26,7 @@
     <mat-grid-tile>
       <mat-form-field  class="inputForm" appearance="outline">
         <mat-label>Clabe interbancaria</mat-label>
-        <input formControlName="rfc" type="text" matInput required >
+        <input formControlName="bancoClaveInterbancaria" type="text" matInput required >
       </mat-form-field>
     </mat-grid-tile>
 
@@ -38,7 +38,7 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
-      <button mat-raised-button color="primary" style="margin-left: 10px"  matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveBank()" [disabled]="!paymentForm.valid" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
 
     </mat-grid-tile>
 
