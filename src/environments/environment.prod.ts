@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlApi: 'http://localhost:8080/Nirho/'
+  urlApi: 'http://74.208.131.50:8080/Nirho/'
 };

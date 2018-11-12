@@ -23,7 +23,12 @@ export class ScholarshipAdmComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+<<<<<<< HEAD
   certificaciones: Certificacion[] = [
+=======
+
+  fruits: Fruit[] = [
+>>>>>>> 46959dfa8951c8338ad61ac380e8f8d06d50e5a0
   ];
 
   add(event: MatChipInputEvent): void {
@@ -49,6 +54,7 @@ export class ScholarshipAdmComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   scholarship = {
     escolaridad: 0,
     escolaridadCarrera: '',
@@ -58,6 +64,17 @@ export class ScholarshipAdmComponent implements OnInit {
     escolaridadCursos: '',
     escolaridadOficios: '',
     titulo: false
+=======
+  company = {
+    id: 0,
+    celular: 1234,
+    email: '',
+    nombre: '',
+    puesto: '',
+    telefono: 1234,
+    tipoContacto: 1,
+    empresa: {}
+>>>>>>> 46959dfa8951c8338ad61ac380e8f8d06d50e5a0
   };
   escolaridades = [];
   mobile = false;

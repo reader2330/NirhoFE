@@ -16,6 +16,7 @@ import { LanguageModalAdmComponent } from './components/language-modal-adm/langu
 import { LaborAdmComponent } from './components/labor-adm/labor-adm.component';
 import { LaborModalAdmComponent } from './components/labor-modal-adm/labor-modal-adm.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -41,7 +42,8 @@ import { LaborModalAdmComponent } from './components/labor-modal-adm/labor-modal
   ],
   entryComponents: [
     LanguageModalAdmComponent,
-    LaborModalAdmComponent
+    LaborModalAdmComponent,
+    LaborAdmComponent
   ]
 })
 export class AdmModule { }
