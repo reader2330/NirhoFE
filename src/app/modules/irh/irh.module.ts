@@ -13,7 +13,10 @@ import { RecruitingIrhComponent } from './components/reviews/recruiting-irh/recr
 import { RecruitingModalIrhComponent } from './components/reviews/modals/recruiting-modal-irh/recruiting-modal-irh.component';
 import { RhAdminModalIrhComponent } from './components/reviews/modals/rh-admin-modal-irh/rh-admin-modal-irh.component';
 import { RhAdminIrhComponent } from './components/reviews/rh-admin-irh/rh-admin-irh.component';
-import { OrganizationalDevelopmentIrhComponent } from './components/reviews/organizational-development-irh/organizational-development-irh.component';
+import {
+  DialogOverviewExampleDialog,
+  OrganizationalDevelopmentIrhComponent
+} from './components/reviews/organizational-development-irh/organizational-development-irh.component';
 import { OrganizationalDevelopmentModalIrhComponent } from './components/reviews/modals/organizational-development-modal-irh/organizational-development-modal-irh.component';
 import { TrainingIrhComponent } from './components/reviews/training-irh/training-irh.component';
 import { TrainingModalIrhComponent } from './components/reviews/modals/training-modal-irh/training-modal-irh.component';
@@ -32,7 +35,8 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
     FormsModule,
     ReactiveFormsModule,
     EmojiModule,
-    PickerModule
+    PickerModule,
+
   ],
   declarations: [
     EnterpriseListComponent,
@@ -50,7 +54,8 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
     TrainingModalIrhComponent,
     EnterpriseDetailIrhComponent,
     CuestionarioSelectIRHComponent,
-    EncuestaIrhComponent
+    EncuestaIrhComponent,
+    DialogOverviewExampleDialog
   ],
   entryComponents: [
     RecruitingModalIrhComponent,
