@@ -66,7 +66,7 @@ var routes = [
     },
     {
         path: 'encuesta/:token',
-        component: _modules_clb_components_encuesta_encuesta_component__WEBPACK_IMPORTED_MODULE_5__["EncuestaComponent"]
+        component: _modules_clb_components_encuesta_encuesta_component__WEBPACK_IMPORTED_MODULE_5__["EncuestaIrhComponent"]
     },
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -318,7 +318,7 @@ var CLBModule = /** @class */ (function () {
                 _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_16__["AsignarConsultorComponent"],
                 _components_estadisticas_estadisticas_component__WEBPACK_IMPORTED_MODULE_17__["EstadisticasComponent"],
                 _components_detalle_preguntas_detalle_preguntas_component__WEBPACK_IMPORTED_MODULE_18__["DetallePreguntasComponent"],
-                _components_encuesta_encuesta_component__WEBPACK_IMPORTED_MODULE_19__["EncuestaComponent"],
+                _components_encuesta_encuesta_component__WEBPACK_IMPORTED_MODULE_19__["EncuestaIrhComponent"],
                 _components_avatar_edit_avatar_edit_component__WEBPACK_IMPORTED_MODULE_20__["AvatarEditComponent"],
             ]
         })

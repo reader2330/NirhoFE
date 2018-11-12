@@ -18,8 +18,10 @@ import { OrganizationalDevelopmentModalIrhComponent } from './components/reviews
 import { TrainingIrhComponent } from './components/reviews/training-irh/training-irh.component';
 import { TrainingModalIrhComponent } from './components/reviews/modals/training-modal-irh/training-modal-irh.component';
 import { EnterpriseDetailIrhComponent } from './components/enterprise-detail-irh/enterprise-detail-irh.component';
-import {CLBModule} from '../clb/clb.module';
 import {CuestionarioSelectIRHComponent} from './components/cuestionario-select-irh/cuestionario-select-irh.component';
+import {EncuestaIrhComponent} from './components/encuesta_irh/encuesta-irh.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 @NgModule({
   imports: [
@@ -29,6 +31,8 @@ import {CuestionarioSelectIRHComponent} from './components/cuestionario-select-i
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    EmojiModule,
+    PickerModule
   ],
   declarations: [
     EnterpriseListComponent,
@@ -45,7 +49,8 @@ import {CuestionarioSelectIRHComponent} from './components/cuestionario-select-i
     TrainingIrhComponent,
     TrainingModalIrhComponent,
     EnterpriseDetailIrhComponent,
-    CuestionarioSelectIRHComponent
+    CuestionarioSelectIRHComponent,
+    EncuestaIrhComponent
   ],
   entryComponents: [
     RecruitingModalIrhComponent,

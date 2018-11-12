@@ -41,6 +41,10 @@ export class SidebarIrhComponent implements OnInit {
     }, {
       id_submodulo: 3,
       descripcion: 'Configurar cuestionario'
+    },
+      {
+      id_submodulo: 4,
+      descripcion: 'Contestar cuestionario'
     });
   }
 
