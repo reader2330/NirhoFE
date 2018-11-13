@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       }, () => {
         console.log('acabe');
       });
-    this.router.navigate(['inicio']);
+    this.router.navigate(['IRH']);
   }
 
 }

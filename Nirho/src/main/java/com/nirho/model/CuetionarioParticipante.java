@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author eisten
+ * @author DELL
  */
 @Entity
 @Table(name = "cuetionario_participante")
@@ -33,13 +33,10 @@ public class CuetionarioParticipante implements Serializable {
     private Integer respuesta;
     @Column(name = "respuesta_texto")
     private String respuestaTexto;
-    @JoinColumn(name = "id_participante", referencedColumnName = "id_participante", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Participante participante;
-    @JoinColumn(name = "id_pregunta", referencedColumnName = "id_pregunta", insertable = false, updatable = false)
+    @JoinColumn
     @ManyToOne(optional = false)
     private Pregunta pregunta;
-    @JoinColumn(name = "id_tema", referencedColumnName = "id_tema", insertable = false, updatable = false)
+    @JoinColumn
     @ManyToOne(optional = false)
     private Tema tema;
 
@@ -50,8 +47,8 @@ public class CuetionarioParticipante implements Serializable {
         this.cuetionarioParticipantePK = cuetionarioParticipantePK;
     }
 
-    public CuetionarioParticipante(int idParticipante, int idTema, int idPregunta) {
-        this.cuetionarioParticipantePK = new CuetionarioParticipantePK(idParticipante, idTema, idPregunta);
+    public CuetionarioParticipante(int idParticipante, int idProyecto, int idTema, int idPregunta) {
+        this.cuetionarioParticipantePK = new CuetionarioParticipantePK(idParticipante, idProyecto, idTema, idPregunta);
     }
 
     public CuetionarioParticipantePK getCuetionarioParticipantePK() {
@@ -77,15 +74,7 @@ public class CuetionarioParticipante implements Serializable {
     public void setRespuestaTexto(String respuestaTexto) {
         this.respuestaTexto = respuestaTexto;
     }
-
-    public Participante getParticipante() {
-        return participante;
-    }
-
-    public void setParticipante(Participante participante) {
-        this.participante = participante;
-    }
-
+    
     public Pregunta getPregunta() {
         return pregunta;
     }
@@ -93,7 +82,7 @@ public class CuetionarioParticipante implements Serializable {
     public void setPregunta(Pregunta pregunta) {
         this.pregunta = pregunta;
     }
-
+    
     public Tema getTema() {
         return tema;
     }
@@ -105,7 +94,8 @@ public class CuetionarioParticipante implements Serializable {
 	@Override
 	public String toString() {
 		return "CuetionarioParticipante [cuetionarioParticipantePK=" + cuetionarioParticipantePK + ", respuesta="
-				+ respuesta + ", respuestaTexto=" + respuestaTexto + ", participante=" + participante + ", pregunta="
+				+ respuesta + ", respuestaTexto=" + respuestaTexto + ", pregunta="
 				+ pregunta + ", tema=" + tema + "]";
 	}
+        
 }

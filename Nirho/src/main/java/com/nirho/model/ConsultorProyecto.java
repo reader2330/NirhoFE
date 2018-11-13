@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -29,6 +31,9 @@ public class ConsultorProyecto implements Serializable {
     @Basic(optional = false)
     @Column(name = "asignado")
     private int asignado;
+    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Proyecto proyecto;
 
     public ConsultorProyecto() {
     }
@@ -69,7 +74,15 @@ public class ConsultorProyecto implements Serializable {
     public void setAsignado(int asignado) {
         this.asignado = asignado;
     }
+    
+	public Proyecto getProyecto() {
+		return proyecto;
+	}
 
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
+	}
+	
 	@Override
 	public String toString() {
 		return "ConsultorProyecto [consultorProyectoPK=" + consultorProyectoPK + ", avance=" + avance + ", asignado="

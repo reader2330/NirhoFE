@@ -7,8 +7,6 @@ package com.nirho.dto;
 
 import java.io.Serializable;
 
-import com.nirho.model.Empresa;
-
 /**
  *
  * @author eisten
@@ -33,8 +31,7 @@ public class ParticipanteHC implements Serializable {
     private String correoElectronico;
     private String sede;
     private String areaOrg;
-    private Empresa idEmpresa;
-
+    
     public ParticipanteHC() {
     }
 
@@ -191,15 +188,7 @@ public class ParticipanteHC implements Serializable {
     public void setAreaOrg(String areaOrg) {
         this.areaOrg = areaOrg;
     }
-
-    public Empresa getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    public void setIdEmpresa(Empresa idEmpresa) {
-        this.idEmpresa = idEmpresa;
-    }
-
+    
 	@Override
 	public String toString() {
 		return "ParticipanteHC [idParticipante=" + idParticipante + ", nivel=" + nivel + ", nivelTexto=" + nivelTexto
@@ -207,7 +196,7 @@ public class ParticipanteHC implements Serializable {
 				+ ", rfc=" + rfc + ", puesto=" + puesto + ", fechaIngreso=" + fechaIngreso + ", antigPuesto="
 				+ antigPuesto + ", nivelEscolaridad=" + nivelEscolaridad + ", otrosEstudios=" + otrosEstudios
 				+ ", idioma=" + idioma + ", nivelIdioma=" + nivelIdioma + ", correoElectronico=" + correoElectronico
-				+ ", sede=" + sede + ", areaOrg=" + areaOrg + ", idEmpresa=" + idEmpresa + "]";
+				+ ", sede=" + sede + ", areaOrg=" + areaOrg + "]";
 	}
     
 }

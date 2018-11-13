@@ -21,18 +21,27 @@ import {EncuestaComponent} from './components/encuesta/encuesta.component';
 import {AvatarEditComponent} from './components/avatar-edit/avatar-edit.component';
 import {MaterialModule} from '../material/material.module';
 import {ChartModule} from 'angular2-highcharts';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import {AppRoutingModule} from '../../app-routing.module';
 import {HttpClientModule} from '../../../../node_modules/@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { PickerModule } from '@ctrl/ngx-emoji-mart'
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
-import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji'
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+declare var require: any;
 
+export function highchartsFactory() {
+  const hc = require('highcharts');
+  const dd = require('highcharts/modules/drilldown');
+  dd(hc);
+
+  return hc;
+}
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
-    ChartModule.forRoot(require('highcharts')),
+    ChartModule,
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
@@ -65,6 +74,12 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji'
   ],
   exports: [
     CuestionarioSelectComponent
-  ]
+  ],
+  providers: [
+    {
+      provide: HighchartsStatic,
+      useFactory: highchartsFactory
+    }
+  ],
 })
 export class CLBModule { }

@@ -13,13 +13,18 @@ import { RecruitingIrhComponent } from './components/reviews/recruiting-irh/recr
 import { RecruitingModalIrhComponent } from './components/reviews/modals/recruiting-modal-irh/recruiting-modal-irh.component';
 import { RhAdminModalIrhComponent } from './components/reviews/modals/rh-admin-modal-irh/rh-admin-modal-irh.component';
 import { RhAdminIrhComponent } from './components/reviews/rh-admin-irh/rh-admin-irh.component';
-import { OrganizationalDevelopmentIrhComponent } from './components/reviews/organizational-development-irh/organizational-development-irh.component';
+import {
+  DialogOverviewExampleDialog,
+  OrganizationalDevelopmentIrhComponent
+} from './components/reviews/organizational-development-irh/organizational-development-irh.component';
 import { OrganizationalDevelopmentModalIrhComponent } from './components/reviews/modals/organizational-development-modal-irh/organizational-development-modal-irh.component';
 import { TrainingIrhComponent } from './components/reviews/training-irh/training-irh.component';
 import { TrainingModalIrhComponent } from './components/reviews/modals/training-modal-irh/training-modal-irh.component';
 import { EnterpriseDetailIrhComponent } from './components/enterprise-detail-irh/enterprise-detail-irh.component';
-import {CLBModule} from '../clb/clb.module';
 import {CuestionarioSelectIRHComponent} from './components/cuestionario-select-irh/cuestionario-select-irh.component';
+import {EncuestaIrhComponent} from './components/encuesta_irh/encuesta-irh.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 @NgModule({
   imports: [
@@ -29,6 +34,9 @@ import {CuestionarioSelectIRHComponent} from './components/cuestionario-select-i
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    EmojiModule,
+    PickerModule,
+
   ],
   declarations: [
     EnterpriseListComponent,
@@ -45,7 +53,9 @@ import {CuestionarioSelectIRHComponent} from './components/cuestionario-select-i
     TrainingIrhComponent,
     TrainingModalIrhComponent,
     EnterpriseDetailIrhComponent,
-    CuestionarioSelectIRHComponent
+    CuestionarioSelectIRHComponent,
+    EncuestaIrhComponent,
+    DialogOverviewExampleDialog
   ],
   entryComponents: [
     RecruitingModalIrhComponent,

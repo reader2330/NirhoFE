@@ -15,10 +15,12 @@ public class CuestionarioParticipanteDAOImpl extends AbstractDAO<CuetionarioPart
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<CuetionarioParticipante> findByIdParticipante(Integer idParticipante) {
-		String hql = "FROM CuetionarioParticipante cp WHERE cp.cuetionarioParticipantePK.idParticipante = :idParticipante";
+	public List<CuetionarioParticipante> findByParticipanteProyecto(Integer idParticipante, Integer idProyecto) {
+		String hql = "FROM CuetionarioParticipante cp WHERE cp.cuetionarioParticipantePK.idParticipante = :idParticipante "
+													+ "AND cp.cuetionarioParticipantePK.idProyecto = :idProyecto";
 		Query query = entityManager.createQuery(hql);
 		query.setParameter("idParticipante", idParticipante);
+		query.setParameter("idProyecto", idProyecto);
 		return query.getResultList();
 	}
 
