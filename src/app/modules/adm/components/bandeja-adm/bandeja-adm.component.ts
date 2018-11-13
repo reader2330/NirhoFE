@@ -31,7 +31,7 @@ export class BandejaAdmComponent implements OnInit {
   }
   getEmpleados() {
 
-    this.ProyectoService.getEmploye().subscribe((res) => {
+    this.CatalogsAdmService.getEmploye().subscribe((res) => {
       this.dataSource = res;
     });
 

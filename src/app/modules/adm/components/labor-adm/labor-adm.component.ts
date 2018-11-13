@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {LanguageModalAdmComponent} from '../language-modal-adm/language-modal-adm.component';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {DialogData} from '../../../irh/components/reviews/training-irh/training-irh.component';
@@ -6,6 +6,8 @@ import {LaborModalAdmComponent} from '../labor-modal-adm/labor-modal-adm.compone
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {CatalogsAdmService} from '../../services/catalogs-adm.service';
+import Swal from "sweetalert2";
 
 export interface laboral_interface {
   puesto: string;
@@ -23,6 +25,7 @@ export interface laboral_interface {
   styleUrls: ['./labor-adm.component.scss']
 })
 export class LaborAdmComponent implements OnInit {
+
   jsonFinal = {
     id: null,
     nombreCompleto : '',
@@ -72,7 +75,7 @@ export class LaborAdmComponent implements OnInit {
     }
   );
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, public dialog: MatDialog) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, public dialog: MatDialog, private CatalogsAdmService: CatalogsAdmService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -141,8 +144,25 @@ export class LaborAdmComponent implements OnInit {
     this.jsonFinal.escolaridadOficios = scholarship.escolaridadOficios;
     this.jsonFinal.titulo = scholarship.titulo;
     this.jsonFinal.idiomas.push(languageList);
+    this.jsonFinal.puesto = this.laborales[0].puesto;
+    this.jsonFinal.nivelLaboral = this.laborales[0].nivelLaboral;
+    this.jsonFinal.fechaInicio = this.laborales[0].fechaInicio;
+    this.jsonFinal.fechaTermino = this.laborales[0].fechaTermino;
+    this.jsonFinal.antiguedad = this.laborales[0].antiguedad;
+    this.jsonFinal.localidad = this.laborales[0].localidad;
+    this.jsonFinal.area = this.laborales[0].area;
 
-    console.log(this.jsonFinal);
+    this.CatalogsAdmService.saveEmploye(this.jsonFinal).subscribe(res => {
+      console.log(res);
+      Swal(
+        'Listo.',
+        'Los cuestionarios se enviaron correctamente',
+        'success'
+      ).then(res => {
+        this.response.emit({value:1});
+      });
+    });
+
 
 
   }

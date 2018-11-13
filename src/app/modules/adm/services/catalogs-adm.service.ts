@@ -45,5 +45,8 @@ export class CatalogsAdmService {
   getEmploye(): Observable<laboral_interface[]> {
     return this._http.get<laboral_interface[]>(this.api + 'empleado/todos', {headers: this.header});
   }
+  saveEmploye(data): Observable<any> {
+    return this._http.post(this.api + 'empleado/agregar', data, {headers: this.header});
+  }
 
 }
