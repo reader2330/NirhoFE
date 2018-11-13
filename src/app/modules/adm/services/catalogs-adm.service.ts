@@ -26,4 +26,19 @@ export class CatalogsAdmService {
   getScholarship(): Observable<any> {
     return this._http.get(this.api + 'catalogo/empleado/nivelEscolaridad', {headers: this.header});
   }
+  getLanguage(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/idioma', {headers: this.header});
+  }
+  getTypeContac(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/empleado/tipoContacto', {headers: this.header});
+  }
+  getLevelJob(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/empleado/nivelLaboral', {headers: this.header});
+  }
+  getLevelLanguage(): Observable<any> {
+    return this._http.get(this.api + '/catalogo/nivelIdioma', {headers: this.header});
+  }
+  getLevelHabilities(): Observable<any> {
+    return this._http.get(this.api + '/catalogo/nivelConocimiento', {headers: this.header});
+  }
 }
