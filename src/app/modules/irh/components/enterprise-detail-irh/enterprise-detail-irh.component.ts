@@ -100,12 +100,7 @@ export class EnterpriseDetailIrhComponent implements OnInit {
         }
       });
   }
-  getValuesFormFromJson(){
-
-  }
-
-  saveCompany() {
-    console.log(this.enterpriseForm.value);
+  saveTotalCompany() {
     Swal({
       title: '',
       text: 'Seguro que quieres guardar la información ingresada de la empresa',
@@ -117,37 +112,50 @@ export class EnterpriseDetailIrhComponent implements OnInit {
       if (result.value) {
         let obj = this.enterpriseForm.value;
         console.log(obj);
-          this.EntrepiseService.saveEntripise(obj).subscribe((res) => {
-              console.log(res);
-              Swal(
-                'Listo.',
-                'La información se guardo correctamente',
-                'success'
-              ).then(() => {
-                this.response.emit({value: 1});
-              });
+        this.EntrepiseService.saveEntripise(obj).subscribe((res) => {
+            console.log(res);
+            Swal(
+              'Listo.',
+              'La información se guardo correctamente',
+              'success'
+            ).then(() => {
+              this.response.emit({value: 1});
+            });
 
-            },
-            (err) => {
-              console.log(err);
-              Swal(
-                'Algo salio mal.',
-                'No se pudo guarda la información',
-                'error'
-              ).then(() => {
-                this.response.emit({value: 1});
-              });
-
-
+          },
+          (err) => {
+            console.log(err);
+            Swal(
+              'Algo salio mal.',
+              'No se pudo guarda la información',
+              'error'
+            ).then(() => {
+              this.response.emit({value: 1});
             });
 
 
-        }
+          });
+
+
+      }
     });
   }
-
-  updateCompany(){
-
+  updateCompany() {
+  }
+  cancelCompany() {
+    Swal({
+      title: '',
+      text: '¿Se eliminara la información ingresada?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        this.enterpriseForm.reset();
+        this.response.emit({value: 1});
+      }
+    });
   }
 
 }

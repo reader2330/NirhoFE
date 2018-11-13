@@ -7,9 +7,9 @@ import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.Proyecto;
 
 public interface ProyectoService {
-	List<Proyecto> obtenerProyectosTodos() throws NirhoServiceException;
-	List<Proyecto> obtenerProyectosConsultor(Integer idUsuario) throws NirhoServiceException;
+	List<Proyecto> obtenerProyectosTodos(Integer idModulo) throws NirhoServiceException;
+	List<Proyecto> obtenerProyectosConsultor(Integer idUsuario, Integer idModulo) throws NirhoServiceException;
 	Proyecto obtenerProyectoPorId(Integer idProyecto) throws NirhoServiceException;
-	void registrarProyecto(Proyecto proyecto) throws NirhoServiceException;
+	void registrarProyecto(Proyecto proyecto, Integer idModulo) throws NirhoServiceException;
 	void asignarConsultor(ConsultorProyectoPK consultorProyectoPK) throws NirhoServiceException;
 }

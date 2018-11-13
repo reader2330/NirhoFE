@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '../../../../../../node_modules/@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {EnterprisesService} from '../../services/enterprises.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-enterprise-irh',
@@ -10,6 +11,7 @@ import {EnterprisesService} from '../../services/enterprises.service';
   styleUrls: ['./enterprise-irh.component.scss']
 })
 export class EnterpriseIrhComponent implements OnInit {
+  @Output() response = new EventEmitter();
   mobile = false;
   mgsInit = '';
   countries = [];
@@ -87,6 +89,65 @@ export class EnterpriseIrhComponent implements OnInit {
     this.CatalogService.getGiros().subscribe(res => {
       this.spins = res;
       console.log(res);
+    });
+  }
+
+
+  saveCompany() {
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar la información ingresada de la empresa',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        let obj = this.enterpriseForm.value;
+        console.log(obj);
+        this.EntrepiseService.saveEntripise(obj).subscribe((res) => {
+            console.log(res);
+            Swal(
+              'Listo.',
+              'La información se guardo correctamente',
+              'success'
+            ).then(() => {
+              this.response.emit({value: 1});
+            });
+
+          },
+          (err) => {
+            console.log(err);
+            Swal(
+              'Algo salio mal.',
+              'No se pudo guarda la información',
+              'error'
+            ).then(() => {
+              this.response.emit({value: 1});
+            });
+
+
+          });
+
+
+      }
+    });
+  }
+  updateCompany() {
+  }
+  cancelCompany() {
+    Swal({
+      title: '',
+      text: '¿Se eliminara la información ingresada?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        this.enterpriseForm.reset();
+        this.response.emit({value: 1});
+      }
     });
   }
 

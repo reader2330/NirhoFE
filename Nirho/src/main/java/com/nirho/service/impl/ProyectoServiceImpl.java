@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nirho.dao.ConsultorProyectoDAO;
+import com.nirho.dao.ModuloDAO;
 import com.nirho.dao.ProyectoDAO;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConsultorProyecto;
@@ -20,13 +21,16 @@ public class ProyectoServiceImpl implements ProyectoService {
 	public final static Logger logger = Logger.getLogger(ProyectoServiceImpl.class);
 	@Autowired
 	private ProyectoDAO dao;
-	@Autowired ConsultorProyectoDAO consulProyDAO;
+	@Autowired
+	private ModuloDAO moduloDAO;
+	@Autowired 
+	private ConsultorProyectoDAO consulProyDAO;
 	
 	@Override
-	public List<Proyecto> obtenerProyectosTodos() throws NirhoServiceException {
+	public List<Proyecto> obtenerProyectosTodos(Integer idModulo) throws NirhoServiceException {
 		List<Proyecto> lista = null;
 		try {
-			lista = dao.findAll();
+			lista = moduloDAO.getOne(idModulo).getProyectoList();
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al consultar en la BD los proyectos, causa [" + e.getMessage()+ "]");
@@ -35,12 +39,14 @@ public class ProyectoServiceImpl implements ProyectoService {
 	}
 	
 	@Override
-	public List<Proyecto> obtenerProyectosConsultor(Integer idUsuario) throws NirhoServiceException {
+	public List<Proyecto> obtenerProyectosConsultor(Integer idUsuario, Integer idModulo) throws NirhoServiceException {
 		List<Proyecto> lista = new ArrayList<>();
 		try {
 			List<ConsultorProyecto> listaCP = consulProyDAO.findByIdUsuario(idUsuario);
 			for(ConsultorProyecto cp: listaCP) {
-				lista.add(dao.getOne(cp.getConsultorProyectoPK().getIdProyecto()));
+				if(cp.getProyecto().getIdModulo().intValue() == idModulo.intValue()) {
+					lista.add(dao.getOne(cp.getConsultorProyectoPK().getIdProyecto()));
+				}
 			}
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");
@@ -62,8 +68,9 @@ public class ProyectoServiceImpl implements ProyectoService {
 	}
 
 	@Override
-	public void registrarProyecto(Proyecto proyecto) throws NirhoServiceException {
+	public void registrarProyecto(Proyecto proyecto, Integer idModulo) throws NirhoServiceException {
 		try {
+			proyecto.setIdModulo(idModulo);
 			if(proyecto.getIdProyecto()==null){
 				dao.save(proyecto);
 			} else {
