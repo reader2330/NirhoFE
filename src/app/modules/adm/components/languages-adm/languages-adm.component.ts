@@ -95,7 +95,10 @@ export class LanguagesAdmComponent implements OnInit {
     this.temp = JSON.parse(sessionStorage.getItem('lenguaje'));
     this.lenguajes.push(this.temp);
     this.dataSource = this.lenguajes;
-    console.log("eee: ", this.dataSource);
+  }
+
+  saveLanguages() {
+    sessionStorage.setItem('language-list', JSON.stringify(this.lenguajes));
   }
 
   ngOnInit() {
