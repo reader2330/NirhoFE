@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {CatalogsService} from '../../../clb/services/catalogs.service';
+import {CatalogsAdmService} from '../../services/catalogs-adm.service';
 
 @Component({
   selector: 'app-contact-adm',
@@ -10,32 +10,28 @@ import {CatalogsService} from '../../../clb/services/catalogs.service';
 })
 export class ContactAdmComponent implements OnInit {
 
-  contact = {
-    id: 0,
-    celular: 1234,
+  contacto = {
+    celular: 0,
     email: '',
     nombre: '',
     puesto: '',
-    telefono: 1234,
-    tipoContacto: 1,
-    empresa: {}
+    telefono: 0,
+    tipoContacto: 0
   };
+  tipoContacto = [];
   puestos = [];
-  typeContact = [];
   mobile = false;
   contactForm = new FormGroup(
     {
-      id: new FormControl(null),
       telefono: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       puesto: new FormControl(0, Validators.required),
       tipoContacto: new FormControl(0, Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       nombre: new FormControl('', Validators.required),
-      celular: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      empresa:  new FormControl(null)
+      celular: new FormControl('', [Validators.required, Validators.maxLength(10)])
     }
   );
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogsAdmServices: CatalogsAdmService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -57,7 +53,31 @@ export class ContactAdmComponent implements OnInit {
     }
   }
 
+  getTypeContac() {
+    this.CatalogsAdmServices.getTypeContac().subscribe((res) => {
+      if (res) {
+        this.tipoContacto = res;
+      }
+    });
+  }
+
+  getJob() {
+    this.CatalogsAdmServices.getJob().subscribe((res) => {
+      if (res) {
+        this.puestos = res;
+      }
+    });
+  }
+
+  saveContact() {
+    console.log(this.contactForm.value);
+    this.contacto = this.contactForm.value;
+    sessionStorage.setItem('contacto', JSON.stringify(this.contacto));
+  }
+
   ngOnInit() {
+    this.getTypeContac();
+    this.getJob();
   }
 
 }

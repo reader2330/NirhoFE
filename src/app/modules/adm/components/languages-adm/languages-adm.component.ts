@@ -6,19 +6,14 @@ import {TableClient2ModalEvdComponent} from '../../../evd/components/modals/tabl
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {DialogData} from '../../../irh/components/reviews/training-irh/training-irh.component';
 import {LanguageModalAdmComponent} from '../language-modal-adm/language-modal-adm.component';
+import {laboral_interface} from '../labor-adm/labor-adm.component';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface language_interface {
+  idioma: number;
+  nivel: number;
+  habilidades: number;
 }
 
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'}
-];
 
 @Component({
   selector: 'app-languages-adm',
@@ -28,7 +23,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class LanguagesAdmComponent implements OnInit {
 
   displayedColumns: string[] = ['idioma', 'habilidad', 'nivel', 'delete'];
-  dataSource = ELEMENT_DATA;
+  lenguajes: language_interface[] = [] ;
+  dataSource = [];
+  temp = '';
 
   contact = {
     id: 0,
@@ -80,6 +77,7 @@ export class LanguagesAdmComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.getFieldsLanguage();
       console.log('The dialog was closed');
       //this.animal = result;
     });
@@ -93,6 +91,13 @@ export class LanguagesAdmComponent implements OnInit {
     }
   }
 
+  getFieldsLanguage() {
+    this.temp = JSON.parse(sessionStorage.getItem('lenguaje'));
+    this.lenguajes.push(this.temp);
+    this.dataSource = this.lenguajes;
+    console.log("eee: ", this.dataSource);
+  }
+
   ngOnInit() {
   }
 
@@ -102,14 +107,4 @@ export class LanguagesAdmComponent implements OnInit {
   selector: 'app-language-modal-adm',
   templateUrl: '../language-modal-adm/language-modal-adm.component.html'
 })
-export class DialogOverviewExampleDialog {
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}

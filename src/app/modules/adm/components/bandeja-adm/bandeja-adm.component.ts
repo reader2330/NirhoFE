@@ -5,6 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {ProyectoService} from '../../services/proyecto.service';
 import {Proyecto} from '../../models/proyecto';
 import {CatalogsService} from '../../services/catalogs.service';
+import {CatalogsAdmService} from '../../services/catalogs-adm.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class BandejaAdmComponent implements OnInit {
   proyects: Proyecto[];
   @Output() responseChildren = new EventEmitter();
 
-  constructor(private ProyectoService: ProyectoService) {
+  constructor(private ProyectoService: ProyectoService, private CatalogsAdmService: CatalogsAdmService) {
   }
   displayedColumns: string[] = ['nombre', 'empresa', 'empleados', 'participantes', 'periodo', 'frecuenciaEval', 'detail3'];
   dataSource = [];
@@ -26,14 +27,12 @@ export class BandejaAdmComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getProyects();
+    this.getEmpleados();
   }
-  getProyects() {
+  getEmpleados() {
 
-    this.ProyectoService.getProyects().subscribe((res) => {
-      console.log(res);
-      this.proyects = res;
-      this.dataSource = this.proyects;
+    this.ProyectoService.getEmploye().subscribe((res) => {
+      this.dataSource = res;
     });
 
   }
@@ -45,7 +44,7 @@ export class BandejaAdmComponent implements OnInit {
 
     }
   }
-  getUser() {
+  /*getUser() {
     if (sessionStorage.getItem('user')) {
       let user = JSON.parse(sessionStorage.getItem('user'));
       if (user.rol !== 3) {
@@ -62,7 +61,7 @@ export class BandejaAdmComponent implements OnInit {
     this.ProyectoService.getProyectsbyRol(4).subscribe((res) => {
         this.proyects = res;
     });
-  }
+  }*/
 
 
 

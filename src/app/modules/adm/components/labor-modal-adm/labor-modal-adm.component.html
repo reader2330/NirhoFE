@@ -1,7 +1,7 @@
-<form [formGroup]="enterpriseForm">
+<form [formGroup]="laborForm">
   <h5 style="text-align: center">
     <mat-icon>folder_open</mat-icon>
-    Nuevo idioma
+    Nuevos datos laborales
   </h5>
   <hr>
 
@@ -10,10 +10,10 @@
 
       <div class="col-sm-12 col-md-6">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
-          <mat-label>Idioma</mat-label>
-          <mat-select required >
-            <mat-option >
-
+          <mat-label>Puesto</mat-label>
+          <mat-select formControlName="puesto" required>
+            <mat-option *ngFor="let puesto of puestos" [value]="puesto.id">
+              {{puesto.descripcionCatalogo}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -21,27 +21,57 @@
 
       <div class="col-sm-12 col-md-6">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
-          <mat-label>Nivel</mat-label>
-          <mat-select  required >
-            <mat-option >
-
+          <mat-label>Nivel Laboral</mat-label>
+          <mat-select [formControlName]="nivelLaboral" required >
+            <mat-option *ngFor="let nivelLab of nivelesLaborales" [value]="nivelLab.id">
+              {{nivelLab.descripcionCatalogo}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
 
-      <div class="col-sm-12 col-md-12">
+      <div class="col-sm-12 col-md-6">
+          <mat-form-field appearance="outline" style="display: contents">
+            <mat-label>Fecha inicio</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechaInicio">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
+          <mat-form-field appearance="outline" style="display: contents">
+            <mat-label>Fecha termino</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="fechaTermino">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
-          <mat-label>Habilidades</mat-label>
-          <mat-select  multiple required>
-            <mat-option >
-
-            </mat-option>
-          </mat-select>
+          <mat-label>Antigüedad</mat-label>
+          <input matInput formControlName="antiguedad" type="text" required onkeyup="javascript: this.value = this.value.toUpperCase()">
         </mat-form-field>
       </div>
 
-      <!--<button type="button" style="margin-left: 20px" mat-raised-button color="primary">Save me prro</button>-->
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Localidad</mat-label>
+          <input matInput formControlName="localidad" type="text" required onkeyup="javascript: this.value = this.value.toUpperCase()">
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Área</mat-label>
+          <input matInput formControlName="area" type="text" required onkeyup="javascript: this.value = this.value.toUpperCase()">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12">
+        <button type="button" style="margin-left: 20px" (click)="saveJob()" mat-raised-button color="primary">Agregar</button>
+      </div>
 
 
     </div>
