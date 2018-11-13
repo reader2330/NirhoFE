@@ -46,6 +46,10 @@ export class SidebarIrhComponent implements OnInit {
       id_submodulo: 4,
       descripcion: 'Contestar cuestionario'
     });
+
+    this.LoginService.getUser().subscribe(res => {
+      console.log(res);
+    })
   }
 
   goModule(opt) {
