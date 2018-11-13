@@ -25,7 +25,41 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./labor-adm.component.scss']
 })
 export class LaborAdmComponent implements OnInit {
-
+  jsonFinal = {
+    id: null,
+    nombreCompleto : '',
+    nacionalidad: 0,
+    fechaNacimiento: null,
+    edad : 0,
+    rfc: '',
+    curp: '',
+    nss: '',
+    direccion: '',
+    contactos : [],
+    banco : 0,
+    bancoCuenta: null,
+    bancoClaveInterbancaria : 0,
+    escolaridad: 0,
+    escolaridadCarrera: '',
+    escolaridadEspecialidad: '',
+    escolaridadCapacidades : '',
+    escolaridadCertificaciones : [],
+    escolaridadCursos: [],
+    escolaridadOficios: [],
+    titulo: false,
+    idiomas : [],
+    puesto: '',
+    nivelLaboral: 0,
+    fechaInicio: null,
+    fechaTermino: null,
+    antiguedad: 0,
+    localidad: '',
+    area: '',
+    documentoCurp: null,
+    documentoIne : null,
+    documentoCV: null,
+    documentoComprobanteDomicilio: null
+  };
   displayedColumns: string[] = ['puesto', 'nivel', 'date_init', 'date_end', 'antiquity', 'location', 'area', 'delete'];
   dataSource = ELEMENT_DATA;
 
@@ -40,11 +74,46 @@ export class LaborAdmComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      //this.animal = result;
+
     });
   }
 
   ngOnInit() {
+  }
+
+  saveEmpleado() {
+    console.log(sessionStorage);
+    let employee = JSON.parse(sessionStorage.getItem('employee'));
+    let laborList = JSON.parse(sessionStorage.getItem('labor-list'));
+    let languageList = JSON.parse(sessionStorage.getItem('language-list'));
+    let contacto = JSON.parse(sessionStorage.getItem('contacto'));
+    let payment = JSON.parse(sessionStorage.getItem('payment'));
+    let scholarship = JSON.parse(sessionStorage.getItem('scholarship'));
+    this.jsonFinal.id = employee.id;
+    this.jsonFinal.nombreCompleto = employee.nombreCompleto;
+    this.jsonFinal.nacionalidad = employee.nacionalidad;
+    this.jsonFinal.fechaNacimiento = employee.fechaNacimiento;
+    this.jsonFinal.edad = employee.edad;
+    this.jsonFinal.rfc = employee.rfc;
+    this.jsonFinal.curp = employee.curp;
+    this.jsonFinal.nss = employee.nss;
+    this.jsonFinal.direccion = employee.direccion;
+    this.jsonFinal.contactos.push(contacto);
+    this.jsonFinal.banco = payment.banco;
+    this.jsonFinal.bancoCuenta = payment.bancoCuenta;
+    this.jsonFinal.bancoClaveInterbancaria = payment.bancoClaveInterbancaria;
+    this.jsonFinal.escolaridad = scholarship.escolaridad;
+    this.jsonFinal.escolaridadCarrera = scholarship.escolaridadCarrera;
+    this.jsonFinal.escolaridadEspecialidad = scholarship.escolaridadEspecialidad;
+    this.jsonFinal.escolaridadCertificaciones = scholarship.escolaridadCertificaciones;
+    this.jsonFinal.escolaridadCursos = scholarship.escolaridadCursos;
+    this.jsonFinal.escolaridadOficios = scholarship.escolaridadOficios;
+    this.jsonFinal.titulo = scholarship.titulo;
+    this.jsonFinal.idiomas.push(languageList);
+
+    console.log(this.jsonFinal);
+
+
   }
 
 }

@@ -40,34 +40,34 @@
 
    <mat-grid-tile [colspan]="1" [rowspan]="1">
      <mat-form-field class="example-chip-list" appearance="outline">
-       <mat-chip-list #chipList>
+       <mat-chip-list #chipListCertificaciones>
          <mat-chip *ngFor="let fruit of certificaciones" [selectable]="selectable"
                    [removable]="removable" (removed)="remove(fruit)">
            {{fruit.name}}
            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
          </mat-chip>
-         <input placeholder="Certificaciones"
-                [matChipInputFor]="chipList"
+         <input matInput formArrayName="escolaridadCertificaciones" placeholder="Certificaciones"
+                [matChipInputFor]="chipListCertificaciones"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="add($event)">
+                (matChipInputTokenEnd)="add($event,1)">
        </mat-chip-list>
      </mat-form-field>
    </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="example-chip-list" appearance="outline">
-        <mat-chip-list #chipList>
-          <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+        <mat-chip-list #chipListCursos>
+          <mat-chip *ngFor="let fruit of cursos" [selectable]="selectable"
                     [removable]="removable" (removed)="remove(fruit)">
             {{fruit.name}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
-          <input placeholder="Cursos"
-                 [matChipInputFor]="chipList"
+          <input  formArrayName="escolaridadCursos" placeholder="Cursos"
+                 [matChipInputFor]="chipListCursos"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  [matChipInputAddOnBlur]="addOnBlur"
-                 (matChipInputTokenEnd)="add($event)">
+                 (matChipInputTokenEnd)="add($event,2)">
         </mat-chip-list>
       </mat-form-field>
     </mat-grid-tile>
@@ -75,23 +75,23 @@
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="example-chip-list" appearance="outline">
-        <mat-chip-list #chipList>
-          <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+        <mat-chip-list #chipListOficios>
+          <mat-chip *ngFor="let fruit of oficios" [selectable]="selectable"
                     [removable]="removable" (removed)="remove(fruit)">
             {{fruit.name}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
-          <input placeholder="Oficios"
-                 [matChipInputFor]="chipList"
+          <input matInput formArrayName="escolaridadOficios" placeholder="Oficios"
+                 [matChipInputFor]="chipListOficios"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  [matChipInputAddOnBlur]="addOnBlur"
-                 (matChipInputTokenEnd)="add($event)">
+                 (matChipInputTokenEnd)="add($event,3)">
         </mat-chip-list>
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile>
-      <mat-checkbox [formControlName]="titulo">Título universitario</mat-checkbox>
+      <mat-checkbox formControlName="titulo">Título universitario</mat-checkbox>
     </mat-grid-tile>
 
 

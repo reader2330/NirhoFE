@@ -10,7 +10,7 @@ import {CatalogsAdmService} from '../../services/catalogs-adm.service';
   styleUrls: ['./payment-adm.component.scss']
 })
 export class PaymentAdmComponent implements OnInit {
-
+  mobile = false;
   payment = {
     banco: 0,
     bancoCuenta: '',

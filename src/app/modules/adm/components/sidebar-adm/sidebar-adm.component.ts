@@ -41,7 +41,7 @@ export class SidebarAdmComponent implements OnInit {
       this.user = res;
       sessionStorage.setItem('user', JSON.stringify(this.user));
     });
-  }
+  }*/
 
   recibirRespuestChildren(evt) {
     if (evt.value) {
@@ -51,12 +51,12 @@ export class SidebarAdmComponent implements OnInit {
   }
 
   cerraSesion() {
-    this.LoginService.closeSession().subscribe((res) => {
+    this.LoginServices.closeSession().subscribe((res) => {
       console.log(res);
     });
     sessionStorage.clear();
     this.route.navigate(['']);
-  }*/
+  }
 
 
   /*ngOnInit() {

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {MatChipInputEvent} from '@angular/material';
 import {CatalogsAdmService} from '../../services/catalogs-adm.service';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 
 export interface Certificacion {
@@ -23,16 +24,25 @@ export class ScholarshipAdmComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  certificaciones: Certificacion[] = [
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  certificaciones = [
   ];
+  oficios = [];
+  cursos = [];
 
-  add(event: MatChipInputEvent): void {
+  add(event: MatChipInputEvent, module): void {
     const input = event.input;
     const value = event.value;
 
     // Add our fruit
-    if ((value || '').trim()) {
-      this.certificaciones.push({name: value.trim()});
+    if ((value || '').trim() && module === 1) {
+      this.certificaciones.push(value.trim());
+    }
+    if ((value || '').trim() && module === 2) {
+      this.cursos.push( value.trim());
+    }
+    if ((value || '').trim() && module === 3) {
+      this.oficios.push(value.trim());
     }
 
     // Reset the input value
@@ -41,7 +51,7 @@ export class ScholarshipAdmComponent implements OnInit {
     }
   }
 
-  remove(certificacion: Certific): void {
+  remove(certificacion ): void {
     const index = this.certificaciones.indexOf(certificacion);
 
     if (index >= 0) {
@@ -53,9 +63,9 @@ export class ScholarshipAdmComponent implements OnInit {
     escolaridadCarrera: '',
     escolaridadEspecialidad: '',
     escolaridadCapacidades: '',
-    escolaridadCertificaciones: '',
-    escolaridadCursos: '',
-    escolaridadOficios: '',
+    escolaridadCertificaciones: [],
+    escolaridadCursos: [],
+    escolaridadOficios: [],
     titulo: false
   };
   escolaridades = [];
@@ -66,9 +76,9 @@ export class ScholarshipAdmComponent implements OnInit {
       escolaridadCarrera: new FormControl('', Validators.required),
       escolaridadEspecialidad: new FormControl('', Validators.required),
       escolaridadCapacidades: new FormControl('', [Validators.required]),
-      escolaridadCertificaciones: new FormControl('', Validators.required),
-      escolaridadCursos: new FormControl('', [Validators.required]),
-      escolaridadOficios:  new FormControl(''),
+      escolaridadCertificaciones: new FormArray([], Validators.required),
+      escolaridadCursos: new FormArray([], [Validators.required]),
+      escolaridadOficios:  new FormArray([], Validators.required),
       titulo:  new FormControl(false)
     }
   );
@@ -103,8 +113,12 @@ export class ScholarshipAdmComponent implements OnInit {
   }
 
   saveScholarship() {
-    console.log(this.scholarshipForm.value);
-    this.scholarship = this.scholarshipForm.value;
+
+    this.scholarship =  this.scholarshipForm.value;
+    this.scholarship.escolaridadCertificaciones = this.certificaciones;
+    this.scholarship.escolaridadCursos = this.cursos;
+    this.scholarship.escolaridadOficios = this.oficios;
+    console.log(this.scholarship);
     sessionStorage.setItem('scholarship', JSON.stringify(this.scholarship));
   }
 
