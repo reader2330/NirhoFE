@@ -43,7 +43,7 @@
        <mat-chip-list #chipListCertificaciones>
          <mat-chip *ngFor="let fruit of certificaciones" [selectable]="selectable"
                    [removable]="removable" (removed)="remove(fruit)">
-           {{fruit.name}}
+           {{fruit}}
            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
          </mat-chip>
          <input matInput formArrayName="escolaridadCertificaciones" placeholder="Certificaciones"
@@ -60,7 +60,7 @@
         <mat-chip-list #chipListCursos>
           <mat-chip *ngFor="let fruit of cursos" [selectable]="selectable"
                     [removable]="removable" (removed)="remove(fruit)">
-            {{fruit.name}}
+            {{fruit}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
           <input  formArrayName="escolaridadCursos" placeholder="Cursos"
@@ -78,7 +78,7 @@
         <mat-chip-list #chipListOficios>
           <mat-chip *ngFor="let fruit of oficios" [selectable]="selectable"
                     [removable]="removable" (removed)="remove(fruit)">
-            {{fruit.name}}
+            {{fruit}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
           <input matInput formArrayName="escolaridadOficios" placeholder="Oficios"

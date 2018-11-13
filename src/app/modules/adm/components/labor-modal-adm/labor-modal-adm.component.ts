@@ -13,7 +13,7 @@ export class LaborModalAdmComponent implements OnInit {
   puestos = [];
   nivelesLaborales = [];
   mobile = false;
-
+  job_detail = {};
   laborForm = new FormGroup(
     {
       puesto: new FormControl(0, [Validators.required]),

@@ -15,6 +15,7 @@ export class LanguageModalAdmComponent implements OnInit {
   level_lenguages = [];
   hab_lenguages = [];
   mobile = false;
+  lenguaje? = {};
 
   languageForm = new FormGroup(
     {

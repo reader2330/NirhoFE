@@ -36,4 +36,9 @@ export class StepperAdmComponent implements OnInit {
 
   }
 
+  recibirRespuesta(evt) {
+    console.log(evt);
+    this.responseChildren.emit({value: evt.value});
+  }
+
 }

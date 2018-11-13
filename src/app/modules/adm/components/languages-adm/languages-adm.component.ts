@@ -25,7 +25,7 @@ export class LanguagesAdmComponent implements OnInit {
   displayedColumns: string[] = ['idioma', 'habilidad', 'nivel', 'delete'];
   lenguajes: language_interface[] = [] ;
   dataSource = [];
-  temp = '';
+  temp: language_interface;
 
   contact = {
     id: 0,
@@ -105,6 +105,3 @@ export class LanguagesAdmComponent implements OnInit {
   }
 
 }
-
-
-

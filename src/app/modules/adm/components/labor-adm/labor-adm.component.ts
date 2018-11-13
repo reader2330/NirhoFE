@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 export interface laboral_interface {
   puesto: string;
   nivelLaboral: number;
-  fechaInicio: number;
+  fechaInicio: string;
   fechaTermino: string;
   antiguedad: string;
   localidad: string;
@@ -25,47 +25,47 @@ export interface laboral_interface {
   styleUrls: ['./labor-adm.component.scss']
 })
 export class LaborAdmComponent implements OnInit {
-
+  @Output() response = new EventEmitter();
   jsonFinal = {
     id: null,
-    nombreCompleto : '',
+    nombreCompleto: '',
     nacionalidad: 0,
-    fechaNacimiento: null,
-    edad : 0,
+    fechaNacimiento: '',
+    edad: 0,
     rfc: '',
     curp: '',
     nss: '',
     direccion: '',
-    contactos : [],
-    banco : 0,
+    contactos: [],
+    banco: 0,
     bancoCuenta: null,
-    bancoClaveInterbancaria : 0,
+    bancoClaveInterbancaria: 0,
     escolaridad: 0,
     escolaridadCarrera: '',
     escolaridadEspecialidad: '',
-    escolaridadCapacidades : '',
-    escolaridadCertificaciones : [],
+    escolaridadCapacidades: '',
+    escolaridadCertificaciones: [],
     escolaridadCursos: [],
     escolaridadOficios: [],
     titulo: false,
-    idiomas : [],
+    idiomas: [],
     puesto: '',
     nivelLaboral: 0,
-    fechaInicio: null,
-    fechaTermino: null,
-    antiguedad: 0,
+    fechaInicio: '',
+    fechaTermino: '',
+    antiguedad: '',
     localidad: '',
     area: '',
     documentoCurp: null,
-    documentoIne : null,
+    documentoIne: null,
     documentoCV: null,
     documentoComprobanteDomicilio: null
   };
   displayedColumns: string[] = ['puesto', 'nivelLaboral', 'fechaInicio', 'fechaTermino', 'antiguedad', 'localidad', 'area', 'delete'];
-  laborales: laboral_interface[] = [] ;
+  laborales: laboral_interface[] = [];
   dataSource = [];
   mobile = false;
-  temp = '';
+  temp: laboral_interface;
 
   laborForm = new FormGroup(
     {
@@ -111,6 +111,7 @@ export class LaborAdmComponent implements OnInit {
     this.dataSource = this.laborales;
     //console.log("temp: ", this.dataSource);
   }
+
   // accent
   ngOnInit() {
   }
@@ -151,22 +152,16 @@ export class LaborAdmComponent implements OnInit {
     this.jsonFinal.antiguedad = this.laborales[0].antiguedad;
     this.jsonFinal.localidad = this.laborales[0].localidad;
     this.jsonFinal.area = this.laborales[0].area;
-
-    this.CatalogsAdmService.saveEmploye(this.jsonFinal).subscribe(res => {
-      console.log(res);
-      Swal(
-        'Listo.',
-        'Los cuestionarios se enviaron correctamente',
-        'success'
-      ).then(res => {
-        this.response.emit({value:1});
-      });
-    });
-
-
-
+    Swal('Listo.',
+      'Los cuestionarios se enviaron correctamente',
+      'success');
+    if (sessionStorage.getItem('arrayEmpleados')) {
+      let arrayEmpleado = JSON.parse(sessionStorage.getItem('arrayEmpleados'));
+      arrayEmpleado.push(this.jsonFinal);
+    }
+    sessionStorage.setItem('newEmpleado', JSON.stringify(this.jsonFinal));
+    this.response.emit({value:1});
   }
-
 }
   /*@Component({
     selector: 'app-labor-modal-adm',

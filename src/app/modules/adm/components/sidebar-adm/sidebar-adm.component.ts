@@ -12,8 +12,15 @@ export class SidebarAdmComponent implements OnInit {
 
   mobile = false;
   selectModule = 1;
-  modules = [];
+  modules = [{
+    id_submodulo: 1,
+    descripcion: 'Bandeja empleados',
+  },{
+    id_submodulo: 2,
+    descripcion: 'Alta de empleado'
+  }];
   user = {};
+
 
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginServices: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));

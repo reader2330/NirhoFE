@@ -16,7 +16,25 @@ export class BandejaAdmComponent implements OnInit {
   dataSource = [];
 
   ngOnInit() {
-    this.getEmpleados();
+
+
+    if (sessionStorage.getItem('arrayEmpleados')) {
+      if (sessionStorage.getItem('newEmpleado')) {
+        let empleado = JSON.parse(sessionStorage.getItem('newEmpleado'));
+        let array = JSON.parse(sessionStorage.getItem('arrayEmpleados'));
+        array.push(empleado);
+        this.dataSource = array;
+        sessionStorage.setItem('arrayEmpleados', JSON.stringify(array));
+        console.log(array);
+        sessionStorage.removeItem('newEmpleado');
+      }else{
+        let array = JSON.parse(sessionStorage.getItem('arrayEmpleados'));
+        this.dataSource = array;
+      }
+    }else {
+      let arreglo = [];
+      sessionStorage.setItem('arrayEmpleados', JSON.stringify(arreglo));
+    }
   }
 
   getEmpleados() {
@@ -29,7 +47,7 @@ export class BandejaAdmComponent implements OnInit {
   goDetailProyect(element) {
     if (element) {
       sessionStorage.setItem('empleado-detail', JSON.stringify(element));
-      this.responseChildren.emit({value: 10});
+      this.responseChildren.emit({value: 2});
     }
   }
   /*getUser() {
