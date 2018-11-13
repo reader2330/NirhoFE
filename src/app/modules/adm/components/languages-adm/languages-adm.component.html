@@ -40,16 +40,19 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
 
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
-            <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveBank()" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
-
-          </mat-grid-tile>
 
         </div>
 
+        <div>
+          <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
+          <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveLanguages()" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
+        </div>
+
       </div>
+
     </mat-card>
+
+
 
 </form>
 
