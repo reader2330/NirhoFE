@@ -15,6 +15,7 @@ import { LanguagesAdmComponent } from './components/languages-adm/languages-adm.
 import { LanguageModalAdmComponent } from './components/language-modal-adm/language-modal-adm.component';
 import { LaborAdmComponent } from './components/labor-adm/labor-adm.component';
 import { LaborModalAdmComponent } from './components/labor-modal-adm/labor-modal-adm.component';
+import {BandejaAdmComponent} from './components/bandeja-adm/bandeja-adm.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { LaborModalAdmComponent } from './components/labor-modal-adm/labor-modal
     LanguagesAdmComponent,
     LanguageModalAdmComponent,
     LaborAdmComponent,
-    LaborModalAdmComponent
+    LaborModalAdmComponent,
+    BandejaAdmComponent
   ],
   entryComponents: [
     LanguageModalAdmComponent,

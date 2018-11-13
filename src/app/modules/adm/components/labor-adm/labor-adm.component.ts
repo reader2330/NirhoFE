@@ -168,8 +168,8 @@ export class LaborAdmComponent implements OnInit {
   }
 
 }
-  @Component({
+  /*@Component({
     selector: 'app-labor-modal-adm',
     templateUrl: '../labor-modal-adm/labor-modal-adm.component.html'
-  })
+  })*/
 

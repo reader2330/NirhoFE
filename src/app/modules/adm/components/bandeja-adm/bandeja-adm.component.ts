@@ -1,10 +1,4 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
-import {SelectionModel} from '@angular/cdk/collections';
-import {MatButtonModule} from '@angular/material/button';
-import {ProyectoService} from '../../services/proyecto.service';
-import {Proyecto} from '../../models/proyecto';
-import {CatalogsService} from '../../services/catalogs.service';
 import {CatalogsAdmService} from '../../services/catalogs-adm.service';
 
 
@@ -14,24 +8,19 @@ import {CatalogsAdmService} from '../../services/catalogs-adm.service';
   styleUrls: ['./bandeja-adm.component.scss']
 })
 export class BandejaAdmComponent implements OnInit {
-  proyects: Proyecto[];
   @Output() responseChildren = new EventEmitter();
 
-  constructor(private ProyectoService: ProyectoService, private CatalogsAdmService: CatalogsAdmService) {
+  constructor(private CatalogsAdmServices: CatalogsAdmService) {
   }
-  displayedColumns: string[] = ['nombre', 'empresa', 'empleados', 'participantes', 'periodo', 'frecuenciaEval', 'detail3'];
+  displayedColumns: string[] = ['nombreCompleto', 'nacionalidad', 'fechaNacimiento', 'edad', 'rfc', 'curp', 'nss', 'detail3'];
   dataSource = [];
 
-
-
-
   ngOnInit() {
-
     this.getEmpleados();
   }
-  getEmpleados() {
 
-    this.CatalogsAdmService.getEmploye().subscribe((res) => {
+  getEmpleados() {
+    this.CatalogsAdmServices.getEmploye().subscribe((res) => {
       this.dataSource = res;
     });
 
@@ -39,9 +28,8 @@ export class BandejaAdmComponent implements OnInit {
 
   goDetailProyect(element) {
     if (element) {
-      sessionStorage.setItem('detail', JSON.stringify(element));
+      sessionStorage.setItem('empleado-detail', JSON.stringify(element));
       this.responseChildren.emit({value: 10});
-
     }
   }
   /*getUser() {

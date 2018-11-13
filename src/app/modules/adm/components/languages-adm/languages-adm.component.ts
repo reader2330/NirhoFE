@@ -106,8 +106,5 @@ export class LanguagesAdmComponent implements OnInit {
 
 }
 
-@Component({
-  selector: 'app-language-modal-adm',
-  templateUrl: '../language-modal-adm/language-modal-adm.component.html'
-})
+
 
