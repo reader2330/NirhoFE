@@ -22,7 +22,7 @@
       <div class="col-sm-12 col-md-6">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
           <mat-label>Nivel Laboral</mat-label>
-          <mat-select [formControlName]="nivelLaboral" required >
+          <mat-select formControlName="nivelLaboral" required >
             <mat-option *ngFor="let nivelLab of nivelesLaborales" [value]="nivelLab.id">
               {{nivelLab.descripcionCatalogo}}
             </mat-option>
@@ -51,26 +51,26 @@
       <div class="col-sm-12 col-md-6">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
           <mat-label>Antigüedad</mat-label>
-          <input matInput formControlName="antiguedad" type="text" required onkeyup="javascript: this.value = this.value.toUpperCase()">
+          <input matInput formControlName="antiguedad" type="text" required>
         </mat-form-field>
       </div>
 
       <div class="col-sm-12 col-md-6">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
           <mat-label>Localidad</mat-label>
-          <input matInput formControlName="localidad" type="text" required onkeyup="javascript: this.value = this.value.toUpperCase()">
+          <input matInput formControlName="localidad" type="text" required>
         </mat-form-field>
       </div>
 
       <div class="col-sm-12 col-md-6">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
           <mat-label>Área</mat-label>
-          <input matInput formControlName="area" type="text" required onkeyup="javascript: this.value = this.value.toUpperCase()">
+          <input matInput formControlName="area" type="text" required>
         </mat-form-field>
       </div>
 
       <div class="col-md-12">
-        <button type="button" style="margin-left: 20px" (click)="saveJob()" mat-raised-button color="primary">Agregar</button>
+        <button type="button" style="margin-left: 20px" mat-button  (click)="saveJob()" mat-raised-button color="primary">Agregar</button>
       </div>
 
 

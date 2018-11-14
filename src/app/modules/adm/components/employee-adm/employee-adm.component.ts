@@ -95,6 +95,7 @@ export class EmployeeAdmComponent implements OnInit {
 
   ngOnInit() {
     this.getNacionality();
+    console.log(sessionStorage.getItem('empleado-detail'));
   }
 
 }

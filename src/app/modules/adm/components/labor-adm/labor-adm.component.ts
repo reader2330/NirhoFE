@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {LanguageModalAdmComponent} from '../language-modal-adm/language-modal-adm.component';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource} from '@angular/material';
 import {DialogData} from '../../../irh/components/reviews/training-irh/training-irh.component';
 import {LaborModalAdmComponent} from '../labor-modal-adm/labor-modal-adm.component';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
@@ -8,6 +8,7 @@ import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CatalogsAdmService} from '../../services/catalogs-adm.service';
 import Swal from "sweetalert2";
+import {language_interface} from '../languages-adm/languages-adm.component';
 
 export interface laboral_interface {
   puesto: string;
@@ -63,10 +64,11 @@ export class LaborAdmComponent implements OnInit {
   };
   displayedColumns: string[] = ['puesto', 'nivelLaboral', 'fechaInicio', 'fechaTermino', 'antiguedad', 'localidad', 'area', 'delete'];
   laborales: laboral_interface[] = [];
-  dataSource = [];
+  dataSource = new MatTableDataSource<laboral_interface>();
   mobile = false;
   temp: laboral_interface;
-
+  puestos = [];
+  nivelesLaborales = [];
   laborForm = new FormGroup(
     {
       idioma: new FormControl(0, [Validators.required]),
@@ -105,15 +107,17 @@ export class LaborAdmComponent implements OnInit {
   }
 
   getFieldsJob() {
-    //console.log("entaaaa")
+
     this.temp = JSON.parse(sessionStorage.getItem('job_detail'));
     this.laborales.push(this.temp);
-    this.dataSource = this.laborales;
-    //console.log("temp: ", this.dataSource);
+    this.dataSource.data = this.laborales;
+
   }
 
   // accent
   ngOnInit() {
+    this.getJob();
+    this.getLevelJob();
   }
 
   saveEmpleado() {
@@ -144,7 +148,7 @@ export class LaborAdmComponent implements OnInit {
     this.jsonFinal.escolaridadCursos = scholarship.escolaridadCursos;
     this.jsonFinal.escolaridadOficios = scholarship.escolaridadOficios;
     this.jsonFinal.titulo = scholarship.titulo;
-    this.jsonFinal.idiomas.push(languageList);
+    this.jsonFinal.idiomas.push(languageList[0]);
     this.jsonFinal.puesto = this.laborales[0].puesto;
     this.jsonFinal.nivelLaboral = this.laborales[0].nivelLaboral;
     this.jsonFinal.fechaInicio = this.laborales[0].fechaInicio;
@@ -152,19 +156,89 @@ export class LaborAdmComponent implements OnInit {
     this.jsonFinal.antiguedad = this.laborales[0].antiguedad;
     this.jsonFinal.localidad = this.laborales[0].localidad;
     this.jsonFinal.area = this.laborales[0].area;
-    Swal('Listo.',
-      'Los cuestionarios se enviaron correctamente',
-      'success');
-    if (sessionStorage.getItem('arrayEmpleados')) {
-      let arrayEmpleado = JSON.parse(sessionStorage.getItem('arrayEmpleados'));
+    Swal({
+      title: '',
+      text: '¿Seguro qué quieres guardar los datos?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+
+        this.CatalogsAdmService.saveEmploye(this.jsonFinal).subscribe(res => {
+          console.log(res);
+          Swal('Listo.',
+            'El empleado se guardo correctamente',
+            'success');
+          this.response.emit({value:1});
+        });
+      }
+    });
+
+
+   /* if (localStorage.getItem('arrayEmpleados')) {
+      let arrayEmpleado = JSON.parse(localStorage.getItem('arrayEmpleados'));
       arrayEmpleado.push(this.jsonFinal);
     }
-    sessionStorage.setItem('newEmpleado', JSON.stringify(this.jsonFinal));
-    this.response.emit({value:1});
+    localStorage.setItem('newEmpleado', JSON.stringify(this.jsonFinal));*/
+
+  }
+
+  removeLabor(element) {
+    console.log(element);
+    for (let i = 0; i < this.laborales.length; i++ ) {
+      if ( element.puesto == this.laborales[i].puesto) {
+        this.laborales.splice(i,1);
+      }
+
+    }
+    this.dataSource.data = this.laborales;
+
+  }
+
+  showLabor(element, key) {
+
+    switch (key) {
+
+      case 1:
+
+        for (let i = 0; i < this.puestos.length; i++) {
+          if (this.puestos[i].id == element) {
+
+            return this.puestos[i].descripcionCatalogo;
+          }
+        }
+        break;
+      case 2:
+        for (let i = 0; i < this.nivelesLaborales.length; i++) {
+          if (this.nivelesLaborales[i].id == element) {
+            return this.nivelesLaborales[i].descripcionCatalogo;
+          }
+        }
+        break;
+
+    }
+
+  }
+  getJob() {
+    this.CatalogsAdmService.getJob().subscribe((res) => {
+      if (res) {
+        console.log("puestos", res);
+        this.puestos = res;
+      }
+    });
+  }
+
+  getLevelJob() {
+    this.CatalogsAdmService.getLevelJob().subscribe((res) => {
+      if (res) {
+        console.log("niveles",res);
+        this.nivelesLaborales = res;
+      }
+    });
   }
 }
-  /*@Component({
-    selector: 'app-labor-modal-adm',
-    templateUrl: '../labor-modal-adm/labor-modal-adm.component.html'
-  })*/
+
+
 

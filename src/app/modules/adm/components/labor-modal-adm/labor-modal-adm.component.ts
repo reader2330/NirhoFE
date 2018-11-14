@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsAdmService} from '../../services/catalogs-adm.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatDialogRef} from '@angular/material';
+
 
 @Component({
   selector: 'app-labor-modal-adm',
@@ -26,7 +28,7 @@ export class LaborModalAdmComponent implements OnInit {
     }
   );
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogsAdmServices: CatalogsAdmService) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogsAdmServices: CatalogsAdmService , private dialogRef : MatDialogRef<LaborModalAdmComponent>) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -58,6 +60,7 @@ export class LaborModalAdmComponent implements OnInit {
     console.log(this.laborForm.value);
     this.job_detail = this.laborForm.value;
     sessionStorage.setItem('job_detail', JSON.stringify(this.job_detail));
+    this.dialogRef.close();
   }
 
   ngOnInit() {

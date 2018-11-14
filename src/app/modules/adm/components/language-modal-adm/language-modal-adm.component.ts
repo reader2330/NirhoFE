@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsAdmService} from '../../services/catalogs-adm.service';
+import {MatDialogRef} from '@angular/material';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class LanguageModalAdmComponent implements OnInit {
     }
   );
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogsAdmServices: CatalogsAdmService) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogsAdmServices: CatalogsAdmService, private dialogRef : MatDialogRef<LanguageModalAdmComponent>) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -67,6 +68,7 @@ export class LanguageModalAdmComponent implements OnInit {
     console.log(this.languageForm.value);
     this.lenguaje = this.languageForm.value;
     sessionStorage.setItem('lenguaje', JSON.stringify(this.lenguaje));
+    this.dialogRef.close();
   }
 
   ngOnInit() {

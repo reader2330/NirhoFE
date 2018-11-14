@@ -1,0 +1,71 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos del Empleado
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+
+    <mat-form-field style="margin-left: 10px">
+      <input matInput placeholder="Nombre"  [(ngModel)]="empleado.nombreCompleto">
+    </mat-form-field>
+
+    <mat-form-field style="margin-left: 10px">
+      <mat-label>Nacionalidad</mat-label>
+      <mat-select [(ngModel)]="empleado.nacionalidad" required >
+        <mat-option *ngFor="let nacionalidad of nacionalidades" [value]="nacionalidad.id">
+          {{nacionalidad.descripcionCatalogo}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="margin-left: 10px">
+      <mat-label>Fecha de nacimiento</mat-label>
+      <input [(ngModel)]="empleado.fechaNacimiento" [value]="empleado.fechaNacimiento" matInput [matDatepicker]="picker" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field style="margin-left: 10px">
+      <input matInput placeholder="Direccion" [(ngModel)]="empleado.direccion">
+    </mat-form-field>
+    <button style="margin-left: 30px "   mat-raised-button color="accent"><mat-icon>save</mat-icon>Actualizar</button>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos de contacto
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos bancarios
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos escolaridad
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos idiomas
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos laborales
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+
+
+</mat-accordion>

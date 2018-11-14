@@ -1,5 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CatalogsAdmService} from '../../services/catalogs-adm.service';
+import Swal from "sweetalert2";
+import {MatTableDataSource} from '@angular/material';
+import {laboral_interface} from '../labor-adm/labor-adm.component';
 
 
 @Component({
@@ -12,43 +15,72 @@ export class BandejaAdmComponent implements OnInit {
 
   constructor(private CatalogsAdmServices: CatalogsAdmService) {
   }
-  displayedColumns: string[] = ['nombreCompleto', 'nacionalidad', 'fechaNacimiento', 'edad', 'rfc', 'curp', 'nss', 'detail3'];
-  dataSource = [];
+  displayedColumns: string[] = ['nombreCompleto', 'nacionalidad', 'fechaNacimiento', 'edad', 'rfc', 'curp', 'nss', 'detail3', 'delete'];
+  dataSource = new MatTableDataSource<laboral_interface>();
 
   ngOnInit() {
 
 
-    if (sessionStorage.getItem('arrayEmpleados')) {
-      if (sessionStorage.getItem('newEmpleado')) {
-        let empleado = JSON.parse(sessionStorage.getItem('newEmpleado'));
-        let array = JSON.parse(sessionStorage.getItem('arrayEmpleados'));
-        array.push(empleado);
-        this.dataSource = array;
-        sessionStorage.setItem('arrayEmpleados', JSON.stringify(array));
-        console.log(array);
-        sessionStorage.removeItem('newEmpleado');
-      }else{
-        let array = JSON.parse(sessionStorage.getItem('arrayEmpleados'));
-        this.dataSource = array;
-      }
-    }else {
-      let arreglo = [];
-      sessionStorage.setItem('arrayEmpleados', JSON.stringify(arreglo));
-    }
-  }
+    /* if (localStorage.getItem('arrayEmpleados')) {
+       if (localStorage.getItem('newEmpleado')) {
+         let empleado = JSON.parse(localStorage.getItem('newEmpleado'));
+         let array = JSON.parse(localStorage.getItem('arrayEmpleados'));
+         array.push(empleado);
+         this.dataSource = array;
+         localStorage.setItem('arrayEmpleados', JSON.stringify(array));
+         console.log(array);
+         localStorage.removeItem('newEmpleado');
+       }else{
+         let array = JSON.parse(localStorage.getItem('arrayEmpleados'));
+         this.dataSource = array;
+       }
+     }else {
+       let arreglo = [];
+       localStorage.setItem('arrayEmpleados', JSON.stringify(arreglo));
+     }
+   }*/
+    this.getEmpleados();
 
+  }
   getEmpleados() {
-    this.CatalogsAdmServices.getEmploye().subscribe((res) => {
-      this.dataSource = res;
+    this.CatalogsAdmServices.getEmployes().subscribe((res) => {
+      this.dataSource.data = res;
     });
 
   }
 
-  goDetailProyect(element) {
+  goDetailEmpleado(element) {
+    console.log("adios");
     if (element) {
-      sessionStorage.setItem('empleado-detail', JSON.stringify(element));
-      this.responseChildren.emit({value: 2});
+      sessionStorage.setItem('idEmpleado', JSON.stringify(element.id));
+      this.responseChildren.emit({value: 3});
     }
+  }
+  deleteEmpleado(element){
+    console.log(element)
+    Swal({
+      title: '',
+      text: '¿Seguro qué quieres eliminar a este empleado?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+          this.CatalogsAdmServices.deleteEmploye(element.id).subscribe(res => {
+            Swal(
+              'Listo.',
+              'Se ha eliminado correctamente',
+              'success'
+            );
+            this.getEmpleados();
+
+          });
+
+
+        }
+    });
+
   }
   /*getUser() {
     if (sessionStorage.getItem('user')) {

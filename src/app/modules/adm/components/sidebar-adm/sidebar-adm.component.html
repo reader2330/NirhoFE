@@ -42,7 +42,8 @@
 
         <app-stepper-adm (responseChildren)="recibirRespuestChildren($event)" *ngIf="selectModule == 2"></app-stepper-adm>
 
-        <app-bandeja *ngIf="selectModule == 1"></app-bandeja>
+        <app-bandeja (responseChildren)="recibirRespuestChildren($event)" *ngIf="selectModule == 1"></app-bandeja>
+        <app-empleado-detalle (responseChildren)="recibirRespuestChildren($event)"  *ngIf="selectModule == 3"></app-empleado-detalle>
 
       </div>
 

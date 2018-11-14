@@ -42,11 +42,21 @@ export class CatalogsAdmService {
   getLevelHabilities(): Observable<any> {
     return this._http.get(this.api + 'catalogo/nivelConocimiento', {headers: this.header});
   }
-  getEmploye(): Observable<laboral_interface[]> {
+  getEmployes(): Observable<laboral_interface[]> {
     return this._http.get<laboral_interface[]>(this.api + 'empleado/todos', {headers: this.header});
   }
   saveEmploye(data): Observable<any> {
     return this._http.post(this.api + 'empleado/agregar', data, {headers: this.header});
   }
+  updateEmploye(data): Observable<any> {
+    return this._http.put(this.api + 'empleado/editar', data, {headers: this.header});
+  }
+  deleteEmploye(id): Observable<any> {
+    return this._http.delete(this.api + 'empleado/eliminar/' + id, {headers: this.header});
+  }
+  getEmploye(id): Observable<any> {
+    return this._http.get(this.api + 'empleado/'+id, { headers: this.header});
+  }
+
 
 }

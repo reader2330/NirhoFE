@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../../services/login.service';
 import {Router} from '@angular/router';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-login',
@@ -21,13 +22,14 @@ export class LoginComponent implements OnInit {
   sendLogin(){
       this.LoginService.sendLogin(this.params).subscribe((res) =>{
         console.log(res);
+        this.router.navigate(['ADM']);
       }, (err) => {
-        if (err) console.log(err);
+        Swal('Algo salio mal', 'Credenciales incorrectas', 'error');
 
       }, () => {
         console.log('acabe');
       });
-    this.router.navigate(['IRH']);
+
   }
 
 }
