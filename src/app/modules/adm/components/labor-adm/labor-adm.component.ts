@@ -54,7 +54,14 @@ export class LaborAdmComponent implements OnInit {
     escolaridadOficios: [],
     titulo: false,
     idiomas: [],
-    laboral: [],
+    puesto: '',
+    nivelLaboral: 0,
+    fechaInicio: '',
+    fechaTermino: '',
+    antiguedad: '',
+    localidad : '',
+    area: '',
+    sueldo: 0,
     estadoCivil: '',
     documentoCurp: null,
     documentoIne: null,
@@ -109,6 +116,7 @@ export class LaborAdmComponent implements OnInit {
 
     this.temp = JSON.parse(sessionStorage.getItem('job_detail'));
     this.laborales.push(this.temp);
+    console.log(this.laborales);
     this.dataSource.data = this.laborales;
 
   }
@@ -149,14 +157,14 @@ export class LaborAdmComponent implements OnInit {
     this.jsonFinal.escolaridadOficios = scholarship.escolaridadOficios;
     this.jsonFinal.titulo = scholarship.titulo;
     this.jsonFinal.idiomas.push(languageList[0]);
-    this.jsonFinal.laboral[0].puesto = this.laborales[0].puesto;
-    this.jsonFinal.laboral[0].nivelLaboral = this.laborales[0].nivelLaboral;
-    this.jsonFinal.laboral[0].fechaInicio = this.laborales[0].fechaInicio;
-    this.jsonFinal.laboral[0].fechaTermino = this.laborales[0].fechaTermino;
-    this.jsonFinal.laboral[0].antiguedad = this.laborales[0].antiguedad;
-    this.jsonFinal.laboral[0].localidad = this.laborales[0].localidad;
-    this.jsonFinal.laboral[0].area = this.laborales[0].area;
-    this.jsonFinal.laboral[0].sueldo = this.laborales[0].sueldo;
+   this.jsonFinal.puesto = this.laborales[0].puesto;
+   this.jsonFinal.nivelLaboral = this.laborales[0].nivelLaboral;
+   this.jsonFinal.fechaInicio = this.laborales[0].fechaInicio;
+   this.jsonFinal.fechaTermino = this.laborales[0].fechaTermino;
+   this.jsonFinal.antiguedad = this.laborales[0].antiguedad;
+   this.jsonFinal.localidad = this.laborales[0].puesto;
+   this.jsonFinal.area = this.laborales[0].area;
+   this.jsonFinal.sueldo = this.laborales[0].sueldo;
     console.log(this.jsonFinal);
     Swal({
       title: '',
