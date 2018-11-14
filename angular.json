@@ -28,7 +28,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/nirhoTheme.scss"
+              "src/nirhoTheme.scss",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": []
           },
