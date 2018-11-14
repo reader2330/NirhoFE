@@ -31,7 +31,7 @@ import com.nirho.util.SessionUtil;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping( value = "/proyectoCLB" )
+@RequestMapping( value = "/proyectoAPO" )
 public class ProyectoAPOController {
 	public final static Logger logger = Logger.getLogger(ProyectoAPOController.class);
 	public final static Integer ID_MODULO = 4;
