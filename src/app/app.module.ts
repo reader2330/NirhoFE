@@ -13,6 +13,7 @@ import {IrhModule} from './modules/irh/irh.module';
 import {CLBModule} from './modules/clb/clb.module';
 import {EvdModule} from './modules/evd/evd.module';
 import {AdmModule} from './modules/adm/adm.module';
+import {SynchronizeModule} from './modules/synchronize/synchronize.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {AdmModule} from './modules/adm/adm.module';
     ReactiveFormsModule,
     IrhModule,
     EvdModule,
-    AdmModule
+    AdmModule,
+    SynchronizeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
