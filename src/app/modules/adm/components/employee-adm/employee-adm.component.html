@@ -6,7 +6,7 @@
 
       <mat-form-field class="inputForm" appearance="outline">
         <mat-label>Nombre completo</mat-label>
-        <input matInput formControlName="nombreCompleto" type="text" required onkeyup="javascript: this.value = this.value.toUpperCase()">
+        <input matInput formControlName="nombreCompleto" type="text" required >
       </mat-form-field>
     </mat-grid-tile>
 
@@ -40,29 +40,37 @@
     <mat-grid-tile>
       <mat-form-field  class="inputForm" appearance="outline">
         <mat-label>RFC</mat-label>
-        <input formControlName="rfc" type="text" matInput required onkeyup="javascript: this.value = this.value.toUpperCase()">
+        <input formControlName="rfc" type="text" matInput required >
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile>
       <mat-form-field  class="inputForm" appearance="outline">
         <mat-label>CURP</mat-label>
-        <input formControlName="curp" type="text" matInput required onkeyup="javascript: this.value = this.value.toUpperCase()">
+        <input formControlName="curp" type="text" matInput required >
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile>
       <mat-form-field  class="inputForm" appearance="outline">
         <mat-label>NSS</mat-label>
-        <input formControlName="nss" type="text" matInput required onkeyup="javascript: this.value = this.value.toUpperCase()">
+        <input formControlName="nss" type="text" matInput required >
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="checkMaxColumns()" [rowspan]="1">
       <mat-form-field  class="inputForm" appearance="outline">
         <mat-label>Dirección</mat-label>
-        <input formControlName="direccion" type="tel" matInput required onkeyup="javascript: this.value = this.value.toUpperCase()">
+        <input formControlName="direccion" type="tel" matInput required >
       </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+    <div style="margin-left: 10px" class="inputForm" appearance="outline">
+      <mat-radio-group formControlName="estadoCivil" >
+        <mat-radio-button style="margin-left: 10px" value="0">Soltero</mat-radio-button>
+        <mat-radio-button style="margin-left: 10px" value="1">Casado</mat-radio-button>
+      </mat-radio-group>
+    </div>
     </mat-grid-tile>
     <mat-grid-tile *ngIf="!mobile">
 

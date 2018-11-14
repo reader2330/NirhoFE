@@ -18,6 +18,7 @@ export interface laboral_interface {
   antiguedad: string;
   localidad: string;
   area: string;
+  sueldo: number;
 }
 
 @Component({
@@ -41,6 +42,9 @@ export class LaborAdmComponent implements OnInit {
     banco: 0,
     bancoCuenta: null,
     bancoClaveInterbancaria: 0,
+    creditoHipotecario: false,
+    tipoCreditoHipotecario: 0,
+    pensionAlimenticia: false,
     escolaridad: 0,
     escolaridadCarrera: '',
     escolaridadEspecialidad: '',
@@ -50,13 +54,8 @@ export class LaborAdmComponent implements OnInit {
     escolaridadOficios: [],
     titulo: false,
     idiomas: [],
-    puesto: '',
-    nivelLaboral: 0,
-    fechaInicio: '',
-    fechaTermino: '',
-    antiguedad: '',
-    localidad: '',
-    area: '',
+    laboral: [],
+    estadoCivil: '',
     documentoCurp: null,
     documentoIne: null,
     documentoCV: null,
@@ -137,6 +136,7 @@ export class LaborAdmComponent implements OnInit {
     this.jsonFinal.curp = employee.curp;
     this.jsonFinal.nss = employee.nss;
     this.jsonFinal.direccion = employee.direccion;
+    this.jsonFinal.estadoCivil = employee.estadoCivil;
     this.jsonFinal.contactos.push(contacto);
     this.jsonFinal.banco = payment.banco;
     this.jsonFinal.bancoCuenta = payment.bancoCuenta;
@@ -149,13 +149,15 @@ export class LaborAdmComponent implements OnInit {
     this.jsonFinal.escolaridadOficios = scholarship.escolaridadOficios;
     this.jsonFinal.titulo = scholarship.titulo;
     this.jsonFinal.idiomas.push(languageList[0]);
-    this.jsonFinal.puesto = this.laborales[0].puesto;
-    this.jsonFinal.nivelLaboral = this.laborales[0].nivelLaboral;
-    this.jsonFinal.fechaInicio = this.laborales[0].fechaInicio;
-    this.jsonFinal.fechaTermino = this.laborales[0].fechaTermino;
-    this.jsonFinal.antiguedad = this.laborales[0].antiguedad;
-    this.jsonFinal.localidad = this.laborales[0].localidad;
-    this.jsonFinal.area = this.laborales[0].area;
+    this.jsonFinal.laboral[0].puesto = this.laborales[0].puesto;
+    this.jsonFinal.laboral[0].nivelLaboral = this.laborales[0].nivelLaboral;
+    this.jsonFinal.laboral[0].fechaInicio = this.laborales[0].fechaInicio;
+    this.jsonFinal.laboral[0].fechaTermino = this.laborales[0].fechaTermino;
+    this.jsonFinal.laboral[0].antiguedad = this.laborales[0].antiguedad;
+    this.jsonFinal.laboral[0].localidad = this.laborales[0].localidad;
+    this.jsonFinal.laboral[0].area = this.laborales[0].area;
+    this.jsonFinal.laboral[0].sueldo = this.laborales[0].sueldo;
+    console.log(this.jsonFinal);
     Swal({
       title: '',
       text: '¿Seguro qué quieres guardar los datos?',

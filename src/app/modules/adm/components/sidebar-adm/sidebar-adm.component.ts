@@ -11,7 +11,7 @@ import {LoginService} from '../../../clb/services/login.service';
 export class SidebarAdmComponent implements OnInit {
 
   mobile = false;
-  selectModule = 1;
+  selectModule = 3;
   modules = [{
     id_submodulo: 1,
     descripcion: 'Bandeja empleados',

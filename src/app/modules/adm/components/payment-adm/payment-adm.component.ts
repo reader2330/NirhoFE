@@ -16,12 +16,33 @@ export class PaymentAdmComponent implements OnInit {
     bancoCuenta: '',
     bancoClaveInterbancaria: ''
   };
+  hipotecas = [
+    {
+    id: 1,
+    descripcionCatalogo: 'INFONAVIT'
+    },
+    {
+      id: 2,
+      descripcionCatalogo: 'FOVISSTE'
+    },
+    {
+      id: 3,
+      descripcionCatalogo : 'FONACOT'
+    },
+    {
+      id: 4,
+      descripcionCatalogo : 'OTRO'
+    }
+  ];
   bancos = [];
   paymentForm = new FormGroup(
     {
       banco: new FormControl(0, [Validators.required]),
       bancoCuenta: new FormControl('', Validators.required),
-      bancoClaveInterbancaria: new FormControl('', Validators.required)
+      bancoClaveInterbancaria: new FormControl('', Validators.required),
+      creditoHipotecario: new FormControl(false),
+      tipoCreditoHipotecario: new FormControl('') ,
+      pensionAlimenticia: new FormControl(false)
     }
   );
   constructor(breakpointObserver: BreakpointObserver, private CatalogsAdmServices: CatalogsAdmService) {
@@ -63,6 +84,13 @@ export class PaymentAdmComponent implements OnInit {
 
   ngOnInit() {
     this.getBank();
+  }
+
+  checkValorCredito() {
+    let opt = this.paymentForm.controls['creditoHipotecario'].value;
+    if (!opt) {
+      this.paymentForm.patchValue({'tipoCreditoHipotecario': 0})
+    }
   }
 
 }

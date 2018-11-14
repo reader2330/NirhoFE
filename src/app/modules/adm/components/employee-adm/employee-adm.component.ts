@@ -36,7 +36,8 @@ export class EmployeeAdmComponent implements OnInit {
       curp: new FormControl(null,
         Validators.compose([Validators.required, Validators.maxLength(18)])),
       nss: new FormControl(null, Validators.required),
-      direccion: new FormControl('', Validators.required)
+      direccion: new FormControl('', Validators.required),
+      estadoCivil: new FormControl(null, Validators.required)
     }
   );
 

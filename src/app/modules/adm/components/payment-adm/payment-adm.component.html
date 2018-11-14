@@ -29,13 +29,28 @@
         <input formControlName="bancoClaveInterbancaria" type="text" matInput required >
       </mat-form-field>
     </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-checkbox (change)="checkValorCredito()" formControlName="creditoHipotecario">Credito hipotecario</mat-checkbox>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>Tipo de credito hipotecario</mat-label>
+        <mat-select [disabled]="!paymentForm.controls['creditoHipotecario'].value"  formControlName="tipoCreditoHipotecario" required >
+          <mat-option *ngFor="let hipot of hipotecas" [value]="hipot.id">
+            {{hipot.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-checkbox formControlName="pensionAlimenticia">Pension alimenticia</mat-checkbox>
+    </mat-grid-tile>
 
     <mat-grid-tile *ngIf="!mobile">
 
     </mat-grid-tile>
-    <mat-grid-tile *ngIf="!mobile">
 
-    </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
       <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveBank()" [disabled]="!paymentForm.valid" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>

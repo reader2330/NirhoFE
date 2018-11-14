@@ -9,14 +9,67 @@ import Swal from "sweetalert2";
 })
 export class EmpleadoDetalleComponent implements OnInit {
   @Output() responseChildren = new EventEmitter();
-  empleado = {};
+  empleado = {
+    id: null,
+    nombreCompleto: '',
+    nacionalidad: 0,
+    fechaNacimiento: '',
+    edad: 0,
+    rfc: '',
+    curp: '',
+    nss: '',
+    direccion: '',
+    contactos: [],
+    banco: 0,
+    bancoCuenta: null,
+    bancoClaveInterbancaria: 0,
+    creditoHipotecario: false,
+    tipoCreditoHipotecario: 0,
+    pensionAlimenticia: false,
+    escolaridad: 0,
+    escolaridadCarrera: '',
+    escolaridadEspecialidad: '',
+    escolaridadCapacidades: '',
+    escolaridadCertificaciones: [],
+    escolaridadCursos: [],
+    escolaridadOficios: [],
+    titulo: false,
+    idiomas: [],
+    laboral : [],
+    documentoCurp: null,
+    documentoIne: null,
+    documentoCV: null,
+    documentoComprobanteDomicilio: null
+  };
   nacionalidades = [];
+  bancos = [];
+  hipotecas = [
+    {
+      id: 1,
+      descripcionCatalogo: 'INFONAVIT'
+    },
+    {
+      id: 2,
+      descripcionCatalogo: 'FOVISSTE'
+    },
+    {
+      id: 3,
+      descripcionCatalogo : 'FONACOT'
+    },
+    {
+      id: 4,
+      descripcionCatalogo : 'OTRO'
+    }
+  ];
+  escolaridades =[]
 
   constructor(private CatalogoAdm:CatalogsAdmService) { }
   ngOnInit() {
     let idEmpleado = sessionStorage.getItem('idEmpleado');
     this.getEmpleado(idEmpleado);
     this.getNacionality();
+    this.getBank();
+    this.getScholarship();
   }
 
   getEmpleado(id) {
@@ -31,6 +84,13 @@ export class EmpleadoDetalleComponent implements OnInit {
     this.CatalogoAdm.getNacionality().subscribe((res) => {
       if (res) {
         this.nacionalidades = res;
+      }
+    });
+  }
+  getBank() {
+    this.CatalogoAdm.getBank().subscribe((res) => {
+      if (res) {
+        this.bancos = res;
       }
     });
   }
@@ -53,6 +113,18 @@ export class EmpleadoDetalleComponent implements OnInit {
             'success');
           this.responseChildren.emit({value: 1});
         });
+      }
+    });
+  }
+  checkValorCredito() {
+    if (!this.empleado.creditoHipotecario) {
+      this.empleado.tipoCreditoHipotecario = 0;
+    }
+  }
+  getScholarship() {
+    this.CatalogoAdm.getScholarship().subscribe((res) => {
+      if (res) {
+        this.escolaridades = res;
       }
     });
   }
