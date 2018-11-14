@@ -26,9 +26,9 @@ public class EmailTestController {
             MimeMessage mail = mailSender.createMimeMessage();
 
             MimeMessageHelper helper = new MimeMessageHelper( mail );
-            helper.setTo( "eistenroman@gmail.com" );
+            helper.setTo( "participante.nirho@gmail.com" );
             helper.setSubject( "Cuestionario de participante Nirho" );
-            helper.setText("<p>Estimado Eisten Román<p></p>Para ingresar a su cuestionario de participación al proyecto ${Proyecto}, "
+            helper.setText("<p>Estimado Participante Nirho<p></p>Para ingresar a su cuestionario de participación al proyecto ${Proyecto}, "
             		+ "por favor hacer clic en la siguiente liga: http://localhost:8080/Nirho/cuestionario/participante?token=1-meh521187cluj-5 </p>"
             		+ "<p>Saludos</p>", true);
             mailSender.send(mail);
@@ -44,10 +44,10 @@ public class EmailTestController {
     public String sendMail2() {
         try {
         	EmailDatos datos = new EmailDatos();
-        	datos.setEmailDestino("eistenroman@gmail.com");
-        	datos.setNombreParticipante("Eisten Román");
+        	datos.setEmailDestino("participante.nirho@gmail.com");
+        	datos.setNombreParticipante("Participante Nirho");
         	datos.setNombreProyecto("Clima Laboral Magallanes S.A.");
-        	datos.setToken("9-ecl512087emog-5");
+        	datos.setToken("1-meh521187cluj-5");
         	emailService.sendEmail(datos);
         	return "OK";
         } catch (Exception e) {
