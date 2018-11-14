@@ -24,7 +24,8 @@ export class LaborModalAdmComponent implements OnInit {
       fechaTermino: new FormControl('', Validators.required),
       antiguedad: new FormControl(0, Validators.required),
       localidad: new FormControl('', Validators.required),
-      area: new FormControl('', Validators.required)
+      area: new FormControl('', Validators.required),
+      sueldo: new FormControl('', Validators.required)
     }
   );
 

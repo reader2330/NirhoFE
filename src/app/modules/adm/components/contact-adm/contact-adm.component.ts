@@ -24,7 +24,7 @@ export class ContactAdmComponent implements OnInit {
   contactForm = new FormGroup(
     {
       telefono: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      puesto: new FormControl(0, Validators.required),
+      beneficiario: new FormControl('', Validators.required),
       tipoContacto: new FormControl(0, Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       nombre: new FormControl('', Validators.required),
