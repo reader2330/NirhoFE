@@ -32,9 +32,9 @@ import com.nirho.util.SessionUtil;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping( value = "/proyectoCLB" )
-public class ProyectoCLBController {
-	public final static Logger logger = Logger.getLogger(ProyectoCLBController.class);
-	public final static Integer ID_MODULO = 1;
+public class ProyectoAPOController {
+	public final static Logger logger = Logger.getLogger(ProyectoAPOController.class);
+	public final static Integer ID_MODULO = 4;
 	
 	@Autowired
 	ProyectoService proyectoService;

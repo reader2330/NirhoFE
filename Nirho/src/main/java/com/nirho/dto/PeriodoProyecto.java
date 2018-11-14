@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.nirho.model.Proyecto;
 
-public class PeriodoCLB implements Serializable {
+public class PeriodoProyecto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Proyecto proyecto;
 	private String fechaRegistro;
