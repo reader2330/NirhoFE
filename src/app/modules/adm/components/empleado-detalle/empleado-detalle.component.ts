@@ -95,7 +95,7 @@ export class EmpleadoDetalleComponent implements OnInit {
     });
   }
 
-  updateEmpleado(){
+  updateEmpleado() {
     Swal({
       title: '',
       text: '¿Seguro qué quieres actualizar los datos?',
@@ -127,6 +127,9 @@ export class EmpleadoDetalleComponent implements OnInit {
         this.escolaridades = res;
       }
     });
+  }
+  goBandeja(){
+    this.responseChildren.emit({value: 1});
   }
 
 }

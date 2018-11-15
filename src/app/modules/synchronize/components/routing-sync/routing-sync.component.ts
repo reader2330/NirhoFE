@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {Router} from '@angular/router';
+import {environment} from '../../../../../environments/environment';
+
 
 @Component({
   selector: 'app-routing-sync',
@@ -8,6 +10,20 @@ import {Router} from '@angular/router';
   styleUrls: ['./routing-sync.component.scss']
 })
 export class RoutingSyncComponent implements OnInit {
+
+  imagenes = [{
+    url: environment.urlNG + 'assets/imagen1.jpeg'
+  },
+    {
+      url: environment.urlNG + 'assets/imagen2.jpeg'
+    },
+    {
+      url: environment.urlNG + 'assets/imagen3.jpeg'
+    },
+    {
+      url: environment.urlNG + 'assets/imagen4.jpeg'
+    },
+  ];
 
   constructor(private router: Router) { }
 
@@ -48,7 +64,6 @@ export class RoutingSyncComponent implements OnInit {
     }
 
   }
-
   ngOnInit() {
   }
 

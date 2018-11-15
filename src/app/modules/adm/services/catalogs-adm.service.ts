@@ -49,7 +49,7 @@ export class CatalogsAdmService {
     return this._http.post(this.api + 'empleado/agregar', data, {headers: this.header});
   }
   updateEmploye(data): Observable<any> {
-    return this._http.put(this.api + 'empleado/editar', data, {headers: this.header});
+    return this._http.post(this.api + 'empleado/editar', data, {headers: this.header});
   }
   deleteEmploye(id): Observable<any> {
     return this._http.delete(this.api + 'empleado/eliminar/' + id, {headers: this.header});
