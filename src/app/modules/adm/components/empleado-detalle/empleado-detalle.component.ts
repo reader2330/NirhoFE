@@ -61,7 +61,109 @@ export class EmpleadoDetalleComponent implements OnInit {
       descripcionCatalogo : 'OTRO'
     }
   ];
-  escolaridades =[]
+  escolaridades = [{
+    id:1,
+    descripcionCatalogo:"Primaria Trunca"
+  },
+    {
+      id:2,
+      descripcionCatalogo:"Primaria Completa"
+    },
+    {
+      id:3,
+      descripcionCatalogo:"Secundaria Trunca"
+    },
+    {
+      id:4,
+      descripcionCatalogo:"Secundaria Completa"
+    },
+    {
+      id:5,
+      descripcionCatalogo:"Carrera Técnica Completa"
+    },
+    {
+      id:6,
+      descripcionCatalogo:"Carrera Técnica Incompleta"
+    },
+    {
+      id:7,
+      descripcionCatalogo:"Bachillerato Completo"
+    },
+    {
+      id:8,
+      descripcionCatalogo:"Bachillerato Incompleto"
+    },
+    {
+      id:9,
+      descripcionCatalogo:"Universidad Completa"
+    },
+    {
+      id:10,
+      descripcionCatalogo:"Universidad Incompleta"
+    },
+    {
+      id:11,
+      descripcionCatalogo:"Maestría Completa"
+    },
+    {
+      id:12,
+      descripcionCatalogo:"Maestría Incompleta"
+    },
+    {
+      id:13,
+      descripcionCatalogo:"Doctorado Completo"
+    },
+    {
+      id:14,
+      descripcionCatalogo:"Doctorado Incompleto"
+    },
+    {
+      id:15,
+      descripcionCatalogo:"Universitario Técnico Completo"
+    },
+    {
+      id:16,
+      descripcionCatalogo:"Universitario Técnico Incompleto"
+    },
+    {
+      id:17,
+      descripcionCatalogo:"Otro"
+    }
+  ];
+  tipoContrato : [
+    {
+      id:1,
+      descripcionCatalogo:"De ley"
+    },
+    {
+      id:2,
+      descripcionCatalogo:"Superiores de ley"
+    },
+    {
+      id:3,
+      descripcionCatalogo:"Honorarios"
+    },
+    {
+      id:4,
+      descripcionCatalogo:"Salarios asimilados"
+    },
+    {
+      id:5,
+      descripcionCatalogo:"Comisionista"
+    },
+    {
+      id:6,
+      descripcionCatalogo:"Becario"
+    },
+    {
+      id:7,
+      descripcionCatalogo:"Servicio social"
+    },
+    {
+      id:8,
+      descripcionCatalogo:"Otro"
+    }
+    ]
 
   constructor(private CatalogoAdm:CatalogsAdmService) { }
   ngOnInit() {
@@ -69,7 +171,7 @@ export class EmpleadoDetalleComponent implements OnInit {
     this.getEmpleado(idEmpleado);
     this.getNacionality();
     this.getBank();
-    this.getScholarship();
+    //this.getScholarship();
   }
 
   getEmpleado(id) {
@@ -77,7 +179,7 @@ export class EmpleadoDetalleComponent implements OnInit {
     this.CatalogoAdm.getEmploye(id).subscribe(res => {
       this.empleado = res;
       console.log(res);
-    })
+    });
 
   }
   getNacionality () {

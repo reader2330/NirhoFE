@@ -24,7 +24,7 @@ export class SidebarAdmComponent implements OnInit {
   user = {};
 
   avatar = {
-    url: 'http://localhost:4200/assets/avatar.png'
+    url: environment.urlNG + 'assets/avatar.png'
   };
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginServices: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));

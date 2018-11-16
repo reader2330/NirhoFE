@@ -18,7 +18,54 @@ export class ContactAdmComponent implements OnInit {
     telefono: 0,
     tipoContacto: 0
   };
-  tipoContacto = [];
+  tipoContacto = [
+
+      {
+        id:1,
+        descripcionCatalogo: "Padre"
+      },
+      {
+        id:2,
+        descripcionCatalogo: "Madre"
+      },
+      {
+        id:3,
+        descripcionCatalogo:"Hermano / Hermana"
+      },
+      {
+        id:4,
+        descripcionCatalogo:"Esposo/Esposa"
+      },
+      {
+        id:5,
+        descripcionCatalogo:"Hijo / Hija"
+      },
+      {
+        id:6,
+        descripcionCatalogo:"Abuelo / Abuela"
+      },
+      {
+        id:7,
+        descripcionCatalogo:"Nieto / Nieta"
+      },
+      {
+        id:8,
+        descripcionCatalogo:"Tío / Tía"
+      },
+      {
+        id:9,
+        descripcionCatalogo:"Amigo / Amiga"
+      },
+      {
+        id:10,
+        descripcionCatalogo:"Concubina / Concubino"
+      },
+      {
+        id:11,
+        descripcionCatalogo:"Otro"
+      }
+
+  ];
   puestos = [];
   mobile = false;
   contactForm = new FormGroup(
@@ -76,7 +123,7 @@ export class ContactAdmComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getTypeContac();
+    //this.getTypeContac();
     this.getJob();
   }
 

@@ -61,6 +61,40 @@ export class LaborAdmComponent implements OnInit {
     documentoCV: null,
     documentoComprobanteDomicilio: null
   };
+  tipoContrato : [
+    {
+      id:1,
+      descripcionCatalogo:"De ley"
+    },
+    {
+      id:2,
+      descripcionCatalogo:"Superiores de ley"
+    },
+    {
+      id:3,
+      descripcionCatalogo:"Honorarios"
+    },
+    {
+      id:4,
+      descripcionCatalogo:"Salarios asimilados"
+    },
+    {
+      id:5,
+      descripcionCatalogo:"Comisionista"
+    },
+    {
+      id:6,
+      descripcionCatalogo:"Becario"
+    },
+    {
+      id:7,
+      descripcionCatalogo:"Servicio social"
+    },
+    {
+      id:8,
+      descripcionCatalogo:"Otro"
+    }
+    ]
   displayedColumns: string[] = ['puesto', 'nivelLaboral', 'fechaInicio', 'fechaTermino', 'antiguedad', 'localidad', 'area', 'delete'];
   laborales: laboral_interface[] = [];
   dataSource = new MatTableDataSource<laboral_interface>();
@@ -107,8 +141,13 @@ export class LaborAdmComponent implements OnInit {
 
   getFieldsJob() {
 
-    this.temp = JSON.parse(sessionStorage.getItem('job_detail'));
-    this.laborales.push(this.temp);
+    if(sessionStorage.getItem('job_detail')){
+      this.temp = JSON.parse(sessionStorage.getItem('job_detail'));
+      this.laborales.push(this.temp);
+      sessionStorage.removeItem('job_detail');
+    }
+
+
     console.log(this.laborales);
     this.dataSource.data = this.laborales;
 
@@ -142,9 +181,13 @@ export class LaborAdmComponent implements OnInit {
     this.jsonFinal.banco = payment.banco;
     this.jsonFinal.bancoCuenta = payment.bancoCuenta;
     this.jsonFinal.bancoClaveInterbancaria = payment.bancoClaveInterbancaria;
+    this.jsonFinal.creditoHipotecario = payment.creditoHipotecario;
+    this.jsonFinal.tipoCreditoHipotecario = payment.tipoCreditoHipotecario;
+    this.jsonFinal.pensionAlimenticia = payment.pensionAlimenticia;
     this.jsonFinal.escolaridad = scholarship.escolaridad;
     this.jsonFinal.escolaridadCarrera = scholarship.escolaridadCarrera;
     this.jsonFinal.escolaridadEspecialidad = scholarship.escolaridadEspecialidad;
+    this.jsonFinal.escolaridadCapacidades = scholarship.escolaridadCapacidades;
     this.jsonFinal.escolaridadCertificaciones = scholarship.escolaridadCertificaciones;
     this.jsonFinal.escolaridadCursos = scholarship.escolaridadCursos;
     this.jsonFinal.escolaridadOficios = scholarship.escolaridadOficios;

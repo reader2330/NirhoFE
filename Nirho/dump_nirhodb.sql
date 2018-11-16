@@ -570,6 +570,225 @@ INSERT INTO `empresa` VALUES (1,'Lamartine 289\nCol. Polanco','KKANA S.A. de C.V
 /*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+DROP TABLE IF EXISTS `empleado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado` (
+  `id_empleado` bigint(20) NOT NULL AUTO_INCREMENT,
+  `antiguedad` datetime DEFAULT NULL,
+  `area` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `banco` int(11) NOT NULL,
+  `banco_cinterbancaria` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `banco_cuenta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `curp` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `direccion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `documento_comprobante` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `documento_curp` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `documento_cv` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `documento_ine` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `edad` int(11) DEFAULT NULL,
+  `escolaridad` int(11) NOT NULL,
+  `escolaridad_capacidades` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `escolaridad_carrera` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `escolaridad_certificaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `escolaridad_cursos` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `escolaridad_especialidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `escolaridad_oficios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fecha_inicio` datetime DEFAULT NULL,
+  `fecha_nacimiento` datetime DEFAULT NULL,
+  `fecha_termino` datetime DEFAULT NULL,
+  `localidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nacionalidad` int(11) NOT NULL,
+  `nivel_laboral` int(11) NOT NULL,
+  `nombre_completo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nss` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rfc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `titulo` bit(1) DEFAULT NULL,
+  `credito_hipotecario` bit(1) DEFAULT NULL,
+  `estado_civil` int(11) DEFAULT NULL,
+  `pension_alimenticia` bit(1) DEFAULT NULL,
+  `tipo_credito_hipotecario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_empleado`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado`
+--
+
+LOCK TABLES `empleado` WRITE;
+/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES (1,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,NULL,NULL,NULL,NULL,'\0',NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_contacto`
+--
+
+DROP TABLE IF EXISTS `empleado_contacto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado_contacto` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `celular` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telefono` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo_contacto` int(11) NOT NULL,
+  `id_empleado` bigint(20) DEFAULT NULL,
+  `beneficiario` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK3xitmnmcnt8db9f1vr8oc3gv7` (`id_empleado`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_contacto`
+--
+
+LOCK TABLES `empleado_contacto` WRITE;
+/*!40000 ALTER TABLE `empleado_contacto` DISABLE KEYS */;
+INSERT INTO `empleado_contacto` VALUES (1,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL),(2,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL);
+/*!40000 ALTER TABLE `empleado_contacto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_escolaridad_certificaciones`
+--
+
+DROP TABLE IF EXISTS `empleado_escolaridad_certificaciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado_escolaridad_certificaciones` (
+  `empleado_id_empleado` bigint(20) NOT NULL,
+  `escolaridad_certificaciones` varchar(255) DEFAULT NULL,
+  KEY `FKdqq3ag8tmwls621tskwtlflb` (`empleado_id_empleado`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_escolaridad_certificaciones`
+--
+
+LOCK TABLES `empleado_escolaridad_certificaciones` WRITE;
+/*!40000 ALTER TABLE `empleado_escolaridad_certificaciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empleado_escolaridad_certificaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_escolaridad_cursos`
+--
+
+DROP TABLE IF EXISTS `empleado_escolaridad_cursos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado_escolaridad_cursos` (
+  `empleado_id_empleado` bigint(20) NOT NULL,
+  `escolaridad_cursos` varchar(255) DEFAULT NULL,
+  KEY `FKna7oi3rko76yog6733quvgql1` (`empleado_id_empleado`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_escolaridad_cursos`
+--
+
+LOCK TABLES `empleado_escolaridad_cursos` WRITE;
+/*!40000 ALTER TABLE `empleado_escolaridad_cursos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empleado_escolaridad_cursos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_escolaridad_oficios`
+--
+
+DROP TABLE IF EXISTS `empleado_escolaridad_oficios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado_escolaridad_oficios` (
+  `empleado_id_empleado` bigint(20) NOT NULL,
+  `escolaridad_oficios` varchar(255) DEFAULT NULL,
+  KEY `FKathhoexkd7i3249cwcttrom2n` (`empleado_id_empleado`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_escolaridad_oficios`
+--
+
+LOCK TABLES `empleado_escolaridad_oficios` WRITE;
+/*!40000 ALTER TABLE `empleado_escolaridad_oficios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empleado_escolaridad_oficios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_idioma`
+--
+
+DROP TABLE IF EXISTS `empleado_idioma`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado_idioma` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `habilidades` int(11) NOT NULL,
+  `idioma` int(11) NOT NULL,
+  `nivel` int(11) NOT NULL,
+  `id_empleado` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKkulfaa1xpxr8bf3wcgs0b8n1e` (`id_empleado`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_idioma`
+--
+
+LOCK TABLES `empleado_idioma` WRITE;
+/*!40000 ALTER TABLE `empleado_idioma` DISABLE KEYS */;
+INSERT INTO `empleado_idioma` VALUES (1,0,0,0,NULL),(2,0,0,0,NULL),(3,0,0,0,NULL);
+/*!40000 ALTER TABLE `empleado_idioma` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_laboral`
+--
+
+DROP TABLE IF EXISTS `empleado_laboral`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado_laboral` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `antiguedad` datetime DEFAULT NULL,
+  `area` varchar(255) DEFAULT NULL,
+  `fecha_inicio` datetime DEFAULT NULL,
+  `fecha_termino` datetime DEFAULT NULL,
+  `localidad` varchar(255) DEFAULT NULL,
+  `nivel_laboral` int(11) NOT NULL,
+  `puesto` varchar(255) DEFAULT NULL,
+  `sueldo` double DEFAULT NULL,
+  `id_empleado` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKfk2kbn1bv2iebttqlmgakprfw` (`id_empleado`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_laboral`
+--
+
+LOCK TABLES `empleado_laboral` WRITE;
+/*!40000 ALTER TABLE `empleado_laboral` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empleado_laboral` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+
+
 --
 -- Table structure for table `entrevista_asignacion_vacante`
 --

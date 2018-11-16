@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
+import com.nirho.dto.EmailDatos;
 import com.nirho.dto.HeadCount;
 import com.nirho.dto.HeadCountAmpliado;
 import com.nirho.dto.NivelDTO;
@@ -29,6 +30,7 @@ import com.nirho.model.EstatusProyecto;
 import com.nirho.model.Participante;
 import com.nirho.model.ParticipantePK;
 import com.nirho.model.Proyecto;
+import com.nirho.service.EmailService;
 import com.nirho.service.ParticipanteService;
 import com.nirho.service.ProyectoService;
 import com.nirho.util.NirhoUtil;
@@ -42,6 +44,8 @@ public class ParticipanteController {
 	ParticipanteService participanteService;
 	@Autowired
 	ProyectoService proyectoService;
+	@Autowired
+	private EmailService emailService;
 	
 	@GetMapping(value = "/organigrama")
 	public List<NivelDTO> organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
@@ -69,6 +73,11 @@ public class ParticipanteController {
 		logger.info(" ************************ headcount [" + headcount + "] *****************************");
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(headcount.getIdProyecto());
+        	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
+        	if(!(estatusActual == ProyectoConstants.ESTATUS_CONFIGURACION.intValue() ||
+        			estatusActual == ProyectoConstants.ESTATUS_CARGA.intValue())) {
+        		throw new NirhoControllerException("No se ha realizado la configuracion del cuestionario en el proyecto");
+        	}        	
 			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CARGA));
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 			List<ParticipanteHC> participantesHC = headcount.getLista();
@@ -81,7 +90,9 @@ public class ParticipanteController {
 				participantes.add(participante);
 			}
 			participanteService.guardarParticipanteService(participantes);
-		} catch (NirhoServiceException e) {
+		} catch (NirhoControllerException nce) {
+        	throw new NirhoControllerException(nce.getMessage());
+        } catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el participante en la BD");
 		}
 	}
@@ -92,6 +103,11 @@ public class ParticipanteController {
 		logger.info(" ************************ headcount [" + headcount + "] *****************************");
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(headcount.getIdProyecto());
+        	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
+        	if(!(estatusActual == ProyectoConstants.ESTATUS_CONFIGURACION.intValue() ||
+        			estatusActual == ProyectoConstants.ESTATUS_CARGA.intValue())) {
+        		throw new NirhoControllerException("No se ha realizado la configuracion del cuestionario en el proyecto");
+        	}
 			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CARGA));
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 			List<ParticipanteHCA> participantesHCA = headcount.getLista();
@@ -103,10 +119,47 @@ public class ParticipanteController {
 				participantes.add(participante);
 			}
 			participanteService.ampliarParticipanteService(participantes);
-		} catch (NirhoServiceException e) {
+		} catch (NirhoControllerException nce) {
+        	throw new NirhoControllerException(nce.getMessage());
+        } catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el participante en la BD");
 		}
 	}
+	
+	@RequestMapping(path = "/emailSend", method = RequestMethod.GET)
+    public void sendMail(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException {
+        try {
+        	Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
+        	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
+        	if(estatusActual != ProyectoConstants.ESTATUS_CARGA.intValue()) {
+        		throw new NirhoControllerException("No se ha realizado la carga de participantes en el proyecto");
+        	}
+        	
+        	List<Participante> participantes = participanteService.obtenerParticipantes(idProyecto);      	
+            for(Participante participante: participantes) {
+            	try {
+            		EmailDatos datos = new EmailDatos();
+            		datos.setEmailDestino(participante.getCorreoElectronico());
+            		datos.setNombreParticipante(participante.getNombres());
+            		datos.setNombreProyecto(participante.getProyecto().getNombre());
+            		datos.setToken(participante.getToken());
+            		emailService.sendEmail(datos);
+            	} catch(NirhoServiceException nse) {
+            		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
+            	}
+            }
+            
+            EstatusProyecto estatus = new EstatusProyecto();
+            estatus.setIdEstatus(ProyectoConstants.ESTATUS_ENVIADO);
+            proyecto.setIdEstatus(estatus);
+            proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());            
+        } catch (NirhoControllerException nce) {
+        	throw new NirhoControllerException(nce.getMessage());
+        } catch (Exception e) {
+        	throw new NirhoControllerException("Problemas en el registro de envio de los correos electronicos");
+        }
+    }
+	
 	
 	private Participante assamblerToParticipanteHC(ParticipanteHC participanteHC) {
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -156,5 +209,5 @@ public class ParticipanteController {
 		}
 		return participante;
 	}
-	
+		
 }

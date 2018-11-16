@@ -28,6 +28,40 @@ export class LaborModalAdmComponent implements OnInit {
       sueldo: new FormControl('', Validators.required)
     }
   );
+  tipoContrato = [
+    {
+      id:1,
+      descripcionCatalogo:"De ley"
+    },
+    {
+      id:2,
+      descripcionCatalogo:"Superiores de ley"
+    },
+    {
+      id:3,
+      descripcionCatalogo:"Honorarios"
+    },
+    {
+      id:4,
+      descripcionCatalogo:"Salarios asimilados"
+    },
+    {
+      id:5,
+      descripcionCatalogo:"Comisionista"
+    },
+    {
+      id:6,
+      descripcionCatalogo:"Becario"
+    },
+    {
+      id:7,
+      descripcionCatalogo: "Servicio social"
+    },
+    {
+      id:8,
+      descripcionCatalogo:"Otro"
+    }
+    ];
 
   constructor(breakpointObserver: BreakpointObserver, private CatalogsAdmServices: CatalogsAdmService , private dialogRef : MatDialogRef<LaborModalAdmComponent>) {
     breakpointObserver.isMatched(('(max-width:450)'));

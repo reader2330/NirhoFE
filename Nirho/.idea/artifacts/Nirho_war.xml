@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Nirho:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="Nirho.war">
+      <element id="artifact" artifact-name="Nirho:war exploded" />
+    </root>
+  </artifact>
+</component>
