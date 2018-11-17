@@ -31,8 +31,10 @@ public class CuetionarioParticipante implements Serializable {
     protected CuetionarioParticipantePK cuetionarioParticipantePK;
     @Column(name = "respuesta")
     private Integer respuesta;
-    @Column(name = "respuesta_texto")
-    private String respuestaTexto;
+    @Column(name = "respuesta_rh")
+    private Integer respuestaRh;
+    @Column(name = "respuesta_jefe")
+    private Integer respuestaJefe;
     @JoinColumn
     @ManyToOne(optional = false)
     private Pregunta pregunta;
@@ -66,16 +68,24 @@ public class CuetionarioParticipante implements Serializable {
     public void setRespuesta(Integer respuesta) {
         this.respuesta = respuesta;
     }
-
-    public String getRespuestaTexto() {
-        return respuestaTexto;
-    }
-
-    public void setRespuestaTexto(String respuestaTexto) {
-        this.respuestaTexto = respuestaTexto;
-    }
     
-    public Pregunta getPregunta() {
+    public Integer getRespuestaRh() {
+		return respuestaRh;
+	}
+
+	public void setRespuestaRh(Integer respuestaRh) {
+		this.respuestaRh = respuestaRh;
+	}
+
+	public Integer getRespuestaJefe() {
+		return respuestaJefe;
+	}
+
+	public void setRespuestaJefe(Integer respuestaJefe) {
+		this.respuestaJefe = respuestaJefe;
+	}
+
+	public Pregunta getPregunta() {
         return pregunta;
     }
 
@@ -94,7 +104,7 @@ public class CuetionarioParticipante implements Serializable {
 	@Override
 	public String toString() {
 		return "CuetionarioParticipante [cuetionarioParticipantePK=" + cuetionarioParticipantePK + ", respuesta="
-				+ respuesta + ", respuestaTexto=" + respuestaTexto + ", pregunta="
+				+ respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe + ", pregunta="
 				+ pregunta + ", tema=" + tema + "]";
 	}
         
