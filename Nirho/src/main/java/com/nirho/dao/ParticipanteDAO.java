@@ -8,4 +8,5 @@ import com.nirho.model.ParticipantePK;
 public interface ParticipanteDAO extends BaseDAO<Participante, ParticipantePK> {
 	List<Participante> findByIdProyecto(Integer idProyecto);
 	List<Participante> findByRfc(String rfc);
+	List<Participante> findByAreaOrgProyecto(String areaOrg, int idProyecto);
 }

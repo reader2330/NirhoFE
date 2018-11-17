@@ -340,7 +340,9 @@ CREATE TABLE `consultor_proyecto` (
   `id_proyecto` int(11) NOT NULL,
   `avance` int(3) DEFAULT NULL,
   `asignado` int(1) NOT NULL,
-  PRIMARY KEY (`id_usuario`,`id_proyecto`)
+  PRIMARY KEY (`id_usuario`,`id_proyecto`),
+  KEY `fo_consultor_id_proy_idx` (`id_proyecto`),
+  CONSTRAINT `fo_consultor_id_proy` FOREIGN KEY (`id_proyecto`) REFERENCES `proyecto` (`id_proyecto`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -512,15 +514,19 @@ DROP TABLE IF EXISTS `cuetionario_participante`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `cuetionario_participante` (
   `id_participante` int(11) NOT NULL,
+  `id_proyecto` int(11) NOT NULL,
   `id_tema` int(11) NOT NULL,
   `id_pregunta` int(11) NOT NULL,
   `respuesta` int(2) DEFAULT NULL,
-  `respuesta_texto` varchar(180) DEFAULT NULL,
-  PRIMARY KEY (`id_participante`,`id_tema`,`id_pregunta`),
+  `respuesta_rh` int(2) DEFAULT NULL,
+  `respuesta_jefe` int(2) DEFAULT NULL,
+  PRIMARY KEY (`id_participante`,`id_tema`,`id_pregunta`,`id_proyecto`),
   KEY `fk_cuest_part_id_tema_idx` (`id_tema`),
   KEY `fk_cuest_part_id_preg_idx` (`id_pregunta`),
+  KEY `fk_cuest_part_id_proyecto_idx` (`id_proyecto`),
   CONSTRAINT `fk_cuest_part_id_part` FOREIGN KEY (`id_participante`) REFERENCES `participante` (`id_participante`),
   CONSTRAINT `fk_cuest_part_id_pregunta` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id_pregunta`),
+  CONSTRAINT `fk_cuest_part_id_proyecto` FOREIGN KEY (`id_proyecto`) REFERENCES `proyecto` (`id_proyecto`),
   CONSTRAINT `fk_cuest_part_id_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -531,7 +537,6 @@ CREATE TABLE `cuetionario_participante` (
 
 LOCK TABLES `cuetionario_participante` WRITE;
 /*!40000 ALTER TABLE `cuetionario_participante` DISABLE KEYS */;
-INSERT INTO `cuetionario_participante` VALUES (62,101,501,NULL,NULL),(62,101,502,NULL,NULL),(62,101,510,NULL,NULL),(62,102,601,NULL,NULL),(62,103,701,NULL,NULL),(63,101,501,NULL,NULL),(63,101,502,NULL,NULL),(63,101,510,NULL,NULL),(63,102,601,NULL,NULL),(63,103,701,NULL,NULL),(64,101,501,NULL,NULL),(64,101,502,NULL,NULL),(64,101,510,NULL,NULL),(64,102,601,NULL,NULL),(64,103,701,NULL,NULL),(65,101,501,NULL,NULL),(65,101,502,NULL,NULL),(65,101,510,NULL,NULL),(65,102,601,NULL,NULL),(65,103,701,NULL,NULL),(66,101,501,NULL,NULL),(66,101,502,NULL,NULL),(66,101,510,NULL,NULL),(66,102,601,NULL,NULL),(66,103,701,NULL,NULL),(67,101,501,NULL,NULL),(67,101,502,NULL,NULL),(67,101,510,NULL,NULL),(67,102,601,NULL,NULL),(67,103,701,NULL,NULL),(68,101,501,NULL,NULL),(68,101,502,NULL,NULL),(68,101,510,NULL,NULL),(68,102,601,NULL,NULL),(68,103,701,NULL,NULL),(69,101,501,NULL,NULL),(69,101,502,NULL,NULL),(69,101,510,NULL,NULL),(69,102,601,NULL,NULL),(69,103,701,NULL,NULL),(70,101,501,NULL,NULL),(70,101,502,NULL,NULL),(70,101,510,NULL,NULL),(70,102,601,NULL,NULL),(70,103,701,NULL,NULL),(71,101,501,NULL,NULL),(71,101,502,NULL,NULL),(71,101,510,NULL,NULL),(71,102,601,NULL,NULL),(71,103,701,NULL,NULL),(72,101,501,NULL,NULL),(72,101,502,NULL,NULL),(72,101,510,NULL,NULL),(72,102,601,NULL,NULL),(72,103,701,NULL,NULL),(73,101,501,NULL,NULL),(73,101,502,NULL,NULL),(73,101,510,NULL,NULL),(73,102,601,NULL,NULL),(73,103,701,NULL,NULL),(74,101,501,NULL,NULL),(74,101,502,NULL,NULL),(74,101,510,NULL,NULL),(74,102,601,NULL,NULL),(74,103,701,NULL,NULL),(75,101,501,NULL,NULL),(75,101,502,NULL,NULL),(75,101,510,NULL,NULL),(75,102,601,NULL,NULL),(75,103,701,NULL,NULL);
 /*!40000 ALTER TABLE `cuetionario_participante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -637,6 +642,30 @@ LOCK TABLES `entrevistado` WRITE;
 /*!40000 ALTER TABLE `entrevistado` DISABLE KEYS */;
 INSERT INTO `entrevistado` VALUES (11,'actualizado','puestoResponsableLlenado','nombreEntrevistador','nombreEntrevistado','puestoEntrevistado','correoElectronico',3123,31241,'RESR901003963'),(12,'actualizado','puestoResponsableLlenado','nombreEntrevistador','nombreEntrevistado','puestoEntrevistado','correoElectronico',3123,31241,'RESR901003965'),(13,'actualizado','puestoResponsableLlenado','nombreEntrevistador','nombreEntrevistado','puestoEntrevistado','correoElectronico',5554353215,31241,'RESR901003971'),(14,'actualizado','puestoResponsableLlenado','nombreEntrevistador','nombreEntrevistado','puestoEntrevistado','correoElectronico',5554353215,31241,'RESR901003972');
 /*!40000 ALTER TABLE `entrevistado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `estatus_proyecto`
+--
+
+DROP TABLE IF EXISTS `estatus_proyecto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `estatus_proyecto` (
+  `id_estatus` int(11) NOT NULL,
+  `descripcion` varchar(90) DEFAULT NULL,
+  PRIMARY KEY (`id_estatus`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estatus_proyecto`
+--
+
+LOCK TABLES `estatus_proyecto` WRITE;
+/*!40000 ALTER TABLE `estatus_proyecto` DISABLE KEYS */;
+INSERT INTO `estatus_proyecto` VALUES (1,'En captura'),(2,'En asignación'),(3,'En configuración de cuestionario'),(4,'En carga de Head Count'),(5,'En enviado a participantes'),(6,'Vigente'),(7,'Cierre'),(8,'Resultados');
+/*!40000 ALTER TABLE `estatus_proyecto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -782,7 +811,7 @@ CREATE TABLE `modulo` (
 
 LOCK TABLES `modulo` WRITE;
 /*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
-INSERT INTO `modulo` VALUES (1,'Clima Laboral',NULL);
+INSERT INTO `modulo` VALUES (1,'Clima Laboral','Módulo CLB'),(2,'Evaluación de Desempeño','Módulo EVD'),(3,'Evaluación Organizacional 360','Módulo EVO-360'),(4,'Administración por Objetivos','Módulo APO');
 /*!40000 ALTER TABLE `modulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -794,9 +823,9 @@ DROP TABLE IF EXISTS `participante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `participante` (
-  `id_participante` int(11) NOT NULL AUTO_INCREMENT,
-  `id_empresa` bigint(20) NOT NULL,
-  `nivel` int(11) NOT NULL,
+  `id_participante` int(11) NOT NULL,
+  `id_proyecto` int(11) NOT NULL,
+  `nivel` int(11) DEFAULT NULL,
   `nivel_texto` varchar(90) DEFAULT NULL,
   `nombres` varchar(90) DEFAULT NULL,
   `a_paterno` varchar(45) DEFAULT NULL,
@@ -810,14 +839,24 @@ CREATE TABLE `participante` (
   `otros_estudios` varchar(45) DEFAULT NULL,
   `idioma` varchar(45) DEFAULT NULL,
   `nivel_idioma` varchar(45) DEFAULT NULL,
-  `correo_electronico` varchar(45) NOT NULL,
+  `correo_electronico` varchar(45) DEFAULT NULL,
   `sede` varchar(45) DEFAULT NULL,
   `area_org` varchar(45) DEFAULT NULL,
   `token` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_participante`),
-  KEY `FK_PART_EMPR_idx` (`id_empresa`),
-  CONSTRAINT `FK_PART_EMPR` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
+  `objetivo_puesto` varchar(180) DEFAULT NULL,
+  `funciones` varchar(270) DEFAULT NULL,
+  `actividades` varchar(270) DEFAULT NULL,
+  `meta_kpi` varchar(90) DEFAULT NULL,
+  `cantidad_meta` varchar(45) DEFAULT NULL,
+  `unidad_medida` varchar(45) DEFAULT NULL,
+  `tiempo` varchar(45) DEFAULT NULL,
+  `frecuencia_eval` varchar(45) DEFAULT NULL,
+  `id_evaluador` int(11) DEFAULT NULL,
+  `id_part_jefe_inm` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_participante`,`id_proyecto`),
+  KEY `FK_PATICIPANTE_PROY_idx` (`id_proyecto`),
+  CONSTRAINT `FK_PATICIPANTE_PROY` FOREIGN KEY (`id_proyecto`) REFERENCES `proyecto` (`id_proyecto`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -826,7 +865,6 @@ CREATE TABLE `participante` (
 
 LOCK TABLES `participante` WRITE;
 /*!40000 ALTER TABLE `participante` DISABLE KEYS */;
-INSERT INTO `participante` VALUES (62,31,1,'Gerente','Juan Carlos',NULL,NULL,'Masculino','JULC781125HEM','Gerente General','0016-10-16',1.970000,'Licenciatura',NULL,'Ingés','Comprensión','rrensoli@hotmail.com','Oficina Central','Corporativo','meh521187cluj'),(63,31,2,'Supervisor','Miriam',NULL,NULL,'Femenino','CAHM741225MDF','Supervisor Producción','0018-03-20',0.550000,'Profesional Técnico',NULL,'Inglés','Lectura','rrensoli58@gmaail.com','Planta','Producción','fdm522147mhac'),(64,31,2,'Supervisor','Karen',NULL,NULL,'Femenino','PERK881004MDF','SupervisorVentas','0017-10-06',1.000000,'Licenciatura',NULL,'Inglés','Lectura','gabriela_vmx@yahoo.com.mx','Planta','Ventas','fdm400188krep'),(65,31,2,'Supervisor','Luis Eduardo',NULL,NULL,'Masculino','COFL870711MDF','Administración','0014-08-08',4.160000,'Licenciatura',NULL,'Inglés','Principiante','juanc.palomarez@outlook.com','Oficina Central','Administración','fdm117078lfoc'),(66,31,2,'Supervisor','Alfredo',NULL,NULL,'Masculino','HEPA751204HEM','Supervisor de Calidad','0012-08-08',6.160000,'Licenciatura',NULL,'Inglés','Comprensión','eistenroman@gmail.com','Planta','Control de Calidad','meh402157apeh'),(67,31,3,'Intendente','Marco',NULL,NULL,'Masculino','ALTM600320HDF','Intendente de Producción','0013-07-24',5.210000,'Técnico','Mantenimiento preventivo y correctivo','Inglés','Principiante','rubenbrab@gmail.com','Planta','Produccón','fdh023006mtla'),(68,31,3,'Intendente','Mario',NULL,NULL,'Masculino','LODM731228HDF','Intendente de Calidad','0012-06-19',6.300000,'Licenciatura',NULL,'Inglés','Principiante','rene.rensoli@sisim.com.mx','Planta','Control de Calidad','fdh822137mdol'),(69,31,3,'Intendente','Susana',NULL,NULL,'Femenino','RODS630221MDF','Jefe de Recursos Humanos','0013-11-01',4.930000,'Licenciatura',NULL,'N/A',NULL,'angeles@nirho.com','Planta','Administración','fdm122036sdor'),(70,31,4,'Operativo','Adriana',NULL,NULL,'Femenino','PEHA900310HEM','Producción turno 1','0016-10-16',1.970000,'Bachillerarto',NULL,'Inglés','Técnico','kabaiss@live.com.mx','Planta','Producción','meh013009ahep'),(71,31,4,'Operativo','Juan ',NULL,NULL,'Masculino','SARRJ751003195','Producción turno 2','0005-10-15',12.980000,'Técnico',NULL,'Inglés','Técnico','aanibal_arguelles_90@hotmail.com','Planta','Producción','591300157jrras'),(72,31,4,'Operativo','Alberto',NULL,NULL,'Masculino','JURA880304HDF','Encargado de Empaques','0016-04-19',2.470000,'Técnico',NULL,'N/A',NULL,'drako_cesar@hotmail.com','Planta','Produccón','fdh403088aruj'),(73,31,4,'Operativo','Araceli',NULL,NULL,'Femenino','HEDA9003MNDF','Calidad Turno 1','0015-06-24',3.290000,'Licenciatura',NULL,'N/A',NULL,'rrensoli@comuidad.unam.mx','Planta','Control de Calidad','fdnm3009adeh'),(74,31,4,'Operativo','Emmanuel',NULL,NULL,'Masculino','LOCE781009HDF','Calidad Turno 2','0009-03-07',9.590000,'Técnico',NULL,'N/A',NULL,'rrensoli@hotmail.com','Planta','Control de Calidad','fdh900187ecol'),(75,31,4,'Operativo','Luis ',NULL,NULL,'Masculino','CAEL800623HDF','Auxiliar administrativo','0013-12-21',4.790000,'Licenciatura',NULL,'Inglés','Principiante','eistenroman@gmail.com','Oficina Central','Administración','fdh326008leac');
 /*!40000 ALTER TABLE `participante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -985,6 +1023,7 @@ DROP TABLE IF EXISTS `proyecto`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `proyecto` (
   `id_proyecto` int(11) NOT NULL AUTO_INCREMENT,
+  `id_modulo` int(11) NOT NULL,
   `nombre` varchar(90) DEFAULT NULL,
   `id_empresa` bigint(20) NOT NULL,
   `num_empleados` int(11) NOT NULL,
@@ -994,12 +1033,19 @@ CREATE TABLE `proyecto` (
   `fecha_fin` datetime DEFAULT NULL,
   `dias_garantia` int(11) DEFAULT NULL,
   `frecuencia_eval` decimal(10,0) DEFAULT NULL,
+  `nombre_rh` varchar(180) DEFAULT NULL,
+  `email_rh` varchar(90) DEFAULT NULL,
   `id_contacto` bigint(20) NOT NULL,
+  `id_estatus` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_proyecto`),
   KEY `FK_PROYECTO_EMPRESA_idx` (`id_empresa`),
   KEY `FK_PROY_CONTACTO_idx` (`id_contacto`),
+  KEY `FK_PROYECTO_MODULO_idx` (`id_modulo`),
+  KEY `FK_PROY_ID_ESTATIUS_idx` (`id_estatus`),
   CONSTRAINT `FK_CONTACTO_PROY` FOREIGN KEY (`id_contacto`) REFERENCES `contacto` (`id`),
-  CONSTRAINT `FK_PROYECTO_EMPRESA` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`)
+  CONSTRAINT `FK_PROYECTO_EMPRESA` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`),
+  CONSTRAINT `FK_PROYECTO_MODULO` FOREIGN KEY (`id_modulo`) REFERENCES `modulo` (`id_modulo`),
+  CONSTRAINT `FK_PROY_ID_ESTATIUS` FOREIGN KEY (`id_estatus`) REFERENCES `estatus_proyecto` (`id_estatus`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1009,7 +1055,7 @@ CREATE TABLE `proyecto` (
 
 LOCK TABLES `proyecto` WRITE;
 /*!40000 ALTER TABLE `proyecto` DISABLE KEYS */;
-INSERT INTO `proyecto` VALUES (1,'CLIMA LABOLAL KKANA',1,1,'AQUI',1,'2018-10-10 00:00:00','2018-11-22 00:00:00',3,NULL,1),(2,'CLIMA LABORAL PTITO',2,1000,'PTITO',50,NULL,NULL,NULL,3,2),(3,'CLIMA LABORAL DE CLIMA AUTOMOTRIZ S.A.',3,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 00:00:00','2019-08-09 00:00:00',30,3,3),(4,'CLIMA LABORAL TECNOLOGOP',4,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 17:27:41','2018-11-15 00:00:00',10,1,4),(5,'CLIMA LABORAL MAGALLANES HERMANOS S.A.',31,238,'LAS 5 SEDES',237,NULL,NULL,NULL,2,5);
+INSERT INTO `proyecto` VALUES (1,1,'CLIMA LABOLAL KKANA',1,1,'AQUI',1,'2018-10-10 00:00:00','2018-11-22 00:00:00',3,NULL,NULL,NULL,1,1),(2,1,'CLIMA LABORAL PTITO',2,1000,'PTITO',50,NULL,NULL,NULL,3,NULL,NULL,2,1),(3,1,'CLIMA LABORAL DE CLIMA AUTOMOTRIZ S.A.',3,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 00:00:00','2019-08-09 00:00:00',30,3,NULL,NULL,3,1),(4,1,'CLIMA LABORAL TECNOLOGOP',4,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 17:27:41','2018-11-15 00:00:00',10,1,NULL,NULL,4,1),(5,1,'CLIMA LABORAL MAGALLANES HERMANOS S.A.',31,238,'LAS 5 SEDES',237,NULL,NULL,NULL,2,NULL,NULL,5,4);
 /*!40000 ALTER TABLE `proyecto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1232,7 +1278,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPxjRIYT8pG0zgzKTilbko-MOv8pSnmO63M9FkOvfHoR9FvInm','consultorventas@nirho.com','CONSULTOR VENTAS','17f82ee224bb3238db809ed4a7a006f0',1,'','consultorventas'),(2,'https://imgur.com/I80W1Q0.png','gerentenirho@nirho.com','GERENTE NIRHO','a16068c1b716a5dfd54b9e59b7bbc95f',2,'','gerentenirho'),(3,'https://raw.githubusercontent.com/fangpenlin/avataaars/HEAD/avataaars-example.png?raw=true','candidato@nirho.com','CANDIDATO','5f4dcc3b5aa765d61d8327deb882cf99',0,'','candidato'),(4,'/img/avatar1.png','consultornirho@nirho.com','CONSULTOR NIRHO','6ba3c78f6ef92b87020886f1476a017d',3,'','consultornirho'),(5,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','empresanirho@nirho.com','EMPRESA NIRHO','5f4dcc3b5aa765d61d8327deb882cf99',4,'','empresanirho'),(6,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','gael2808@hotmail.com','DANILO GARCIA REYES','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'GARD8908281E8'),(7,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','rrensoli@hotmail.com','rene ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'recr581026sm7'),(8,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','jonatan.gallegos@nirho.com','JONATAN GALLEGOS GUTIERREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'GAGA9402198H8'),(9,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','alejandro.barradas@nirho.com','ALEJANDRO BARRADAS PEREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'BAPA890207P96'),(10,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','ventasgdl@nirho.com','MARIA DE LOURDES VALDEZ RODRIGUEZ','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'VARL600331VA4');
+INSERT INTO `usuario` VALUES (1,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPxjRIYT8pG0zgzKTilbko-MOv8pSnmO63M9FkOvfHoR9FvInm','consultorventas@nirho.com','CONSULTOR VENTAS','17f82ee224bb3238db809ed4a7a006f0',1,'','consultorventas'),(2,'https://imgur.com/I80W1Q0.png','gerentenirho@nirho.com','GERENTE NIRHO','a16068c1b716a5dfd54b9e59b7bbc95f',2,'','gerentenirho'),(3,'https://raw.githubusercontent.com/fangpenlin/avataaars/HEAD/avataaars-example.png?raw=true','candidato@nirho.com','CANDIDATO','5f4dcc3b5aa765d61d8327deb882cf99',0,'','candidato'),(4,'/img/avatar1.png','consultornirho@nirho.com','CONSULTOR NIRHO','6ba3c78f6ef92b87020886f1476a017d',3,'','consultornirho'),(5,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','empresanirho@nirho.com','EMPRESA NIRHO','5f4dcc3b5aa765d61d8327deb882cf99',3,'','empresanirho'),(6,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','gael2808@hotmail.com','DANILO GARCIA REYES','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'GARD8908281E8'),(7,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','rrensoli@hotmail.com','rene ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'recr581026sm7'),(8,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','jonatan.gallegos@nirho.com','JONATAN GALLEGOS GUTIERREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'GAGA9402198H8'),(9,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','alejandro.barradas@nirho.com','ALEJANDRO BARRADAS PEREZ','5f4dcc3b5aa765d61d8327deb882cf99',3,NULL,'BAPA890207P96'),(10,'http://www.hotellaginestra.it/wp-content/uploads/2016/06/person-flat.png','ventasgdl@nirho.com','MARIA DE LOURDES VALDEZ RODRIGUEZ','5f4dcc3b5aa765d61d8327deb882cf99',1,NULL,'VARL600331VA4');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1284,4 +1330,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-09  0:52:00
+-- Dump completed on 2018-11-16 22:38:47

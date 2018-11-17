@@ -121,5 +121,18 @@ public class ParticipanteServiceImpl implements ParticipanteService {
 		}
 		return participantes;
 	}
+
+	@Override
+	public List<Participante> obtenerParticipantesAreaOrg(String areaOrg, Integer idProyecto)
+			throws NirhoServiceException {
+		List<Participante> participantes = new ArrayList<>();
+		try {
+			participantes = participanteDAO.findByAreaOrgProyecto(areaOrg, idProyecto);
+		} catch (Exception e) {
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
+		}
+		return participantes;
+	}
 		
 }

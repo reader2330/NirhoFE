@@ -29,5 +29,14 @@ public class ParticipanteDAOImpl extends AbstractDAO<Participante, ParticipanteP
 		query.setParameter("rfc", rfc);
 		return query.getResultList();
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Participante> findByAreaOrgProyecto(String areaOrg, int idProyecto) {
+		String hql = "FROM Participante p WHERE p.participantePK.idProyecto = :idProyecto AND p.areaOrg = :areaOrg";
+		Query query = entityManager.createQuery(hql);
+		query.setParameter("areaOrg", areaOrg);
+		return query.getResultList();
+	}
 	
 }
