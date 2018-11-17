@@ -144,7 +144,7 @@
       </mat-form-field>
 
   </mat-expansion-panel>
-  <!--<mat-expansion-panel>
+  <mat-expansion-panel *ngFor="let laboral of empleado.laboral">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Datos laborales
@@ -154,7 +154,7 @@
       <div class="col-sm-12 col-md-3">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
           <mat-label>Puesto</mat-label>
-          <mat-select [(ngModel)]= "empleado.puesto" required>
+          <mat-select [(ngModel)]= "laboral.puesto" required>
             <mat-option *ngFor="let puesto of puestos" [value]="puesto.id">
               {{puesto.descripcionCatalogo}}
             </mat-option>
@@ -165,7 +165,7 @@
       <div class="col-sm-12 col-md-3">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
           <mat-label>Tipo de contrato</mat-label>
-          <mat-select required >
+          <mat-select [(ngModel)]= "laboral.nivelLaboral" required >
             <mat-option *ngFor="let nivelLab of tipoContrato" [value]="nivelLab.id">
               {{nivelLab.descripcionCatalogo}}
             </mat-option>
@@ -176,7 +176,7 @@
       <div class="col-sm-12 col-md-3">
         <mat-form-field appearance="outline" style="display: contents">
           <mat-label>Fecha inicio</mat-label>
-          <input matInput [matDatepicker]="picker" >
+          <input [(ngModel)]= "laboral.fechaInicio"  matInput [matDatepicker]="picker" >
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -185,7 +185,7 @@
       <div class="col-sm-12 col-md-3">
         <mat-form-field appearance="outline" style="display: contents">
           <mat-label>Fecha termino</mat-label>
-          <input matInput [matDatepicker]="picker2" >
+          <input [(ngModel)]= "laboral.fechaTermino"   matInput [matDatepicker]="picker2" >
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
@@ -194,33 +194,33 @@
       <div class="col-sm-12 col-md-3">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
           <mat-label>Antigüedad</mat-label>
-          <input matInput  type="text" required>
+          <input [(ngModel)]= "laboral.antiguedad"  matInput  type="text" required>
         </mat-form-field>
       </div>
 
       <div class="col-sm-12 col-md-3">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
           <mat-label>Localidad</mat-label>
-          <input matInput  type="text" required>
+          <input [(ngModel)]= "laboral.localidad"  matInput  type="text" required>
         </mat-form-field>
       </div>
 
       <div class="col-sm-12 col-md-3">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
           <mat-label>Área</mat-label>
-          <input matInput type="text" required>
+          <input [(ngModel)]= "laboral.area"  matInput type="text" required>
         </mat-form-field>
       </div>
       <div class="col-sm-12 col-md-3">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
           <mat-label>Sueldo</mat-label>
-          <input matInput  type="number" required>
+          <input matInput [(ngModel)]= "laboral.sueldo"  type="number" required>
         </mat-form-field>
       </div>
     </div>
 
 
-  </mat-expansion-panel>-->
+  </mat-expansion-panel>
 
 
 </mat-accordion>

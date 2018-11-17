@@ -32,6 +32,10 @@ export class LoginService {
   updateAvatar(ruta): Observable<any> {
     return this._http.get(this.api + 'usuario/guardarAvatar', {headers: this.header, params: {'ruta': ruta}});
   }
+  getSessionID(){
+
+
+  }
 
 
 

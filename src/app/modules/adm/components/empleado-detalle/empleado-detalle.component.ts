@@ -130,13 +130,13 @@ export class EmpleadoDetalleComponent implements OnInit {
       descripcionCatalogo:"Otro"
     }
   ];
-  tipoContrato : [
+  tipoContrato = [
     {
       id:1,
       descripcionCatalogo:"De ley"
     },
     {
-      id:2,
+      id: 2,
       descripcionCatalogo:"Superiores de ley"
     },
     {
@@ -163,7 +163,102 @@ export class EmpleadoDetalleComponent implements OnInit {
       id:8,
       descripcionCatalogo:"Otro"
     }
-    ]
+    ];
+  tipoContacto = [
+
+    {
+      id:1,
+      descripcionCatalogo: "Padre"
+    },
+    {
+      id:2,
+      descripcionCatalogo: "Madre"
+    },
+    {
+      id:3,
+      descripcionCatalogo:"Hermano / Hermana"
+    },
+    {
+      id:4,
+      descripcionCatalogo:"Esposo/Esposa"
+    },
+    {
+      id:5,
+      descripcionCatalogo:"Hijo / Hija"
+    },
+    {
+      id:6,
+      descripcionCatalogo:"Abuelo / Abuela"
+    },
+    {
+      id:7,
+      descripcionCatalogo:"Nieto / Nieta"
+    },
+    {
+      id:8,
+      descripcionCatalogo:"Tío / Tía"
+    },
+    {
+      id:9,
+      descripcionCatalogo:"Amigo / Amiga"
+    },
+    {
+      id:10,
+      descripcionCatalogo:"Concubina / Concubino"
+    },
+    {
+      id:11,
+      descripcionCatalogo:"Otro"
+    }
+
+  ];
+  puestos = [
+    {
+      id: '1',
+      descripcionCatalogo:"Becario"
+    },
+    {
+      id: '2',
+      descripcionCatalogo:"Analista"
+    },
+    {
+      id: '3',
+      descripcionCatalogo:"Consultor junior"
+    },
+    {
+      id: '4',
+      descripcionCatalogo:"Consultor semisenior"
+    },
+    {
+      id: '5',
+      descripcionCatalogo:"Consultor senior"
+    },
+    {
+      id: '6',
+      descripcionCatalogo:"Gerente de operaciones"
+    },
+    {
+      id: '7',
+      descripcionCatalogo:"Analista de ventas"
+    },
+    {
+      id: '8',
+      descripcionCatalogo:"Consultor ventas junior"
+    },
+    {
+      id: '9',
+      descripcionCatalogo:"Consultor ventas semisenior"
+    },
+    {
+      id: '10',
+      descripcionCatalogo:"Consultor ventas senior"
+    },
+    {
+      id: '11',
+      descripcionCatalogo:"Gerente de ventas"
+    }
+  ];
+
 
   constructor(private CatalogoAdm:CatalogsAdmService) { }
   ngOnInit() {
@@ -171,13 +266,15 @@ export class EmpleadoDetalleComponent implements OnInit {
     this.getEmpleado(idEmpleado);
     this.getNacionality();
     this.getBank();
-    //this.getScholarship();
+    this.getScholarship();
   }
 
   getEmpleado(id) {
 
     this.CatalogoAdm.getEmploye(id).subscribe(res => {
       this.empleado = res;
+      this.empleado.laboral[0]['fechaTermino'] = new Date(this.empleado.laboral[0]['fechaTermino']);
+      this.empleado.laboral[0]['fechaInicio'] = new Date(this.empleado.laboral[0]['fechaInicio']);
       console.log(res);
     });
 
@@ -226,8 +323,12 @@ export class EmpleadoDetalleComponent implements OnInit {
   getScholarship() {
     this.CatalogoAdm.getScholarship().subscribe((res) => {
       if (res) {
+        console.log(res);
         this.escolaridades = res;
       }
+    });
+    this.CatalogoAdm.getTypeContac().subscribe(res => {
+      console.log(res);
     });
   }
   goBandeja(){

@@ -61,7 +61,7 @@ export class LaborAdmComponent implements OnInit {
     documentoCV: null,
     documentoComprobanteDomicilio: null
   };
-  tipoContrato : [
+  tipoContrato = [
     {
       id:1,
       descripcionCatalogo:"De ley"
@@ -100,7 +100,52 @@ export class LaborAdmComponent implements OnInit {
   dataSource = new MatTableDataSource<laboral_interface>();
   mobile = false;
   temp: laboral_interface;
-  puestos = [];
+  puestos = [
+    {
+      id:1,
+      descripcionCatalogo:"Becario"
+    },
+    {
+      id:2,
+      descripcionCatalogo:"Analista"
+    },
+    {
+      id:3,
+      descripcionCatalogo:"Consultor junior"
+    },
+    {
+      id:4,
+      descripcionCatalogo:"Consultor semisenior"
+    },
+    {
+      id:5,
+      descripcionCatalogo:"Consultor senior"
+    },
+    {
+      id:6,
+      descripcionCatalogo:"Gerente de operaciones"
+    },
+    {
+      id:7,
+      descripcionCatalogo:"Analista de ventas"
+    },
+    {
+      id:8,
+      descripcionCatalogo:"Consultor ventas junior"
+    },
+    {
+      id:9,
+      descripcionCatalogo:"Consultor ventas semisenior"
+    },
+    {
+      id:10,
+      descripcionCatalogo:"Consultor ventas senior"
+    },
+    {
+      id:11,
+      descripcionCatalogo:"Gerente de ventas"
+    }
+  ];
   nivelesLaborales = [];
   laborForm = new FormGroup(
     {
@@ -155,8 +200,8 @@ export class LaborAdmComponent implements OnInit {
 
   // accent
   ngOnInit() {
-    this.getJob();
-    this.getLevelJob();
+    //this.getJob();
+    //this.getLevelJob();
   }
 
   saveEmpleado() {
@@ -258,9 +303,9 @@ export class LaborAdmComponent implements OnInit {
         }
         break;
       case 2:
-        for (let i = 0; i < this.nivelesLaborales.length; i++) {
-          if (this.nivelesLaborales[i].id == element) {
-            return this.nivelesLaborales[i].descripcionCatalogo;
+        for (let i = 0; i < this.tipoContrato.length; i++) {
+          if (this.tipoContrato[i].id == element) {
+            return this.tipoContrato[i].descripcionCatalogo;
           }
         }
         break;
