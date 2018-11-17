@@ -87,6 +87,8 @@ public class Participante implements Serializable {
     private String frecuenciaEval;
     @Column(name = "id_evaluador")
     private Integer idEvaluador;
+    @Column(name = "id_part_jefe_inm")
+    private Integer idPartJefeInm;
     @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Proyecto proyecto;
@@ -325,8 +327,16 @@ public class Participante implements Serializable {
     public void setIdEvaluador(Integer idEvaluador) {
         this.idEvaluador = idEvaluador;
     }
+    
+    public Integer getIdPartJefeInm() {
+		return idPartJefeInm;
+	}
 
-    public Proyecto getProyecto() {
+	public void setIdPartJefeInm(Integer idPartJefeInm) {
+		this.idPartJefeInm = idPartJefeInm;
+	}
+
+	public Proyecto getProyecto() {
         return proyecto;
     }
 
@@ -344,8 +354,8 @@ public class Participante implements Serializable {
 				+ ", sede=" + sede + ", areaOrg=" + areaOrg + ", token=" + token + ", objetivoPuesto=" + objetivoPuesto
 				+ ", funciones=" + funciones + ", actividades=" + actividades + ", metaKpi=" + metaKpi
 				+ ", cantidadMeta=" + cantidadMeta + ", unidadMedida=" + unidadMedida + ", tiempo=" + tiempo
-				+ ", frecuenciaEval=" + frecuenciaEval + ", idEvaluador=" + idEvaluador + ", proyecto=" + proyecto
-				+ "]";
+				+ ", frecuenciaEval=" + frecuenciaEval + ", idEvaluador=" + idEvaluador + ", idPartJefeInm="
+				+ idPartJefeInm + ", proyecto=" + proyecto + "]";
 	}
 	
 }

@@ -28,7 +28,7 @@ public class EmailTestController {
             MimeMessageHelper helper = new MimeMessageHelper( mail );
             helper.setTo( "eistenroman@gmail.com" );
             helper.setSubject( "Cuestionario de participante Nirho" );
-            helper.setText("<p>Estimado Eisten Román<p></p>Para ingresar a su cuestionario de participación al proyecto ${Proyecto}, "
+            helper.setText("<p>Estimado Jose Perez<p></p>Para ingresar a su cuestionario de participación al proyecto ${Proyecto}, "
             		+ "por favor hacer clic en la siguiente liga: http://localhost:8080/Nirho/cuestionario/participante?token=1-meh521187cluj-5 </p>"
             		+ "<p>Saludos</p>", true);
             mailSender.send(mail);
