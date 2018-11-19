@@ -11,8 +11,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 export class EnterpriseListComponent implements OnInit {
   rfc = '';
-  obj = '';
+  obj = {
+    enterprise_rfc : ''
+  };
   id = 0;
+  mobile = false;
   enterpriseSearch = new FormGroup(
     {
       enterprise_rfc: new FormControl('')
@@ -40,6 +43,7 @@ export class EnterpriseListComponent implements OnInit {
   getEnterpriseByRFC() {
     this.obj = this.enterpriseSearch.value;
     this.rfc = this.obj.enterprise_rfc;
+    console.log(this.rfc);
     this.EnterprisesServices.getEnterpriseByRFC(this.rfc).subscribe((res) => {
       console.log(res);
       this.enterprises = res;
@@ -48,7 +52,7 @@ export class EnterpriseListComponent implements OnInit {
   }
 
   getEnterpriseDetail(obj) {
-    sessionStorage.setItem('detail', JSON.stringify(obj));
+    sessionStorage.setItem('detailIRH', JSON.stringify(obj));
     this.responseChildren.emit({value: 10});
   }
 

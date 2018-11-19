@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {BreakpointObserver, Breakpoints} from '../../../../../../node_modules/@angular/cdk/layout';
+import {CatalogsService} from '../../../clb/services/catalogs.service';
+import {EnterprisesService} from '../../services/enterprises.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-enterprise-irh',
@@ -7,15 +11,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./enterprise-irh.component.scss']
 })
 export class EnterpriseIrhComponent implements OnInit {
-
-  enterprise = {
-    id: null,
-    name: '',
-    empresa: '',
-    giro: 0,
-    pais: 0,
-    rfc : '',
-  };
+  @Output() response = new EventEmitter();
+  mobile = false;
+  mgsInit = '';
+  countries = [];
+  spins = [];
 
   enterpriseForm = new FormGroup(
     {
@@ -59,10 +59,96 @@ export class EnterpriseIrhComponent implements OnInit {
       return 2;
     }
   }
-
-  constructor() { }
+  constructor( breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private EntrepiseService: EnterprisesService) {
+    breakpointObserver.isMatched(('(max-width:450)'));
+    breakpointObserver.observe([
+      Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
+      if (result.matches) {
+        this.mobile = true;
+        this.checkMobileCols();
+      } else {
+        this.mobile = false;
+        this.checkMobileCols();
+      }
+      console.log(this.mobile);
+    });
+  }
 
   ngOnInit() {
+    if (sessionStorage.getItem('detailIRH')) {
+      let data = JSON.parse(sessionStorage.getItem('detailIRH'));
+      console.log(data);
+      this.enterpriseForm.patchValue(data);
+      console.log(this.enterpriseForm.value);
+      this.mgsInit = 'Editar Empresa';
+    }
+    this.CatalogService.getCountries().subscribe(res => {
+      this.countries = res;
+      console.log(res);
+    });
+    this.CatalogService.getGiros().subscribe(res => {
+      this.spins = res;
+      console.log(res);
+    });
+  }
+
+
+  saveCompany() {
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar la información ingresada de la empresa',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        let obj = this.enterpriseForm.value;
+        console.log(obj);
+        this.EntrepiseService.saveEntripise(obj).subscribe((res) => {
+            console.log(res);
+            Swal(
+              'Listo.',
+              'La información se guardo correctamente',
+              'success'
+            ).then(() => {
+              this.response.emit({value: 1});
+            });
+
+          },
+          (err) => {
+            console.log(err);
+            Swal(
+              'Algo salio mal.',
+              'No se pudo guarda la información',
+              'error'
+            ).then(() => {
+              this.response.emit({value: 1});
+            });
+
+
+          });
+
+
+      }
+    });
+  }
+  updateCompany() {
+  }
+  cancelCompany() {
+    Swal({
+      title: '',
+      text: '¿Se eliminara la información ingresada?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        this.enterpriseForm.reset();
+        this.response.emit({value: 1});
+      }
+    });
   }
 
 }

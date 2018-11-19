@@ -20,7 +20,9 @@ import {
   MatRadioModule,
   MatProgressSpinnerModule,
   MatSliderModule,
-  MatDialogModule
+  MatDialogModule,
+  MatNativeDateModule,
+  MatDatepickerModule, MatChipsModule,
 } from '@angular/material';
 
 @NgModule({
@@ -44,7 +46,10 @@ import {
     MatRadioModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatChipsModule
   ],
   declarations: [],
   exports: [
@@ -66,7 +71,12 @@ import {
     MatRadioModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDatepickerModule,
+    MatChipsModule
+  ],
+  providers: [
+    MatDatepickerModule,
   ]
 })
 export class MaterialModule { }

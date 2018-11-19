@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '../../../../../../../node_modules/@angular/cdk/layout';
 import {CatalogsService} from '../../../services/catalogs.service';
-import {IWorkBook, read, utils, IWorkSheet} from '';
+import {IWorkBook, read, utils, IWorkSheet} from 'ts-xlsx';
 import {ProyectoService} from '../../../services/proyecto.service';
 import {Participante} from '../../../models/participante';
 

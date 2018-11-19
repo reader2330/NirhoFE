@@ -1,0 +1,46 @@
+.logo_nirho{
+  width: 100%;
+  margin-top: 5px;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-image: url("../../../../../logo_nirho.jpeg");
+  background-size: cover;
+}
+
+.direccion{
+  color:#fff;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.redireccion{
+  text-decoration: none;
+}
+
+.twitter:hover{
+  color: black;
+}
+
+.modulo{
+  text-decoration: none;
+  color: black;
+}
+
+.stepper-forms{
+  margin-top: 25px;
+}
+
+.logo-nav{
+  width: 180px;
+  height: 60px;
+  margin-left: 15px;
+  background-image: url("../../../../../logo.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.mat-list .mat-list-item .mat-list-item-content, .mat-list .mat-list-option .mat-list-item-content, .mat-nav-list .mat-list-item .mat-list-item-content, .mat-nav-list .mat-list-option .mat-list-item-content, .mat-selection-list .mat-list-item .mat-list-item-content, .mat-selection-list .mat-list-option .mat-list-item-content{
+  cursor: pointer;
+}
+
+

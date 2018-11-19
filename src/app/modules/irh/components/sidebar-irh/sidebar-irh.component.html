@@ -36,11 +36,13 @@
   <mat-sidenav-content>
     <div class="row">
 
-      <div style="margin-left: 20px;margin-top: 50px"  class="col-sm-12 stepper-forms" >
+      <div style="padding: 10px 30px 0 30px;"  class="col-sm-12 stepper-forms" >
 
-        <app-enterprise-list></app-enterprise-list>
-        <!--<app-enterprise-irh></app-enterprise-irh>-->
-        <!--<app-recruiting-irh></app-recruiting-irh>-->
+        <app-enterprise-list (responseChildren)="recibirRespuestChildren($event)" *ngIf="selectModule == 1"></app-enterprise-list>
+        <app-enterprise-detail-irh (response)="recibirRespuestChildren($event)" *ngIf=" selectModule == 2 "></app-enterprise-detail-irh>
+        <app-enterprise-irh (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 10" ></app-enterprise-irh>
+        <app-cuestionario-select-irh (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 3"></app-cuestionario-select-irh>
+        <app-encuesta-irh (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 4"></app-encuesta-irh>
         <!--<app-rh-admin-irh></app-rh-admin-irh>-->
         <!--<app-organizational-development-irh></app-organizational-development-irh>-->
         <!--<app-training-irh></app-training-irh>-->

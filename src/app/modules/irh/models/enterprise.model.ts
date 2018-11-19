@@ -1,17 +1,31 @@
+import {FormControl, Validators} from '@angular/forms';
+
 export class Enterprise {
-  id_enterprise: number;
-  address: string;
-  name: string;
-  giro: number;
-  country: number;
-  rfc: string;
-  operations_year_start: number;
-  anual_facturaction: number;
-  star_product_service: string;
-  product_main_services: string;
-  total_admin_employees: number;
-  total_operative_employees: number;
-  type_employee_contract: string;
+
+  empresa: {
+    direccion: string
+    giro: number
+    pais: number
+    rfc: string
+    empresa: string
+    anioInicioOperaciones: number
+    facturacionAnual: number
+    productoServicioEstrella: string
+    principalesProductosServicios: string
+    noEmpleadosAdministrativo: number
+    noEmpleadosOperativo: number
+    tipoContratacionEmpleados: string
+  };
+  entrevistado: {
+      nombreResponsableLlenado: string
+      puestoResponsableLlenado: string
+      nombreEntrevistador: string
+      nombreEntrevistado: string
+      puestoEntrevistado: string
+      correoElectronico: string
+      telefonoCelular: number
+      telefono_oficina_extension: number;
+  };
 
   constructor() {}
 

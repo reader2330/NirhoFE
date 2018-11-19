@@ -1,0 +1,94 @@
+<form [formGroup]="employeeForm">
+  <mat-grid-list  [cols]="checkMobileCols()" rowHeight="100px">
+
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Nombre completo</mat-label>
+        <input matInput formControlName="nombreCompleto" type="text" required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Nacionalidad</mat-label>
+        <mat-select formControlName="nacionalidad" required >
+          <mat-option *ngFor="let nacionalidad of nacionalidades" [value]="nacionalidad.id">
+            {{nacionalidad.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>Edad</mat-label>
+        <input formControlName="edad" type="text" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>RFC</mat-label>
+        <input formControlName="rfc" type="text" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>CURP</mat-label>
+        <input formControlName="curp" type="text" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>NSS</mat-label>
+        <input formControlName="nss" type="text" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="checkMaxColumns()" [rowspan]="1">
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input formControlName="direccion" type="tel" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+    <div style="margin-left: 10px" class="inputForm" appearance="outline">
+      <mat-radio-group formControlName="estadoCivil" >
+        <mat-radio-button style="margin-left: 10px" value="0">Soltero</mat-radio-button>
+        <mat-radio-button style="margin-left: 10px" value="1">Casado</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveEmployee()" [disabled]="!employeeForm.valid" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
+
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+
+</form>
+
+
+
+

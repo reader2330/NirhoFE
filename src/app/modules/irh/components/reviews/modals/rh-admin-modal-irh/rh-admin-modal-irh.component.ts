@@ -8,7 +8,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class RhAdminModalIrhComponent implements OnInit {
 
-
+  mobile = false;
 
   enterprise = {
     id: null,

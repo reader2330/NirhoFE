@@ -1,0 +1,228 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos del Empleado
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+
+    <mat-form-field style="margin-left: 10px" appearance="outline" >
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Nombre"  [(ngModel)]="empleado.nombreCompleto">
+    </mat-form-field>
+
+    <mat-form-field style="margin-left: 10px" appearance="outline">
+      <mat-label>Nacionalidad</mat-label>
+      <mat-select [(ngModel)]="empleado.nacionalidad" required >
+        <mat-option *ngFor="let nacionalidad of nacionalidades" [value]="nacionalidad.id">
+          {{nacionalidad.descripcionCatalogo}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="margin-left: 10px" appearance="outline">
+      <mat-label>Edad</mat-label>
+      <input matInput [(ngModel)]="empleado.edad" type="text">
+    </mat-form-field>
+
+    <mat-form-field style="margin-left: 10px" appearance="outline">
+      <mat-label>Direccion</mat-label>
+      <input matInput placeholder="Direccion" [(ngModel)]="empleado.direccion">
+    </mat-form-field>
+    <div style="margin-left: 10px" class="inputForm" appearance="outline">
+
+      <mat-radio-group [(ngModel)] ="empleado.estadoCivil">
+
+        <mat-radio-button style="margin-left: 10px" [value]="0">Soltero</mat-radio-button>
+        <mat-radio-button style="margin-left: 10px" [value]="1">Casado</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+  </mat-expansion-panel>
+  <mat-expansion-panel *ngFor="let contacto of empleado.contactos">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos de contacto
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+    <mat-form-field style="margin-left: 10px" class="inputForm" appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="contacto.nombre" type="text">
+    </mat-form-field>
+
+    <mat-form-field style="margin-left: 10px" class="inputForm" appearance="outline">
+      <mat-label>Tipo de contacto</mat-label>
+      <mat-select [(ngModel)]="contacto.tipoContacto" >
+        <mat-option *ngFor="let tipo of tipoContacto" [value]="tipo.id">
+          {{tipo.descripcionCatalogo}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="margin-left: 10px" class="inputForm" appearance="outline">
+      <mat-label>Telefono</mat-label>
+      <input matInput [(ngModel)]="contacto.telefono" type="text">
+    </mat-form-field>
+    <mat-form-field style="margin-left: 10px" class="inputForm" appearance="outline">
+      <mat-label>Celular</mat-label>
+      <input matInput [(ngModel)]="contacto.celular" type="text">
+    </mat-form-field>
+    <mat-form-field style="margin-left: 10px" class="inputForm" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="contacto.email" type="text">
+    </mat-form-field>
+    <mat-form-field style="margin-left: 10px" class="inputForm" appearance="outline">
+      <mat-label>Beneficiario</mat-label>
+      <input matInput [(ngModel)]="contacto.beneficiario" type="text">
+    </mat-form-field>
+
+
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos bancarios
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-form-field class="inputForm" appearance="outline">
+      <mat-label>Banco</mat-label>
+      <mat-select [(ngModel)]="empleado.banco" required >
+        <mat-option *ngFor="let banco of bancos" [value]="banco.id">
+          {{banco.descripcionCatalogo}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="margin-left: 10px" class="inputForm" appearance="outline">
+      <mat-label>Número de cuenta</mat-label>
+      <input matInput [(ngModel)]="empleado.bancoCuenta" type="text" required>
+    </mat-form-field>
+    <mat-form-field style="margin-left: 10px"  class="inputForm" appearance="outline">
+      <mat-label>Clabe interbancaria</mat-label>
+      <input [(ngModel)]="empleado.bancoClaveInterbancaria" type="text" matInput required >
+    </mat-form-field >
+    <mat-checkbox style="margin-left: 10px" (change)="checkValorCredito()" [(ngModel)]="empleado.creditoHipotecario">Credito hipotecario</mat-checkbox>
+    <mat-form-field style="margin-left: 10px" class="inputForm" appearance="outline">
+      <mat-label>Tipo de credito hipotecario</mat-label>
+      <mat-select   [(ngModel)]="empleado.tipoCreditoHipotecario" required >
+        <mat-option *ngFor="let hipot of hipotecas" [value]="hipot.id">
+          {{hipot.descripcionCatalogo}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-checkbox style="margin-left: 10px" [(ngModel)]="empleado.pensionAlimenticia">Pension alimenticia</mat-checkbox>
+
+
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos escolaridad
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+      <mat-form-field style="margin-left: 10px" class="inputForm" appearance="outline">
+        <mat-label>Nivel de escolaridad</mat-label>
+        <mat-select [(ngModel)] ="empleado.escolaridad" required >
+          <mat-option *ngFor="let escolaridad of escolaridades" [value]="escolaridad.id">
+            {{ escolaridad.descripcionCatalogo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="margin-left: 10px" class="inputForm" appearance="outline">
+        <mat-label>Carrera</mat-label>
+        <input matInput [(ngModel)] ="empleado.escolaridadCarrera"  type="text" required>
+      </mat-form-field>
+      <mat-checkbox style="margin-left: 10px" [(ngModel)] = "empleado.titulo  " >Título universitario</mat-checkbox>
+      <mat-form-field style="margin-left: 10px"  class="inputForm" appearance="outline">
+        <mat-label>Especialidad</mat-label>
+        <input [(ngModel)] ="empleado.escolaridadEspecialidad"  type="text" matInput required >
+      </mat-form-field>
+
+      <mat-form-field style="margin-left: 10px" class="inputForm" appearance="outline">
+        <mat-label>Otras capacidades</mat-label>
+        <textarea matInput [(ngModel)] ="empleado.escolaridadCapacidades"  type="text" required></textarea>
+      </mat-form-field>
+
+  </mat-expansion-panel>
+  <mat-expansion-panel *ngFor="let laboral of empleado.laboral">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos laborales
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="row">
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Puesto</mat-label>
+          <mat-select [(ngModel)]= "laboral.puesto" required>
+            <mat-option *ngFor="let puesto of puestos" [value]="puesto.id">
+              {{puesto.descripcionCatalogo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Tipo de contrato</mat-label>
+          <mat-select [(ngModel)]= "laboral.nivelLaboral" required >
+            <mat-option *ngFor="let nivelLab of tipoContrato" [value]="nivelLab.id">
+              {{nivelLab.descripcionCatalogo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field appearance="outline" style="display: contents">
+          <mat-label>Fecha inicio</mat-label>
+          <input [(ngModel)]= "laboral.fechaInicio"  matInput [matDatepicker]="picker" >
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field appearance="outline" style="display: contents">
+          <mat-label>Fecha termino</mat-label>
+          <input [(ngModel)]= "laboral.fechaTermino"   matInput [matDatepicker]="picker2" >
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Antigüedad</mat-label>
+          <input [(ngModel)]= "laboral.antiguedad"  matInput  type="text" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Localidad</mat-label>
+          <input [(ngModel)]= "laboral.localidad"  matInput  type="text" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Área</mat-label>
+          <input [(ngModel)]= "laboral.area"  matInput type="text" required>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Sueldo</mat-label>
+          <input matInput [(ngModel)]= "laboral.sueldo"  type="number" required>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+  </mat-expansion-panel>
+
+
+</mat-accordion>
+<button style="margin-left: 450px; color:white; margin-top: 20px" (click)="updateEmpleado()"   mat-raised-button color="accent"><mat-icon>save</mat-icon>Actualizar</button>
+<button style="margin-left: 10px; margin-top: 20px" (click)="goBandeja()"   mat-raised-button color><mat-icon>arrow_back</mat-icon>Regresar</button>
