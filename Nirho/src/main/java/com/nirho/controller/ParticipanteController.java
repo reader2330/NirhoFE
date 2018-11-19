@@ -31,6 +31,7 @@ import com.nirho.model.Participante;
 import com.nirho.model.ParticipantePK;
 import com.nirho.model.Proyecto;
 import com.nirho.service.EmailService;
+import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.ParticipanteService;
 import com.nirho.service.ProyectoService;
 import com.nirho.util.NirhoUtil;
@@ -46,6 +47,8 @@ public class ParticipanteController {
 	ProyectoService proyectoService;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private EstatusProyectoService estatusService;
 	
 	@GetMapping(value = "/organigrama")
 	public List<NivelDTO> organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
@@ -78,7 +81,7 @@ public class ParticipanteController {
         			estatusActual == ProyectoConstants.ESTATUS_CARGA.intValue())) {
         		throw new NirhoControllerException("No se ha realizado la configuracion del cuestionario en el proyecto");
         	}        	
-			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CARGA));
+			proyecto.setIdEstatus(estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_CARGA));
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 			List<ParticipanteHC> participantesHC = headcount.getLista();
 			List<Participante> participantes = new ArrayList<>();
