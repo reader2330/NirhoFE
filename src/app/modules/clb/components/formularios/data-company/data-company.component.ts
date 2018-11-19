@@ -113,6 +113,7 @@ export class DataCompanyComponent implements OnInit {
     this.company = this.companyForm.value;
     sessionStorage.setItem('company', JSON.stringify(this.company));
   }
+
   cancelCompany(){}
 
 

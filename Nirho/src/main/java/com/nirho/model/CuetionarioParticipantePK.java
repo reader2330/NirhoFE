@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author eisten
+ * @author DELL
  */
 @Embeddable
 public class CuetionarioParticipantePK implements Serializable {
@@ -25,6 +25,9 @@ public class CuetionarioParticipantePK implements Serializable {
     @Column(name = "id_participante")
     private int idParticipante;
     @Basic(optional = false)
+    @Column(name = "id_proyecto")
+    private int idProyecto;
+    @Basic(optional = false)
     @Column(name = "id_tema")
     private int idTema;
     @Basic(optional = false)
@@ -34,8 +37,9 @@ public class CuetionarioParticipantePK implements Serializable {
     public CuetionarioParticipantePK() {
     }
 
-    public CuetionarioParticipantePK(int idParticipante, int idTema, int idPregunta) {
+    public CuetionarioParticipantePK(int idParticipante, int idProyecto, int idTema, int idPregunta) {
         this.idParticipante = idParticipante;
+        this.idProyecto = idProyecto;
         this.idTema = idTema;
         this.idPregunta = idPregunta;
     }
@@ -46,6 +50,14 @@ public class CuetionarioParticipantePK implements Serializable {
 
     public void setIdParticipante(int idParticipante) {
         this.idParticipante = idParticipante;
+    }
+
+    public int getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
     }
 
     public int getIdTema() {
@@ -68,6 +80,7 @@ public class CuetionarioParticipantePK implements Serializable {
     public int hashCode() {
         int hash = 0;
         hash += (int) idParticipante;
+        hash += (int) idProyecto;
         hash += (int) idTema;
         hash += (int) idPregunta;
         return hash;
@@ -83,6 +96,9 @@ public class CuetionarioParticipantePK implements Serializable {
         if (this.idParticipante != other.idParticipante) {
             return false;
         }
+        if (this.idProyecto != other.idProyecto) {
+            return false;
+        }
         if (this.idTema != other.idTema) {
             return false;
         }
@@ -94,7 +110,7 @@ public class CuetionarioParticipantePK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.nirho.model.CuetionarioParticipantePK[ idParticipante=" + idParticipante + ", idTema=" + idTema + ", idPregunta=" + idPregunta + " ]";
+        return "com.nirho.model.CuetionarioParticipantePK[ idParticipante=" + idParticipante + ", idProyecto=" + idProyecto + ", idTema=" + idTema + ", idPregunta=" + idPregunta + " ]";
     }
     
 }

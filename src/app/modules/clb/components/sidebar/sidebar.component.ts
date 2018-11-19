@@ -10,7 +10,7 @@ import {LoginService} from '../../services/login.service';
 })
 export class SidebarComponent implements OnInit {
   mobile = false;
-  selectModule = 1;
+  selectModule = 6;
   modules = [];
   user = {};
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
@@ -47,6 +47,7 @@ export class SidebarComponent implements OnInit {
   getUser() {
     this.LoginService.getUser().subscribe((res) => {
       this.user = res;
+      console.log(res);
       sessionStorage.setItem('user', JSON.stringify(this.user));
     });
   }

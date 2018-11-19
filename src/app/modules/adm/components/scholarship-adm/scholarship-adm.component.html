@@ -1,0 +1,116 @@
+<form [formGroup]="scholarshipForm">
+  <mat-grid-list  [cols]="checkMobileCols()" rowHeight="100px">
+
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Nivel de escolaridad</mat-label>
+        <mat-select formControlName="escolaridad" required >
+          <mat-option *ngFor="let escolaridad of escolaridades" [value]="escolaridad.id">
+            {{escolaridad.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Carrera</mat-label>
+        <input matInput formControlName="escolaridadCarrera" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-checkbox formControlName="titulo">Título universitario</mat-checkbox>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile>
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>Especialidad</mat-label>
+        <input formControlName="escolaridadEspecialidad" type="text" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Otras capacidades</mat-label>
+        <textarea matInput formControlName="escolaridadCapacidades" type="text" required></textarea>
+      </mat-form-field>
+    </mat-grid-tile>
+
+   <mat-grid-tile [colspan]="1" [rowspan]="1">
+     <mat-form-field class="example-chip-list" appearance="outline">
+       <mat-chip-list #chipListCertificaciones>
+         <mat-chip *ngFor="let fruit of certificaciones" [selectable]="selectable"
+                   [removable]="removable" (removed)="remove(fruit)">
+           {{fruit}}
+           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+         </mat-chip>
+         <input matInput formArrayName="escolaridadCertificaciones" placeholder="Certificaciones"
+                [matChipInputFor]="chipListCertificaciones"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event,1)">
+       </mat-chip-list>
+     </mat-form-field>
+   </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-chip-list" appearance="outline">
+        <mat-chip-list #chipListCursos>
+          <mat-chip *ngFor="let fruit of cursos" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(fruit)">
+            {{fruit}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input  formArrayName="escolaridadCursos" placeholder="Cursos"
+                 [matChipInputFor]="chipListCursos"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event,2)">
+        </mat-chip-list>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-chip-list" appearance="outline">
+        <mat-chip-list #chipListOficios>
+          <mat-chip *ngFor="let fruit of oficios" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(fruit)">
+            {{fruit}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input matInput formArrayName="escolaridadOficios" placeholder="Oficios"
+                 [matChipInputFor]="chipListOficios"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event,3)">
+        </mat-chip-list>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+
+
+
+
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveScholarship()" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
+
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+
+</form>

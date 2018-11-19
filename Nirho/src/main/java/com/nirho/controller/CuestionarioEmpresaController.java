@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +30,7 @@ import com.nirho.model.view.VwTemaCuestionario;
 import com.nirho.service.CuestionarioTemaEmpresaService;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping( value = "/cuestionarioEmpresa" )
 public class CuestionarioEmpresaController {
 	public final static Logger logger = Logger.getLogger(CuestionarioEmpresaController.class);
@@ -156,9 +158,9 @@ public class CuestionarioEmpresaController {
 	@ResponseBody
 	public void agregarPregunta(@Valid @RequestBody PreguntaTema preguntaTema) throws NirhoControllerException{
 		try {
-//			if(preguntaTema.getIdTema() > 0){
-//				preguntaTema.setTema(new TemaCuestionario(preguntaTema.getIdTema()));
-//			}
+			if(preguntaTema.getIdTema() > 0){
+				preguntaTema.setTema(new TemaCuestionario(preguntaTema.getIdTema()));
+			}
 			if(preguntaTema.getIdPregunta() != null && preguntaTema.getIdPregunta() > 0){
 				cuestionarioTemaEmpresaService.editarPregunta(preguntaTema);
 			}else{
@@ -272,6 +274,19 @@ public class CuestionarioEmpresaController {
 	      logger.error("Problemas al guardar el tema " + e);
 	      throw new NirhoControllerException("Problemas al guardar el tema");
 	    }
+	}
+	
+	@RequestMapping(value = "/agregarEditarRespuestasCuestionarioActivoEmpresaSingle", method = RequestMethod.POST)
+	@ResponseBody
+	public void agregarEditarRespuestasCuestionarioActivoEmpresa(@Valid @RequestBody RespuestaPreguntaIRH respuesta) throws NirhoControllerException{
+		try {
+			logger.info("En agregarEditarRespuestasCuestionarioActivoEmpresa ");
+			logger.info("respuesta " + respuesta);
+			cuestionarioTemaEmpresaService.agregarEditarRespuestasCuestionarioActivoEmpresa(respuesta);
+		} catch (NirhoServiceException e) {
+			logger.error("Problemas al agregar respuesta de un cuestionario de la empresa" + e);
+			throw new NirhoControllerException("Problemas al agrega respuesta de un cuestionario de la empresa");
+		}
 	}
 	
 	

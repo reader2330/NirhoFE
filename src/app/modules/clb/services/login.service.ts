@@ -24,12 +24,19 @@ export class LoginService {
     return this._http.get(this.api + 'usuario/submodulosClb', {headers: this.header});
   }
   getUser(): Observable<any> {
-    return this._http.get(this.api + 'proyecto/usuario', {headers: this.header});
+    return this._http.get(this.api + 'usuario/usuarioEnSesion', {headers: this.header});
   }
   closeSession(): Observable<any> {
     return this._http.get(this.api + 'usuario/logout', {headers: this.header});
   }
   updateAvatar(ruta): Observable<any> {
-    return this._http.get(this.api + '/usuario/guardarAvatar', {headers: this.header, params: {'ruta': ruta}});
+    return this._http.get(this.api + 'usuario/guardarAvatar', {headers: this.header, params: {'ruta': ruta}});
   }
+  getSessionID(){
+
+
+  }
+
+
+
 }
