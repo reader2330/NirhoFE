@@ -83,11 +83,15 @@ public class ParticipanteController {
 			List<ParticipanteHC> participantesHC = headcount.getLista();
 			List<Participante> participantes = new ArrayList<>();
 			for(ParticipanteHC p: participantesHC) {
-				Participante participante = assamblerToParticipanteHC(p);
-				ParticipantePK participantePK = new ParticipantePK(p.getIdParticipante(), headcount.getIdProyecto());
-				participante.setParticipantePK(participantePK);
-				participante.setToken(NirhoUtil.obtenerToken(p.getIdParticipante(), headcount.getIdProyecto(), participante.getRfc()));
-				participantes.add(participante);
+				try {
+					Participante participante = assamblerToParticipanteHC(p);
+					ParticipantePK participantePK = new ParticipantePK(p.getIdParticipante(), headcount.getIdProyecto());
+					participante.setParticipantePK(participantePK);
+					participante.setToken(NirhoUtil.obtenerToken(p.getIdParticipante(), headcount.getIdProyecto(), participante.getRfc()));
+					participantes.add(participante);
+				}catch(Exception e) {
+					logger.info("Exception [" + e.getMessage() + "]");
+				}
 			}
 			participanteService.guardarParticipanteService(participantes);
 		} catch (NirhoControllerException nce) {
