@@ -88,10 +88,10 @@ public class ParticipanteController {
 			for(ParticipanteHC p: participantesHC) {
 				try {
 					Participante participante = assamblerToParticipanteHC(p);
-					ParticipantePK participantePK = new ParticipantePK(p.getIdParticipante(), headcount.getIdProyecto());
+					ParticipantePK participantePK = new ParticipantePK(Integer.parseInt(p.getIdParticipante()), headcount.getIdProyecto());
 					participante.setParticipantePK(participantePK);
 					participante.setProyecto(proyecto);
-					participante.setToken(NirhoUtil.obtenerToken(p.getIdParticipante(), headcount.getIdProyecto(), participante.getRfc()));
+					participante.setToken(NirhoUtil.obtenerToken(Integer.parseInt(p.getIdParticipante()), headcount.getIdProyecto(), participante.getRfc()));
 					participantes.add(participante);
 				}catch(Exception e) {
 					logger.info("Exception [" + e.getMessage() + "]");
@@ -172,7 +172,7 @@ public class ParticipanteController {
 	private Participante assamblerToParticipanteHC(ParticipanteHC participanteHC) {
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 		Participante participante = new Participante();
-		participante.setNivel(participanteHC.getNivel());
+		participante.setNivel(Integer.parseInt(participanteHC.getNivel()));
 		participante.setNivelTexto(participanteHC.getNivelTexto());
 		participante.setNombres(participanteHC.getNombres());
 	    participante.setAPaterno(participanteHC.getAPaterno());

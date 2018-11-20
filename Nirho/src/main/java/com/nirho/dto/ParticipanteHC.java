@@ -13,8 +13,8 @@ import java.io.Serializable;
  */
 public class ParticipanteHC implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Integer idParticipante;
-    private int nivel;
+    private String idParticipante;
+    private String nivel;
     private String nivelTexto;
     private String nombres;
     private String aPaterno;
@@ -35,29 +35,29 @@ public class ParticipanteHC implements Serializable {
     public ParticipanteHC() {
     }
 
-    public ParticipanteHC(Integer idParticipante) {
+    public ParticipanteHC(String idParticipante) {
         this.idParticipante = idParticipante;
     }
 
-    public ParticipanteHC(Integer idParticipante, int nivel, String correoElectronico) {
+    public ParticipanteHC(String idParticipante, String nivel, String correoElectronico) {
         this.idParticipante = idParticipante;
         this.nivel = nivel;
         this.correoElectronico = correoElectronico;
     }
 
-    public Integer getIdParticipante() {
+    public String getIdParticipante() {
         return idParticipante;
     }
 
-    public void setIdParticipante(Integer idParticipante) {
+    public void setIdParticipante(String idParticipante) {
         this.idParticipante = idParticipante;
     }
 
-    public int getNivel() {
+    public String getNivel() {
         return nivel;
     }
 
-    public void setNivel(int nivel) {
+    public void setNivel(String nivel) {
         this.nivel = nivel;
     }
 
