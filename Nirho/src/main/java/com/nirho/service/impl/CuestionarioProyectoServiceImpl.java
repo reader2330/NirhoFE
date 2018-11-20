@@ -40,6 +40,7 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	private CuestionarioParticipanteDAO cuestPartDAO;
 	@Autowired
 	private PreguntaDAO preguntaDAO;
+
 	
 	@Override
 	public void guardar(CuestionarioConfiguracion cuestionario) throws NirhoServiceException {
@@ -130,5 +131,10 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 		}
 		
 	}
-	
+
+	@Override
+	public List<CuestionarioProyecto> obtenerCuestionarioProyecto(Integer idProyecto) throws NirhoServiceException {
+		return dao.findByIdProyecto(idProyecto);
+	}
+
 }
