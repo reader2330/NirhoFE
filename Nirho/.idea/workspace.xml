@@ -9,254 +9,21 @@
     <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nirho.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Nirho.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dump_nirhodb.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/SpringBootMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/SpringBootMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/config/CorsConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/config/CorsConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/constant/AreaOrgConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/constant/AreaOrgConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/constant/ProyectoConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/constant/ProyectoConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/CatalogoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/CatalogoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/CatalogosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/CatalogosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/CuestionarioEmpresaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/CuestionarioEmpresaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/CuestionarioProyectoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/CuestionarioProyectoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/EmailTestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/EmailTestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/EmpresaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/EmpresaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/GraficasProyectoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/GraficasProyectoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ParticipanteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ParticipanteController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoAPOController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoAPOController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoCLBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoCLBController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVDController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVDController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVO360Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVO360Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ActividadesPuestoVacanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ActividadesPuestoVacanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/AsignacionConsultorVacanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/AsignacionConsultorVacanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/BaseDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/BaseDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CandidatoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CandidatoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CaracteristicasCandidatoCvDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CaracteristicasCandidatoCvDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CaracteristicasCandidatoVacanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CaracteristicasCandidatoVacanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CatalogoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CatalogoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CompetenciasVacanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CompetenciasVacanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ConocimientoCandidatoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ConocimientoCandidatoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ConocimientoVacanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ConocimientoVacanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ConsultorProyectoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ConsultorProyectoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ContactoCandidatoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ContactoCandidatoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ContactoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ContactoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ContratacionVacanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ContratacionVacanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CuestionarioEmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CuestionarioEmpresaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CuestionarioParticipanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CuestionarioParticipanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CuestionarioProyectoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/CuestionarioProyectoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/EmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/EmpresaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/EntrevistaAsignacionVacanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/EntrevistaAsignacionVacanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/EntrevistadoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/EntrevistadoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/EstatusProyectoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/EstatusProyectoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ExperienciaCandidatoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ExperienciaCandidatoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/IdiomaCandidatoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/IdiomaCandidatoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/IdiomaVacanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/IdiomaVacanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/IndicadoresNirhoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/IndicadoresNirhoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ModuloDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ModuloDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ParticipanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ParticipanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/PreguntaCuestionarioEmpresaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/PreguntaCuestionarioEmpresaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/PreguntaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/PreguntaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/PreguntaTemaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/PreguntaTemaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ProyectoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/ProyectoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/PsicometricoAsignacionVacanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/PsicometricoAsignacionVacanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/RespuestaPreguntaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/RespuestaPreguntaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/RolClbSubmoduloDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/RolClbSubmoduloDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/TemaCuestionarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/TemaCuestionarioDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/TipoCatalogoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/TipoCatalogoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/UsuarioDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/VacanteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/VacanteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/AbstractDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/AbstractDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ActividadesPuestoVacanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ActividadesPuestoVacanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/AsignacionConsultorVacanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/AsignacionConsultorVacanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CandidatoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CandidatoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CaracteristicasCandidatoCvDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CaracteristicasCandidatoCvDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CaracteristicasCandidatoVacanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CaracteristicasCandidatoVacanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CatalogoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CatalogoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CompetenciasVacanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CompetenciasVacanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ConocimientoCandidatoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ConocimientoCandidatoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ConocimientoVacanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ConocimientoVacanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ConsultorProyectoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ConsultorProyectoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ContactoCandidatoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ContactoCandidatoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ContactoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ContactoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ContratacionVacanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ContratacionVacanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CuestionarioEmpresaDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CuestionarioEmpresaDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CuestionarioParticipanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CuestionarioParticipanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CuestionarioProyectoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/CuestionarioProyectoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/EmpresaDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/EmpresaDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/EntrevistaAsignacionVacanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/EntrevistaAsignacionVacanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/EntrevistadoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/EntrevistadoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/EstatusProyectoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/EstatusProyectoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ExperienciaCandidatoDAOIml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ExperienciaCandidatoDAOIml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/IdiomaCandidatoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/IdiomaCandidatoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/IdiomaVacanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/IdiomaVacanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/IndicadoresNirhoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/IndicadoresNirhoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ModuloDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ModuloDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ParticipanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ParticipanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/PreguntaCuestionarioEmpresaDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/PreguntaCuestionarioEmpresaDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/PreguntaDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/PreguntaDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/PreguntaTemaDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/PreguntaTemaDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ProyectoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ProyectoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/PsicometricoAsignacionVacanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/PsicometricoAsignacionVacanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/RespuestaPreguntaDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/RespuestaPreguntaDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/RolClbSubmoduloDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/RolClbSubmoduloDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/TemaCuestionarioDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/TemaCuestionarioDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/TipoCatalogoDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/TipoCatalogoDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/UsuarioDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/UsuarioDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/VacanteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/VacanteDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/CuestionarioConfiguracion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/CuestionarioConfiguracion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/CuestionarioEmpresaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/CuestionarioEmpresaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/DetalleEmpresaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/DetalleEmpresaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/EmailDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/EmailDatos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/GraficaAreaOrgDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/GraficaAreaOrgDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/GraficaTemaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/GraficaTemaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/HeadCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/HeadCount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/HeadCountAmpliado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/HeadCountAmpliado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/NivelDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/NivelDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/ParticipanteDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/ParticipanteDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/ParticipanteHC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/ParticipanteHC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/ParticipanteHCA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/ParticipanteHCA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/PeriodoProyecto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/PeriodoProyecto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/PreguntaRespuestaCEmpresaIRHDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/PreguntaRespuestaCEmpresaIRHDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/RegistroEmpresaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/RegistroEmpresaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/TemaPreguntas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/TemaPreguntas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/VerTemaQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/VerTemaQ.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/transformer/CuestionarioDTOTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/transformer/CuestionarioDTOTransformer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/dto/transformer/RespuestaCEmpresaIRHDTOTransoformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/dto/transformer/RespuestaCEmpresaIRHDTOTransoformer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/exception/NirhoControllerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/exception/NirhoControllerException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/exception/NirhoServiceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/exception/NirhoServiceException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/ActividadesPuestoVacante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/ActividadesPuestoVacante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/AsignacionConsultorVacante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/AsignacionConsultorVacante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Candidato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Candidato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/CaracteristicasCandidatoCv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/CaracteristicasCandidatoCv.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/CaracteristicasCandidatoVacante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/CaracteristicasCandidatoVacante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Catalogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Catalogo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/ClbSubmodulo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/ClbSubmodulo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/CompetenciasVacante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/CompetenciasVacante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/ConocimientoCandidato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/ConocimientoCandidato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/ConocimientoVacante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/ConocimientoVacante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/ConsultorProyecto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/ConsultorProyecto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/ConsultorProyectoPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/ConsultorProyectoPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Contacto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Contacto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/ContactoCandidato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/ContactoCandidato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/ContratacionVacante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/ContratacionVacante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/CuestionarioEmpresa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/CuestionarioEmpresa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/CuestionarioProyecto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/CuestionarioProyecto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/CuestionarioProyectoPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/CuestionarioProyectoPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/CuetionarioParticipante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/CuetionarioParticipante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/CuetionarioParticipantePK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/CuetionarioParticipantePK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Empresa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Empresa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/EntrevistaAsignacionVacante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/EntrevistaAsignacionVacante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Entrevistado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Entrevistado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/EspacioFisico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/EspacioFisico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/EstatusProyecto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/EstatusProyecto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/ExperienciaCandidato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/ExperienciaCandidato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/IdiomaCandidato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/IdiomaCandidato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/IdiomaVacante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/IdiomaVacante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/IndicadoresNirho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/IndicadoresNirho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Modulo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Modulo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Participante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Participante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/ParticipantePK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/ParticipantePK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Pregunta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Pregunta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/PreguntaCuestionarioEmpresa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/PreguntaCuestionarioEmpresa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/PreguntaTema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/PreguntaTema.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/PreguntaTemaHistorico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/PreguntaTemaHistorico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Proyecto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Proyecto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/PsicometricoAsignacionVacante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/PsicometricoAsignacionVacante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/RespuestaPregunta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/RespuestaPregunta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/RespuestaPreguntaIRH.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/RespuestaPreguntaIRH.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/RespuestaPreguntaPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/RespuestaPreguntaPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/RolClbSubmodulo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/RolClbSubmodulo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/RolClbSubmoduloPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/RolClbSubmoduloPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Tema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Tema.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/TemaCuestionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/TemaCuestionario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/TipoCatalogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/TipoCatalogo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Vacante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Vacante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/view/VwCuestionarioPreguntasTemas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/view/VwCuestionarioPreguntasTemas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/view/VwCuestionarioRespuestas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/view/VwCuestionarioRespuestas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/view/VwEmpresasSolicitudCuestionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/view/VwEmpresasSolicitudCuestionario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/view/VwTemaCuestionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/view/VwTemaCuestionario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/ActividadesPuestoVacanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/ActividadesPuestoVacanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/AsignacionConsultorVacanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/AsignacionConsultorVacanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/CandidatoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/CandidatoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/CaracteristicasCandidatoCvService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/CaracteristicasCandidatoCvService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/CaracteristicasCandidatoVacanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/CaracteristicasCandidatoVacanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/CatalogoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/CatalogoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/CompetenciasVacanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/CompetenciasVacanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/ConocimientoCandidatoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/ConocimientoCandidatoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/ConocimientoVacanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/ConocimientoVacanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/ContactoCandidatoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/ContactoCandidatoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/ContactoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/ContactoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/ContratacionVacanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/ContratacionVacanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/CuestionarioProyectoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/CuestionarioProyectoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/CuestionarioTemaEmpresaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/CuestionarioTemaEmpresaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/EmpresaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/EmpresaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/EntrevistaAsignacionVacanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/EntrevistaAsignacionVacanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/EstatusProyectoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/EstatusProyectoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/ExperienciaCandidatoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/ExperienciaCandidatoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/GraficaAreaOrgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/GraficaAreaOrgService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/GraficasProyectoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/GraficasProyectoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/IdiomaCandidatoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/IdiomaCandidatoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/IdiomaVacanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/IdiomaVacanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/IndicadoresNirhoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/IndicadoresNirhoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/ParticipanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/ParticipanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/ProyectoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/ProyectoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/PsicometricoAsignacionVacanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/PsicometricoAsignacionVacanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/RolClbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/RolClbService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/TemasModuloService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/TemasModuloService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/TipoCatalogoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/TipoCatalogoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/UsuarioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/VacanteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/VacanteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/ActividadesPuestoVacanteServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/ActividadesPuestoVacanteServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/CatalogoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/CatalogoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/CuestionarioProyectoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/CuestionarioProyectoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/CuestionarioServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/CuestionarioServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/EmailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/EmailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/EmpresaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/EmpresaServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/EstatusProyectoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/EstatusProyectoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/GraficaAreaOrgServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/GraficaAreaOrgServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/GraficasProyectoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/GraficasProyectoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/ParticipanteServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/ParticipanteServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/ProyectoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/ProyectoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/RolClbServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/RolClbServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/TemasModuloServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/TemasModuloServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/UsuarioServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/service/impl/UsuarioServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/util/EmailUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/util/EmailUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/util/NirhoUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/util/NirhoUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/util/SessionConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/util/SessionConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/util/SessionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/util/SessionUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/avatar.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/avatar.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/avatar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/avatar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/background.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/background.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/background2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/background2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/background3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/background3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/logo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/logo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/avatar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/avatar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/logo_m.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/logo_m.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/main.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/polyfills.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/polyfills.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/polyfills.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/polyfills.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/runtime.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/runtime.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/runtime.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/runtime.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/sad.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/sad.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/styles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/styles.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/styles.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/vendor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/vendor.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/vendor.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/adm/components/sidebar-adm/sidebar-adm.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/adm/components/sidebar-adm/sidebar-adm.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/clb.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/clb.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/avatar-edit/avatar-edit.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/avatar-edit/avatar-edit.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/formularios/head-count/head-count.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/formularios/head-count/head-count.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/login/login.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/sidebar/sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/sidebar/sidebar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/sidebar/sidebar.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/sidebar/sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/sidebar/sidebar.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/models/participante.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/models/participante.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/services/login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/services/login.service.ts" afterDir="false" />
@@ -282,14 +49,24 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="12" />
+          <entry key="java" value="18" />
           <entry key="sql" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="12" />
+          <entry key="JAVA" value="18" />
           <entry key="SQL" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="3" />
         </counts>
       </usages-collector>
     </session>
@@ -297,37 +74,76 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="96" column="33" selection-start-line="96" selection-start-column="33" selection-end-line="96" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/service/ProyectoService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/service/impl/ProyectoServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="74" column="22" selection-start-line="74" selection-start-column="22" selection-end-line="74" selection-end-column="22" />
+            <state relative-caret-position="915">
+              <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVO360Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="417">
+              <caret line="181" column="80" lean-forward="true" selection-start-line="181" selection-start-column="80" selection-end-line="181" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVDController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="178" column="81" selection-start-line="178" selection-start-column="81" selection-end-line="178" selection-end-column="81" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoCLBController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoAPOController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="178" column="81" selection-start-line="178" selection-start-column="81" selection-end-line="178" selection-end-column="81" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/constant/ProyectoConstants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/dao/BaseDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
               <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/config/WebSecurityConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -350,42 +166,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/constant/ProyectoConstants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/util/EmailUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/util/NirhoUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoCLBController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="94" column="40" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
@@ -400,6 +180,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVO360Controller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nirho/constant/ProyectoConstants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVDController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoCLBController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoAPOController.java" />
       </list>
     </option>
   </component>
@@ -411,12 +196,7 @@
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="Nirho" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-      </expand>
+      <expand />
       <select />
     </treeState>
   </component>
@@ -465,6 +245,15 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="nirho" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Nirho" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Nirho" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nirho" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -475,7 +264,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542693035872" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542696738458" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="project.structure.last.edited" value="Project" />
@@ -545,17 +334,18 @@
       <workItem from="1542430433494" duration="605000" />
       <workItem from="1542601131838" duration="2435000" />
       <workItem from="1542645805570" duration="594000" />
-      <workItem from="1542673089086" duration="3544000" />
+      <workItem from="1542673089086" duration="5336000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8318000" />
+    <option name="totallyTimeSpent" value="10110000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1680" height="751" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2008547" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2008547" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -572,9 +362,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4993895" visible="true" weight="0.32776934" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4993895" weight="0.32776934" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50061053" side_tool="true" weight="0.32776934" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32874617" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32776934" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Version Control" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
@@ -583,7 +373,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Maven Projects" order="5" visible="true" weight="0.32905984" />
+      <window_info anchor="right" id="Maven Projects" order="5" weight="0.32905984" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
@@ -619,24 +409,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoCLBController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="94" column="40" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/config/CorsConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/constant/ProyectoConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -668,13 +444,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/service/impl/ProyectoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="74" column="22" selection-start-line="74" selection-start-column="22" selection-end-line="74" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/dao/impl/ProyectoDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -693,6 +462,58 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/config/WebSecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/service/impl/ProyectoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/constant/ProyectoConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVO360Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="181" column="80" lean-forward="true" selection-start-line="181" selection-start-column="80" selection-end-line="181" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVDController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="178" column="81" selection-start-line="178" selection-start-column="81" selection-end-line="178" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoCLBController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoAPOController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="178" column="81" selection-start-line="178" selection-start-column="81" selection-end-line="178" selection-end-column="81" />
         </state>
       </provider>
     </entry>
