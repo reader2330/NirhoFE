@@ -26,6 +26,7 @@ import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.EstatusProyecto;
 import com.nirho.model.Proyecto;
 import com.nirho.service.CatalogoService;
+import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.ProyectoService;
 import com.nirho.util.SessionUtil;
 
@@ -40,7 +41,9 @@ public class ProyectoCLBController {
 	ProyectoService proyectoService;
 	@Autowired
 	CatalogoService catalogoService;
-		
+	@Autowired
+	private EstatusProyectoService estatusService;
+	
 	@GetMapping(value = "/todos")
 	public List<Proyecto> todos() throws NirhoControllerException{
 		List<Proyecto> proyectos = new ArrayList<>();
@@ -77,7 +80,7 @@ public class ProyectoCLBController {
 			
 	@RequestMapping(value = "/porId", method = RequestMethod.GET)
 	@ResponseBody
-	public Proyecto porRfc(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+	public Proyecto porId(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		Proyecto proyecto = new Proyecto();
 		try {
 			proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
@@ -86,12 +89,13 @@ public class ProyectoCLBController {
 		}
 		return proyecto;
 	}
-	
+		
 	@RequestMapping(value = "/registrar", method = RequestMethod.POST)
 	@ResponseBody
 	public void registrarProyecto(@RequestBody Proyecto proyecto) throws NirhoControllerException {
 		logger.info(" ********************************* proyecto [" + proyecto + "] *****************************");
 		try {
+			proyecto.setIdEstatus(estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_CAPTURA));
 			proyectoService.registrarProyecto(proyecto, ID_MODULO);
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
@@ -112,6 +116,7 @@ public class ProyectoCLBController {
 			}  catch (NullPointerException e) {
 				logger.info("NullPointerExceptio [" + e.getLocalizedMessage() +"]");
 			}
+			periodo.getProyecto().setIdEstatus(estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_ASIGNADO));
 			proyectoService.registrarProyecto(periodo.getProyecto(), ID_MODULO);
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
@@ -146,8 +151,7 @@ public class ProyectoCLBController {
 	public void apertura(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
-			EstatusProyecto estatus = new EstatusProyecto();
-			estatus.setIdEstatus(ProyectoConstants.ESTATUS_VIGENTE);
+			EstatusProyecto estatus = estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_VIGENTE);
 			proyecto.setIdEstatus(estatus);
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 		} catch(NirhoServiceException e){
@@ -160,8 +164,7 @@ public class ProyectoCLBController {
 	public void cierre(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
-			EstatusProyecto estatus = new EstatusProyecto();
-			estatus.setIdEstatus(ProyectoConstants.ESTATUS_FINALIZADO);
+			EstatusProyecto estatus = estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_FINALIZADO);
 			proyecto.setIdEstatus(estatus);
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 		} catch(NirhoServiceException e){
@@ -174,12 +177,12 @@ public class ProyectoCLBController {
 	public void revisionResultados(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
-			EstatusProyecto estatus = new EstatusProyecto();
-			estatus.setIdEstatus(ProyectoConstants.ESTATUS_RESULTADOS);
+			EstatusProyecto estatus = estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_RESULTADOS);
 			proyecto.setIdEstatus(estatus);
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al registrar el proyecto");
 		}
 	}
+	
 }
