@@ -175,7 +175,7 @@ public class ProyectoAPOController {
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
 			EstatusProyecto estatus = new EstatusProyecto();
-			estatus.setIdEstatus(ProyectoConstants.ESTTUS_RESULTADOS);
+			estatus.setIdEstatus(ProyectoConstants.ESTATUS_RESULTADOS);
 			proyecto.setIdEstatus(estatus);
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 		} catch(NirhoServiceException e){

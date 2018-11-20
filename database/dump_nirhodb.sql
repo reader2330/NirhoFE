@@ -542,6 +542,217 @@ LOCK TABLES `cuetionario_participante` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `empleado`
+--
+
+DROP TABLE IF EXISTS `empleado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `empleado` (
+  `id_empleado` bigint(20) NOT NULL,
+  `banco` int(11) NOT NULL,
+  `banco_cinterbancaria` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `banco_cuenta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `credito_hipotecario` bit(1) DEFAULT NULL,
+  `curp` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `direccion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `documento_comprobante` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `documento_curp` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `documento_cv` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `documento_ine` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `edad` int(11) DEFAULT NULL,
+  `escolaridad` int(11) NOT NULL,
+  `escolaridad_capacidades` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `escolaridad_carrera` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `escolaridad_especialidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estado_civil` int(11) DEFAULT NULL,
+  `fecha_nacimiento` datetime DEFAULT NULL,
+  `nacionalidad` int(11) NOT NULL,
+  `nombre_completo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nss` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pension_alimenticia` bit(1) DEFAULT NULL,
+  `rfc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo_credito_hipotecario` int(11) DEFAULT NULL,
+  `titulo` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`id_empleado`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado`
+--
+
+LOCK TABLES `empleado` WRITE;
+/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES (22,158,'897897897','798777',_binary '\0','Prueba1','Prueba1',NULL,NULL,NULL,NULL,20,160,'','Prueba1','99080',0,'2018-11-01 06:00:00',152,'Prueba1','Prueba1',_binary '\0','Prueba1',0,_binary '');
+/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_contacto`
+--
+
+DROP TABLE IF EXISTS `empleado_contacto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `empleado_contacto` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `beneficiario` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `celular` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telefono` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo_contacto` int(11) NOT NULL,
+  `empleado` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKsoynw38tfj3l369gfbf7q8s2s` (`empleado`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_contacto`
+--
+
+LOCK TABLES `empleado_contacto` WRITE;
+/*!40000 ALTER TABLE `empleado_contacto` DISABLE KEYS */;
+INSERT INTO `empleado_contacto` VALUES (1,'Prueba1','89789897','Prueba1@Prueba1.com','Prueba1','8978977',156,22);
+/*!40000 ALTER TABLE `empleado_contacto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_escolaridad_certificaciones`
+--
+
+DROP TABLE IF EXISTS `empleado_escolaridad_certificaciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `empleado_escolaridad_certificaciones` (
+  `empleado_id_empleado` bigint(20) NOT NULL,
+  `escolaridad_certificaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  KEY `FKdqq3ag8tmwls621tskwtlflb` (`empleado_id_empleado`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_escolaridad_certificaciones`
+--
+
+LOCK TABLES `empleado_escolaridad_certificaciones` WRITE;
+/*!40000 ALTER TABLE `empleado_escolaridad_certificaciones` DISABLE KEYS */;
+INSERT INTO `empleado_escolaridad_certificaciones` VALUES (22,'9089088');
+/*!40000 ALTER TABLE `empleado_escolaridad_certificaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_escolaridad_cursos`
+--
+
+DROP TABLE IF EXISTS `empleado_escolaridad_cursos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `empleado_escolaridad_cursos` (
+  `empleado_id_empleado` bigint(20) NOT NULL,
+  `escolaridad_cursos` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  KEY `FKna7oi3rko76yog6733quvgql1` (`empleado_id_empleado`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_escolaridad_cursos`
+--
+
+LOCK TABLES `empleado_escolaridad_cursos` WRITE;
+/*!40000 ALTER TABLE `empleado_escolaridad_cursos` DISABLE KEYS */;
+INSERT INTO `empleado_escolaridad_cursos` VALUES (22,'Prueba1');
+/*!40000 ALTER TABLE `empleado_escolaridad_cursos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_escolaridad_oficios`
+--
+
+DROP TABLE IF EXISTS `empleado_escolaridad_oficios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `empleado_escolaridad_oficios` (
+  `empleado_id_empleado` bigint(20) NOT NULL,
+  `escolaridad_oficios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  KEY `FKathhoexkd7i3249cwcttrom2n` (`empleado_id_empleado`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_escolaridad_oficios`
+--
+
+LOCK TABLES `empleado_escolaridad_oficios` WRITE;
+/*!40000 ALTER TABLE `empleado_escolaridad_oficios` DISABLE KEYS */;
+INSERT INTO `empleado_escolaridad_oficios` VALUES (22,'Prueba1');
+/*!40000 ALTER TABLE `empleado_escolaridad_oficios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_idioma`
+--
+
+DROP TABLE IF EXISTS `empleado_idioma`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `empleado_idioma` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `habilidades` int(11) NOT NULL,
+  `idioma` int(11) NOT NULL,
+  `nivel` int(11) NOT NULL,
+  `empleado` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKidyu1tnmp2a7wl7gk3jd0uyxc` (`empleado`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_idioma`
+--
+
+LOCK TABLES `empleado_idioma` WRITE;
+/*!40000 ALTER TABLE `empleado_idioma` DISABLE KEYS */;
+INSERT INTO `empleado_idioma` VALUES (1,30,16,24,22);
+/*!40000 ALTER TABLE `empleado_idioma` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado_laboral`
+--
+
+DROP TABLE IF EXISTS `empleado_laboral`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `empleado_laboral` (
+  `id` bigint(20) NOT NULL,
+  `antiguedad` int(11) DEFAULT NULL,
+  `area` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fecha_inicio` datetime DEFAULT NULL,
+  `fecha_termino` datetime DEFAULT NULL,
+  `localidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nivel_laboral` int(11) NOT NULL,
+  `puesto` int(11) DEFAULT NULL,
+  `sueldo` double DEFAULT NULL,
+  `empleado` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKk9bwwpj0liftfn8ds013qwr6q` (`empleado`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado_laboral`
+--
+
+LOCK TABLES `empleado_laboral` WRITE;
+/*!40000 ALTER TABLE `empleado_laboral` DISABLE KEYS */;
+INSERT INTO `empleado_laboral` VALUES (23,20,'Prueba1','2018-11-01 06:00:00','2018-11-14 06:00:00','Prueba1',164,154,890809,22);
+/*!40000 ALTER TABLE `empleado_laboral` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `empresa`
 --
 
@@ -646,6 +857,35 @@ INSERT INTO `entrevistado` VALUES (11,'actualizado','puestoResponsableLlenado','
 UNLOCK TABLES;
 
 --
+-- Table structure for table `espacio_fisico`
+--
+
+DROP TABLE IF EXISTS `espacio_fisico`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `espacio_fisico` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `delimitacion_areas_trabajo` bit(1) NOT NULL,
+  `elementos_comunicacion_interna` bit(1) NOT NULL,
+  `instalaciones_adecuadas` bit(1) NOT NULL,
+  `luz_suficiente_adecuada` bit(1) NOT NULL,
+  `posiciones_trabajo_comodas` bit(1) NOT NULL,
+  `seguridad_ocupacional` bit(1) NOT NULL,
+  `temperatura_adecuada` bit(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `espacio_fisico`
+--
+
+LOCK TABLES `espacio_fisico` WRITE;
+/*!40000 ALTER TABLE `espacio_fisico` DISABLE KEYS */;
+/*!40000 ALTER TABLE `espacio_fisico` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `estatus_proyecto`
 --
 
@@ -699,6 +939,28 @@ CREATE TABLE `experiencia_candidato` (
 LOCK TABLES `experiencia_candidato` WRITE;
 /*!40000 ALTER TABLE `experiencia_candidato` DISABLE KEYS */;
 /*!40000 ALTER TABLE `experiencia_candidato` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hibernate_sequence`
+--
+
+DROP TABLE IF EXISTS `hibernate_sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hibernate_sequence`
+--
+
+LOCK TABLES `hibernate_sequence` WRITE;
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` VALUES (24),(24);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1000,8 +1262,11 @@ CREATE TABLE `pregunta_tema_historico` (
   `fecha_modificacion` datetime DEFAULT NULL,
   `ponderacion` varchar(10) NOT NULL,
   `accion` varchar(10) NOT NULL,
+  `documento_referencia` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_pregunta`),
   KEY `FK_PREGUNTA_HIST` (`id_pregunta`),
+  KEY `FK79p5rimayhlrj7sicu9v9p7ta` (`id_tema`),
+  CONSTRAINT `FK79p5rimayhlrj7sicu9v9p7ta` FOREIGN KEY (`id_tema`) REFERENCES `tema_cuestionario` (`id_tema`),
   CONSTRAINT `FK_PREGUNTA_HIST` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta_tema` (`id_pregunta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1105,6 +1370,7 @@ CREATE TABLE `respuesta_pregunta` (
   `disc_table` varchar(1) DEFAULT NULL,
   `id_cuestionario_empresa` int(11) NOT NULL,
   PRIMARY KEY (`id_respuesta_pregunta`),
+  UNIQUE KEY `UK_7a1y2wepr2i9gw6akvah7efsp` (`id_cuestionario_empresa`),
   KEY `FK_CUESTIONARIO_EMPRESA` (`id_cuestionario_empresa`),
   CONSTRAINT `FK_CUESTIONARIO_EMPRESA` FOREIGN KEY (`id_cuestionario_empresa`) REFERENCES `cuestionario_empresa` (`id_cuestionario_empresa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
@@ -1247,7 +1513,7 @@ CREATE TABLE `tipo_catalogo` (
 
 LOCK TABLES `tipo_catalogo` WRITE;
 /*!40000 ALTER TABLE `tipo_catalogo` DISABLE KEYS */;
-INSERT INTO `tipo_catalogo` VALUES (1,1,'Pais'),(2,1,'Giro'),(3,1,'Tipo Contacto'),(4,1,'Idioma'),(5,1,'Nivel Idioma'),(6,1,'Nivel Conocimiento'),(7,1,'Tipo Contacto Empresa'),(8,1,'Nivel actividad'),(9,1,'Competencia'),(10,1,'Motivo Vacante'),(11,1,'Tipo contrato'),(12,1,'Prestaciones');
+INSERT INTO `tipo_catalogo` VALUES (1,1,'Pais'),(2,1,'Giro'),(3,1,'Tipo Contacto'),(4,1,'Idioma'),(5,1,'Nivel Idioma'),(6,1,'Nivel Conocimiento'),(7,1,'Tipo Contacto Empresa'),(8,1,'Nivel actividad'),(9,1,'Competencia'),(10,1,'Motivo Vacante'),(11,1,'Tipo contrato'),(12,1,'Prestaciones'),(13,1,'Nacionalidad Empleado'),(14,1,'Puesto Empleado'),(15,1,'Tipo Contacto Empleado'),(16,1,'Banco Empleado'),(17,1,'Nivel de escolaridad Empleado'),(18,1,'Habilidades Empleado'),(19,1,'Nivel Laboral Empleado'),(20,1,'Nivel Idioma Empleado'),(21,1,'Crédito hipotecario');
 /*!40000 ALTER TABLE `tipo_catalogo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1320,6 +1586,120 @@ LOCK TABLES `vacante` WRITE;
 /*!40000 ALTER TABLE `vacante` DISABLE KEYS */;
 INSERT INTO `vacante` VALUES (1,_binary '͜ur\0[IM۠&v겥\0\0xp\0\0\0\0\0\0	\0\0\0','La Martine 280',4,4,46,'Gerente de Diseño',1,'Gerente \"A\"','No aplica','Director General',1,1),(2,_binary '͜ur\0[IM۠&v겥\0\0xp\0\0\0\0\0\0\0\0\0\n','No Aplica',1,6,49,'ASESORA DE MODA',4,'ASESORA DE MODA','NINGUNO','SUPERVISORA DE TIENDA O GERENTE',3,10);
 /*!40000 ALTER TABLE `vacante` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vw_cuestionario_preguntas_temas`
+--
+
+DROP TABLE IF EXISTS `vw_cuestionario_preguntas_temas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `vw_cuestionario_preguntas_temas` (
+  `id_pregunta` int(11) NOT NULL,
+  `de_plantilla` int(11) DEFAULT NULL,
+  `descripcion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `documento_referencia` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `enunciado` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_tema` int(11) DEFAULT NULL,
+  `nombre_tema` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_pregunta`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vw_cuestionario_preguntas_temas`
+--
+
+LOCK TABLES `vw_cuestionario_preguntas_temas` WRITE;
+/*!40000 ALTER TABLE `vw_cuestionario_preguntas_temas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vw_cuestionario_preguntas_temas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vw_cuestionario_respuestas`
+--
+
+DROP TABLE IF EXISTS `vw_cuestionario_respuestas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `vw_cuestionario_respuestas` (
+  `id_respuesta_pregunta` int(11) NOT NULL,
+  `cumplimiento` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `de_plantilla` int(11) DEFAULT NULL,
+  `documento_referencia` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `enunciado` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estado` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_participante` int(11) DEFAULT NULL,
+  `id_pregunta` int(11) DEFAULT NULL,
+  `inversion_aproximada` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `observaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo` int(11) DEFAULT NULL,
+  `vigencia` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_respuesta_pregunta`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vw_cuestionario_respuestas`
+--
+
+LOCK TABLES `vw_cuestionario_respuestas` WRITE;
+/*!40000 ALTER TABLE `vw_cuestionario_respuestas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vw_cuestionario_respuestas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vw_empresas_solicitud_cuestionario`
+--
+
+DROP TABLE IF EXISTS `vw_empresas_solicitud_cuestionario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `vw_empresas_solicitud_cuestionario` (
+  `id_cuestionario_empresa` int(11) NOT NULL,
+  `finalizado` int(11) DEFAULT NULL,
+  `id_empresa` int(11) DEFAULT NULL,
+  `id_tema` int(11) DEFAULT NULL,
+  `nombre_empresa` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre_tema` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rfc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_cuestionario_empresa`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vw_empresas_solicitud_cuestionario`
+--
+
+LOCK TABLES `vw_empresas_solicitud_cuestionario` WRITE;
+/*!40000 ALTER TABLE `vw_empresas_solicitud_cuestionario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vw_empresas_solicitud_cuestionario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vw_tema_cuestionario`
+--
+
+DROP TABLE IF EXISTS `vw_tema_cuestionario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `vw_tema_cuestionario` (
+  `id_tema` int(11) NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_tema`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vw_tema_cuestionario`
+--
+
+LOCK TABLES `vw_tema_cuestionario` WRITE;
+/*!40000 ALTER TABLE `vw_tema_cuestionario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vw_tema_cuestionario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
