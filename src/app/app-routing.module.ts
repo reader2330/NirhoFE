@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './modules/clb/components/login/login.component';
 import {InicioComponent} from './modules/clb/components/inicio/inicio.component';
-import {SteppersComponent} from './modules/clb/components/formularios/steppers/steppers.component';
 import {AvatarEditComponent} from './modules/clb/components/avatar-edit/avatar-edit.component';
 import {EncuestaComponent} from './modules/clb/components/encuesta/encuesta.component';
 import {InicioIrhComponent} from './modules/irh/components/inicio-irh/inicio-irh.component';
 import {InicioEvdComponent} from './modules/evd/components/inicio-evd/inicio-evd.component';
 import {InicioAdmComponent} from './modules/adm/components/inicio-adm/inicio-adm.component';
 import {InicioSyncComponent} from './modules/synchronize/components/inicio-sync/inicio-sync.component';
+import {LoginGuard} from './guards/login.guard';
 
 const routes: Routes = [
   {
@@ -17,32 +17,40 @@ const routes: Routes = [
   },
   {
     path: 'CLB',
-    component: InicioComponent
+    component: InicioComponent,
+    //canActivate: [LoginGuard]
   },
   {
     path: 'avatar-edit',
-    component: AvatarEditComponent
+    component: AvatarEditComponent,
+    //canActivate: [LoginGuard]
   },
   {
     path: 'encuesta/:token',
-    component: EncuestaComponent
+    component: EncuestaComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'IRH',
-    component: InicioIrhComponent
+    component: InicioIrhComponent,
+    //canActivate: [LoginGuard]
   },
   {
     path: 'EVD',
-    component: InicioEvdComponent
+    component: InicioEvdComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'ADM',
-    component: InicioAdmComponent
+    component: InicioAdmComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'SYNC',
-    component: InicioSyncComponent
-  }
+    component: InicioSyncComponent,
+    //canActivate: [LoginGuard]
+  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

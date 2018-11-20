@@ -33,7 +33,10 @@ export class LoginService {
     return this._http.get(this.api + 'usuario/guardarAvatar', {headers: this.header, params: {'ruta': ruta}});
   }
   getToken() {
-    return localStorage.getItem('token');
+    if (localStorage.getItem('token')) {
+      return localStorage.getItem('token');
+    }
+    return false;
   }
 
 

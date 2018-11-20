@@ -62,5 +62,15 @@ export class ProyectoService {
     return this.http.post(this.api + 'cuestionario/contestaPregPart', data, {headers:this.headers})
 
   }
+  getGraficas(idProyecto) {
+    return this.http.get(this.api + 'graficas/proyecto',{headers: this.headers, params:   {
+        idProyecto: idProyecto
+      }});
+  }
+  sendCuestionario(idProyecto) {
+    return this.http.get(this.api + 'participantes/cuestionariosSend',{headers: this.headers, params:   {
+        idProyecto: idProyecto
+      }});
+  }
 
 }

@@ -82,11 +82,11 @@ export function highchartsFactory() {
       provide: HighchartsStatic,
       useFactory: highchartsFactory
     },
-    /*{
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: LoginInterceptor,
       multi: true
-    }*/
+    }
   ],
 })
 export class CLBModule { }

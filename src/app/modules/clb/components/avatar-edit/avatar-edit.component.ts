@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import {LoginService} from '../../services/login.service';
 import {Router} from '@angular/router';
-
+import {environment} from '../../../../../environments/environment';
 export interface Avatar {
   value: string;
   url: string;
@@ -24,9 +24,9 @@ export class AvatarEditComponent implements OnInit {
   selectedValue : String;
 
   avatares: Avatar[] = [
-    {value: 'avatar1', url: '/logo.png'},
-    {value: 'avatar2', url: '/avatar.png'},
-    {value: 'avatar3', url: '/X2.svg'}
+    {value: 'avatar1', url: environment.urlNG + 'assets/logo.png'},
+    {value: 'avatar2', url: environment.urlNG + 'assets/avatar.png'},
+    {value: 'avatar3', url: environment.urlNG + 'assets/X2.svg'}
   ];
 
   avatarForm = new FormGroup({

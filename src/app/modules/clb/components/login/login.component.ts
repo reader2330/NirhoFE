@@ -23,10 +23,11 @@ export class LoginComponent implements OnInit {
   sendLogin() {
       this.LoginService.sendLogin(this.params).subscribe((res: HttpResponse<any>) => {
         console.log(res);
-        if (res['token']) {
+        if (res && res['token']) {
           localStorage.setItem('token', res['token']);
-          this.router.navigate(['SYNC']);
         }
+
+        this.router.navigate(['SYNC']);
       }, (err: HttpResponse<any>) => {
         console.log(err);
         Swal('Algo salio mal', 'Credenciales incorrectas', 'error');
