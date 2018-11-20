@@ -7,6 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../Nirho.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../database/dump_nirhodb.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../database/dump_nirhodb.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/app-routing.module.ts" afterDir="false" />
@@ -25,7 +26,7 @@
     <session id="272960886">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.9" value="1" />
           <entry key="project.opened" value="2" />
@@ -215,16 +216,15 @@
       <workItem from="1542427990366" duration="597000" />
       <workItem from="1542430433494" duration="605000" />
       <workItem from="1542601131838" duration="2435000" />
-      <workItem from="1542645805570" duration="347000" />
+      <workItem from="1542645805570" duration="594000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4527000" />
+    <option name="totallyTimeSpent" value="4774000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1680" height="751" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1984127" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
