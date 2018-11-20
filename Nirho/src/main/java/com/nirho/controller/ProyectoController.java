@@ -91,10 +91,12 @@ public class ProyectoController {
 	@RequestMapping(value = "/registrar", method = RequestMethod.POST)
 	@ResponseBody
 	public void registrarProyecto(@RequestBody Proyecto proyecto, @RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException {
-		logger.info(" ********************************* proyecto [" + proyecto + "] *****************************");
+
 		try {
 			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CAPTURA));
+			logger.info(" ********************************* proyecto [" + proyecto + "] *****************************");
 			proyectoService.registrarProyecto(proyecto, idModulo);
+
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
 		}
@@ -178,7 +180,7 @@ public class ProyectoController {
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
 			EstatusProyecto estatus = new EstatusProyecto();
-			estatus.setIdEstatus(ProyectoConstants.ESTTUS_RESULTADOS);
+			estatus.setIdEstatus(ProyectoConstants.ESTATUS_RESULTADOS);
 			proyecto.setIdEstatus(estatus);
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 		} catch(NirhoServiceException e){

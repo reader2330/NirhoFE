@@ -28,10 +28,11 @@ public class GraficasProyectoController {
 		
 	@RequestMapping(value = "/proyecto", method = RequestMethod.GET)
 	@ResponseBody
-	public List<GraficaAreaOrgDTO> proyecto(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+	public List<GraficaAreaOrgDTO> proyecto(@RequestParam(name="idProyecto") String idProyecto) throws NirhoControllerException{
 		 List<GraficaAreaOrgDTO> graficas = new ArrayList<>();
+		 logger.info("***************[idProyecto]******" + idProyecto);
 		try {
-			graficas = graficasService.obtenerGraficasProyecto(idProyecto);
+			graficas = graficasService.obtenerGraficasProyecto(Integer.parseInt(idProyecto));
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro del proyecto");
 		}

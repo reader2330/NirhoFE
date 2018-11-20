@@ -36,6 +36,7 @@ public class ParticipanteDAOImpl extends AbstractDAO<Participante, ParticipanteP
 		String hql = "FROM Participante p WHERE p.participantePK.idProyecto = :idProyecto AND p.areaOrg = :areaOrg";
 		Query query = entityManager.createQuery(hql);
 		query.setParameter("areaOrg", areaOrg);
+		query.setParameter("idProyecto", idProyecto);
 		return query.getResultList();
 	}
 	

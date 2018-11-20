@@ -68,8 +68,8 @@ public class Proyecto implements Serializable {
     @JoinColumn(name = "id_contacto", referencedColumnName = "id", nullable=false, updatable=true)
     @ManyToOne(optional = false,  cascade = CascadeType.ALL)
     private Contacto idContacto;
-    @JoinColumn(name = "id_estatus", referencedColumnName = "id_estatus", insertable = false, updatable = false)
-    @ManyToOne
+    @JoinColumn(name = "id_estatus", referencedColumnName = "id_estatus")
+    @ManyToOne( optional = false)
     private EstatusProyecto idEstatus;
     
 	public Integer getIdProyecto() {
