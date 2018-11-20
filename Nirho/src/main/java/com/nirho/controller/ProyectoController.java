@@ -26,7 +26,6 @@ import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.EstatusProyecto;
 import com.nirho.model.Proyecto;
 import com.nirho.service.CatalogoService;
-import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.ProyectoService;
 import com.nirho.util.SessionUtil;
 
@@ -40,9 +39,7 @@ public class ProyectoController {
 	ProyectoService proyectoService;
 	@Autowired
 	CatalogoService catalogoService;
-	@Autowired
-	private EstatusProyectoService estatusService;
-	
+			
 	@GetMapping(value = "/todos")
 	public List<Proyecto> todos(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
 		List<Proyecto> proyectos = new ArrayList<>();
@@ -96,7 +93,7 @@ public class ProyectoController {
 	public void registrarProyecto(@RequestBody Proyecto proyecto, @RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException {
 		logger.info(" ********************************* proyecto [" + proyecto + "] *****************************");
 		try {
-			proyecto.setIdEstatus(estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_CAPTURA));
+			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CAPTURA));
 			proyectoService.registrarProyecto(proyecto, idModulo);
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
@@ -117,7 +114,7 @@ public class ProyectoController {
 			}  catch (NullPointerException e) {
 				logger.info("NullPointerExceptio [" + e.getLocalizedMessage() +"]");
 			}
-			periodo.getProyecto().setIdEstatus(estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_ASIGNADO));
+			periodo.getProyecto().setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_ASIGNADO));
 			proyectoService.registrarProyecto(periodo.getProyecto(), idModulo);
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
@@ -152,7 +149,8 @@ public class ProyectoController {
 	public void apertura(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
-			EstatusProyecto estatus = estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_VIGENTE);
+			EstatusProyecto estatus = new EstatusProyecto();
+			estatus.setIdEstatus(ProyectoConstants.ESTATUS_VIGENTE);
 			proyecto.setIdEstatus(estatus);
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 		} catch(NirhoServiceException e){
@@ -165,7 +163,8 @@ public class ProyectoController {
 	public void cierre(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
-			EstatusProyecto estatus = estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_FINALIZADO);
+			EstatusProyecto estatus = new EstatusProyecto();
+			estatus.setIdEstatus(ProyectoConstants.ESTATUS_FINALIZADO);
 			proyecto.setIdEstatus(estatus);
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 		} catch(NirhoServiceException e){
@@ -178,7 +177,8 @@ public class ProyectoController {
 	public void revisionResultados(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
-			EstatusProyecto estatus = estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_RESULTADOS);
+			EstatusProyecto estatus = new EstatusProyecto();
+			estatus.setIdEstatus(ProyectoConstants.ESTTUS_RESULTADOS);
 			proyecto.setIdEstatus(estatus);
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 		} catch(NirhoServiceException e){

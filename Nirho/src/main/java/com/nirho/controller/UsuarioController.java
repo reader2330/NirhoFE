@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +21,9 @@ import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ClbSubmodulo;
 import com.nirho.model.Usuario;
+import com.nirho.security.TokenHelper;
 import com.nirho.service.RolClbService;
 import com.nirho.service.UsuarioService;
-import com.nirho.util.SessionConstants;
 import com.nirho.util.SessionUtil;
 
 @RestController
@@ -33,19 +34,23 @@ public class UsuarioController {
 	
 	@Autowired
 	RolClbService rolService;
+	
 	@Autowired
 	UsuarioService usuarioService;
-		
+	
+	@Autowired
+    TokenHelper tokenHelper;
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
-	public void login(@RequestBody Usuario usuario, HttpServletRequest request) throws NirhoControllerException {
+	public String login(@RequestBody Usuario usuario, HttpServletRequest request) throws NirhoControllerException {
 		try {
 			Usuario usuarioSession = usuarioService.obtenerUsuario(usuario.getUsername());
 			if(!SessionUtil.getEncryptMD5(usuario.getPassword().trim()).equals(usuarioSession.getPassword())) {
 				throw new NirhoControllerException("Password incorrecto");
 			}
 			logger.info("usuario session [" + usuarioSession +"]");
-			HttpSession httpSession = request.getSession(true);
-			httpSession.setAttribute(SessionConstants.USUARIO_ATTRIBUTE, usuarioSession);
+			String jwt = tokenHelper.generateToken( usuarioSession.getUsername(), usuarioSession.getRol() );
+	        return "{\"token\": \"" + jwt + "\"}";
 		} catch (NirhoControllerException e) {
 			logger.info("Exception [" + e.getMessage() +"]");
 			throw new NirhoControllerException(e.getMessage());
@@ -64,17 +69,18 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "/submodulosClb", method = RequestMethod.GET)
-	public List<ClbSubmodulo> submodulosClb(HttpServletRequest request) {
-		List<ClbSubmodulo> submodulos = null;
-		if (request.getSession(false) != null) {
-			Usuario usuario = SessionUtil.getUsuarioSession(request);
+	public ResponseEntity<?> submodulosClb(HttpServletRequest request) {
+        if(request.getAttribute("username") != null) {
+        	List<ClbSubmodulo> submodulos = null;
 			try {
-				submodulos = rolService.obtenerSubModulos(usuario.getRol());
+				submodulos = rolService.obtenerSubModulos((int)request.getAttribute("role"));
 			} catch (NirhoServiceException e) {
 				logger.info("Exception [" + e.getMessage() +"]");
 			}
-		}
-		return submodulos;
+    		return new ResponseEntity<>(submodulos, HttpStatus.OK);	
+        } else {
+        	return new ResponseEntity<String>("Unauthorized", HttpStatus.UNAUTHORIZED); 
+        }
 	}
 	
 	@RequestMapping(value = "/consultores", method = RequestMethod.GET)
@@ -90,29 +96,52 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/getUsuarioLogueado", method = RequestMethod.GET)
 	@ResponseBody
-	public Usuario getUsuarioLogueado(HttpServletRequest request){
-		Usuario usuarioEnSesion = SessionUtil.getUsuarioSession(request);
-		return usuarioEnSesion;
+	public ResponseEntity<?> getUsuarioLogueado(HttpServletRequest request) throws NirhoControllerException{
+		if(request.getAttribute("username") != null) {
+			try {
+				Usuario usuarioEnSesion = usuarioService.obtenerUsuario((String)request.getAttribute("username"));
+    			return new ResponseEntity<>(usuarioEnSesion, HttpStatus.OK);	
+			} catch (NirhoServiceException e) {
+				logger.info("Exception [" + e.getMessage() +"]");
+				throw new NirhoControllerException(e.getMessage());
+			}
+        } else {
+        	return new ResponseEntity<String>("Unauthorized", HttpStatus.UNAUTHORIZED); 
+        }
 	}
 	
 	@RequestMapping(value = "/usuarioEnSesion", method = RequestMethod.GET)
 	@ResponseBody
-	public Usuario getUsuario(HttpServletRequest request) {
-		Usuario usuario = SessionUtil.getUsuarioSession(request);
-		logger.info("Usuario en Session ["+usuario+"]");
-		return usuario;
+	public ResponseEntity<?> getUsuario(HttpServletRequest request) throws NirhoControllerException {
+		if(request.getAttribute("username") != null) {
+			try {
+				Usuario usuarioEnSesion = usuarioService.obtenerUsuario((String)request.getAttribute("username"));
+				logger.info("Usuario en Session ["+usuarioEnSesion+"]");
+				return new ResponseEntity<>(usuarioEnSesion, HttpStatus.OK);	
+			} catch (NirhoServiceException e) {
+				logger.info("Exception [" + e.getMessage() +"]");
+				throw new NirhoControllerException(e.getMessage());
+			}
+        } else {
+        	return new ResponseEntity<String>("Unauthorized", HttpStatus.UNAUTHORIZED); 
+        }
 	}
 	
 	@RequestMapping(value = "/guardarAvatar", method = RequestMethod.GET)
 	@ResponseBody
-	public void guardarAvatar(HttpServletRequest request, @RequestParam(name="ruta") String ruta) throws NirhoControllerException {
-		try {
-			Usuario usuario = SessionUtil.getUsuarioSession(request);
-			usuario.setAvatar(ruta);
-			usuarioService.guardarAvatar(usuario);
-		} catch (NirhoServiceException e) {
-			logger.info("Exception [" + e.getMessage() +"]");
-			throw new NirhoControllerException("Problemas en la BD al guardar el avatar");
-		}
+	public ResponseEntity<?> guardarAvatar(HttpServletRequest request, @RequestParam(name="ruta") String ruta) throws NirhoControllerException {
+		if(request.getAttribute("username") != null) {
+			try {
+				Usuario usuario = usuarioService.obtenerUsuario((String)request.getAttribute("username"));
+				usuario.setAvatar(ruta);
+				usuarioService.guardarAvatar(usuario);
+				return new ResponseEntity<>("", HttpStatus.OK);
+			} catch (NirhoServiceException e) {
+				logger.info("Exception [" + e.getMessage() +"]");
+				throw new NirhoControllerException("Problemas en la BD al guardar el avatar");
+			}
+        } else {
+        	return new ResponseEntity<String>("Unauthorized", HttpStatus.UNAUTHORIZED); 
+        }
 	}
 }

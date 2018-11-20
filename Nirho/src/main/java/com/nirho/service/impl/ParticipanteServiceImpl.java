@@ -33,6 +33,15 @@ public class ParticipanteServiceImpl implements ParticipanteService {
 					if(participante == null) {
 						participanteDAO.save(p);
 					} else {
+						p.setObjetivoPuesto(participante.getObjetivoPuesto());
+						p.setFunciones(participante.getFunciones());
+						p.setActividades(participante.getActividades());
+						p.setMetaKpi(participante.getMetaKpi());
+						p.setCantidadMeta(participante.getCantidadMeta());
+						p.setUnidadMedida(participante.getUnidadMedida());
+						p.setTiempo(participante.getTiempo());
+						p.setFrecuenciaEval(participante.getFrecuenciaEval());
+						p.setIdEvaluador(participante.getIdEvaluador());
 						participanteDAO.update(p);
 					}
 				} catch(Exception e) {

@@ -90,7 +90,6 @@ public class ParticipanteController {
 					Participante participante = assamblerToParticipanteHC(p);
 					ParticipantePK participantePK = new ParticipantePK(p.getIdParticipante(), headcount.getIdProyecto());
 					participante.setParticipantePK(participantePK);
-					participante.setProyecto(proyecto);
 					participante.setToken(NirhoUtil.obtenerToken(p.getIdParticipante(), headcount.getIdProyecto(), participante.getRfc()));
 					participantes.add(participante);
 				}catch(Exception e) {
