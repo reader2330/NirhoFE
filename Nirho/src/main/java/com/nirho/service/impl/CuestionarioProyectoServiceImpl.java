@@ -130,5 +130,11 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 		}
 		
 	}
+
+	@Override
+	public List<CuestionarioProyecto> obtenerCuestionarioProyecto(Integer idProyecto) throws NirhoServiceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
