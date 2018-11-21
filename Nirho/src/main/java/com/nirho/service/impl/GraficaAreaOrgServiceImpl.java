@@ -32,7 +32,6 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 	private CuestionarioProyectoDAO cuestProytDAO;
 	
 	@Override
-	@SuppressWarnings("unused")
 	public GraficaAreaOrgDTO obtenerResultadosCorporativo(int idProyecto)  throws NirhoServiceException{
 		GraficaAreaOrgDTO gdto = new GraficaAreaOrgDTO();
 		gdto.setAreaOrg(AreaOrgConstants.CORPORATIVO);
@@ -47,7 +46,8 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				tdto.setTema(tema);	
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
-						switch(cuestPart.getRespuesta()) {
+						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
+						switch(respuesta) {
 							case 1:
 								tdto.setNumResp1(tdto.getNumResp1()+1);
 								break;
@@ -79,7 +79,6 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 
 
 	@Override
-	@SuppressWarnings("unused")
 	public GraficaAreaOrgDTO obtenerResultadosProduccion(int idProyecto) throws NirhoServiceException {
 		GraficaAreaOrgDTO gdto = new GraficaAreaOrgDTO();
 		gdto.setAreaOrg(AreaOrgConstants.PRODUCCION);
@@ -126,7 +125,6 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 
 
 	@Override
-	@SuppressWarnings("unused")
 	public GraficaAreaOrgDTO obtenerResultadosVentas(int idProyecto) throws NirhoServiceException {
 		GraficaAreaOrgDTO gdto = new GraficaAreaOrgDTO();
 		gdto.setAreaOrg(AreaOrgConstants.VENTAS);
@@ -141,7 +139,8 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				tdto.setTema(tema);	
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
-						switch(cuestPart.getRespuesta()) {
+						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
+						switch(respuesta) {
 							case 1:
 								tdto.setNumResp1(tdto.getNumResp1()+1);
 								break;
@@ -173,7 +172,6 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 
 
 	@Override
-	@SuppressWarnings("unused")
 	public GraficaAreaOrgDTO obtenerResultadosAdministracion(int idProyecto) throws NirhoServiceException {
 		GraficaAreaOrgDTO gdto = new GraficaAreaOrgDTO();
 		gdto.setAreaOrg(AreaOrgConstants.ADMINISTRACION);
@@ -188,7 +186,8 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				tdto.setTema(tema);	
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
-						switch(cuestPart.getRespuesta()) {
+						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
+						switch(respuesta) {
 							case 1:
 								tdto.setNumResp1(tdto.getNumResp1()+1);
 								break;
@@ -220,7 +219,6 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 
 
 	@Override
-	@SuppressWarnings("unused")
 	public GraficaAreaOrgDTO obtenerResultadosControlDeCalidad(int idProyecto) throws NirhoServiceException {
 		GraficaAreaOrgDTO gdto = new GraficaAreaOrgDTO();
 		gdto.setAreaOrg(AreaOrgConstants.CONTROL_DE_CALIDAD);
@@ -235,7 +233,8 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				tdto.setTema(tema);	
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
-						switch(cuestPart.getRespuesta()) {
+						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
+						switch(respuesta) {
 							case 1:
 								tdto.setNumResp1(tdto.getNumResp1()+1);
 								break;
