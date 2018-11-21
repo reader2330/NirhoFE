@@ -73,6 +73,7 @@ export class CuestionarioSelectIRHComponent implements OnInit {
           for (let pregunta of tema.preguntas) {
             if (pregunta.select) {
               delete pregunta.select;
+              delete pregunta.idTema;
               this.selectPregunta.push(pregunta);
             }
           }
@@ -80,8 +81,14 @@ export class CuestionarioSelectIRHComponent implements OnInit {
 
         console.log(this.selectPregunta);
         let data = {
-          idProyecto: this.entripise['id'],
-          lista: this.selectPregunta
+          idEmpresa: this.entripise['id'],
+          finalizado: false,
+          temas:[{
+            nombre: "imagen",
+            descripcion:"Tema 01 de Clima Laboral",
+            status: true,
+            preguntas: this.selectPregunta,
+          }]
         };
         console.log(data);
         this.EnterprisesService.savePreguntas(data).subscribe((res) => {
