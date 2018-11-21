@@ -42,7 +42,6 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 			for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {
 				GraficaTemaDTO tdto = new GraficaTemaDTO();
 				Tema tema = cuestProy.getTema();
-				tdto.setIdProyecto(idProyecto);
 				tdto.setTema(tema);	
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
@@ -89,7 +88,6 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 			for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {
 				GraficaTemaDTO tdto = new GraficaTemaDTO();
 				Tema tema = cuestProy.getTema();
-				tdto.setIdProyecto(idProyecto);
 				tdto.setTema(tema);	
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
@@ -135,7 +133,6 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 			for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {
 				GraficaTemaDTO tdto = new GraficaTemaDTO();
 				Tema tema = cuestProy.getTema();
-				tdto.setIdProyecto(idProyecto);
 				tdto.setTema(tema);	
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
@@ -182,7 +179,6 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 			for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {
 				GraficaTemaDTO tdto = new GraficaTemaDTO();
 				Tema tema = cuestProy.getTema();
-				tdto.setIdProyecto(idProyecto);
 				tdto.setTema(tema);	
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
@@ -229,7 +225,6 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 			for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {
 				GraficaTemaDTO tdto = new GraficaTemaDTO();
 				Tema tema = cuestProy.getTema();
-				tdto.setIdProyecto(idProyecto);
 				tdto.setTema(tema);	
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){

@@ -6,7 +6,6 @@ import com.nirho.model.Tema;
 
 public class GraficaTemaDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int idProyecto;
 	private Tema tema;
 	private int numResp1;
 	private int numResp2;
@@ -14,12 +13,6 @@ public class GraficaTemaDTO  implements Serializable {
 	private int numResp4;
 	private int numResp5;
 	
-	public int getIdProyecto() {
-		return idProyecto;
-	}
-	public void setIdProyecto(int idProyecto) {
-		this.idProyecto = idProyecto;
-	}
 	public Tema getTema() {
 		return tema;
 	}
@@ -59,7 +52,7 @@ public class GraficaTemaDTO  implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "GraficaAreaOrgDTO [idProyecto=" + idProyecto + ", tema=" + tema + ", numResp1=" + numResp1
+		return "GraficaAreaOrgDTO [tema=" + tema + ", numResp1=" + numResp1
 				+ ", numResp2=" + numResp2 + ", numResp3=" + numResp3 + ", numResp4=" + numResp4 + ", numResp5="
 				+ numResp5 + "]";
 	}
