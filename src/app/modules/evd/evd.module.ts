@@ -13,6 +13,13 @@ import { HeadCountEvdComponent } from './components/head-count-evd/head-count-ev
 import { OrganigramaEvdComponent } from './components/organigrama-evd/organigrama-evd.component';
 import { TableCliente2EvdComponent } from './components/table-cliente2-evd/table-cliente2-evd.component';
 import { TableClient2ModalEvdComponent } from './components/modals/table-client2-modal-evd/table-client2-modal-evd.component';
+import { StepperEvdComponent } from './components/stepper-evd/stepper-evd.component';
+import { EnterpriseEvdComponent } from './components/enterprise-evd/enterprise-evd.component';
+import { ProyectEvdComponent } from './components/proyect-evd/proyect-evd.component';
+import { CuestionarioEvdComponent } from './components/cuestionario-evd/cuestionario-evd.component';
+import { EncuestaEvdComponent } from './components/encuesta-evd/encuesta-evd.component';
+import { EncuestaModalEvdComponent } from './components/encuesta-modal-evd/encuesta-modal-evd.component';
+import {EmojiModule} from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 @NgModule({
   imports: [
@@ -22,6 +29,7 @@ import { TableClient2ModalEvdComponent } from './components/modals/table-client2
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    EmojiModule,
   ],
   declarations: [
     InicioEvdComponent,
@@ -33,10 +41,17 @@ import { TableClient2ModalEvdComponent } from './components/modals/table-client2
     OrganigramaEvdComponent,
 
     TableCliente2EvdComponent,
-    TableClient2ModalEvdComponent
+    TableClient2ModalEvdComponent,
+    StepperEvdComponent,
+    EnterpriseEvdComponent,
+    ProyectEvdComponent,
+    CuestionarioEvdComponent,
+    EncuestaEvdComponent,
+    EncuestaModalEvdComponent
   ],
   entryComponents: [
-    TableClient2ModalEvdComponent
+    TableClient2ModalEvdComponent,
+    EncuestaModalEvdComponent
   ]
 })
 export class EvdModule { }

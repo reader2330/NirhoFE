@@ -1,5 +1,6 @@
 
 
+
 <mat-toolbar style="background:  black" >
   <a *ngIf="mobile" style=" color:white" (click)="snav.toggle()"><mat-icon >menu</mat-icon></a>
   <span style="flex: 1 1 auto;"></span>
@@ -37,17 +38,9 @@
   <mat-sidenav-content>
     <div class="row">
 
-      <div style="padding: 10px 30px 0 30px"  class="col-sm-12 stepper-forms" >
+      <div style="padding: 10px 30px 0 30px;"  class="col-sm-12 stepper-forms" >
 
-        <!--<app-stepper-evd></app-stepper-evd>-->
-        <!--<app-bandeja-evd></app-bandeja-evd>-->
-        <!--<app-bandeja-detalle-evd></app-bandeja-detalle-evd>-->
-        <!--<app-head-count-evd></app-head-count-evd>-->
-        <!--<app-organigrama-evd></app-organigrama-evd>-->
-        <!--<app-table-cliente-irh></app-table-cliente-irh>-->
-        <!--<app-table-cliente2-evd></app-table-cliente2-evd>-->
-        <!--<app-cuestionario-evd></app-cuestionario-evd>-->
-        <app-encuesta-evd></app-encuesta-evd>
+        <app-stepper-apo></app-stepper-apo>
 
       </div>
 
@@ -55,3 +48,4 @@
 
   </mat-sidenav-content>
 </mat-sidenav-container>
+
