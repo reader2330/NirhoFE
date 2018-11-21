@@ -26,8 +26,10 @@ import {AppRoutingModule} from '../../app-routing.module';
 import {HttpClientModule} from '../../../../node_modules/@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import {LoginInterceptor} from './services/login.interceptor';
 declare var require: any;
 
 export function highchartsFactory() {
@@ -79,6 +81,11 @@ export function highchartsFactory() {
     {
       provide: HighchartsStatic,
       useFactory: highchartsFactory
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoginInterceptor,
+      multi: true
     }
   ],
 })

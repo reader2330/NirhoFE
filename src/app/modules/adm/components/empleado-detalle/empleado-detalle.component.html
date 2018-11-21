@@ -33,8 +33,8 @@
 
       <mat-radio-group [(ngModel)] ="empleado.estadoCivil">
 
-        <mat-radio-button style="margin-left: 10px" value="0">Soltero</mat-radio-button>
-        <mat-radio-button style="margin-left: 10px" value="1">Casado</mat-radio-button>
+        <mat-radio-button style="margin-left: 10px" [value]="0">Soltero</mat-radio-button>
+        <mat-radio-button style="margin-left: 10px" [value]="1">Casado</mat-radio-button>
       </mat-radio-group>
     </div>
 
@@ -123,7 +123,7 @@
         <mat-label>Nivel de escolaridad</mat-label>
         <mat-select [(ngModel)] ="empleado.escolaridad" required >
           <mat-option *ngFor="let escolaridad of escolaridades" [value]="escolaridad.id">
-            {{escolaridad.descripcionCatalogo}}
+            {{ escolaridad.descripcionCatalogo }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -132,7 +132,7 @@
         <mat-label>Carrera</mat-label>
         <input matInput [(ngModel)] ="empleado.escolaridadCarrera"  type="text" required>
       </mat-form-field>
-      <mat-checkbox style="margin-left: 10px" [(ngModel)] ="empleado.titulo" >Título universitario</mat-checkbox>
+      <mat-checkbox style="margin-left: 10px" [(ngModel)] = "empleado.titulo  " >Título universitario</mat-checkbox>
       <mat-form-field style="margin-left: 10px"  class="inputForm" appearance="outline">
         <mat-label>Especialidad</mat-label>
         <input [(ngModel)] ="empleado.escolaridadEspecialidad"  type="text" matInput required >
@@ -144,6 +144,85 @@
       </mat-form-field>
 
   </mat-expansion-panel>
+  <mat-expansion-panel *ngFor="let laboral of empleado.laboral">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Datos laborales
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="row">
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Puesto</mat-label>
+          <mat-select [(ngModel)]= "laboral.puesto" required>
+            <mat-option *ngFor="let puesto of puestos" [value]="puesto.id">
+              {{puesto.descripcionCatalogo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Tipo de contrato</mat-label>
+          <mat-select [(ngModel)]= "laboral.nivelLaboral" required >
+            <mat-option *ngFor="let nivelLab of tipoContrato" [value]="nivelLab.id">
+              {{nivelLab.descripcionCatalogo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field appearance="outline" style="display: contents">
+          <mat-label>Fecha inicio</mat-label>
+          <input [(ngModel)]= "laboral.fechaInicio"  matInput [matDatepicker]="picker" >
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field appearance="outline" style="display: contents">
+          <mat-label>Fecha termino</mat-label>
+          <input [(ngModel)]= "laboral.fechaTermino"   matInput [matDatepicker]="picker2" >
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Antigüedad</mat-label>
+          <input [(ngModel)]= "laboral.antiguedad"  matInput  type="text" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Localidad</mat-label>
+          <input [(ngModel)]= "laboral.localidad"  matInput  type="text" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Área</mat-label>
+          <input [(ngModel)]= "laboral.area"  matInput type="text" required>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-3">
+        <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+          <mat-label>Sueldo</mat-label>
+          <input matInput [(ngModel)]= "laboral.sueldo"  type="number" required>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+  </mat-expansion-panel>
+
 
 </mat-accordion>
-<button style="margin-left: 500px; margin-top: 20px"   mat-raised-button color="accent"><mat-icon>save</mat-icon>Actualizar</button>
+<button style="margin-left: 450px; color:white; margin-top: 20px" (click)="updateEmpleado()"   mat-raised-button color="accent"><mat-icon>save</mat-icon>Actualizar</button>
+<button style="margin-left: 10px; margin-top: 20px" (click)="goBandeja()"   mat-raised-button color><mat-icon>arrow_back</mat-icon>Regresar</button>

@@ -41,15 +41,14 @@ export class SidebarIrhComponent implements OnInit {
     }, {
       id_submodulo: 3,
       descripcion: 'Configurar cuestionario'
-    },
-      {
-      id_submodulo: 4,
-      descripcion: 'Contestar cuestionario'
-    });
+    }, {
+       id_submodulo: 4,
+        descripcion: 'Contestar preguntas'
+    })
 
     this.LoginService.getUser().subscribe(res => {
       console.log(res);
-    })
+    });
   }
 
   goModule(opt) {

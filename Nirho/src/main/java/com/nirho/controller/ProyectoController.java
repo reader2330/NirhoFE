@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
-import com.nirho.dto.PeriodoCLB;
+import com.nirho.dto.PeriodoProyecto;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConsultorProyectoPK;
@@ -39,7 +39,7 @@ public class ProyectoController {
 	ProyectoService proyectoService;
 	@Autowired
 	CatalogoService catalogoService;
-		
+			
 	@GetMapping(value = "/todos")
 	public List<Proyecto> todos(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
 		List<Proyecto> proyectos = new ArrayList<>();
@@ -78,7 +78,7 @@ public class ProyectoController {
 			
 	@RequestMapping(value = "/porId", method = RequestMethod.GET)
 	@ResponseBody
-	public Proyecto porRfc(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+	public Proyecto porId(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		Proyecto proyecto = new Proyecto();
 		try {
 			proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
@@ -87,26 +87,16 @@ public class ProyectoController {
 		}
 		return proyecto;
 	}
-	
-	@RequestMapping(value = "/estatus", method = RequestMethod.GET)
-	@ResponseBody
-	public EstatusProyecto estatus(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
-		EstatusProyecto estatus = new EstatusProyecto();
-		try {
-			estatus = proyectoService.obtenerProyectoPorId(idProyecto).getIdEstatus();
-		} catch(NirhoServiceException e){
-			throw new NirhoControllerException("Problemas al obtener el registro del proyecto");
-		}
-		return estatus;
-	}
-	
+		
 	@RequestMapping(value = "/registrar", method = RequestMethod.POST)
 	@ResponseBody
 	public void registrarProyecto(@RequestBody Proyecto proyecto, @RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException {
-		logger.info(" ********************************* proyecto [" + proyecto + "] *****************************");
+
 		try {
 			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CAPTURA));
+			logger.info(" ********************************* proyecto [" + proyecto + "] *****************************");
 			proyectoService.registrarProyecto(proyecto, idModulo);
+
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
 		}
@@ -114,7 +104,7 @@ public class ProyectoController {
 		
 	@RequestMapping(value = "/agignarPeriodoGarantia", method = RequestMethod.POST)
 	@ResponseBody
-	public void agignarPeriodoGarantia(@RequestBody PeriodoCLB periodo, @RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException {
+	public void agignarPeriodoGarantia(@RequestBody PeriodoProyecto periodo, @RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException {
 		logger.info(" ********************************* periodo [" + periodo + "] *****************************");
 		try {
 			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");			
@@ -141,6 +131,60 @@ public class ProyectoController {
 			proyectoService.asignarConsultor(datos);
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
+		}
+	}
+	
+	@RequestMapping(value = "/estatus", method = RequestMethod.GET)
+	@ResponseBody
+	public EstatusProyecto estatus(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		EstatusProyecto estatus = new EstatusProyecto();
+		try {
+			estatus = proyectoService.obtenerProyectoPorId(idProyecto).getIdEstatus();
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro del proyecto");
+		}
+		return estatus;
+	}
+	
+	@RequestMapping(value = "/apertura", method = RequestMethod.GET)
+	@ResponseBody
+	public void apertura(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		try {
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
+			EstatusProyecto estatus = new EstatusProyecto();
+			estatus.setIdEstatus(ProyectoConstants.ESTATUS_VIGENTE);
+			proyecto.setIdEstatus(estatus);
+			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al registrar el proyecto");
+		}
+	}
+	
+	@RequestMapping(value = "/cierre", method = RequestMethod.GET)
+	@ResponseBody
+	public void cierre(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		try {
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
+			EstatusProyecto estatus = new EstatusProyecto();
+			estatus.setIdEstatus(ProyectoConstants.ESTATUS_FINALIZADO);
+			proyecto.setIdEstatus(estatus);
+			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al registrar el proyecto");
+		}
+	}
+	
+	@RequestMapping(value = "/revisionResultados", method = RequestMethod.GET)
+	@ResponseBody
+	public void revisionResultados(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		try {
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
+			EstatusProyecto estatus = new EstatusProyecto();
+			estatus.setIdEstatus(ProyectoConstants.ESTATUS_RESULTADOS);
+			proyecto.setIdEstatus(estatus);
+			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al registrar el proyecto");
 		}
 	}
 	

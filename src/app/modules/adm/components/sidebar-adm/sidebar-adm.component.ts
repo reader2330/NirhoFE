@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Router} from '@angular/router';
 import {LoginService} from '../../../clb/services/login.service';
+import {environment} from '../../../../../environments/environment';
+
 
 @Component({
   selector: 'app-sidebar-adm',
@@ -11,17 +13,19 @@ import {LoginService} from '../../../clb/services/login.service';
 export class SidebarAdmComponent implements OnInit {
 
   mobile = false;
-  selectModule = 3;
+  selectModule = 1;
   modules = [{
     id_submodulo: 1,
     descripcion: 'Bandeja empleados',
-  },{
+  }, {
     id_submodulo: 2,
     descripcion: 'Alta de empleado'
   }];
   user = {};
 
-
+  avatar = {
+    url: ''
+  };
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginServices: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
@@ -56,6 +60,9 @@ export class SidebarAdmComponent implements OnInit {
     }
 
   }
+  IrInicio() {
+    this.route.navigate(['SYNC']);
+  }
 
   cerraSesion() {
     this.LoginServices.closeSession().subscribe((res) => {
@@ -63,6 +70,10 @@ export class SidebarAdmComponent implements OnInit {
     });
     sessionStorage.clear();
     this.route.navigate(['']);
+  }
+
+  goAvatarEditing() {
+    this.route.navigate(['avatar-edit']);
   }
 
 

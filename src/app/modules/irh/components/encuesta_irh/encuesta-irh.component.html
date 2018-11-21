@@ -5,6 +5,19 @@
     <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1"  >
             <h4>Contestar cuestionario</h4>
     </mat-grid-tile>
+    <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+      <mat-form-field  style="width: 40%; margin-right: 10px" appearance="outline">
+        <mat-label>Seleccionar empresa</mat-label>
+        <mat-select [(ngModel)]="entrepise.id"   >
+          <mat-option *ngFor="let entrepise of companys"   [value]="entrepise.id">
+            {{entrepise.empresa}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+      <button mat-raised-button color="accent" (click)="getPreguntasEmpresa()">Ver preguntas</button>
+    </mat-grid-tile>
     <!--<mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="2" >
       <mat-accordion  class="example-headers-align">
         <mat-expansion-panel *ngFor= "let tema of temas" >
@@ -48,12 +61,12 @@
       </mat-accordion>
     </mat-grid-tile>-->
 
-  <mat-grid-tile style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2">
+  <mat-grid-tile *ngIf="!goQuestion" style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2">
     <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
       <mat-expansion-panel *ngFor= "let tema of temas" >
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{tema.nombre}} <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>
+            {{tema.temas[0].nombre}} <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>
           </mat-panel-title>
 
         </mat-expansion-panel-header>
@@ -98,7 +111,7 @@
     </mat-accordion>
 
   </mat-grid-tile>
-  <mat-grid-tile  style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="1">
+  <mat-grid-tile *ngIf="!goQuestion"  style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="1">
       <button mat-raised-button color="accent" (click)="FinishCuestionario()">Finalizar cuestionario</button>
   </mat-grid-tile>
 

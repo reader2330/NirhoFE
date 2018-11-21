@@ -182,7 +182,7 @@ export class HeadCountEvdComponent implements OnInit {
 
   changeData(data, index) {
     this.dataSource[index] = new Participante();
-    this.dataSource[index].id = data[0];
+    this.dataSource[index].idParticipante = data[0];
     this.dataSource[index].nivel = data[1];
     this.dataSource[index].nivelTexto = data[2];
     this.dataSource[index].nombres = data[3];

@@ -4,8 +4,8 @@
 
     </div>
     <mat-list style="cursor: pointer">
-      <mat-list-item (click)="goModule(1)">
-        <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">1</span>
+      <mat-list-item  >
+        <span  class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">1</span>
         &nbsp; CLB
       </mat-list-item>
       <mat-list-item (click)="goModule(2)" >
@@ -16,23 +16,23 @@
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">3</span>
         &nbsp; ADM
       </mat-list-item>
-      <mat-list-item (click)="goModule(4)">
+      <mat-list-item >
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">4</span>
         &nbsp; EVD
       </mat-list-item>
-      <mat-list-item (click)="goModule(5)">
+      <mat-list-item >
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">5</span>
         &nbsp; EVA 360
       </mat-list-item>
-      <mat-list-item (click)="goModule(6)" >
+      <mat-list-item  >
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">6</span>
         &nbsp; APO
       </mat-list-item>
-      <mat-list-item (click)="goModule(7)">
+      <mat-list-item >
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">7</span>
         &nbsp; PVC
       </mat-list-item>
-      <mat-list-item (click)="goModule(8)">
+      <mat-list-item >
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">8</span>
         &nbsp; RYS
       </mat-list-item>
@@ -43,21 +43,21 @@
     <mdb-carousel [isControls]="true" class="carousel slide carousel-fade" [type]="'carousel-thumbnails'" [animation]="'fade'">
       <!--First slide-->
       <mdb-carousel-item>
-        <img class="d-block w-100" src="../../../../../imagen4.jpeg">
+        <img class="d-block w-100" src="{{imagenes[0].url}}">
       </mdb-carousel-item>
       <!--/First slide-->
       <!--Second slide-->
       <mdb-carousel-item>
-        <img class="d-block w-100" src="../../../../../imagen1.jpeg">
+        <img class="d-block w-100" src="{{imagenes[1].url}}">
       </mdb-carousel-item>
       <!--/Second slide-->
       <!--Third slide-->
       <mdb-carousel-item>
-        <img class="d-block w-100" src="../../../../../imagen2.jpeg">
+        <img class="d-block w-100" src="{{imagenes[2].url}}">
       </mdb-carousel-item>
       <!--/Third slide-->
       <mdb-carousel-item>
-        <img class="d-block w-100" src="../../../../../imagen3.jpeg">
+        <img class="d-block w-100" src="{{imagenes[3].url}}">
       </mdb-carousel-item>
     </mdb-carousel>
     <!--/.Carousel Wrapper-->

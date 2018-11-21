@@ -31,26 +31,25 @@ export class OrganigramaComponent implements OnInit {
   getOrganigrama() {
     this.ProyectService.getOrganigrama(this.proyect['idProyecto']).subscribe( (res)  => {
       this.levels = res;
-
-      this.levels.sort(((a, b) => {
-        if (a.nivel > b.nivel) {
-          return 1;
-        }
-        if (a.nivel < b.nivel) {
-          return -1;
-        }
-      }));
-      console.log(this.levels);
-      this.level1 = this.levels[0];
-      this.level2 = this.levels[1];
-      this.level3 = this.levels[2];
-      this.level4 = this.levels[3];
-      console.log(this.level1);
-      console.log(this.level2);
-      console.log(this.level3);
-
-
-
+      console.log(res);
+      if(this.levels.length){
+        this.levels.sort(((a, b) => {
+          if (a.nivel > b.nivel) {
+            return 1;
+          }
+          if (a.nivel < b.nivel) {
+            return -1;
+          }
+        }));
+        console.log(this.levels);
+        this.level1 = this.levels[0];
+        this.level2 = this.levels[1];
+        this.level3 = this.levels[2];
+        this.level4 = this.levels[3];
+        console.log(this.level1);
+        console.log(this.level2);
+        console.log(this.level3);
+      }
     });
   }
   getColor(level) {

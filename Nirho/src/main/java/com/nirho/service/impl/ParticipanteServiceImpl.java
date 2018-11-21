@@ -28,21 +28,25 @@ public class ParticipanteServiceImpl implements ParticipanteService {
 	public void guardarParticipanteService(List<Participante> participantes) throws NirhoServiceException {
 		try {
 			for(Participante p: participantes) {
-				Participante participante = participanteDAO.getOne(p.getParticipantePK());
-				if(participante == null) {
-					participanteDAO.save(p);
-				} else {
-					p.setObjetivoPuesto(participante.getObjetivoPuesto());
-					p.setFunciones(participante.getFunciones());
-					p.setActividades(participante.getActividades());
-					p.setMetaKpi(participante.getMetaKpi());
-					p.setCantidadMeta(participante.getCantidadMeta());
-					p.setUnidadMedida(participante.getUnidadMedida());
-					p.setTiempo(participante.getTiempo());
-					p.setFrecuenciaEval(participante.getFrecuenciaEval());
-					p.setIdEvaluador(participante.getIdEvaluador());
-					participanteDAO.update(p);
-				}
+				try {
+					Participante participante = participanteDAO.getOne(p.getParticipantePK());
+					if(participante == null) {
+						participanteDAO.save(p);
+					} else {
+						p.setObjetivoPuesto(participante.getObjetivoPuesto());
+						p.setFunciones(participante.getFunciones());
+						p.setActividades(participante.getActividades());
+						p.setMetaKpi(participante.getMetaKpi());
+						p.setCantidadMeta(participante.getCantidadMeta());
+						p.setUnidadMedida(participante.getUnidadMedida());
+						p.setTiempo(participante.getTiempo());
+						p.setFrecuenciaEval(participante.getFrecuenciaEval());
+						p.setIdEvaluador(participante.getIdEvaluador());
+						participanteDAO.update(p);
+					}
+				} catch(Exception e) {
+					logger.info("Exception [" + e.getMessage() + "");
+				}	
 			}
 		} catch (Exception e) {
 			logger.info("Exception [" + e.getMessage() + "");
@@ -115,6 +119,19 @@ public class ParticipanteServiceImpl implements ParticipanteService {
 		List<Participante> participantes = new ArrayList<>();
 		try {
 			participantes = participanteDAO.findByIdProyecto(idProyecto);
+		} catch (Exception e) {
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
+		}
+		return participantes;
+	}
+
+	@Override
+	public List<Participante> obtenerParticipantesAreaOrg(String areaOrg, Integer idProyecto)
+			throws NirhoServiceException {
+		List<Participante> participantes = new ArrayList<>();
+		try {
+			participantes = participanteDAO.findByAreaOrgProyecto(areaOrg, idProyecto);
 		} catch (Exception e) {
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");

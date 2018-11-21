@@ -8,5 +8,5 @@ public interface ProyectoConstants {
 	Integer ESTATUS_ENVIADO = 5;
 	Integer ESTATUS_VIGENTE = 6;
 	Integer ESTATUS_FINALIZADO = 7;
-	Integer ESTTUS_RESULTADOS = 8;
+	Integer ESTATUS_RESULTADOS = 8;
 }

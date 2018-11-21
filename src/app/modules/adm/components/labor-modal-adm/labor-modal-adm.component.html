@@ -21,9 +21,9 @@
 
       <div class="col-sm-12 col-md-6">
         <mat-form-field class="inputForm" appearance="outline" style="display: contents">
-          <mat-label>Nivel Laboral</mat-label>
+          <mat-label>Tipo de contrato</mat-label>
           <mat-select formControlName="nivelLaboral" required >
-            <mat-option *ngFor="let nivelLab of nivelesLaborales" [value]="nivelLab.id">
+            <mat-option *ngFor="let nivelLab of tipoContrato" [value]="nivelLab.id">
               {{nivelLab.descripcionCatalogo}}
             </mat-option>
           </mat-select>

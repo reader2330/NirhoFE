@@ -29,7 +29,7 @@ import com.nirho.util.NirhoUtil;
 @Service
 public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoService {
 	public final static Logger logger = Logger.getLogger(CuestionarioProyectoServiceImpl.class);
-	
+
 	@Autowired
 	private CuestionarioProyectoDAO dao;
 	@Autowired
@@ -40,7 +40,8 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	private CuestionarioParticipanteDAO cuestPartDAO;
 	@Autowired
 	private PreguntaDAO preguntaDAO;
-	
+
+
 	@Override
 	public void guardar(CuestionarioConfiguracion cuestionario) throws NirhoServiceException {
 		logger.info("************* CuestionarioConfiguracion [" + cuestionario +"] *******************");
@@ -108,7 +109,7 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 			ParticipantePK participantePK = NirhoUtil.obtenerParticipanteToken(token);
 			Participante participante = participanteDAO.getOne(participantePK);
 			if(participante != null) {
-				return cuestPartDAO.findByParticipanteProyecto(participante.getParticipantePK().getIdParticipante(), 
+				return cuestPartDAO.findByParticipanteProyecto(participante.getParticipantePK().getIdParticipante(),
 						participante.getParticipantePK().getIdProyecto());
 			}
 		} catch(NirhoServiceException nse) {
@@ -128,7 +129,13 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 			logger.info("Exception e [" + e.getMessage() +"]");
 			throw new NirhoServiceException("Problemas al registrar la respuesta del participante en la BD");
 		}
-		
+
 	}
-	
+
+	@Override
+	public List<CuestionarioProyecto> obtenerCuestionarioProyecto(Integer idProyecto) throws NirhoServiceException {
+		return dao.findByIdProyecto(idProyecto);
+	}
+
+
 }

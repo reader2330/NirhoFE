@@ -16,7 +16,7 @@ export class CatalogsAdmService {
     this.header.append('Content-Type', 'application/json');
   }
   getNacionality(): Observable<any> {
-    return this._http.get(this.api + 'catalogo/empleado/nacionalidad', {headers: this.header});
+    return this._http.get(this.api + 'catalogo/pais', {headers: this.header});
   }
   getJob(): Observable<any> {
     return this._http.get(this.api + 'catalogo/empleado/puesto', {headers: this.header});
@@ -49,7 +49,7 @@ export class CatalogsAdmService {
     return this._http.post(this.api + 'empleado/agregar', data, {headers: this.header});
   }
   updateEmploye(data): Observable<any> {
-    return this._http.put(this.api + 'empleado/editar', data, {headers: this.header});
+    return this._http.post(this.api + 'empleado/editar', data, {headers: this.header});
   }
   deleteEmploye(id): Observable<any> {
     return this._http.delete(this.api + 'empleado/eliminar/' + id, {headers: this.header});

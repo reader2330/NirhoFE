@@ -54,26 +54,98 @@ export class LaborAdmComponent implements OnInit {
     escolaridadOficios: [],
     titulo: false,
     idiomas: [],
-    puesto: '',
-    nivelLaboral: 0,
-    fechaInicio: '',
-    fechaTermino: '',
-    antiguedad: '',
-    localidad : '',
-    area: '',
-    sueldo: 0,
+    laboral: [],
     estadoCivil: '',
     documentoCurp: null,
     documentoIne: null,
     documentoCV: null,
     documentoComprobanteDomicilio: null
   };
+  tipoContrato = [
+    {
+      id:1,
+      descripcionCatalogo:"De ley"
+    },
+    {
+      id:2,
+      descripcionCatalogo:"Superiores de ley"
+    },
+    {
+      id:3,
+      descripcionCatalogo:"Honorarios"
+    },
+    {
+      id:4,
+      descripcionCatalogo:"Salarios asimilados"
+    },
+    {
+      id:5,
+      descripcionCatalogo:"Comisionista"
+    },
+    {
+      id:6,
+      descripcionCatalogo:"Becario"
+    },
+    {
+      id:7,
+      descripcionCatalogo:"Servicio social"
+    },
+    {
+      id:8,
+      descripcionCatalogo:"Otro"
+    }
+    ]
   displayedColumns: string[] = ['puesto', 'nivelLaboral', 'fechaInicio', 'fechaTermino', 'antiguedad', 'localidad', 'area', 'delete'];
   laborales: laboral_interface[] = [];
   dataSource = new MatTableDataSource<laboral_interface>();
   mobile = false;
   temp: laboral_interface;
-  puestos = [];
+  puestos = [
+    {
+      id:1,
+      descripcionCatalogo:"Becario"
+    },
+    {
+      id:2,
+      descripcionCatalogo:"Analista"
+    },
+    {
+      id:3,
+      descripcionCatalogo:"Consultor junior"
+    },
+    {
+      id:4,
+      descripcionCatalogo:"Consultor semisenior"
+    },
+    {
+      id:5,
+      descripcionCatalogo:"Consultor senior"
+    },
+    {
+      id:6,
+      descripcionCatalogo:"Gerente de operaciones"
+    },
+    {
+      id:7,
+      descripcionCatalogo:"Analista de ventas"
+    },
+    {
+      id:8,
+      descripcionCatalogo:"Consultor ventas junior"
+    },
+    {
+      id:9,
+      descripcionCatalogo:"Consultor ventas semisenior"
+    },
+    {
+      id:10,
+      descripcionCatalogo:"Consultor ventas senior"
+    },
+    {
+      id:11,
+      descripcionCatalogo:"Gerente de ventas"
+    }
+  ];
   nivelesLaborales = [];
   laborForm = new FormGroup(
     {
@@ -114,8 +186,13 @@ export class LaborAdmComponent implements OnInit {
 
   getFieldsJob() {
 
-    this.temp = JSON.parse(sessionStorage.getItem('job_detail'));
-    this.laborales.push(this.temp);
+    if(sessionStorage.getItem('job_detail')){
+      this.temp = JSON.parse(sessionStorage.getItem('job_detail'));
+      this.laborales.push(this.temp);
+      sessionStorage.removeItem('job_detail');
+    }
+
+
     console.log(this.laborales);
     this.dataSource.data = this.laborales;
 
@@ -123,8 +200,8 @@ export class LaborAdmComponent implements OnInit {
 
   // accent
   ngOnInit() {
-    this.getJob();
-    this.getLevelJob();
+    //this.getJob();
+    //this.getLevelJob();
   }
 
   saveEmpleado() {
@@ -149,22 +226,27 @@ export class LaborAdmComponent implements OnInit {
     this.jsonFinal.banco = payment.banco;
     this.jsonFinal.bancoCuenta = payment.bancoCuenta;
     this.jsonFinal.bancoClaveInterbancaria = payment.bancoClaveInterbancaria;
+    this.jsonFinal.creditoHipotecario = payment.creditoHipotecario;
+    this.jsonFinal.tipoCreditoHipotecario = payment.tipoCreditoHipotecario;
+    this.jsonFinal.pensionAlimenticia = payment.pensionAlimenticia;
     this.jsonFinal.escolaridad = scholarship.escolaridad;
     this.jsonFinal.escolaridadCarrera = scholarship.escolaridadCarrera;
     this.jsonFinal.escolaridadEspecialidad = scholarship.escolaridadEspecialidad;
+    this.jsonFinal.escolaridadCapacidades = scholarship.escolaridadCapacidades;
     this.jsonFinal.escolaridadCertificaciones = scholarship.escolaridadCertificaciones;
     this.jsonFinal.escolaridadCursos = scholarship.escolaridadCursos;
     this.jsonFinal.escolaridadOficios = scholarship.escolaridadOficios;
     this.jsonFinal.titulo = scholarship.titulo;
     this.jsonFinal.idiomas.push(languageList[0]);
-   this.jsonFinal.puesto = this.laborales[0].puesto;
+    this.jsonFinal.laboral.push(this.laborales[0]);
+   /*this.jsonFinal.puesto = this.laborales[0].puesto;
    this.jsonFinal.nivelLaboral = this.laborales[0].nivelLaboral;
    this.jsonFinal.fechaInicio = this.laborales[0].fechaInicio;
    this.jsonFinal.fechaTermino = this.laborales[0].fechaTermino;
    this.jsonFinal.antiguedad = this.laborales[0].antiguedad;
    this.jsonFinal.localidad = this.laborales[0].puesto;
    this.jsonFinal.area = this.laborales[0].area;
-   this.jsonFinal.sueldo = this.laborales[0].sueldo;
+   this.jsonFinal.sueldo = this.laborales[0].sueldo;*/
     console.log(this.jsonFinal);
     Swal({
       title: '',
@@ -221,9 +303,9 @@ export class LaborAdmComponent implements OnInit {
         }
         break;
       case 2:
-        for (let i = 0; i < this.nivelesLaborales.length; i++) {
-          if (this.nivelesLaborales[i].id == element) {
-            return this.nivelesLaborales[i].descripcionCatalogo;
+        for (let i = 0; i < this.tipoContrato.length; i++) {
+          if (this.tipoContrato[i].id == element) {
+            return this.tipoContrato[i].descripcionCatalogo;
           }
         }
         break;

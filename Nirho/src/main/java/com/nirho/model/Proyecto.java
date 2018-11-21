@@ -55,6 +55,10 @@ public class Proyecto implements Serializable {
     private Integer diasGarantia;
     @Column(name = "frecuencia_eval")
     private Long frecuenciaEval;
+    @Column(name = "nombre_rh")
+    private String nombreRh;
+    @Column(name = "email_rh")
+    private String emailRh;
     @Basic(optional = false)
     @Column(name = "id_modulo")
     private Integer idModulo;
@@ -64,14 +68,14 @@ public class Proyecto implements Serializable {
     @JoinColumn(name = "id_contacto", referencedColumnName = "id", nullable=false, updatable=true)
     @ManyToOne(optional = false,  cascade = CascadeType.ALL)
     private Contacto idContacto;
-    @JoinColumn(name = "id_estatus", referencedColumnName = "id_estatus", insertable = false, updatable = false)
+    @JoinColumn(name = "id_estatus", referencedColumnName = "id_estatus", nullable=false, updatable = true)
     @ManyToOne
     private EstatusProyecto idEstatus;
-    
+
 	public Integer getIdProyecto() {
 		return idProyecto;
 	}
-	
+
 	public Integer getIdModulo() {
 		return idModulo;
 	}
@@ -155,7 +159,7 @@ public class Proyecto implements Serializable {
 	public void setIdEmpresa(Empresa idEmpresa) {
 		this.idEmpresa = idEmpresa;
 	}
-	
+
 	public Contacto getIdContacto() {
 		return idContacto;
 	}
@@ -172,13 +176,29 @@ public class Proyecto implements Serializable {
 		this.idEstatus = idEstatus;
 	}
 
+	public String getNombreRh() {
+		return nombreRh;
+	}
+
+	public void setNombreRh(String nombreRh) {
+		this.nombreRh = nombreRh;
+	}
+
+	public String getEmailRh() {
+		return emailRh;
+	}
+
+	public void setEmailRh(String emailRh) {
+		this.emailRh = emailRh;
+	}
+
 	@Override
 	public String toString() {
 		return "Proyecto [idProyecto=" + idProyecto + ", nombre=" + nombre + ", numEmpleados=" + numEmpleados
 				+ ", sedes=" + sedes + ", numParticipantes=" + numParticipantes + ", fechaRegistro=" + fechaRegistro
 				+ ", fechaFin=" + fechaFin + ", diasGarantia=" + diasGarantia + ", frecuenciaEval=" + frecuenciaEval
-				+ ", idModulo=" + idModulo + ", idEmpresa=" + idEmpresa + ", idContacto=" + idContacto + ", idEstatus="
-				+ idEstatus + "]";
+				+ ", nombreRh=" + nombreRh + ", emailRh=" + emailRh + ", idModulo=" + idModulo + ", idEmpresa="
+				+ idEmpresa + ", idContacto=" + idContacto + ", idEstatus=" + idEstatus + "]";
 	}
-	
+
 }

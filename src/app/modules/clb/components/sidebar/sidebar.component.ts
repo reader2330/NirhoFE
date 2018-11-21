@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Router} from '@angular/router';
 import {LoginService} from '../../services/login.service';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,9 +11,12 @@ import {LoginService} from '../../services/login.service';
 })
 export class SidebarComponent implements OnInit {
   mobile = false;
-  selectModule = 1   ;
+  selectModule = 4;
   modules = [];
   user = {};
+  avatar = {
+    url: ''
+  };
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
@@ -49,6 +53,9 @@ export class SidebarComponent implements OnInit {
       this.user = res;
       console.log(res);
       sessionStorage.setItem('user', JSON.stringify(this.user));
+      if (this.user) {
+        this.avatar.url = this.user['avatar'];
+      }
     });
   }
   recibirRespuestChildren(evt) {
@@ -62,8 +69,17 @@ export class SidebarComponent implements OnInit {
     this.LoginService.closeSession().subscribe((res) => {
       console.log(res);
     });
+    localStorage.clear();
     sessionStorage.clear();
     this.route.navigate(['']);
+  }
+
+  IrInicio() {
+    this.route.navigate(['SYNC']);
+  }
+
+  goAvatarEditing() {
+    this.route.navigate(['avatar-edit']);
   }
 
 }
