@@ -3,6 +3,7 @@ import {ProyectoService} from '../../../clb/services/proyecto.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BreakpointObserver, Breakpoints} from '../../../../../../node_modules/@angular/cdk/layout';
 import Swal from "sweetalert2";
+import {EnterprisesService} from '../../services/enterprises.service';
 
 @Component({
   selector: 'app-encuesta-irh',
@@ -15,6 +16,11 @@ export class EncuestaIrhComponent implements OnInit {
   temas = [{
     nombre: 'Imagen'
   }];
+  goQuestion= true;
+  companys = [];
+  entrepise = {
+    id:0
+  };
   token = '';
   dataSource = [{
     'nom': 1,
@@ -54,7 +60,7 @@ export class EncuestaIrhComponent implements OnInit {
 
   ];
 
-  constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver) {
+  constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver,  private EnterprisesService: EnterprisesService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -66,19 +72,22 @@ export class EncuestaIrhComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.getToken();
+    this.EnterprisesService.getEnterprises().subscribe(res => {
+      console.log(res);
+      this.companys = res;
+    })
   }
 
 
-  getToken() {
-      this.route.params.subscribe((res) => {
-        this.token = res['token'];
-        this.ProyectServices.getPreguntasParticipante(this.token).subscribe((res) => {
-          console.log(res);
-
-        });
-      });
-
+  getPreguntasEmpresa(){
+    this.goQuestion = true
+    console.log(this.entrepise);
+    this.EnterprisesService.getPreguntasEmpresa(this.entrepise.id).subscribe(res => {
+      console.log(res);
+      this.temas = res;
+      this.dataSource = res[0].temas[0].preguntas;
+      this.goQuestion = false;
+    });
   }
 
   checkMobileCols() {
