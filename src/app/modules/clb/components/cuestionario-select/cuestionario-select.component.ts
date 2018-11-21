@@ -126,6 +126,7 @@ export class CuestionarioSelectComponent implements OnInit {
 
 
   addPreguntar(tema) {
+
     let enunciado = {...this.questionNew};
     let question = {...tema.preguntas[tema.preguntas.length - 1]};
     question['enunciado'] = enunciado.enunciado;
