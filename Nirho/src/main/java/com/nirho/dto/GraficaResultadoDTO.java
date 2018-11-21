@@ -2,22 +2,22 @@ package com.nirho.dto;
 
 import java.io.Serializable;
 
-import com.nirho.model.Tema;
+import com.nirho.model.Pregunta;
 
-public class GraficaTemaDTO  implements Serializable {
+public class GraficaResultadoDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Tema tema;
+	private Pregunta pregunta;
 	private int numResp1;
 	private int numResp2;
 	private int numResp3;
 	private int numResp4;
 	private int numResp5;
 	
-	public Tema getTema() {
-		return tema;
+	public Pregunta getPregunta() {
+		return pregunta;
 	}
-	public void setTema(Tema tema) {
-		this.tema = tema;
+	public void setPregunta(Pregunta pregunta) {
+		this.pregunta = pregunta;
 	}
 	public int getNumResp1() {
 		return numResp1;
@@ -52,8 +52,7 @@ public class GraficaTemaDTO  implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "GraficaAreaOrgDTO [tema=" + tema + ", numResp1=" + numResp1
-				+ ", numResp2=" + numResp2 + ", numResp3=" + numResp3 + ", numResp4=" + numResp4 + ", numResp5="
-				+ numResp5 + "]";
+		return "GraficaResultadoDTO [pregunta=" + pregunta + ", numResp1=" + numResp1 + ", numResp2="
+				+ numResp2 + ", numResp3=" + numResp3 + ", numResp4=" + numResp4 + ", numResp5=" + numResp5 + "]";
 	}
 }
