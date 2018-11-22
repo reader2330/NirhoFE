@@ -4,12 +4,8 @@
   </a>
   <span style="flex: 1 1 auto;"></span>
 
-  <button mat-raised-button style="margin-right: 20px;" (click)="IrInicio()">
-    <mat-icon>home</mat-icon>Inicio
-  </button>
-  <button mat-raised-button (click)="cerraSesion()">
-    <mat-icon>people_outline</mat-icon>Cerrar sesión
-  </button>
+  <button mat-raised-button style="margin-right: 20px;" (click)="IrInicio()"><mat-icon >home</mat-icon>Inicio</button>
+  <button mat-raised-button (click)="cerraSesion()"><mat-icon >exit_to_app</mat-icon>Cerrar sesión</button>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
   <mat-sidenav mode="side" [opened]="!mobile" [fixedInViewport]="false" [fixedTopGap]="62" [fixedBottomGap]="60" #snav>

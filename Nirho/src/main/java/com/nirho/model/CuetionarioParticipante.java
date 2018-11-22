@@ -10,6 +10,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -33,7 +35,12 @@ public class CuetionarioParticipante implements Serializable {
     private Integer respuestaRh;
     @Column(name = "respuesta_jefe")
     private Integer respuestaJefe;
-
+    @JoinColumn
+    @ManyToOne(optional = false)
+    private Pregunta pregunta;
+    @JoinColumn
+    @ManyToOne(optional = false)
+    private Tema tema;
 
     public CuetionarioParticipante() {
     }
@@ -78,7 +85,7 @@ public class CuetionarioParticipante implements Serializable {
 		this.respuestaJefe = respuestaJefe;
 	}
 
-	/*public Pregunta getPregunta() {
+	public Pregunta getPregunta() {
         return pregunta;
     }
 
@@ -92,11 +99,13 @@ public class CuetionarioParticipante implements Serializable {
 
     public void setTema(Tema tema) {
         this.tema = tema;
-    }*/
+    }
 
 	@Override
 	public String toString() {
-        return "CuetionarioParticipante [cuetionarioParticipantePK=" + cuetionarioParticipantePK + ", respuesta="
-                + respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe;
-    }
+		return "CuetionarioParticipante [cuetionarioParticipantePK=" + cuetionarioParticipantePK + ", respuesta="
+				+ respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe + ", pregunta="
+				+ pregunta + ", tema=" + tema + "]";
+	}
+        
 }

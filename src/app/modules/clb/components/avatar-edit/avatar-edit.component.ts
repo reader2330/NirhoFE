@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import {LoginService} from '../../services/login.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../../../../environments/environment';
 export interface Avatar {
   value: string;
@@ -20,6 +20,7 @@ export class AvatarEditComponent implements OnInit {
   avatar = {
     url: String
   };
+  nameModule = '';
 
   selectedValue: String;
 
@@ -65,16 +66,19 @@ export class AvatarEditComponent implements OnInit {
           confirmButtonText: 'Guardar',
           cancelButtonText: 'Cancelar'
         }).then((res) => {
-          this.router.navigate(['']);
+          this.router.navigate([this.nameModule]);
         });
 
       }
     });
   }
 
-  constructor(private LoginService: LoginService, private router:Router) { }
+  constructor(private LoginService: LoginService, private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.nameModule = params['module'];
+    });
     this.LoginService.getUser().subscribe((res) => {
       console.log(res);
       this.selected = res.avatar;

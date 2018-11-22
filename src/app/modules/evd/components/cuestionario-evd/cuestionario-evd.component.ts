@@ -14,7 +14,9 @@ export class CuestionarioEvdComponent implements OnInit {
   mobile = false;
   selectProyect = false;
   proyects = [];
-  proyect = {};
+  proyect = {
+    idProyecto: undefined
+  };
   temas = [];
   tema = {};
   load = false;

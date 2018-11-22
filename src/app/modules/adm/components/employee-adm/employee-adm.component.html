@@ -78,6 +78,9 @@
     <mat-grid-tile *ngIf="!mobile">
 
     </mat-grid-tile>
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
       <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveEmployee()" [disabled]="!employeeForm.valid" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>

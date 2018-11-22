@@ -12,7 +12,7 @@
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">2</span>
         &nbsp; IRH
       </mat-list-item>
-      <mat-list-item (click)="goModule(3)">
+      <mat-list-item  *ngIf="adm" (click)="goModule(3)">
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">3</span>
         &nbsp; ADM
       </mat-list-item>

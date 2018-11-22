@@ -11,7 +11,7 @@ import {environment} from '../../../../../environments/environment';
 })
 export class SidebarComponent implements OnInit {
   mobile = false;
-  selectModule = 4;
+  selectModule = 1;
   modules = [];
   user = {};
   avatar = {
@@ -79,7 +79,7 @@ export class SidebarComponent implements OnInit {
   }
 
   goAvatarEditing() {
-    this.route.navigate(['avatar-edit']);
+    this.route.navigate(['avatar-edit', 'CLB']);
   }
 
 }

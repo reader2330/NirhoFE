@@ -78,7 +78,10 @@ export class SidebarIrhComponent implements OnInit {
     });
   }
   goAvatarEditing() {
-    this.route.navigate(['avatar-edit']);
+    this.route.navigate(['avatar-edit', 'IRH']);
+  }
+  IrInicio() {
+    this.route.navigate(['SYNC']);
   }
 
 }

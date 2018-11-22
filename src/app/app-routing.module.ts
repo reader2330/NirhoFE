@@ -29,7 +29,7 @@ const routes: Routes = [
     //canActivate: [LoginGuard]
   },
   {
-    path: 'avatar-edit',
+    path: 'avatar-edit/:module',
     component: AvatarEditComponent,
     //canActivate: [LoginGuard]
   },
