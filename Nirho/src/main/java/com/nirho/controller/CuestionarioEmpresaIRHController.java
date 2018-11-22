@@ -77,6 +77,19 @@ public class CuestionarioEmpresaIRHController {
 		} 
 	}
 	
+	@RequestMapping(value = "/{idCuestionarioEmpresa}/finalizado/{valor}", method = RequestMethod.POST)
+	public void edit(@PathVariable("id") long id, @PathVariable("valor") boolean valor) throws NirhoControllerException{
+		try {
+			CuestionarioEmpresaIRH c = cuestionarioEmpresaServiceIRH.getCuestionarioEmpresaIRHById(id);
+			c.setFinalizado(valor);
+			cuestionarioEmpresaServiceIRH.updateCuestionarioEmpresaIRH(c);			
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} 
+	}
+	
 	@RequestMapping(value = "/eliminar/{id}", method = RequestMethod.DELETE)
     public void removePerson(@PathVariable("id") long id) throws NirhoControllerException{
 		try {
