@@ -20,8 +20,8 @@ import {
 })
 export class Sidebar360Component implements OnInit {
   mobile = false;
-  selectedItem = 4;
-  selectModule = 4;
+  selectedItem = 2;
+  selectModule = 2;
   modules = [];
   user = {};
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private loginService: LoginService) {
