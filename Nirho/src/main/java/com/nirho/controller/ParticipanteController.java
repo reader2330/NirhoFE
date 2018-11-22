@@ -187,15 +187,17 @@ public class ParticipanteController {
         	}
 
         	List<Participante> participantes = participanteService.obtenerParticipantes(idProyecto);
+        	List<CuestionarioProyecto> cuestProyList = cuestionarioService.obtenerCuestionarioProyecto(idProyecto);
             for(Participante participante: participantes) {
-            	List<CuestionarioProyecto> cuestProyList = cuestionarioService.obtenerCuestionarioProyecto(idProyecto);
             	for(CuestionarioProyecto cp: cuestProyList) {
             		try {
                 		CuetionarioParticipante cuetionarioParticipante = new CuetionarioParticipante();
                 		CuetionarioParticipantePK pk = new CuetionarioParticipantePK(participante.getParticipantePK().getIdParticipante(), participante.getParticipantePK().getIdProyecto(),
                 				cp.getCuestionarioProyectoPK().getIdTema(), cp.getCuestionarioProyectoPK().getIdPregunta());
                 		cuetionarioParticipante.setCuetionarioParticipantePK(pk);
-                		logger.info("########################## CuestionarioParticipantePK [" + cuetionarioParticipante + "]");
+                		cuetionarioParticipante.setPregunta(cp.getPregunta());
+                		cuetionarioParticipante.setTema(cp.getTema());
+                		logger.info("CuestionarioParticipante [" + cuetionarioParticipante + "]");
                 		cuestionarioParticipanteService.guardar(cuetionarioParticipante);
                 	} catch(NirhoServiceException nse) {
                 		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
