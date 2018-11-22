@@ -20,7 +20,8 @@ import {
 })
 export class Sidebar360Component implements OnInit {
   mobile = false;
-  selectModule = 1;
+  selectedItem = 2;
+  selectModule = 2;
   modules = [];
   user = {};
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private loginService: LoginService) {
@@ -37,9 +38,6 @@ export class Sidebar360Component implements OnInit {
 
   }
 
-
-
-
   ngOnInit() {
     setTimeout(() => {
       this.getModules();
@@ -48,6 +46,7 @@ export class Sidebar360Component implements OnInit {
   }
 
   goModule(opt) {
+    this.selectedItem = opt;
     this.selectModule = opt;
   }
   getModules() {
@@ -56,16 +55,19 @@ export class Sidebar360Component implements OnInit {
       descripcion: 'Revisión de proyecto'
     }, {
       id_submodulo: 3,
-      descripcion: 'Configuración y carga de Head Count'
+      descripcion: 'Asignación de participantes'
     }, {
       id_submodulo: 4,
-      descripcion: 'Configuración y elaboración de cuestionario'
+      descripcion: 'Consultar asignación'
     }, {
       id_submodulo: 5,
-      descripcion: 'Analisis de información'
+      descripcion: 'Configuración de cuestionario'
     }, {
       id_submodulo: 6,
-      descripcion: 'Integración de informes'
+      descripcion: 'Ver cuestionario'
+    }, {
+      id_submodulo: 7,
+      descripcion: 'Estado del cuestionario'
     }];
     this.loginService.getModules().subscribe((res) => {
     });

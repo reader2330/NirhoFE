@@ -23,7 +23,7 @@
         <mat-list-item>
           <p>{{ 'Marcello Montenegro' }}</p>
         </mat-list-item>
-        <mat-list-item *ngFor="let module of modules" (click)="goModule(module.id_submodulo)">
+        <mat-list-item *ngFor="let module of modules" [ngClass]="{'c-active': selectedItem == module.id_submodulo}" (click)="goModule(module.id_submodulo)">
           <p>{{module.descripcion}}</p>
         </mat-list-item>
       </mat-list>
@@ -35,6 +35,26 @@
         <div *ngIf="selectModule == 2">
           <h3>Revisión de proyecto</h3>
           <app-steppers-360 (responseChildren)="recibirRespuestChildren($event)"></app-steppers-360>
+        </div>
+        <div *ngIf="selectModule == 3">
+          <h3>Asignación de participantes a evaluar</h3>
+          <app-assign-poll (responseChildren)="recibirRespuestChildren($event)"></app-assign-poll>
+        </div>
+        <div *ngIf="selectModule == 4">
+          <h3>Consultar asignación</h3>
+          <app-view-assigns (responseChildren)="recibirRespuestChildren($event)"></app-view-assigns>
+        </div>
+        <div *ngIf="selectModule == 5">
+          <h3>Configuración de cuestionario</h3>
+          <app-poll-config (responseChildren)="recibirRespuestChildren($event)"></app-poll-config>
+        </div>
+        <div *ngIf="selectModule == 6">
+          <h3>Ver cuestionario</h3>
+          <app-view-poll (responseChildren)="recibirRespuestChildren($event)"></app-view-poll>
+        </div>
+        <div *ngIf="selectModule == 7">
+          <h3>Estado de la encuesta</h3>
+          <app-poll-status (responseChildren)="recibirRespuestChildren($event)"></app-poll-status>
         </div>
       </div>
     </div>

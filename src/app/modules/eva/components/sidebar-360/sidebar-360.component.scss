@@ -77,7 +77,16 @@ stepper-forms {
 
 }
 
+/deep/ .mat-list .mat-list-item .mat-list-item-content, .mat-list .mat-list-option .mat-list-item-content, .mat-nav-list .mat-list-item .mat-list-item-content, .mat-nav-list .mat-list-option .mat-list-item-content, .mat-selection-list .mat-list-item .mat-list-item-content, .mat-selection-list .mat-list-option .mat-list-item-content {
+  padding: 15px 15px 0 15px !important;
+}
+
 
 .mat-nav-list .mat-list-item {
   height: auto;
+}
+
+.mat-nav-list .mat-list-item.c-active {
+  background: #a2ba00;
+  color: white;
 }
