@@ -106,6 +106,7 @@ export class HaedCount2ApoComponent implements OnInit {
 
   }
 
+  readFile(evt: any) {}
   /*readFile(evt: any) {
     const target: DataTransfer = <DataTransfer>(evt.target);
     if (target.files.length === 1 && evt.target.accept === ".xlsx") {
@@ -161,5 +162,7 @@ export class HaedCount2ApoComponent implements OnInit {
     this.dataSource[index].areaOrg = data[17];
 
   }
+
+  guardaHead(){}
 
 }

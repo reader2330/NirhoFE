@@ -107,6 +107,7 @@ export class HeadCountApoComponent implements OnInit {
     }
 
   }
+  readFile(evt: any) {}
 
   /*readFile(evt: any) {
     const target: DataTransfer = <DataTransfer>(evt.target);
