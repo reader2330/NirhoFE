@@ -1,18 +1,16 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Participante} from '../../../clb/models/participante';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {ProyectoService} from '../../../clb/services/proyecto.service';
-import {IWorkBook, IWorkSheet, read, utils} from 'ts-xlsx';
-import Swal from 'sweetalert2';
-import {Participante} from '../../../clb/models/participante';
-import {ProyectoEvdService} from '../../services/proyecto-evd.service';
+//import {IWorkBook, IWorkSheet, read, utils} from 'xlsx';
 
 @Component({
-  selector: 'app-head-count-evd',
-  templateUrl: './head-count-evd.component.html',
-  styleUrls: ['./head-count-evd.component.scss']
+  selector: 'app-haed-count2-apo',
+  templateUrl: './haed-count2-apo.component.html',
+  styleUrls: ['./haed-count2-apo.component.scss']
 })
-export class HeadCountEvdComponent implements OnInit {
+export class HaedCount2ApoComponent implements OnInit {
 
   @Output () responseHead = new EventEmitter();
   mobile = false;
@@ -36,6 +34,7 @@ export class HeadCountEvdComponent implements OnInit {
 
 
   ];
+
   names = [
     'id',
     'nivel',
@@ -57,7 +56,7 @@ export class HeadCountEvdComponent implements OnInit {
     'areaOrg'
   ];
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectEvdServices: ProyectoEvdService) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectService:ProyectoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -72,12 +71,10 @@ export class HeadCountEvdComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getProyects();
-
   }
 
   getProyects() {
-    this.ProyectEvdServices.getProyects().subscribe((res) => {
+    this.ProyectService.getProyects().subscribe((res) => {
       console.log(res);
       this.proyects = res;
     });
@@ -109,18 +106,18 @@ export class HeadCountEvdComponent implements OnInit {
 
   }
 
-  readFile(evt: any) {
+  /*readFile(evt: any) {
     const target: DataTransfer = <DataTransfer>(evt.target);
     if (target.files.length === 1 && evt.target.accept === ".xlsx") {
       const reader: FileReader = new FileReader();
-      reader.onload = (e: any) => {
+      reader.onload = (e: any) => {*/
         /* read workbook */
-        const bstr: string = e.target.result;
+        /*const bstr: string = e.target.result;
         const wb: IWorkBook = read(bstr, {type: 'binary'});
         const wsname: string = wb.SheetNames[0];
-        const ws: IWorkSheet = wb.Sheets[wsname];
+        const ws: IWorkSheet = wb.Sheets[wsname];*/
         /* save data */
-        this.data = <any[]>(utils.sheet_to_json(ws, {header: 1}));
+        /*this.data = <any[]>(utils.sheet_to_json(ws, {header: 1}));
         this.data.shift();
         for (let  i = 0; i < this.data.length; i++) {
           for (let j = 0 ; j < this.data[i].length; j++) {
@@ -132,7 +129,7 @@ export class HeadCountEvdComponent implements OnInit {
       reader.readAsBinaryString(target.files[0]);
 
     }
-  }
+  }*/
 
   getName(j) {
     return this.names[j];
@@ -142,47 +139,9 @@ export class HeadCountEvdComponent implements OnInit {
     this.showTable = true;
   }
 
-  guardaHead() {
-    let data = {
-      lista: this.dataSource,
-      idProyecto: this.filters.idProyecto
-    }
-    Swal({
-      title: '',
-      text: 'Seguro que quieres guardar la información ingresada del proyecto',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Si guardar',
-      cancelButtonText: 'No, seguir editando'
-    }).then((result) => {
-      if (result.value) {
-        this.ProyectEvdServices.saveHead(data).subscribe(() => {
-            Swal(
-              'Listo.',
-              'La información se guardo correctamente',
-              'success'
-            ).then(() => {
-              this.responseHead.emit({value: 1});
-            });
-
-          },
-          (err) => {
-            console.log(err);
-            Swal(
-              'Algo salio mal.',
-              'No se pudo guarda la información',
-              'error'
-            ).then(() => {
-              this.responseHead.emit({value: 1});
-            });
-          });
-      }
-    });
-  }
-
   changeData(data, index) {
     this.dataSource[index] = new Participante();
-    this.dataSource[index].idParticipante = data[0];
+    this.dataSource[index].id = data[0];
     this.dataSource[index].nivel = data[1];
     this.dataSource[index].nivelTexto = data[2];
     this.dataSource[index].nombres = data[3];

@@ -1,0 +1,50 @@
+<form [formGroup]="encuestaForm">
+  <h5 style="text-align: center">
+    <mat-icon>folder_open</mat-icon>
+    Nueva competencia
+  </h5>
+  <hr>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field class="inputForm" appearance="outline">
+          <mat-label>Factor de desempeño</mat-label>
+          <input matInput formControlName="factor" type="text" required>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
+        <mat-form-field class="inputForm" appearance="outline">
+          <mat-label>Descripción</mat-label>
+          <input matInput formControlName="descricpion" type="text" required>
+        </mat-form-field>
+      </div>
+
+      <br><br><br><br><br>
+
+      <div class="col-md-3"></div>
+
+      <div class="col-sm-12 col-md-6" style="display: inline-block; text-align:center;">
+        <mat-radio-group formControlName="tipo">
+          <mat-radio-button value="br">BR </mat-radio-button>&nbsp;
+          <mat-radio-button value="mr">MR </mat-radio-button>&nbsp;
+          <mat-radio-button value="r">R</mat-radio-button>&nbsp;
+          <mat-radio-button value="rs">RS</mat-radio-button>&nbsp;
+          <mat-radio-button value="e">E</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="col-md-3"></div>
+      <br><br><br>
+      <button type="button" style="margin-left: 20px;" mat-raised-button color="primary" (click)="saveQuiz()" [disabled]="!encuestaForm.valid">Agregar <mat-icon>save</mat-icon> </button>
+
+    </div>
+  </div>
+
+</form>
+
+
+
+

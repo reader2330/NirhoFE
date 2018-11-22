@@ -14,6 +14,7 @@ import {CLBModule} from './modules/clb/clb.module';
 import {EvdModule} from './modules/evd/evd.module';
 import {AdmModule} from './modules/adm/adm.module';
 import {SynchronizeModule} from './modules/synchronize/synchronize.module';
+import {ApoModule} from './modules/apo/apo.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {SynchronizeModule} from './modules/synchronize/synchronize.module';
     IrhModule,
     EvdModule,
     AdmModule,
-    SynchronizeModule
+    SynchronizeModule,
+    ApoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
