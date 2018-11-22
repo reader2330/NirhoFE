@@ -1,0 +1,67 @@
+<form [formGroup]="enterpriseForm">
+  <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="empresa" type="text" required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Pais</mat-label>
+        <mat-select  formControlName="pais" required >
+          <mat-option *ngFor="let nacionalidad of nacionalidades" [value]="nacionalidad.id">
+            {{nacionalidad.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>RFC</mat-label>
+        <input formControlName="rfc" type="text" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Giro</mat-label>
+        <mat-select formControlName="giro" required >
+          <mat-option *ngFor="let spin of spins" [value]="spin.id">
+            {{spin.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input formControlName="direccion" type="text" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-raised-button matStepperPrevious>Cancelar
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <button mat-raised-button color="primary" style="margin-left: 10px;" [disabled]="!enterpriseForm.valid" (click)="guardarEmpresa()"
+              matStepperNext>Siguiente
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+
+</form>
+
