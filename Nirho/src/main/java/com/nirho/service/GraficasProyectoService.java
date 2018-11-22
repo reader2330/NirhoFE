@@ -1,10 +1,8 @@
 package com.nirho.service;
 
-import java.util.List;
-
-import com.nirho.dto.GraficaAreaOrgDTO;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.dto.GraficasProyectoDTO;
 
 public interface GraficasProyectoService {
-	List<GraficaAreaOrgDTO> obtenerGraficasProyecto(Integer idProyecto) throws NirhoServiceException;
+	GraficasProyectoDTO obtenerGraficasProyecto(Integer idProyecto) throws NirhoServiceException;
 }

@@ -11,14 +11,16 @@ import com.nirho.service.CuestionarioParticipanteService;
 
 @Service
 public class CuestionarioParticipanteServiceImpl implements CuestionarioParticipanteService {
-    public final static Logger logger = Logger.getLogger(CuestionarioParticipanteServiceImpl.class);
 
-    @Autowired
-    private CuestionarioParticipanteDAO dao;
+	public final static Logger logger = Logger.getLogger(CuestionarioParticipanteServiceImpl.class);
 
-    @Override
-    public void guardar(CuetionarioParticipante cuestionario) throws NirhoServiceException {
-        dao.save(cuestionario);
-    }
+	@Autowired
+	private CuestionarioParticipanteDAO dao;
+
+	@Override
+	public void guardar(CuetionarioParticipante cuestionario) throws NirhoServiceException {
+		dao.save(cuestionario);
+	}
 
 }
+

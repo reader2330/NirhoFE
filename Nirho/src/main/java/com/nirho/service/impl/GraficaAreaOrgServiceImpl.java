@@ -12,12 +12,12 @@ import com.nirho.dao.CuestionarioParticipanteDAO;
 import com.nirho.dao.CuestionarioProyectoDAO;
 import com.nirho.dao.ParticipanteDAO;
 import com.nirho.dto.GraficaAreaOrgDTO;
-import com.nirho.dto.GraficaTemaDTO;
+import com.nirho.dto.GraficaResultadoDTO;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.CuestionarioProyecto;
 import com.nirho.model.CuetionarioParticipante;
 import com.nirho.model.Participante;
-import com.nirho.model.Tema;
+import com.nirho.model.Pregunta;
 import com.nirho.service.GraficaAreaOrgService;
 
 @Service
@@ -32,41 +32,40 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 	private CuestionarioProyectoDAO cuestProytDAO;
 	
 	@Override
-	@SuppressWarnings("unused")
 	public GraficaAreaOrgDTO obtenerResultadosCorporativo(int idProyecto)  throws NirhoServiceException{
 		GraficaAreaOrgDTO gdto = new GraficaAreaOrgDTO();
 		gdto.setAreaOrg(AreaOrgConstants.CORPORATIVO);
-		List<GraficaTemaDTO> resultados = new ArrayList<>();
+		List<GraficaResultadoDTO> resultados = new ArrayList<>();
 		List<Participante> participantes = new ArrayList<>();
 		try {
 			participantes = participanteDAO.findByAreaOrgProyecto(AreaOrgConstants.CORPORATIVO, idProyecto);
 			for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {
-				GraficaTemaDTO tdto = new GraficaTemaDTO();
-				Tema tema = cuestProy.getTema();
-				tdto.setIdProyecto(idProyecto);
-				tdto.setTema(tema);	
+				GraficaResultadoDTO resDTO = new GraficaResultadoDTO();
+				Pregunta pregunta = cuestProy.getPregunta();
+				resDTO.setPregunta(pregunta);
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
-						switch(cuestPart.getRespuesta()) {
+						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
+						switch(respuesta) {
 							case 1:
-								tdto.setNumResp1(tdto.getNumResp1()+1);
+								resDTO.setNumResp1(resDTO.getNumResp1()+1);
 								break;
 							case 2:
-								tdto.setNumResp2(tdto.getNumResp1()+1);
+								resDTO.setNumResp2(resDTO.getNumResp1()+1);
 								break;
 							case 3:
-								tdto.setNumResp3(tdto.getNumResp1()+1);
+								resDTO.setNumResp3(resDTO.getNumResp1()+1);
 								break;	
 							case 4:
-								tdto.setNumResp4(tdto.getNumResp1()+1);
+								resDTO.setNumResp4(resDTO.getNumResp1()+1);
 								break;
 							case 5:
-								tdto.setNumResp5(tdto.getNumResp1()+1);
+								resDTO.setNumResp5(resDTO.getNumResp1()+1);
 								break;
 						}
 					}
 				}
-				resultados.add(tdto);
+				resultados.add(resDTO);
 			}
 			gdto.setResultados(resultados);
 		} catch (Exception e) {
@@ -79,41 +78,40 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 
 
 	@Override
-	@SuppressWarnings("unused")
 	public GraficaAreaOrgDTO obtenerResultadosProduccion(int idProyecto) throws NirhoServiceException {
 		GraficaAreaOrgDTO gdto = new GraficaAreaOrgDTO();
 		gdto.setAreaOrg(AreaOrgConstants.PRODUCCION);
-		List<GraficaTemaDTO> resultados = new ArrayList<>();
+		List<GraficaResultadoDTO> resultados = new ArrayList<>();
 		List<Participante> participantes = new ArrayList<>();
 		try {
 			participantes = participanteDAO.findByAreaOrgProyecto(AreaOrgConstants.PRODUCCION, idProyecto);
 			for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {
-				GraficaTemaDTO tdto = new GraficaTemaDTO();
-				Tema tema = cuestProy.getTema();
-				tdto.setIdProyecto(idProyecto);
-				tdto.setTema(tema);	
+				GraficaResultadoDTO resDTO = new GraficaResultadoDTO();
+				Pregunta pregunta = cuestProy.getPregunta();
+				resDTO.setPregunta(pregunta);
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
-						switch(cuestPart.getRespuesta()) {
+						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
+						switch(respuesta) {
 							case 1:
-								tdto.setNumResp1(tdto.getNumResp1()+1);
+								resDTO.setNumResp1(resDTO.getNumResp1()+1);
 								break;
 							case 2:
-								tdto.setNumResp2(tdto.getNumResp1()+1);
+								resDTO.setNumResp2(resDTO.getNumResp1()+1);
 								break;
 							case 3:
-								tdto.setNumResp3(tdto.getNumResp1()+1);
+								resDTO.setNumResp3(resDTO.getNumResp1()+1);
 								break;	
 							case 4:
-								tdto.setNumResp4(tdto.getNumResp1()+1);
+								resDTO.setNumResp4(resDTO.getNumResp1()+1);
 								break;
 							case 5:
-								tdto.setNumResp5(tdto.getNumResp1()+1);
+								resDTO.setNumResp5(resDTO.getNumResp1()+1);
 								break;
 						}
 					}
 				}
-				resultados.add(tdto);
+				resultados.add(resDTO);
 			}
 			gdto.setResultados(resultados);
 		} catch (Exception e) {
@@ -126,41 +124,40 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 
 
 	@Override
-	@SuppressWarnings("unused")
 	public GraficaAreaOrgDTO obtenerResultadosVentas(int idProyecto) throws NirhoServiceException {
 		GraficaAreaOrgDTO gdto = new GraficaAreaOrgDTO();
 		gdto.setAreaOrg(AreaOrgConstants.VENTAS);
-		List<GraficaTemaDTO> resultados = new ArrayList<>();
+		List<GraficaResultadoDTO> resultados = new ArrayList<>();
 		List<Participante> participantes = new ArrayList<>();
 		try {
 			participantes = participanteDAO.findByAreaOrgProyecto(AreaOrgConstants.VENTAS, idProyecto);
 			for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {
-				GraficaTemaDTO tdto = new GraficaTemaDTO();
-				Tema tema = cuestProy.getTema();
-				tdto.setIdProyecto(idProyecto);
-				tdto.setTema(tema);	
+				GraficaResultadoDTO resDTO = new GraficaResultadoDTO();
+				Pregunta pregunta = cuestProy.getPregunta();
+				resDTO.setPregunta(pregunta);
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
-						switch(cuestPart.getRespuesta()) {
+						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
+						switch(respuesta) {
 							case 1:
-								tdto.setNumResp1(tdto.getNumResp1()+1);
+								resDTO.setNumResp1(resDTO.getNumResp1()+1);
 								break;
 							case 2:
-								tdto.setNumResp2(tdto.getNumResp1()+1);
+								resDTO.setNumResp2(resDTO.getNumResp1()+1);
 								break;
 							case 3:
-								tdto.setNumResp3(tdto.getNumResp1()+1);
+								resDTO.setNumResp3(resDTO.getNumResp1()+1);
 								break;	
 							case 4:
-								tdto.setNumResp4(tdto.getNumResp1()+1);
+								resDTO.setNumResp4(resDTO.getNumResp1()+1);
 								break;
 							case 5:
-								tdto.setNumResp5(tdto.getNumResp1()+1);
+								resDTO.setNumResp5(resDTO.getNumResp1()+1);
 								break;
 						}
 					}
 				}
-				resultados.add(tdto);
+				resultados.add(resDTO);
 			}
 			gdto.setResultados(resultados);
 		} catch (Exception e) {
@@ -173,41 +170,40 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 
 
 	@Override
-	@SuppressWarnings("unused")
 	public GraficaAreaOrgDTO obtenerResultadosAdministracion(int idProyecto) throws NirhoServiceException {
 		GraficaAreaOrgDTO gdto = new GraficaAreaOrgDTO();
 		gdto.setAreaOrg(AreaOrgConstants.ADMINISTRACION);
-		List<GraficaTemaDTO> resultados = new ArrayList<>();
+		List<GraficaResultadoDTO> resultados = new ArrayList<>();
 		List<Participante> participantes = new ArrayList<>();
 		try {
 			participantes = participanteDAO.findByAreaOrgProyecto(AreaOrgConstants.ADMINISTRACION, idProyecto);
 			for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {
-				GraficaTemaDTO tdto = new GraficaTemaDTO();
-				Tema tema = cuestProy.getTema();
-				tdto.setIdProyecto(idProyecto);
-				tdto.setTema(tema);	
+				GraficaResultadoDTO resDTO = new GraficaResultadoDTO();
+				Pregunta pregunta = cuestProy.getPregunta();
+				resDTO.setPregunta(pregunta);
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
-						switch(cuestPart.getRespuesta()) {
+						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
+						switch(respuesta) {
 							case 1:
-								tdto.setNumResp1(tdto.getNumResp1()+1);
+								resDTO.setNumResp1(resDTO.getNumResp1()+1);
 								break;
 							case 2:
-								tdto.setNumResp2(tdto.getNumResp1()+1);
+								resDTO.setNumResp2(resDTO.getNumResp1()+1);
 								break;
 							case 3:
-								tdto.setNumResp3(tdto.getNumResp1()+1);
+								resDTO.setNumResp3(resDTO.getNumResp1()+1);
 								break;	
 							case 4:
-								tdto.setNumResp4(tdto.getNumResp1()+1);
+								resDTO.setNumResp4(resDTO.getNumResp1()+1);
 								break;
 							case 5:
-								tdto.setNumResp5(tdto.getNumResp1()+1);
+								resDTO.setNumResp5(resDTO.getNumResp1()+1);
 								break;
 						}
 					}
 				}
-				resultados.add(tdto);
+				resultados.add(resDTO);
 			}
 			gdto.setResultados(resultados);
 		} catch (Exception e) {
@@ -220,41 +216,40 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 
 
 	@Override
-	@SuppressWarnings("unused")
 	public GraficaAreaOrgDTO obtenerResultadosControlDeCalidad(int idProyecto) throws NirhoServiceException {
 		GraficaAreaOrgDTO gdto = new GraficaAreaOrgDTO();
 		gdto.setAreaOrg(AreaOrgConstants.CONTROL_DE_CALIDAD);
-		List<GraficaTemaDTO> resultados = new ArrayList<>();
+		List<GraficaResultadoDTO> resultados = new ArrayList<>();
 		List<Participante> participantes = new ArrayList<>();
 		try {
 			participantes = participanteDAO.findByAreaOrgProyecto(AreaOrgConstants.CONTROL_DE_CALIDAD, idProyecto);
 			for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {
-				GraficaTemaDTO tdto = new GraficaTemaDTO();
-				Tema tema = cuestProy.getTema();
-				tdto.setIdProyecto(idProyecto);
-				tdto.setTema(tema);	
+				GraficaResultadoDTO resDTO = new GraficaResultadoDTO();
+				Pregunta pregunta = cuestProy.getPregunta();
+				resDTO.setPregunta(pregunta);
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
-						switch(cuestPart.getRespuesta()) {
+						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
+						switch(respuesta) {
 							case 1:
-								tdto.setNumResp1(tdto.getNumResp1()+1);
+								resDTO.setNumResp1(resDTO.getNumResp1()+1);
 								break;
 							case 2:
-								tdto.setNumResp2(tdto.getNumResp1()+1);
+								resDTO.setNumResp2(resDTO.getNumResp1()+1);
 								break;
 							case 3:
-								tdto.setNumResp3(tdto.getNumResp1()+1);
+								resDTO.setNumResp3(resDTO.getNumResp1()+1);
 								break;	
 							case 4:
-								tdto.setNumResp4(tdto.getNumResp1()+1);
+								resDTO.setNumResp4(resDTO.getNumResp1()+1);
 								break;
 							case 5:
-								tdto.setNumResp5(tdto.getNumResp1()+1);
+								resDTO.setNumResp5(resDTO.getNumResp1()+1);
 								break;
 						}
 					}
 				}
-				resultados.add(tdto);
+				resultados.add(resDTO);
 			}
 			gdto.setResultados(resultados);
 		} catch (Exception e) {

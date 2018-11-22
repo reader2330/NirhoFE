@@ -68,14 +68,14 @@ public class Proyecto implements Serializable {
     @JoinColumn(name = "id_contacto", referencedColumnName = "id", nullable=false, updatable=true)
     @ManyToOne(optional = false,  cascade = CascadeType.ALL)
     private Contacto idContacto;
-    @JoinColumn(name = "id_estatus", referencedColumnName = "id_estatus")
-    @ManyToOne( optional = false)
+    @JoinColumn(name = "id_estatus", referencedColumnName = "id_estatus", nullable=false, updatable = true)
+    @ManyToOne
     private EstatusProyecto idEstatus;
-    
+
 	public Integer getIdProyecto() {
 		return idProyecto;
 	}
-	
+
 	public Integer getIdModulo() {
 		return idModulo;
 	}
@@ -159,7 +159,7 @@ public class Proyecto implements Serializable {
 	public void setIdEmpresa(Empresa idEmpresa) {
 		this.idEmpresa = idEmpresa;
 	}
-	
+
 	public Contacto getIdContacto() {
 		return idContacto;
 	}
@@ -200,5 +200,5 @@ public class Proyecto implements Serializable {
 				+ ", nombreRh=" + nombreRh + ", emailRh=" + emailRh + ", idModulo=" + idModulo + ", idEmpresa="
 				+ idEmpresa + ", idContacto=" + idContacto + ", idEstatus=" + idEstatus + "]";
 	}
-	
+
 }

@@ -18,16 +18,15 @@ export class ProyectoEvdService {
   }
 
   saveProyect(data): Observable<any> {
-    return this.http.post(this.api + 'proyecto/registrar', data, {headers: this.headers});
-  }
-  getProyects(): Observable<Proyecto[]> {
-    return this.http.get<Proyecto[]>(this.api + 'proyecto/todos', {headers: this.headers});
+    return this.http.post(this.api + 'proyectoEVD/registrar', data, {headers: this.headers});
   }
 
+  getProyects(): Observable<Proyecto[]> {
+    return this.http.get<Proyecto[]>(this.api + 'proyectoEVD/todos', {headers: this.headers});
+  }
   saveHead(data): Observable<any> {
     return this.http.post(this.api + 'participantes/headCount', data, {headers: this.headers} );
   }
-
   savePeriod(data): Observable<any> {
     return this.http.post(this.api + 'proyecto/agignarPeriodoGarantia', data, {headers: this.headers});
   }
@@ -37,9 +36,7 @@ export class ProyectoEvdService {
   getTemas(): Observable<any> {
     return this.http.get(this.api + 'cuestionario/temas/', {headers: this.headers, params: {'idModulo': '1'}});
   }
-  getPreguntas(id): Observable<Pregunta[]> {
-    return this.http.get<Pregunta[]>(this.api + 'cuestionario/plantilla', {headers: this.headers, params: {'idModulo': '1' }});
-  }
+
   savePreguntas(data): Observable<any> {
     return this.http.post(this.api + 'cuestionario/configurar', data, {headers: this.headers});
   }
@@ -60,6 +57,14 @@ export class ProyectoEvdService {
   }
   updatePregunta(data) {
     return this.http.post(this.api + 'cuestionario/contestaPregPart', data, {headers:this.headers})
-
+  }
+  getNacionality(): Observable<any> {
+    return this.http.get(this.api + 'catalogo/pais', {headers: this.headers});
+  }
+  getGiros(): Observable<any> {
+    return this.http.get(this.api + 'catalogo/giro',{headers: this.headers});
+  }
+  getPreguntas(id): Observable<Pregunta[]> {
+    return this.http.get<Pregunta[]>(this.api + 'cuestionario/plantilla', {headers: this.headers, params: {'idModulo': '1' }});
   }
 }

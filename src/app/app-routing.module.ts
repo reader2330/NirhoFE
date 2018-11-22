@@ -8,7 +8,10 @@ import {InicioIrhComponent} from './modules/irh/components/inicio-irh/inicio-irh
 import {InicioEvdComponent} from './modules/evd/components/inicio-evd/inicio-evd.component';
 import {InicioAdmComponent} from './modules/adm/components/inicio-adm/inicio-adm.component';
 import {InicioSyncComponent} from './modules/synchronize/components/inicio-sync/inicio-sync.component';
+import {InicioApoComponent} from './modules/apo/components/inicio-apo/inicio-apo.component';
+
 import {LoginGuard} from './guards/login.guard';
+
 
 const routes: Routes = [
   {
@@ -47,8 +50,11 @@ const routes: Routes = [
   },
   {
     path: 'SYNC',
-    component: InicioSyncComponent,
-    //canActivate: [LoginGuard]
+    component: InicioSyncComponent
+  },
+  {
+    path: 'APO',
+    component: InicioApoComponent
   },
   { path: '**', redirectTo: '' }
 ];

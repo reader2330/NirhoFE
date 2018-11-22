@@ -5,6 +5,7 @@ import {ProyectoService} from '../../../clb/services/proyecto.service';
 import {IWorkBook, IWorkSheet, read, utils} from 'ts-xlsx';
 import Swal from 'sweetalert2';
 import {Participante} from '../../../clb/models/participante';
+import {ProyectoEvdService} from '../../services/proyecto-evd.service';
 
 @Component({
   selector: 'app-head-count-evd',
@@ -56,7 +57,7 @@ export class HeadCountEvdComponent implements OnInit {
     'areaOrg'
   ];
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectService:ProyectoService) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectEvdServices: ProyectoEvdService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -76,7 +77,7 @@ export class HeadCountEvdComponent implements OnInit {
   }
 
   getProyects() {
-    this.ProyectService.getProyects().subscribe((res) => {
+    this.ProyectEvdServices.getProyects().subscribe((res) => {
       console.log(res);
       this.proyects = res;
     });
@@ -140,6 +141,7 @@ export class HeadCountEvdComponent implements OnInit {
   uploadHeadCount() {
     this.showTable = true;
   }
+
   guardaHead() {
     let data = {
       lista: this.dataSource,
@@ -154,7 +156,7 @@ export class HeadCountEvdComponent implements OnInit {
       cancelButtonText: 'No, seguir editando'
     }).then((result) => {
       if (result.value) {
-        this.ProyectService.saveHead(data).subscribe(() => {
+        this.ProyectEvdServices.saveHead(data).subscribe(() => {
             Swal(
               'Listo.',
               'La información se guardo correctamente',
@@ -177,6 +179,7 @@ export class HeadCountEvdComponent implements OnInit {
       }
     });
   }
+
   changeData(data, index) {
     this.dataSource[index] = new Participante();
     this.dataSource[index].idParticipante = data[0];
