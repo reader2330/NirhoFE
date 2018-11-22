@@ -66,18 +66,4 @@ export class TableCliente2EvdComponent implements OnInit {
 
 }
 
-@Component({
-  selector: 'app-table-client2-modal-evd',
-  templateUrl: '../modals/table-client2-modal-evd/table-client2-modal-evd.component.html'
-})
-export class DialogOverviewExampleDialog {
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}

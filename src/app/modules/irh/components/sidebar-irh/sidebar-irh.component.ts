@@ -15,6 +15,9 @@ export class SidebarIrhComponent implements OnInit {
   selectModule = 0;
   modules = [];
   user = {};
+  avatar = {
+    url: ''
+  };
 
 
 
@@ -46,9 +49,7 @@ export class SidebarIrhComponent implements OnInit {
         descripcion: 'Contestar preguntas'
     })
 
-    this.LoginService.getUser().subscribe(res => {
-      console.log(res);
-    });
+    this.getUser();
   }
 
   goModule(opt) {
@@ -61,6 +62,23 @@ export class SidebarIrhComponent implements OnInit {
     if (evt.value) {
       this.selectModule = evt.value;
     }
+  }
+  cerrarSesion(){
+    sessionStorage.clear();
+    this.route.navigate(['/']);
+  }
+  getUser() {
+    this.LoginService.getUser().subscribe((res) => {
+      this.user = res;
+      console.log(res);
+      sessionStorage.setItem('user', JSON.stringify(this.user));
+      if (this.user) {
+        this.avatar.url = this.user['avatar'];
+      }
+    });
+  }
+  goAvatarEditing() {
+    this.route.navigate(['avatar-edit']);
   }
 
 }

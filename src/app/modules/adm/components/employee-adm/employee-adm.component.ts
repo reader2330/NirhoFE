@@ -98,5 +98,6 @@ export class EmployeeAdmComponent implements OnInit {
     this.getNacionality();
     console.log(sessionStorage.getItem('empleado-detail'));
   }
+  cancelCompany(){}
 
 }

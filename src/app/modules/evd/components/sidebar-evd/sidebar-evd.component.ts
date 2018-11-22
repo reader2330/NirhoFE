@@ -68,5 +68,9 @@ export class SidebarEvdComponent implements OnInit {
 
   ngOnInit() {
   }
+  cerrarSesion(){
+    sessionStorage.clear();
+    this.route.navigate(['/']);
+  }
 
   }

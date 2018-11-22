@@ -15,7 +15,9 @@ export class CuestionarioSelectIRHComponent implements OnInit {
   mobile = false;
   selectProyect = false;
   entrepises = [];
-  entripise = {};
+  entripise = {
+    id:undefined
+  };
   temas = [];
   tema = {};
   load = false;

@@ -196,5 +196,6 @@ export class ScholarshipAdmComponent implements OnInit {
   ngOnInit() {
     //this.getScholarship();
   }
+  cancelCompany(){}
 
 }

@@ -21,13 +21,20 @@ export class AvatarEditComponent implements OnInit {
     url: String
   };
 
-  selectedValue : String;
+  selectedValue: String;
 
   avatares: Avatar[] = [
-    {value: 'avatar1', url: environment.urlNG + 'assets/logo.png'},
-    {value: 'avatar2', url: environment.urlNG + 'assets/avatar.png'},
-    {value: 'avatar3', url: environment.urlNG + 'assets/X2.svg'}
+      {value: 'avatar1', url: environment.urlNG + 'assets/Avatars/p1.png'},
+      {value: 'avatar2', url: environment.urlNG + 'assets/Avatars/p2.png'},
+      {value: 'avatar3', url: environment.urlNG + 'assets/Avatars/p3.png'},
+      {value: 'avatar4', url: environment.urlNG + 'assets/Avatars/p4.png'},
+      {value: 'avatar5', url: environment.urlNG + 'assets/Avatars/p5.png'},
+      {value: 'avatar6', url: environment.urlNG + 'assets/Avatars/p6.png'},
+      {value: 'avatar7', url: environment.urlNG + 'assets/Avatars/p7.png'},
+
+
   ];
+  selected = '';
 
   avatarForm = new FormGroup({
     url_avatar: new FormControl('')
@@ -70,6 +77,7 @@ export class AvatarEditComponent implements OnInit {
   ngOnInit() {
     this.LoginService.getUser().subscribe((res) => {
       console.log(res);
+      this.selected = res.avatar;
     });
   }
 

@@ -53,18 +53,3 @@ export class RhAdminIrhComponent implements OnInit {
 
 }
 
-@Component({
-  selector: 'app-rh-admin-modal-irh',
-  templateUrl: '../modals/rh-admin-modal-irh/rh-admin-modal-irh.component.html'
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}

@@ -93,4 +93,5 @@ export class PaymentAdmComponent implements OnInit {
     }
   }
 
+  cancelCompany(){}
 }
