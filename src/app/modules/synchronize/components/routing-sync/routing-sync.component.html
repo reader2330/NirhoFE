@@ -4,7 +4,7 @@
 
     </div>
     <mat-list style="cursor: pointer">
-      <mat-list-item  >
+      <mat-list-item (click)="goModule(1)" >
         <span  class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">1</span>
         &nbsp; CLB
       </mat-list-item>
@@ -12,27 +12,27 @@
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">2</span>
         &nbsp; IRH
       </mat-list-item>
-      <mat-list-item (click)="goModule(3)">
+      <mat-list-item  *ngIf="adm" (click)="goModule(3)">
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">3</span>
         &nbsp; ADM
       </mat-list-item>
-      <mat-list-item >
+      <mat-list-item (click)="goModule(4)">
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">4</span>
         &nbsp; EVD
       </mat-list-item>
-      <mat-list-item >
+      <mat-list-item (click)="goModule(5)" >
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">5</span>
         &nbsp; EVA 360
       </mat-list-item>
-      <mat-list-item  >
+      <mat-list-item (click)="goModule(6)"  >
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">6</span>
         &nbsp; APO
       </mat-list-item>
-      <mat-list-item >
+      <mat-list-item (click)="goModule(7)" >
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">7</span>
         &nbsp; PVC
       </mat-list-item>
-      <mat-list-item >
+      <mat-list-item (click)="goModule(8)" >
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">8</span>
         &nbsp; RYS
       </mat-list-item>

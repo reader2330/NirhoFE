@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import {LoginService} from '../../services/login.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../../../../environments/environment';
 export interface Avatar {
   value: string;
@@ -20,14 +20,22 @@ export class AvatarEditComponent implements OnInit {
   avatar = {
     url: String
   };
+  nameModule = '';
 
-  selectedValue : String;
+  selectedValue: String;
 
   avatares: Avatar[] = [
-    {value: 'avatar1', url: environment.urlNG + 'assets/logo.png'},
-    {value: 'avatar2', url: environment.urlNG + 'assets/avatar.png'},
-    {value: 'avatar3', url: environment.urlNG + 'assets/X2.svg'}
+      {value: 'avatar1', url: environment.urlNG + 'assets/Avatars/p1.png'},
+      {value: 'avatar2', url: environment.urlNG + 'assets/Avatars/p2.png'},
+      {value: 'avatar3', url: environment.urlNG + 'assets/Avatars/p3.png'},
+      {value: 'avatar4', url: environment.urlNG + 'assets/Avatars/p4.png'},
+      {value: 'avatar5', url: environment.urlNG + 'assets/Avatars/p5.png'},
+      {value: 'avatar6', url: environment.urlNG + 'assets/Avatars/p6.png'},
+      {value: 'avatar7', url: environment.urlNG + 'assets/Avatars/p7.png'},
+
+
   ];
+  selected = '';
 
   avatarForm = new FormGroup({
     url_avatar: new FormControl('')
@@ -58,18 +66,22 @@ export class AvatarEditComponent implements OnInit {
           confirmButtonText: 'Guardar',
           cancelButtonText: 'Cancelar'
         }).then((res) => {
-          this.router.navigate(['']);
+          this.router.navigate([this.nameModule]);
         });
 
       }
     });
   }
 
-  constructor(private LoginService: LoginService, private router:Router) { }
+  constructor(private LoginService: LoginService, private router:Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.nameModule = params['module'];
+    });
     this.LoginService.getUser().subscribe((res) => {
       console.log(res);
+      this.selected = res.avatar;
     });
   }
 

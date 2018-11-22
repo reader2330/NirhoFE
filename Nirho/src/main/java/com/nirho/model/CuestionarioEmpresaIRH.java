@@ -1,7 +1,7 @@
 package com.nirho.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -32,20 +32,15 @@ public class CuestionarioEmpresaIRH implements Serializable {
 	@Column(name = "finalizado")
 	private boolean finalizado;
 	
+	@Column(name = "tema")
+	private String tema;
+	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "cuestionarioEmpresa")
-   	private List<CuestionarioEmpresaIRHTema> temas;
+    @JoinColumn(name = "cuestionarioEmpresaIRH")
+   	private Set<CuestionarioEmpresaIRHPregunta> preguntas;
 	
 	public CuestionarioEmpresaIRH() {
 		super();
-	}
-
-	public CuestionarioEmpresaIRH(Long id, Long idEmpresa, boolean finalizado, List<CuestionarioEmpresaIRHTema> temas) {
-		super();
-		this.id = id;
-		this.idEmpresa = idEmpresa;
-		this.finalizado = finalizado;
-		this.temas = temas;
 	}
 
 	public Long getId() {
@@ -72,18 +67,26 @@ public class CuestionarioEmpresaIRH implements Serializable {
 		this.finalizado = finalizado;
 	}
 
-	public List<CuestionarioEmpresaIRHTema> getTemas() {
-		return temas;
+	public String getTema() {
+		return tema;
 	}
 
-	public void setTemas(List<CuestionarioEmpresaIRHTema> temas) {
-		this.temas = temas;
+	public void setTema(String tema) {
+		this.tema = tema;
+	}
+
+	public Set<CuestionarioEmpresaIRHPregunta> getPreguntas() {
+		return preguntas;
+	}
+
+	public void setPreguntas(Set<CuestionarioEmpresaIRHPregunta> preguntas) {
+		this.preguntas = preguntas;
 	}
 
 	@Override
 	public String toString() {
-		return "CuestionarioEmpresa [id=" + id + ", idEmpresa=" + idEmpresa + ", finalizado=" + finalizado + ", temas="
-				+ temas + "]";
+		return "CuestionarioEmpresaIRH [id=" + id + ", idEmpresa=" + idEmpresa + ", finalizado=" + finalizado
+				+ ", tema=" + tema + ", preguntas=" + preguntas + "]";
 	}
 	
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {Router} from '@angular/router';
 import {environment} from '../../../../../environments/environment';
+import {LoginService} from '../../../clb/services/login.service';
 
 
 @Component({
@@ -11,6 +12,7 @@ import {environment} from '../../../../../environments/environment';
 })
 export class RoutingSyncComponent implements OnInit {
 
+  adm = false;
   imagenes = [{
     url: environment.urlNG + 'assets/imagen1.jpeg'
   },
@@ -25,7 +27,7 @@ export class RoutingSyncComponent implements OnInit {
     },
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private LoginService: LoginService) { }
 
   goModule(num) {
     switch (num) {
@@ -65,6 +67,16 @@ export class RoutingSyncComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.LoginService.getUser().subscribe(res => {
+      console.log(res);
+      if (res && res.rol !== 2 ) {
+        this.adm = false;
+      }else{
+        if(res.rol === 2) {
+          this.adm = true;
+        }
+      }
+    })
   }
 
 }

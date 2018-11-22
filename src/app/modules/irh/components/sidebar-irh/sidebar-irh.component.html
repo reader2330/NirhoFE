@@ -2,7 +2,8 @@
 <mat-toolbar style="background:  black" >
   <a *ngIf="mobile" style=" color:white" (click)="snav.toggle()"><mat-icon >menu</mat-icon></a>
   <span style="flex: 1 1 auto;"></span>
-  <button mat-raised-button (click)="cerraSesion()"><mat-icon >people_outline</mat-icon>Cerrar sesión</button>
+  <button mat-raised-button style="margin-right: 20px;" (click)="IrInicio()"><mat-icon >home</mat-icon>Inicio</button>
+  <button mat-raised-button (click)="cerrarSesion()"><mat-icon >people_outline</mat-icon>Cerrar sesión</button>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
   <mat-sidenav mode="side" [opened]="!mobile" [fixedInViewport]="false" [fixedTopGap]="62" [fixedBottomGap]="60"  #snav>
@@ -17,9 +18,9 @@
             <div class="logo-nav-mobile">
 
             </div>
-          </span>
-      <div class="avatar">
-
+      </span>
+      <div >
+        <a (click)="goAvatarEditing()" ><img class="avatar" src="{{avatar.url}}"></a>
       </div>
 
       <mat-list>

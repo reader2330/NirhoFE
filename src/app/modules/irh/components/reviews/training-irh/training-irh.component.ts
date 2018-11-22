@@ -52,18 +52,4 @@ export class TrainingIrhComponent implements OnInit {
 
 }
 
-@Component({
-  selector: 'app-training-modal-irh',
-  templateUrl: '../modals/training-modal-irh/training-modal-irh.component.html'
-})
-export class DialogOverviewExampleDialog {
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}

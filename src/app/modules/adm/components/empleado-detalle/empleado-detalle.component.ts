@@ -39,7 +39,8 @@ export class EmpleadoDetalleComponent implements OnInit {
     documentoCurp: null,
     documentoIne: null,
     documentoCV: null,
-    documentoComprobanteDomicilio: null
+    documentoComprobanteDomicilio: null,
+    estadoCivil : false
   };
   nacionalidades = [];
   bancos = [];

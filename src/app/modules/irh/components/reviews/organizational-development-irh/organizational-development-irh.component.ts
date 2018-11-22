@@ -57,7 +57,7 @@ export class OrganizationalDevelopmentIrhComponent implements OnInit {
   templateUrl: '../modals/organizational-development-modal-irh/organizational-development-modal-irh.component.html'
 })
 export class DialogOverviewExampleDialog {
-
+  enterpriseForm = {}
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}

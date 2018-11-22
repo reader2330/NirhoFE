@@ -12,6 +12,7 @@ export class SidebarApoComponent implements OnInit {
 
   mobile = false;
   selectModule = 1;
+  modules =[]
 
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginServices: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));
@@ -31,5 +32,7 @@ export class SidebarApoComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  cerraSesion(){}
 
 }

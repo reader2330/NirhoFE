@@ -12,7 +12,9 @@ export class OrganigramaEvdComponent implements OnInit {
   proyect = {};
   mobile = false;
   levels = [];
-  level1 = {};
+  level1 = {
+    participantes:[]
+  };
   level2 = {};
   level3 = {};
   level4 = {};

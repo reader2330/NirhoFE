@@ -168,6 +168,7 @@ export class LanguagesAdmComponent implements OnInit {
     this.dataSource.data = this.lenguajes;
 
   }
+  cancelCompany(){}
 
 
 }
