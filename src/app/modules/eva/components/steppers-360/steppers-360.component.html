@@ -1,0 +1,37 @@
+<mat-horizontal-stepper labelPosition="bottom" [hidden]="mobile" [linear]="false" #stepper>
+  <mat-step>
+    <ng-template matStepLabel>
+      <p class="bold">Paso 1 </p>
+      <p>Datos Empresa</p>
+    </ng-template>
+    <app-data-company-360></app-data-company-360>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <p class="bold">Paso 2 </p>
+      <p>Datos Contacto</p>
+    </ng-template>
+    <app-data-contact-360></app-data-contact-360>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <p class="bold">Paso 3 </p>
+      <p>Datos Proyecto</p>
+    </ng-template>
+    <app-data-project-360 (response)="getResponseChildren($event)"></app-data-project-360>
+  </mat-step>
+</mat-horizontal-stepper>
+<mat-vertical-stepper [hidden]="!mobile" [linear]="false" #stepper2>
+  <mat-step>
+    <ng-template matStepLabel> Datos de la Empresa</ng-template>
+    <app-data-company-360></app-data-company-360>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel> Datos Contacto</ng-template>
+    <app-data-contact-360></app-data-contact-360>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Datos Proyecto</ng-template>
+    <app-data-project-360 (response)="getResponseChildren($event)"></app-data-project-360>
+  </mat-step>
+</mat-vertical-stepper>

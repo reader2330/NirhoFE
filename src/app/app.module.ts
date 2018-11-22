@@ -31,6 +31,8 @@ import { EncuestaComponent } from './modules/clb/components/encuesta/encuesta.co
 import { AvatarEditComponent } from './modules/clb/components/avatar-edit/avatar-edit.component';
 import {CLBModule} from './modules/clb/clb.module';
 
+import {EVAModule} from './modules/eva/eva.module';
+
 
 
 
@@ -46,6 +48,7 @@ import {CLBModule} from './modules/clb/clb.module';
     MaterialModule,
     HttpClientModule,
     CLBModule,
+    EVAModule,
     FormsModule,
     ReactiveFormsModule
   ],

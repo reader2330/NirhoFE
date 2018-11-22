@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {LoginComponent} from './modules/clb/components/login/login.component';
-import {InicioComponent} from './modules/clb/components/inicio/inicio.component';
-import {SteppersComponent} from './modules/clb/components/formularios/steppers/steppers.component';
-import {AvatarEditComponent} from './modules/clb/components/avatar-edit/avatar-edit.component';
-import {EncuestaComponent} from './modules/clb/components/encuesta/encuesta.component';
+import { LoginComponent } from './modules/clb/components/login/login.component';
+import { InicioComponent } from './modules/clb/components/inicio/inicio.component';
+import { SteppersComponent } from './modules/clb/components/formularios/steppers/steppers.component';
+import { AvatarEditComponent } from './modules/clb/components/avatar-edit/avatar-edit.component';
+import { EncuestaComponent } from './modules/clb/components/encuesta/encuesta.component';
+import { Sidebar360Component } from './modules/eva/components/sidebar-360/sidebar-360.component';
 
 const routes: Routes = [
   {
@@ -23,8 +24,10 @@ const routes: Routes = [
     path: 'encuesta/:token',
     component: EncuestaComponent
   },
-
-
+  {
+    path: '360/inicio',
+    component: Sidebar360Component
+  }
 ];
 
 @NgModule({
