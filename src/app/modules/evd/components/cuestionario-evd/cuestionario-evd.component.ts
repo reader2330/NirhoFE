@@ -25,8 +25,7 @@ export class CuestionarioEvdComponent implements OnInit {
   questionNew = {
     enunciado : ''
   };
-  tema = '';
-  descripcion= '';
+  descripcion = '';
 
   constructor(private ProyectoEvdServices: ProyectoEvdService) { }
 
@@ -84,7 +83,7 @@ export class CuestionarioEvdComponent implements OnInit {
           lista: this.selectPregunta
         };
         console.log(data);
-        this.ProyectService.savePreguntas(data).subscribe((res) => {
+        this.ProyectoEvdServices.savePreguntas(data).subscribe((res) => {
           Swal(
             'Listo.',
             'La información se guardo correctamente',

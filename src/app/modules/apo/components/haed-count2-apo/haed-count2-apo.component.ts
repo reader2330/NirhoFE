@@ -3,7 +3,7 @@ import {Participante} from '../../../clb/models/participante';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {ProyectoService} from '../../../clb/services/proyecto.service';
-//import {IWorkBook, IWorkSheet, read, utils} from 'xlsx';
+import {IWorkBook, IWorkSheet, read, utils} from 'ts-xlsx';
 
 @Component({
   selector: 'app-haed-count2-apo',
@@ -141,7 +141,7 @@ export class HaedCount2ApoComponent implements OnInit {
 
   changeData(data, index) {
     this.dataSource[index] = new Participante();
-    this.dataSource[index].id = data[0];
+    this.dataSource[index].idParticipante = data[0];
     this.dataSource[index].nivel = data[1];
     this.dataSource[index].nivelTexto = data[2];
     this.dataSource[index].nombres = data[3];

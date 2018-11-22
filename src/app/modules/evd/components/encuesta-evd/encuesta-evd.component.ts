@@ -7,6 +7,7 @@ import {MatDialog, MatTableDataSource} from '@angular/material';
 import {EncuestaModalEvdComponent} from '../encuesta-modal-evd/encuesta-modal-evd.component';
 import {laboral_interface} from '../../../adm/components/labor-adm/labor-adm.component';
 import Swal from "sweetalert2";
+import {Router} from '@angular/router';
 
 export interface quiz_interface {
   factor: string;
@@ -25,7 +26,7 @@ export class EncuestaEvdComponent implements OnInit {
 
   @Output() responseChildren = new EventEmitter();
 
-  constructor(private ProyectoEvdServices: ProyectoEvdService, public dialog: MatDialog) {
+  constructor(private ProyectoEvdServices: ProyectoEvdService, public dialog: MatDialog, private router: Router) {
   }
 
   mobile = false;
@@ -165,7 +166,7 @@ export class EncuestaEvdComponent implements OnInit {
 
   updateValor(question) {
     console.log(question);
-    this.ProyectServices.updatePregunta(question).subscribe((res) => {
+    this.ProyectoEvdServices.updatePregunta(question).subscribe((res) => {
       console.log(res);
     });
 

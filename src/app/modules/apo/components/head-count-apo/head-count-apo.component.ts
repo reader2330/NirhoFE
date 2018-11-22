@@ -108,17 +108,17 @@ export class HeadCountApoComponent implements OnInit {
 
   }
 
-  readFile(evt: any) {
+  /*readFile(evt: any) {
     const target: DataTransfer = <DataTransfer>(evt.target);
     if (target.files.length === 1 && evt.target.accept === ".xlsx") {
       const reader: FileReader = new FileReader();
       reader.onload = (e: any) => {
-        /* read workbook */
+         read workbook
         const bstr: string = e.target.result;
         const wb: IWorkBook = read(bstr, {type: 'binary'});
         const wsname: string = wb.SheetNames[0];
         const ws: IWorkSheet = wb.Sheets[wsname];
-        /* save data */
+         save data
         this.data = <any[]>(utils.sheet_to_json(ws, {header: 1}));
         this.data.shift();
         for (let  i = 0; i < this.data.length; i++) {
@@ -131,7 +131,7 @@ export class HeadCountApoComponent implements OnInit {
       reader.readAsBinaryString(target.files[0]);
 
     }
-  }
+  }*/
 
   getName(j) {
     return this.names[j];
@@ -179,7 +179,7 @@ export class HeadCountApoComponent implements OnInit {
   }
   changeData(data, index) {
     this.dataSource[index] = new Participante();
-    this.dataSource[index].id = data[0];
+    this.dataSource[index].idParticipante = data[0];
     this.dataSource[index].nivel = data[1];
     this.dataSource[index].nivelTexto = data[2];
     this.dataSource[index].nombres = data[3];
