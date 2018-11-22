@@ -79,6 +79,7 @@ export class DataProyectComponent implements OnInit {
     }
 
   }
+  cancelCompany(){}
   saveProyect() {
 
     Swal({

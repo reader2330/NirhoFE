@@ -61,12 +61,14 @@ export class DetallePreguntasComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if(result.value){
-        Swal(
-          'Listo.',
-          'Los cuestionarios se enviaron correctamente',
-          'success'
-        ).then(() => {
-          this.response.emit({value: 1});
+        this.ProyectService.sendCuestionario(this.proyect.idProyecto).subscribe(res => {
+          Swal(
+            'Listo.',
+            'Los cuestionarios se enviaron correctamente',
+            'success'
+          ).then(() => {
+            this.response.emit({value: 1});
+          });
         });
       }
     });

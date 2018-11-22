@@ -14,7 +14,9 @@ export class CuestionarioSelectComponent implements OnInit {
   mobile = false;
   selectProyect = false;
   proyects = [];
-  proyect = {};
+  proyect = {
+    idProyecto: undefined
+  };
   temas = [];
   tema = {};
   load = false;
@@ -126,6 +128,7 @@ export class CuestionarioSelectComponent implements OnInit {
 
 
   addPreguntar(tema) {
+
     let enunciado = {...this.questionNew};
     let question = {...tema.preguntas[tema.preguntas.length - 1]};
     question['enunciado'] = enunciado.enunciado;

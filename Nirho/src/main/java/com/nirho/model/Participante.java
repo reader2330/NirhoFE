@@ -8,35 +8,32 @@ package com.nirho.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author eisten
+ * @author DELL
  */
 @Entity
 @Table(name = "participante")
+@NamedQueries({
+    @NamedQuery(name = "Participante.findAll", query = "SELECT p FROM Participante p")})
 public class Participante implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_participante")
-    private Integer idParticipante;
-    @Basic(optional = false)
+    @EmbeddedId
+    protected ParticipantePK participantePK;
     @Column(name = "nivel")
-    private int nivel;
+    private Integer nivel;
     @Column(name = "nivel_texto")
     private String nivelTexto;
     @Column(name = "nombres")
@@ -64,7 +61,6 @@ public class Participante implements Serializable {
     private String idioma;
     @Column(name = "nivel_idioma")
     private String nivelIdioma;
-    @Basic(optional = false)
     @Column(name = "correo_electronico")
     private String correoElectronico;
     @Column(name = "sede")
@@ -73,36 +69,54 @@ public class Participante implements Serializable {
     private String areaOrg;
     @Column(name = "token")
     private String token;
-    @JoinColumn(name = "id_empresa", referencedColumnName = "id")
+    @Column(name = "objetivo_puesto")
+    private String objetivoPuesto;
+    @Column(name = "funciones")
+    private String funciones;
+    @Column(name = "actividades")
+    private String actividades;
+    @Column(name = "meta_kpi")
+    private String metaKpi;
+    @Column(name = "cantidad_meta")
+    private String cantidadMeta;
+    @Column(name = "unidad_medida")
+    private String unidadMedida;
+    @Column(name = "tiempo")
+    private String tiempo;
+    @Column(name = "frecuencia_eval")
+    private String frecuenciaEval;
+    @Column(name = "id_evaluador")
+    private Integer idEvaluador;
+    @Column(name = "id_part_jefe_inm")
+    private Integer idPartJefeInm;
+    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Empresa idEmpresa;
-
+    private Proyecto proyecto;
+    
     public Participante() {
     }
 
-    public Participante(Integer idParticipante) {
-        this.idParticipante = idParticipante;
+    public Participante(ParticipantePK participantePK) {
+        this.participantePK = participantePK;
     }
 
-    public Participante(Integer idParticipante, int nivel, String correoElectronico) {
-        this.idParticipante = idParticipante;
-        this.nivel = nivel;
-        this.correoElectronico = correoElectronico;
+    public Participante(int idParticipante, int idProyecto) {
+        this.participantePK = new ParticipantePK(idParticipante, idProyecto);
     }
 
-    public Integer getIdParticipante() {
-        return idParticipante;
+    public ParticipantePK getParticipantePK() {
+        return participantePK;
     }
 
-    public void setIdParticipante(Integer idParticipante) {
-        this.idParticipante = idParticipante;
+    public void setParticipantePK(ParticipantePK participantePK) {
+        this.participantePK = participantePK;
     }
 
-    public int getNivel() {
+    public Integer getNivel() {
         return nivel;
     }
 
-    public void setNivel(int nivel) {
+    public void setNivel(Integer nivel) {
         this.nivel = nivel;
     }
 
@@ -233,31 +247,115 @@ public class Participante implements Serializable {
     public void setAreaOrg(String areaOrg) {
         this.areaOrg = areaOrg;
     }
-    
+
     public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public Empresa getIdEmpresa() {
-        return idEmpresa;
+        return token;
     }
 
-    public void setIdEmpresa(Empresa idEmpresa) {
-        this.idEmpresa = idEmpresa;
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getObjetivoPuesto() {
+        return objetivoPuesto;
+    }
+
+    public void setObjetivoPuesto(String objetivoPuesto) {
+        this.objetivoPuesto = objetivoPuesto;
+    }
+
+    public String getFunciones() {
+        return funciones;
+    }
+
+    public void setFunciones(String funciones) {
+        this.funciones = funciones;
+    }
+
+    public String getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(String actividades) {
+        this.actividades = actividades;
+    }
+
+    public String getMetaKpi() {
+        return metaKpi;
+    }
+
+    public void setMetaKpi(String metaKpi) {
+        this.metaKpi = metaKpi;
+    }
+
+    public String getCantidadMeta() {
+        return cantidadMeta;
+    }
+
+    public void setCantidadMeta(String cantidadMeta) {
+        this.cantidadMeta = cantidadMeta;
+    }
+
+    public String getUnidadMedida() {
+        return unidadMedida;
+    }
+
+    public void setUnidadMedida(String unidadMedida) {
+        this.unidadMedida = unidadMedida;
+    }
+
+    public String getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
+    }
+
+    public String getFrecuenciaEval() {
+        return frecuenciaEval;
+    }
+
+    public void setFrecuenciaEval(String frecuenciaEval) {
+        this.frecuenciaEval = frecuenciaEval;
+    }
+
+    public Integer getIdEvaluador() {
+        return idEvaluador;
+    }
+
+    public void setIdEvaluador(Integer idEvaluador) {
+        this.idEvaluador = idEvaluador;
+    }
+    
+    public Integer getIdPartJefeInm() {
+		return idPartJefeInm;
+	}
+
+	public void setIdPartJefeInm(Integer idPartJefeInm) {
+		this.idPartJefeInm = idPartJefeInm;
+	}
+
+	public Proyecto getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
     }
 
 	@Override
 	public String toString() {
-		return "Participante [idParticipante=" + idParticipante + ", nivel=" + nivel + ", nivelTexto=" + nivelTexto
+		return "Participante [participantePK=" + participantePK + ", nivel=" + nivel + ", nivelTexto=" + nivelTexto
 				+ ", nombres=" + nombres + ", aPaterno=" + aPaterno + ", aMaterno=" + aMaterno + ", genero=" + genero
 				+ ", rfc=" + rfc + ", puesto=" + puesto + ", fechaIngreso=" + fechaIngreso + ", antigPuesto="
 				+ antigPuesto + ", nivelEscolaridad=" + nivelEscolaridad + ", otrosEstudios=" + otrosEstudios
 				+ ", idioma=" + idioma + ", nivelIdioma=" + nivelIdioma + ", correoElectronico=" + correoElectronico
-				+ ", sede=" + sede + ", areaOrg=" + areaOrg + ", idEmpresa=" + idEmpresa + "]";
+				+ ", sede=" + sede + ", areaOrg=" + areaOrg + ", token=" + token + ", objetivoPuesto=" + objetivoPuesto
+				+ ", funciones=" + funciones + ", actividades=" + actividades + ", metaKpi=" + metaKpi
+				+ ", cantidadMeta=" + cantidadMeta + ", unidadMedida=" + unidadMedida + ", tiempo=" + tiempo
+				+ ", frecuenciaEval=" + frecuenciaEval + ", idEvaluador=" + idEvaluador + ", idPartJefeInm="
+				+ idPartJefeInm + ", proyecto=" + proyecto + "]";
 	}
-    
+	
 }

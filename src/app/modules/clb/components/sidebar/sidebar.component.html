@@ -3,9 +3,14 @@
     <mat-icon>menu</mat-icon>
   </a>
   <span style="flex: 1 1 auto;"></span>
+<<<<<<< HEAD
   <button mat-raised-button (click)="cerraSesion()">
     <mat-icon>people_outline</mat-icon>Cerrar sesión
   </button>
+=======
+  <button mat-raised-button style="margin-right: 20px;" (click)="IrInicio()"><mat-icon >home</mat-icon>Inicio</button>
+  <button mat-raised-button (click)="cerraSesion()"><mat-icon >people_outline</mat-icon>Cerrar sesión</button>
+>>>>>>> 0f02b62f5d4e1306b3ccdd02aa05a60c9889f81e
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
   <mat-sidenav mode="side" [opened]="!mobile" [fixedInViewport]="false" [fixedTopGap]="62" [fixedBottomGap]="60" #snav>
@@ -19,10 +24,17 @@
       <span *ngIf="mobile">
         <div class="logo-nav-mobile">
 
+<<<<<<< HEAD
         </div>
       </span>
       <div class="avatar">
 
+=======
+            </div>
+          </span>
+      <div >
+        <a (click)="goAvatarEditing()" ><img class="avatar" src="{{avatar.url}}"></a>
+>>>>>>> 0f02b62f5d4e1306b3ccdd02aa05a60c9889f81e
       </div>
 
       <mat-list>

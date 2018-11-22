@@ -13,15 +13,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nirho.constant.ProyectoConstants;
 import com.nirho.dto.CuestionarioConfiguracion;
 import com.nirho.dto.TemaPreguntas;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.CuetionarioParticipante;
-import com.nirho.model.PreguntaTema;
-import com.nirho.model.TemaCuestionario;
+import com.nirho.model.EstatusProyecto;
+import com.nirho.model.Pregunta;
+import com.nirho.model.Proyecto;
+import com.nirho.model.Tema;
 import com.nirho.service.CuestionarioProyectoService;
+import com.nirho.service.ProyectoService;
 import com.nirho.service.TemasModuloService;
 
 @RestController
@@ -33,6 +37,8 @@ public class CuestionarioProyectoController {
 	TemasModuloService temasService;
 	@Autowired
 	CuestionarioProyectoService cuestionarioService;
+	@Autowired
+	ProyectoService proyectoService;
 	
 	@GetMapping(value = "/plantilla")
 	public List<TemaPreguntas> plantilla(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
@@ -46,8 +52,8 @@ public class CuestionarioProyectoController {
 	}
 	
 	@GetMapping(value = "/temas")
-	public List<TemaCuestionario> temas(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
-		List<TemaCuestionario> temas = new ArrayList<>();
+	public List<Tema> temas(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
+		List<Tema> temas = new ArrayList<>();
 		try {
 			temas = temasService.obtenerTemasCuestionario(idModulo);
 		} catch(NirhoServiceException e){
@@ -57,8 +63,8 @@ public class CuestionarioProyectoController {
 	}
 	
 	@GetMapping(value = "/preguntas")
-	public List<PreguntaTema> preguntas(@RequestParam(name="idTema") Integer idTema) throws NirhoControllerException{
-		List<PreguntaTema> preguntas = new ArrayList<>();
+	public List<Pregunta> preguntas(@RequestParam(name="idTema") Integer idTema) throws NirhoControllerException{
+		List<Pregunta> preguntas = new ArrayList<>();
 		try {
 			preguntas = temasService.obtenerPreguntasTema(idTema);
 		} catch(NirhoServiceException e){
@@ -71,6 +77,9 @@ public class CuestionarioProyectoController {
 	@ResponseBody
 	public void guardarParticipantes(@RequestBody CuestionarioConfiguracion cuestionario) throws NirhoControllerException {
 		try {
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(cuestionario.getIdProyecto());
+			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CONFIGURACION));
+			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 			cuestionarioService.guardar(cuestionario);
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el cuestionario en la BD");

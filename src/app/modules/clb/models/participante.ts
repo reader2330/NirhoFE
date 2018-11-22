@@ -1,7 +1,7 @@
 export class Participante {
   constructor() {
   }
-  id: string;
+  idParticipante: string;
   nivel: string;
   nivelTexto: string;
   nombres: string;

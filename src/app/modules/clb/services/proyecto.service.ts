@@ -18,10 +18,10 @@ export class ProyectoService {
   }
 
   saveProyect(data): Observable<any> {
-    return this.http.post(this.api + 'proyecto/registrar', data, {headers: this.headers});
+    return this.http.post(this.api + 'proyectoCLB/registrar', data, {headers: this.headers});
   }
   getProyects(): Observable<Proyecto[]> {
-    return this.http.get<Proyecto[]>(this.api + 'proyecto/todos', {headers: this.headers});
+    return this.http.get<Proyecto[]>(this.api + 'proyectoCLB/todos', {headers: this.headers});
   }
 
   saveHead(data): Observable<any> {
@@ -29,7 +29,7 @@ export class ProyectoService {
   }
 
   savePeriod(data): Observable<any> {
-    return this.http.post(this.api + 'proyecto/agignarPeriodoGarantia', data, {headers: this.headers});
+    return this.http.post(this.api + 'proyectoCLB/agignarPeriodoGarantia', data, {headers: this.headers});
   }
   getOrganigrama(id): Observable<any> {
     return this.http.get(this.api + 'participantes/organigrama/', {headers: this.headers, params: {'idProyecto': id}});
@@ -61,6 +61,16 @@ export class ProyectoService {
   updatePregunta(data) {
     return this.http.post(this.api + 'cuestionario/contestaPregPart', data, {headers:this.headers})
 
+  }
+  getGraficas(idProyecto) {
+    return this.http.get(this.api + 'graficas/proyecto',{headers: this.headers, params:   {
+        idProyecto: idProyecto
+      }});
+  }
+  sendCuestionario(idProyecto) {
+    return this.http.get(this.api + 'participantes/cuestionariosSend',{headers: this.headers, params:   {
+        idProyecto: idProyecto
+      }});
   }
 
 }

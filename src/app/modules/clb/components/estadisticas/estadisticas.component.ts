@@ -9,6 +9,7 @@ import {ProyectoService} from '../../services/proyecto.service';
 export class EstadisticasComponent implements OnInit {
   mobile = false;
   proyects = [];
+  proyect = {};
   options: Object;
   options2: Object;
   options3: Object;
@@ -37,6 +38,7 @@ export class EstadisticasComponent implements OnInit {
 
   ngOnInit() {
     this.getProyects();
+    this.getGraficas();
   }
 
   getProyects() {
@@ -53,6 +55,12 @@ export class EstadisticasComponent implements OnInit {
       return 3;
     }
 
+  }
+
+  getGraficas(){
+    this.ProyectService.getGraficas(9).subscribe(res => {
+      console.log(res);
+    })
   }
 
 }

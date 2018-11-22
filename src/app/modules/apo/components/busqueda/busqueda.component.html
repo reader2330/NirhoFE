@@ -1,0 +1,70 @@
+<div class="container">
+  <div style="float: right" [formGroup]="enterpriseSearch">
+    <mat-form-field appearance="outline">
+      <mat-label>Buscar por empresa</mat-label>
+      <input matInput placeholder="e.g RESR901003971" formControlName="enterprise_rfc">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="padding-left: 15px;">
+      <mat-label>Buscar por puesto</mat-label>
+      <input matInput placeholder="e.g Gerente" formControlName="enterprise_rfc">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="padding-left: 15px;">
+      <mat-label>Buscar por nivel</mat-label>
+      <input matInput placeholder="e.g Nivel 1" formControlName="enterprise_rfc">
+    </mat-form-field>
+    <button type="button" style="margin-left: 20px" mat-raised-button color="primary">Buscar</button>
+  </div>
+  <br>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="funcion">
+      <th mat-header-cell *matHeaderCellDef > FUNCION </th>
+      <td mat-cell *matCellDef="let element"> {{element.funcion | uppercase}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="actividad">
+      <th mat-header-cell *matHeaderCellDef > ACTIVIDAD </th>
+      <td mat-cell *matCellDef="let element"> {{element.actividad}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="meta">
+      <th mat-header-cell *matHeaderCellDef > META </th>
+      <td mat-cell *matCellDef="let element"> {{element.meta | uppercase}} </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef > CANTIDAD </th>
+      <td mat-cell *matCellDef="let element"> {{element.cantidad | uppercase}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="unidad">
+      <th mat-header-cell *matHeaderCellDef > UNIDAD </th>
+      <td mat-cell *matCellDef="let element"> {{element.unidad}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="frecuencia">
+      <th mat-header-cell *matHeaderCellDef > FRECUENCIA </th>
+      <td mat-cell *matCellDef="let element"> {{element.frecuencia | uppercase}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="programado">
+      <th mat-header-cell *matHeaderCellDef > PROGRAMADO </th>
+      <td mat-cell *matCellDef="let element"> {{element.programado | uppercase}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+
+

@@ -1,0 +1,75 @@
+<form>
+
+  <mat-card>
+    <div class="row">
+
+      <div class="col-sm-12 col-md-4"></div>
+      <div class="col-sm-12 col-md-4"></div>
+      <div class="col-sm-12 col-md-4">
+        <button mat-raised-button style="float: right" (click)="openDialog()" color="primary"> Agregar <mat-icon>add_circle_outline</mat-icon></button>
+      </div>
+      <br><br>
+      <div class="col-sm-12">
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="puesto">
+            <th mat-header-cell *matHeaderCellDef style="padding-right: 50px;"> PUESTO </th>
+            <td mat-cell *matCellDef="let element"> {{showLabor(element.puesto,1)}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="nivelLaboral">
+            <th mat-header-cell *matHeaderCellDef style="padding-right: 55px;"> NIVEL </th>
+            <td mat-cell *matCellDef="let element"> {{showLabor(element.nivelLaboral,2)}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="fechaInicio">
+            <th mat-header-cell *matHeaderCellDef style="padding-right: 30px;"> FECHA INICIO </th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaInicio | date}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="fechaTermino">
+            <th mat-header-cell *matHeaderCellDef style="padding-right: 30px;"> FECHA FINAL </th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaTermino | date}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="antiguedad">
+            <th mat-header-cell *matHeaderCellDef style="padding-right: 30px;"> ANTUGÜEDAD </th>
+            <td mat-cell *matCellDef="let element"> {{element.antiguedad}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="localidad">
+            <th mat-header-cell *matHeaderCellDef style="padding-right: 30px;"> LOCALIDAD </th>
+            <td mat-cell *matCellDef="let element"> {{element.localidad}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="area">
+            <th mat-header-cell *matHeaderCellDef style="padding-right: 30px;"> ÁREA </th>
+            <td mat-cell *matCellDef="let element"> {{element.area}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element"> <button (click)="removeLabor(element)" mat-button><mat-icon>delete</mat-icon></button> </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+      </div>
+
+      <button  style="margin-left: 600px ; margin-top: 50px" mat-raised-button color="accent" (click)="saveEmpleado()"><mat-icon>save</mat-icon>Guardar empleado</button>
+    </div>
+
+  </mat-card>
+
+</form>
+

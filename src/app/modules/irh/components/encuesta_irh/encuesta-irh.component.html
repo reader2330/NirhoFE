@@ -1,0 +1,131 @@
+
+
+  <mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="150px">
+
+    <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1"  >
+            <h4>Contestar cuestionario</h4>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+      <mat-form-field  style="width: 40%; margin-right: 10px" appearance="outline">
+        <mat-label>Seleccionar empresa</mat-label>
+        <mat-select [(ngModel)]="entrepise.id"   >
+          <mat-option *ngFor="let entrepise of companys"   [value]="entrepise.id">
+            {{entrepise.empresa}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+      <button mat-raised-button color="accent" (click)="getPreguntasEmpresa()">Ver preguntas</button>
+    </mat-grid-tile>
+    <!--<mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="2" >
+      <mat-accordion  class="example-headers-align">
+        <mat-expansion-panel *ngFor= "let tema of temas" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{tema.nombre}} <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>
+            </mat-panel-title>
+
+          </mat-expansion-panel-header>
+          <mat-panel-description>
+            <mat-list >
+              <h3 mat-subheader>Preguntas</h3>
+              <mat-list-item role="listitem"  >
+
+
+
+
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <mat-list-item role="listitem" class="example-headers-align" mat-line>¿Que vale mexico?
+                <mat-radio-group>
+                  <mat-radio-button style="margin-left: 10px">2</mat-radio-button>
+                  <mat-radio-button style="margin-left: 10px">1</mat-radio-button>
+                  <mat-radio-button style="margin-left: 10px">3</mat-radio-button>
+                  <mat-radio-button style="margin-left: 10px">4</mat-radio-button>
+                  <mat-radio-button style="margin-left: 10px">5</mat-radio-button>
+
+                </mat-radio-group></mat-list-item>
+              <mat-list-item role="listitem">Item 2</mat-list-item>
+              <mat-list-item role="listitem">Item 3</mat-list-item>
+            </mat-list>
+
+
+
+          </mat-panel-description>
+
+
+        </mat-expansion-panel>
+
+
+      </mat-accordion>
+    </mat-grid-tile>-->
+
+  <mat-grid-tile *ngIf="!goQuestion" style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2">
+    <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
+      <mat-expansion-panel *ngFor= "let tema of temas" >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{tema.temas[0].nombre}} <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <mat-panel-description style="width: 100%">
+          <table mat-table style="width: 100%" [dataSource]="dataSource" class="mat-elevation-z8">
+
+
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="ENUNCIADO">
+              <th mat-header-cell *matHeaderCellDef> ENUNCIADO </th>
+              <td mat-cell *matCellDef="let element"> {{element.enunciado}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="1">
+              <th mat-header-cell *matHeaderCellDef>
+                <ngx-emoji  [ngStyle]="{'margin-left':mobile == true ? '30px':'200px'}" [emoji]="returnEmoji(1)" [size]="returnSize()"></ngx-emoji>
+                <ngx-emoji  [ngStyle]="{'margin-left':mobile == true ? '5px':'20px'}" [emoji]="returnEmoji(2)" [size]="returnSize()"></ngx-emoji>
+                <ngx-emoji  [ngStyle]="{'margin-left':mobile == true ? '5px':'20px'}" [emoji]="returnEmoji(3)" [size]="returnSize()"></ngx-emoji>
+                <ngx-emoji  [ngStyle]="{'margin-left':mobile == true ? '5px':'20px'}" [emoji]="returnEmoji(4)" [size]="returnSize()"></ngx-emoji>
+                <ngx-emoji  [ngStyle]="{'margin-left':mobile == true ? '5px':'20px'}" [emoji]="returnEmoji(5)" [size]="returnSize()"></ngx-emoji>
+              </th>
+              <td mat-cell *matCellDef="let element">
+
+                <mat-slider  [ngStyle]="{'margin-left':mobile == true ? '20px':'160px', 'width':mobile == true ? '100px':'250px'}" min="0" max="5" step="1"  (change)="updateValor(element)" tickInterval="10" thumbLabel ></mat-slider>
+
+              </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-panel-description>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="!goQuestion"  style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="1">
+      <button mat-raised-button color="accent" (click)="FinishCuestionario()">Finalizar cuestionario</button>
+  </mat-grid-tile>
+
+
+  </mat-grid-list>
+
+
+
+
+
+
+
+
+
+
+
+

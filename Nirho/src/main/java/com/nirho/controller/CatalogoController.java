@@ -122,4 +122,104 @@ public class CatalogoController {
 		}
 		return catalogo;
 	}
+	
+	@GetMapping(value = "/empleado/nacionalidad")
+	public List<Catalogo> nacionalidad() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("13"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
+	
+	@GetMapping(value = "/empleado/puesto")
+	public List<Catalogo> puestoEmpleado() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("14"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
+	
+	@GetMapping(value = "/empleado/tipoContacto")
+	public List<Catalogo> tipoContactoEmpleado() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("15"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
+	
+	@GetMapping(value = "/empleado/banco")
+	public List<Catalogo> bancoEmpleado() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("16"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
+	
+	@GetMapping(value = "/empleado/nivelEscolaridad")
+	public List<Catalogo> escolaridadEmpleado() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("17"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
+
+	@GetMapping(value = "/empleado/habilidades")
+	public List<Catalogo> habilidadesEmpleado() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("18"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
+	
+	@GetMapping(value = "/empleado/nivelLaboral")
+	public List<Catalogo> nivelLaboralEmpleado() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("19"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
+
+	@GetMapping(value = "/empleado/nivelIdioma")
+	public List<Catalogo> nivelIdiomaEmpleado() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("20"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
+	
+	@GetMapping(value = "/empleado/creditoHipotecario")
+	public List<Catalogo> creditoHipotecario() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("21"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
+	
 }

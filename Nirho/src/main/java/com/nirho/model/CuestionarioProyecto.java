@@ -29,13 +29,13 @@ public class CuestionarioProyecto implements Serializable {
     protected CuestionarioProyectoPK cuestionarioProyectoPK;
     @JoinColumn(name = "id_pregunta", referencedColumnName = "id_pregunta", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private PreguntaTema preguntaTema;
+    private Pregunta pregunta;
     @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Proyecto proyecto;
     @JoinColumn(name = "id_tema", referencedColumnName = "id_tema", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private TemaCuestionario temaCuestionario;
+    private Tema tema;
 
     public CuestionarioProyecto() {
     }
@@ -56,12 +56,12 @@ public class CuestionarioProyecto implements Serializable {
         this.cuestionarioProyectoPK = cuestionarioProyectoPK;
     }
 
-    public PreguntaTema getPreguntaTema() {
-        return preguntaTema;
+    public Pregunta getPregunta() {
+        return pregunta;
     }
 
-    public void setPreguntaTema(PreguntaTema preguntaTema) {
-        this.preguntaTema = preguntaTema;
+    public void setPregunta(Pregunta pregunta) {
+        this.pregunta = pregunta;
     }
 
     public Proyecto getProyecto() {
@@ -72,12 +72,12 @@ public class CuestionarioProyecto implements Serializable {
         this.proyecto = proyecto;
     }
 
-    public TemaCuestionario getTemaCuestionario() {
-        return temaCuestionario;
+    public Tema getTema() {
+        return tema;
     }
 
-    public void setTemaCuestionario(TemaCuestionario temaCuestionario) {
-        this.temaCuestionario = temaCuestionario;
+    public void setTema(Tema tema) {
+        this.tema = tema;
     }
 
     @Override
