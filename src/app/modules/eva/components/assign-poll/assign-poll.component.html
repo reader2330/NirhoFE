@@ -1,3 +1,68 @@
-<p>
-  assign-poll works!
-</p>
+<form [formGroup]="projectForm" style="background: white; border: 1px solid #efefef; padding: 10px 0 0 0">
+  <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
+    <mat-grid-tile>
+      <mat-form-field style="width:85%;" class="inputForm" appearance="outline">
+        <mat-label>Selecciona evaluador</mat-label>
+        <mat-select style="width:100%;" formControlName="evaluador">
+          <mat-option *ngFor="let puesto of evaluador " [value]="puesto.descripcionCatalogo">
+            {{puesto.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field style="width:85%;" class="inputForm" appearance="outline">
+        <mat-label>Selecciona participante</mat-label>
+        <mat-select formControlName="participante">
+          <mat-option *ngFor="let puesto of participantes " [value]="puesto.descripcionCatalogo">
+            {{puesto.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile style="margin-top:-10px;">
+      <button style="width:70%;" mat-raised-button color="primary" (click)="assign()">Asignar</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
+
+<div *ngIf="assigned.length">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%; margin: 20px 0 20px 0; box-shadow: 0 0; border: 1px solid #eceaea;">
+
+    <ng-container matColumnDef="evaluador">
+      <th mat-header-cell *matHeaderCellDef style="padding-right: 130px;"> Evaluador </th>
+      <td mat-cell *matCellDef="let element"> {{element.evaluador | uppercase}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="participantes">
+      <th mat-header-cell *matHeaderCellDef style="padding-right: 190px;"> Participantes </th>
+      <td mat-cell *matCellDef="let element"> {{element.participantes}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="a">
+      <th mat-header-cell *matHeaderCellDef style="padding-right: 200px;"> a </th>
+      <td mat-cell *matCellDef="let element"> {{element.to | uppercase}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="evaluar">
+      <th mat-header-cell *matHeaderCellDef style="padding-right: 200px;"> evaluar </th>
+      <td mat-cell *matCellDef="let element"> {{element.evaluar | uppercase}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <div class="text-right">
+    <button mat-raised-button color="primary" (click)="done()">Aceptar</button>
+  </div>
+
+</div>
+<div class="text-center text-muted" style="margin-top:25px;" *ngIf="!assigned.length">
+  <div>
+    <span class="fa fa-exclamation-circle fa-2x"></span>
+  </div>
+  <div>
+    Aún no has asignado participantes a evaluar
+  </div>
+</div>
