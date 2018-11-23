@@ -87,8 +87,13 @@ public class CuestionarioEmpresaIRHController {
 		} 
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value = "/{idCuestionarioEmpresa}/finalizado/{valor}/score/{valorcore}", method = RequestMethod.POST)
 	public void edit(@PathVariable("idCuestionarioEmpresa") long id, @PathVariable("valor") boolean valor, @PathVariable("valorcore") double score) throws NirhoControllerException{
+=======
+	@RequestMapping(value = "/{idCuestionarioEmpresa}/finalizado/{valor}", method = RequestMethod.POST)
+	public void edit(@PathVariable("idCuestionarioEmpresa") long id, @PathVariable("valor") boolean valor) throws NirhoControllerException{
+>>>>>>> 72a0304a454b9a155d1ddcc5bba60463b01e9e4f
 		try {
 			CuestionarioEmpresaIRH c = cuestionarioEmpresaServiceIRH.getCuestionarioEmpresaIRHById(id);
 			c.setFinalizado(valor);
