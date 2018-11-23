@@ -19,7 +19,7 @@ import com.nirho.service.CuestionarioEmpresaIRHPreguntaService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping( value = "/CuestionarioEmpresaIRHPregunta" )
+@RequestMapping( value = "/cuestionarioEmpresaIRHPregunta" )
 public class CuestionarioEmpresaIRHPreguntaController {
 	
 	public final static Logger logger = Logger.getLogger(CuestionarioEmpresaIRHPreguntaController.class);
