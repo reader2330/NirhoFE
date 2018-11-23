@@ -487,8 +487,9 @@ CREATE TABLE `cuestionario_empresa_irh` (
   `id_cuestionario_empresa` bigint(20) NOT NULL AUTO_INCREMENT,
   `finalizado` bit(1) DEFAULT NULL,
   `id_empresa` bigint(20) NOT NULL,
+  `score` double DEFAULT NULL,
   PRIMARY KEY (`id_cuestionario_empresa`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -497,7 +498,7 @@ CREATE TABLE `cuestionario_empresa_irh` (
 
 LOCK TABLES `cuestionario_empresa_irh` WRITE;
 /*!40000 ALTER TABLE `cuestionario_empresa_irh` DISABLE KEYS */;
-INSERT INTO `cuestionario_empresa_irh` VALUES (1,_binary '\0',1);
+INSERT INTO `cuestionario_empresa_irh` VALUES (1,_binary '',1,1.2),(2,_binary '\0',2,0.1);
 /*!40000 ALTER TABLE `cuestionario_empresa_irh` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -516,7 +517,7 @@ CREATE TABLE `cuestionario_empresa_irh_pregunta` (
   `cuestionario_empresairhtema` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_pregunta`),
   KEY `FKg1g8e6gn903tepgfpcuqa4xtg` (`cuestionario_empresairhtema`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -525,7 +526,7 @@ CREATE TABLE `cuestionario_empresa_irh_pregunta` (
 
 LOCK TABLES `cuestionario_empresa_irh_pregunta` WRITE;
 /*!40000 ALTER TABLE `cuestionario_empresa_irh_pregunta` DISABLE KEYS */;
-INSERT INTO `cuestionario_empresa_irh_pregunta` VALUES (1,'Esta compania es la mejor empresa de sistemas del pais',2,1,1),(2,'Me siento orgulloso de trabajar en esta compania',0,1,1);
+INSERT INTO `cuestionario_empresa_irh_pregunta` VALUES (1,'Esta compania es la mejor empresa de sistemas del pais',0,1,1),(2,'Me siento orgulloso de trabajar en esta compania',0,1,1),(3,'Me siento orgulloso de trabajar en esta compania',0,1,2),(4,'Esta compania es la mejor empresa de sistemas del pais',0,1,2);
 /*!40000 ALTER TABLE `cuestionario_empresa_irh_pregunta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -544,7 +545,7 @@ CREATE TABLE `cuestionario_empresa_irh_tema` (
   `cuestionario_empresairh` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id_tema`),
   KEY `FKll8k4lh49xusr1oxoyfcv4k4e` (`cuestionario_empresairh`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -553,7 +554,7 @@ CREATE TABLE `cuestionario_empresa_irh_tema` (
 
 LOCK TABLES `cuestionario_empresa_irh_tema` WRITE;
 /*!40000 ALTER TABLE `cuestionario_empresa_irh_tema` DISABLE KEYS */;
-INSERT INTO `cuestionario_empresa_irh_tema` VALUES (1,'Tema 01 de Clima Laboral','imagen',_binary '',1);
+INSERT INTO `cuestionario_empresa_irh_tema` VALUES (1,'Tema 01 de Clima Laboral','imagen',_binary '',1),(2,'Tema 01 de Clima Laboral','imagen',_binary '',2);
 /*!40000 ALTER TABLE `cuestionario_empresa_irh_tema` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1798,4 +1799,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-23  0:28:36
+-- Dump completed on 2018-11-23  1:25:51

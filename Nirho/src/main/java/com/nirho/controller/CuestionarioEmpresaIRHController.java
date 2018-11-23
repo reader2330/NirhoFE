@@ -55,6 +55,16 @@ public class CuestionarioEmpresaIRHController {
 		}
 	}
 	
+	@RequestMapping(value = "/empresa/{id}/score", method = RequestMethod.GET)
+	public String getScoreByEmpresa(@PathVariable("id") long id) throws NirhoControllerException{
+		try {
+			List<CuestionarioEmpresaIRH> l = cuestionarioEmpresaServiceIRH.getListCuestionarioEmpresaIRHByEmpresaId(id);
+			return "{\"score\": " + l.get(0).getScore() + "}";
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de cuestionario empresa");
+		}
+	}
+	
 	@RequestMapping(value = "/agregar", method = RequestMethod.POST)
 	public void add(@Valid @RequestBody CuestionarioEmpresaIRH ce) throws NirhoControllerException{
 		try {
@@ -77,11 +87,12 @@ public class CuestionarioEmpresaIRHController {
 		} 
 	}
 	
-	@RequestMapping(value = "/{idCuestionarioEmpresa}/finalizado/{valor}", method = RequestMethod.POST)
-	public void edit(@PathVariable("id") long id, @PathVariable("valor") boolean valor) throws NirhoControllerException{
+	@RequestMapping(value = "/{idCuestionarioEmpresa}/finalizado/{valor}/score/{valorcore}", method = RequestMethod.POST)
+	public void edit(@PathVariable("idCuestionarioEmpresa") long id, @PathVariable("valor") boolean valor, @PathVariable("valorcore") double score) throws NirhoControllerException{
 		try {
 			CuestionarioEmpresaIRH c = cuestionarioEmpresaServiceIRH.getCuestionarioEmpresaIRHById(id);
 			c.setFinalizado(valor);
+			c.setScore(score);;
 			cuestionarioEmpresaServiceIRH.updateCuestionarioEmpresaIRH(c);			
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
