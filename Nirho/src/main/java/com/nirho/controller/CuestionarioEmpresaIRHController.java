@@ -78,7 +78,7 @@ public class CuestionarioEmpresaIRHController {
 	}
 	
 	@RequestMapping(value = "/{idCuestionarioEmpresa}/finalizado/{valor}", method = RequestMethod.POST)
-	public void edit(@PathVariable("id") long id, @PathVariable("valor") boolean valor) throws NirhoControllerException{
+	public void edit(@PathVariable("idCuestionarioEmpresa") long id, @PathVariable("valor") boolean valor) throws NirhoControllerException{
 		try {
 			CuestionarioEmpresaIRH c = cuestionarioEmpresaServiceIRH.getCuestionarioEmpresaIRHById(id);
 			c.setFinalizado(valor);
