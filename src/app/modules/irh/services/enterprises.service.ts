@@ -33,14 +33,21 @@ export class EnterprisesService {
   getPreguntas(id): Observable<Pregunta[]> {
     return this.http.get<Pregunta[]>(this.api + 'cuestionario/plantilla', {headers: this.headers, params: {'idModulo': '1' }});
   }
-  getPreguntasEmpresa(id) :Observable<any>{
-    return this.http.get(this.api + 'cuestionarioEmpresaIRH/empresa/'+ id, {headers: this.headers});
+  getPreguntasEmpresa(id): Observable<any>{
+    return this.http.get(this.api + 'cuestionarioEmpresaIRH/empresa/' + id, {headers: this.headers});
   }
   savePreguntas(data): Observable<any> {
     return this.http.post(this.api + 'cuestionarioEmpresaIRH/agregar', data, {headers: this.headers});
   }
-  saveEntripise(data): Observable<any>{
+  saveEntripise(data): Observable<any> {
     return this.http.post(this.api + 'empresa/registrarEmpresaIRH', data, {headers: this.headers});
+  }
+  updatePregunta(data): Observable<any> {
+
+    return this.http.post(this.api + 'cuestionarioEmpresaIRHPregunta/' + data['idPregunta'] + '/respuesta/' + data['respuesta'], {}, {headers: this.headers});
+  }
+  finalizeCuestionario(data): Observable<any> {
+    return this.http.post(this.api + 'cuestionarioEmpresaIRH/' + data.id + '/finalizado/'  + data.opt,{}, {headers: this.headers});
   }
 
 }

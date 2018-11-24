@@ -190,6 +190,13 @@ export class EncuestaIrhComponent implements OnInit {
 
   updateValor(question) {
     console.log(question);
+    let data = {
+      idPregunta: question.id,
+      respuesta: question.respuesta
+    };
+    this.EnterprisesService.updatePregunta(data).subscribe(res => {
+      console.log(res);
+    })
   }
 
   FinishCuestionario() {
@@ -202,13 +209,21 @@ export class EncuestaIrhComponent implements OnInit {
       cancelButtonText: 'No, seguir contestando'
     }).then((result) => {
       if (result.value) {
-        Swal(
-          'Listo.',
-          'El cuestionario se finalizo correctamente',
-          'success'
-        ).then(() => {
-          this.response.emit({value: 1});
-        });
+        let data = {
+          id: this.temas[0]['id'],
+          opt: true
+        };
+        console.log(data);
+        this.EnterprisesService.finalizeCuestionario(data).subscribe(res => {
+          Swal(
+            'Listo.',
+            'El cuestionario se finalizo correctamente',
+            'success'
+          ).then(() => {
+            this.response.emit({value: 1});
+          });
+        })
+
       }
       });
   }
