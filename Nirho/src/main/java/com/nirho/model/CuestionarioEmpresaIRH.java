@@ -32,6 +32,9 @@ public class CuestionarioEmpresaIRH implements Serializable {
 	@Column(name = "finalizado")
 	private boolean finalizado;
 	
+	@Column(name = "score")
+	private double score;
+	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cuestionarioEmpresaIRH")
    	private Set<CuestionarioEmpresaIRHTema> temas;
@@ -62,6 +65,14 @@ public class CuestionarioEmpresaIRH implements Serializable {
 
 	public void setFinalizado(boolean finalizado) {
 		this.finalizado = finalizado;
+	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
 	}
 
 	public Set<CuestionarioEmpresaIRHTema> getTemas() {
