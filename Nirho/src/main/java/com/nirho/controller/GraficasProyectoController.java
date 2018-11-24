@@ -3,6 +3,7 @@ package com.nirho.controller;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import com.nirho.dto.GraficaProyectoDTO;
 import com.nirho.dto.GraficaRespPregDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.GraficaProyecto;
 import com.nirho.service.GraficasProyectoService;
 
 @RestController
@@ -48,5 +50,16 @@ public class GraficasProyectoController {
 			throw new NirhoControllerException("Problemas al obtener el registro del proyecto");
 		}
 		return graficas;
+	}
+	
+	@RequestMapping(value = "/guardarComentario", method = RequestMethod.POST)
+	@ResponseBody
+	public void asignarConsultor(@RequestBody GraficaProyecto graficaProyecto) throws NirhoControllerException {
+		logger.info(" ********************************* GraficaProyecto [" + graficaProyecto + "] *****************************");
+		try {
+			graficasService.guardarComentario(graficaProyecto);
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
+		}
 	}
 }
