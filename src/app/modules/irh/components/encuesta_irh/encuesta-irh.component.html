@@ -97,7 +97,7 @@
               </th>
               <td mat-cell *matCellDef="let element">
 
-                <mat-slider  [ngStyle]="{'margin-left':mobile == true ? '20px':'160px', 'width':mobile == true ? '100px':'250px'}" min="0" max="5" step="1"  (change)="updateValor(element)" tickInterval="10" thumbLabel ></mat-slider>
+                <mat-slider [(ngModel)] = "element.respuesta"  [ngStyle]="{'margin-left':mobile == true ? '20px':'160px', 'width':mobile == true ? '100px':'250px'}" min="0" max="5" step="1"  (change)="updateValor(element)" tickInterval="10" thumbLabel ></mat-slider>
 
               </td>
             </ng-container>
