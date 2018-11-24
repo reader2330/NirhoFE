@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.nirho.constant.AreaOrgConstants;
 import com.nirho.constant.ProyectoConstants;
 import com.nirho.dao.GraficaProyectoDAO;
+import com.nirho.dao.ParticipanteDAO;
 import com.nirho.dto.GraficaAreaOrgDTO;
+import com.nirho.dto.GraficaPastelDTO;
 import com.nirho.dto.GraficaProyectoDTO;
 import com.nirho.dto.GraficaRespPregDTO;
 import com.nirho.dto.GraficaResultadoDTO;
@@ -18,6 +20,7 @@ import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.EstatusProyecto;
 import com.nirho.model.GraficaProyecto;
 import com.nirho.model.GraficaProyectoPK;
+import com.nirho.model.Participante;
 import com.nirho.model.Proyecto;
 import com.nirho.service.GraficaAreaOrgService;
 import com.nirho.service.GraficasProyectoService;
@@ -33,6 +36,8 @@ public class GraficasProyectoServiceImpl implements GraficasProyectoService {
 	private GraficaAreaOrgService graficasAreaService;
 	@Autowired
 	private GraficaProyectoDAO graficaDAO;
+	@Autowired
+	private ParticipanteDAO participanteDAO;
 	
 	@Override
 	public GraficaProyectoDTO obtenerGraficasProyecto(Integer idProyecto) throws NirhoServiceException {
@@ -48,6 +53,7 @@ public class GraficasProyectoServiceImpl implements GraficasProyectoService {
 			graficas.add(obtenerGraficasProyectoPorAreaOrg(idProyecto, AreaOrgConstants.ADMINISTRACION));
 			graficas.add(obtenerGraficasProyectoPorAreaOrg(idProyecto, AreaOrgConstants.CONTROL_DE_CALIDAD));
 			dto.setDatos(graficas);
+			dto.setPastel(obtenerPatelParticipantesPorArea(idProyecto));
 		} catch(Exception e) {
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al consultar en la BD las graficas del proyecto, causa [" + e.getMessage()+ "]");
@@ -303,4 +309,38 @@ public class GraficasProyectoServiceImpl implements GraficasProyectoService {
 		}
 	}
 	
+	private List<GraficaPastelDTO> obtenerPatelParticipantesPorArea(Integer idProyecto){
+		List<GraficaPastelDTO> pastelList = new ArrayList<>();
+		GraficaPastelDTO pastelCorporativo = new GraficaPastelDTO();
+		pastelCorporativo.setAreaOranizacional(AreaOrgConstants.CORPORATIVO);
+		GraficaPastelDTO pastelProduccion = new GraficaPastelDTO();
+		pastelProduccion.setAreaOranizacional(AreaOrgConstants.PRODUCCION);
+		GraficaPastelDTO pastelVentas = new GraficaPastelDTO();
+		pastelVentas.setAreaOranizacional(AreaOrgConstants.VENTAS);
+		GraficaPastelDTO pastelAdministracion = new GraficaPastelDTO();
+		pastelAdministracion.setAreaOranizacional(AreaOrgConstants.ADMINISTRACION);
+		GraficaPastelDTO pastelControlCalidad = new GraficaPastelDTO();
+		pastelControlCalidad.setAreaOranizacional(AreaOrgConstants.CONTROL_DE_CALIDAD);
+		for(Participante part: participanteDAO.findByIdProyecto(idProyecto)) {
+			String area = part.getAreaOrg() != null ? part.getAreaOrg().trim() : "";
+			switch(area) {
+				case AreaOrgConstants.CORPORATIVO: pastelCorporativo.setNumParticipantes(pastelCorporativo.getNumParticipantes()+1);
+					break;
+				case AreaOrgConstants.PRODUCCION: pastelProduccion.setNumParticipantes(pastelProduccion.getNumParticipantes()+1);
+					break;
+				case AreaOrgConstants.VENTAS: pastelVentas.setNumParticipantes(pastelVentas.getNumParticipantes()+1);
+					break;
+				case AreaOrgConstants.ADMINISTRACION: pastelAdministracion.setNumParticipantes(pastelAdministracion.getNumParticipantes()+1);
+					break;
+				case AreaOrgConstants.CONTROL_DE_CALIDAD: pastelControlCalidad.setNumParticipantes(pastelControlCalidad.getNumParticipantes()+1);
+					break;
+			}
+		}
+		pastelList.add(pastelCorporativo);
+		pastelList.add(pastelProduccion);
+		pastelList.add(pastelVentas);
+		pastelList.add(pastelAdministracion);
+		pastelList.add(pastelControlCalidad);
+		return pastelList;
+	}
 }
