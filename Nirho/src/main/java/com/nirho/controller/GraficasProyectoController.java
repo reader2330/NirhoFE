@@ -54,12 +54,12 @@ public class GraficasProyectoController {
 	
 	@RequestMapping(value = "/guardarComentario", method = RequestMethod.POST)
 	@ResponseBody
-	public void asignarConsultor(@RequestBody GraficaProyecto graficaProyecto) throws NirhoControllerException {
+	public void guardarComentario(@RequestBody GraficaProyecto graficaProyecto) throws NirhoControllerException {
 		logger.info(" ********************************* GraficaProyecto [" + graficaProyecto + "] *****************************");
 		try {
 			graficasService.guardarComentario(graficaProyecto);
 		} catch (NirhoServiceException e) {
-			throw new NirhoControllerException("Problemas al registrar el proyecto en la BD");
+			throw new NirhoControllerException("Problemas al registrar el comentario en la BD");
 		}
 	}
 }
