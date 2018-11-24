@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.nirho.model.Proyecto;
 
-public class GraficasProyectoDTO  implements Serializable {
+public class GraficaRespPregDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Proyecto proyecto;
 	private List<GraficaAreaOrgDTO> areas;

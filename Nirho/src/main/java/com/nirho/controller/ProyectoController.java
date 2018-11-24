@@ -25,7 +25,7 @@ import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.EstatusProyecto;
 import com.nirho.model.Proyecto;
-import com.nirho.service.CatalogoService;
+import com.nirho.service.GraficasProyectoService;
 import com.nirho.service.ProyectoService;
 import com.nirho.util.SessionUtil;
 
@@ -36,9 +36,9 @@ public class ProyectoController {
 	public final static Logger logger = Logger.getLogger(ProyectoController.class);
 	
 	@Autowired
-	ProyectoService proyectoService;
+	private ProyectoService proyectoService;
 	@Autowired
-	CatalogoService catalogoService;
+	private GraficasProyectoService graficasService;
 			
 	@GetMapping(value = "/todos")
 	public List<Proyecto> todos(@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{
@@ -169,6 +169,7 @@ public class ProyectoController {
 			estatus.setIdEstatus(ProyectoConstants.ESTATUS_FINALIZADO);
 			proyecto.setIdEstatus(estatus);
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
+			graficasService.generarGraficasProyecto(idProyecto);
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al registrar el proyecto");
 		}

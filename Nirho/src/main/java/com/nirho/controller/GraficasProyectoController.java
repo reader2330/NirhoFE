@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nirho.dto.GraficasProyectoDTO;
+import com.nirho.dto.GraficaProyectoDTO;
+import com.nirho.dto.GraficaRespPregDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.service.GraficasProyectoService;
@@ -23,10 +24,23 @@ public class GraficasProyectoController {
 	@Autowired
 	GraficasProyectoService graficasService;
 		
+	@RequestMapping(value = "/respuestas", method = RequestMethod.GET)
+	@ResponseBody
+	public GraficaRespPregDTO proyecto(@RequestParam(name="idProyecto") String idProyecto) throws NirhoControllerException{
+		GraficaRespPregDTO graficas = new GraficaRespPregDTO();
+		 logger.info("***************[idProyecto]******" + idProyecto);
+		try {
+			graficas = graficasService.obtenerGraficasRespuestasPreguntas(Integer.parseInt(idProyecto));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro del proyecto");
+		}
+		return graficas;
+	}
+	
 	@RequestMapping(value = "/proyecto", method = RequestMethod.GET)
 	@ResponseBody
-	public GraficasProyectoDTO proyecto(@RequestParam(name="idProyecto") String idProyecto) throws NirhoControllerException{
-		GraficasProyectoDTO graficas = new GraficasProyectoDTO();
+	public GraficaProyectoDTO proyectoTema(@RequestParam(name="idProyecto") String idProyecto) throws NirhoControllerException{
+		GraficaProyectoDTO graficas = new GraficaProyectoDTO();
 		 logger.info("***************[idProyecto]******" + idProyecto);
 		try {
 			graficas = graficasService.obtenerGraficasProyecto(Integer.parseInt(idProyecto));
