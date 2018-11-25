@@ -1,6 +1,7 @@
 package com.nirho.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.CuestionarioEmpresaIRH;
+import com.nirho.model.CuestionarioEmpresaIRHTema;
 import com.nirho.service.CuestionarioEmpresaIRHService;
 
 @RestController
@@ -50,6 +52,22 @@ public class CuestionarioEmpresaIRHController {
 	public List<CuestionarioEmpresaIRH> getByEmpresa(@PathVariable("id") long id) throws NirhoControllerException{
 		try {
 			return cuestionarioEmpresaServiceIRH.getListCuestionarioEmpresaIRHByEmpresaId(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de cuestionario empresa");
+		}
+	}
+	
+	@RequestMapping(value = "/preguntas/predeterminadas", method = RequestMethod.GET)
+	public Set<CuestionarioEmpresaIRHTema> getDefaultPreguntas() throws NirhoControllerException{
+		try {
+			List<CuestionarioEmpresaIRH> cuestionarios = cuestionarioEmpresaServiceIRH.getListCuestionarioEmpresaIRHByEmpresaId(0);
+			if(cuestionarios.size() > 0) {
+				Set<CuestionarioEmpresaIRHTema> temas = cuestionarios.get(0).getTemas();
+				return temas;
+			} else {
+				throw new NirhoControllerException("");
+			}
+			
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de cuestionario empresa");
 		}
