@@ -498,6 +498,7 @@ CREATE TABLE `cuestionario_empresa_irh` (
 
 LOCK TABLES `cuestionario_empresa_irh` WRITE;
 /*!40000 ALTER TABLE `cuestionario_empresa_irh` DISABLE KEYS */;
+INSERT INTO `cuestionario_empresa_irh` VALUES (0,_binary '\0',0,0);
 /*!40000 ALTER TABLE `cuestionario_empresa_irh` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -516,7 +517,7 @@ CREATE TABLE `cuestionario_empresa_irh_pregunta` (
   `cuestionario_empresairhtema` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_pregunta`),
   KEY `FKg1g8e6gn903tepgfpcuqa4xtg` (`cuestionario_empresairhtema`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -525,6 +526,7 @@ CREATE TABLE `cuestionario_empresa_irh_pregunta` (
 
 LOCK TABLES `cuestionario_empresa_irh_pregunta` WRITE;
 /*!40000 ALTER TABLE `cuestionario_empresa_irh_pregunta` DISABLE KEYS */;
+INSERT INTO `cuestionario_empresa_irh_pregunta` VALUES (1,'Existe un Organigrama de la Organización',0,0,1),(2,'Existe un departamento o persona encargada específicamente del RyS de personal',0,0,1),(3,'Se cuenta con un sistema de evaluación de resultados del personal a todos los niveles y áreas',0,0,1),(4,'Se realiza un Diagnóstico de Necesidades de Capacitación periódicamente',0,0,1),(5,'Existe algún procedimiento para evaluar el Clima Laboral dentro de la empresa',0,0,1),(6,'Se cuenta con un tabulador que rija la estrategia de compensación de la empresa',0,0,1),(7,'Cuentan con un proceso de bajas del personal',0,0,1),(8,'Se cumple con la normatividad que aplique al tipo de industria a la que se pertenece',0,0,1),(9,'Se cuenta con un proceso documentado y estandarizado de RyS',0,0,2),(10,'Se cuenta con un sistema de evaluación de candidatos',0,0,2),(11,'Se realizan entrevistas de selección por parte del jefe directo de la posición a buscar',0,0,2),(12,'Se cuenta con un sistema de inducción al nuevo personal',0,0,2),(13,'Se evalúa la efectividad de la inducción proporcionada al nuevo personal',0,0,2),(14,'Existe un departamento o persona encargada de elaborar contratos laborales de servicios para los nuevos integrantes',0,0,2),(15,'Se cuenta con un sistema de evaluación de resultados del personal a todos los niveles y áreas',0,0,3),(16,'Se cuenta con un sistema de evaluación de competencias del personal  a todos los niveles y áreas',0,0,3),(17,'Se cuenta con un sistema de consecuencias post-evaluación',0,0,3),(18,'La periodicidad de las evaluaciones aplicadas al personal es cuatrimestral',0,0,3),(19,'Se programan sesiones de retroalimentación de las evaluaciones al personal',0,0,3),(20,'Se analizan periódicamente los indicadores de medición de resultados por puestos (en caso de contar con ellos)',0,0,3),(21,'Se realiza un Diagnóstico de Necesidades de Capacitación periódicamente',0,0,4),(22,'Se diseñan Planes de Capacitación relacionados con un diagnóstico previo',0,0,4),(23,'Se cuenta con un Presupuesto autorizado destinado a cubrir necesidades de Capacitación',0,0,4),(24,'Existen indicadores relativos al plan de capacitación como nivel de aprovechamiento, asistencia, efectividad, roi, etc.',0,0,4),(25,'Se tiene un sistema de gestión/administración de los resultados de la capacitación',0,0,4),(26,'Se diseñan Planes de Carrera orientado a ofrecer un crecimiento profesional dentro de la organización',0,0,4),(27,'Se realizan evaluaciones de potencial al personal con miras a planes de sucesión y carrera',0,0,4),(28,'Existe algún procedimiento para evaluar el Clima Laboral dentro de la empresa',0,0,5),(29,'Se diseñan planes de acción correctivos y preventivos como resultado de la Medición de Clima Laboral',0,0,5),(30,'Existe un procedimiento sistematizado de comunicación interna horizontal, vertical y diagonal',0,0,5),(31,'Se han identificado los Valores Organizacionales',0,0,5),(32,'Se difunden (comunican) los Valores Organizacionales de forma permanente',0,0,5),(33,'Existe un procedimiento que tenga por objetivo el hacer a todos los colaboradores partícipes de los Valores Organizacionales',0,0,5),(34,'Existe un programa de Calidad de Vida para los colaboradores de la empresa',0,0,5),(35,'Se diseñan y aplican programas de motivación para todo el personal',0,0,5),(36,'Se llevan a cabo eventos de integración y celebración en la empresa',0,0,5),(37,'Se mide la satisfacción de los eventos de integración y celebración llevados a cabo en la empresa',0,0,5),(38,'Se cuenta con un tabulador que rija la estrategia de compensación de la empresa',0,0,6),(39,'Se revisa y actualiza el tabulador en la empresa cuando menos una vez al año',0,0,6),(40,'Existe un procedimiento y políticas de aumento de sueldos',0,0,6),(41,'Existe un esquema de remuneración variable con base en resultados para todos los puestos',0,0,6),(42,'La empresa otorga prestaciones de ley (IMSS, Aguinaldo, Vacaciones, Infonavit, etc,.)',0,0,6),(43,'La empresa otorga prestaciones superiores a las de ley (SGMM, SV, Auto, etc.) al menos a algunos empleados',0,0,6),(44,'La empresa ha diseñado y ofrece esquemas de beneficios adicionales para sus empleados (horario flexible, préstamos, alianzas y descuentos empresariales, etc.)',0,0,6),(45,'La empresa mide las incidencias del personal y éstas tienen una repercusión en la remuneración de los empleados (permisos, retardos, incapacidades, etc.)',0,0,6),(46,'Cuentan con un proceso de bajas del personal',0,0,7),(47,'Existe un área o persona encargada de calcular los finiquitos o liquidaciones del personal de baja',0,0,7),(48,'Se aplican entrevistas de salida al personal que renuncia',0,0,7),(49,'Existe un procedimiento de acciones correctivas/preventivas correlacionadas al resultado de entrevistas de salida',0,0,7),(50,'Cuentan con un Contrato de Confidencialidad que ampare la propiedad intelectual de la empresa firmado por cada empleado',0,0,7),(51,'Si cuenta con personal operativo, éste se encuentra sindicalizado',0,0,7),(52,'Todos los empleados están dados de alta en algun sistema de Seguridad Social e Infonavit',0,0,7),(53,'Se pagan en tiempo y forma las aportaciones patronales a Infonavit, Fondo de Cesantía y Vejez y demás instancias que dicta el Gobierno estatal y federal',0,0,7),(54,'Se cumple con la normatividad que aplique al tipo de industria a la que se pertenece',0,0,8),(55,'Se llevan a cabo recorridos periódicos de Seguridad e Higiene',0,0,8),(56,'Se cuenta con una Brigada contra Incendios y Sismos perteneciente a la misma empresa',0,0,8),(57,'Se cuenta con planes y programas de salud y seguridad ocupacional',0,0,8),(58,'Se cuenta con un registro de los accidentes de trabajo ocurridos en la organización asi como de sus causas',0,0,8),(59,'Se diseñan planes de prevención de accidentes',0,0,8),(60,'Se realizan acciones correctivas para cada accidente de trabajo',0,0,8),(61,'Se cuenta con material y equipo de seguridad en las instalaciones',0,0,8),(62,'Se cuenta con un botiquín de primeros auxilios disponible para todos los colaboradores de la empresa con un responsable en el uso y manejo del contenido',0,0,8);
 /*!40000 ALTER TABLE `cuestionario_empresa_irh_pregunta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -543,7 +545,7 @@ CREATE TABLE `cuestionario_empresa_irh_tema` (
   `cuestionario_empresairh` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id_tema`),
   KEY `FKll8k4lh49xusr1oxoyfcv4k4e` (`cuestionario_empresairh`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -552,6 +554,7 @@ CREATE TABLE `cuestionario_empresa_irh_tema` (
 
 LOCK TABLES `cuestionario_empresa_irh_tema` WRITE;
 /*!40000 ALTER TABLE `cuestionario_empresa_irh_tema` DISABLE KEYS */;
+INSERT INTO `cuestionario_empresa_irh_tema` VALUES (1,'','ESTRUCTURA ORGANIZACIONAL',_binary '',0),(2,'','INTEGRACION DE PERSONAL',_binary '',0),(3,'','EVALUACIÓN DEL PERSONAL',_binary '',0),(4,'','CAPACITACION Y DESARROLLO DE PERSONAL',_binary '',0),(5,'','DESARROLLO ORGANIZACIONAL',_binary '',0),(6,'','REMUNERACIONES',_binary '',0),(7,'','RELACIONES LABORALES',_binary '',0),(8,'','SEGURIDAD E HIGIENE',_binary '',0);
 /*!40000 ALTER TABLE `cuestionario_empresa_irh_tema` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1830,4 +1833,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-24 23:38:32
+-- Dump completed on 2018-11-25  0:51:50
