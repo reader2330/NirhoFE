@@ -43,7 +43,6 @@ export class EnterprisesService {
     return this.http.post(this.api + 'empresa/registrarEmpresaIRH', data, {headers: this.headers});
   }
   updatePregunta(data): Observable<any> {
-
     return this.http.post(this.api + 'cuestionarioEmpresaIRHPregunta/' + data['idPregunta'] + '/respuesta/' + data['respuesta'], {}, {headers: this.headers});
   }
   finalizeCuestionario(data): Observable<any> {

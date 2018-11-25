@@ -21,6 +21,11 @@ export class EncuestaIrhComponent implements OnInit {
   entrepise = {
     id:0
   };
+  opts = [
+    {name: 'SI', key: 1},
+    {name: 'NO', key: -1},
+    {name: 'N/A', key: 0},
+  ];
   token = '';
   dataSource = [{
     'nom': 1,
@@ -80,13 +85,14 @@ export class EncuestaIrhComponent implements OnInit {
 
 
   getPreguntasEmpresa(){
-    this.goQuestion = true
+    this.goQuestion = true;
     console.log(this.entrepise);
     this.EnterprisesService.getPreguntasEmpresa(this.entrepise.id).subscribe(res => {
       console.log(res);
       this.temas = res;
+      console.log(res[0].temas[0].preguntas);
       this.dataSource = res[0].temas[0].preguntas;
-      this.goQuestion = false;
+      //this.goQuestion = false;
     });
   }
 
@@ -100,93 +106,7 @@ export class EncuestaIrhComponent implements OnInit {
   }
 
 
-  returnEmoji(id) {
 
-    switch (id) {
-      case 1:
-          if (this.mobile) {
-            return { id: 'sob', skin: 3, size: 16 };
-          } else {
-            return { id: 'sob', skin: 3, size: 24 };
-          }
-      case 2 :
-        if (this.mobile) {
-          return { id: 'cry', skin: 3 };
-        } else {
-          return { id: 'cry', skin: 3 };
-        };
-      case 3:
-        if (this.mobile) {
-          return { id: 'confused', skin: 3 };
-        } else {
-          return { id: 'confused', skin: 3 };
-        }
-      case 4:
-        if (this.mobile) {
-          return { id: 'grinning', skin: 3 };
-        } else {
-          return { id: 'grinning', skin: 3 };
-        }
-      case 5:
-        if (this.mobile) {
-          return { id: 'hugging_face', skin: 3 };
-        } else {
-          return { id: 'hugging_face', skin: 3 };
-        }
-
-
-
-    }
-
-  }
-  returnSize() {
-    if (this.mobile) {
-      return 16;
-    } else {
-      return 24;
-    }
-  }
-
-  formatLabel(value: number | null) {
-    if (!value) {
-      return 0;
-    }
-
-    switch (value) {
-      case 1:
-        if (this.mobile) {
-          return { id: 'sob', skin: 3, size: 16 };
-        } else {
-          return { id: 'sob', skin: 3, size: 24 };
-        }
-      case 2 :
-        if (this.mobile) {
-          return { id: 'cry', skin: 3 };
-        } else {
-          return { id: 'cry', skin: 3 };
-        }
-      case 3:
-        if (this.mobile) {
-          return { id: 'confused', skin: 3 };
-        } else {
-          return { id: 'confused', skin: 3 };
-        }
-      case 4:
-        if (this.mobile) {
-          return { id: 'grinning', skin: 3 };
-        } else {
-          return { id: 'grinning', skin: 3 };
-        }
-      case 5:
-        if (this.mobile) {
-          return { id: 'hugging_face', skin: 3 };
-        } else {
-          return { id: 'hugging_face', skin: 3 };
-        }
-    }
-
-    return value;
-  }
 
   updateValor(question) {
     console.log(question);

@@ -27,7 +27,7 @@
         <mat-list-item>
           <p style="margin-left: 40px">{{ 'Jose Lopez' }}</p>
         </mat-list-item>
-        <mat-list-item *ngFor="let module of modules" (click)="goModule(module.id_submodulo)">
+        <mat-list-item [ngClass]="{'c-active': selectModule == module.id_submodulo}" *ngFor="let module of modules" (click)="goModule(module.id_submodulo)">
           <p>{{module.descripcion}}</p>
         </mat-list-item>
 

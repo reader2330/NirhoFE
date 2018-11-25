@@ -12,7 +12,7 @@ import {LoginService} from '../../../clb/services/login.service';
 export class SidebarIrhComponent implements OnInit {
 
   mobile = false;
-  selectModule = 0;
+  selectModule = 1;
   modules = [];
   user = {};
   avatar = {
