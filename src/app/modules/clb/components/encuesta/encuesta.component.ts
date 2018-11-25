@@ -14,38 +14,10 @@ export class EncuestaComponent implements OnInit {
   temas = [{
     nombre: 'Imagen'
   }];
+  goPreguntas = false;
   token = '';
-  dataSource = [{
-    'nom': 1,
-    'enunciado': '¿Como esta México?',
-    'valor1': 0,
-    'valor2': 0,
-    'valor3': 0,
-    'valor4': 0,
-    'valor5': 0
+  dataSource = [
 
-
-  },{
-    'nom': 2,
-    'enunciado': '¿Como ves a México?',
-    'valor1': 0,
-    'valor2': 0,
-    'valor3': 0,
-    'valor4': 0,
-    'valor5': 0
-
-
-  },{
-    'nom': 3,
-    'enunciado': '¿Te gusta  México?',
-    'valor1': 0,
-    'valor2': 0,
-    'valor3': 0,
-    'valor4': 0,
-    'valor5': 0
-
-
-  },
   ];
   displayedColumns: string[] = [
     'ENUNCIADO',
@@ -74,7 +46,13 @@ export class EncuestaComponent implements OnInit {
         this.token = res['token'];
         this.ProyectServices.getPreguntasParticipante(this.token).subscribe((res) => {
           console.log(res);
-         // this.temas = res;
+         this.temas = res;
+         this.dataSource = [];
+         for (let tema of this.temas) {
+           this.dataSource.push(tema)
+         }
+         this.goPreguntas = true;
+
         });
       });
 
