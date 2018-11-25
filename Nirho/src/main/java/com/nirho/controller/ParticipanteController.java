@@ -79,6 +79,7 @@ public class ParticipanteController {
 		}
 	}
 
+	
 	@RequestMapping(value = "/headCount", method = RequestMethod.POST)
 	@ResponseBody
 	public void guardarParticipantes(@RequestBody HeadCount headcount) throws NirhoControllerException {
