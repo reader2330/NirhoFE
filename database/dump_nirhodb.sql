@@ -589,6 +589,85 @@ INSERT INTO `cuestionario_proyecto` VALUES (5,101,501),(5,101,502),(5,101,510),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `cuestionario_proyecto_tp`
+--
+
+DROP TABLE IF EXISTS `cuestionario_proyecto_tp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `cuestionario_proyecto_tp` (
+  `id_cuestionario_proyecto` bigint(20) NOT NULL AUTO_INCREMENT,
+  `finalizado` bit(1) DEFAULT NULL,
+  `id_proyecto` bigint(20) NOT NULL,
+  `score` double DEFAULT NULL,
+  PRIMARY KEY (`id_cuestionario_proyecto`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cuestionario_proyecto_tp`
+--
+
+LOCK TABLES `cuestionario_proyecto_tp` WRITE;
+/*!40000 ALTER TABLE `cuestionario_proyecto_tp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cuestionario_proyecto_tp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cuestionario_proyecto_tp_pregunta`
+--
+
+DROP TABLE IF EXISTS `cuestionario_proyecto_tp_pregunta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `cuestionario_proyecto_tp_pregunta` (
+  `id_pregunta` bigint(20) NOT NULL AUTO_INCREMENT,
+  `enunciado` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `respuesta` int(11) DEFAULT NULL,
+  `tipo` int(11) NOT NULL,
+  `cuestionario_proyectotptema` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_pregunta`),
+  KEY `FKi7go5xnmb78xo9wosxsnjnysj` (`cuestionario_proyectotptema`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cuestionario_proyecto_tp_pregunta`
+--
+
+LOCK TABLES `cuestionario_proyecto_tp_pregunta` WRITE;
+/*!40000 ALTER TABLE `cuestionario_proyecto_tp_pregunta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cuestionario_proyecto_tp_pregunta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cuestionario_proyecto_tp_tema`
+--
+
+DROP TABLE IF EXISTS `cuestionario_proyecto_tp_tema`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `cuestionario_proyecto_tp_tema` (
+  `id_tema` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` bit(1) DEFAULT NULL,
+  `cuestionario_proyectotp` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id_tema`),
+  KEY `FK3m5odk661ccdnl45bjwwovui8` (`cuestionario_proyectotp`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cuestionario_proyecto_tp_tema`
+--
+
+LOCK TABLES `cuestionario_proyecto_tp_tema` WRITE;
+/*!40000 ALTER TABLE `cuestionario_proyecto_tp_tema` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cuestionario_proyecto_tp_tema` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cuetionario_participante`
 --
 
@@ -1833,4 +1912,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-25  0:51:50
+-- Dump completed on 2018-11-25 11:05:26
