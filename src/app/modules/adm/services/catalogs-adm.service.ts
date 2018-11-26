@@ -16,7 +16,7 @@ export class CatalogsAdmService {
     this.header.append('Content-Type', 'application/json');
   }
   getNacionality(): Observable<any> {
-    return this._http.get(this.api + 'catalogo/empleado/nacionalidad', {headers: this.header});
+    return this._http.get(this.api + 'catalogo/empleado/nacmmitionalidad', {headers: this.header});
   }
   getJob(): Observable<any> {
     return this._http.get(this.api + 'catalogo/empleado/puesto', {headers: this.header});
