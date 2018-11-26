@@ -72,5 +72,11 @@ export class ProyectoService {
         idProyecto: idProyecto
       }});
   }
+  getProyect(id) {
+    return this.http.get(this.api + 'proyectoCLB/porId', {headers: this.headers, params: {
+      'idProyecto': id
+      }});
+
+  }
 
 }

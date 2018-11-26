@@ -49,7 +49,7 @@
         <app-cuestionario-select (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 7"></app-cuestionario-select>
         <app-detalle-preguntas *ngIf="selectModule == 8"></app-detalle-preguntas>
         <app-estadisticas *ngIf="selectModule == 9"></app-estadisticas>
-        <app-bandeja-detalle *ngIf="selectModule == 10"></app-bandeja-detalle>
+        <app-bandeja-detalle (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 10"></app-bandeja-detalle>
       </div>
     </div>
   </mat-sidenav-content>

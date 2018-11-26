@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 import {CatalogsService} from '../../services/catalogs.service';
 
 import {Proyecto} from '../../models/proyecto';
+import {ProyectoService} from '../../services/proyecto.service';
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -15,16 +17,20 @@ export class BandejaDetalleComponent implements OnInit {
   giros = [];
   puestos = [];
   tiposContacto = [];
-  data: Proyecto;
+  data = {};
   panelOpenState = true;
+  muestra = {};
 
 
-  constructor(private CatalogService: CatalogsService) { }
-
+  constructor(private CatalogService: CatalogsService, private ProyectServices: ProyectoService) { }
+  @Output() response = new EventEmitter();
   ngOnInit() {
     if (sessionStorage.getItem('detail')) {
-      this.data = JSON.parse(sessionStorage.getItem('detail'));
-      console.log(this.data);
+      this.muestra = JSON.parse(sessionStorage.getItem('detail'));
+      this.ProyectServices.getProyect(this.muestra['idProyecto']).subscribe(res => {
+        console.log(res);
+        this.data = res;
+      })
       this.getCatalogos();
     }
   }
@@ -49,26 +55,23 @@ export class BandejaDetalleComponent implements OnInit {
   getCatalogos() {
     this.CatalogService.getPuestos().subscribe((res) => {
       this.puestos = res;
-      this.data.idContacto.puesto = this.getNames(this.puestos, this.data.idContacto.puesto);
-      console.log(this.data);
+      console.log(res);
+
     });
     this.CatalogService.getGiros().subscribe((res) => {
       this.giros = res;
-      this.data.idEmpresa.giro = this.getNames(this.giros, this.data.idEmpresa.giro);
     });
 
     this.CatalogService.getTypeContact().subscribe((res) => {
       this.tiposContacto = res;
-      this.data.idContacto.tipoContacto = this.getNames(this.tiposContacto, this.data.idContacto.tipoContacto);
     });
     this.CatalogService.getCountries().subscribe((res) => {
       this.paises = res;
-      this.data.idEmpresa.pais = this.getNames(this.paises, this.data.idEmpresa.pais);
     });
 
   }
 
-  getNames(catalog, id, ) {
+  getNames(catalog, id ) {
 
     for (let cat of catalog ) {
       if (cat.id === id) {
@@ -76,6 +79,53 @@ export class BandejaDetalleComponent implements OnInit {
       }
     }
     return '';
+  }
+  getPuestos() {
+    this.CatalogService.getPuestos().subscribe((res) => {
+
+      if (res) {
+        this.puestos = res;
+        console.log(res);
+      }
+    });
+
+  }
+
+  updateProyecto() {
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar la información ingresada del proyecto',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        this.ProyectServices.saveProyect(this.data).subscribe(res => {
+            console.log(res);
+            Swal(
+              'Listo.',
+              'La información se guardo correctamente',
+              'success'
+            ).then(() => {
+              this.response.emit({value: 1});
+            });
+
+          },
+          (err) => {
+            console.log(err);
+            Swal(
+              'Algo salio mal.',
+              'No se pudo guarda la información',
+              'error'
+            ).then(() => {
+              this.response.emit({value: 1});
+            });
+
+          });
+      }
+    });
+
   }
 
 }

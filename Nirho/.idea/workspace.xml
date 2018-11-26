@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/irh/components/encuesta_irh/encuesta-irh.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/irh/components/encuesta_irh/encuesta-irh.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/irh/services/enterprises.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/irh/services/enterprises.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,14 +34,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="68" />
+          <entry key="java" value="69" />
           <entry key="sql" value="1" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="68" />
+          <entry key="JAVA" value="69" />
           <entry key="SQL" value="1" />
           <entry key="XML" value="1" />
         </counts>
@@ -59,11 +60,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/CuestionarioEmpresaIRHController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
+            <state relative-caret-position="1425">
               <caret line="113" column="30" lean-forward="true" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoCLBController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="592">
+              <caret line="107" column="30" selection-start-line="107" selection-start-column="30" selection-end-line="107" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -91,18 +101,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="269">
               <caret line="96" column="13" selection-start-line="96" selection-start-column="13" selection-end-line="96" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/model/GraficaProyecto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -279,7 +277,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543200407827" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543212875889" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="project.structure.last.edited" value="Project" />
@@ -365,12 +363,12 @@
       <workItem from="1542950574554" duration="2116000" />
       <workItem from="1543092245785" duration="5933000" />
       <workItem from="1543129100569" duration="566000" />
-      <workItem from="1543180336085" duration="1698000" />
+      <workItem from="1543180336085" duration="2347000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32486000" />
+    <option name="totallyTimeSpent" value="33135000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="954" extended-state="0" />
@@ -646,13 +644,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoCLBController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-580">
-          <caret line="107" column="30" selection-start-line="107" selection-start-column="30" selection-end-line="107" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/model/CuestionarioEmpresaIRH.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -751,8 +742,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/CuestionarioEmpresaIRHController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
+        <state relative-caret-position="1425">
           <caret line="113" column="30" lean-forward="true" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoCLBController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="592">
+          <caret line="107" column="30" selection-start-line="107" selection-start-column="30" selection-end-line="107" selection-end-column="30" />
         </state>
       </provider>
     </entry>
