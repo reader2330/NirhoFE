@@ -111,7 +111,7 @@ public class CuestionarioEmpresaIRHController {
 		try {
 			CuestionarioEmpresaIRH c = cuestionarioEmpresaServiceIRH.getCuestionarioEmpresaIRHById(id);
 			c.setFinalizado(valor);
-			c.setScore(score);;
+			c.setScore(score);
 			cuestionarioEmpresaServiceIRH.updateCuestionarioEmpresaIRH(c);			
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");

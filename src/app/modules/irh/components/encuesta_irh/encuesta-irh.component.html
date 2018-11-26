@@ -17,7 +17,9 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
       <button mat-raised-button color="accent" (click)="getPreguntasEmpresa()">Ver preguntas</button>
+      <button mat-raised-button color="accent" style="margin-left: 20px" (click)="FinishCuestionario()">Finalizar cuestionario</button>
     </mat-grid-tile>
+  </mat-grid-list>
     <!--<mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="2" >
       <mat-accordion  class="example-headers-align">
         <mat-expansion-panel *ngFor= "let tema of temas" >
@@ -61,58 +63,38 @@
       </mat-accordion>
     </mat-grid-tile>-->
 
+  <mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="700px">
+
   <mat-grid-tile *ngIf="!goQuestion" style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2">
     <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
       <mat-expansion-panel *ngFor= "let tema of temas" >
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{tema.temas[0].nombre}} <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>
+            {{tema.nombre}} <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>
           </mat-panel-title>
 
         </mat-expansion-panel-header>
-        <mat-panel-description style="width: 100%">
-          <table mat-table style="width: 100%" [dataSource]="dataSource" class="mat-elevation-z8">
-
-
-
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-
-            <!-- Position Column -->
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="ENUNCIADO">
-              <th mat-header-cell *matHeaderCellDef> ENUNCIADO </th>
-              <td mat-cell *matCellDef="let element"> {{element.enunciado}} </td>
-            </ng-container>
-
-            <!-- Weight Column -->
-            <ng-container matColumnDef="1">
-              <mat-form-field  style="width: 40%; margin-right: 10px" appearance="outline">
-                <mat-label>Seleccione una opcion</mat-label>
-                <mat-select [(ngModel)]="element.respuesta"   >
-                  <mat-option *ngFor="let option  of opts"   [value]="option.key">
-                    {{option.name}}
-                  </mat-option>
+        <mat-panel-description>
+          <div class="row">
+            <div *ngFor="let question of tema.preguntas" class="col-sm-12">
+              <label style="margin-right: 20px"> {{question.enunciado}}</label>
+              <mat-form-field>
+                <mat-select [(ngModel)]="question.respuesta" >
+                  <mat-option *ngFor="let opt of opts" [value]="opt.key">{{opt.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
-            </ng-container>
+            </div>
+          </div>
 
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+
         </mat-panel-description>
       </mat-expansion-panel>
     </mat-accordion>
 
   </mat-grid-tile>
-  <mat-grid-tile *ngIf="!goQuestion"  style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="1">
-      <button mat-raised-button color="accent" (click)="FinishCuestionario()">Finalizar cuestionario</button>
-  </mat-grid-tile>
-
-
   </mat-grid-list>
+
 
 
 

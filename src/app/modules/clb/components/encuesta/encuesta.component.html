@@ -2,11 +2,10 @@
 <mat-toolbar style="background:  black" >
   <span style="flex: 1 1 auto;"></span>
 </mat-toolbar>
-  <mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="150px">
-    <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1"  >
-      <div class="logo-nav">
-      </div>
-    </mat-grid-tile>
+<div class="logo-nav">
+</div>
+  <mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="500px">
+
     <!--<mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="2" >
       <mat-accordion  class="example-headers-align">
         <mat-expansion-panel *ngFor= "let tema of temas" >

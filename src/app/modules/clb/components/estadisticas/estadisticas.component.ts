@@ -14,6 +14,7 @@ export class EstadisticasComponent implements OnInit {
   proyect = {};
   options = [];
   pies = [];
+  totales = [0, 0, 0, 0, 0];
   createCharts = false;
   constructor(private ProyectService: ProyectoService) {
 
@@ -41,7 +42,12 @@ export class EstadisticasComponent implements OnInit {
   }
 
   getGraficas() {
+    this.createCharts = false;
+    this.options = [];
+    this.pies = [];
+    this.data = [];
     this.ProyectService.getGraficas(this.proyect['idProyecto']).subscribe(res => {
+
       this.data = res;
       if(res['datos']){
         this.constructoChars();
@@ -62,7 +68,6 @@ export class EstadisticasComponent implements OnInit {
       let option = {
         chart: {type: 'column'},
         title: {text: data[0]['gaficaProyectoPK']['areaOrg'] },
-        subtitle: {text: data[0]['tema']['nombre']},
         xAxis: {
           categories : ['ML', 'M', 'R', 'B', 'MB'],
           title: {
@@ -71,16 +76,26 @@ export class EstadisticasComponent implements OnInit {
         },
         yAxis: {
           min: 0,
-          max: 5
         },
         series: [{
           name: 'Total',
-          data: [data[0]['numResp1'] , data[0]['numResp2'], data[0]['numResp3'], data[0]['numResp4'], data[0]['numResp5']]
+          data: []
         }]
       };
+      for(let res of data ) {
+        console.log(res);
+        this.totales[0] += res.numResp1;
+        this.totales[1] += res.numResp2;
+        this.totales[2] += res.numResp3;
+        this.totales[3] += res.numResp4;
+        this.totales[4] += res.numResp5;
+      }
+      option.series[0].data = this.totales;
+      console.log(this.options);
       this.options.push(option);
-
+      this.totales = [0,0,0,0,0];
     }
+
     let pies = {
       chart: {type: 'pie'},
       title: {text: 'Total de participantes' },

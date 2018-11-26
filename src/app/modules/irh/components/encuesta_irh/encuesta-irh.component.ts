@@ -27,43 +27,7 @@ export class EncuestaIrhComponent implements OnInit {
     {name: 'N/A', key: 0},
   ];
   token = '';
-  dataSource = [{
-    'nom': 1,
-    'enunciado': '¿Como esta México?',
-    'valor1': 0,
-    'valor2': 0,
-    'valor3': 0,
-    'valor4': 0,
-    'valor5': 0
 
-
-  },{
-    'nom': 2,
-    'enunciado': '¿Como ves a México?',
-    'valor1': 0,
-    'valor2': 0,
-    'valor3': 0,
-    'valor4': 0,
-    'valor5': 0
-
-
-  },{
-    'nom': 3,
-    'enunciado': '¿Te gusta  México?',
-    'valor1': 0,
-    'valor2': 0,
-    'valor3': 0,
-    'valor4': 0,
-    'valor5': 0
-
-
-  },
-  ];
-  displayedColumns: string[] = [
-    'ENUNCIADO',
-    '1',
-
-  ];
 
   constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver,  private EnterprisesService: EnterprisesService) {
     breakpointObserver.isMatched(('(max-width:450)'));
@@ -80,19 +44,17 @@ export class EncuestaIrhComponent implements OnInit {
     this.EnterprisesService.getEnterprises().subscribe(res => {
       console.log(res);
       this.companys = res;
-    })
+    });
   }
 
 
   getPreguntasEmpresa(){
     this.goQuestion = true;
     console.log(this.entrepise);
-    this.EnterprisesService.getPreguntasEmpresa(this.entrepise.id).subscribe(res => {
+    this.EnterprisesService.getPreguntas(this.entrepise.id).subscribe(res => {
       console.log(res);
       this.temas = res;
-      console.log(res[0].temas[0].preguntas);
-      this.dataSource = res[0].temas[0].preguntas;
-      //this.goQuestion = false;
+      this.goQuestion = false;
     });
   }
 
@@ -129,12 +91,11 @@ export class EncuestaIrhComponent implements OnInit {
       cancelButtonText: 'No, seguir contestando'
     }).then((result) => {
       if (result.value) {
-        let data = {
-          id: this.temas[0]['id'],
-          opt: true
-        };
-        console.log(data);
-        this.EnterprisesService.finalizeCuestionario(data).subscribe(res => {
+
+        this.calculateScore();
+
+
+        /*this.EnterprisesService.finalizeCuestionario(data).subscribe(res => {
           Swal(
             'Listo.',
             'El cuestionario se finalizo correctamente',
@@ -142,10 +103,31 @@ export class EncuestaIrhComponent implements OnInit {
           ).then(() => {
             this.response.emit({value: 1});
           });
-        })
+        })*/
 
       }
       });
+  }
+
+  calculateScore() {
+    let total = 0;
+    let cal = 0;
+    for (let tema of this.temas) {
+      for (let question of tema['preguntas']) {
+        console.log(question);
+        if (question.respuesta !== 0) {
+          total += 1;
+          if(question.respuesta === 1) {
+            cal += 1;
+          }
+        }
+      }
+    }
+    console.log(total);
+    console.log(cal);
+    console.log((cal / total) * 10)
+    return (cal / total) * 10;
+
   }
 
 
