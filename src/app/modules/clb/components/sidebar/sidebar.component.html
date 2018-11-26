@@ -48,7 +48,7 @@
         <app-organigrama (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 6"> </app-organigrama>
         <app-cuestionario-select (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 7"></app-cuestionario-select>
         <app-detalle-preguntas *ngIf="selectModule == 8"></app-detalle-preguntas>
-        <app-estadisticas *ngIf="selectModule == 9"></app-estadisticas>
+        <app-estadisticas (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 9"></app-estadisticas>
         <app-bandeja-detalle (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 10"></app-bandeja-detalle>
       </div>
     </div>

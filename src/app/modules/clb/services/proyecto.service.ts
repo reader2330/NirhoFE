@@ -78,5 +78,14 @@ export class ProyectoService {
       }});
 
   }
+  closeProyect(id) {
+    return this.http.get(this.api + 'proyectoCLB/cierre' , {headers: this.headers , params: {
+      'idProyecto': id
+      }});
+  }
+
+  saveComents(data) {
+    return this.http.post(this.api + 'graficas/guardarComentario', data, {headers: this.headers});
+  }
 
 }

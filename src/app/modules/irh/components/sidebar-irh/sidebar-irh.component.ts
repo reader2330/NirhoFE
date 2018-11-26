@@ -41,13 +41,11 @@ export class SidebarIrhComponent implements OnInit {
     }, {
       id_submodulo: 2,
       descripcion: 'Alta de empresa'
-    }, {
-      id_submodulo: 3,
-      descripcion: 'Configurar cuestionario'
-    }, {
+    },
+      {
        id_submodulo: 4,
         descripcion: 'Contestar preguntas'
-    })
+    });
 
     this.getUser();
   }

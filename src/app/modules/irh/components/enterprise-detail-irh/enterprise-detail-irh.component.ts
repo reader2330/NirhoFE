@@ -101,6 +101,7 @@ export class EnterpriseDetailIrhComponent implements OnInit {
       });
   }
   saveTotalCompany() {
+
     Swal({
       title: '',
       text: 'Seguro que quieres guardar la información ingresada de la empresa',
@@ -140,8 +141,7 @@ export class EnterpriseDetailIrhComponent implements OnInit {
       }
     });
   }
-  updateCompany() {
-  }
+
   cancelCompany() {
     Swal({
       title: '',

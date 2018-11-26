@@ -15,7 +15,7 @@ export class BandejaAdmComponent implements OnInit {
 
   constructor(private CatalogsAdmServices: CatalogsAdmService) {
   }
-  displayedColumns: string[] = ['nombreCompleto', 'nacionalidad', 'fechaNacimiento', 'edad', 'rfc', 'detail3', 'delete'];
+  displayedColumns: string[] = ['nombreCompleto', 'nacionalidad', 'fechaNacimiento', 'edad', 'rfc', 'delete', 'detail3'];
   dataSource = new MatTableDataSource<laboral_interface>();
 
   ngOnInit() {

@@ -20,10 +20,16 @@
   <div style=" border: 2px black solid" class="col-sm-12">
     <div style="width: 100%; margin-left: 500px">
     <chart   [options]="pies[0]"></chart>
+      <input matInput type="text"  placeholder="Comentario" >
     </div>
   </div>
-  <div *ngFor="let opt of options"  style=" border: 2px black solid"  class="col-sm-6">
+  <div *ngFor="let opt of options; let i = index"  style=" border: 2px black solid"  class="col-sm-6">
     <chart  [options]="opt"></chart>
+    <input matInput type="text" [(ngModel)]="data['datos'][i][0].comentarios" placeholder="Comentario" >
+  </div>
+
+  <div class="col-sm-4 offset-4" style="margin-top: 30px">
+    <button style="margin-left: 50px" mat-raised-button color="accent" (click)="guardarComentario()"> Guardar comentarios</button>
   </div>
 
 </div>

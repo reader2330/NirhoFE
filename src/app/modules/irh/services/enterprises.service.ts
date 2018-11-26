@@ -26,6 +26,9 @@ export class EnterprisesService {
   getEnterpriseByRFC(rfc): Observable<Enterprise[]> {
     return this.http.get<Enterprise[]>(this.api + 'empresa/consultarEmpresaIRHRfc', {headers: this.headers,  params: {'rfc': rfc }});
   }
+  updateEntrepise(data): Observable<any> {
+    return this.http.post(this.api + 'empresa/registrar', data, {headers: this.headers});
+  }
 
   getTemas(): Observable<any> {
     return this.http.get(this.api + 'cuestionario/temas/', {headers: this.headers, params: {'idModulo': '1'}});

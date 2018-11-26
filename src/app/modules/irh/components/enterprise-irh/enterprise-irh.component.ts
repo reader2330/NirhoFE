@@ -94,6 +94,7 @@ export class EnterpriseIrhComponent implements OnInit {
 
 
   saveCompany() {
+    console.log("muestra")
     Swal({
       title: '',
       text: 'Seguro que quieres guardar la información ingresada de la empresa',
@@ -105,7 +106,7 @@ export class EnterpriseIrhComponent implements OnInit {
       if (result.value) {
         let obj = this.enterpriseForm.value;
         console.log(obj);
-        this.EntrepiseService.saveEntripise(obj).subscribe((res) => {
+        this.EntrepiseService.updateEntrepise(obj).subscribe((res) => {
             console.log(res);
             Swal(
               'Listo.',

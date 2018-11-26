@@ -5,6 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {ProyectoService} from '../../services/proyecto.service';
 import {Proyecto} from '../../models/proyecto';
 import {CatalogsService} from '../../services/catalogs.service';
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -18,7 +19,7 @@ export class BandejaComponent implements OnInit {
 
   constructor(private ProyectoService: ProyectoService) {
   }
-  displayedColumns: string[] = ['nombre', 'empresa', 'empleados', 'participantes', 'periodo', 'frecuenciaEval', 'detail3'];
+  displayedColumns: string[] = ['nombre', 'empresa', 'empleados', 'participantes', 'periodo', 'frecuenciaEval', 'detail4','detail3'];
   dataSource = [];
 
 
@@ -63,6 +64,28 @@ export class BandejaComponent implements OnInit {
     this.ProyectoService.getProyectsbyRol(4).subscribe((res) => {
         this.proyects = res;
     });
+  }
+
+  cerrarProyecto(element) {
+
+      Swal({
+      title: '',
+      text: 'Seguro que quieres guardar la información ingresada del proyecto',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+      }).then((result) => {
+        if (result.value) {
+          this.ProyectoService.closeProyect(element['idProyecto']).subscribe(res => {
+            Swal(
+              'Listo.',
+              'Se ha cerrado correctamente el proyecto',
+              'success'
+            );
+          });
+        }
+      });
   }
 
 

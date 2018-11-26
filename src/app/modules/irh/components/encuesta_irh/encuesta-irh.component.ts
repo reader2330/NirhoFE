@@ -116,6 +116,7 @@ export class EncuestaIrhComponent implements OnInit {
       });
   }
 
+
   calculateScore() {
     let total = 0;
     let cal = 0;
