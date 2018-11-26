@@ -6,11 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +18,7 @@
     <session id="272960886">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.12" value="2" />
@@ -277,7 +273,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543212875889" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543213093795" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="project.structure.last.edited" value="Project" />
@@ -363,18 +359,17 @@
       <workItem from="1542950574554" duration="2116000" />
       <workItem from="1543092245785" duration="5933000" />
       <workItem from="1543129100569" duration="566000" />
-      <workItem from="1543180336085" duration="2347000" />
+      <workItem from="1543180336085" duration="2493000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33135000" />
+    <option name="totallyTimeSpent" value="33281000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="954" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1935287" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1935287" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -391,7 +386,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4993895" visible="true" weight="0.32946634" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4993895" visible="true" weight="0.32946634" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50061053" side_tool="true" weight="0.32946634" />
       <window_info anchor="bottom" id="Java Enterprise" order="10" />
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" weight="0.3298611" />
