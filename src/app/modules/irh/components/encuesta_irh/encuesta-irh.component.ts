@@ -77,7 +77,6 @@ export class EncuestaIrhComponent implements OnInit {
       respuesta: question.respuesta
     };
     this.EnterprisesService.updatePregunta(data).subscribe(res => {
-      console.log(res);
     })
   }
 
@@ -91,11 +90,19 @@ export class EncuestaIrhComponent implements OnInit {
       cancelButtonText: 'No, seguir contestando'
     }).then((result) => {
       if (result.value) {
-
-        this.calculateScore();
-
-
-        /*this.EnterprisesService.finalizeCuestionario(data).subscribe(res => {
+        let data = {
+          id : 1,
+          score: this.calculateScore(),
+          value: true
+        };
+        Swal(
+          'Listo.',
+          'La calificación final es: ' + data.score,
+          'success'
+        ).then(() => {
+          this.response.emit({value: 1});
+        });
+        /*this.EnterprisesService.finalizeCuestionarioScore(data).subscribe(res => {
           Swal(
             'Listo.',
             'El cuestionario se finalizo correctamente',
@@ -114,7 +121,6 @@ export class EncuestaIrhComponent implements OnInit {
     let cal = 0;
     for (let tema of this.temas) {
       for (let question of tema['preguntas']) {
-        console.log(question);
         if (question.respuesta !== 0) {
           total += 1;
           if(question.respuesta === 1) {
@@ -123,9 +129,6 @@ export class EncuestaIrhComponent implements OnInit {
         }
       }
     }
-    console.log(total);
-    console.log(cal);
-    console.log((cal / total) * 10)
     return (cal / total) * 10;
 
   }

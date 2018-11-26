@@ -7,15 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/controller/CuestionarioEmpresaIRHController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/controller/CuestionarioEmpresaIRHController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/avatar-edit/avatar-edit.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/avatar-edit/avatar-edit.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/encuesta/encuesta.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/encuesta/encuesta.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/estadisticas/estadisticas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/estadisticas/estadisticas.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/formularios/data-period/data-period.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/formularios/data-period/data-period.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/formularios/data-period/data-period.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/formularios/data-period/data-period.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/eva/eva.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/eva/eva.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/irh/components/cuestionario-select-irh/cuestionario-select-irh.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/irh/components/cuestionario-select-irh/cuestionario-select-irh.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/irh/components/encuesta_irh/encuesta-irh.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/irh/components/encuesta_irh/encuesta-irh.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/irh/components/encuesta_irh/encuesta-irh.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/irh/components/encuesta_irh/encuesta-irh.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/irh/services/enterprises.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/irh/services/enterprises.service.ts" afterDir="false" />
     </list>
@@ -71,7 +62,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/CuestionarioEmpresaIRHController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
+            <state relative-caret-position="321">
               <caret line="113" column="30" lean-forward="true" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="30" />
             </state>
           </provider>
@@ -288,7 +279,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543199605671" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543200407827" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="project.structure.last.edited" value="Project" />
@@ -374,12 +365,12 @@
       <workItem from="1542950574554" duration="2116000" />
       <workItem from="1543092245785" duration="5933000" />
       <workItem from="1543129100569" duration="566000" />
-      <workItem from="1543180336085" duration="1457000" />
+      <workItem from="1543180336085" duration="1698000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32245000" />
+    <option name="totallyTimeSpent" value="32486000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="954" extended-state="0" />
@@ -760,7 +751,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/CuestionarioEmpresaIRHController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
+        <state relative-caret-position="321">
           <caret line="113" column="30" lean-forward="true" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="30" />
         </state>
       </provider>
