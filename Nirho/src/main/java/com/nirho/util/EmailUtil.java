@@ -3,7 +3,7 @@ package com.nirho.util;
 import com.nirho.dto.EmailDatos;
 
 public class EmailUtil {
-	public static final String URL_CUESTIONARIO = "http://74.208.131.50/Nirho/encuesta/";
+	public static final String URL_CUESTIONARIO = "http://74.208.131.50/#/Nirho/encuesta/";
 	public static String getAsunto(String nombreProyecto) {
 		String asunto = "Cuestionario " + nombreProyecto;
 		return asunto;
