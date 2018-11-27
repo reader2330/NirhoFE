@@ -1641,7 +1641,7 @@ CREATE TABLE `rol_clb_submodulo` (
 
 LOCK TABLES `rol_clb_submodulo` WRITE;
 /*!40000 ALTER TABLE `rol_clb_submodulo` DISABLE KEYS */;
-INSERT INTO `rol_clb_submodulo` VALUES (1,1),(2,1),(3,1),(1,2),(2,2),(2,3),(2,4),(3,5),(3,6),(3,7),(3,8),(3,9);
+INSERT INTO `rol_clb_submodulo` VALUES (1,1),(2,1),(1,2),(2,2),(2,3),(2,4),(3,1),(3,7),(3,5),(3,6),(3,8),(3,9);
 /*!40000 ALTER TABLE `rol_clb_submodulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
