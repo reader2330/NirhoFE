@@ -215,47 +215,47 @@ export class EmpleadoDetalleComponent implements OnInit {
   ];
   puestos = [
     {
-      id: '1',
+      id: 1,
       descripcionCatalogo:"Becario"
     },
     {
-      id: '2',
+      id: 2,
       descripcionCatalogo:"Analista"
     },
     {
-      id: '3',
+      id: 3,
       descripcionCatalogo:"Consultor junior"
     },
     {
-      id: '4',
+      id: 4,
       descripcionCatalogo:"Consultor semisenior"
     },
     {
-      id: '5',
+      id: 5,
       descripcionCatalogo:"Consultor senior"
     },
     {
-      id: '6',
+      id: 6,
       descripcionCatalogo:"Gerente de operaciones"
     },
     {
-      id: '7',
+      id: 7,
       descripcionCatalogo:"Analista de ventas"
     },
     {
-      id: '8',
+      id: 8,
       descripcionCatalogo:"Consultor ventas junior"
     },
     {
-      id: '9',
+      id: 9,
       descripcionCatalogo:"Consultor ventas semisenior"
     },
     {
-      id: '10',
+      id: 10,
       descripcionCatalogo:"Consultor ventas senior"
     },
     {
-      id: '11',
+      id: 11,
       descripcionCatalogo:"Gerente de ventas"
     }
   ];
@@ -268,6 +268,7 @@ export class EmpleadoDetalleComponent implements OnInit {
     this.getNacionality();
     this.getBank();
     this.getScholarship();
+    this.getJob();
   }
 
   getEmpleado(id) {
@@ -334,6 +335,14 @@ export class EmpleadoDetalleComponent implements OnInit {
   }
   goBandeja(){
     this.responseChildren.emit({value: 1});
+  }
+  getJob() {
+    this.CatalogoAdm.getJob().subscribe((res) => {
+      if (res) {
+        console.log("puestos", res);
+        this.puestos = res;
+      }
+    });
   }
 
 }

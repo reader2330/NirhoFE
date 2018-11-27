@@ -6,16 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/nirho/model/Empresa.java" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/model/Empresa.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.html" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.ts" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/login/login.component.ts" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/login/login.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/app/modules/irh/components/encuesta_irh/encuesta-irh.component.html" afterPath="$PROJECT_DIR$/../src/app/modules/irh/components/encuesta_irh/encuesta-irh.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/app/modules/irh/components/encuesta_irh/encuesta-irh.component.ts" afterPath="$PROJECT_DIR$/../src/app/modules/irh/components/encuesta_irh/encuesta-irh.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/app/modules/irh/components/sidebar-irh/sidebar-irh.component.ts" afterPath="$PROJECT_DIR$/../src/app/modules/irh/components/sidebar-irh/sidebar-irh.component.ts" />
-    </list>
+    <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -473,12 +464,12 @@
       <workItem from="1543092245785" duration="5933000" />
       <workItem from="1543129100569" duration="566000" />
       <workItem from="1543180336085" duration="2493000" />
-      <workItem from="1543257382483" duration="1681000" />
+      <workItem from="1543257382483" duration="1986000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34962000" />
+    <option name="totallyTimeSpent" value="35267000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="6" />
