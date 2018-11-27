@@ -44,9 +44,9 @@
         <app-steppers (responseChildren)="recibirRespuestChildren($event)" *ngIf="selectModule == 2"></app-steppers>
         <app-data-period (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 3"></app-data-period>
         <app-asignar-consultor *ngIf="selectModule == 4"></app-asignar-consultor>
-        <app-head-count (responseHead)="recibirRespuestChildren($event)" *ngIf="selectModule == 5"></app-head-count>
+        <app-head-count (responseHead)="recibirRespuestChildren($event)" *ngIf="selectModule == 7"></app-head-count>
         <app-organigrama (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 6"> </app-organigrama>
-        <app-cuestionario-select (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 7"></app-cuestionario-select>
+        <app-cuestionario-select (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 5"></app-cuestionario-select>
         <app-detalle-preguntas *ngIf="selectModule == 8"></app-detalle-preguntas>
         <app-estadisticas (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 9"></app-estadisticas>
         <app-bandeja-detalle (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 10"></app-bandeja-detalle>

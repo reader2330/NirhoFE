@@ -239,7 +239,7 @@ CREATE TABLE `clb_submodulo` (
 
 LOCK TABLES `clb_submodulo` WRITE;
 /*!40000 ALTER TABLE `clb_submodulo` DISABLE KEYS */;
-INSERT INTO `clb_submodulo` VALUES (1,'Bandeja de Proyectos'),(2,'Alta de Proyecto'),(3,'Asignar Periodo Y Garantía'),(4,'Asignar Consultor'),(5,'Cargar Head Count'),(6,'Organigrama'),(7,'Configurar Cuestionario'),(8,'Enviar Cuestionarios'),(9,'Gráficas de Resultados');
+INSERT INTO `clb_submodulo` VALUES (1,'Bandeja de Proyectos'),(2,'Alta de Proyecto'),(3,'Asignar Periodo Y Garantía'),(4,'Asignar Consultor'),(7,'Cargar Head Count'),(6,'Organigrama'),(5,'Configurar Cuestionario'),(8,'Enviar Cuestionarios'),(9,'Gráficas de Resultados');
 /*!40000 ALTER TABLE `clb_submodulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1716,6 +1716,8 @@ CREATE TABLE `tipo_catalogo` (
 
 LOCK TABLES `tipo_catalogo` WRITE;
 /*!40000 ALTER TABLE `tipo_catalogo` DISABLE KEYS */;
+
+
 INSERT INTO `tipo_catalogo` VALUES (1,1,'Pais'),(2,1,'Giro'),(3,1,'Tipo Contacto'),(4,1,'Idioma'),(5,1,'Nivel Idioma'),(6,1,'Nivel Conocimiento'),(7,1,'Tipo Contacto Empresa'),(8,1,'Nivel actividad'),(9,1,'Competencia'),(10,1,'Sexo'),(11,1,'Estado civil'),(12,1,'Tipo de pregunta'),(13,1,'Nacionalidad Empleado'),(14,1,'Puesto Empleado'),(15,1,'Tipo Contacto Empleado'),(16,1,'Banco Empleado'),(17,1,'Nivel de escolaridad Empleado'),(18,1,'Habilidades Empleado'),(19,1,'Nivel Laboral Empleado'),(20,1,'Crédito hipotecario'),(21,1,'Prestaciones'),(22,1,'Tipo de contrato'),(23,1,'Motivo de vacante'),(24,1,'Frecuencia de evaluacion');
 /*!40000 ALTER TABLE `tipo_catalogo` ENABLE KEYS */;
 UNLOCK TABLES;
