@@ -498,7 +498,7 @@ CREATE TABLE `cuestionario_empresa_irh` (
 
 LOCK TABLES `cuestionario_empresa_irh` WRITE;
 /*!40000 ALTER TABLE `cuestionario_empresa_irh` DISABLE KEYS */;
-INSERT INTO `cuestionario_empresa_irh` VALUES (1,_binary '\0',0,0);
+INSERT INTO `cuestionario_empresa_irh` VALUES (0,_binary '\0',0,0);
 /*!40000 ALTER TABLE `cuestionario_empresa_irh` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1915,4 +1915,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-27 22:03:57
+-- Dump completed on 2018-11-27 22:35:26
