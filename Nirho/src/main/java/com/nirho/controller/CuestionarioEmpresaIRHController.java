@@ -103,9 +103,12 @@ public class CuestionarioEmpresaIRHController {
 	}
 	
 	@RequestMapping(value = "/agregar", method = RequestMethod.POST)
-	public void add(@Valid @RequestBody CuestionarioEmpresaIRH ce) throws NirhoControllerException{
+	public String add(@Valid @RequestBody CuestionarioEmpresaIRH ce) throws NirhoControllerException{
 		try {
-			cuestionarioEmpresaServiceIRH.addCuestionarioEmpresaIRH(ce);			
+			cuestionarioEmpresaServiceIRH.addCuestionarioEmpresaIRH(ce);	
+			JSONObject response = new JSONObject();
+			response.accumulate("id", ce.getId());
+			return response.toString();
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
 		} catch(Exception exe) {
