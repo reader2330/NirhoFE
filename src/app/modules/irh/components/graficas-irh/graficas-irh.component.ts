@@ -80,7 +80,7 @@ export class GraficasIRHComponent implements OnInit {
           data: this.scores
         },{
           name: 'Media',
-          data:this.media
+          data: this.media
         }],
 
         responsive: {
