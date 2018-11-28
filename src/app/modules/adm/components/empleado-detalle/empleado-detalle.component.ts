@@ -65,6 +65,7 @@ export class EmpleadoDetalleComponent implements OnInit {
     this.getScholarship();
     this.getJob();
     this.getTypeContac();
+    this.getCreditoHipotecario()
   }
 
   getEmpleado(id) {
@@ -145,6 +146,11 @@ export class EmpleadoDetalleComponent implements OnInit {
       if (res) {
         this.tipoContacto = res;
       }
+    });
+  }
+  getCreditoHipotecario(){
+    this.CatalogoAdm.getCreditoHipotecario().subscribe(res => {
+      this.hipotecas = res;
     });
   }
 

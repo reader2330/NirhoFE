@@ -84,6 +84,7 @@ export class PaymentAdmComponent implements OnInit {
 
   ngOnInit() {
     this.getBank();
+    this.getCreditoHipotecario()
   }
 
   checkValorCredito() {
@@ -91,6 +92,11 @@ export class PaymentAdmComponent implements OnInit {
     if (!opt) {
       this.paymentForm.patchValue({'tipoCreditoHipotecario': 0})
     }
+  }
+  getCreditoHipotecario(){
+    this.CatalogsAdmServices.getCreditoHipotecario().subscribe(res => {
+      this.hipotecas = res;
+    });
   }
 
   cancelCompany(){}

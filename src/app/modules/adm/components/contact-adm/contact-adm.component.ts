@@ -125,6 +125,7 @@ export class ContactAdmComponent implements OnInit {
   ngOnInit() {
     //this.getTypeContac();
     this.getJob();
+    this.getTypeContac();
   }
 
 }

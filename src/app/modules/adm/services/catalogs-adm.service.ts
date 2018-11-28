@@ -57,6 +57,9 @@ export class CatalogsAdmService {
   getEmploye(id): Observable<any> {
     return this._http.get(this.api + 'empleado/'+id, { headers: this.header});
   }
+  getCreditoHipotecario(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/empleado/creditoHipotecario', {headers: this.header});
+  }
 
 
 }

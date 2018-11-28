@@ -73,7 +73,7 @@ export class SidebarAdmComponent implements OnInit {
   }
 
   goAvatarEditing() {
-    this.route.navigate(['avatar-edit']);
+    this.route.navigate(['avatar-edit/ADM']);
   }
 
 

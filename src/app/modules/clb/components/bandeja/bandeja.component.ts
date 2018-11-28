@@ -6,6 +6,7 @@ import {ProyectoService} from '../../services/proyecto.service';
 import {Proyecto} from '../../models/proyecto';
 import {CatalogsService} from '../../services/catalogs.service';
 import Swal from "sweetalert2";
+import {LoginService} from '../../services/login.service';
 
 
 @Component({
@@ -17,18 +18,20 @@ export class BandejaComponent implements OnInit {
   proyects: Proyecto[];
   @Output() responseChildren = new EventEmitter();
 
-  constructor(private ProyectoService: ProyectoService) {
+  constructor(private ProyectoService: ProyectoService, private LoginService: LoginService) {
   }
+
   displayedColumns: string[] = ['nombre', 'empresa', 'empleados', 'participantes', 'FechaFinal', 'frecuenciaEval', 'detail4', 'detail3'];
   dataSource = [];
-
-
+  user = {};
 
 
   ngOnInit() {
 
     this.getProyects();
+    this.getUser();
   }
+
   getProyects() {
 
     this.ProyectoService.getProyects().subscribe((res) => {
@@ -47,45 +50,47 @@ export class BandejaComponent implements OnInit {
 
     }
   }
+
   getUser() {
-    if (sessionStorage.getItem('user')) {
-      let user = JSON.parse(sessionStorage.getItem('user'));
-      if (user.rol !== 3) {
-        this.getProyects();
-      } else {
-        this.getProyects();
-      }
-    } else {
-      this.getProyects();
-    }
+    this.LoginService.getUser().subscribe(res => {
+      console.log(res);
+      this.user = res;
+    });
   }
 
   getProyectsbyRol() {
     this.ProyectoService.getProyectsbyRol(4).subscribe((res) => {
-        this.proyects = res;
+      this.proyects = res;
     });
   }
 
   cerrarProyecto(element) {
 
-      Swal({
+    Swal({
       title: '',
       text: 'Seguro que quieres guardar la información ingresada del proyecto',
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si guardar',
       cancelButtonText: 'No, seguir editando'
-      }).then((result) => {
-        if (result.value) {
-          this.ProyectoService.closeProyect(element['idProyecto']).subscribe(res => {
-            Swal(
-              'Listo.',
-              'Se ha cerrado correctamente el proyecto',
-              'success'
-            );
-          });
-        }
-      });
+    }).then((result) => {
+      if (result.value) {
+        this.ProyectoService.closeProyect(element['idProyecto']).subscribe(res => {
+          Swal(
+            'Listo.',
+            'Se ha cerrado correctamente el proyecto',
+            'success'
+          );
+        });
+      }
+    });
+  }
+
+  checkConcierge() {
+    if (this.user['rol'] == 2) {
+      return false;
+    }
+    return true;
   }
 
 

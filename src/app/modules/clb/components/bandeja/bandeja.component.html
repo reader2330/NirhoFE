@@ -39,10 +39,10 @@
     <td mat-cell *matCellDef="let element"> {{element.frecuenciaEval}}</td>
   </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="detail4">
+
+  <ng-container  matColumnDef="detail4">
     <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let element"> <button (click)="cerrarProyecto(element)" mat-button>  <mat-icon>lock</mat-icon></button> </td>
+    <td mat-cell *matCellDef="let element"> <button [disabled]="checkConcierge()" (click)="cerrarProyecto(element)" mat-button>  <mat-icon>lock</mat-icon></button> </td>
   </ng-container>
   <ng-container matColumnDef="detail3">
     <th mat-header-cell *matHeaderCellDef>  </th>
