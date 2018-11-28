@@ -1,0 +1,29 @@
+<mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
+  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+    <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">insert_chart_outlined</mat-icon> Estadisticas</h2>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+    <mat-form-field  style="width: 96%; " appearance="outline">
+      <mat-label>Seleccionar empresa</mat-label>
+      <mat-select [(ngModel)]="company">
+        <mat-option *ngFor="let company of companys" [value]="company">
+          {{company.empresa}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+    <button mat-raised-button color="accent" [disabled]="!company.id" (click)="getGraficas()">Ver graficas</button>
+  </mat-grid-tile>
+</mat-grid-list>
+<div class="row" *ngIf="createCharts">
+  <div style=" border: 2px black solid" class="col-sm-12">
+    <div style="width: 100%;">
+      <chart   [options]="pies[0]"></chart>
+    </div>
+  </div>
+
+</div>
+
+
+

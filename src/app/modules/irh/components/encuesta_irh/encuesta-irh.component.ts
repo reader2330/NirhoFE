@@ -16,10 +16,10 @@ export class EncuestaIrhComponent implements OnInit {
   temas = [{
     nombre: 'Imagen'
   }];
-  goQuestion= true;
+  goQuestion = true;
   companys = [];
   entrepise = {
-    id:0
+    id: 0
   };
   opts = [
     {name: 'SI', key: 1},
@@ -38,7 +38,7 @@ export class EncuestaIrhComponent implements OnInit {
   token = '';
 
 
-  constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver,  private EnterprisesService: EnterprisesService) {
+  constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver, private EnterprisesService: EnterprisesService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -49,6 +49,7 @@ export class EncuestaIrhComponent implements OnInit {
       }
     });
   }
+
   ngOnInit() {
     this.EnterprisesService.getEnterprises().subscribe(res => {
       console.log(res);
@@ -57,7 +58,7 @@ export class EncuestaIrhComponent implements OnInit {
   }
 
 
-  getPreguntasEmpresa(){
+  getPreguntasEmpresa() {
     this.goQuestion = true;
     console.log(this.entrepise);
     this.EnterprisesService.getPreguntas(this.entrepise.id).subscribe(res => {
@@ -75,8 +76,6 @@ export class EncuestaIrhComponent implements OnInit {
     }
 
   }
-
-
 
 
   updateValor(question) {
@@ -99,55 +98,62 @@ export class EncuestaIrhComponent implements OnInit {
       cancelButtonText: 'No, seguir contestando'
     }).then((result) => {
       if (result.value) {
+        this.calculateScoreTema();
         let data = {
-          id : 1,
-          score: this.calculateScore(),
-          value: true
+          idEmpresa: this.entrepise.id,
+          temas: this.temas
         };
-        Swal(
-          'Listo.',
-          'La calificación final es: ' + data.score,
-          'success'
-        ).then(() => {
-          this.response.emit({value: 1});
-        });
-        /*this.EnterprisesService.finalizeCuestionarioScore(data).subscribe(res => {
-          Swal(
-            'Listo.',
-            'El cuestionario se finalizo correctamente',
-            'success'
-          ).then(() => {
-            this.response.emit({value: 1});
+        this.EnterprisesService.saveCuestionario(data).subscribe(res => {
+          let id = res['id'];
+          let obj = {
+            id: id,
+            value: true,
+            score : this.calculateScore()
+          };
+          this.EnterprisesService.finalizeCuestionarioScore(obj).subscribe(res => {
+            Swal(
+              'Listo.',
+              'El cuestionario se finalizo correctamente',
+              'success'
+            ).then(() => {
+              this.response.emit({value: 1});
+            });
           });
-        })*/
+        });
 
       }
-      });
+    });
   }
 
-  calculateScore() {
+  calculateScoreTema() {
     let total = 0;
     let totalTema = 0;
     let scoreFinal = 0;
 
     for (let tema of this.temas) {
       let totalParcial = 0;
-        for (let question of tema['preguntas']) {
+      for (let question of tema['preguntas']) {
 
-            if (question.respuesta1 === 1) {
-                totalTema += 1;
-                totalParcial += (question.respuesta2 * question.respuesta3);
-            }
+        if (question.respuesta1 !== 0) {
+          if (question.respuesta1 == 1) {
+            totalTema += 1;
+            totalParcial += (question.respuesta2 * question.respuesta3);
+          } else {
+            totalTema += 1;
+          }
         }
-        console.log(totalParcial);
-        console.log(totalTema);
-        console.log(Math.round((totalParcial / totalTema)));
-       tema['score'] = (totalParcial / totalTema);
+      }
+      tema['score'] = (totalParcial / totalTema);
     }
-
   }
 
-
-
-
+  calculateScore() {
+    let scoreFinal = 0;
+    let total = 0;
+    for ( let tema of this.temas) {
+      total += tema['score'];
+    }
+    scoreFinal = (total / this.temas.length);
+    return scoreFinal;
+  }
 }

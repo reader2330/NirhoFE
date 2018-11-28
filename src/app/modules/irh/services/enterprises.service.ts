@@ -54,5 +54,11 @@ export class EnterprisesService {
   finalizeCuestionarioScore(data): Observable<any> {
     return this.http.post(this.api + 'cuestionarioEmpresaIRH/' + data.id + '/finalizado/'  + data.value + '/score/' + data.score , {}, {headers: this.headers});
   }
+  saveCuestionario(data) {
+    return this.http.post(this.api + 'cuestionarioEmpresaIRH/agregar', data, {headers: this.headers});
+  }
+  getData(id) {
+    return this.http.get(this.api + 'cuestionarioEmpresaIRH/empresa/' + id + '/scores', {headers: this.headers});
+  }
 
 }

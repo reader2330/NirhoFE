@@ -44,6 +44,7 @@
         <app-enterprise-irh (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 10" ></app-enterprise-irh>
         <app-cuestionario-select-irh (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 3"></app-cuestionario-select-irh>
         <app-encuesta-irh (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 4"></app-encuesta-irh>
+        <app-graficas-irh *ngIf="selectModule == 5" ></app-graficas-irh>
         <!--<app-rh-admin-irh></app-rh-admin-irh>-->
         <!--<app-organizational-development-irh></app-organizational-development-irh>-->
         <!--<app-training-irh></app-training-irh>-->

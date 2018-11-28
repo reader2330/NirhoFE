@@ -45,7 +45,11 @@ export class SidebarIrhComponent implements OnInit {
       {
        id_submodulo: 4,
         descripcion: 'Contestar preguntas'
-    });
+    },
+      {
+        id_submodulo: 5,
+        descripcion: 'Ver graficas'
+      });
 
     this.getUser();
   }

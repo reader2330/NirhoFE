@@ -25,6 +25,10 @@ import {CuestionarioSelectIRHComponent} from './components/cuestionario-select-i
 import {EncuestaIrhComponent} from './components/encuesta_irh/encuesta-irh.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { GraficasIRHComponent } from './components/graficas-irh/graficas-irh.component';
+import {highchartsFactory} from '../clb/clb.module';
+import {ChartModule} from 'angular2-highcharts';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 
 @NgModule({
   imports: [
@@ -35,6 +39,7 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
     FormsModule,
     ReactiveFormsModule,
     EmojiModule,
+    ChartModule,
     PickerModule,
 
   ],
@@ -55,7 +60,8 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
     EnterpriseDetailIrhComponent,
     CuestionarioSelectIRHComponent,
     EncuestaIrhComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    GraficasIRHComponent
   ],
   entryComponents: [
     RecruitingModalIrhComponent,
@@ -63,6 +69,11 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
     OrganizationalDevelopmentModalIrhComponent,
     RhAdminModalIrhComponent,
     TrainingModalIrhComponent
-  ]
+  ],
+  providers: [
+    {
+      provide: HighchartsStatic,
+      useFactory: highchartsFactory
+    }]
 })
 export class IrhModule { }
