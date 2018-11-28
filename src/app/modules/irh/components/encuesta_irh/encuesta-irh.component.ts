@@ -26,6 +26,15 @@ export class EncuestaIrhComponent implements OnInit {
     {name: 'NO', key: -1},
     {name: 'N/A', key: 0},
   ];
+  vigencias = [
+    {name: 'Vigente', key: 1},
+    {name: 'No vigente', key: 0}
+  ];
+  desarrollo = [
+    {name: 'En Desarrollo', key: 1},
+    {name: 'Formalizado y autorizado', key: 2},
+    {name: 'Formalizado, autorizado y administrado', key: 3}
+  ];
   token = '';
 
 
@@ -116,21 +125,25 @@ export class EncuestaIrhComponent implements OnInit {
       });
   }
 
-
   calculateScore() {
     let total = 0;
-    let cal = 0;
+    let totalTema = 0;
+    let scoreFinal = 0;
+
     for (let tema of this.temas) {
-      for (let question of tema['preguntas']) {
-        if (question.respuesta !== 0) {
-          total += 1;
-          if(question.respuesta === 1) {
-            cal += 1;
-          }
+      let totalParcial = 0;
+        for (let question of tema['preguntas']) {
+
+            if (question.respuesta1 === 1) {
+                totalTema += 1;
+                totalParcial += (question.respuesta2 * question.respuesta3);
+            }
         }
-      }
+        console.log(totalParcial);
+        console.log(totalTema);
+        console.log(Math.round((totalParcial / totalTema)));
+       tema['score'] = (totalParcial / totalTema);
     }
-    return (cal / total) * 10;
 
   }
 

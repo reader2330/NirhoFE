@@ -63,7 +63,7 @@
       </mat-accordion>
     </mat-grid-tile>-->
 
-  <mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="600px">
+  <mat-grid-list style="margin-bottom: 100px;width: 100%" [cols]="checkMobileCols()" rowHeight="700px">
 
   <mat-grid-tile *ngIf="!goQuestion" style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2">
     <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
@@ -77,10 +77,20 @@
         <mat-panel-description>
           <div class="row">
             <div *ngFor="let question of tema.preguntas" class="col-sm-12">
-              <label style="margin-right: 20px"> {{question.enunciado}}</label>
-              <mat-form-field>
-                <mat-select [(ngModel)]="question.respuesta" >
+              <label style="margin-right: 30px"> {{question.enunciado}}</label>
+              <mat-form-field style="margin-right: 30px">
+                <mat-select [(ngModel)]="question.respuesta1" >
                   <mat-option *ngFor="let opt of opts" [value]="opt.key">{{opt.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field style="margin-right: 30px">
+                <mat-select [(ngModel)]="question.respuesta2" >
+                  <mat-option *ngFor="let vig of vigencias" [value]="vig.key">{{vig.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select [(ngModel)]="question.respuesta3" >
+                  <mat-option *ngFor="let des of desarrollo" [value]="des.key">{{des.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>

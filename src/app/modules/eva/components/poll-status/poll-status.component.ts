@@ -55,7 +55,7 @@ export class PollStatusComponent implements OnInit {
   ngOnInit() {
   }
 
-  assign(){}
+  assign() {}
 
   getProject() {
   }
