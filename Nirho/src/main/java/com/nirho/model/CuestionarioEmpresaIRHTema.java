@@ -37,6 +37,8 @@ public class CuestionarioEmpresaIRHTema implements Serializable {
     private String descripcion;
     @Column(name="status")
     private boolean status;
+    @Column(name = "score")
+	private double score;
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cuestionarioEmpresaIRHTema")
@@ -84,6 +86,14 @@ public class CuestionarioEmpresaIRHTema implements Serializable {
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
 	}
 
 	public Set<CuestionarioEmpresaIRHPregunta> getPreguntas() {

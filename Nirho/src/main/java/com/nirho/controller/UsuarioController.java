@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -81,6 +82,17 @@ public class UsuarioController {
         } else {
         	return new ResponseEntity<String>("Unauthorized", HttpStatus.UNAUTHORIZED); 
         }
+	}
+	
+	@RequestMapping(value = "/role/{role}/submodulos", method = RequestMethod.GET)
+	public ResponseEntity<?> submodulos(@PathVariable("role") int role) {
+    	List<ClbSubmodulo> submodulos = null;
+		try {
+			submodulos = rolService.obtenerSubModulos(role);
+		} catch (NirhoServiceException e) {
+			logger.info("Exception [" + e.getMessage() +"]");
+		}
+		return new ResponseEntity<>(submodulos, HttpStatus.OK);	
 	}
 	
 	@RequestMapping(value = "/consultores", method = RequestMethod.GET)
