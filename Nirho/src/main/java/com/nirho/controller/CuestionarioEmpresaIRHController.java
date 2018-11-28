@@ -1,5 +1,6 @@
 package com.nirho.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.CuestionarioEmpresaIRH;
+import com.nirho.model.CuestionarioEmpresaIRHPregunta;
 import com.nirho.model.CuestionarioEmpresaIRHTema;
 import com.nirho.service.CuestionarioEmpresaIRHService;
 
@@ -66,8 +68,21 @@ public class CuestionarioEmpresaIRHController {
 		try {
 			List<CuestionarioEmpresaIRH> cuestionarios = cuestionarioEmpresaServiceIRH.getListCuestionarioEmpresaIRHByEmpresaId(0);
 			if(cuestionarios.size() > 0) {
-				Set<CuestionarioEmpresaIRHTema> temas = cuestionarios.get(0).getTemas();
-				return temas;
+				Set<CuestionarioEmpresaIRHTema> newTemas = new HashSet<>();
+				for(CuestionarioEmpresaIRHTema tema : cuestionarios.get(0).getTemas()) {
+					CuestionarioEmpresaIRHTema newTema = new CuestionarioEmpresaIRHTema();
+					newTema.setNombre(tema.getNombre());
+					newTema.setStatus(true);
+					Set<CuestionarioEmpresaIRHPregunta> newPreguntas = new HashSet<>();
+					for(CuestionarioEmpresaIRHPregunta pregunta : tema.getPreguntas()) {
+						CuestionarioEmpresaIRHPregunta newPregunta = new CuestionarioEmpresaIRHPregunta();
+						newPregunta.setEnunciado(pregunta.getEnunciado());
+						newPreguntas.add(newPregunta);
+					}
+					newTema.setPreguntas(newPreguntas);
+					newTemas.add(newTema);
+				}
+				return newTemas;
 			} else {
 				throw new NirhoControllerException("");
 			}
