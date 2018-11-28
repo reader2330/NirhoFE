@@ -18,6 +18,8 @@ export class AssignPollComponent implements OnInit {
     evaluador: new FormControl(null),
     participante: new FormControl(null),
   });
+  evaluador = [];
+  participantes = [];
 
   constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
     breakpointObserver.isMatched(('(max-width:450)'));

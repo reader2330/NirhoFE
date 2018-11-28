@@ -113,4 +113,5 @@ export class DataCompany360Component implements OnInit {
     this.company = this.companyForm.value;
     sessionStorage.setItem('company', JSON.stringify(this.company));
   }
+  cancelCompany() {}
 }

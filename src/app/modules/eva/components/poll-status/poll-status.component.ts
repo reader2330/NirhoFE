@@ -29,6 +29,8 @@ export class PollStatusComponent implements OnInit {
   projectForm = new FormGroup({
     project: new FormControl(null),
   });
+  evaluador = [];
+
   constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
@@ -52,6 +54,8 @@ export class PollStatusComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  assign(){}
 
   getProject() {
   }

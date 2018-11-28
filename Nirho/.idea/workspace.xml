@@ -7,7 +7,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nirho/util/EmailUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nirho/util/EmailUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/adm/components/bandeja-adm/bandeja-adm.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/adm/components/bandeja-adm/bandeja-adm.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/adm/components/bandeja-adm/bandeja-adm.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/adm/components/bandeja-adm/bandeja-adm.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/adm/components/empleado-detalle/empleado-detalle.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/adm/components/empleado-detalle/empleado-detalle.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/adm/components/empleado-detalle/empleado-detalle.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/adm/components/empleado-detalle/empleado-detalle.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/adm/components/labor-modal-adm/labor-modal-adm.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/adm/components/labor-modal-adm/labor-modal-adm.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/adm/components/scholarship-adm/scholarship-adm.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/adm/components/scholarship-adm/scholarship-adm.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/bandeja/bandeja.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/encuesta/encuesta.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/encuesta/encuesta.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/estadisticas/estadisticas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/estadisticas/estadisticas.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/eva/components/assign-poll/assign-poll.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/eva/components/assign-poll/assign-poll.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/eva/components/forms/data-company-360/data-company-360.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/eva/components/forms/data-company-360/data-company-360.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/eva/components/forms/data-project-360/data-project-360.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/eva/components/forms/data-project-360/data-project-360.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/eva/components/poll-status/poll-status.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/eva/components/poll-status/poll-status.component.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,14 +49,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="70" />
+          <entry key="java" value="71" />
           <entry key="sql" value="1" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="70" />
+          <entry key="JAVA" value="71" />
           <entry key="SQL" value="1" />
           <entry key="XML" value="1" />
         </counts>
@@ -81,7 +97,16 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/util/EmailUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
-              <caret line="5" column="75" selection-start-line="5" selection-start-column="75" selection-end-line="5" selection-end-column="75" />
+              <caret line="5" column="71" selection-start-line="5" selection-start-column="71" selection-end-line="5" selection-end-column="71" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVO360Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="181" column="43" lean-forward="true" selection-start-line="181" selection-start-column="43" selection-end-line="181" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -109,15 +134,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1020">
               <caret line="96" column="13" selection-start-line="96" selection-start-column="13" selection-end-line="96" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/model/CuestionarioProyecto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -293,7 +309,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543213093795" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543297680475" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="project.structure.last.edited" value="Project" />
@@ -385,7 +401,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35399000" />
+    <option name="totallyTimeSpent" value="37050000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="954" extended-state="0" />
@@ -431,13 +447,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVO360Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="181" column="80" selection-start-line="181" selection-start-column="80" selection-end-line="181" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/service/EstatusProyectoService.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -765,10 +774,17 @@
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoEVO360Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="181" column="43" lean-forward="true" selection-start-line="181" selection-start-column="43" selection-end-line="181" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/util/EmailUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="5" column="75" selection-start-line="5" selection-start-column="75" selection-end-line="5" selection-end-column="75" />
+          <caret line="5" column="71" selection-start-line="5" selection-start-column="71" selection-end-line="5" selection-end-column="71" />
         </state>
       </provider>
     </entry>

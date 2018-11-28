@@ -19,7 +19,7 @@ export class BandejaComponent implements OnInit {
 
   constructor(private ProyectoService: ProyectoService) {
   }
-  displayedColumns: string[] = ['nombre', 'empresa', 'empleados', 'participantes', 'periodo', 'frecuenciaEval', 'detail4','detail3'];
+  displayedColumns: string[] = ['nombre', 'empresa', 'empleados', 'participantes', 'FechaFinal', 'frecuenciaEval', 'detail4', 'detail3'];
   dataSource = [];
 
 

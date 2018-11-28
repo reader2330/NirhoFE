@@ -69,76 +69,6 @@ export class ScholarshipAdmComponent implements OnInit {
     titulo: false
   };
   escolaridades = [
-
-      {
-        id:1,
-        descripcionCatalogo:"Primaria Trunca"
-      },
-      {
-        id:2,
-        descripcionCatalogo:"Primaria Completa"
-      },
-      {
-        id:3,
-        descripcionCatalogo:"Secundaria Trunca"
-      },
-      {
-        id:4,
-        descripcionCatalogo:"Secundaria Completa"
-      },
-      {
-        id:5,
-        descripcionCatalogo:"Carrera Técnica Completa"
-      },
-      {
-        id:6,
-        descripcionCatalogo:"Carrera Técnica Incompleta"
-      },
-      {
-        id:7,
-        descripcionCatalogo:"Bachillerato Completo"
-      },
-      {
-        id:8,
-        descripcionCatalogo:"Bachillerato Incompleto"
-      },
-      {
-        id:9,
-        descripcionCatalogo:"Universidad Completa"
-      },
-      {
-        id:10,
-        descripcionCatalogo:"Universidad Incompleta"
-      },
-      {
-        id:11,
-        descripcionCatalogo:"Maestría Completa"
-      },
-      {
-        id:12,
-        descripcionCatalogo:"Maestría Incompleta"
-      },
-      {
-        id:13,
-        descripcionCatalogo:"Doctorado Completo"
-      },
-      {
-        id:14,
-        descripcionCatalogo:"Doctorado Incompleto"
-      },
-      {
-        id:15,
-        descripcionCatalogo:"Universitario Técnico Completo"
-      },
-      {
-        id:16,
-        descripcionCatalogo:"Universitario Técnico Incompleto"
-      },
-      {
-        id:17,
-        descripcionCatalogo:"Otro"
-      }
-
   ];
   mobile = false;
   scholarshipForm = new FormGroup(
@@ -194,7 +124,7 @@ export class ScholarshipAdmComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getScholarship();
+    this.getScholarship();
   }
   cancelCompany(){}
 

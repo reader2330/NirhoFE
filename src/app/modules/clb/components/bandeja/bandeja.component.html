@@ -28,9 +28,9 @@
   </ng-container>
 
   <!-- Symbol Column -->
-  <ng-container matColumnDef="periodo">
-    <th mat-header-cell *matHeaderCellDef style="padding-right: 30px;"> PERIODO ESTUDIO </th>
-    <td mat-cell *matCellDef="let element">{{element.perido}} </td>
+  <ng-container matColumnDef="FechaFinal">
+    <th mat-header-cell *matHeaderCellDef style="padding-right: 30px;"> Fin de proyecto </th>
+    <td mat-cell *matCellDef="let element">{{element.fechaFin | date}} </td>
   </ng-container>
 
   <!-- Symbol Column -->

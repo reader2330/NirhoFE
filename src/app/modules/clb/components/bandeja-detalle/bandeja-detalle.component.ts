@@ -17,7 +17,15 @@ export class BandejaDetalleComponent implements OnInit {
   giros = [];
   puestos = [];
   tiposContacto = [];
-  data = {};
+  data:any = {
+    idEmpresa: {},
+    idContacto: {},
+    nombre : '',
+    numEmpleados: 0,
+    numParticipantes: 0,
+    sedes: ''
+
+  };
   panelOpenState = true;
   muestra = {};
 

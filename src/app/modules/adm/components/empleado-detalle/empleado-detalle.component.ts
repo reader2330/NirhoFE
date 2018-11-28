@@ -45,219 +45,14 @@ export class EmpleadoDetalleComponent implements OnInit {
   nacionalidades = [];
   bancos = [];
   hipotecas = [
-    {
-      id: 1,
-      descripcionCatalogo: 'INFONAVIT'
-    },
-    {
-      id: 2,
-      descripcionCatalogo: 'FOVISSTE'
-    },
-    {
-      id: 3,
-      descripcionCatalogo : 'FONACOT'
-    },
-    {
-      id: 4,
-      descripcionCatalogo : 'OTRO'
-    }
   ];
-  escolaridades = [{
-    id:1,
-    descripcionCatalogo:"Primaria Trunca"
-  },
-    {
-      id:2,
-      descripcionCatalogo:"Primaria Completa"
-    },
-    {
-      id:3,
-      descripcionCatalogo:"Secundaria Trunca"
-    },
-    {
-      id:4,
-      descripcionCatalogo:"Secundaria Completa"
-    },
-    {
-      id:5,
-      descripcionCatalogo:"Carrera Técnica Completa"
-    },
-    {
-      id:6,
-      descripcionCatalogo:"Carrera Técnica Incompleta"
-    },
-    {
-      id:7,
-      descripcionCatalogo:"Bachillerato Completo"
-    },
-    {
-      id:8,
-      descripcionCatalogo:"Bachillerato Incompleto"
-    },
-    {
-      id:9,
-      descripcionCatalogo:"Universidad Completa"
-    },
-    {
-      id:10,
-      descripcionCatalogo:"Universidad Incompleta"
-    },
-    {
-      id:11,
-      descripcionCatalogo:"Maestría Completa"
-    },
-    {
-      id:12,
-      descripcionCatalogo:"Maestría Incompleta"
-    },
-    {
-      id:13,
-      descripcionCatalogo:"Doctorado Completo"
-    },
-    {
-      id:14,
-      descripcionCatalogo:"Doctorado Incompleto"
-    },
-    {
-      id:15,
-      descripcionCatalogo:"Universitario Técnico Completo"
-    },
-    {
-      id:16,
-      descripcionCatalogo:"Universitario Técnico Incompleto"
-    },
-    {
-      id:17,
-      descripcionCatalogo:"Otro"
-    }
+  escolaridades = [
   ];
   tipoContrato = [
-    {
-      id:1,
-      descripcionCatalogo:"De ley"
-    },
-    {
-      id: 2,
-      descripcionCatalogo:"Superiores de ley"
-    },
-    {
-      id:3,
-      descripcionCatalogo:"Honorarios"
-    },
-    {
-      id:4,
-      descripcionCatalogo:"Salarios asimilados"
-    },
-    {
-      id:5,
-      descripcionCatalogo:"Comisionista"
-    },
-    {
-      id:6,
-      descripcionCatalogo:"Becario"
-    },
-    {
-      id:7,
-      descripcionCatalogo:"Servicio social"
-    },
-    {
-      id:8,
-      descripcionCatalogo:"Otro"
-    }
     ];
   tipoContacto = [
-
-    {
-      id:1,
-      descripcionCatalogo: "Padre"
-    },
-    {
-      id:2,
-      descripcionCatalogo: "Madre"
-    },
-    {
-      id:3,
-      descripcionCatalogo:"Hermano / Hermana"
-    },
-    {
-      id:4,
-      descripcionCatalogo:"Esposo/Esposa"
-    },
-    {
-      id:5,
-      descripcionCatalogo:"Hijo / Hija"
-    },
-    {
-      id:6,
-      descripcionCatalogo:"Abuelo / Abuela"
-    },
-    {
-      id:7,
-      descripcionCatalogo:"Nieto / Nieta"
-    },
-    {
-      id:8,
-      descripcionCatalogo:"Tío / Tía"
-    },
-    {
-      id:9,
-      descripcionCatalogo:"Amigo / Amiga"
-    },
-    {
-      id:10,
-      descripcionCatalogo:"Concubina / Concubino"
-    },
-    {
-      id:11,
-      descripcionCatalogo:"Otro"
-    }
-
   ];
   puestos = [
-    {
-      id: 1,
-      descripcionCatalogo:"Becario"
-    },
-    {
-      id: 2,
-      descripcionCatalogo:"Analista"
-    },
-    {
-      id: 3,
-      descripcionCatalogo:"Consultor junior"
-    },
-    {
-      id: 4,
-      descripcionCatalogo:"Consultor semisenior"
-    },
-    {
-      id: 5,
-      descripcionCatalogo:"Consultor senior"
-    },
-    {
-      id: 6,
-      descripcionCatalogo:"Gerente de operaciones"
-    },
-    {
-      id: 7,
-      descripcionCatalogo:"Analista de ventas"
-    },
-    {
-      id: 8,
-      descripcionCatalogo:"Consultor ventas junior"
-    },
-    {
-      id: 9,
-      descripcionCatalogo:"Consultor ventas semisenior"
-    },
-    {
-      id: 10,
-      descripcionCatalogo:"Consultor ventas senior"
-    },
-    {
-      id: 11,
-      descripcionCatalogo:"Gerente de ventas"
-    }
   ];
 
 
@@ -269,6 +64,7 @@ export class EmpleadoDetalleComponent implements OnInit {
     this.getBank();
     this.getScholarship();
     this.getJob();
+    this.getTypeContac();
   }
 
   getEmpleado(id) {
@@ -341,6 +137,13 @@ export class EmpleadoDetalleComponent implements OnInit {
       if (res) {
         console.log("puestos", res);
         this.puestos = res;
+      }
+    });
+  }
+  getTypeContac() {
+    this.CatalogoAdm.getTypeContac().subscribe((res) => {
+      if (res) {
+        this.tipoContacto = res;
       }
     });
   }
