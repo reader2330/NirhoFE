@@ -67,7 +67,7 @@
 
   <mat-grid-tile *ngIf="!goQuestion" style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2">
     <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
-      <mat-expansion-panel *ngFor= "let tema of temas" >
+      <mat-expansion-panel *ngFor= "let tema of temas; let i = index" [expanded]="i == 0" >
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{tema.nombre}} <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>
@@ -79,16 +79,19 @@
             <div *ngFor="let question of tema.preguntas" class="col-sm-12">
               <label style="margin-right: 30px"> {{question.enunciado}}</label>
               <mat-form-field style="margin-right: 30px">
+                <mat-label >Se tiene</mat-label>
                 <mat-select [(ngModel)]="question.respuesta1" >
                   <mat-option *ngFor="let opt of opts" [value]="opt.key">{{opt.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field style="margin-right: 30px">
+                <mat-label >¿Esta vigente?</mat-label>
                 <mat-select [(ngModel)]="question.respuesta2" >
                   <mat-option *ngFor="let vig of vigencias" [value]="vig.key">{{vig.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
+                <mat-label>Situación</mat-label>
                 <mat-select [(ngModel)]="question.respuesta3" >
                   <mat-option *ngFor="let des of desarrollo" [value]="des.key">{{des.name}}</mat-option>
                 </mat-select>
