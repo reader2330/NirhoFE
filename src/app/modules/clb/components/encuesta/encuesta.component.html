@@ -4,7 +4,8 @@
 </mat-toolbar>
 <div class="logo-nav">
 </div>
-  <mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="500px">
+
+  <mat-grid-list style="width: 100%; " [cols]="checkMobileCols()" rowHeight="300px">
 
     <!--<mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="2" >
       <mat-accordion  class="example-headers-align">
@@ -99,12 +100,16 @@
     </mat-accordion>
 
   </mat-grid-tile>
+  </mat-grid-list>
+<mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="100px">
+
   <mat-grid-tile  style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="1">
-      <button mat-raised-button color="accent" (click)="FinishCuestionario()">Finalizar cuestionario</button>
+    <button mat-raised-button color="accent" (click)="FinishCuestionario()">Finalizar cuestionario</button>
   </mat-grid-tile>
 
 
-  </mat-grid-list>
+</mat-grid-list>
+
 
 
 

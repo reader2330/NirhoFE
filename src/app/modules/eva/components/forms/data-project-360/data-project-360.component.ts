@@ -20,6 +20,7 @@ export class DataProject360Component implements OnInit {
     operativeLevelEmployees: Number,
     totalEmployees: Number
   };
+  puestos = [];
 
   projectForm = new FormGroup({
     id: new FormControl(null),

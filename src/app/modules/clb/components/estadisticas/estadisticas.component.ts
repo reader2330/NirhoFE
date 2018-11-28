@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ProyectoService} from '../../services/proyecto.service';
-import construct = Reflect.construct;
+
 import Swal from "sweetalert2";
 
 @Component({
@@ -12,7 +12,9 @@ export class EstadisticasComponent implements OnInit {
   mobile = false;
   proyects = [];
   data = {};
-  proyect = {};
+  proyect = {
+    idProyecto: 0
+  };
   options = [];
   pies = [];
   totales = [0, 0, 0, 0, 0];
@@ -20,12 +22,9 @@ export class EstadisticasComponent implements OnInit {
   @Output() response = new EventEmitter();
 
   constructor(private ProyectService: ProyectoService) {
-
   }
-
   ngOnInit() {
     this.getProyects();
-
   }
 
   getProyects() {
