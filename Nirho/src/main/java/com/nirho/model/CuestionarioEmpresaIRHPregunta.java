@@ -32,21 +32,28 @@ public class CuestionarioEmpresaIRHPregunta implements Serializable {
     @Basic(optional = false)
     @Column(name = "tipo")
     private int tipo;
-    @Column(name = "respuesta")
-    private int respuesta;
+    @Column(name = "respuesta1")
+    private int respuesta1;
+    @Column(name = "respuesta2")
+    private int respuesta2;
+    @Column(name = "respuesta3")
+    private int respuesta3;
     
 	public CuestionarioEmpresaIRHPregunta() {
 		super();
 	}
 	
-	public CuestionarioEmpresaIRHPregunta(Long id, String enunciado, int tipo, int respuesta) {
+	public CuestionarioEmpresaIRHPregunta(Long id, String enunciado, int tipo, int respuesta1, int respuesta2,
+			int respuesta3) {
 		super();
 		this.id = id;
 		this.enunciado = enunciado;
 		this.tipo = tipo;
-		this.respuesta = respuesta;
+		this.respuesta1 = respuesta1;
+		this.respuesta2 = respuesta2;
+		this.respuesta3 = respuesta3;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -70,13 +77,29 @@ public class CuestionarioEmpresaIRHPregunta implements Serializable {
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
-	
-	public int getRespuesta() {
-		return respuesta;
+
+	public int getRespuesta1() {
+		return respuesta1;
 	}
-	
-	public void setRespuesta(int respuesta) {
-		this.respuesta = respuesta;
-	}    
-     
+
+	public void setRespuesta1(int respuesta1) {
+		this.respuesta1 = respuesta1;
+	}
+
+	public int getRespuesta2() {
+		return respuesta2;
+	}
+
+	public void setRespuesta2(int respuesta2) {
+		this.respuesta2 = respuesta2;
+	}
+
+	public int getRespuesta3() {
+		return respuesta3;
+	}
+
+	public void setRespuesta3(int respuesta3) {
+		this.respuesta3 = respuesta3;
+	}
+	 
 }
