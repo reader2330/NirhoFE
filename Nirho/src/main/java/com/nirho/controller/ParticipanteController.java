@@ -35,12 +35,14 @@ import com.nirho.model.EstatusProyecto;
 import com.nirho.model.Participante;
 import com.nirho.model.ParticipantePK;
 import com.nirho.model.Proyecto;
+import com.nirho.model.Usuario;
 import com.nirho.service.CuestionarioParticipanteService;
 import com.nirho.service.CuestionarioProyectoService;
 import com.nirho.service.EmailService;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.ParticipanteService;
 import com.nirho.service.ProyectoService;
+import com.nirho.service.UsuarioService;
 import com.nirho.util.NirhoUtil;
 
 @RestController
@@ -60,6 +62,8 @@ public class ParticipanteController {
 	private CuestionarioProyectoService cuestionarioService;
 	@Autowired
 	private CuestionarioParticipanteService cuestionarioParticipanteService;
+	@Autowired
+	UsuarioService usuarioService;
 
 	@GetMapping(value = "/organigrama")
 	public List<NivelDTO> organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
@@ -271,7 +275,9 @@ public class ParticipanteController {
     		datos.setNombreParticipante(participante.getNombres());
     		datos.setNombreProyecto(participante.getProyecto().getNombre());
     		datos.setToken(participante.getToken());
-    		emailService.sendEmail(datos, request);
+    		String usuario = (String) request.getAttribute("username");
+			Usuario usuarioEnSesion = usuarioService.obtenerUsuario(usuario);
+    		emailService.sendEmail(datos, usuarioEnSesion.getEmail());
     	} catch(NirhoServiceException nse) {
     		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
     	}
