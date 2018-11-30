@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -145,7 +147,7 @@ public class ParticipanteController {
 	}
 
 	@RequestMapping(path = "/emailSend", method = RequestMethod.GET)
-    public void sendMail(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException {
+    public void sendMail(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletRequest request) throws NirhoControllerException {
         try {
         	Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
         	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
@@ -155,7 +157,7 @@ public class ParticipanteController {
 
         	List<Participante> participantes = participanteService.obtenerParticipantes(idProyecto);
             for(Participante participante: participantes) {
-            	enviarCorreoParticipante(participante);
+            	enviarCorreoParticipante(participante, request);
             }
             
             EstatusProyecto estatus = new EstatusProyecto();
@@ -170,7 +172,7 @@ public class ParticipanteController {
     }
 
 	@RequestMapping(path = "/cuestionariosSend", method = RequestMethod.GET)
-    public void cuestionariosSend(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException {
+    public void cuestionariosSend(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletRequest request) throws NirhoControllerException {
         try {
         	Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
         	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
@@ -195,7 +197,7 @@ public class ParticipanteController {
 						logger.info("CuestionarioParticipante [" + cuetionarioParticipante + "]");
 						cuestionarioParticipanteService.guardar(cuetionarioParticipante);
 					}
-					enviarCorreoParticipante(participante);
+					enviarCorreoParticipante(participante, request);
 				} catch (NirhoServiceException nse) {
 					logger.info("Problemas al enviar el cuestionario a la BD, causa + [" + nse.getMessage() + "]");
 				}
@@ -262,14 +264,14 @@ public class ParticipanteController {
 		return participante;
 	}
 	
-	private void enviarCorreoParticipante(Participante participante) {
+	private void enviarCorreoParticipante(Participante participante, HttpServletRequest request) {
 		try {
     		EmailDatos datos = new EmailDatos();
     		datos.setEmailDestino(participante.getCorreoElectronico());
     		datos.setNombreParticipante(participante.getNombres());
     		datos.setNombreProyecto(participante.getProyecto().getNombre());
     		datos.setToken(participante.getToken());
-    		emailService.sendEmail(datos);
+    		emailService.sendEmail(datos, request);
     	} catch(NirhoServiceException nse) {
     		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
     	}

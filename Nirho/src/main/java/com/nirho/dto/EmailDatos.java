@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class EmailDatos  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String emailDestino;
+	private String emailConsultor;
 	private String nombreParticipante;
 	private String nombreProyecto;
 	private String token;
@@ -14,6 +15,12 @@ public class EmailDatos  implements Serializable {
 	}
 	public void setEmailDestino(String emailDestino) {
 		this.emailDestino = emailDestino;
+	}
+	public String getEmailConsultor() {
+		return emailConsultor;
+	}
+	public void setEmailConsultor(String emailConsultor) {
+		this.emailConsultor = emailConsultor;
 	}
 	public String getNombreParticipante() {
 		return nombreParticipante;
@@ -33,11 +40,11 @@ public class EmailDatos  implements Serializable {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
 	@Override
 	public String toString() {
-		return "DatosEmail [nombreParticipante=" + nombreParticipante + ", nombreProyecto=" + nombreProyecto
-				+ ", token=" + token + "]";
+		return "EmailDatos [emailDestino=" + emailDestino + ", emailConsultor=" + emailConsultor
+				+ ", nombreParticipante=" + nombreParticipante + ", nombreProyecto=" + nombreProyecto + ", token="
+				+ token + "]";
 	}
 		
 }

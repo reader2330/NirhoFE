@@ -9,16 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nirho.dto.EmailDatos;
-import com.nirho.service.EmailService;
-
 @RestController
 public class EmailTestController {
 
     @Autowired
     private JavaMailSender mailSender;
-    @Autowired
-    private EmailService emailService;
     
     @RequestMapping(path = "/email-test-1", method = RequestMethod.GET)
     public String sendMail1() {
@@ -40,19 +35,4 @@ public class EmailTestController {
         }
     }
     
-    @RequestMapping(path = "/email-test-2", method = RequestMethod.GET)
-    public String sendMail2() {
-        try {
-        	EmailDatos datos = new EmailDatos();
-        	datos.setEmailDestino("eistenroman@gmail.com");
-        	datos.setNombreParticipante("Eisten Román");
-        	datos.setNombreProyecto("Clima Laboral Magallanes S.A.");
-        	datos.setToken("9-ecl512087emog-5");
-        	emailService.sendEmail(datos);
-        	return "OK";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Erro al enviar e-mail";
-        }
-    }
 }
