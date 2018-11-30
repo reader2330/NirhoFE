@@ -102,6 +102,13 @@ public class CuestionarioProyectoController {
 	public List<CuetionarioParticipante> participante(@RequestParam(name="token") String token) throws NirhoControllerException{
 		List<CuetionarioParticipante> preguntas = new ArrayList<>();
 		try {
+			String[] datos = token.split("-");
+			Integer idProyecto = Integer.parseInt(datos[2]);
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
+        	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
+        	if(estatusActual >= ProyectoConstants.ESTATUS_FINALIZADO.intValue()) {
+        		throw new NirhoControllerException("Se ha finalizado el esdudio del proyecto");
+        	}
 			preguntas = cuestionarioService.obtenerCuestionarioParticipante(token);
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
