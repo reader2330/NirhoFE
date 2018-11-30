@@ -59,6 +59,8 @@ public class Proyecto implements Serializable {
     private String nombreRh;
     @Column(name = "email_rh")
     private String emailRh;
+    @Column(name = "comentario_grap")
+    private String comentarioGrap;
     @Basic(optional = false)
     @Column(name = "id_modulo")
     private Integer idModulo;
@@ -191,14 +193,23 @@ public class Proyecto implements Serializable {
 	public void setEmailRh(String emailRh) {
 		this.emailRh = emailRh;
 	}
+	
+	public String getComentarioGrap() {
+		return comentarioGrap;
+	}
+
+	public void setComentarioGrap(String comentarioGrap) {
+		this.comentarioGrap = comentarioGrap;
+	}
 
 	@Override
 	public String toString() {
 		return "Proyecto [idProyecto=" + idProyecto + ", nombre=" + nombre + ", numEmpleados=" + numEmpleados
 				+ ", sedes=" + sedes + ", numParticipantes=" + numParticipantes + ", fechaRegistro=" + fechaRegistro
 				+ ", fechaFin=" + fechaFin + ", diasGarantia=" + diasGarantia + ", frecuenciaEval=" + frecuenciaEval
-				+ ", nombreRh=" + nombreRh + ", emailRh=" + emailRh + ", idModulo=" + idModulo + ", idEmpresa="
-				+ idEmpresa + ", idContacto=" + idContacto + ", idEstatus=" + idEstatus + "]";
+				+ ", nombreRh=" + nombreRh + ", emailRh=" + emailRh + ", comentarioGrap=" + comentarioGrap
+				+ ", idModulo=" + idModulo + ", idEmpresa=" + idEmpresa + ", idContacto=" + idContacto + ", idEstatus="
+				+ idEstatus + "]";
 	}
-
+	
 }

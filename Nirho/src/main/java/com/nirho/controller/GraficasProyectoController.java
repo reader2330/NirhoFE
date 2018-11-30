@@ -15,7 +15,9 @@ import com.nirho.dto.GraficaRespPregDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.GraficaProyecto;
+import com.nirho.model.Proyecto;
 import com.nirho.service.GraficasProyectoService;
+import com.nirho.service.ProyectoService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -25,6 +27,8 @@ public class GraficasProyectoController {
 	
 	@Autowired
 	GraficasProyectoService graficasService;
+	@Autowired
+	ProyectoService proyectoService;
 		
 	@RequestMapping(value = "/respuestas", method = RequestMethod.GET)
 	@ResponseBody
@@ -58,6 +62,17 @@ public class GraficasProyectoController {
 		logger.info(" ********************************* GraficaProyecto [" + graficaProyecto + "] *****************************");
 		try {
 			graficasService.guardarComentario(graficaProyecto);
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al registrar el comentario en la BD");
+		}
+	}
+	
+	@RequestMapping(value = "/guardarComentPastel", method = RequestMethod.POST)
+	@ResponseBody
+	public void guardarComentPastel(@RequestBody Proyecto proyecto) throws NirhoControllerException {
+		logger.info(" ********************************* Proyecto [" + proyecto + "] *****************************");
+		try {
+			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el comentario en la BD");
 		}
