@@ -32,12 +32,12 @@ public class CuestionarioEmpresaIRH implements Serializable {
 	@Column(name = "finalizado")
 	private boolean finalizado;
 	
-	@Column(name = "tema")
-	private String tema;
+	@Column(name = "score")
+	private double score;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cuestionarioEmpresaIRH")
-   	private Set<CuestionarioEmpresaIRHPregunta> preguntas;
+   	private Set<CuestionarioEmpresaIRHTema> temas;
 	
 	public CuestionarioEmpresaIRH() {
 		super();
@@ -67,26 +67,26 @@ public class CuestionarioEmpresaIRH implements Serializable {
 		this.finalizado = finalizado;
 	}
 
-	public String getTema() {
-		return tema;
+	public double getScore() {
+		return score;
 	}
 
-	public void setTema(String tema) {
-		this.tema = tema;
+	public void setScore(double score) {
+		this.score = score;
 	}
 
-	public Set<CuestionarioEmpresaIRHPregunta> getPreguntas() {
-		return preguntas;
+	public Set<CuestionarioEmpresaIRHTema> getTemas() {
+		return temas;
 	}
 
-	public void setPreguntas(Set<CuestionarioEmpresaIRHPregunta> preguntas) {
-		this.preguntas = preguntas;
+	public void setTemas(Set<CuestionarioEmpresaIRHTema> temas) {
+		this.temas = temas;
 	}
 
 	@Override
 	public String toString() {
 		return "CuestionarioEmpresaIRH [id=" + id + ", idEmpresa=" + idEmpresa + ", finalizado=" + finalizado
-				+ ", tema=" + tema + ", preguntas=" + preguntas + "]";
+				+ ", temas=" + temas + "]";
 	}
 	
 }

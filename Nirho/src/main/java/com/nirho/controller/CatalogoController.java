@@ -204,7 +204,7 @@ public class CatalogoController {
 	public List<Catalogo> nivelIdiomaEmpleado() throws NirhoControllerException{
 		List<Catalogo> catalogo = new ArrayList<>();
 		try {
-			catalogo = catalogoService.obtenerCatalogo(new Long("20"));
+			catalogo = catalogoService.obtenerCatalogo(new Long("5"));
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el catalogo");
 		}
@@ -215,7 +215,7 @@ public class CatalogoController {
 	public List<Catalogo> creditoHipotecario() throws NirhoControllerException{
 		List<Catalogo> catalogo = new ArrayList<>();
 		try {
-			catalogo = catalogoService.obtenerCatalogo(new Long("21"));
+			catalogo = catalogoService.obtenerCatalogo(new Long("20"));
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el catalogo");
 		}

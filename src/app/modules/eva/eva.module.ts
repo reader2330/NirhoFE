@@ -20,14 +20,23 @@ import { AssignPollComponent } from './components/assign-poll/assign-poll.compon
 import { ViewAssignsComponent } from './components/view-assigns/view-assigns.component';
 import { PollConfigComponent } from './components/poll-config/poll-config.component';
 import { ViewPollComponent } from './components/view-poll/view-poll.component';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { PollStatusComponent } from './components/poll-status/poll-status.component';
+
+export function highchartsFactory() {
+  const hc = require('highcharts');
+  const dd = require('highcharts/modules/drilldown');
+  dd(hc);
+
+  return hc;
+}
 
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
-    ChartModule.forRoot(require('highcharts')),
+    ChartModule,
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
@@ -47,6 +56,12 @@ import { PollStatusComponent } from './components/poll-status/poll-status.compon
     PollConfigComponent,
     ViewPollComponent,
     PollStatusComponent
-  ]
+  ],
+  providers: [
+    {
+      provide: HighchartsStatic,
+      useFactory: highchartsFactory
+    }
+    ]
 })
 export class EVAModule { }

@@ -33,7 +33,7 @@ export class EnterpriseListComponent implements OnInit {
   getEnterprises() {
 
     this.EnterprisesServices.getEnterprises().subscribe((res) => {
-      console.log(res);
+
       this.enterprises = res;
       this.dataSource = this.enterprises;
     });

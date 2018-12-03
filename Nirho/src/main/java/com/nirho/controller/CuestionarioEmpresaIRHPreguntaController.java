@@ -19,7 +19,7 @@ import com.nirho.service.CuestionarioEmpresaIRHPreguntaService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping( value = "/CuestionarioEmpresaIRHPregunta" )
+@RequestMapping( value = "/cuestionarioEmpresaIRHPregunta" )
 public class CuestionarioEmpresaIRHPreguntaController {
 	
 	public final static Logger logger = Logger.getLogger(CuestionarioEmpresaIRHPreguntaController.class);
@@ -67,11 +67,37 @@ public class CuestionarioEmpresaIRHPreguntaController {
 		} 
 	}
 	
-	@RequestMapping(value = "/{idPregunta}/respuesta/{valor}", method = RequestMethod.POST)
-	public void edit(@PathVariable("idPregunta") long id, @PathVariable("valor") int valor) throws NirhoControllerException{
+	@RequestMapping(value = "/{idPregunta}/respuesta1/{valor}", method = RequestMethod.POST)
+	public void editPregunta1(@PathVariable("idPregunta") long id, @PathVariable("valor") int valor) throws NirhoControllerException{
 		try {
 			CuestionarioEmpresaIRHPregunta c = cuestionarioEmpresaServiceIRH.getCuestionarioEmpresaIRHPreguntaById(id);
-			c.setRespuesta(valor);
+			c.setRespuesta1(valor);
+			cuestionarioEmpresaServiceIRH.updateCuestionarioEmpresaIRHPregunta(c);			
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar respuesta");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar respuesta");
+		} 
+	}
+	
+	@RequestMapping(value = "/{idPregunta}/respuesta2/{valor}", method = RequestMethod.POST)
+	public void editPregunta2(@PathVariable("idPregunta") long id, @PathVariable("valor") int valor) throws NirhoControllerException{
+		try {
+			CuestionarioEmpresaIRHPregunta c = cuestionarioEmpresaServiceIRH.getCuestionarioEmpresaIRHPreguntaById(id);
+			c.setRespuesta2(valor);
+			cuestionarioEmpresaServiceIRH.updateCuestionarioEmpresaIRHPregunta(c);			
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar respuesta");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar respuesta");
+		} 
+	}
+	
+	@RequestMapping(value = "/{idPregunta}/respuesta3/{valor}", method = RequestMethod.POST)
+	public void editPregunta3(@PathVariable("idPregunta") long id, @PathVariable("valor") int valor) throws NirhoControllerException{
+		try {
+			CuestionarioEmpresaIRHPregunta c = cuestionarioEmpresaServiceIRH.getCuestionarioEmpresaIRHPreguntaById(id);
+			c.setRespuesta3(valor);
 			cuestionarioEmpresaServiceIRH.updateCuestionarioEmpresaIRHPregunta(c);			
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar respuesta");

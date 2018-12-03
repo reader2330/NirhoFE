@@ -12,7 +12,7 @@ import {LoginService} from '../../../clb/services/login.service';
 export class SidebarIrhComponent implements OnInit {
 
   mobile = false;
-  selectModule = 0;
+  selectModule = 1;
   modules = [];
   user = {};
   avatar = {
@@ -41,13 +41,15 @@ export class SidebarIrhComponent implements OnInit {
     }, {
       id_submodulo: 2,
       descripcion: 'Alta de empresa'
-    }, {
-      id_submodulo: 3,
-      descripcion: 'Configurar cuestionario'
-    }, {
+    },
+      {
        id_submodulo: 4,
         descripcion: 'Contestar preguntas'
-    })
+    },
+      {
+        id_submodulo: 5,
+        descripcion: 'Ver graficas'
+      });
 
     this.getUser();
   }

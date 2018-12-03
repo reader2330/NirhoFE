@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,12 +35,14 @@ import com.nirho.model.EstatusProyecto;
 import com.nirho.model.Participante;
 import com.nirho.model.ParticipantePK;
 import com.nirho.model.Proyecto;
+import com.nirho.model.Usuario;
 import com.nirho.service.CuestionarioParticipanteService;
 import com.nirho.service.CuestionarioProyectoService;
 import com.nirho.service.EmailService;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.ParticipanteService;
 import com.nirho.service.ProyectoService;
+import com.nirho.service.UsuarioService;
 import com.nirho.util.NirhoUtil;
 
 @RestController
@@ -58,6 +62,8 @@ public class ParticipanteController {
 	private CuestionarioProyectoService cuestionarioService;
 	@Autowired
 	private CuestionarioParticipanteService cuestionarioParticipanteService;
+	@Autowired
+	UsuarioService usuarioService;
 
 	@GetMapping(value = "/organigrama")
 	public List<NivelDTO> organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
@@ -79,6 +85,7 @@ public class ParticipanteController {
 		}
 	}
 
+	
 	@RequestMapping(value = "/headCount", method = RequestMethod.POST)
 	@ResponseBody
 	public void guardarParticipantes(@RequestBody HeadCount headcount) throws NirhoControllerException {
@@ -144,7 +151,7 @@ public class ParticipanteController {
 	}
 
 	@RequestMapping(path = "/emailSend", method = RequestMethod.GET)
-    public void sendMail(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException {
+    public void sendMail(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletRequest request) throws NirhoControllerException {
         try {
         	Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
         	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
@@ -154,7 +161,7 @@ public class ParticipanteController {
 
         	List<Participante> participantes = participanteService.obtenerParticipantes(idProyecto);
             for(Participante participante: participantes) {
-            	enviarCorreoParticipante(participante);
+            	enviarCorreoParticipante(participante, request);
             }
             
             EstatusProyecto estatus = new EstatusProyecto();
@@ -169,7 +176,7 @@ public class ParticipanteController {
     }
 
 	@RequestMapping(path = "/cuestionariosSend", method = RequestMethod.GET)
-    public void cuestionariosSend(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException {
+    public void cuestionariosSend(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletRequest request) throws NirhoControllerException {
         try {
         	Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
         	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
@@ -194,7 +201,7 @@ public class ParticipanteController {
 						logger.info("CuestionarioParticipante [" + cuetionarioParticipante + "]");
 						cuestionarioParticipanteService.guardar(cuetionarioParticipante);
 					}
-					enviarCorreoParticipante(participante);
+					enviarCorreoParticipante(participante, request);
 				} catch (NirhoServiceException nse) {
 					logger.info("Problemas al enviar el cuestionario a la BD, causa + [" + nse.getMessage() + "]");
 				}
@@ -261,14 +268,16 @@ public class ParticipanteController {
 		return participante;
 	}
 	
-	private void enviarCorreoParticipante(Participante participante) {
+	private void enviarCorreoParticipante(Participante participante, HttpServletRequest request) {
 		try {
     		EmailDatos datos = new EmailDatos();
     		datos.setEmailDestino(participante.getCorreoElectronico());
     		datos.setNombreParticipante(participante.getNombres());
     		datos.setNombreProyecto(participante.getProyecto().getNombre());
     		datos.setToken(participante.getToken());
-    		emailService.sendEmail(datos);
+    		String usuario = (String) request.getAttribute("username");
+			Usuario usuarioEnSesion = usuarioService.obtenerUsuario(usuario);
+    		emailService.sendEmail(datos, usuarioEnSesion.getEmail());
     	} catch(NirhoServiceException nse) {
     		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
     	}

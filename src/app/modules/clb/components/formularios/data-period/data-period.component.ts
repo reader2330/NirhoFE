@@ -23,7 +23,7 @@ export class DataPeriodComponent implements OnInit {
     }
   );
   proyects = [];
-  proyect: Proyecto;
+  proyect = new Proyecto();
   constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectService:ProyectoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([

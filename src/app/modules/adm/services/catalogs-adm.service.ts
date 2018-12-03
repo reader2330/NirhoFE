@@ -16,7 +16,7 @@ export class CatalogsAdmService {
     this.header.append('Content-Type', 'application/json');
   }
   getNacionality(): Observable<any> {
-    return this._http.get(this.api + 'catalogo/pais', {headers: this.header});
+    return this._http.get(this.api + 'catalogo/empleado/nacionalidad', {headers: this.header});
   }
   getJob(): Observable<any> {
     return this._http.get(this.api + 'catalogo/empleado/puesto', {headers: this.header});
@@ -56,6 +56,9 @@ export class CatalogsAdmService {
   }
   getEmploye(id): Observable<any> {
     return this._http.get(this.api + 'empleado/'+id, { headers: this.header});
+  }
+  getCreditoHipotecario(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/empleado/creditoHipotecario', {headers: this.header});
   }
 
 

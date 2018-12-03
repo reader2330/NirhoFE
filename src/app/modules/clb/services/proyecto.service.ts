@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../../environments/environment.prod';
+import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs';
 import {Proyecto} from '../models/proyecto';
 import {Pregunta} from '../models/pregunta';
@@ -71,6 +71,21 @@ export class ProyectoService {
     return this.http.get(this.api + 'participantes/cuestionariosSend',{headers: this.headers, params:   {
         idProyecto: idProyecto
       }});
+  }
+  getProyect(id) {
+    return this.http.get(this.api + 'proyectoCLB/porId', {headers: this.headers, params: {
+      'idProyecto': id
+      }});
+
+  }
+  closeProyect(id) {
+    return this.http.get(this.api + 'proyectoCLB/cierre' , {headers: this.headers , params: {
+      'idProyecto': id
+      }});
+  }
+
+  saveComents(data) {
+    return this.http.post(this.api + 'graficas/guardarComentario', data, {headers: this.headers});
   }
 
 }

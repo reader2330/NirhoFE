@@ -1,6 +1,6 @@
 <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
-    <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">people_outline</mat-icon> Estadisticas</h2>
+    <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">insert_chart_outlined</mat-icon> Estadisticas</h2>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <mat-form-field  style="width: 96%; " appearance="outline">
@@ -12,18 +12,26 @@
       </mat-select>
     </mat-form-field>
   </mat-grid-tile>
+  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+    <button mat-raised-button color="accent" [disabled]="!proyect.idProyecto" (click)="getGraficas()">Ver graficas</button>
+  </mat-grid-tile>
 </mat-grid-list>
-<div class="row">
-  <div class="col-sm-7" style=" border: 2px black solid">
-    <chart [options]="options"></chart>
+<div class="row" *ngIf="createCharts">
+  <div style=" border: 2px black solid" class="col-sm-12">
+    <div style="width: 100%; margin-left: 500px">
+    <chart   [options]="pies[0]"></chart>
+      <input matInput type="text"  placeholder="Comentario" >
+    </div>
+  </div>
+  <div *ngFor="let opt of options; let i = index"  style=" border: 2px black solid"  class="col-sm-6">
+    <chart  [options]="opt"></chart>
+    <input matInput type="text" [(ngModel)]="data['datos'][i][0].comentarios" placeholder="Comentario" >
+  </div>
 
+  <div class="col-sm-4 offset-4" style="margin-top: 30px">
+    <button style="margin-left: 50px" mat-raised-button color="accent" (click)="guardarComentario()"> Guardar comentarios</button>
   </div>
-  <div class="col-sm-5 " style=" border: 2px black solid">
-    <chart [options]="options3"></chart>
-  </div>
-  <div class="col-sm-12" style="border: 2px black solid">
-    <chart  [options]="options2"> </chart>
-  </div>
+
 </div>
 
 

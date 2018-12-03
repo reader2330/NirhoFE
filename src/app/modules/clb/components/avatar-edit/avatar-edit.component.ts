@@ -31,7 +31,7 @@ export class AvatarEditComponent implements OnInit {
       {value: 'avatar4', url: environment.urlNG + 'assets/Avatars/p4.png'},
       {value: 'avatar5', url: environment.urlNG + 'assets/Avatars/p5.png'},
       {value: 'avatar6', url: environment.urlNG + 'assets/Avatars/p6.png'},
-      {value: 'avatar7', url: environment.urlNG + 'assets/Avatars/p7.png'},
+
 
 
   ];

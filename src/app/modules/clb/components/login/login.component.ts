@@ -25,15 +25,12 @@ export class LoginComponent implements OnInit {
         console.log(res);
         if (res && res['token']) {
           localStorage.setItem('token', res['token']);
+          this.router.navigate(['SYNC']);
         }
 
-        this.router.navigate(['SYNC']);
+
       }, (err: HttpResponse<any>) => {
 
-        localStorage.setItem('token', '8347265298347562938');
-        this.router.navigate(['SYNC']);
-          
-        
         console.log(err);
         Swal('Algo salio mal', 'Credenciales incorrectas', 'error');
 

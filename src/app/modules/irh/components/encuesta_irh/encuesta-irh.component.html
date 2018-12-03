@@ -17,7 +17,9 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
       <button mat-raised-button color="accent" (click)="getPreguntasEmpresa()">Ver preguntas</button>
+      <button mat-raised-button color="accent" style="margin-left: 20px" (click)="FinishCuestionario()">Finalizar cuestionario</button>
     </mat-grid-tile>
+  </mat-grid-list>
     <!--<mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="2" >
       <mat-accordion  class="example-headers-align">
         <mat-expansion-panel *ngFor= "let tema of temas" >
@@ -61,62 +63,51 @@
       </mat-accordion>
     </mat-grid-tile>-->
 
+  <mat-grid-list style="margin-bottom: 100px;width: 100%" [cols]="checkMobileCols()" rowHeight="700px">
+
   <mat-grid-tile *ngIf="!goQuestion" style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2">
     <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
-      <mat-expansion-panel *ngFor= "let tema of temas" >
+      <mat-expansion-panel *ngFor= "let tema of temas; let i = index" [expanded]="i == 0" >
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{tema.temas[0].nombre}} <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>
+            {{tema.nombre}} <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>
           </mat-panel-title>
 
         </mat-expansion-panel-header>
-        <mat-panel-description style="width: 100%">
-          <table mat-table style="width: 100%" [dataSource]="dataSource" class="mat-elevation-z8">
+        <mat-panel-description>
+          <div class="row">
+            <div *ngFor="let question of tema.preguntas" class="col-sm-12">
+              <label style="margin-right: 30px"> {{question.enunciado}}</label>
+              <mat-form-field style="margin-right: 30px">
+                <mat-label >Se tiene</mat-label>
+                <mat-select [(ngModel)]="question.respuesta1" >
+                  <mat-option *ngFor="let opt of opts" [value]="opt.key">{{opt.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field style="margin-right: 30px">
+                <mat-label >¿Esta vigente?</mat-label>
+                <mat-select [(ngModel)]="question.respuesta2" >
+                  <mat-option *ngFor="let vig of vigencias" [value]="vig.key">{{vig.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Situación</mat-label>
+                <mat-select [(ngModel)]="question.respuesta3" >
+                  <mat-option *ngFor="let des of desarrollo" [value]="des.key">{{des.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
 
 
 
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-
-            <!-- Position Column -->
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="ENUNCIADO">
-              <th mat-header-cell *matHeaderCellDef> ENUNCIADO </th>
-              <td mat-cell *matCellDef="let element"> {{element.enunciado}} </td>
-            </ng-container>
-
-            <!-- Weight Column -->
-            <ng-container matColumnDef="1">
-              <th mat-header-cell *matHeaderCellDef>
-                <ngx-emoji  [ngStyle]="{'margin-left':mobile == true ? '30px':'200px'}" [emoji]="returnEmoji(1)" [size]="returnSize()"></ngx-emoji>
-                <ngx-emoji  [ngStyle]="{'margin-left':mobile == true ? '5px':'20px'}" [emoji]="returnEmoji(2)" [size]="returnSize()"></ngx-emoji>
-                <ngx-emoji  [ngStyle]="{'margin-left':mobile == true ? '5px':'20px'}" [emoji]="returnEmoji(3)" [size]="returnSize()"></ngx-emoji>
-                <ngx-emoji  [ngStyle]="{'margin-left':mobile == true ? '5px':'20px'}" [emoji]="returnEmoji(4)" [size]="returnSize()"></ngx-emoji>
-                <ngx-emoji  [ngStyle]="{'margin-left':mobile == true ? '5px':'20px'}" [emoji]="returnEmoji(5)" [size]="returnSize()"></ngx-emoji>
-              </th>
-              <td mat-cell *matCellDef="let element">
-
-                <mat-slider  [ngStyle]="{'margin-left':mobile == true ? '20px':'160px', 'width':mobile == true ? '100px':'250px'}" min="0" max="5" step="1"  (change)="updateValor(element)" tickInterval="10" thumbLabel ></mat-slider>
-
-              </td>
-            </ng-container>
-
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
         </mat-panel-description>
       </mat-expansion-panel>
     </mat-accordion>
 
   </mat-grid-tile>
-  <mat-grid-tile *ngIf="!goQuestion"  style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="1">
-      <button mat-raised-button color="accent" (click)="FinishCuestionario()">Finalizar cuestionario</button>
-  </mat-grid-tile>
-
-
   </mat-grid-list>
+
 
 
 

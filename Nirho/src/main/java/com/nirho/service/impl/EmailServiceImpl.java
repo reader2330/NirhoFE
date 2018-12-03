@@ -18,15 +18,16 @@ public class EmailServiceImpl implements EmailService {
 	public final static Logger logger = Logger.getLogger(EmailServiceImpl.class);
 	@Autowired
 	private JavaMailSender mailSender;
-	
+		
 	@Override
-	public void sendEmail(EmailDatos datos) throws NirhoServiceException {
+	public void sendEmail(EmailDatos datos, String cc) throws NirhoServiceException {
 		try {
 			MimeMessage mail = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mail);
 			helper.setTo(datos.getEmailDestino());
 			helper.setSubject(EmailUtil.getAsunto(datos.getNombreProyecto()));
 			helper.setText(EmailUtil.getContenido(datos), true);
+			helper.setCc(cc);
 			mailSender.send(mail);
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");

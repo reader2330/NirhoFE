@@ -26,21 +26,39 @@ export class EnterprisesService {
   getEnterpriseByRFC(rfc): Observable<Enterprise[]> {
     return this.http.get<Enterprise[]>(this.api + 'empresa/consultarEmpresaIRHRfc', {headers: this.headers,  params: {'rfc': rfc }});
   }
+  updateEntrepise(data): Observable<any> {
+    return this.http.post(this.api + 'empresa/registrar', data, {headers: this.headers});
+  }
 
   getTemas(): Observable<any> {
     return this.http.get(this.api + 'cuestionario/temas/', {headers: this.headers, params: {'idModulo': '1'}});
   }
-  getPreguntas(id): Observable<Pregunta[]> {
-    return this.http.get<Pregunta[]>(this.api + 'cuestionario/plantilla', {headers: this.headers, params: {'idModulo': '1' }});
+  getPreguntas(id): Observable<any> {
+    return this.http.get(this.api + 'cuestionarioEmpresaIRH/preguntas/predeterminadas', {headers: this.headers});
   }
-  getPreguntasEmpresa(id) :Observable<any>{
-    return this.http.get(this.api + 'cuestionarioEmpresaIRH/empresa/'+ id, {headers: this.headers});
-  }
+  /*getPreguntasEmpresa(id): Observable<any>{
+    return this.http.get(this.api + 'cuestionarioEmpresaIRH/empresa/' + id, {headers: this.headers});
+  }*/
   savePreguntas(data): Observable<any> {
     return this.http.post(this.api + 'cuestionarioEmpresaIRH/agregar', data, {headers: this.headers});
   }
-  saveEntripise(data): Observable<any>{
+  saveEntripise(data): Observable<any> {
     return this.http.post(this.api + 'empresa/registrarEmpresaIRH', data, {headers: this.headers});
+  }
+  updatePregunta(data): Observable<any> {
+    return this.http.post(this.api + 'cuestionarioEmpresaIRHPregunta/' + data['idPregunta'] + '/respuesta/' + data['respuesta'], {}, {headers: this.headers});
+  }
+  finalizeCuestionario(data): Observable<any> {
+    return this.http.post(this.api + 'cuestionarioEmpresaIRH/' + data.id + '/finalizado/'  + data.opt,{}, {headers: this.headers});
+  }
+  finalizeCuestionarioScore(data): Observable<any> {
+    return this.http.post(this.api + 'cuestionarioEmpresaIRH/' + data.id + '/finalizado/'  + data.value + '/score/' + data.score , {}, {headers: this.headers});
+  }
+  saveCuestionario(data) {
+    return this.http.post(this.api + 'cuestionarioEmpresaIRH/agregar', data, {headers: this.headers});
+  }
+  getData(id) {
+    return this.http.get(this.api + 'cuestionarioEmpresaIRH/empresa/' + id + '/scores', {headers: this.headers});
   }
 
 }

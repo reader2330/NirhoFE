@@ -16,51 +16,29 @@ export class EncuestaIrhComponent implements OnInit {
   temas = [{
     nombre: 'Imagen'
   }];
-  goQuestion= true;
+  goQuestion = true;
   companys = [];
   entrepise = {
-    id:0
+    id: 0
   };
+  opts = [
+    {name: 'SI', key: 1},
+    {name: 'NO', key: -1},
+    {name: 'N/A', key: 0},
+  ];
+  vigencias = [
+    {name: 'Vigente', key: 1},
+    {name: 'No vigente', key: 0}
+  ];
+  desarrollo = [
+    {name: 'En Desarrollo', key: 1},
+    {name: 'Formalizado y autorizado', key: 2},
+    {name: 'Formalizado, autorizado y administrado', key: 3}
+  ];
   token = '';
-  dataSource = [{
-    'nom': 1,
-    'enunciado': '¿Como esta México?',
-    'valor1': 0,
-    'valor2': 0,
-    'valor3': 0,
-    'valor4': 0,
-    'valor5': 0
 
 
-  },{
-    'nom': 2,
-    'enunciado': '¿Como ves a México?',
-    'valor1': 0,
-    'valor2': 0,
-    'valor3': 0,
-    'valor4': 0,
-    'valor5': 0
-
-
-  },{
-    'nom': 3,
-    'enunciado': '¿Te gusta  México?',
-    'valor1': 0,
-    'valor2': 0,
-    'valor3': 0,
-    'valor4': 0,
-    'valor5': 0
-
-
-  },
-  ];
-  displayedColumns: string[] = [
-    'ENUNCIADO',
-    '1',
-
-  ];
-
-  constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver,  private EnterprisesService: EnterprisesService) {
+  constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver, private EnterprisesService: EnterprisesService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -71,21 +49,21 @@ export class EncuestaIrhComponent implements OnInit {
       }
     });
   }
+
   ngOnInit() {
     this.EnterprisesService.getEnterprises().subscribe(res => {
       console.log(res);
       this.companys = res;
-    })
+    });
   }
 
 
-  getPreguntasEmpresa(){
-    this.goQuestion = true
+  getPreguntasEmpresa() {
+    this.goQuestion = true;
     console.log(this.entrepise);
-    this.EnterprisesService.getPreguntasEmpresa(this.entrepise.id).subscribe(res => {
+    this.EnterprisesService.getPreguntas(this.entrepise.id).subscribe(res => {
       console.log(res);
       this.temas = res;
-      this.dataSource = res[0].temas[0].preguntas;
       this.goQuestion = false;
     });
   }
@@ -100,96 +78,14 @@ export class EncuestaIrhComponent implements OnInit {
   }
 
 
-  returnEmoji(id) {
-
-    switch (id) {
-      case 1:
-          if (this.mobile) {
-            return { id: 'sob', skin: 3, size: 16 };
-          } else {
-            return { id: 'sob', skin: 3, size: 24 };
-          }
-      case 2 :
-        if (this.mobile) {
-          return { id: 'cry', skin: 3 };
-        } else {
-          return { id: 'cry', skin: 3 };
-        };
-      case 3:
-        if (this.mobile) {
-          return { id: 'confused', skin: 3 };
-        } else {
-          return { id: 'confused', skin: 3 };
-        }
-      case 4:
-        if (this.mobile) {
-          return { id: 'grinning', skin: 3 };
-        } else {
-          return { id: 'grinning', skin: 3 };
-        }
-      case 5:
-        if (this.mobile) {
-          return { id: 'hugging_face', skin: 3 };
-        } else {
-          return { id: 'hugging_face', skin: 3 };
-        }
-
-
-
-    }
-
-  }
-  returnSize() {
-    if (this.mobile) {
-      return 16;
-    } else {
-      return 24;
-    }
-  }
-
-  formatLabel(value: number | null) {
-    if (!value) {
-      return 0;
-    }
-
-    switch (value) {
-      case 1:
-        if (this.mobile) {
-          return { id: 'sob', skin: 3, size: 16 };
-        } else {
-          return { id: 'sob', skin: 3, size: 24 };
-        }
-      case 2 :
-        if (this.mobile) {
-          return { id: 'cry', skin: 3 };
-        } else {
-          return { id: 'cry', skin: 3 };
-        }
-      case 3:
-        if (this.mobile) {
-          return { id: 'confused', skin: 3 };
-        } else {
-          return { id: 'confused', skin: 3 };
-        }
-      case 4:
-        if (this.mobile) {
-          return { id: 'grinning', skin: 3 };
-        } else {
-          return { id: 'grinning', skin: 3 };
-        }
-      case 5:
-        if (this.mobile) {
-          return { id: 'hugging_face', skin: 3 };
-        } else {
-          return { id: 'hugging_face', skin: 3 };
-        }
-    }
-
-    return value;
-  }
-
   updateValor(question) {
     console.log(question);
+    let data = {
+      idPregunta: question.id,
+      respuesta: question.respuesta
+    };
+    this.EnterprisesService.updatePregunta(data).subscribe(res => {
+    })
   }
 
   FinishCuestionario() {
@@ -202,18 +98,62 @@ export class EncuestaIrhComponent implements OnInit {
       cancelButtonText: 'No, seguir contestando'
     }).then((result) => {
       if (result.value) {
-        Swal(
-          'Listo.',
-          'El cuestionario se finalizo correctamente',
-          'success'
-        ).then(() => {
-          this.response.emit({value: 1});
+        this.calculateScoreTema();
+        let data = {
+          idEmpresa: this.entrepise.id,
+          temas: this.temas
+        };
+        this.EnterprisesService.saveCuestionario(data).subscribe(res => {
+          let id = res['id'];
+          let obj = {
+            id: id,
+            value: true,
+            score : this.calculateScore()
+          };
+          this.EnterprisesService.finalizeCuestionarioScore(obj).subscribe(res => {
+            Swal(
+              'Listo.',
+              'El cuestionario se finalizo correctamente',
+              'success'
+            ).then(() => {
+              this.response.emit({value: 1});
+            });
+          });
         });
+
       }
-      });
+    });
   }
 
+  calculateScoreTema() {
+    let total = 0;
+    let totalTema = 0;
+    let scoreFinal = 0;
 
+    for (let tema of this.temas) {
+      let totalParcial = 0;
+      for (let question of tema['preguntas']) {
 
+        if (question.respuesta1 !== 0) {
+          if (question.respuesta1 == 1) {
+            totalTema += 1;
+            totalParcial += (question.respuesta2 * question.respuesta3);
+          } else {
+            totalTema += 1;
+          }
+        }
+      }
+      tema['score'] = (totalParcial / totalTema);
+    }
+  }
 
+  calculateScore() {
+    let scoreFinal = 0;
+    let total = 0;
+    for ( let tema of this.temas) {
+      total += tema['score'];
+    }
+    scoreFinal = (total / this.temas.length);
+    return scoreFinal;
+  }
 }

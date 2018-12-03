@@ -15,9 +15,9 @@ export class BandejaAdmComponent implements OnInit {
 
   constructor(private CatalogsAdmServices: CatalogsAdmService) {
   }
-  displayedColumns: string[] = ['nombreCompleto', 'nacionalidad', 'fechaNacimiento', 'edad', 'rfc', 'detail3', 'delete'];
+  displayedColumns: string[] = ['nombreCompleto', 'nacionalidad', 'fechaNacimiento', 'edad', 'rfc', 'delete', 'detail3'];
   dataSource = new MatTableDataSource<laboral_interface>();
-
+  nacionalidades = []
   ngOnInit() {
 
 
@@ -40,13 +40,23 @@ export class BandejaAdmComponent implements OnInit {
      }
    }*/
     this.getEmpleados();
-
+    this.getNacionality();
   }
   getEmpleados() {
     this.CatalogsAdmServices.getEmployes().subscribe((res) => {
       this.dataSource.data = res;
     });
 
+  }
+  showName(id) {
+    console.log(id);
+
+    for (let nationaly  of this.nacionalidades) {
+      console.log(nationaly);
+      if (nationaly.id === id) {
+        return nationaly.descripcionCatalogo;
+      }
+    }
   }
 
   goDetailEmpleado(element) {
@@ -82,6 +92,12 @@ export class BandejaAdmComponent implements OnInit {
         }
     });
 
+  }
+  getNacionality() {
+    this.CatalogsAdmServices.getNacionality().subscribe(res => {
+      console.log(res);
+      this.nacionalidades = res;
+    });
   }
   /*getUser() {
     if (sessionStorage.getItem('user')) {

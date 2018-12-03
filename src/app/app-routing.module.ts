@@ -26,25 +26,26 @@ const routes: Routes = [
   {
     path: 'CLB',
     component: InicioComponent,
-    //canActivate: [LoginGuard]
+    canActivate: [LoginGuard]
   },
   {
     path: 'avatar-edit/:module',
     component: AvatarEditComponent,
-    //canActivate: [LoginGuard]
+    canActivate: [LoginGuard]
   },
   {
     path: 'encuesta/:token',
     component: EncuestaComponent,
-    canActivate: [LoginGuard]
+    //canActivate: [LoginGuard]
   },
   {
     path: 'EVA360',
-    component: Sidebar360Component
+    component: Sidebar360Component,
+    canActivate: [LoginGuard]
   }, {
     path: 'IRH',
     component: InicioIrhComponent,
-    //canActivate: [LoginGuard]
+    canActivate: [LoginGuard]
   },
   {
     path: 'EVD',
@@ -58,11 +59,13 @@ const routes: Routes = [
   },
   {
     path: 'SYNC',
-    component: InicioSyncComponent
+    component: InicioSyncComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'APO',
-    component: InicioApoComponent
+    component: InicioApoComponent,
+    canActivate: [LoginGuard]
   },
   { path: '**', redirectTo: '' }
 ];

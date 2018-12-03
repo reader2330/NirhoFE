@@ -51,8 +51,27 @@ public class Empresa implements Serializable {
 	private Integer noEmpleadosOperativo;	
 
 	@Column(name = "tipo_contratacion_empleados")
-	private String tipoContratacionEmpleados;	
-		
+	private String tipoContratacionEmpleados;
+
+
+	public Empresa() {
+	}
+
+	public Empresa(String direccion, String empresa, int giro, int pais, String rfc, Integer anioInicioOperaciones, Double facturacionAnual, String productoServicioEstrella, String principalesProductosServicios, Integer noEmpleadosAdministrativo, Integer noEmpleadosOperativo, String tipoContratacionEmpleados) {
+		this.direccion = direccion;
+		this.empresa = empresa;
+		this.giro = giro;
+		this.pais = pais;
+		this.rfc = rfc;
+		this.anioInicioOperaciones = anioInicioOperaciones;
+		this.facturacionAnual = facturacionAnual;
+		this.productoServicioEstrella = productoServicioEstrella;
+		this.principalesProductosServicios = principalesProductosServicios;
+		this.noEmpleadosAdministrativo = noEmpleadosAdministrativo;
+		this.noEmpleadosOperativo = noEmpleadosOperativo;
+		this.tipoContratacionEmpleados = tipoContratacionEmpleados;
+	}
+
 	/**
 	 * @return the id
 	 */
