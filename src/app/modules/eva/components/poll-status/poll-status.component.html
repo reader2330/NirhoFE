@@ -1,0 +1,32 @@
+<form [formGroup]="projectForm" style="background: white; border: 1px solid #efefef; padding: 10px 0 0 0">
+  <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
+    <mat-grid-tile>
+      <mat-form-field style="width:85%;" class="inputForm" appearance="outline">
+        <mat-label>Selecciona un proyecto</mat-label>
+        <mat-select style="width:100%;" formControlName="project">
+          <mat-option *ngFor="let puesto of evaluador " [value]="puesto.descripcionCatalogo">
+            {{puesto.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile style="margin-top:-10px;">
+      <button style="width:70%;" mat-raised-button color="primary" (click)="assign()">Ver estatus</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
+
+<div style="background: white; border: 1px solid #efefef; padding: 10px 0 0 0; margin-top:20px;">
+  <div class="">
+    <div class="text-center">
+      <div class="timelineCustom scroll" id="timelineCustom">
+        <div class="itemTime" [ngClass]="{'itemTime-success': stage.completed, 'itemTime-warning': !stage.completed}" *ngFor="let stage of stages">
+          <div><span class="fs-30 fa fa-3x" [ngClass]="{'fa-check-circle success': stage.completed, 'fa-question-circle': !stage.completed}"></span></div>
+          <div class="textCustom">{{stage.name}}</div>
+        </div>
+        <div class="timelineBar"></div>
+      </div>
+    </div>
+  </div>
+</div>

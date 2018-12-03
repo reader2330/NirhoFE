@@ -1,7 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule, MatCardModule, MatGridListModule, MatInputModule, MatFormFieldModule, MatIconModule, MatListModule, MatToolbarModule, MatSidenavModule} from '@angular/material';
 
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatGridListModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatListModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatStepperModule,
+  MatTableModule,
+  MatCheckboxModule,
+  MatExpansionModule,
+  MatRadioModule,
+  MatProgressSpinnerModule,
+  MatSliderModule,
+  MatDialogModule,
+  MatNativeDateModule,
+  MatDatepickerModule, MatChipsModule,
+} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -14,7 +36,20 @@ import {MatButtonModule, MatCardModule, MatGridListModule, MatInputModule, MatFo
     MatInputModule,
     MatFormFieldModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatStepperModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatSliderModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatChipsModule
   ],
   declarations: [],
   exports: [
@@ -26,8 +61,22 @@ import {MatButtonModule, MatCardModule, MatGridListModule, MatInputModule, MatFo
     MatInputModule,
     MatFormFieldModule,
     MatToolbarModule,
-    MatSidenavModule
-
+    MatSidenavModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatStepperModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatSliderModule,
+    MatDatepickerModule,
+    MatChipsModule
+  ],
+  providers: [
+    MatDatepickerModule,
   ]
 })
 export class MaterialModule { }

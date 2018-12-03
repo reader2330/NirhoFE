@@ -1,0 +1,30 @@
+<mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
+  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+    <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">people_outline</mat-icon> Estadisticas</h2>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+    <mat-form-field  style="width: 96%; " appearance="outline">
+      <mat-label>Seleccionar proyecto</mat-label>
+      <mat-select [(ngModel)]="proyect">
+        <mat-option *ngFor="let proyect of proyects" [value]="proyect">
+          {{proyect.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+<div class="row">
+  <div class="col-sm-7" style=" border: 2px black solid">
+    <chart [options]="options"></chart>
+
+  </div>
+  <div class="col-sm-5 " style=" border: 2px black solid">
+    <chart [options]="options3"></chart>
+  </div>
+  <div class="col-sm-12" style="border: 2px black solid">
+    <chart  [options]="options2"> </chart>
+  </div>
+</div>
+
+
+

@@ -27,7 +27,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/nirhoTheme.scss",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": []
           },
@@ -48,7 +50,8 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
-            }
+            },
+
           }
         },
         "serve": {

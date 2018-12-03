@@ -1,0 +1,171 @@
+<form [formGroup]="companyForm"  >
+  <mat-grid-list  [cols]="checkMobileCols()" rowHeight="100px">
+
+
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Nombre de la empresa</mat-label>
+        <input matInput formControlName="empresa" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>País</mat-label>
+        <mat-select formControlName="pais" required >
+          <mat-option *ngFor="let country of countries" [value]="country.id">
+            {{country.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>RFC</mat-label>
+        <input formControlName="rfc" type="text" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field  style="width: 96%; " appearance="outline">
+        <mat-label>Giro</mat-label>
+        <mat-select formControlName="giro">
+          <mat-option *ngFor="let spin of spins" [value]="spin.id">
+            {{spin.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="checkMaxColumns()" [rowspan]="1">
+      <mat-form-field  class="inputForm" appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input formControlName="direccion" type="tel" matInput required >
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveCompany()" [disabled]="!companyForm.valid" matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
+
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+
+</form>
+
+
+
+
+
+
+
+
+
+   <!-- <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Telefono</mat-label>
+        <input type="tel" matInput >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="checkMaxTwoColumns()" [rowspan]="1">
+      <mat-form-field  style="width: 96%; " appearance="outline">
+        <mat-label>Razón social</mat-label>
+        <input type="text" matInput >
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field  style="width: 96%; " appearance="outline">
+        <mat-label>Giro</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let spin of spins" [value]="spin.id">
+              {{spin.description}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="checkMaxTwoColumns()" [rowspan]="1">
+      <mat-form-field  style="width: 96%; " appearance="outline">
+        <mat-label>Dirección fiscal</mat-label>
+        <input type="text" matInput >
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="checkMaxTwoColumns()" [rowspan]="1">
+      <mat-form-field  style="width: 96%; " appearance="outline">
+        <mat-label>Condiciones de pago</mat-label>
+        <input type="text" matInput >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="checkMaxTwoColumns()" [rowspan]="1">
+      <mat-form-field  style="width: 96%; " appearance="outline">
+        <mat-label>Contacto de cobranza</mat-label>
+        <input type="text" matInput >
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+
+    <mat-grid-tile [colspan]="checkMaxTwoColumns()" [rowspan]="1">
+      <mat-form-field  style="width: 96%; " appearance="outline">
+        <mat-label>Contacto del lider del proyecto</mat-label>
+        <input type="text" matInput >
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field  style="width: 96%; " appearance="outline">
+        <mat-label>Telefono</mat-label>
+        <input type="tel" matInput >
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field  style="width: 96%; " appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="text" matInput >
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="checkMobileCols()" rowHeight="100px">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-raised-button >Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px">Guardar <mat-icon>save_alt</mat-icon></button>
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+
+    </mat-grid-tile>
+
+
+
+
+  </mat-grid-list>
+
+
+
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field appearance="outline">
+      <mat-label>Duración del proyecto</mat-label>
+      <input type="number" matInput >
+
+    </mat-form-field>
+  </mat-grid-tile>-->
+
+

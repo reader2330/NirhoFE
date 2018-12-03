@@ -1,0 +1,147 @@
+.success {
+  color: #58B957;
+}
+
+.timelineCustom {
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 0px 0 55px 0;
+  position: relative;
+}
+
+.itemTime {
+  display: inline-block;
+  vertical-align: top;
+  color: gray;
+  padding: 0 0 5px 0;
+  font-size: 12px;
+  text-align: center;
+  position: relative;
+  min-width: 150px;
+  max-width: 150px;
+  margin: 0 10px 0 10px;
+}
+
+.itemTime img {
+  display: block;
+  max-width: 40px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.itemTime h2 {
+  font-size: 15px;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.itemTime .textCustom {
+  white-space: normal;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.itemTime .subTextCustom {
+  position: fixed;
+  margin-top: 70px;
+  white-space: normal;
+  font-size: 10px;
+  line-height: 14px;
+}
+
+.itemTime-success {}
+
+.itemTime-warning {}
+
+.itemTime-success:before {
+  content: '';
+  display: block;
+  background: #58B957;
+  width: 5px;
+  height: 30px;
+  position: absolute;
+  left: 50%;
+  bottom: -30px;
+  margin-left: -2px;
+  z-index: 1;
+}
+
+.itemTime-success:after {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 10px;
+  position: absolute;
+  border: 4px solid #58B957;
+  left: 50%;
+  bottom: -45px;
+  margin-left: -8px;
+  z-index: 2;
+}
+
+.itemTime-warning:before {
+  content: '';
+  display: block;
+  background: gray;
+  width: 5px;
+  height: 30px;
+  position: absolute;
+  left: 50%;
+  bottom: -30px;
+  margin-left: -2px;
+  z-index: 1;
+}
+
+.itemTime-warning:after {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 10px;
+  position: absolute;
+  border: 4px solid gray;
+  left: 50%;
+  bottom: -45px;
+  margin-left: -8px;
+  z-index: 2;
+}
+
+.itemTime-empty:before {
+  content: '';
+  display: block;
+  background: #eeeeee;
+  width: 5px;
+  height: 30px;
+  position: absolute;
+  left: 50%;
+  bottom: -30px;
+  margin-left: -2px;
+  z-index: 1;
+}
+
+.itemTime-empty:after {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 10px;
+  position: absolute;
+  border: 4px solid #eeeeee;
+  left: 50%;
+  bottom: -45px;
+  margin-left: -8px;
+  z-index: 2;
+}
+
+.timelineBar:not(.timelineCustom) {
+  height: 5px;
+  background: #eee;
+  width: 100%;
+  position: relative;
+  bottom: -34px;
+  left: 0;
+}

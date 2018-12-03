@@ -1,0 +1,8 @@
+{
+  "/service/*": {
+    "target": "http://74.208.131.50:8080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

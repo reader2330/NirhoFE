@@ -1,0 +1,60 @@
+<form [formGroup]="proyectForm">
+  <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
+
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="proyecto" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Numero de participantes</mat-label>
+        <input matInput  formControlName="numParticipantes" type="number">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Sedes</mat-label>
+        <input matInput formControlName="sede" [disabled]="true" type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Periodo de evaluación</mat-label>
+        <input matInput type="text" formControlName="periodoEv" [disabled]="true">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Frecuencia evaluación</mat-label>
+        <input matInput type="text" formControlName="frecuencia" [disabled]="true">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="!mobile">
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-raised-button matStepperPrevious>Cancelar
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <button mat-raised-button color="primary" style="margin-left: 10px;" [disabled]="!proyectForm.valid"
+              matStepperNext>Siguiente
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+
+</form>

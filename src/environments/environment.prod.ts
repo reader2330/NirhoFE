@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  urlApi: 'https://hola.com'
+  urlApi: 'http://74.208.252.39:8080/Nirho/',
+  urlNG: 'http://74.208.252.39:80/'
 };

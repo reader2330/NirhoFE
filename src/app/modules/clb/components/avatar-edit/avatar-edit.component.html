@@ -1,0 +1,27 @@
+<form [formGroup]="avatarForm">
+  <mat-card >
+    <h3 style="text-align: center">Editar Avatar</h3>
+    <hr>
+    <div align="center">
+      <img mat-card-avatar src={{selected}} style="height: 210px; width: 210px;">
+    </div>
+    <br><br>
+    <div class="row">
+      <div class="col-xs-12 col-md-4"></div>
+      <div class="col-xs-12 col-md-4" align="center" style="align-items: center">
+
+        <mat-form-field >
+          <mat-select placeholder="Seleccionar avatar" [(ngModel)]="selectedValue" name="avatar" [(value)]="selected" formControlName="url_avatar">
+            <mat-option *ngFor="let avatar of avatares" [(value)]="avatar.url"><mat-radio-button><img mat-card-avatar src={{avatar.url}}>{{avatar.value}}</mat-radio-button></mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <br>
+        <button mat-raised-button color="primary" (click)="saveAvatar()">Guardar</button>
+      </div>
+      <div class="col-xs-12 col-md-4"></div>
+    </div>
+
+  </mat-card>
+</form>
+

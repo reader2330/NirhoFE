@@ -1,0 +1,62 @@
+<mat-toolbar style="background:  black">
+  <a *ngIf="mobile" style=" color:white" (click)="snav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </a>
+  <span style="flex: 1 1 auto;"></span>
+  <button mat-raised-button (click)="cerraSesion()">
+    <mat-icon>people_outline</mat-icon>Cerrar sesión
+  </button>
+</mat-toolbar>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" [opened]="!mobile" [fixedInViewport]="false" [fixedTopGap]="62" [fixedBottomGap]="60" #snav>
+    <mat-nav-list>
+      <span *ngIf="!mobile">
+        <div class="logo-nav"></div>
+      </span>
+      <span *ngIf="mobile">
+        <div class="logo-nav-mobile"></div>
+      </span>
+      <div style="text-align:center;">
+        <div class="avatar"></div>
+      </div>
+      <mat-list style="max-width: 200px;">
+        <mat-list-item>
+          <p>{{ 'Marcello Montenegro' }}</p>
+        </mat-list-item>
+        <mat-list-item *ngFor="let module of modules" [ngClass]="{'c-active': selectedItem == module.id_submodulo}" (click)="goModule(module.id_submodulo)">
+          <p>{{module.descripcion}}</p>
+        </mat-list-item>
+      </mat-list>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="">
+      <div style="padding: 10px 30px 0 30px;" class="col-sm-12 stepper-forms">
+        <div *ngIf="selectModule == 2">
+          <h3>Revisión de proyecto</h3>
+          <app-steppers-360 (responseChildren)="recibirRespuestChildren($event)"></app-steppers-360>
+        </div>
+        <div *ngIf="selectModule == 3">
+          <h3>Asignación de participantes a evaluar</h3>
+          <app-assign-poll (responseChildren)="recibirRespuestChildren($event)"></app-assign-poll>
+        </div>
+        <div *ngIf="selectModule == 4">
+          <h3>Consultar asignación</h3>
+          <app-view-assigns (responseChildren)="recibirRespuestChildren($event)"></app-view-assigns>
+        </div>
+        <div *ngIf="selectModule == 5">
+          <h3>Configuración de cuestionario</h3>
+          <app-poll-config (responseChildren)="recibirRespuestChildren($event)"></app-poll-config>
+        </div>
+        <div *ngIf="selectModule == 6">
+          <h3>Ver cuestionario</h3>
+          <app-view-poll (responseChildren)="recibirRespuestChildren($event)"></app-view-poll>
+        </div>
+        <div *ngIf="selectModule == 7">
+          <h3>Estado de la encuesta</h3>
+          <app-poll-status (responseChildren)="recibirRespuestChildren($event)"></app-poll-status>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

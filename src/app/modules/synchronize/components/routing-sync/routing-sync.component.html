@@ -1,0 +1,124 @@
+<div class="row">
+  <div class="col-xs-12 col-md-2" style="align-items: center; padding-top: 50px;">
+    <div class="col-md-12 logo-nav">
+
+    </div>
+    <mat-list style="cursor: pointer">
+      <mat-list-item (click)="goModule(1)" >
+        <span  class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">1</span>
+        &nbsp; CLB
+      </mat-list-item>
+      <mat-list-item (click)="goModule(2)" >
+        <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">2</span>
+        &nbsp; IRH
+      </mat-list-item>
+      <mat-list-item  *ngIf="adm" (click)="goModule(3)">
+        <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">3</span>
+        &nbsp; ADM
+      </mat-list-item>
+      <mat-list-item (click)="goModule(4)">
+        <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">4</span>
+        &nbsp; EVD
+      </mat-list-item>
+      <mat-list-item (click)="goModule(5)" >
+        <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">5</span>
+        &nbsp; EVA 360
+      </mat-list-item>
+      <mat-list-item (click)="goModule(6)"  >
+        <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">6</span>
+        &nbsp; APO
+      </mat-list-item>
+      <mat-list-item (click)="goModule(7)" >
+        <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">7</span>
+        &nbsp; PVC
+      </mat-list-item>
+      <mat-list-item (click)="goModule(8)" >
+        <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">8</span>
+        &nbsp; RYS
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="col-md-8" style="padding-top: 45px;">
+    <!--Carousel Wrapper-->
+    <mdb-carousel [isControls]="true" class="carousel slide carousel-fade" [type]="'carousel-thumbnails'" [animation]="'fade'">
+      <!--First slide-->
+      <mdb-carousel-item>
+        <img class="d-block w-100" src="{{imagenes[0].url}}">
+      </mdb-carousel-item>
+      <!--/First slide-->
+      <!--Second slide-->
+      <mdb-carousel-item>
+        <img class="d-block w-100" src="{{imagenes[1].url}}">
+      </mdb-carousel-item>
+      <!--/Second slide-->
+      <!--Third slide-->
+      <mdb-carousel-item>
+        <img class="d-block w-100" src="{{imagenes[2].url}}">
+      </mdb-carousel-item>
+      <!--/Third slide-->
+      <mdb-carousel-item>
+        <img class="d-block w-100" src="{{imagenes[3].url}}">
+      </mdb-carousel-item>
+    </mdb-carousel>
+    <!--/.Carousel Wrapper-->
+
+  </div>
+
+  <div class="col-xs-12 col-md-12">
+    <div class="container" style="padding-top: 70px;">
+      <div class="row" style="background-color: #c2c2c2;">
+        <div class="col-xs-12 col-md-4">
+          <p class="direccion">
+            Roma Norte
+            <br>
+            Sonora 119 Primer Piso, Roma Norte. CP 06700 CDMX
+            <br>
+            contacto@nirho.com
+            <br>
+            Tel: +52 (55) 7591 8816 y +52 (55) 7591 8817
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4">
+          <p class="direccion">
+            Portales
+            <br>
+            Miguel Laurent 1407-A Portales Norte. CP. 03650 CDMX
+            <br>
+            contacto@nirho.com
+            <br>
+            Tel: +52 (55) 7591 8816 y +52 (55) 7591 8817
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4">
+          <p class="direccion">
+            Guadalajara
+            <br>
+            Primo Feliciano Velázquez #3264-B Col. Vallarta Sur CP. 44500 GDL
+            <br>
+            contacto@nirho.com
+            <br>
+            Tel: (33) 2306 1175 o (33) 2306 1178
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-md-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-8">
+          <p style="font-size: 13px">
+            © 2016 niRHo. <a href=" http://nirho.com/index.php/aviso-de-privacidad/">Todos los derechos reservados.</a>
+          </p>
+        </div>
+        <div class="col-xs-12 col-md-4" style="float: right; text-align: right">
+          <a href="" class="redireccion"><i class="fa fa-facebook-square fa-2x" style="color: #3A5795"></i>&nbsp;</a>
+          <a href="" class="redireccion twitter"><i class="fa fa-twitter-square fa-2x" style="color: #5EA9DD"></i>&nbsp;</a>
+          <a href="" class="redireccion"><i class="fa fa-linkedin-square fa-2x" style="color: #0274B3"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

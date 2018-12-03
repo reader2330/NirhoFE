@@ -1,0 +1,25 @@
+server:
+  port: 8080
+poller:
+  fixedRate: 5000
+spring:
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: consultor.nirho@gmail.com
+      password: HeadCount123**
+      properties.mail.smtp.auth: true
+      properties.mail.smtp.starttls.enable: true
+      properties.mail.smtp.starttls.required: true
+      properties.mail.smtp.ssl.enable: false
+      
+    application.name: nirho
+    jmx.default-domain: nirho
+    datasource.jndi-name: java:jboss/datasources/NirhoDS
+        
+    jpa:
+      show_sql: true
+      hibernate.dialect: org.hibernate.dialect.MySQLDialect
+      hbm2ddl.method: update
+      format_sql: true
+      hibernate.enable_lazy_load_no_trans: true

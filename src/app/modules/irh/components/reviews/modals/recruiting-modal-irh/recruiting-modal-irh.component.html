@@ -1,0 +1,80 @@
+<form [formGroup]="enterpriseForm">
+  <h5 style="text-align: center">
+    <mat-icon>folder_open</mat-icon>
+    Reclutamiento y selección
+  </h5>
+  <hr>
+
+ <div class="container-fluid">
+   <div class="row">
+
+     <div class="col-sm-12 col-md-6">
+       <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+         <mat-label>Estructura organizacional</mat-label>
+         <input matInput placeholder="Placeholder">
+       </mat-form-field>
+     </div>
+
+     <div class="col-sm-12 col-md-6">
+
+       <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+         <mat-label>Documento que debe existir</mat-label>
+         <input matInput placeholder="Placeholder">
+       </mat-form-field>
+     </div>
+
+     <div class="col-sm-12 col-md-4">
+       <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+         <mat-label>Cumplimiento</mat-label>
+         <mat-select formControlName="pais" required >
+           <mat-option >
+
+           </mat-option>
+         </mat-select>
+       </mat-form-field>
+     </div>
+
+     <div class="col-sm-12 col-md-4">
+       <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+         <mat-label>Vigencia</mat-label>
+         <mat-select formControlName="pais" required >
+           <mat-option >
+
+           </mat-option>
+         </mat-select>
+       </mat-form-field>
+     </div>
+
+     <div class="col-sm-12 col-md-4">
+       <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+         <mat-label>Estado</mat-label>
+         <mat-select formControlName="pais" required >
+           <mat-option >
+
+           </mat-option>
+         </mat-select>
+       </mat-form-field>
+     </div>
+
+
+
+    <div class="col-sm-12 col-md-8" >
+      <mat-form-field appearance="outline" style="display: contents">
+        <mat-label>Observaciones</mat-label>
+        <textarea matInput placeholder="Leave a comment"></textarea>
+      </mat-form-field>
+    </div>
+
+     <div class="col-sm-12 col-md-4">
+       <mat-form-field class="inputForm" appearance="outline" style="display: contents">
+         <mat-label>Inversión aproximada</mat-label>
+         <input matInput placeholder="Placeholder">
+       </mat-form-field>
+     </div>
+
+
+   </div>
+ </div>
+
+</form>
+
