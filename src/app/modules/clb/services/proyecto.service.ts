@@ -11,6 +11,7 @@ import {Pregunta} from '../models/pregunta';
 })
 export class ProyectoService {
   api = environment.urlApi;
+
   headers = new HttpHeaders();
   constructor(private http: HttpClient, ) {
 
@@ -60,7 +61,6 @@ export class ProyectoService {
   }
   updatePregunta(data) {
     return this.http.post(this.api + 'cuestionario/contestaPregPart', data, {headers:this.headers})
-
   }
   getGraficas(idProyecto) {
     return this.http.get(this.api + 'graficas/proyecto',{headers: this.headers, params:   {

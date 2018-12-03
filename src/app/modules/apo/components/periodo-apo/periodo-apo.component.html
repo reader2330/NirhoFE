@@ -1,0 +1,42 @@
+<form [formGroup]="proyectForm">
+  <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
+    <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+      <mat-form-field style="width: 96%; " appearance="outline">
+        <mat-label>Seleccionar proyecto</mat-label>
+        <mat-select formControlName="idProyecto" required>
+          <mat-option *ngFor="let proyect of proyects" [value]="proyect.idProyecto">
+            {{proyect.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+          <mat-form-field appearance="outline" style="display: contents">
+            <mat-label>Fecha inicio</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechaInicio">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+
+
+          <mat-form-field appearance="outline" style="display: contents">
+            <mat-label>Fecha termino</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="fechaTermino">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+        <mat-form-field class="inputForm" appearance="outline">
+          <mat-label>periodo</mat-label>
+          <input matInput formControlName="periodo" type="text" required>
+        </mat-form-field>
+
+
+
+  <button mat-raised-button (click)="agregarPeriodo()" style="margin-left: 10px; background-color: #A1B712; color: #fff;">Modificar <mat-icon>save</mat-icon></button>
+
+
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

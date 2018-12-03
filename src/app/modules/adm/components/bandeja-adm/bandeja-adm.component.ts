@@ -56,6 +56,7 @@ export class BandejaAdmComponent implements OnInit {
       this.responseChildren.emit({value: 3});
     }
   }
+
   deleteEmpleado(element){
     console.log(element)
     Swal({

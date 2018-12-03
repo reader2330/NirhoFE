@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {EnterprisesService} from '../../../irh/services/enterprises.service';
+import {ProyectoApoService} from '../../services/proyecto-apo.service';
 
 @Component({
   selector: 'app-enterprise-apo',
@@ -14,8 +15,9 @@ export class EnterpriseApoComponent implements OnInit {
   @Output() response = new EventEmitter();
   mobile = false;
   mgsInit = '';
-  countries = [];
+  nacionalidades = [];
   spins = [];
+  empresa = [];
 
   enterpriseForm = new FormGroup(
     {
@@ -28,7 +30,7 @@ export class EnterpriseApoComponent implements OnInit {
     }
   );
 
-  constructor( breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private EntrepiseService: EnterprisesService) {
+  constructor( breakpointObserver: BreakpointObserver, private ProyectoApoServices: ProyectoApoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -44,6 +46,8 @@ export class EnterpriseApoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getNacionality();
+    this.getGiros();
   }
 
   checkMobileCols() {
@@ -69,6 +73,30 @@ export class EnterpriseApoComponent implements OnInit {
     } else {
       return 2;
     }
+  }
+
+  getNacionality () {
+    this.ProyectoApoServices.getNacionality().subscribe((res) => {
+      if (res) {
+        //console.log(res);
+        this.nacionalidades = res;
+      }
+    });
+  }
+
+  getGiros() {
+    this.ProyectoApoServices.getGiros().subscribe((res) => {
+      if (res) {
+        //console.log(res);
+        this.spins = res;
+      }
+    });
+  }
+
+  guardarEmpresa() {
+    console.log(this.enterpriseForm.value);
+    this.empresa = this.enterpriseForm.value;
+    sessionStorage.setItem('enterprise', JSON.stringify(this.empresa));
   }
 
 }

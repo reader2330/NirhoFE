@@ -1,54 +1,8 @@
-
-<mat-toolbar style="background:  black" >
-  <span style="flex: 1 1 auto;"></span>
-</mat-toolbar>
 <mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="150px">
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1"  >
     <div class="logo-nav">
     </div>
   </mat-grid-tile>
-  <!--<mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="2" >
-    <mat-accordion  class="example-headers-align">
-      <mat-expansion-panel *ngFor= "let tema of temas" >
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{tema.nombre}} <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>
-          </mat-panel-title>
-
-        </mat-expansion-panel-header>
-        <mat-panel-description>
-          <mat-list >
-            <h3 mat-subheader>Preguntas</h3>
-            <mat-list-item role="listitem"  >
-
-
-
-
-            </mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item role="listitem" class="example-headers-align" mat-line>¿Que vale mexico?
-              <mat-radio-group>
-                <mat-radio-button style="margin-left: 10px">2</mat-radio-button>
-                <mat-radio-button style="margin-left: 10px">1</mat-radio-button>
-                <mat-radio-button style="margin-left: 10px">3</mat-radio-button>
-                <mat-radio-button style="margin-left: 10px">4</mat-radio-button>
-                <mat-radio-button style="margin-left: 10px">5</mat-radio-button>
-
-              </mat-radio-group></mat-list-item>
-            <mat-list-item role="listitem">Item 2</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-          </mat-list>
-
-
-
-        </mat-panel-description>
-
-
-      </mat-expansion-panel>
-
-
-    </mat-accordion>
-  </mat-grid-tile>-->
 
   <mat-grid-tile style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2">
     <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">

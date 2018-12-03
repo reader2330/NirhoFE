@@ -3,6 +3,9 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {EnterprisesService} from '../../../irh/services/enterprises.service';
+import {ProyectoEvdService} from '../../../evd/services/proyecto-evd.service';
+import Swal from "sweetalert2";
+import {ProyectoApoService} from '../../services/proyecto-apo.service';
 
 @Component({
   selector: 'app-proyect-apo',
@@ -13,21 +16,19 @@ export class ProyectApoComponent implements OnInit {
 
   @Output() response = new EventEmitter();
   mobile = false;
-  mgsInit = '';
-  countries = [];
-  spins = [];
+  proyecto = [];
 
   proyectForm = new FormGroup(
     {
+      proyecto: new FormControl('', Validators.required),
+      numEmpleados: new FormControl(0, Validators.required),
       numParticipantes: new FormControl(0, Validators.required),
-      sede: new FormControl(0, Validators.required),
-      frecuencia: new FormControl(0, Validators.required),
-      periodoEv: new FormControl('', Validators.required),
-      proyecto: new FormControl('', Validators.required)
+      sede: new FormControl('', Validators.required),
+      frecuenciaEval: new FormControl('', Validators.required),
     }
   );
 
-  constructor( breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private EntrepiseService: EnterprisesService) {
+  constructor( breakpointObserver: BreakpointObserver, private ProyectoApoServices: ProyectoApoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -68,6 +69,12 @@ export class ProyectApoComponent implements OnInit {
     } else {
       return 2;
     }
+  }
+
+  guardarProyecto() {
+    console.log(this.proyectForm.value);
+    this.proyecto = this.proyectForm.value;
+    sessionStorage.setItem('project', JSON.stringify(this.proyecto));
   }
 
 }

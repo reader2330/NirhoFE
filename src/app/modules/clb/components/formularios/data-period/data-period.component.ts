@@ -68,6 +68,7 @@ export class DataPeriodComponent implements OnInit {
       cancelButtonText: 'No, seguir editando'
     }).then((result) => {
       if (result.value) {
+        console.log("ppppp: ", this.proyect)
         this.proyect.diasGarantia = this.periodForm.value.diasGarantia;
         let data = {
           fechaRegistro: this.periodForm.value.fechaRegistro,

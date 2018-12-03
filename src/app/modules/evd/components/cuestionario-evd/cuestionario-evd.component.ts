@@ -109,7 +109,7 @@ export class CuestionarioEvdComponent implements OnInit {
 
   getProyects() {
     this.ProyectoEvdServices.getProyects().subscribe((res) => {
-
+      console.log(res,"dddd")
       this.proyects = res;
     });
   }

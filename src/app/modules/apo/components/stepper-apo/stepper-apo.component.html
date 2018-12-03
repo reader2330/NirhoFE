@@ -13,34 +13,11 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>
-      <p class="bold">Paso 3  </p> <p>Head Count</p>
+      <p class="bold">Paso 3  </p> <p>Datos Contacto</p>
     </ng-template>
-    <app-head-count-apo></app-head-count-apo>
+    <app-contact-apo></app-contact-apo>
   </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>
-      <p class="bold">Paso 4  </p> <p>Organigrama</p>
-    </ng-template>
-    <app-organigrama-apo></app-organigrama-apo>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>
-      <p class="bold">Paso 5  </p> <p>Head Count Ampliado</p>
-    </ng-template>
-    <app-haed-count2-apo></app-haed-count2-apo>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>
-      <p class="bold">Paso 6  </p> <p>Búsqueda</p>
-    </ng-template>
-    <app-busqueda></app-busqueda>
-  </mat-step>
-  <!--  <mat-step>
-      <ng-template matStepLabel>
-        <p class="bold">Paso 7  </p> <p>Documentación</p>
-      </ng-template>
 
-    </mat-step>-->
 </mat-horizontal-stepper>
 <mat-vertical-stepper  [hidden]="!mobile" [linear]="false" #stepper2>
   <mat-step >

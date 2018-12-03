@@ -3,8 +3,9 @@ import {Participante} from '../../../clb/models/participante';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {ProyectoService} from '../../../clb/services/proyecto.service';
-//import {IWorkBook, IWorkSheet, read, utils} from 'xlsx';
+import {IWorkBook, IWorkSheet, read, utils} from 'ts-xlsx';
 import Swal from "sweetalert2";
+import {ProyectoApoService} from '../../services/proyecto-apo.service';
 
 @Component({
   selector: 'app-head-count-apo',
@@ -56,7 +57,7 @@ export class HeadCountApoComponent implements OnInit {
     'areaOrg'
   ];
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectService:ProyectoService) {
+  constructor(breakpointObserver: BreakpointObserver, private ProyectApoService: ProyectoApoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -76,7 +77,7 @@ export class HeadCountApoComponent implements OnInit {
   }
 
   getProyects() {
-    this.ProyectService.getProyects().subscribe((res) => {
+    this.ProyectApoService.getProyects().subscribe((res) => {
       console.log(res);
       this.proyects = res;
     });
@@ -107,19 +108,18 @@ export class HeadCountApoComponent implements OnInit {
     }
 
   }
-  readFile(evt: any) {}
 
-  /*readFile(evt: any) {
+  readFile(evt: any) {
     const target: DataTransfer = <DataTransfer>(evt.target);
     if (target.files.length === 1 && evt.target.accept === ".xlsx") {
       const reader: FileReader = new FileReader();
       reader.onload = (e: any) => {
-         read workbook
+        /* read workbook */
         const bstr: string = e.target.result;
         const wb: IWorkBook = read(bstr, {type: 'binary'});
         const wsname: string = wb.SheetNames[0];
         const ws: IWorkSheet = wb.Sheets[wsname];
-         save data
+        /* save data */
         this.data = <any[]>(utils.sheet_to_json(ws, {header: 1}));
         this.data.shift();
         for (let  i = 0; i < this.data.length; i++) {
@@ -132,7 +132,7 @@ export class HeadCountApoComponent implements OnInit {
       reader.readAsBinaryString(target.files[0]);
 
     }
-  }*/
+  }
 
   getName(j) {
     return this.names[j];
@@ -155,7 +155,7 @@ export class HeadCountApoComponent implements OnInit {
       cancelButtonText: 'No, seguir editando'
     }).then((result) => {
       if (result.value) {
-        this.ProyectService.saveHead(data).subscribe(() => {
+        this.ProyectApoService.saveHead(data).subscribe(() => {
             Swal(
               'Listo.',
               'La información se guardo correctamente',

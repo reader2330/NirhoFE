@@ -58,8 +58,6 @@ export class CuestionarioSelectComponent implements OnInit {
   }
   savePreguntas() {
 
-
-
     Swal({
       title: '',
       text: 'Seguro que quieres guardar la información ingresada del proyecto',

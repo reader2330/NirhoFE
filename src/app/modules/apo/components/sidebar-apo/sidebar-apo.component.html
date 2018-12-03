@@ -20,15 +20,19 @@
 
             </div>
           </span>
-      <div class="avatar">
+      <div style="text-align:center;">
+        <div class="avatar">
 
+          <!--<a (click)="goAvatarEditing()"><img class="avatar" src="{{avatar.url}}"></a>-->
+
+        </div>
       </div>
 
-      <mat-list>
+      <mat-list style="max-width: 200px;">
         <mat-list-item>
-          <p style="margin-left: 40px">{{ 'Jose Lopez' }}</p>
+          <p style="margin-left: 40px">{{ 'Joaquín Hernández' }}</p>
         </mat-list-item>
-        <mat-list-item *ngFor="let module of modules" (click)="goModule(module.id_submodulo)">
+        <mat-list-item *ngFor="let module of modules" [ngClass]="{'c-active': selectedItem == module.id_submodulo}" (click)="goModule(module.id_submodulo)">
           <p>{{module.descripcion}}</p>
         </mat-list-item>
 
@@ -36,11 +40,42 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="row">
+    <div>
 
       <div style="padding: 10px 30px 0 30px;"  class="col-sm-12 stepper-forms" >
 
-        <app-stepper-apo></app-stepper-apo>
+        <div *ngIf="selectModule == 2">
+          <h3>Bandeja de proyectos</h3>
+          <app-bandeja-lista-apo (responseChildren)="recibirRespuestChildren($event)"></app-bandeja-lista-apo>
+        </div>
+        <div *ngIf="selectModule == 3">
+          <h3>Alta de proyectos</h3>
+          <app-stepper-apo (responseChildren)="recibirRespuestChildren($event)"></app-stepper-apo>
+        </div>
+        <div *ngIf="selectModule == 4">
+          <h3>Head Count</h3>
+          <app-head-count-apo (responseChildren)="recibirRespuestChildren($event)"></app-head-count-apo>
+        </div>
+        <div *ngIf="selectModule == 5">
+          <h3>Head Count Ampliado</h3>
+          <app-haed-count2-apo (responseChildren)="recibirRespuestChildren($event)"></app-haed-count2-apo>
+        </div>
+        <div *ngIf="selectModule == 6">
+          <h3>Periodo de garantía</h3>
+          <app-periodo-apo (responseChildren)="recibirRespuestChildren($event)"></app-periodo-apo>
+        </div>
+        <div *ngIf="selectModule == 7">
+          <h3>Ver Cuestionario</h3>
+          <app-poll-status-apo (responseChildren)="recibirRespuestChildren($event)"></app-poll-status-apo>
+        </div>
+        <!--<div *ngIf="selectModule == 6">
+          <h3>Ver Cuestionario</h3>
+          <app-cuestionario-evd (responseChildren)="recibirRespuestChildren($event)"></app-cuestionario-evd>
+        </div>
+        <div *ngIf="selectModule == 7">
+          <h3>Estado del cuestionario</h3>
+          <app-encuesta-evd (responseChildren)="recibirRespuestChildren($event)"></app-encuesta-evd>
+        </div>-->
 
       </div>
 

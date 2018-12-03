@@ -1,23 +1,21 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {CatalogsService} from '../../../clb/services/catalogs.service';
+import {ProyectoEvdService} from '../../../evd/services/proyecto-evd.service';
 import {EnterprisesService} from '../../../irh/services/enterprises.service';
-import {ProyectoEvdService} from '../../services/proyecto-evd.service';
 import Swal from "sweetalert2";
+import {ProyectoApoService} from '../../services/proyecto-apo.service';
 
 @Component({
-  selector: 'app-proyect-evd',
-  templateUrl: './proyect-evd.component.html',
-  styleUrls: ['./proyect-evd.component.scss']
+  selector: 'app-contact-apo',
+  templateUrl: './contact-apo.component.html',
+  styleUrls: ['./contact-apo.component.scss']
 })
-export class ProyectEvdComponent implements OnInit {
+export class ContactApoComponent implements OnInit {
 
   @Output() response = new EventEmitter();
   mobile = false;
-  mgsInit = '';
-  countries = [];
-  spins = [];
+  tipos = [];
 
   jsonFinal = {
     id: null,
@@ -35,27 +33,28 @@ export class ProyectEvdComponent implements OnInit {
     frecuenciaEval: '',
     idContacto: {
       id: null,
-      telefono: "89789798",
-      puesto: "Contacto de cobranza",
-      tipoContacto: 11,
-      email: "Prueba5@Prueba5",
-      nombre: "Prueba5",
-      celular: "897897",
+      telefono: 0,
+      puesto: '',
+      tipoContacto: 0,
+      email: '',
+      nombre: '',
+      celular: 0,
       empresa: null
     }
   }
 
-  proyectForm = new FormGroup(
+  contactForm = new FormGroup(
     {
-      proyecto: new FormControl('', Validators.required),
-      numEmpleados: new FormControl(0, Validators.required),
-      numParticipantes: new FormControl(0, Validators.required),
-      sede: new FormControl('', Validators.required),
-      frecuenciaEval: new FormControl('', Validators.required),
+      nombre: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      puesto: new FormControl('', Validators.required),
+      tipoContacto: new FormControl(0, Validators.required),
+      telefono: new FormControl(0, Validators.required),
+      celular: new FormControl(0, Validators.required),
     }
   );
 
-  constructor( breakpointObserver: BreakpointObserver, private ProyectoEvdServices: ProyectoEvdService, private EntrepiseService: EnterprisesService) {
+  constructor( breakpointObserver: BreakpointObserver, private ProyectoApoServices: ProyectoApoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -71,6 +70,7 @@ export class ProyectEvdComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getTypeContact();
   }
 
   checkMobileCols() {
@@ -98,16 +98,27 @@ export class ProyectEvdComponent implements OnInit {
     }
   }
 
+  getTypeContact() {
+    this.ProyectoApoServices.getTypeContact().subscribe((res) => {
+      if (res) {
+        //console.log(res);
+        this.tipos = res;
+      }
+    });
+  }
 
-
-  guardarProyecto() {
+  guardarContacto() {
     console.log(sessionStorage);
-    let temp = this.proyectForm.value;
-    sessionStorage.setItem('proyect', JSON.stringify(temp));
+    let temp = this.contactForm.value;
+    sessionStorage.setItem('contact', JSON.stringify(temp));
 
     let enterprise = JSON.parse(sessionStorage.getItem('enterprise'));
-    let proyecto = JSON.parse(sessionStorage.getItem('proyect'));
-    let contacto = '';
+    let proyecto = JSON.parse(sessionStorage.getItem('project'));
+    let contacto = JSON.parse(sessionStorage.getItem('contact'));
+
+    console.log('enterprise: ', enterprise)
+    console.log('proyecto: ', proyecto)
+    console.log('contacto: ', contacto)
 
     this.jsonFinal.idEmpresa.empresa = enterprise.empresa;
     this.jsonFinal.idEmpresa.pais = enterprise.pais;
@@ -119,6 +130,12 @@ export class ProyectEvdComponent implements OnInit {
     this.jsonFinal.numParticipantes = proyecto.numParticipantes;
     this.jsonFinal.sedes = proyecto.sede;
     this.jsonFinal.frecuenciaEval = proyecto.frecuenciaEval;
+    this.jsonFinal.idContacto.nombre = contacto.nombre;
+    this.jsonFinal.idContacto.email = contacto.email;
+    this.jsonFinal.idContacto.puesto = contacto.puesto;
+    this.jsonFinal.idContacto.tipoContacto = contacto.tipoContacto;
+    this.jsonFinal.idContacto.telefono = contacto.telefono;
+    this.jsonFinal.idContacto.celular = contacto.celular;
 
     console.log('json final: ', this.jsonFinal);
 
@@ -131,7 +148,7 @@ export class ProyectEvdComponent implements OnInit {
       cancelButtonText: 'No, seguir editando'
     }).then((result) => {
       if (result.value) {
-        this.ProyectoEvdServices.saveProyect(this.jsonFinal).subscribe(res => {
+        this.ProyectoApoServices.saveProyect(this.jsonFinal).subscribe(res => {
           console.log(res);
           Swal('Listo.',
             'El proyecto se guardo correctamente',

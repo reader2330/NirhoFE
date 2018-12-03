@@ -1,18 +1,18 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Proyecto} from '../../../clb/models/proyecto';
-import {ProyectoEvdService} from '../../services/proyecto-evd.service';
+import {ProyectoApoService} from '../../services/proyecto-apo.service';
 
 @Component({
-  selector: 'app-bandeja-evd',
-  templateUrl: './bandeja-evd.component.html',
-  styleUrls: ['./bandeja-evd.component.scss']
+  selector: 'app-bandeja-lista-apo',
+  templateUrl: './bandeja-lista-apo.component.html',
+  styleUrls: ['./bandeja-lista-apo.component.scss']
 })
-export class BandejaEvdComponent implements OnInit {
+export class BandejaListaApoComponent implements OnInit {
 
   proyects: Proyecto[];
   @Output() responseChildren = new EventEmitter();
 
-  constructor(private ProyectoEvdServices: ProyectoEvdService) {
+  constructor(private ProyectoApoServices: ProyectoApoService) {
   }
 
   displayedColumns: string[] = ['nombre', 'empresa', 'empleados', 'participantes', 'frecuenciaEval', 'detail3'];
@@ -24,7 +24,7 @@ export class BandejaEvdComponent implements OnInit {
 
   getProyects() {
 
-    this.ProyectoEvdServices.getProyects().subscribe((res) => {
+    this.ProyectoApoServices.getProyects().subscribe((res) => {
       console.log(res);
       this.proyects = res;
       this.dataSource = this.proyects;
@@ -53,9 +53,4 @@ export class BandejaEvdComponent implements OnInit {
     }
   }
 
-  getProyectsbyRol() {
-    this.ProyectoEvdServices.getProyectsbyRol(4).subscribe((res) => {
-      this.proyects = res;
-    });
-  }
 }

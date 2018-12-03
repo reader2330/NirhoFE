@@ -4,6 +4,8 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
 import {ProyectoService} from '../../../clb/services/proyecto.service';
 import {IWorkBook, IWorkSheet, read, utils} from 'ts-xlsx';
+import Swal from "sweetalert2";
+import {ProyectoApoService} from '../../services/proyecto-apo.service';
 
 @Component({
   selector: 'app-haed-count2-apo',
@@ -31,7 +33,13 @@ export class HaedCount2ApoComponent implements OnInit {
     'GENERO',
     'PUESTO',
     'FECHA DE INGRESO',
-
+    'ANTIGUEDAD EN EL PUESTO',
+    'NIVEL DE ESCOLARIDAD',
+    'IDIOMA',
+    'NIVEL',
+    'CORREO ELECTRONICO',
+    'SEDE',
+    'AREA ORGANIZACIONAL'
 
   ];
 
@@ -56,7 +64,7 @@ export class HaedCount2ApoComponent implements OnInit {
     'areaOrg'
   ];
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectService:ProyectoService) {
+  constructor(breakpointObserver: BreakpointObserver, private ProyectApoService: ProyectoApoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -71,10 +79,11 @@ export class HaedCount2ApoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getProyects();
   }
 
   getProyects() {
-    this.ProyectService.getProyects().subscribe((res) => {
+    this.ProyectApoService.getProyects().subscribe((res) => {
       console.log(res);
       this.proyects = res;
     });
@@ -106,19 +115,18 @@ export class HaedCount2ApoComponent implements OnInit {
 
   }
 
-  readFile(evt: any) {}
-  /*readFile(evt: any) {
+  readFile(evt: any) {
     const target: DataTransfer = <DataTransfer>(evt.target);
     if (target.files.length === 1 && evt.target.accept === ".xlsx") {
       const reader: FileReader = new FileReader();
-      reader.onload = (e: any) => {*/
+      reader.onload = (e: any) => {
         /* read workbook */
-        /*const bstr: string = e.target.result;
+        const bstr: string = e.target.result;
         const wb: IWorkBook = read(bstr, {type: 'binary'});
         const wsname: string = wb.SheetNames[0];
-        const ws: IWorkSheet = wb.Sheets[wsname];*/
+        const ws: IWorkSheet = wb.Sheets[wsname];
         /* save data */
-        /*this.data = <any[]>(utils.sheet_to_json(ws, {header: 1}));
+        this.data = <any[]>(utils.sheet_to_json(ws, {header: 1}));
         this.data.shift();
         for (let  i = 0; i < this.data.length; i++) {
           for (let j = 0 ; j < this.data[i].length; j++) {
@@ -130,7 +138,7 @@ export class HaedCount2ApoComponent implements OnInit {
       reader.readAsBinaryString(target.files[0]);
 
     }
-  }*/
+  }
 
   getName(j) {
     return this.names[j];
@@ -163,6 +171,42 @@ export class HaedCount2ApoComponent implements OnInit {
 
   }
 
-  guardaHead(){}
+  guardaHead() {
+    let data = {
+      lista: this.dataSource,
+      idProyecto: this.filters.idProyecto
+    }
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar la información ingresada del proyecto',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        this.ProyectApoService.saveHeadAmp(data).subscribe(() => {
+            Swal(
+              'Listo.',
+              'La información se guardo correctamente',
+              'success'
+            ).then(() => {
+              this.responseHead.emit({value: 1});
+            });
+
+          },
+          (err) => {
+            console.log(err);
+            Swal(
+              'Algo salio mal.',
+              'No se pudo guarda la información',
+              'error'
+            ).then(() => {
+              this.responseHead.emit({value: 1});
+            });
+          });
+      }
+    });
+  }
 
 }

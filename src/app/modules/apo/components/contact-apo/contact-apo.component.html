@@ -1,40 +1,49 @@
-<form [formGroup]="proyectForm">
+<form [formGroup]="contactForm">
   <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
 
-
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-
       <mat-form-field class="inputForm" appearance="outline">
         <mat-label>Nombre</mat-label>
-        <input matInput formControlName="proyecto" type="text" required>
+        <input matInput formControlName="nombre" type="text" required>
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Número de empleados</mat-label>
-        <input matInput formControlName="numEmpleados" type="text" required>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" required>
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Numero de participantes</mat-label>
-        <input matInput  formControlName="numParticipantes" type="number">
+        <mat-label>Puesto</mat-label>
+        <input matInput formControlName="puesto" type="text" required>
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Sedes</mat-label>
-        <input matInput formControlName="sede" type="text">
+        <mat-label>Tipo contacto</mat-label>
+        <mat-select  formControlName="tipoContacto" required >
+          <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
+            {{tipo.descripcionCatalogo}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Frecuencia evaluación</mat-label>
-        <input matInput type="text" formControlName="frecuenciaEval">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="telefono" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Celular</mat-label>
+        <input matInput formControlName="celular" type="text" required>
       </mat-form-field>
     </mat-grid-tile>
 
@@ -48,8 +57,8 @@
       <button mat-raised-button matStepperPrevious>Cancelar
         <mat-icon>cancel</mat-icon>
       </button>
-      <button mat-raised-button color="primary" style="margin-left: 10px;" (click)="guardarProyecto()" [disabled]="!proyectForm.valid" matStepperNext>Siguiente
-        <mat-icon>arrow_forward</mat-icon>
+      <button mat-raised-button style="margin-left: 10px; background-color: #A1B712; color: #fff;" [disabled]="!contactForm.valid" (click)="guardarContacto()">Guardar
+        <mat-icon>save</mat-icon>
       </button>
     </mat-grid-tile>
 
@@ -57,3 +66,6 @@
 
 
 </form>
+
+
+

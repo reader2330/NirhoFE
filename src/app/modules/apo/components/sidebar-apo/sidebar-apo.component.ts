@@ -11,8 +11,13 @@ import {LoginService} from '../../../clb/services/login.service';
 export class SidebarApoComponent implements OnInit {
 
   mobile = false;
-  selectModule = 1;
-  modules =[]
+  selectedItem = 2;
+  selectModule = 2;
+  modules = [];
+  user = {};
+  avatar = {
+    url: ''
+  };
 
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginServices: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));
@@ -30,7 +35,45 @@ export class SidebarApoComponent implements OnInit {
     this.selectModule = opt;
   }
 
+  getModules() {
+    this.modules = [{
+      id_submodulo: 2,
+      descripcion: 'Bandeja de proyectos'
+    }, {
+      id_submodulo: 3,
+      descripcion: 'Alta proyecto'
+    }, {
+      id_submodulo: 4,
+      descripcion: 'Head Count'
+    }, {
+      id_submodulo: 5,
+      descripcion: 'Head Count Ampliado'
+    }, {
+      id_submodulo: 6,
+      descripcion: 'Periodo de garantía'
+    }, {
+      id_submodulo: 7,
+      descripcion: 'Otro'
+    }];
+    /*this.loginService.getModules().subscribe((res) => {
+    });*/
+  }
+
   ngOnInit() {
+    setTimeout(() => {
+      this.getModules();
+      //this.getUser();
+    }, 1500);
+  }
+
+  goAvatarEditing() {
+    this.route.navigate(['avatar-edit']);
+  }
+
+  recibirRespuestChildren(evt) {
+    if (evt.value) {
+      this.selectModule = evt.value;
+    }
   }
 
   cerraSesion(){}

@@ -30,19 +30,19 @@
 }
 
 
-.avatar{
-  width: 200px;
+.avatar {
+  width: 150px;
   margin-top: 10px;
-  height: 200px;
+  height: 150px;
   border-radius: 100px;
   background-repeat: no-repeat;
   background-image: url("../../../../../avatar.png");
   background-size: cover;
-
+  margin-left: 26px;
 }
 
 
-.logo-nav{
+.logo-nav {
   width: 165px;
   height: 52px;
   margin-left: 15px;
@@ -51,7 +51,7 @@
   background-repeat: no-repeat;
 }
 
-.logo-nav-mobile{
+.logo-nav-mobile {
   height: 100px;
   width: 180px;
   background-image: url("../../../../../logo_m.png");
@@ -67,14 +67,26 @@
   flex-direction: column;
 }
 
-.form-company > * {
+.form-company>* {
   width: 100%;
 }
 
-stepper-forms{
+stepper-forms {
 
   margin-top: 300px;
 
 }
 
+/deep/ .mat-list .mat-list-item .mat-list-item-content, .mat-list .mat-list-option .mat-list-item-content, .mat-nav-list .mat-list-item .mat-list-item-content, .mat-nav-list .mat-list-option .mat-list-item-content, .mat-selection-list .mat-list-item .mat-list-item-content, .mat-selection-list .mat-list-option .mat-list-item-content {
+  padding: 15px 15px 0 15px !important;
+}
 
+
+.mat-nav-list .mat-list-item {
+  height: auto;
+}
+
+.mat-nav-list .mat-list-item.c-active {
+  background: #a2ba00;
+  color: white;
+}
