@@ -120,16 +120,6 @@ public class ParticipanteAPOController {
 	public void headCountAmp(@RequestBody String headcount) throws NirhoControllerException {
 		logger.info(" ************************ headcount [" + headcount + "] *****************************");
 		try {
-			JSONObject jsonHeadCount = new JSONObject(headcount);
-			Proyecto proyecto = proyectoService.obtenerProyectoPorId(jsonHeadCount.getInt("idProyecto"));
-        	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
-        	if(!(estatusActual == ProyectoConstants.ESTATUS_CONFIGURACION.intValue() ||
-        			estatusActual == ProyectoConstants.ESTATUS_CARGA.intValue())) {
-        		throw new NirhoControllerException("No se ha realizado la configuracion del cuestionario en el proyecto");
-        	}
-			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CARGA));
-			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
-			
 			JSONArray jsonParticipantesAmp = jsonHeadCount.getJSONArray("participantes");
 			List<ParticipanteAPOAmp> participantesAmp = new ArrayList<>();
 			for(int i = 0; i < jsonParticipantesAmp.length(); i++) {
@@ -180,6 +170,7 @@ public class ParticipanteAPOController {
 
 	private ParticipanteAPOAmp assamblerToParticipanteHCA(JSONObject jsonParticipanteAmp) throws JSONException {
 		ParticipanteAPOAmp participante = new ParticipanteAPOAmp();
+		
 		participante.setObjetivoPuesto(jsonParticipanteAmp.getString("objetivoPuesto"));
 		participante.setFunciones(jsonParticipanteAmp.getString("funciones"));
 		participante.setActividades(jsonParticipanteAmp.getString("actividades"));
@@ -189,6 +180,7 @@ public class ParticipanteAPOController {
 		participante.setTiempo(jsonParticipanteAmp.getString("tiempo"));
 		participante.setFrecuenciaEval(jsonParticipanteAmp.getString("frecuenciaEval"));
 		try {
+			participante.setIdParticipante(Integer.parseInt(jsonParticipanteAmp.getString("idParticipante")));
 			participante.setIdEvaluador(Integer.parseInt(jsonParticipanteAmp.getString("idEvaluador")));
 		} catch(Exception e) {
 			logger.info("Exception [" + e.getMessage() + "]");
