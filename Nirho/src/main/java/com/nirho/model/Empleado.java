@@ -100,6 +100,9 @@ public class Empleado implements Serializable {
     @Column(name = "escolaridad")
     private int escolaridad;
     
+    @Column(name = "institucion")
+    private String institucion;
+    
     @Column(name = "escolaridad_carrera")
     private String escolaridadCarrera;
     
@@ -317,6 +320,14 @@ public class Empleado implements Serializable {
 
 	public void setEscolaridad(int escolaridad) {
 		this.escolaridad = escolaridad;
+	}
+
+	public String getInstitucion() {
+		return institucion;
+	}
+
+	public void setInstitucion(String institucion) {
+		this.institucion = institucion;
 	}
 
 	public String getEscolaridadCarrera() {
