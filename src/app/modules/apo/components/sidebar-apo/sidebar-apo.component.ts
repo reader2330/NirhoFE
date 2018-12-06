@@ -11,7 +11,6 @@ import {LoginService} from '../../../clb/services/login.service';
 export class SidebarApoComponent implements OnInit {
 
   mobile = false;
-  selectedItem = 2;
   selectModule = 2;
   modules = [];
   user = {};
@@ -19,7 +18,7 @@ export class SidebarApoComponent implements OnInit {
     url: ''
   };
 
-  constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginServices: LoginService) {
+  constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -62,7 +61,7 @@ export class SidebarApoComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.getModules();
-      //this.getUser();
+      this.getUser();
     }, 1500);
   }
 
@@ -75,7 +74,25 @@ export class SidebarApoComponent implements OnInit {
       this.selectModule = evt.value;
     }
   }
+  getUser() {
+    this.LoginService.getUser().subscribe((res) => {
+      this.user = res;
+      console.log(res);
+      sessionStorage.setItem('user', JSON.stringify(this.user));
+      if (this.user) {
+        this.avatar.url = this.user['avatar'];
+      }
+    });
+  }
 
-  cerraSesion(){}
+
+  cerraSesion() {
+    sessionStorage.clear();
+    localStorage.clear();
+    this.route.navigate(['']);
+  }
+  IrInicio() {
+    this.route.navigate(['SYNC']);
+  }
 
 }

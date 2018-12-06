@@ -6,6 +6,7 @@ import {ProyectoService} from '../../../clb/services/proyecto.service';
 import {IWorkBook, IWorkSheet, read, utils} from 'ts-xlsx';
 import Swal from "sweetalert2";
 import {ProyectoApoService} from '../../services/proyecto-apo.service';
+import {HCAmpliado} from '../../models/hcampliado';
 
 @Component({
   selector: 'app-haed-count2-apo',
@@ -19,27 +20,22 @@ export class HaedCount2ApoComponent implements OnInit {
   data: any[] = [];
   file: File;
   showTable = false;
-  dataSource: Participante[] = [];
+  dataSource: HCAmpliado[] = [];
   proyects = [];
   filters = {
     idProyecto: 0
   };
 
   displayedColumns: string[] = [
-    'NIVEL TEXTO',
-    'NOMBRES',
-    'APELLIDO PATERNO',
-    'APELLIDO MATERNO',
-    'GENERO',
-    'PUESTO',
-    'FECHA DE INGRESO',
-    'ANTIGUEDAD EN EL PUESTO',
-    'NIVEL DE ESCOLARIDAD',
-    'IDIOMA',
-    'NIVEL',
-    'CORREO ELECTRONICO',
-    'SEDE',
-    'AREA ORGANIZACIONAL'
+    'OBJETIVO PUESTO',
+    'FUNCIONES',
+    'ACTIVIDADES',
+    'NOMBRE DE META',
+    'CANTIDAD META',
+    'UNIDAD MEDIDA',
+    'TIEMPO',
+    'F.E.V.',
+
 
   ];
 
@@ -146,28 +142,20 @@ export class HaedCount2ApoComponent implements OnInit {
 
   uploadHeadCount() {
     this.showTable = true;
+    this.mobile = true;
   }
 
   changeData(data, index) {
-    this.dataSource[index] = new Participante();
+    this.dataSource[index] = new HCAmpliado();
     this.dataSource[index].idParticipante = data[0];
-    this.dataSource[index].nivel = data[1];
-    this.dataSource[index].nivelTexto = data[2];
-    this.dataSource[index].nombres = data[3];
-    this.dataSource[index].aPaterno = data[4];
-    this.dataSource[index].aMaterno = data[5];
-    this.dataSource[index].genero = data[6];
-    this.dataSource[index].rfc = data[7];
-    this.dataSource[index].puesto = data[8];
-    this.dataSource[index].fechaIngreso = data[9];
-    this.dataSource[index].antigPuesto = data[10];
-    this.dataSource[index].nivelEscolaridad = data[11];
-    this.dataSource[index].otrosEstudios = data[12];
-    this.dataSource[index].idioma = data[13];
-    this.dataSource[index].nivelIdioma = data[14];
-    this.dataSource[index].correoElectronico = data[15];
-    this.dataSource[index].sede = data[16];
-    this.dataSource[index].areaOrg = data[17];
+    this.dataSource[index].objetivoPuesto = data[1];
+    this.dataSource[index].funcionPuesto = data[2];
+    this.dataSource[index].actividadPuesto = data[3];
+    this.dataSource[index].meta = data[4];
+    this.dataSource[index].cantidad = data[5];
+    this.dataSource[index].unidadMedida = data[6];
+    this.dataSource[index].tiempo = data[7];
+    this.dataSource[index].frecuencia = data[8];
 
   }
 

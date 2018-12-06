@@ -34,7 +34,11 @@
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="inputForm" appearance="outline">
         <mat-label>Frecuencia evaluación</mat-label>
-        <input matInput type="text" formControlName="frecuenciaEval">
+        <mat-select formControlName="frecuenciaEval" >
+          <mat-option *ngFor="let time of periods" [value]="time.id">
+            {{time.description}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </mat-grid-tile>
 

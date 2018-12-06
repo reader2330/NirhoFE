@@ -51,7 +51,6 @@ export class SidebarComponent implements OnInit {
   getUser() {
     this.LoginService.getUser().subscribe((res) => {
       this.user = res;
-      console.log(res);
       sessionStorage.setItem('user', JSON.stringify(this.user));
       if (this.user) {
         this.avatar.url = this.user['avatar'];

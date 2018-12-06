@@ -17,12 +17,12 @@ export class PeriodoApoComponent implements OnInit {
   proyects = [];
   proyecto: Proyecto;
 
-  proyectForm = new FormGroup(
+  periodoForm = new FormGroup(
     {
       idProyecto: new FormControl(0, Validators.required),
       fechaInicio: new FormControl('', Validators.required),
       fechaTermino: new FormControl('', Validators.required),
-      periodo: new FormControl(0, Validators.required),
+      diasGarantia: new FormControl(0, Validators.required),
     }
   );
 
@@ -79,16 +79,8 @@ export class PeriodoApoComponent implements OnInit {
   }
 
   agregarPeriodo() {
-    console.log("wweee", this.proyecto)
-    this.proyecto.diasGarantia = this.proyectForm.value.periodo;
-    let data = {
-      fechaRegistro: this.proyectForm.value.fechaInicio,
-      fechaFin: this.proyectForm.value.fechaTermino,
-      proyecto: this.proyecto
-    };
-    //this.proyecto = this.proyectForm.value;
-    console.log("proyecto: ", data)
-    this.ProyectApoService.updateProyect(data).subscribe(res => {
+    console.log('proyecto: ', this.periodoForm.value)
+    this.ProyectApoService.savePeriod(this.periodoForm.value).subscribe(res => {
       console.log(res);
     });
   }

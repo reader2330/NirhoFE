@@ -13,7 +13,7 @@
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile  [colspan]="checkMobileCols()" [rowspan]="1">
-    <mat-label>Head Count</mat-label>
+    <mat-label>Head Count Ampliado </mat-label>
     <input id ="upload"  (change) ="readFile($event)" style="margin-left: 10px" type="file" accept=".xlsx" >
   </mat-grid-tile>
   <mat-grid-tile  [colspan]="checkMobileCols()" [rowspan]="1">
@@ -28,68 +28,43 @@
   <!-- Position Column -->
 
 
-  <ng-container  matColumnDef="NIVEL TEXTO">
-    <th mat-header-cell style="padding-right: 50px !important;" *matHeaderCellDef> NIVEL TEXTO       </th>
-    <td mat-cell style="padding-right: 50px !important;" *matCellDef="let element"> {{element.nivelTexto}} </td>
+  <ng-container  matColumnDef="OBJETIVO PUESTO">
+    <th mat-header-cell style="padding-right: 50px !important;" *matHeaderCellDef> OBJETIVO PUESTO       </th>
+    <td mat-cell style="padding-right: 50px !important;" *matCellDef="let element"> {{element.objetivoPuesto}} </td>
   </ng-container>
 
 
-  <ng-container  matColumnDef="NOMBRES">
-    <th mat-header-cell style="padding-right: 50px !important;" *matHeaderCellDef>NOMBRES </th>
-    <td mat-cell   style="padding-right: 50px !important;"*matCellDef="let element"> {{element.nombres}}       </td>
+  <ng-container  matColumnDef="FUNCIONES">
+    <th mat-header-cell style="padding-right: 50px !important;" *matHeaderCellDef>FUNCIONES </th>
+    <td mat-cell   style="padding-right: 50px !important;"*matCellDef="let element"> {{element.funcionPuesto}}       </td>
   </ng-container>
 
 
-  <ng-container matColumnDef="APELLIDO PATERNO">
-    <th  style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> APELLIDO PATERNO </th>
-    <td  style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.aPaterno}} </td>
+  <ng-container matColumnDef="ACTIVIDADES">
+    <th  style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> ACTIVIDADES </th>
+    <td  style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.actividadPuesto}} </td>
   </ng-container>
-  <ng-container matColumnDef="APELLIDO MATERNO">
-    <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> APELLIDO MATERNO </th>
-    <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.aMaterno}} </td>
+  <ng-container matColumnDef="NOMBRE DE META">
+    <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> NOMBRE DE META </th>
+    <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.meta}} </td>
   </ng-container>
-  <ng-container matColumnDef="GENERO">
-    <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> GENERO </th>
-    <td  style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.genero}} </td>
+  <ng-container matColumnDef="CANTIDAD META">
+    <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> CANTIDAD META </th>
+    <td  style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="PUESTO">
-    <th  style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> PUESTO </th>
-    <td  style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.puesto}} </td>
+  <ng-container matColumnDef="UNIDAD MEDIDA">
+    <th  style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> UNIDAD MEDIDA </th>
+    <td  style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.unidadMedida}} </td>
   </ng-container>
-  <ng-container matColumnDef="FECHA DE INGRESO">
-    <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> FECHA DE INGRESO </th>
-    <td style="padding-right: 50px !important;"  mat-cell *matCellDef="let element"> {{element.fechaIngreso}} </td>
+  <ng-container matColumnDef="TIEMPO">
+    <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> TIEMPO </th>
+    <td style="padding-right: 50px !important;"  mat-cell *matCellDef="let element"> {{element.tiempo}} </td>
   </ng-container>
-  <ng-container matColumnDef="ANTIGUEDAD EN EL PUESTO">
-     <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> ANTIGUEDAD EN EL PUESTO </th>
-     <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.antigPuesto}} </td>
+  <ng-container matColumnDef="F.E.V.">
+     <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> F.E.V. </th>
+     <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.frecuencia}} </td>
    </ng-container>
-  <ng-container matColumnDef="NIVEL DE ESCOLARIDAD">
-  <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> NIVEL DE ESCOLARIDAD </th>
-  <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.nivelEscolaridad}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="IDIOMA">
-    <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> IDIOMA </th>
-    <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.idioma}} </td>
-  </ng-container>
-  <ng-container matColumnDef="NIVEL">
-    <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> NIVEL DE IDIOMA </th>
-    <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.nivelIdioma}} </td>
-  </ng-container>
-  <ng-container matColumnDef="CORREO ELECTRONICO">
-    <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> EMAIL </th>
-    <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.correoElectronico}} </td>
-  </ng-container>
-  <ng-container matColumnDef="SEDE">
-    <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> SEDE </th>
-    <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.sede}} </td>
-  </ng-container>
-  <ng-container matColumnDef="AREA ORGANIZACIONAL" >
-    <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> AREA ORGANIZACIONAR </th>
-    <td style="padding-right: 50px !important;" mat-cell  *matCellDef="let element"> {{element.areaOrg}} </td>
-  </ng-container>
 
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

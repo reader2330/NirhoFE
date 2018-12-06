@@ -27,6 +27,29 @@ export class ProyectApoComponent implements OnInit {
       frecuenciaEval: new FormControl('', Validators.required),
     }
   );
+  periods = [
+    {
+      id: 1,
+      description: 'Mensual'
+    },
+    {
+      id: 2,
+      description: 'Bimestral'
+    },
+    {
+      id: 3,
+      description: 'Semestral'
+    },
+    {
+      id: 4,
+      description: 'Anual'
+    },
+    {
+      id: 5,
+      description: 'Unica vez'
+    }
+
+  ];
 
   constructor( breakpointObserver: BreakpointObserver, private ProyectoApoServices: ProyectoApoService) {
     breakpointObserver.isMatched(('(max-width:450)'));

@@ -1,4 +1,4 @@
-<form [formGroup]="proyectForm">
+<form [formGroup]="periodoForm">
   <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
     <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
       <mat-form-field style="width: 96%; " appearance="outline">
@@ -9,14 +9,16 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
-
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field appearance="outline" style="display: contents">
             <mat-label>Fecha inicio</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="fechaInicio">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
 
 
 
@@ -26,17 +28,15 @@
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
-
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputForm" appearance="outline">
-          <mat-label>periodo</mat-label>
-          <input matInput formControlName="periodo" type="text" required>
+          <mat-label>Dias de garantia </mat-label>
+          <input matInput formControlName="diasGarantia" type="number" required>
         </mat-form-field>
-
-
-
-  <button mat-raised-button (click)="agregarPeriodo()" style="margin-left: 10px; background-color: #A1B712; color: #fff;">Modificar <mat-icon>save</mat-icon></button>
-
-
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
+    <button mat-raised-button color="accent" (click)="agregarPeriodo()" style="margin-left: 10px;  color: #fff;"><mat-icon>save</mat-icon>Guardar </button>
     </mat-grid-tile>
   </mat-grid-list>
 </form>
