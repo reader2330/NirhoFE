@@ -80,7 +80,8 @@ export class ScholarshipAdmComponent implements OnInit {
       escolaridadCertificaciones: new FormArray([], Validators.required),
       escolaridadCursos: new FormArray([], [Validators.required]),
       escolaridadOficios:  new FormArray([], Validators.required),
-      titulo:  new FormControl(false)
+      titulo:  new FormControl(false),
+      institucion: new FormControl('',Validators.required)
     }
   );
   constructor(breakpointObserver: BreakpointObserver, private CatalogsAdmServices: CatalogsAdmService) {

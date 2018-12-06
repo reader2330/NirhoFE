@@ -16,6 +16,7 @@ import {EvdModule} from './modules/evd/evd.module';
 import {AdmModule} from './modules/adm/adm.module';
 import {SynchronizeModule} from './modules/synchronize/synchronize.module';
 import {ApoModule} from './modules/apo/apo.module';
+import {MAT_DATE_LOCALE} from '@angular/material';
 
 
 @NgModule({
@@ -38,7 +39,9 @@ import {ApoModule} from './modules/apo/apo.module';
     SynchronizeModule,
     ApoModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

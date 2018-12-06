@@ -24,6 +24,14 @@
     <mat-grid-tile>
       <mat-checkbox formControlName="titulo">Título universitario</mat-checkbox>
     </mat-grid-tile>
+    <mat-grid-tile  [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Institución</mat-label>
+        <input matInput formControlName="institucion" type="text" required>
+      </mat-form-field>
+    </mat-grid-tile>
+
 
 
     <mat-grid-tile>

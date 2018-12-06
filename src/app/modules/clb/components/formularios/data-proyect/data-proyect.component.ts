@@ -42,6 +42,10 @@ export class DataProyectComponent implements OnInit {
       id: 4,
       description: 'Anual'
     },
+    {
+      id: 5,
+      description: 'Unica vez'
+    }
 
   ];
   mobile = false;

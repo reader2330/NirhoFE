@@ -52,7 +52,6 @@ export class BandejaAdmComponent implements OnInit {
     console.log(id);
 
     for (let nationaly  of this.nacionalidades) {
-      console.log(nationaly);
       if (nationaly.id === id) {
         return nationaly.descripcionCatalogo;
       }
@@ -60,7 +59,7 @@ export class BandejaAdmComponent implements OnInit {
   }
 
   goDetailEmpleado(element) {
-    console.log("adios");
+
     if (element) {
       sessionStorage.setItem('idEmpleado', JSON.stringify(element.id));
       this.responseChildren.emit({value: 3});
@@ -95,7 +94,7 @@ export class BandejaAdmComponent implements OnInit {
   }
   getNacionality() {
     this.CatalogsAdmServices.getNacionality().subscribe(res => {
-      console.log(res);
+
       this.nacionalidades = res;
     });
   }
