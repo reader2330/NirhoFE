@@ -7,14 +7,18 @@ package com.nirho.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,14 +28,21 @@ import javax.persistence.TemporalType;
  * @author DELL
  */
 @Entity
-@Table(name = "participante")
+@Table(name = "participanteAPO")
 @NamedQueries({
-    @NamedQuery(name = "Participante.findAll", query = "SELECT p FROM Participante p")})
-public class Participante implements Serializable {
+    @NamedQuery(name = "ParticipanteAPO.findAll", query = "SELECT p FROM ParticipanteAPO p")})
+public class ParticipanteAPO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected ParticipantePK participantePK;
+    
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
+    
+    @Column(name = "id_proyecto")
+	private Integer idProyecto;
+    
     @Column(name = "nivel")
     private Integer nivel;
     @Column(name = "nivel_texto")
@@ -67,53 +78,71 @@ public class Participante implements Serializable {
     private String sede;
     @Column(name = "area_org")
     private String areaOrg;
-    @Column(name = "token")
-    private String token;
-    @Column(name = "objetivo_puesto")
-    private String objetivoPuesto;
-    @Column(name = "funciones")
-    private String funciones;
-    @Column(name = "actividades")
-    private String actividades;
-    @Column(name = "meta_kpi")
-    private String metaKpi;
-    @Column(name = "cantidad_meta")
-    private String cantidadMeta;
-    @Column(name = "unidad_medida")
-    private String unidadMedida;
-    @Column(name = "tiempo")
-    private String tiempo;
-    @Column(name = "frecuencia_eval")
-    private String frecuenciaEval;
-    @Column(name = "id_evaluador")
-    private Integer idEvaluador;
     @Column(name = "id_part_jefe_inm")
     private Integer idPartJefeInm;
     
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Proyecto proyecto;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "participanteAPO")
+   	private Set<ParticipanteAPOAmp> ampliaciones;
     
-    public Participante() {
-    }
+    public ParticipanteAPO() {
+		super();
+	}
 
-    public Participante(ParticipantePK participantePK) {
-        this.participantePK = participantePK;
-    }
+	public ParticipanteAPO(Integer id, Integer idProyecto, Integer nivel, String nivelTexto, String nombres,
+			String aPaterno, String aMaterno, String genero, String rfc, String puesto, Date fechaIngreso,
+			Double antigPuesto, String nivelEscolaridad, String otrosEstudios, String idioma, String nivelIdioma,
+			String correoElectronico, String sede, String areaOrg, Integer idPartJefeInm,
+			Set<ParticipanteAPOAmp> ampliaciones) {
+		super();
+		this.id = id;
+		this.idProyecto = idProyecto;
+		this.nivel = nivel;
+		this.nivelTexto = nivelTexto;
+		this.nombres = nombres;
+		this.aPaterno = aPaterno;
+		this.aMaterno = aMaterno;
+		this.genero = genero;
+		this.rfc = rfc;
+		this.puesto = puesto;
+		this.fechaIngreso = fechaIngreso;
+		this.antigPuesto = antigPuesto;
+		this.nivelEscolaridad = nivelEscolaridad;
+		this.otrosEstudios = otrosEstudios;
+		this.idioma = idioma;
+		this.nivelIdioma = nivelIdioma;
+		this.correoElectronico = correoElectronico;
+		this.sede = sede;
+		this.areaOrg = areaOrg;
+		this.idPartJefeInm = idPartJefeInm;
+		this.ampliaciones = ampliaciones;
+	}
 
-    public Participante(int idParticipante, int idProyecto) {
-        this.participantePK = new ParticipantePK(idParticipante, idProyecto);
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public ParticipantePK getParticipantePK() {
-        return participantePK;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setParticipantePK(ParticipantePK participantePK) {
-        this.participantePK = participantePK;
-    }
+	public String getaPaterno() {
+		return aPaterno;
+	}
 
-    public Integer getNivel() {
+	public void setaPaterno(String aPaterno) {
+		this.aPaterno = aPaterno;
+	}
+
+	public String getaMaterno() {
+		return aMaterno;
+	}
+
+	public void setaMaterno(String aMaterno) {
+		this.aMaterno = aMaterno;
+	}
+
+	public Integer getNivel() {
         return nivel;
     }
 
@@ -249,86 +278,6 @@ public class Participante implements Serializable {
         this.areaOrg = areaOrg;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getObjetivoPuesto() {
-        return objetivoPuesto;
-    }
-
-    public void setObjetivoPuesto(String objetivoPuesto) {
-        this.objetivoPuesto = objetivoPuesto;
-    }
-
-    public String getFunciones() {
-        return funciones;
-    }
-
-    public void setFunciones(String funciones) {
-        this.funciones = funciones;
-    }
-
-    public String getActividades() {
-        return actividades;
-    }
-
-    public void setActividades(String actividades) {
-        this.actividades = actividades;
-    }
-
-    public String getMetaKpi() {
-        return metaKpi;
-    }
-
-    public void setMetaKpi(String metaKpi) {
-        this.metaKpi = metaKpi;
-    }
-
-    public String getCantidadMeta() {
-        return cantidadMeta;
-    }
-
-    public void setCantidadMeta(String cantidadMeta) {
-        this.cantidadMeta = cantidadMeta;
-    }
-
-    public String getUnidadMedida() {
-        return unidadMedida;
-    }
-
-    public void setUnidadMedida(String unidadMedida) {
-        this.unidadMedida = unidadMedida;
-    }
-
-    public String getTiempo() {
-        return tiempo;
-    }
-
-    public void setTiempo(String tiempo) {
-        this.tiempo = tiempo;
-    }
-
-    public String getFrecuenciaEval() {
-        return frecuenciaEval;
-    }
-
-    public void setFrecuenciaEval(String frecuenciaEval) {
-        this.frecuenciaEval = frecuenciaEval;
-    }
-
-    public Integer getIdEvaluador() {
-        return idEvaluador;
-    }
-
-    public void setIdEvaluador(Integer idEvaluador) {
-        this.idEvaluador = idEvaluador;
-    }
-    
     public Integer getIdPartJefeInm() {
 		return idPartJefeInm;
 	}
@@ -337,26 +286,31 @@ public class Participante implements Serializable {
 		this.idPartJefeInm = idPartJefeInm;
 	}
 
-	public Proyecto getProyecto() {
-        return proyecto;
-    }
+	public Integer getIdProyecto() {
+		return idProyecto;
+	}
 
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
-    }
+	public void setIdProyecto(Integer idProyecto) {
+		this.idProyecto = idProyecto;
+	}
+
+	public Set<ParticipanteAPOAmp> getAmpliaciones() {
+		return ampliaciones;
+	}
+
+	public void setAmpliaciones(Set<ParticipanteAPOAmp> ampliaciones) {
+		this.ampliaciones = ampliaciones;
+	}
 
 	@Override
 	public String toString() {
-		return "Participante [participantePK=" + participantePK + ", nivel=" + nivel + ", nivelTexto=" + nivelTexto
-				+ ", nombres=" + nombres + ", aPaterno=" + aPaterno + ", aMaterno=" + aMaterno + ", genero=" + genero
-				+ ", rfc=" + rfc + ", puesto=" + puesto + ", fechaIngreso=" + fechaIngreso + ", antigPuesto="
-				+ antigPuesto + ", nivelEscolaridad=" + nivelEscolaridad + ", otrosEstudios=" + otrosEstudios
-				+ ", idioma=" + idioma + ", nivelIdioma=" + nivelIdioma + ", correoElectronico=" + correoElectronico
-				+ ", sede=" + sede + ", areaOrg=" + areaOrg + ", token=" + token + ", objetivoPuesto=" + objetivoPuesto
-				+ ", funciones=" + funciones + ", actividades=" + actividades + ", metaKpi=" + metaKpi
-				+ ", cantidadMeta=" + cantidadMeta + ", unidadMedida=" + unidadMedida + ", tiempo=" + tiempo
-				+ ", frecuenciaEval=" + frecuenciaEval + ", idEvaluador=" + idEvaluador + ", idPartJefeInm="
-				+ idPartJefeInm + ", proyecto=" + proyecto + "]";
+		return "ParticipanteAPO [id=" + id + ", idProyecto=" + idProyecto + ", nivel=" + nivel + ", nivelTexto="
+				+ nivelTexto + ", nombres=" + nombres + ", aPaterno=" + aPaterno + ", aMaterno=" + aMaterno
+				+ ", genero=" + genero + ", rfc=" + rfc + ", puesto=" + puesto + ", fechaIngreso=" + fechaIngreso
+				+ ", antigPuesto=" + antigPuesto + ", nivelEscolaridad=" + nivelEscolaridad + ", otrosEstudios="
+				+ otrosEstudios + ", idioma=" + idioma + ", nivelIdioma=" + nivelIdioma + ", correoElectronico="
+				+ correoElectronico + ", sede=" + sede + ", areaOrg=" + areaOrg + ", idPartJefeInm=" + idPartJefeInm
+				+ ", ampliaciones=" + ampliaciones + "]";
 	}
-	
+
 }

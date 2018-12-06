@@ -141,7 +141,7 @@ public class ParticipanteController {
 				ParticipantePK participantePK = new ParticipantePK(p.getIdParticipante(), headcount.getIdProyecto());
 				participante.setParticipantePK(participantePK);
 				participantes.add(participante);
-			}
+			} 
 			participanteService.ampliarParticipanteService(participantes);
 		} catch (NirhoControllerException nce) {
         	throw new NirhoControllerException(nce.getMessage());

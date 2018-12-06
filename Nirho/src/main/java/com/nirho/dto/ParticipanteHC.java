@@ -30,7 +30,7 @@ public class ParticipanteHC implements Serializable {
     private String nivelIdioma;
     private String correoElectronico;
     private String sede;
-    private String areaOrg;
+    private String areaOrg; 
     
     public ParticipanteHC() {
     }
