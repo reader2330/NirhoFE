@@ -32,14 +32,14 @@
 
       <ul>
         <li *ngFor="let people of level1.participantes">
-          <a >{{people.nombre}} <p class="text-muted " style="font-size: 10px;">{{people.puesto}} </p></a>
+          <a > <p style="font-size: 10px;">{{people.nombre}}</p> <p class="text-muted " style="font-size: 10px;">{{people.puesto}} </p></a>
           <ul>
             <li *ngFor="let people of level2.participantes">
-              <a >{{people.nombre}} <p class="text-muted " style="font-size: 10px;">{{people.puesto}} </p></a>
+              <a ><p style="font-size: 10px;">{{people.nombre}}</p> <p class="text-muted " style="font-size: 10px;">{{people.puesto}} </p></a>
 
               <ul>
                 <li *ngFor="let people of level3.participantes"  >
-                  <a >{{people.nombre}} <p class="text-muted " style="font-size: 10px;">{{people.puesto}} </p></a>
+                  <a ><p style="font-size: 10px;">{{people.nombre}}</p> <p class="text-muted " style="font-size: 10px;">{{people.puesto}} </p></a>
                 </li>
               </ul>
             </li>

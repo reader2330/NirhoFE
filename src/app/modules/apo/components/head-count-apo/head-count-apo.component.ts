@@ -143,7 +143,7 @@ export class HeadCountApoComponent implements OnInit {
   }
   guardaHead() {
     let data = {
-      lista: this.dataSource,
+      participantes: this.dataSource,
       idProyecto: this.filters.idProyecto
     }
     Swal({
