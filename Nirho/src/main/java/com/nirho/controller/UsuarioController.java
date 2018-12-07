@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ClbSubmodulo;
+import com.nirho.model.RoleModuloSubModuloAPO;
 import com.nirho.model.Usuario;
 import com.nirho.security.TokenHelper;
 import com.nirho.service.RolClbService;
@@ -90,7 +91,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "/role/{role}/submodulosAPO", method = RequestMethod.GET)
 	public ResponseEntity<?> submodulosAPO(@PathVariable("role") int role) {
-		List<Integer> submodulos = null;
+		List<RoleModuloSubModuloAPO> submodulos = null;
 		try {
 			submodulos =  roleModuloSubModuloAPOService.obtenerSubModulos(role);
 		} catch (NirhoServiceException e) {
