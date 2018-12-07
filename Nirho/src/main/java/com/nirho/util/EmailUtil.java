@@ -9,7 +9,7 @@ public class EmailUtil {
 		return asunto;
 	}
 	public static String getContenido(EmailDatos datos) {
-		String contenido = "<p>Estimado " + datos.getNombreParticipante() + "</p>" + 
+		String contenido = "<p>Estimado(a) " + datos.getNombreParticipante() + "</p>" + 
 				"<p>Para ingresar a su cuestionario de participación al proyecto " + datos.getNombreProyecto() +
 				", por favor hacer clic en la siguiente liga: " + URL_CUESTIONARIO + datos.getToken() + "</p>" +
 				"<p>Saludos</p>";
