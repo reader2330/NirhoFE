@@ -132,7 +132,7 @@ public class ParticipanteAPOController {
 	private ParticipanteAPO assamblerToParticipanteHC(JSONObject jsonParticipante) throws JSONException {
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 		ParticipanteAPO participante = new ParticipanteAPO();
-		participante.setNivel(Integer.parseInt(jsonParticipante.optString("nivel", null)));
+		participante.setNivel(Integer.parseInt(jsonParticipante.optString("nivel", "0")));
 		participante.setNivelTexto(jsonParticipante.optString("nivelTexto", null));
 		participante.setNombres(jsonParticipante.optString("nombres", null));
 	    participante.setAPaterno(jsonParticipante.optString("aPaterno", null));

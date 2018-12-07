@@ -24,6 +24,7 @@ import com.nirho.model.ClbSubmodulo;
 import com.nirho.model.Usuario;
 import com.nirho.security.TokenHelper;
 import com.nirho.service.RolClbService;
+import com.nirho.service.RoleModuloSubModuloAPOService;
 import com.nirho.service.UsuarioService;
 import com.nirho.util.SessionUtil;
 
@@ -35,6 +36,9 @@ public class UsuarioController {
 	
 	@Autowired
 	RolClbService rolService;
+	
+	@Autowired
+	RoleModuloSubModuloAPOService roleModuloSubModuloAPOService;
 	
 	@Autowired
 	UsuarioService usuarioService;
@@ -82,6 +86,17 @@ public class UsuarioController {
         } else {
         	return new ResponseEntity<String>("Unauthorized", HttpStatus.UNAUTHORIZED); 
         }
+	}
+	
+	@RequestMapping(value = "/role/{role}/submodulosAPO", method = RequestMethod.GET)
+	public ResponseEntity<?> submodulosAPO(@PathVariable("role") int role) {
+		List<Integer> submodulos = null;
+		try {
+			submodulos =  roleModuloSubModuloAPOService.obtenerSubModulos(role);
+		} catch (NirhoServiceException e) {
+			logger.info("Exception [" + e.getMessage() +"]");
+		}
+		return new ResponseEntity<>(submodulos, HttpStatus.OK);	
 	}
 	
 	@RequestMapping(value = "/role/{role}/submodulos", method = RequestMethod.GET)
