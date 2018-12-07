@@ -94,12 +94,12 @@ public class ParticipanteServiceImpl implements ParticipanteService {
 				String apellidoM = p.getAMaterno()!=null?p.getAMaterno():"";
 				nombre = nombre + " " + apellidoP + " " + apellidoM;
 				if(nivel != null) {
-					nivel.getParticipantes().add(new ParticipanteDTO(nombre, p.getPuesto()));
+					nivel.getParticipantes().add(new ParticipanteDTO(p.getParticipantePK().getIdParticipante(), nombre, p.getPuesto(), p.getIdPartJefeInm()));
 				} else {
 					NivelDTO ndto = new NivelDTO();
 					ndto.setNivel(p.getNivel());
 					ndto.setParticipantes(new ArrayList<>());				
-					ndto.getParticipantes().add(new ParticipanteDTO(nombre, p.getPuesto()));
+					ndto.getParticipantes().add(new ParticipanteDTO(p.getParticipantePK().getIdParticipante(), nombre, p.getPuesto(), p.getIdPartJefeInm()));
 					nivelesMap.put(new Integer(p.getNivel()), ndto);
 				}
 			}
