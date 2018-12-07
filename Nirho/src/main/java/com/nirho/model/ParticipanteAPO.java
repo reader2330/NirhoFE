@@ -45,38 +45,38 @@ public class ParticipanteAPO implements Serializable {
     
     @Column(name = "nivel")
     private Integer nivel;
-    @Column(name = "nivel_texto")
+    @Column(name = "nivel_texto", nullable=true)
     private String nivelTexto;
-    @Column(name = "nombres")
+    @Column(name = "nombres", nullable=true)
     private String nombres;
-    @Column(name = "a_paterno")
+    @Column(name = "a_paterno", nullable=true)
     private String aPaterno;
-    @Column(name = "a_materno")
+    @Column(name = "a_materno", nullable=true)
     private String aMaterno;
-    @Column(name = "genero")
+    @Column(name = "genero", nullable=true)
     private String genero;
-    @Column(name = "rfc")
+    @Column(name = "rfc", nullable=true)
     private String rfc;
-    @Column(name = "puesto")
+    @Column(name = "puesto", nullable=true)
     private String puesto;
-    @Column(name = "fecha_ingreso")
+    @Column(name = "fecha_ingreso", nullable=true)
     @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
     @Column(name = "antig_puesto")
     private Double antigPuesto;
-    @Column(name = "nivel_escolaridad")
+    @Column(name = "nivel_escolaridad", nullable=true)
     private String nivelEscolaridad;
-    @Column(name = "otros_estudios")
+    @Column(name = "otros_estudios", nullable=true)
     private String otrosEstudios;
-    @Column(name = "idioma")
+    @Column(name = "idioma", nullable=true)
     private String idioma;
-    @Column(name = "nivel_idioma")
+    @Column(name = "nivel_idioma", nullable=true)
     private String nivelIdioma;
-    @Column(name = "correo_electronico")
+    @Column(name = "correo_electronico", nullable=true)
     private String correoElectronico;
-    @Column(name = "sede")
+    @Column(name = "sede", nullable=true)
     private String sede;
-    @Column(name = "area_org")
+    @Column(name = "area_org", nullable=true)
     private String areaOrg;
     @Column(name = "id_part_jefe_inm")
     private Integer idPartJefeInm;
