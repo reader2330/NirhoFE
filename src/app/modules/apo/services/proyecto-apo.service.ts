@@ -44,7 +44,7 @@ export class ProyectoApoService {
   }
 
   saveHeadAmp(data): Observable<any> {
-    return this.http.post(this.api + 'participantes/headCountAmp', data, {headers: this.headers} );
+    return this.http.post(this.api + 'participantesAPO/headCountAmp', data, {headers: this.headers} );
   }
   savePeriod(data): Observable<any> {
     return this.http.post(this.api + 'proyectoAPO/agignarPeriodoGarantia', data, {headers: this.headers});
