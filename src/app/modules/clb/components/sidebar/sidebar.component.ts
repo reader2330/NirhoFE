@@ -13,7 +13,9 @@ export class SidebarComponent implements OnInit {
   mobile = false;
   selectModule = 1;
   modules = [];
-  user = {};
+  user = {
+    fullName: ''
+  };
   avatar = {
     url: ''
   };

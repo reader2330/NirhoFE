@@ -23,9 +23,16 @@
       <input matInput type="text"  placeholder="Comentario" >
     </div>
   </div>
-  <div *ngFor="let opt of options; let i = index"  style=" border: 2px black solid"  class="col-sm-6">
-    <chart  [options]="opt"></chart>
-    <input matInput type="text" [(ngModel)]="data['datos'][i][0].comentarios" placeholder="Comentario" >
+  <div *ngFor="let opt of options; let i = index"  style=" border: 2px black solid"  class="row col-sm-6">
+    <div class="col-sm-8">
+      <chart  [options]="opt"></chart>
+    </div>
+    <div class="col-sm-4">
+      <textarea matInput type="text" [(ngModel)]="data['datos'][i][0].comentarios" placeholder="Comentario" ></textarea>
+    </div>
+
+
+
   </div>
 
   <div class="col-sm-4 offset-4" style="margin-top: 30px">

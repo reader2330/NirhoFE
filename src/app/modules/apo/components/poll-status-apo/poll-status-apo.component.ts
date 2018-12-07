@@ -11,6 +11,8 @@ import {CatalogsService} from '../../../clb/services/catalogs.service';
 export class PollStatusApoComponent implements OnInit {
 
   mobile = false;
+  evaluador = [];
+
   stages = [{
     name: 'Creado',
     completed: true
@@ -54,5 +56,6 @@ export class PollStatusApoComponent implements OnInit {
 
   ngOnInit() {
   }
+  assign() {}
 
 }

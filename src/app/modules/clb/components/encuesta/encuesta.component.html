@@ -60,7 +60,7 @@
 
   <mat-grid-tile style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2" *ngIf="goPreguntas">
     <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
-      <mat-expansion-panel (opened)="true" >
+      <mat-expansion-panel [expanded]="true" (opened)="true" >
         <mat-expansion-panel-header>
           <mat-panel-title>
             Cuestionario <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>

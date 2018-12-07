@@ -44,7 +44,7 @@ export class DataProyectComponent implements OnInit {
     },
     {
       id: 5,
-      description: 'Unica vez'
+      description: 'Única vez'
     }
 
   ];

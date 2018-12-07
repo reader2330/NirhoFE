@@ -120,6 +120,7 @@ public class ParticipanteAPOController {
 	public void headCountAmp(@RequestBody String headcount) throws NirhoControllerException {
 		logger.info(" ************************ headcount [" + headcount + "] *****************************");
 		try {
+			JSONObject jsonHeadCount = new JSONObject(headcount);
 			JSONArray jsonParticipantesAmp = jsonHeadCount.getJSONArray("participantes");
 			List<ParticipanteAPOAmp> participantesAmp = new ArrayList<>();
 			for(int i = 0; i < jsonParticipantesAmp.length(); i++) {
@@ -127,9 +128,7 @@ public class ParticipanteAPOController {
 				participantesAmp.add(participante);
 			} 
 			participanteAPOService.ampliarParticipanteService(participantesAmp);
-		} catch (NirhoControllerException nce) {
-        	throw new NirhoControllerException(nce.getMessage());
-        } catch (NirhoServiceException e) {
+		}  catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el participante en la BD");
 		} catch (JSONException e) {
 			throw new NirhoControllerException("Problemas al registrar el participante en la BD");

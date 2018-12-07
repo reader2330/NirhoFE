@@ -14,12 +14,14 @@ export class SidebarEvdComponent implements OnInit {
   selectedItem = 2;
   selectModule = 2;
   modules = [];
-  user = {};
+  user = {
+    fullName: ''
+  };
   avatar = {
     url: ''
   };
 
-  constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginServices: LoginService) {
+  constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -68,7 +70,7 @@ export class SidebarEvdComponent implements OnInit {
   }
 
   getUser() {
-    this.LoginServices.getUser().subscribe((res) => {
+    this.LoginService.getUser().subscribe((res) => {
       this.user = res;
       sessionStorage.setItem('user', JSON.stringify(this.user));
     });
@@ -81,13 +83,13 @@ export class SidebarEvdComponent implements OnInit {
 
   }
 
-  /*cerraSesion() {
+  cerrarSesion() {
     this.LoginService.closeSession().subscribe((res) => {
       console.log(res);
     });
     sessionStorage.clear();
     this.route.navigate(['']);
-  }*/
+  }
 
   goAvatarEditing() {
     this.route.navigate(['avatar-edit']);

@@ -29,7 +29,7 @@ public class ParticipanteAPOServiceImpl implements ParticipanteAPOService {
 	@Override
 	public ParticipanteAPO getOne(Integer id) throws NirhoServiceException {
 		try {
-			participanteAPODAO.getOne(p.getId());
+			return participanteAPODAO.getOne(id);
 		} catch (Exception e) {
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");

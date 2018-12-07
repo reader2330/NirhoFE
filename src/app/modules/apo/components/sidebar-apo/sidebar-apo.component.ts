@@ -13,7 +13,9 @@ export class SidebarApoComponent implements OnInit {
   mobile = false;
   selectModule = 2;
   modules = [];
-  user = {};
+  user = {
+    fullName: ''
+  };
   avatar = {
     url: ''
   };

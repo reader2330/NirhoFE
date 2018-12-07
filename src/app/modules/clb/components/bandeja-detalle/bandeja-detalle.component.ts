@@ -58,7 +58,7 @@ export class BandejaDetalleComponent implements OnInit {
         return 'Anual';
       }
       if (num === 5 ) {
-        return 'Unica vez';
+        return 'Única vez';
       }
     }
   }
