@@ -17,6 +17,7 @@ import { BandejaListaApoComponent } from './components/bandeja-lista-apo/bandeja
 import { PollStatusApoComponent } from './components/poll-status-apo/poll-status-apo.component';
 import { ContactApoComponent } from './components/contact-apo/contact-apo.component';
 import { PeriodoApoComponent } from './components/periodo-apo/periodo-apo.component';
+import {AsignarConsultorApoComponent} from './components/asignar-consultor-apo/asignar-consultor-apo.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { PeriodoApoComponent } from './components/periodo-apo/periodo-apo.compon
     BandejaListaApoComponent,
     PollStatusApoComponent,
     ContactApoComponent,
-    PeriodoApoComponent
+    PeriodoApoComponent,
+    AsignarConsultorApoComponent
   ]
 })
 export class ApoModule { }

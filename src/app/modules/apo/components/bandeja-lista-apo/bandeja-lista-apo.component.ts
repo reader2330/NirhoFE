@@ -53,4 +53,25 @@ export class BandejaListaApoComponent implements OnInit {
     }
   }
 
+  getFrecuencia(num) {
+
+    if (num === 1) {
+      return 'Mensual';
+    }
+    if (num === 2) {
+      return 'Bimestral';
+    }
+    if (num === 3) {
+      return 'Semestral';
+    }
+    if (num === 4) {
+      return 'Anual';
+    }
+    if (num === 5 ) {
+      return 'Unica vez';
+    }
+
+  }
+
 }
+

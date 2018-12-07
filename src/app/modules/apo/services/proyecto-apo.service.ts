@@ -49,4 +49,15 @@ export class ProyectoApoService {
   savePeriod(data): Observable<any> {
     return this.http.post(this.api + 'proyectoAPO/agignarPeriodoGarantia', data, {headers: this.headers});
   }
+  getProyectID(id): Observable<any> {
+    return this.http.get(this.api + 'proyectoAPO/porId', {headers: this.headers , params: {
+      'idProyecto': id
+      }});
+  }
+  getConsultores(): Observable<any> {
+    return this.http.get(this.api + 'usuario/consultores', {headers: this.headers});
+  }
+  saveConsultor(data): Observable<any> {
+    return this.http.post(this.api + 'proyectoAPO/asignarConsultor', data, {headers: this.headers});
+  }
 }

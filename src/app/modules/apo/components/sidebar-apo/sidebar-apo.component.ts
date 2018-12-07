@@ -11,7 +11,7 @@ import {LoginService} from '../../../clb/services/login.service';
 export class SidebarApoComponent implements OnInit {
 
   mobile = false;
-  selectModule = 2;
+  selectModule = 1;
   modules = [];
   user = {
     fullName: ''
@@ -38,7 +38,7 @@ export class SidebarApoComponent implements OnInit {
 
   getModules() {
     this.modules = [{
-      id_submodulo: 2,
+      id_submodulo: 1,
       descripcion: 'Bandeja de proyectos'
     }, {
       id_submodulo: 3,
@@ -53,11 +53,30 @@ export class SidebarApoComponent implements OnInit {
       id_submodulo: 6,
       descripcion: 'Periodo de garantía'
     }, {
-      id_submodulo: 7,
+      id_submodulo: 8,
       descripcion: 'Otro'
     }];
     /*this.loginService.getModules().subscribe((res) => {
     });*/
+  }
+  getFrecuencia(num) {
+
+    if (num === 1) {
+      return 'Mensual';
+    }
+    if (num === 2) {
+      return 'Bimestral';
+    }
+    if (num === 3) {
+      return 'Semestral';
+    }
+    if (num === 4) {
+      return 'Anual';
+    }
+    if (num === 5 ) {
+      return 'Unica vez';
+    }
+
   }
 
   ngOnInit() {

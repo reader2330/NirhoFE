@@ -1,24 +1,24 @@
 export class HCAmpliado {
   idParticipante: string;
   objetivoPuesto: string;
-  funcionPuesto: string;
-  actividadPuesto: string;
+  funciones: string;
+  actividades: string;
   meta: string;
   cantidad: string;
-  unidadMedida: string;
+  cantidadMeta: string;
   tiempo: string;
-  frecuencia: string;
+  frecuenciaEval: string;
   constructor(idParticipante?: string, objetivoPuesto?: string, funcionPuesto?: string, actividadPuesto?: string, meta?: string, cantidad?: string, unidadMedida?: string, tiempo?: string, frecuencia?: string) {
     if (idParticipante) {
       this.idParticipante = idParticipante;
       this.objetivoPuesto = objetivoPuesto;
-      this.funcionPuesto = funcionPuesto;
-      this.actividadPuesto = actividadPuesto;
+      this.funciones = funcionPuesto;
+      this.actividades = actividadPuesto;
       this.meta = meta;
       this.cantidad = cantidad;
-      this.unidadMedida = unidadMedida;
+      this.cantidadMeta = unidadMedida;
       this.tiempo = tiempo;
-      this.frecuencia = frecuencia;
+      this.frecuenciaEval = frecuencia;
     }
   }
 }

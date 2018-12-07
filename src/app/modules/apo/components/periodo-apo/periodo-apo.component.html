@@ -3,7 +3,7 @@
     <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
       <mat-form-field style="width: 96%; " appearance="outline">
         <mat-label>Seleccionar proyecto</mat-label>
-        <mat-select formControlName="idProyecto" required>
+        <mat-select (selectionChange)="getProyectID()" formControlName="idProyecto" required>
           <mat-option *ngFor="let proyect of proyects" [value]="proyect.idProyecto">
             {{proyect.nombre}}
           </mat-option>

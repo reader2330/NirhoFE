@@ -45,29 +45,33 @@
 
       <div style="padding: 10px 30px 0 30px;"  class="col-sm-12 stepper-forms" >
 
-        <div *ngIf="selectModule == 2">
+        <div *ngIf="selectModule == 1">
           <h3>Bandeja de proyectos</h3>
-          <app-bandeja-lista-apo (responseChildren)="recibirRespuestChildren($event)"></app-bandeja-lista-apo>
+          <app-bandeja-lista-apo (responseHead)="recibirRespuestChildren($event)"></app-bandeja-lista-apo>
         </div>
         <div *ngIf="selectModule == 3">
           <h3>Alta de proyectos</h3>
-          <app-stepper-apo (responseChildren)="recibirRespuestChildren($event)"></app-stepper-apo>
+          <app-stepper-apo (responseHead)="recibirRespuestChildren($event)"></app-stepper-apo>
         </div>
         <div *ngIf="selectModule == 4">
           <h3>Head Count</h3>
-          <app-head-count-apo (responseChildren)="recibirRespuestChildren($event)"></app-head-count-apo>
+          <app-head-count-apo (responseHead)="recibirRespuestChildren($event)"></app-head-count-apo>
         </div>
         <div *ngIf="selectModule == 5">
           <h3>Head Count Ampliado</h3>
-          <app-haed-count2-apo (responseChildren)="recibirRespuestChildren($event)"></app-haed-count2-apo>
+          <app-haed-count2-apo (responseHead)="recibirRespuestChildren($event)"></app-haed-count2-apo>
         </div>
         <div *ngIf="selectModule == 6">
           <h3>Periodo de garantía</h3>
-          <app-periodo-apo (responseChildren)="recibirRespuestChildren($event)"></app-periodo-apo>
+          <app-periodo-apo (responseHead)="recibirRespuestChildren($event)"></app-periodo-apo>
         </div>
         <div *ngIf="selectModule == 7">
-          <h3>Ver Cuestionario</h3>
-          <app-poll-status-apo (responseChildren)="recibirRespuestChildren($event)"></app-poll-status-apo>
+          <h3>Ver esatdo de proyecto</h3>
+          <app-poll-status-apo (responseHead)="recibirRespuestChildren($event)"></app-poll-status-apo>
+        </div>
+        <div *ngIf="selectModule == 8">
+
+          <app-asignar-consultor-apo (responseHead)="recibirRespuestChildren($event)"></app-asignar-consultor-apo>
         </div>
         <!--<div *ngIf="selectModule == 6">
           <h3>Ver Cuestionario</h3>
