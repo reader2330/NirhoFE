@@ -24,6 +24,7 @@ import com.nirho.dto.EmailDatos;
 import com.nirho.dto.HeadCount;
 import com.nirho.dto.HeadCountAmpliado;
 import com.nirho.dto.NivelDTO;
+import com.nirho.dto.ParticipanteDTO;
 import com.nirho.dto.ParticipanteHC;
 import com.nirho.dto.ParticipanteHCA;
 import com.nirho.exception.NirhoControllerException;
@@ -65,11 +66,71 @@ public class ParticipanteController {
 	@Autowired
 	UsuarioService usuarioService;
 
-	@GetMapping(value = "/organigrama")
-	public List<NivelDTO> organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+	@GetMapping(value = "/organigramaOld")
+	public List<NivelDTO> organigramaOld(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		List<NivelDTO> organigrama = new ArrayList<>();
 		try {
 			organigrama = participanteService.obtenerParticipantesPorProyecto(idProyecto);
+			for (int i = 0; i < organigrama.size() - 1; i++) {
+				for (int j = 0; j < organigrama.size() - 1; j++) {
+					if (organigrama.get(j).getNivel() > organigrama.get(j + 1).getNivel()) {
+						NivelDTO tmp = organigrama.get(j + 1);
+						organigrama.set(j + 1, organigrama.get(j));
+						organigrama.set(j, tmp);
+					}
+				}
+			}
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
+		}
+		return organigrama;
+	}
+	
+	@GetMapping(value = "/organigrama")
+	public ParticipanteDTO organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		ParticipanteDTO organigrama = null;
+		try {
+			List<NivelDTO> niveles = participanteService.obtenerParticipantesPorProyecto(idProyecto);
+			for (int i = 0; i < niveles.size() - 1; i++) {
+				for (int j = 0; j < niveles.size() - 1; j++) {
+					if (niveles.get(j).getNivel() > niveles.get(j + 1).getNivel()) {
+						NivelDTO tmp = niveles.get(j + 1);
+						niveles.set(j + 1, niveles.get(j));
+						niveles.set(j, tmp);
+					}
+				}
+			}
+						
+			List<ParticipanteDTO> nivel1 = niveles.get(0).getParticipantes();
+			if (nivel1 != null && !nivel1.isEmpty()) {
+				organigrama = nivel1.get(0);
+				List<ParticipanteDTO> acargoList = new ArrayList<>();
+				for (int i = 1; i < niveles.size() - 1; i++) {
+					logger.info("nivel index [" + i + "]");
+					List<ParticipanteDTO> participantes = niveles.get(i).getParticipantes();
+					List<ParticipanteDTO> subordinados = niveles.get(i + 1).getParticipantes();
+					for (int j = 0; j < participantes.size(); j++) {
+						ParticipanteDTO part = participantes.get(j);
+						List<ParticipanteDTO> lista = new ArrayList<>();
+						for (int k = 0; k < subordinados.size(); k++) {
+							ParticipanteDTO sub = subordinados.get(k);
+							if (sub.getIdJefeInmediato() != null
+									&& sub.getIdJefeInmediato().intValue() == part.getIdParticipante().intValue()) {
+								logger.info("sub [" + sub + "]");
+								lista.add(sub);
+							}
+						}
+						part.setSubordinados(lista);
+						if (part.getIdJefeInmediato() != null
+								&& part.getIdJefeInmediato().intValue() == organigrama.getIdParticipante().intValue()) {
+							logger.info("part [" + part + "]");
+							acargoList.add(part);
+						}		
+					}
+				}
+				organigrama.setSubordinados(acargoList);
+			}
+			
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
 		}
