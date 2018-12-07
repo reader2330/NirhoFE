@@ -49,6 +49,10 @@ public class RoleModuloSubModuloAPO implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_role")
     private int idRole;
+    
+    @Basic(optional = false)
+    @Column(name = "descripcion")
+    private String descripcion;
 
 	public RoleModuloSubModuloAPO() {
 		super();
@@ -96,6 +100,14 @@ public class RoleModuloSubModuloAPO implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	@Override

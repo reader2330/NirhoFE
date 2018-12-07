@@ -56,6 +56,7 @@ CREATE TABLE `apo_role_modulo_submodulo` (
   `id_modulo` int(11) NOT NULL,
   `id_role` int(11) NOT NULL,
   `id_submodulo` int(11) NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -66,7 +67,7 @@ CREATE TABLE `apo_role_modulo_submodulo` (
 
 LOCK TABLES `apo_role_modulo_submodulo` WRITE;
 /*!40000 ALTER TABLE `apo_role_modulo_submodulo` DISABLE KEYS */;
-INSERT INTO `apo_role_modulo_submodulo` VALUES (1,4,1,1),(2,4,1,2),(3,4,2,1),(4,4,2,1),(5,4,2,3),(6,4,2,4),(7,4,2,5),(8,4,2,6),(9,4,2,7),(10,4,2,8),(11,4,3,1),(12,4,3,2),(13,4,3,1),(14,4,3,4),(15,4,3,5);
+INSERT INTO `apo_role_modulo_submodulo` VALUES (1,4,1,1,'Bandeja de proyectos'),(2,4,1,2,'Alta de proyectos'),(3,4,2,1,'Bandeja de proyectos'),(4,4,2,1,'Bandeja de proyectos'),(5,4,2,3,'Carga de Head Count'),(6,4,2,4,'Carga de Head Count Ampliado'),(7,4,2,5,'Ver participantes'),(8,4,2,6,'Periodo de garantía'),(9,4,2,7,'Asignar consultor'),(10,4,2,8,'Ver estado de proyecto'),(11,4,3,1,'Bandeja de proyectos'),(12,4,3,2,'Alta de proyectos'),(13,4,3,1,'Bandeja de proyectos'),(14,4,3,4,'Carga de Head Count Ampliado'),(15,4,3,5,'Ver participantes');
 /*!40000 ALTER TABLE `apo_role_modulo_submodulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2011,4 +2012,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-07  1:14:27
+-- Dump completed on 2018-12-07  1:39:14

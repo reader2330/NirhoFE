@@ -21,14 +21,9 @@ public class RoleModuloSubModuloAPOServiceImpl implements RoleModuloSubModuloAPO
 	@Autowired
 	private RoleModuloSubModuloAPODAO roleModuloSubModuloAPODAO;
 	 
-	public List<Integer> obtenerSubModulos(int rol) throws NirhoServiceException{
+	public List<RoleModuloSubModuloAPO> obtenerSubModulos(int rol) throws NirhoServiceException{
 		try {
-			List<RoleModuloSubModuloAPO> entities = roleModuloSubModuloAPODAO.obtenerSubModulos(rol);
-			List<Integer> result = new ArrayList<>();
-			for(RoleModuloSubModuloAPO r: entities) {
-				result.add(r.getIdSubmodulo());
-			}
-			return result;
+			return roleModuloSubModuloAPODAO.obtenerSubModulos(rol);
 		} catch (Exception e) {
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
