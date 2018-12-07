@@ -68,7 +68,13 @@ export class EstadisticasComponent implements OnInit {
      }*/
     for (let data of this.data['datos']) {
       let option = {
-        chart: {type: 'column'},
+        chart: {type: 'column',
+          options3d: {
+            enabled: true,
+            alpha: 45,
+            beta: 0
+          }
+        },
         title: {text: data[0]['gaficaProyectoPK']['areaOrg']},
         xAxis: {
           categories: ['ML', 'M', 'R', 'B', 'MB'],

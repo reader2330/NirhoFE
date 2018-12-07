@@ -87,10 +87,6 @@ public class ParticipanteAPOController {
 			JSONObject jsonHeadCount = new JSONObject(headcount);
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(jsonHeadCount.getInt("idProyecto"));
         	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
-        	if(!(estatusActual == ProyectoConstants.ESTATUS_CONFIGURACION.intValue() ||
-        			estatusActual == ProyectoConstants.ESTATUS_CARGA.intValue())) {
-        		throw new NirhoControllerException("No se ha realizado la configuracion del cuestionario en el proyecto");
-        	}
 			proyecto.setIdEstatus(estatusService.obtenerEstatus(ProyectoConstants.ESTATUS_CARGA));
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 			
@@ -106,9 +102,7 @@ public class ParticipanteAPOController {
 				}
 			}
 			participanteAPOService.guardarParticipanteService(participantes);
-		} catch (NirhoControllerException nce) {
-        	throw new NirhoControllerException(nce.getMessage());
-        } catch (NirhoServiceException e) {
+		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el participante en la BD");
 		} catch (JSONException e1) {
 			throw new NirhoControllerException("Problemas al registrar el participante en la BD");

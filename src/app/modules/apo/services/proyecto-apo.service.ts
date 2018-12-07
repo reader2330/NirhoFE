@@ -40,7 +40,7 @@ export class ProyectoApoService {
   }
 
   saveHead(data): Observable<any> {
-    return this.http.post(this.api + 'participantes/headCount', data, {headers: this.headers} );
+    return this.http.post(this.api + 'participantesAPO/headCount', data, {headers: this.headers} );
   }
 
   saveHeadAmp(data): Observable<any> {
