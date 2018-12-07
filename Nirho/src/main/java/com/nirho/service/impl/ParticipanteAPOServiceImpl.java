@@ -41,7 +41,7 @@ public class ParticipanteAPOServiceImpl implements ParticipanteAPOService {
 		try {
 			for(ParticipanteAPO p: participantes) {
 				try {
-					ParticipanteAPO participante = participanteAPODAO.getOne(p.getId());
+					ParticipanteAPO participante = participanteAPODAO.getOne(p.getId() == null ? 0 : p.getId());
 					if(participante == null) {
 						participanteAPODAO.save(p);
 					} else {

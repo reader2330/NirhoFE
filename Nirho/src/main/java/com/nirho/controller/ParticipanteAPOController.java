@@ -132,49 +132,49 @@ public class ParticipanteAPOController {
 	private ParticipanteAPO assamblerToParticipanteHC(JSONObject jsonParticipante) throws JSONException {
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 		ParticipanteAPO participante = new ParticipanteAPO();
-		participante.setNivel(Integer.parseInt(jsonParticipante.getString("nivel")));
-		participante.setNivelTexto(jsonParticipante.getString("nivelTexto"));
-		participante.setNombres(jsonParticipante.getString("nombres"));
-	    participante.setAPaterno(jsonParticipante.getString("aPaterno"));
-		participante.setAMaterno(jsonParticipante.getString("aMaterno"));
-		participante.setGenero(jsonParticipante.getString("genero"));
-		participante.setRfc(jsonParticipante.getString("rfc"));
-		participante.setPuesto(jsonParticipante.getString("puesto"));
+		participante.setNivel(Integer.parseInt(jsonParticipante.optString("nivel", "0")));
+		participante.setNivelTexto(jsonParticipante.optString("nivelTexto", null));
+		participante.setNombres(jsonParticipante.optString("nombres", null));
+	    participante.setAPaterno(jsonParticipante.optString("aPaterno", null));
+		participante.setAMaterno(jsonParticipante.optString("aMaterno", null));
+		participante.setGenero(jsonParticipante.optString("genero", null));
+		participante.setRfc(jsonParticipante.optString("rfc", null));
+		participante.setPuesto(jsonParticipante.optString("puesto", null));
 		try {
-			participante.setFechaIngreso(formatDate.parse(jsonParticipante.getString("fechaIngreso")));
+			participante.setFechaIngreso(formatDate.parse(jsonParticipante.optString("fechaIngreso", "")));
 		} catch (ParseException e) {
 			participante.setFechaIngreso(new Date());
 		}
 		try {
-			participante.setAntigPuesto(new Double(jsonParticipante.getString("antigPuesto")));
+			participante.setAntigPuesto(new Double(jsonParticipante.optString("antigPuesto", "0.0")));
 		} catch(Exception e) {
 			logger.info("Exception [" + e.getMessage() + "]");
 		}
-		participante.setNivelEscolaridad(jsonParticipante.getString("nivelEscolaridad"));
-		participante.setOtrosEstudios(jsonParticipante.getString("otrosEstudios"));
-		participante.setIdioma(jsonParticipante.getString("idioma"));
-		participante.setNivelIdioma(jsonParticipante.getString("nivelIdioma"));
-		participante.setCorreoElectronico(jsonParticipante.getString("correoElectronico"));
-		participante.setSede(jsonParticipante.getString("sede"));
-		participante.setAreaOrg(jsonParticipante.getString("areaOrg"));
-		participante.setIdPartJefeInm(Integer.parseInt(jsonParticipante.getString("idPartJefeInm")));
+		participante.setNivelEscolaridad(jsonParticipante.optString("nivelEscolaridad", null));
+		participante.setOtrosEstudios(jsonParticipante.optString("otrosEstudios", null));
+		participante.setIdioma(jsonParticipante.optString("idioma", null));
+		participante.setNivelIdioma(jsonParticipante.optString("nivelIdioma", null));
+		participante.setCorreoElectronico(jsonParticipante.optString("correoElectronico", null));
+		participante.setSede(jsonParticipante.optString("sede", null));
+		participante.setAreaOrg(jsonParticipante.optString("areaOrg", null));
+		participante.setIdPartJefeInm(Integer.parseInt(jsonParticipante.optString("idPartJefeInm", "0")));
 		return participante;
 	}
 
 	private ParticipanteAPOAmp assamblerToParticipanteHCA(JSONObject jsonParticipanteAmp) throws JSONException {
 		ParticipanteAPOAmp participante = new ParticipanteAPOAmp();
 		
-		participante.setObjetivoPuesto(jsonParticipanteAmp.getString("objetivoPuesto"));
-		participante.setFunciones(jsonParticipanteAmp.getString("funciones"));
-		participante.setActividades(jsonParticipanteAmp.getString("actividades"));
-		participante.setMetaKpi(jsonParticipanteAmp.getString("metaKpi"));
-		participante.setCantidadMeta(jsonParticipanteAmp.getString("cantidadMeta"));
-		participante.setUnidadMedida(jsonParticipanteAmp.getString("unidadMedida"));
-		participante.setTiempo(jsonParticipanteAmp.getString("tiempo"));
-		participante.setFrecuenciaEval(jsonParticipanteAmp.getString("frecuenciaEval"));
+		participante.setObjetivoPuesto(jsonParticipanteAmp.optString("objetivoPuesto", null));
+		participante.setFunciones(jsonParticipanteAmp.optString("funciones", null));
+		participante.setActividades(jsonParticipanteAmp.optString("actividades", null));
+		participante.setMetaKpi(jsonParticipanteAmp.optString("metaKpi", null));
+		participante.setCantidadMeta(jsonParticipanteAmp.optString("cantidadMeta", null));
+		participante.setUnidadMedida(jsonParticipanteAmp.optString("unidadMedida", null));
+		participante.setTiempo(jsonParticipanteAmp.optString("tiempo", null));
+		participante.setFrecuenciaEval(jsonParticipanteAmp.optString("frecuenciaEval", null));
 		try {
-			participante.setIdParticipante(Integer.parseInt(jsonParticipanteAmp.getString("idParticipante")));
-			participante.setIdEvaluador(Integer.parseInt(jsonParticipanteAmp.getString("idEvaluador")));
+			participante.setIdParticipante(Integer.parseInt(jsonParticipanteAmp.optString("idParticipante", "0")));
+			participante.setIdEvaluador(Integer.parseInt(jsonParticipanteAmp.optString("idEvaluador", "0")));
 		} catch(Exception e) {
 			logger.info("Exception [" + e.getMessage() + "]");
 		}

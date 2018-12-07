@@ -45,6 +45,32 @@ INSERT INTO `actividades_puesto_vacante` VALUES (1,'ldkjñdkj oeireou ldk,smv',3
 UNLOCK TABLES;
 
 --
+-- Table structure for table `apo_role_modulo_submodulo`
+--
+
+DROP TABLE IF EXISTS `apo_role_modulo_submodulo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `apo_role_modulo_submodulo` (
+  `id` bigint(20) NOT NULL,
+  `id_modulo` int(11) NOT NULL,
+  `id_role` int(11) NOT NULL,
+  `id_submodulo` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `apo_role_modulo_submodulo`
+--
+
+LOCK TABLES `apo_role_modulo_submodulo` WRITE;
+/*!40000 ALTER TABLE `apo_role_modulo_submodulo` DISABLE KEYS */;
+INSERT INTO `apo_role_modulo_submodulo` VALUES (1,4,1,1),(2,4,1,2),(3,4,2,1),(4,4,2,1),(5,4,2,3),(6,4,2,4),(7,4,2,5),(8,4,2,6),(9,4,2,7),(10,4,2,8),(11,4,3,1),(12,4,3,2),(13,4,3,1),(14,4,3,4),(15,4,3,5);
+/*!40000 ALTER TABLE `apo_role_modulo_submodulo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `asignacion_consultor_vacante`
 --
 
@@ -1985,4 +2011,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-06 22:07:42
+-- Dump completed on 2018-12-07  1:14:27
