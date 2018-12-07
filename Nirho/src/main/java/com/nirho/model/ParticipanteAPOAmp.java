@@ -36,21 +36,21 @@ public class ParticipanteAPOAmp implements Serializable {
     @Column(name = "id_participante")
     private Integer idParticipante;
     
-    @Column(name = "objetivo_puesto")
+    @Column(name = "objetivo_puesto", nullable=true)
     private String objetivoPuesto;
-    @Column(name = "funciones")
+    @Column(name = "funciones", nullable=true)
     private String funciones;
-    @Column(name = "actividades")
+    @Column(name = "actividades", nullable=true)
     private String actividades;
-    @Column(name = "meta_kpi")
+    @Column(name = "meta_kpi", nullable=true)
     private String metaKpi;
-    @Column(name = "cantidad_meta")
+    @Column(name = "cantidad_meta", nullable=true)
     private String cantidadMeta;
-    @Column(name = "unidad_medida")
+    @Column(name = "unidad_medida", nullable=true)
     private String unidadMedida;
-    @Column(name = "tiempo")
+    @Column(name = "tiempo", nullable=true)
     private String tiempo;
-    @Column(name = "frecuencia_eval")
+    @Column(name = "frecuencia_eval", nullable=true)
     private String frecuenciaEval;
     @Column(name = "id_evaluador")
     private Integer idEvaluador;
