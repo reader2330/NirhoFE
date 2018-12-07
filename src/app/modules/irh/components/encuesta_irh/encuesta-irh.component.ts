@@ -31,9 +31,9 @@ export class EncuestaIrhComponent implements OnInit {
     {name: 'No vigente', key: 0}
   ];
   desarrollo = [
-    {name: 'En Desarrollo', key: 1},
-    {name: 'Formalizado y autorizado', key: 2},
-    {name: 'Formalizado, autorizado y administrado', key: 3}
+    {name: 'En Desarrollo', key: 3.3},
+    {name: 'Formalizado y autorizado', key: 6.7},
+    {name: 'Formalizado, autorizado y administrado', key: 10}
   ];
   token = '';
 
