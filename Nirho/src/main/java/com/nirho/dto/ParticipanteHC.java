@@ -30,7 +30,8 @@ public class ParticipanteHC implements Serializable {
     private String nivelIdioma;
     private String correoElectronico;
     private String sede;
-    private String areaOrg; 
+    private String areaOrg;
+    private String idJefeInmediato;
     
     public ParticipanteHC() {
     }
@@ -188,7 +189,15 @@ public class ParticipanteHC implements Serializable {
     public void setAreaOrg(String areaOrg) {
         this.areaOrg = areaOrg;
     }
-    
+
+	public String getIdJefeInmediato() {
+		return idJefeInmediato;
+	}
+
+	public void setIdJefeInmediato(String idJefeInmediato) {
+		this.idJefeInmediato = idJefeInmediato;
+	}
+
 	@Override
 	public String toString() {
 		return "ParticipanteHC [idParticipante=" + idParticipante + ", nivel=" + nivel + ", nivelTexto=" + nivelTexto
@@ -196,7 +205,7 @@ public class ParticipanteHC implements Serializable {
 				+ ", rfc=" + rfc + ", puesto=" + puesto + ", fechaIngreso=" + fechaIngreso + ", antigPuesto="
 				+ antigPuesto + ", nivelEscolaridad=" + nivelEscolaridad + ", otrosEstudios=" + otrosEstudios
 				+ ", idioma=" + idioma + ", nivelIdioma=" + nivelIdioma + ", correoElectronico=" + correoElectronico
-				+ ", sede=" + sede + ", areaOrg=" + areaOrg + "]";
+				+ ", sede=" + sede + ", areaOrg=" + areaOrg + ", idJefeInmediato=" + idJefeInmediato + "]";
 	}
-    
+    	    
 }

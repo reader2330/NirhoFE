@@ -298,6 +298,7 @@ public class ParticipanteController {
 		}
 		try {
 			participante.setAntigPuesto(new Double(participanteHC.getAntigPuesto()));
+			participante.setIdPartJefeInm(Integer.valueOf(participanteHC.getIdJefeInmediato()));
 		} catch(Exception e) {
 			logger.info("Exception [" + e.getMessage() + "]");
 		}
