@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
+import {ProyectoApoService} from '../../services/proyecto-apo.service';
 
 @Component({
   selector: 'app-poll-status-apo',
@@ -12,28 +13,32 @@ export class PollStatusApoComponent implements OnInit {
 
   mobile = false;
   evaluador = [];
-
+  proyects = [];
   stages = [{
-    name: 'Creado',
+    id: 1,
+    name: 'Capturado',
     completed: true
   }, {
-    name: 'Configurado',
+    id: 2,
+    name: 'Asignado',
     completed: true
   }, {
-    name: 'Envio',
+    id: 3,
+    name: 'Carga HC',
     completed: false
   }, {
+    id: 4,
     name: 'Análisis',
     completed: false
   }, {
+    id: 5,
     name: 'Terminado',
     completed: false
   }];
-  projectForm = new FormGroup({
-    project: new FormControl(null),
-  });
+  showStatus = false;
+  proyect = {};
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectoApoService: ProyectoApoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait
@@ -53,9 +58,26 @@ export class PollStatusApoComponent implements OnInit {
     if (this.mobile) { value = 1; }
     return value;
   }
+  getProyects() {
+    this.ProyectoApoService.getProyects().subscribe(res => {
+      console.log(res);
+      this.proyects = res;
+    });
+  }
 
   ngOnInit() {
+    this.getProyects();
   }
-  assign() {}
+  goToEstatus() {
+    this.showStatus = false;
+    this.ProyectoApoService.getStatus(this.proyect['idProyecto']).subscribe(res => {
+      this.stages.forEach(item => {
+        if (res['idEstatus'] >= item.id) {
+          item.completed = true;
+        }
+      });
+      this.showStatus = true;
+    });
+  }
 
 }

@@ -1,23 +1,23 @@
-<form [formGroup]="projectForm" style="background: white; border: 1px solid #efefef; padding: 10px 0 0 0">
+<div  style="background: white; border: 1px solid #efefef; padding: 10px 0 0 0">
   <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
     <mat-grid-tile>
       <mat-form-field style="width:85%;" class="inputForm" appearance="outline">
         <mat-label>Selecciona un proyecto</mat-label>
-        <mat-select style="width:100%;" formControlName="project">
-          <mat-option *ngFor="let puesto of evaluador " [value]="puesto.descripcionCatalogo">
-            {{puesto.descripcionCatalogo}}
+        <mat-select style="width:100%;" [(ngModel)]="proyect">
+          <mat-option *ngFor="let proyecto of proyects " [value]="proyecto">
+            {{proyecto.nombre}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile style="margin-top:-10px;">
-      <button style="width:70%;" mat-raised-button color="primary" (click)="assign()">Ver estatus</button>
+      <button style="width:70%;" mat-raised-button color="accent" (click)="goToEstatus()">Ver estatus</button>
     </mat-grid-tile>
   </mat-grid-list>
-</form>
+</div>
 
-<div style="background: white; border: 1px solid #efefef; padding: 10px 0 0 0; margin-top:20px;">
+<div *ngIf="showStatus" style="background: white; border: 1px solid #efefef; padding: 10px 0 0 0; margin-top:20px;">
   <div class="">
     <div class="text-center">
       <div class="timelineCustom scroll" id="timelineCustom">

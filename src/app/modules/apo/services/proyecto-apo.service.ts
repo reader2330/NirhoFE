@@ -44,9 +44,33 @@ export class ProyectoApoService {
   }
 
   saveHeadAmp(data): Observable<any> {
-    return this.http.post(this.api + 'participantes/headCountAmp', data, {headers: this.headers} );
+    return this.http.post(this.api + 'participantesAPO/headCountAmp', data, {headers: this.headers} );
   }
   savePeriod(data): Observable<any> {
     return this.http.post(this.api + 'proyectoAPO/agignarPeriodoGarantia', data, {headers: this.headers});
   }
+  getProyectID(id): Observable<any> {
+    return this.http.get(this.api + 'proyectoAPO/porId', {headers: this.headers , params: {
+      'idProyecto': id
+      }});
+  }
+  getConsultores(): Observable<any> {
+    return this.http.get(this.api + 'usuario/consultores', {headers: this.headers});
+  }
+  saveConsultor(data): Observable<any> {
+    return this.http.post(this.api + 'proyectoAPO/asignarConsultor', data, {headers: this.headers});
+  }
+  getModules(rol): Observable<any> {
+    return this.http.get(this.api + 'usuario/role/' + rol + '/submodulosAPO', {headers: this.headers});
+  }
+  getParticipantes(id): Observable<any> {
+    return this.http.get(this.api + 'participantesAPO/participantes', {headers: this.headers , params: {'idProyecto': id }});
+  }
+  getAmpliacion(id): Observable<any> {
+    return this.http.get(this.api + 'participantesAPO/ampliaciones', {headers: this.headers , params: {'idParticipante': id}})
+  }
+  getStatus(id): Observable<any> {
+    return this.http.get(this.api + 'proyectoAPO/estatus', {headers: this.headers , params: {'idProyecto': id}})
+  }
+
 }

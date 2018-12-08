@@ -146,22 +146,23 @@ export class HaedCount2ApoComponent implements OnInit {
   }
 
   changeData(data, index) {
+
     this.dataSource[index] = new HCAmpliado();
     this.dataSource[index].idParticipante = data[0];
     this.dataSource[index].objetivoPuesto = data[1];
-    this.dataSource[index].funcionPuesto = data[2];
-    this.dataSource[index].actividadPuesto = data[3];
-    this.dataSource[index].meta = data[4];
-    this.dataSource[index].cantidad = data[5];
+    this.dataSource[index].funciones = data[2];
+    this.dataSource[index].actividades = data[3];
+    this.dataSource[index].metaKpi = data[4];
+    this.dataSource[index].cantidadMeta = data[5];
     this.dataSource[index].unidadMedida = data[6];
     this.dataSource[index].tiempo = data[7];
-    this.dataSource[index].frecuencia = data[8];
+    this.dataSource[index].frecuenciaEval = data[8];
 
   }
 
   guardaHead() {
     let data = {
-      lista: this.dataSource,
+      participantes: this.dataSource,
       idProyecto: this.filters.idProyecto
     }
     Swal({

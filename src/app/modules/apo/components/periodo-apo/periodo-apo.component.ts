@@ -25,6 +25,7 @@ export class PeriodoApoComponent implements OnInit {
       diasGarantia: new FormControl(0, Validators.required),
     }
   );
+  jsonFinal = {};
 
   constructor(breakpointObserver: BreakpointObserver, private ProyectApoService: ProyectoApoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
@@ -49,6 +50,13 @@ export class PeriodoApoComponent implements OnInit {
     this.ProyectApoService.getProyects().subscribe((res) => {
       console.log(res);
       this.proyects = res;
+    });
+  }
+  getProyectID() {
+    console.log(this.periodoForm.controls['idProyecto']['value']);
+    this.ProyectApoService.getProyectID(this.periodoForm.controls['idProyecto']['value']).subscribe(res => {
+      console.log(res);
+      this.jsonFinal['proyecto'] = res;
     });
   }
 
@@ -79,9 +87,29 @@ export class PeriodoApoComponent implements OnInit {
   }
 
   agregarPeriodo() {
-    console.log('proyecto: ', this.periodoForm.value)
-    this.ProyectApoService.savePeriod(this.periodoForm.value).subscribe(res => {
-      console.log(res);
+    this.jsonFinal['fechaInicio'] = this.periodoForm.controls['fechaInicio']['value'];
+    this.jsonFinal['fechaTermino'] = this.periodoForm.controls['fechaTermino']['value'];
+    this.jsonFinal['diasGarantia'] = this.periodoForm.controls['diasGarantia']['value'];
+
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guarda el periodo de garantia',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        this.ProyectApoService.savePeriod(this.jsonFinal).subscribe(res => {
+          Swal(
+            'Listo.',
+            'El periodo de garantia se guardo correctamente ',
+            'success'
+          ).then(() => {
+            this.responseHead.emit({value: 1});
+          });
+        });
+      }
     });
   }
 

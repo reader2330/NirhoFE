@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Router} from '@angular/router';
 import {LoginService} from '../../../clb/services/login.service';
+import {ProyectoApoService} from '../../services/proyecto-apo.service';
 
 @Component({
   selector: 'app-sidebar-apo',
@@ -11,16 +12,17 @@ import {LoginService} from '../../../clb/services/login.service';
 export class SidebarApoComponent implements OnInit {
 
   mobile = false;
-  selectModule = 2;
+  selectModule = 1;
   modules = [];
   user = {
-    fullName: ''
+    fullName: '',
+    rol: 0
   };
   avatar = {
     url: ''
   };
 
-  constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService) {
+  constructor(breakpointObserver: BreakpointObserver, private route: Router, private LoginService: LoginService , private ProyectoServicesAPO: ProyectoApoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -37,33 +39,40 @@ export class SidebarApoComponent implements OnInit {
   }
 
   getModules() {
-    this.modules = [{
-      id_submodulo: 2,
-      descripcion: 'Bandeja de proyectos'
-    }, {
-      id_submodulo: 3,
-      descripcion: 'Alta proyecto'
-    }, {
-      id_submodulo: 4,
-      descripcion: 'Head Count'
-    }, {
-      id_submodulo: 5,
-      descripcion: 'Head Count Ampliado'
-    }, {
-      id_submodulo: 6,
-      descripcion: 'Periodo de garantía'
-    }, {
-      id_submodulo: 7,
-      descripcion: 'Otro'
-    }];
-    /*this.loginService.getModules().subscribe((res) => {
-    });*/
+    this.ProyectoServicesAPO.getModules(this.user.rol).subscribe((res) => {
+      console.log(res);
+      for (let obj of res) {
+        this.modules.push({id_submodulo: obj.idSubmodulo, descripcion: obj.descripcion});
+      }
+      console.log(this.modules);
+    });
+  }
+  getFrecuencia(num) {
+
+    if (num === 1) {
+      return 'Mensual';
+    }
+    if (num === 2) {
+      return 'Bimestral';
+    }
+    if (num === 3) {
+      return 'Semestral';
+    }
+    if (num === 4) {
+      return 'Anual';
+    }
+    if (num === 5 ) {
+      return 'Unica vez';
+    }
+
   }
 
   ngOnInit() {
+    this.getUser();
     setTimeout(() => {
+
       this.getModules();
-      this.getUser();
+
     }, 1500);
   }
 

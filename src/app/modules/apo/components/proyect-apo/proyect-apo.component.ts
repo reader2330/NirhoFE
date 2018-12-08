@@ -14,7 +14,7 @@ import {ProyectoApoService} from '../../services/proyecto-apo.service';
 })
 export class ProyectApoComponent implements OnInit {
 
-  @Output() response = new EventEmitter();
+  @Output() responseHead = new EventEmitter();
   mobile = false;
   proyecto = [];
 
