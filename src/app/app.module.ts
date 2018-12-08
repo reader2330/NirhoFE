@@ -17,11 +17,13 @@ import {AdmModule} from './modules/adm/adm.module';
 import {SynchronizeModule} from './modules/synchronize/synchronize.module';
 import {ApoModule} from './modules/apo/apo.module';
 import {MAT_DATE_LOCALE} from '@angular/material';
+import { ParticipantesSelectorComponent } from './modules/apo/components/participantes-selector/participantes-selector.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
+
   ],
   imports: [
     BrowserModule,

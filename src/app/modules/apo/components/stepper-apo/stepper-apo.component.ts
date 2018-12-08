@@ -8,7 +8,7 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 })
 export class StepperApoComponent implements OnInit {
 
-  @Output() responseChildren = new EventEmitter();
+  @Output() response = new EventEmitter();
   mobile = false;
 
   control = {
@@ -32,13 +32,13 @@ export class StepperApoComponent implements OnInit {
 
   getResponseChildren(evt) {
     console.log(evt);
-    this.responseChildren.emit({value: evt.key});
+    this.response.emit({value: evt.key});
 
   }
 
   recibirRespuesta(evt) {
     console.log(evt);
-    this.responseChildren.emit({value: evt.value});
+    this.response.emit({value: evt.value});
   }
 
 }

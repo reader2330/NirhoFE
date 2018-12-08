@@ -53,7 +53,9 @@ export class SidebarIrhComponent implements OnInit {
 
     this.getUser();
   }
+  getModules() {
 
+  }
   goModule(opt) {
     if (opt == 2) {
       sessionStorage.clear();
@@ -79,6 +81,7 @@ export class SidebarIrhComponent implements OnInit {
       }
     });
   }
+
   goAvatarEditing() {
     this.route.navigate(['avatar-edit', 'IRH']);
   }

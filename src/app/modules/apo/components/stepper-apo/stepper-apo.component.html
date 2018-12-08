@@ -15,7 +15,7 @@
     <ng-template matStepLabel>
       <p class="bold">Paso 3  </p> <p>Datos Contacto</p>
     </ng-template>
-    <app-contact-apo></app-contact-apo>
+    <app-contact-apo (response)="getResponseChildren($event)"></app-contact-apo>
   </mat-step>
 
 </mat-horizontal-stepper>

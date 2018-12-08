@@ -60,4 +60,17 @@ export class ProyectoApoService {
   saveConsultor(data): Observable<any> {
     return this.http.post(this.api + 'proyectoAPO/asignarConsultor', data, {headers: this.headers});
   }
+  getModules(rol): Observable<any> {
+    return this.http.get(this.api + 'usuario/role/' + rol + '/submodulosAPO', {headers: this.headers});
+  }
+  getParticipantes(id): Observable<any> {
+    return this.http.get(this.api + 'participantesAPO/participantes', {headers: this.headers , params: {'idProyecto': id }});
+  }
+  getAmpliacion(id): Observable<any> {
+    return this.http.get(this.api + 'participantesAPO/ampliaciones', {headers: this.headers , params: {'idParticipante': id}})
+  }
+  getStatus(id): Observable<any> {
+    return this.http.get(this.api + 'proyectoAPO/estatus', {headers: this.headers , params: {'idProyecto': id}})
+  }
+
 }

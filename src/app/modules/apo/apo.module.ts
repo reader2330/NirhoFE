@@ -18,6 +18,7 @@ import { PollStatusApoComponent } from './components/poll-status-apo/poll-status
 import { ContactApoComponent } from './components/contact-apo/contact-apo.component';
 import { PeriodoApoComponent } from './components/periodo-apo/periodo-apo.component';
 import {AsignarConsultorApoComponent} from './components/asignar-consultor-apo/asignar-consultor-apo.component';
+import {ParticipantesSelectorComponent} from './components/participantes-selector/participantes-selector.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import {AsignarConsultorApoComponent} from './components/asignar-consultor-apo/a
     PollStatusApoComponent,
     ContactApoComponent,
     PeriodoApoComponent,
-    AsignarConsultorApoComponent
+    AsignarConsultorApoComponent,
+    ParticipantesSelectorComponent
   ]
 })
 export class ApoModule { }
