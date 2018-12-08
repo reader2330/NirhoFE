@@ -298,9 +298,13 @@ public class ParticipanteController {
 		}
 		try {
 			participante.setAntigPuesto(new Double(participanteHC.getAntigPuesto()));
+		} catch(Exception e) {
+			logger.info("Exception AntigPuesto [" + e.getMessage() + "]");
+		}
+		try {
 			participante.setIdPartJefeInm(Integer.valueOf(participanteHC.getIdJefeInmediato()));
 		} catch(Exception e) {
-			logger.info("Exception [" + e.getMessage() + "]");
+			logger.info("Exception IdPartJefeInm [" + e.getMessage() + "]");
 		}
 		participante.setNivelEscolaridad(participanteHC.getNivelEscolaridad());
 		participante.setOtrosEstudios(participanteHC.getOtrosEstudios());
