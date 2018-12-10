@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
 import com.nirho.dto.NivelDTO;
+import com.nirho.dto.ParticipanteDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.EstatusProyecto;
@@ -51,10 +52,50 @@ public class ParticipanteAPOController {
 	UsuarioService usuarioService;
 
 	@GetMapping(value = "/organigrama")
-	public List<NivelDTO> organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
-		List<NivelDTO> organigrama = new ArrayList<>();
+	public ParticipanteDTO organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		ParticipanteDTO organigrama = null;
 		try {
-			organigrama = participanteAPOService.obtenerParticipantesPorProyecto(idProyecto);
+			List<NivelDTO> niveles = participanteAPOService.obtenerParticipantesPorProyecto(idProyecto);
+			for (int i = 0; i < niveles.size() - 1; i++) {
+				for (int j = 0; j < niveles.size() - 1; j++) {
+					if (niveles.get(j).getNivel() > niveles.get(j + 1).getNivel()) {
+						NivelDTO tmp = niveles.get(j + 1);
+						niveles.set(j + 1, niveles.get(j));
+						niveles.set(j, tmp);
+					}
+				}
+			}
+						
+			List<ParticipanteDTO> nivel1 = niveles.get(0).getParticipantes();
+			if (nivel1 != null && !nivel1.isEmpty()) {
+				organigrama = nivel1.get(0);
+				List<ParticipanteDTO> acargoList = new ArrayList<>();
+				for (int i = 1; i < niveles.size() - 1; i++) {
+					logger.info("nivel index [" + i + "]");
+					List<ParticipanteDTO> participantes = niveles.get(i).getParticipantes();
+					List<ParticipanteDTO> subordinados = niveles.get(i + 1).getParticipantes();
+					for (int j = 0; j < participantes.size(); j++) {
+						ParticipanteDTO part = participantes.get(j);
+						List<ParticipanteDTO> lista = new ArrayList<>();
+						for (int k = 0; k < subordinados.size(); k++) {
+							ParticipanteDTO sub = subordinados.get(k);
+							if (sub.getIdJefeInmediato() != null
+									&& sub.getIdJefeInmediato().intValue() == part.getIdParticipante().intValue()) {
+								logger.info("sub [" + sub + "]");
+								lista.add(sub);
+							}
+						}
+						part.setSubordinados(lista);
+						if (part.getIdJefeInmediato() != null
+								&& part.getIdJefeInmediato().intValue() == organigrama.getIdParticipante().intValue()) {
+							logger.info("part [" + part + "]");
+							acargoList.add(part);
+						}		
+					}
+				}
+				organigrama.setSubordinados(acargoList);
+			}
+			
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
 		}
