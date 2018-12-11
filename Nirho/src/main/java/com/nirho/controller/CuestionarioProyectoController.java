@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
 import com.nirho.dto.CuestionarioConfOpcion;
+import com.nirho.dto.CuestionarioConfEVD;
 import com.nirho.dto.CuestionarioConfiguracion;
 import com.nirho.dto.TemaPreguntas;
 import com.nirho.dto.VerTemaQ;
@@ -90,6 +91,20 @@ public class CuestionarioProyectoController {
 	@RequestMapping(value = "/configurar", method = RequestMethod.POST)
 	@ResponseBody
 	public void configurar(@RequestBody CuestionarioConfiguracion cuestionario) throws NirhoControllerException {
+		try {
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(cuestionario.getIdProyecto());
+			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CONFIGURACION));
+			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
+			cuestionarioService.guardar(cuestionario);
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al registrar el cuestionario en la BD");
+		}
+		
+	}
+	
+	@RequestMapping(value = "/configEVD", method = RequestMethod.POST)
+	@ResponseBody
+	public void confPorTemas(@RequestBody CuestionarioConfEVD cuestionario) throws NirhoControllerException {
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(cuestionario.getIdProyecto());
 			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CONFIGURACION));

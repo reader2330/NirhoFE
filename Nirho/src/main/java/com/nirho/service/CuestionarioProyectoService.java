@@ -2,6 +2,7 @@ package com.nirho.service;
 
 import java.util.List;
 
+import com.nirho.dto.CuestionarioConfEVD;
 import com.nirho.dto.CuestionarioConfOpcion;
 import com.nirho.dto.CuestionarioConfiguracion;
 import com.nirho.dto.VerTemaQ;
@@ -12,6 +13,7 @@ import com.nirho.model.CuetionarioParticipante;
 
 public interface CuestionarioProyectoService {
 	void guardar(CuestionarioConfiguracion cuestionario) throws NirhoServiceException;
+	void guardar(CuestionarioConfEVD cuestionario) throws NirhoServiceException;
 	List<VerTemaQ> verTemasCuestionario(Integer idProyecto) throws NirhoServiceException;
 	List<CuetionarioParticipante> obtenerCuestionarioParticipante(String token) throws NirhoServiceException;
 	void contestarPregunta(CuetionarioParticipante questPart) throws NirhoServiceException;
