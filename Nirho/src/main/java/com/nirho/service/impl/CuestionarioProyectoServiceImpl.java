@@ -9,17 +9,23 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nirho.dao.CuestionarioOpcionDAO;
 import com.nirho.dao.CuestionarioParticipanteDAO;
 import com.nirho.dao.CuestionarioProyectoDAO;
+import com.nirho.dao.OpcionDAO;
 import com.nirho.dao.ParticipanteDAO;
 import com.nirho.dao.PreguntaDAO;
+import com.nirho.dto.CuestionarioConfOpcion;
 import com.nirho.dto.CuestionarioConfiguracion;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.CuestionarioOpcion;
+import com.nirho.model.CuestionarioOpcionPK;
 import com.nirho.model.CuestionarioProyecto;
 import com.nirho.model.CuestionarioProyectoPK;
 import com.nirho.model.CuetionarioParticipante;
 import com.nirho.model.CuetionarioParticipantePK;
+import com.nirho.model.Opcion;
 import com.nirho.model.Participante;
 import com.nirho.model.ParticipantePK;
 import com.nirho.model.Pregunta;
@@ -40,7 +46,10 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	private CuestionarioParticipanteDAO cuestPartDAO;
 	@Autowired
 	private PreguntaDAO preguntaDAO;
-
+	@Autowired
+	private OpcionDAO opcionDAO;
+	@Autowired
+	private CuestionarioOpcionDAO coDAO;
 
 	@Override
 	public void guardar(CuestionarioConfiguracion cuestionario) throws NirhoServiceException {
@@ -135,6 +144,36 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	@Override
 	public List<CuestionarioProyecto> obtenerCuestionarioProyecto(Integer idProyecto) throws NirhoServiceException {
 		return dao.findByIdProyecto(idProyecto);
+	}
+
+	@Override
+	public void guardarOpciones(CuestionarioConfOpcion cuestionario) throws NirhoServiceException {
+		logger.info("************* CuestionarioConfOpcion [" + cuestionario +"] *******************");
+		try {
+			for(Opcion opcion: cuestionario.getLista()) {
+				Opcion opcionTem = null;
+				opcionTem = opcionDAO.getOne(opcion.getIdOpcion());
+				logger.info("************* opcionTem [" + opcionTem +"] *******************");
+				if(opcionTem == null) {
+					logger.info("************* Es nueva pregunta [" + opcion +"] *******************");
+					opcionDAO.save(opcion);
+				}
+				CuestionarioOpcion co = new CuestionarioOpcion();
+				CuestionarioOpcionPK pk = new CuestionarioOpcionPK(
+						cuestionario.getIdProyecto(), opcion.getIdTema().getIdTema(), opcion.getIdOpcion());
+				co.setCuestionarioOpcionPK(pk);
+				coDAO.save(co);
+				
+			}
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas con la BD al guardar el cuestionario");
+		}
+	}
+
+	@Override
+	public List<CuestionarioOpcion> obtenerCuestionarioOpcion(Integer idProyecto) throws NirhoServiceException {
+		return coDAO.findByIdProyecto(idProyecto);
 	}
 
 

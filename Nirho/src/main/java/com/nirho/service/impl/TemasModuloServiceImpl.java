@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nirho.dao.ModuloDAO;
+import com.nirho.dao.OpcionDAO;
 import com.nirho.dao.PreguntaDAO;
 import com.nirho.dto.TemaPreguntas;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.Opcion;
 import com.nirho.model.Pregunta;
 import com.nirho.model.Tema;
 import com.nirho.service.TemasModuloService;
@@ -23,6 +25,8 @@ public class TemasModuloServiceImpl implements TemasModuloService {
 	private ModuloDAO dao;
 	@Autowired
 	PreguntaDAO preguntaDAO;
+	@Autowired
+	OpcionDAO opcionDAO;
 
 	@Override
 	public List<Tema> obtenerTemasCuestionario(Integer idModulo) throws NirhoServiceException {
@@ -63,6 +67,18 @@ public class TemasModuloServiceImpl implements TemasModuloService {
 			throw new NirhoServiceException("Problemas con la BD al obtener los temas del modulo [" + idModulo + "]");
 		}
 		return temas;
+	}
+
+	@Override
+	public List<Opcion> obtenerOpcionesTema(Integer idTema) throws NirhoServiceException {
+		List<Opcion> opciones = new ArrayList<>();
+		try {
+			opciones = opcionDAO.findByIdTema(idTema);
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas con la BD al obtener las opciones del tema [" + idTema + "]");
+		}
+		return opciones;
 	}
 	
 }
