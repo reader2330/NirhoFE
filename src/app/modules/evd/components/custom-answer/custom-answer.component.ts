@@ -79,6 +79,8 @@ export class CustomAnswerComponent implements OnInit {
 
   }
 
+  showPreguntas() {}
+
 
 
 }

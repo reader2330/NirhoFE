@@ -78,6 +78,7 @@ export class CustomQuestionComponent implements OnInit {
   saveTemas() {
 
   }
+  showPreguntas(){}
 
 
 

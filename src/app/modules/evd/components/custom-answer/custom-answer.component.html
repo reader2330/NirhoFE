@@ -14,7 +14,7 @@
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <button  mat-raised-button  [disabled]="!proyect.idProyecto" (click)="showPreguntas()"> Ver preguntas</button>
-    <button  mat-raised-button color ="accent" [disabled]="!save" style="color: whitesmoke; margin-left: 10px"  (click)="savePreguntas()"> Guardar preguntas</button>
+    <button  mat-raised-button color ="accent" [disabled]="!save" style="color: whitesmoke; margin-left: 10px"  (click)="saveTemas()"> Guardar preguntas</button>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <mat-spinner  color="accent" mode="indeterminate" *ngIf="load"></mat-spinner>
