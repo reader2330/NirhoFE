@@ -605,7 +605,7 @@ CREATE TABLE `cuestionario_opcion` (
   CONSTRAINT `fk_co_id_opcion` FOREIGN KEY (`id_opcion`) REFERENCES `opcion` (`id_opcion`),
   CONSTRAINT `fk_co_id_proyecto` FOREIGN KEY (`id_proyecto`) REFERENCES `proyecto` (`id_proyecto`),
   CONSTRAINT `fk_co_id_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1347,7 +1347,7 @@ CREATE TABLE `opcion` (
   PRIMARY KEY (`id_opcion`),
   KEY `fk_opcion_tema_idx` (`id_tema`),
   CONSTRAINT `fk_opcion_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
