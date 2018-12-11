@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatRippleModule} from '@angular/material/core';
 
 import {
   MatButtonModule,
@@ -22,7 +23,7 @@ import {
   MatSliderModule,
   MatDialogModule,
   MatNativeDateModule,
-  MatDatepickerModule, MatChipsModule,
+  MatDatepickerModule, MatChipsModule, MatSnackBarModule,
 } from '@angular/material';
 
 @NgModule({
@@ -49,7 +50,9 @@ import {
     MatSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatChipsModule
+    MatChipsModule,
+    MatRippleModule,
+    MatSnackBarModule
   ],
   declarations: [],
   exports: [
@@ -73,7 +76,9 @@ import {
     MatProgressSpinnerModule,
     MatSliderModule,
     MatDatepickerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatRippleModule,
+    MatSnackBarModule
   ],
   providers: [
     MatDatepickerModule,

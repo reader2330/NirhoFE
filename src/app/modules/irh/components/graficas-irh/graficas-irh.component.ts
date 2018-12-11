@@ -45,15 +45,22 @@ export class GraficasIRHComponent implements OnInit {
     this.EnterprisesService.getData(this.company.id).subscribe(res => {
       console.log(res);
       let total = 0;
-      for( let tema of res['temas']) {
+      for ( let tema of res['temas']) {
         this.scores.push(tema['score']);
         this.media.push(res['score']);
         this.categories.push(tema['nombre']);
       }
-
-
-
-      this.pies.push({title: {
+      this.pies.push({
+        chart: {
+          options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+          }
+        },
+        title: {
           text: this.company['empresa']
         },
 
