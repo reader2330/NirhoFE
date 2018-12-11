@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProyectoService} from '../../../clb/services/proyecto.service';
+import {ProyectoEvdService} from '../../../evd/services/proyecto-evd.service';
+import {ProyectoApoService} from '../../services/proyecto-apo.service';
 
 @Component({
   selector: 'app-organigrama-apo',
@@ -7,18 +9,18 @@ import {ProyectoService} from '../../../clb/services/proyecto.service';
   styleUrls: ['./organigrama-apo.component.scss']
 })
 export class OrganigramaApoComponent implements OnInit {
-
+  loadOrganigrama = false;
   proyects = [];
   proyect = {};
   mobile = false;
   levels = [];
   level1 = {
-    participantes:[]
+    participantes: []
   };
   level2 = {};
   level3 = {};
   level4 = {};
-  constructor(private ProyectService: ProyectoService) {
+  constructor(private ProyectService: ProyectoApoService) {
   }
 
   ngOnInit() {
@@ -33,8 +35,9 @@ export class OrganigramaApoComponent implements OnInit {
   getOrganigrama() {
     this.ProyectService.getOrganigrama(this.proyect['idProyecto']).subscribe( (res)  => {
       this.levels = res;
-
-      this.levels.sort(((a, b) => {
+      console.log(res);
+      this.loadOrganigrama = true;
+      /*this.levels.sort(((a, b) => {
         if (a.nivel > b.nivel) {
           return 1;
         }
@@ -53,6 +56,7 @@ export class OrganigramaApoComponent implements OnInit {
 
 
 
+    });*/
     });
   }
   getColor(level) {

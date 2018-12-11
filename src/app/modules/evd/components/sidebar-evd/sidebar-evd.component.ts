@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Router} from '@angular/router';
 import {LoginService} from '../../../clb/services/login.service';
@@ -34,9 +34,10 @@ export class SidebarEvdComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getUser();
     setTimeout(() => {
       this.getModules();
-      this.getUser();
+
     }, 1500);
   }
 
@@ -69,16 +70,27 @@ export class SidebarEvdComponent implements OnInit {
     });*/
   }
 
+  /*getModules() {
+    this.LoginService.getModules().subscribe((res) => {
+      this.modules = res;
+    });
+  }*/
   getUser() {
     this.LoginService.getUser().subscribe((res) => {
       this.user = res;
       sessionStorage.setItem('user', JSON.stringify(this.user));
+      if (this.user) {
+        this.avatar.url = this.user['avatar'];
+      }
     });
   }
 
   recibirRespuestChildren(evt) {
     if (evt.value) {
       this.selectModule = evt.value;
+    }
+    if (evt.key) {
+      this.mobile = true;
     }
 
   }
@@ -98,4 +110,6 @@ export class SidebarEvdComponent implements OnInit {
   IrInicio() {
     this.route.navigate(['SYNC']);
   }
+
+
 }

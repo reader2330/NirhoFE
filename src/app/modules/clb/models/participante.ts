@@ -19,4 +19,6 @@ export class Participante {
   correoElectronico: string;
   sede: string;
   areaOrg: string;
+  idJefeInmediato: string;
+
 }

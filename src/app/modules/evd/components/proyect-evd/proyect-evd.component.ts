@@ -44,6 +44,29 @@ export class ProyectEvdComponent implements OnInit {
       empresa: null
     }
   }
+  periods = [
+    {
+      id: 1,
+      description: 'Mensual'
+    },
+    {
+      id: 2,
+      description: 'Bimestral'
+    },
+    {
+      id: 3,
+      description: 'Semestral'
+    },
+    {
+      id: 4,
+      description: 'Anual'
+    },
+    {
+      id: 5,
+      description: 'Única vez'
+    }
+
+  ];
 
   proyectForm = new FormGroup(
     {

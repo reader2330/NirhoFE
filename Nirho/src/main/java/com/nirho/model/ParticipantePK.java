@@ -15,7 +15,9 @@ import javax.persistence.Embeddable;
  * @author DELL
  */
 @Embeddable
-public class ParticipantePK implements Serializable {
+public class
+
+ParticipantePK implements Serializable {
 
     /**
 	 * 

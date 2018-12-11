@@ -198,6 +198,7 @@ export class HeadCountComponent implements OnInit {
     this.dataSource[index].correoElectronico = data[15];
     this.dataSource[index].sede = data[16];
     this.dataSource[index].areaOrg = data[17];
+    this.dataSource[index].idJefeInmediato = data[18];
 
   }
 
