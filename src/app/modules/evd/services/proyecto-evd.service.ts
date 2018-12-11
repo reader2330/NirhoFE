@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../../environments/environment.prod';
+import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Proyecto} from '../../clb/models/proyecto';
@@ -62,7 +62,7 @@ export class ProyectoEvdService {
     return this.http.get(this.api + 'catalogo/pais', {headers: this.headers});
   }
   getGiros(): Observable<any> {
-    return this.http.get(this.api + 'catalogo/giro',{headers: this.headers});
+    return this.http.get(this.api + 'catalogo/giro', {headers: this.headers});
   }
   getPreguntas(id): Observable<Pregunta[]> {
     return this.http.get<Pregunta[]>(this.api + 'cuestionario/plantilla', {headers: this.headers, params: {'idModulo': '1' }});

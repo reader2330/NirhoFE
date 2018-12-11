@@ -14,6 +14,7 @@ import com.nirho.dao.ParticipanteAPODAO;
 import com.nirho.dto.NivelDTO;
 import com.nirho.dto.ParticipanteDTO;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.Participante;
 import com.nirho.model.ParticipanteAPO;
 import com.nirho.model.ParticipanteAPOAmp;
 import com.nirho.service.ParticipanteAPOService;
@@ -75,31 +76,9 @@ public class ParticipanteAPOServiceImpl implements ParticipanteAPOService {
 	}
 
 	@Override
-	public List<NivelDTO> obtenerParticipantesPorProyecto(Integer idProyecto) throws NirhoServiceException {
+	public List<ParticipanteAPO> obtenerParticipantesPorProyecto(Integer idProyecto) throws NirhoServiceException {
 		try {
-			List<NivelDTO> niveles = new ArrayList<>();
-			Map<Integer, NivelDTO> nivelesMap = new HashedMap<>();
-			for(ParticipanteAPO p: participanteAPODAO.findByIdProyecto(idProyecto)) {
-				NivelDTO nivel = (NivelDTO) nivelesMap.get(new Integer(p.getNivel()));
-				String nombre = p.getNombres()!=null?p.getNombres():"";	
-				String apellidoP = p.getAPaterno()!=null?p.getAPaterno():"";
-				String apellidoM = p.getAMaterno()!=null?p.getAMaterno():"";
-				nombre = nombre + " " + apellidoP + " " + apellidoM;
-				if(nivel != null) {
-					nivel.getParticipantes().add(new ParticipanteDTO(nombre, p.getPuesto()));
-				} else {
-					NivelDTO ndto = new NivelDTO();
-					ndto.setNivel(p.getNivel());
-					ndto.setParticipantes(new ArrayList<>());				
-					ndto.getParticipantes().add(new ParticipanteDTO(nombre, p.getPuesto()));
-					nivelesMap.put(new Integer(p.getNivel()), ndto);
-				}
-			}
-			for (Map.Entry<Integer, NivelDTO> entry : nivelesMap.entrySet()) {
-				logger.info(entry.getValue());
-				niveles.add(entry.getValue());
-			}
-			return niveles;
+			return participanteAPODAO.findByIdProyecto(idProyecto);
 		} catch (Exception e) {
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");

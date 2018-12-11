@@ -68,5 +68,32 @@ public class ParticipanteDTO implements Serializable {
 		return "ParticipanteDTO [idParticipante=" + idParticipante + ", nombre=" + nombre + ", puesto=" + puesto
 				+ ", idJefeInmediato=" + idJefeInmediato + ", subordinados=" + subordinados + "]";
 	}
-		
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idParticipante == null) ? 0 : idParticipante.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ParticipanteDTO other = (ParticipanteDTO) obj;
+		if (idParticipante == null) {
+			if (other.idParticipante != null)
+				return false;
+		} else if (!idParticipante.equals(other.idParticipante))
+			return false;
+		return true;
+	}
+	
+	
+	
 }

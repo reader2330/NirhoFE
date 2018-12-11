@@ -67,10 +67,14 @@ export class ProyectoApoService {
     return this.http.get(this.api + 'participantesAPO/participantes', {headers: this.headers , params: {'idProyecto': id }});
   }
   getAmpliacion(id): Observable<any> {
-    return this.http.get(this.api + 'participantesAPO/ampliaciones', {headers: this.headers , params: {'idParticipante': id}})
+    return this.http.get(this.api + 'participantesAPO/ampliaciones', {headers: this.headers , params: {'idParticipante': id}});
   }
   getStatus(id): Observable<any> {
-    return this.http.get(this.api + 'proyectoAPO/estatus', {headers: this.headers , params: {'idProyecto': id}})
+    return this.http.get(this.api + 'proyectoAPO/estatus', {headers: this.headers , params: {'idProyecto': id}});
+  }
+  getOrganigrama(id): Observable<any> {
+    return this.http.get(this.api + 'participantesAPO/organigrama', {headers: this.headers, params: {'idProyecto': id}});
+
   }
 
 }

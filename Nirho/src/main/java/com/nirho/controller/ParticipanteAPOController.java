@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 
 import org.jboss.logging.Logger;
@@ -29,6 +31,7 @@ import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.EstatusProyecto;
 import com.nirho.model.ParticipanteAPO;
 import com.nirho.model.ParticipanteAPOAmp;
+import com.nirho.model.ParticipantePK;
 import com.nirho.model.Proyecto;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.ParticipanteAPOService;
@@ -53,53 +56,65 @@ public class ParticipanteAPOController {
 
 	@GetMapping(value = "/organigrama")
 	public ParticipanteDTO organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
-		ParticipanteDTO organigrama = null;
 		try {
-			List<NivelDTO> niveles = participanteAPOService.obtenerParticipantesPorProyecto(idProyecto);
-			for (int i = 0; i < niveles.size() - 1; i++) {
-				for (int j = 0; j < niveles.size() - 1; j++) {
-					if (niveles.get(j).getNivel() > niveles.get(j + 1).getNivel()) {
-						NivelDTO tmp = niveles.get(j + 1);
-						niveles.set(j + 1, niveles.get(j));
-						niveles.set(j, tmp);
-					}
+			
+			List<ParticipanteAPO> participantes = participanteAPOService.obtenerParticipantesPorProyecto(idProyecto);
+			Queue<ParticipanteDTO> colaParticipantes =new LinkedList();
+			
+			ParticipanteDTO organigrama = null;
+			for(ParticipanteAPO p: participantes) {
+				if(p.getIdPartJefeInm() == 0) {
+					organigrama = new ParticipanteDTO(p.getId(), p.getNombres() + p.getAPaterno() + p.getAMaterno(), p.getPuesto(), p.getIdPartJefeInm());
+				} else {
+					colaParticipantes.add(new ParticipanteDTO(p.getId(), p.getNombres() + p.getAPaterno() + p.getAMaterno(), p.getPuesto(), p.getIdPartJefeInm()));
 				}
-			}
-						
-			List<ParticipanteDTO> nivel1 = niveles.get(0).getParticipantes();
-			if (nivel1 != null && !nivel1.isEmpty()) {
-				organigrama = nivel1.get(0);
-				List<ParticipanteDTO> acargoList = new ArrayList<>();
-				for (int i = 1; i < niveles.size() - 1; i++) {
-					logger.info("nivel index [" + i + "]");
-					List<ParticipanteDTO> participantes = niveles.get(i).getParticipantes();
-					List<ParticipanteDTO> subordinados = niveles.get(i + 1).getParticipantes();
-					for (int j = 0; j < participantes.size(); j++) {
-						ParticipanteDTO part = participantes.get(j);
-						List<ParticipanteDTO> lista = new ArrayList<>();
-						for (int k = 0; k < subordinados.size(); k++) {
-							ParticipanteDTO sub = subordinados.get(k);
-							if (sub.getIdJefeInmediato() != null
-									&& sub.getIdJefeInmediato().intValue() == part.getIdParticipante().intValue()) {
-								logger.info("sub [" + sub + "]");
-								lista.add(sub);
-							}
-						}
-						part.setSubordinados(lista);
-						if (part.getIdJefeInmediato() != null
-								&& part.getIdJefeInmediato().intValue() == organigrama.getIdParticipante().intValue()) {
-							logger.info("part [" + part + "]");
-							acargoList.add(part);
-						}		
-					}
-				}
-				organigrama.setSubordinados(acargoList);
 			}
 			
+			int i = 0;
+			int s = colaParticipantes.size();
+			
+			while(colaParticipantes.peek() != null && i < s*10) {
+				ParticipanteDTO p = colaParticipantes.poll();
+				ParticipanteDTO organigramaAux = insertToOrganigrama(organigrama, p);
+				if(organigramaAux == null) {
+					colaParticipantes.add(p);
+				}
+				s++;
+			}
+			
+			return organigrama;
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
 		}
-		return organigrama;
+	}
+	
+	private ParticipanteDTO insertToOrganigrama(ParticipanteDTO organigrama, ParticipanteDTO participante) {
+		if(organigrama == null) {
+			return null;
+		}
+		if(participante.getIdJefeInmediato() == organigrama.getIdParticipante()) {
+			if(organigrama.getSubordinados() == null) {
+				List<ParticipanteDTO> subordinados = new ArrayList<>();
+				subordinados.add(participante);
+				organigrama.setSubordinados(subordinados);
+				return organigrama;
+			} else {
+				organigrama.getSubordinados().add(participante);
+				return organigrama;
+			}
+		} else {
+			if(organigrama.getSubordinados() == null) {
+				return null;
+			} else {
+				for(ParticipanteDTO p: organigrama.getSubordinados()) {
+					ParticipanteDTO pp = insertToOrganigrama(p, participante);
+					if(pp != null) {
+						return pp;
+					}
+				}
+				return null;
+			}
+		}
 	}
 
 	@GetMapping(value = "/participantes")

@@ -13,7 +13,8 @@
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
-    <button mat-raised-button (click)="getOrganigrama()">Cargar Organigrama</button>
+    <button mat-raised-button color="accent" (click)="getOrganigrama()">Cargar Organigrama</button>
+    <!--<button mat-raised-button color="primary" style="margin-left: 10px " (click)="getBandeja()">Cargar Organigrama</button>-->
   </mat-grid-tile>
 </mat-grid-list>
 <!--<div class="col-sm-12 ">
@@ -26,19 +27,24 @@
   </div>
 
 </div>-->
-<div class="col-sm-12">
+<div *ngIf="loadOrganigrama" class="col-sm-12">
   <div class="row justify-content-md-center">
     <div class="organigrama">
 
       <ul>
-        <li *ngFor="let people of level1.participantes">
-          <a href="">{{people.nombre}}</a>
-          <ul>
-            <li *ngFor="let people of level2.participantes">
-              <a href="">{{people.nombre}}</a>
-              <ul>
-                <li *ngFor="let people of level3.participantes"  >
-                  <a href="">{{people.nombre}}</a>
+        <li>
+          <a > <p style="font-size: 12px;">{{levels.nombre}}</p> <p class="text-muted " style="font-size: 12px;">{{levels.puesto}} </p></a>
+          <ul *ngIf="levels.subordinados">
+            <li *ngFor="let people of levels.subordinados">
+              <a ><p style="font-size: 12px;">{{people.nombre}} </p> <p class="text-muted " style="font-size: 12px;">{{people.puesto}} </p></a>
+              <ul *ngIf="people.subordinados.length">
+                <li *ngFor="let people2 of people.subordinados"   >
+                  <a ><p style="font-size: 12px;">{{people2.nombre}}</p> <p class="text-muted " style="font-size: 12px;">{{people2.puesto}} </p></a>
+                  <ul *ngIf="people2.subordinados.length">
+                    <li  *ngFor="let people3 of people2.subordinados"  >
+                      <a ><p style="font-size: 12px;">{{people3.nombre}}</p> <p class="text-muted " style="font-size: 12px;">{{people3.puesto}} </p></a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </li>

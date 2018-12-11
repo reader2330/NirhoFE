@@ -20,6 +20,7 @@ export class EnterpriseEvdComponent implements OnInit {
   empresa = [];
   nacionalidades = [];
 
+
   enterpriseForm = new FormGroup(
     {
       empresa: new FormControl('', Validators.required),
@@ -78,6 +79,7 @@ export class EnterpriseEvdComponent implements OnInit {
   getNacionality () {
     this.ProyectoEvdServices.getNacionality().subscribe((res) => {
       if (res) {
+        console.log(res);
         this.nacionalidades = res;
       }
     });

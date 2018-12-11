@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ProyectoService} from '../../../clb/services/proyecto.service';
+import {ProyectoEvdService} from '../../services/proyecto-evd.service';
 
 @Component({
   selector: 'app-organigrama-evd',
@@ -7,18 +8,20 @@ import {ProyectoService} from '../../../clb/services/proyecto.service';
   styleUrls: ['./organigrama-evd.component.scss']
 })
 export class OrganigramaEvdComponent implements OnInit {
+  @Output() responseChildren = new EventEmitter();
+  loadOrganigrama = false;
 
   proyects = [];
   proyect = {};
   mobile = false;
   levels = [];
   level1 = {
-    participantes:[]
+    participantes: []
   };
   level2 = {};
   level3 = {};
   level4 = {};
-  constructor(private ProyectService: ProyectoService) {
+  constructor(private ProyectService: ProyectoEvdService) {
   }
 
   ngOnInit() {
@@ -32,9 +35,12 @@ export class OrganigramaEvdComponent implements OnInit {
   }
   getOrganigrama() {
     this.ProyectService.getOrganigrama(this.proyect['idProyecto']).subscribe( (res)  => {
+      console.log(res);
       this.levels = res;
+      this.responseChildren.emit({key: '1'} );
+      this.loadOrganigrama = true;
 
-      this.levels.sort(((a, b) => {
+     /* this.levels.sort(((a, b) => {
         if (a.nivel > b.nivel) {
           return 1;
         }
@@ -49,7 +55,7 @@ export class OrganigramaEvdComponent implements OnInit {
       this.level4 = this.levels[3];
       console.log(this.level1);
       console.log(this.level2);
-      console.log(this.level3);
+      console.log(this.level3);*/
 
 
 
@@ -89,6 +95,10 @@ export class OrganigramaEvdComponent implements OnInit {
     if (data.length > 0 && data.length < 4) {
       return 'col-sm-3';
     }
+  }
+
+  getBandeja() {
+    this.responseChildren.emit({value: 1});
   }
 
 }

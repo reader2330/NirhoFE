@@ -62,6 +62,11 @@ export class SidebarComponent implements OnInit {
   recibirRespuestChildren(evt) {
     if (evt.value) {
       this.selectModule = evt.value;
+      this.mobile = false;
+    }
+    console.log(evt.key);
+    if (evt.key) {
+      this.mobile = true;
     }
 
   }
