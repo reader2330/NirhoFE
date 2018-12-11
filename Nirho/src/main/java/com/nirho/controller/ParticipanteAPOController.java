@@ -59,14 +59,14 @@ public class ParticipanteAPOController {
 		try {
 			
 			List<ParticipanteAPO> participantes = participanteAPOService.obtenerParticipantesPorProyecto(idProyecto);
-			Queue<ParticipanteDTO> colaParticipantes =new LinkedList();
+			Queue<ParticipanteDTO> colaParticipantes = new LinkedList();
 			
 			ParticipanteDTO organigrama = null;
-			for(ParticipanteAPO p: participantes) {
+			for (ParticipanteAPO p: participantes) {
 				if(p.getIdPartJefeInm() == 0) {
-					organigrama = new ParticipanteDTO(p.getId(), p.getNombres() + p.getAPaterno() + p.getAMaterno(), p.getPuesto(), p.getIdPartJefeInm());
+					organigrama = new ParticipanteDTO(p.getId(), p.getNombres(), p.getPuesto(), p.getIdPartJefeInm());
 				} else {
-					colaParticipantes.add(new ParticipanteDTO(p.getId(), p.getNombres() + p.getAPaterno() + p.getAMaterno(), p.getPuesto(), p.getIdPartJefeInm()));
+					colaParticipantes.add(new ParticipanteDTO(p.getId(), p.getNombres(), p.getPuesto(), p.getIdPartJefeInm()));
 				}
 			}
 			
