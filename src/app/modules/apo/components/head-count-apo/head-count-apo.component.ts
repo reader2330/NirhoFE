@@ -19,7 +19,7 @@ export class HeadCountApoComponent implements OnInit {
   data: any[] = [];
   file: File;
   showTable = false;
-  dataSource: Participante[] = [];
+  dataSource= [];
   proyects = [];
   filters = {
     idProyecto: 0
@@ -198,6 +198,7 @@ export class HeadCountApoComponent implements OnInit {
     this.dataSource[index].correoElectronico = data[15];
     this.dataSource[index].sede = data[16];
     this.dataSource[index].areaOrg = data[17];
+    this.dataSource[index].idPartJefeInm = data[18];
 
   }
 

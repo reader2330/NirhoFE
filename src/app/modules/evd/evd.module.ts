@@ -20,6 +20,11 @@ import { CuestionarioEvdComponent } from './components/cuestionario-evd/cuestion
 import { EncuestaEvdComponent } from './components/encuesta-evd/encuesta-evd.component';
 import { EncuestaModalEvdComponent } from './components/encuesta-modal-evd/encuesta-modal-evd.component';
 import {EmojiModule} from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import {ConfiguradorCuestionarioComponent} from './components/configurador-cuestionario/configurador-cuestionario.component';
+import {CustomThemeComponent} from './components/custom-theme/custom-theme.component';
+import {CustomAnswerComponent} from './components/custom-answer/custom-answer.component';
+import {CustomQuestionComponent} from './components/custom-question/custom-question.component';
+
 
 @NgModule({
   imports: [
@@ -39,7 +44,10 @@ import {EmojiModule} from '@ctrl/ngx-emoji-mart/ngx-emoji';
     BandejaDetalleEvdComponent,
     HeadCountEvdComponent,
     OrganigramaEvdComponent,
-
+    ConfiguradorCuestionarioComponent,
+    CustomThemeComponent,
+    CustomAnswerComponent,
+    CustomQuestionComponent,
     TableCliente2EvdComponent,
     TableClient2ModalEvdComponent,
     StepperEvdComponent,
