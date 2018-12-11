@@ -35,6 +35,8 @@ public class Tema implements Serializable {
     private String nombre;
     @Column(name = "descripcion")
     private String descripcion;
+    @Column(name = "tipo")
+    private String tipo;
     
     public Tema() {
     }
@@ -72,9 +74,18 @@ public class Tema implements Serializable {
         this.descripcion = descripcion;
     }
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	@Override
 	public String toString() {
-		return "Tema [idTema=" + idTema + ", nombre=" + nombre + ", descripcion=" + descripcion + "]";
+		return "Tema [idTema=" + idTema + ", nombre=" + nombre + ", descripcion=" + descripcion + ", tipo=" + tipo
+				+ "]";
 	}
-	
+    	
 }

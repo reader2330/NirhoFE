@@ -589,6 +589,35 @@ INSERT INTO `cuestionario_empresa_irh_tema` VALUES (1,'','ESTRUCTURA ORGANIZACIO
 UNLOCK TABLES;
 
 --
+-- Table structure for table `cuestionario_opcion`
+--
+
+DROP TABLE IF EXISTS `cuestionario_opcion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `cuestionario_opcion` (
+  `id_proyecto` int(11) NOT NULL,
+  `id_tema` int(11) NOT NULL,
+  `id_opcion` int(11) NOT NULL,
+  PRIMARY KEY (`id_proyecto`,`id_tema`,`id_opcion`),
+  KEY `fk_co_id_tema_idx` (`id_tema`),
+  KEY `fk_co_id_opcion_idx` (`id_opcion`),
+  CONSTRAINT `fk_co_id_opcion` FOREIGN KEY (`id_opcion`) REFERENCES `opcion` (`id_opcion`),
+  CONSTRAINT `fk_co_id_proyecto` FOREIGN KEY (`id_proyecto`) REFERENCES `proyecto` (`id_proyecto`),
+  CONSTRAINT `fk_co_id_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cuestionario_opcion`
+--
+
+LOCK TABLES `cuestionario_opcion` WRITE;
+/*!40000 ALTER TABLE `cuestionario_opcion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cuestionario_opcion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cuestionario_proyecto`
 --
 
@@ -1304,6 +1333,34 @@ INSERT INTO `modulo` VALUES (1,'Clima Laboral','Módulo CLB'),(2,'Evaluación de
 UNLOCK TABLES;
 
 --
+-- Table structure for table `opcion`
+--
+
+DROP TABLE IF EXISTS `opcion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `opcion` (
+  `id_opcion` int(11) NOT NULL,
+  `id_tema` int(11) NOT NULL,
+  `enunciado` varchar(200) NOT NULL,
+  `tipo` varchar(2) NOT NULL,
+  PRIMARY KEY (`id_opcion`),
+  KEY `fk_opcion_tema_idx` (`id_tema`),
+  CONSTRAINT `fk_opcion_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `opcion`
+--
+
+LOCK TABLES `opcion` WRITE;
+/*!40000 ALTER TABLE `opcion` DISABLE KEYS */;
+INSERT INTO `opcion` VALUES (201001,201,'No conoce a fondo sus funciones y responsabilidades, mostrando problemas para entender la función tanto en lo general como lo específico','BR'),(201002,201,'En ocasiones se observa falta de conocimiento y profundidad en el desempeño de sus funciones y responsabilidades.','MR'),(201003,201,'A través del desempeño de su trabajo, ha mostrado conocer y asumir las funciones inherentes y responsabilidades del puesto.','R'),(201004,201,'Conoce y realiza con claridad y precisión las funciones y responsabilidades del puesto, tanto en lo específico como en lo general.','RS'),(201005,201,'Tiene un dominio claro de su puesto y ha demostrado capacidad de conocimiento profundo de la función y hasta de otras áreas o puestos.','E'),(202001,202,'En el desempeño de su trabajo no existe el concepto de satisfacción al cliente, el trabajo tiene que ser repetido varias veces por ensayo-error.','BR'),(202002,202,'En ocasiones tiene dificultad para detectar o satisfacer las necesidades de sus “clientes”, algunas veces tiene que repetir el trabajo para que salga bien.','MR'),(202003,202,'Su trabajo está orientado a la satisfacción de las necesidades de sus “clientes” lo cual logra en la mayoría de las ocasiones.','R'),(202004,202,'Logra reconocer y satisfacer las necesidades de sus “clientes”, tanto internas como externas en forma óptima, logra hacer las cosas bien desde la primera vez, y siempre revisa su trabajo.','RS'),(202005,202,'Satisface la necesidad de sus \"clientes\" y constantemente busca entregar más de lo que se le solicitó y hace mejoras en calidad y proceso.','E'),(203001,203,'Frecuentemente tiene problemas para llevar a cabo sus funciones, el trabajo se acumula constantemente, hay demoras largas y constantes.','BR'),(203002,203,'En ocasiones no alcanza a llevar a cabo sus tareas encomendadas, el trabajo se acumula progresivamente y se observan algunas demoras en el mismo.','MR'),(203003,203,'Cumple oportuna y adecuadamente con sus tareas, revisa con tiempo sus resultados y planea sus actividades.','R'),(203004,203,'Realiza su trabajo en tiempo quedando la oportunidad de realizar otras actividades que enriquecen su función.','RS'),(203005,203,'Constantemente se preocupa por buscar la eficiencia en su trabajo haciendo mejoras que han logrado una mayor producción de resultados.','E'),(204001,204,'Frecuentemente existe desorden en las actividades y trabajos realizados, no hay secuencia ni asignación de prioridades en lo que se hace.','BR'),(204002,204,'En ocasiones se observa falta de secuencia y orden en la realización del trabajo, así como dificultad para asignar prioridades claramente.','MR'),(204003,204,'Planea y efectúa su trabajo en forma secuencial y ordenada con base a prioridades.  Su ejecución es eficiente.','R'),(204004,204,'Planea y efectúa su trabajo en forma oportuna y eficiente, pudiendo establecer con claridad y precisión las siguientes actividades a desarrollar','RS'),(204005,204,'El trabajo que desarrolla está muy organizado y existen controles que permiten planear y desarrollar nuevas actividades a largo plazo.','E'),(205001,205,'No cuenta con registros y controles actualizados, con frecuencia omite actividades importantes, la corrección de desviaciones es casi continua.','BR'),(205002,205,'En ocasiones hay dificultades para mantener el registro actualizado de actividades, así como algunos retrasos y omisiones en el seguimiento, y dificultad para corregir desviaciones.','MR'),(205003,205,'Registra, actualiza y da seguimiento oportuno a su trabajo en forma adecuada, pudiendo detectar y corregir desviaciones.','R'),(205004,205,'El registro y seguimiento de actividades es preciso, claro y completo, los pendientes son mínimos y se atienden con oportunidad.','RS'),(205005,205,'Existen controles del 100% de las actividades del puesto, son tan precisos que rara vez necesitan correcciones','E'),(206001,206,'Ha tenido serias dificultades para poder adquirir los conocimientos necesarios para desempeñar el puesto. Requiere que se le explique un mismo asunto varias veces.','BR'),(206002,206,'En ocasiones demuestra dificultad y lentitud para aprender y poner en práctica los conocimientos necesarios para el desempeño del puesto.','MR'),(206003,206,'Ha logrado adquirir y poner en práctica los conocimientos necesarios para desempeñar el puesto adecuadamente.','R'),(206004,206,'Demuestra gran capacidad para adquirir y poner en práctica nuevos conocimientos en forma sólida y rápida, requiere de un mínimo de explicaciones.','RS'),(206005,206,'Constantemente se le ve ocupado en adquirir nuevos conocimientos para reforzar su desarrollo profesional.','E'),(207001,207,'No muestra disposición o interés por involucrarse en el trabajo de otros, existe una marcada tendencia al individualismo.','BR'),(207002,207,'En ocasiones muestra falta de disposición o interés para colaborar con otras personas del área, muestra preferencia por el trabajo individual.','MR'),(207003,207,'Existe una buena disposición para ayudar y colaborar con otros, se interesa en cooperar.','R'),(207004,207,'Siempre se encuentra dispuesto a cooperar tanto con personas de su área como de otras para buscar en conjunto resultados','RS'),(207005,207,'Frecuente tiene la iniciativa de estar en busca de apoyar a sus compañeros y está dispuesto al trabajo en equipo para lograr resultados.','E'),(208001,208,'Difícilmente toma decisiones por iniciativa propia, tiende a ser dependiente y requiere constante supervisión de su trabajo.','BR'),(208002,208,'Ocasionalmente toma acciones por iniciativa propia, ya que necesita supervisión cercana en sus labores','MR'),(208003,208,'Toma decisiones por si mismo cuando es preciso, requiere un grado normal de supervisión.','R'),(208004,208,'Toma acciones por si mismo en forma correcta y anticipadamente. Existe confianza del jefe por lo que la supervisón es menor.','RS'),(208005,208,'En varias ocasiones, ha tomado iniciativas que han producido mejoras importantes en su trabajo o en el de otros.','E'),(209001,209,'Ha llegado tarde muchas veces en el año, frecuentemente existe nula justificación, a pesar de habérsele llamado la atención el empleado ha mantenido su conducta en forma repetitiva.','BR'),(209002,209,'Ha llegado tarde varias veces durante el año y son extensas las disculpas por su impuntualidad, en ocasiones los retardos no son justificados plenamente.','MR'),(209003,209,'Normalmente llega a tiempo a sus labores, son escasos los retardos y existe una justificación clara para ellos.','R'),(209004,209,'Su puntualidad es muy reconocida por su jefe y los demás y en rara ocasión llega tarde a sus labores.','RS'),(209005,209,'Su puntualidad es ejemplar tanto para la asistencia al trabajo como para atender juntas o compromisos.','E'),(210001,210,'Ha tenido demasiadas faltas durante el año y varias de éstas no se han justificado, el empleado lo ha reconocido a pesar de que se le ha llamado la atención.','BR'),(210002,210,'Tiene faltas durante el año sin justificación plena y es necesario que se le recuerde por parte de su jefe su actuación en este sentido.','MR'),(210003,210,'Demuestra una asistencia correcta en el trabajo; ocasionalmente falta pero con plena justificación.','R'),(210004,210,'La asistencia que demuestra es muy buena. Su responsabilidad en este sentido es clara.','RS'),(210005,210,'Ejemplarmente asiste al trabajo. Cualquier inasistencia es por causas ajenas a su control.','E'),(221001,221,'Por debajo de los resultados mínimos esperados','BR'),(221002,221,'Resultados mínimos','MR'),(221003,221,'Resultados suficientes','R'),(221004,221,'Resultados superiores ','RS'),(221005,221,'Excede en sus resultados','E'),(222001,222,'Por debajo de los resultados mínimos esperados','BR'),(222002,222,'Resultados mínimos','MR'),(222003,222,'Resultados suficientes','R'),(222004,222,'Resultados superiores ','RS'),(222005,222,'Excede en sus resultados','E'),(223001,223,'Por debajo de los resultados mínimos esperados','BR'),(223002,223,'Resultados mínimos','MR'),(223003,223,'Resultados suficientes','R'),(223004,223,'Resultados superiores ','RS'),(223005,223,'Excede en sus resultados','E'),(224001,224,'Por debajo de los resultados mínimos esperados','BR'),(224002,224,'Resultados mínimos','MR'),(224003,224,'Resultados suficientes','R'),(224004,224,'Resultados superiores ','RS'),(224005,224,'Excede en sus resultados','E'),(225001,225,'Por debajo de los resultados mínimos esperados','BR'),(225002,225,'Resultados mínimos','MR'),(225003,225,'Resultados suficientes','R'),(225004,225,'Resultados superiores ','RS'),(225005,225,'Excede en sus resultados','E'),(226001,226,'Por debajo de los resultados mínimos esperados','BR'),(226002,226,'Resultados mínimos','MR'),(226003,226,'Resultados suficientes','R'),(226004,226,'Resultados superiores ','RS'),(226005,226,'Excede en sus resultados','E'),(227001,227,'Por debajo de los resultados mínimos esperados','BR'),(227002,227,'Resultados mínimos','MR'),(227003,227,'Resultados suficientes','R'),(227004,227,'Resultados superiores ','RS'),(227005,227,'Excede en sus resultados','E'),(228001,228,'Por debajo de los resultados mínimos esperados','BR'),(228002,228,'Resultados mínimos','MR'),(228003,228,'Resultados suficientes','R'),(228004,228,'Resultados superiores ','RS'),(228005,228,'Excede en sus resultados','E'),(229001,229,'Por debajo de los resultados mínimos esperados','BR'),(229002,229,'Resultados mínimos','MR'),(229003,229,'Resultados suficientes','R'),(229004,229,'Resultados superiores ','RS'),(229005,229,'Excede en sus resultados','E'),(230001,230,'Por debajo de los resultados mínimos esperados','BR'),(230002,230,'Resultados mínimos','MR'),(230003,230,'Resultados suficientes','R'),(230004,230,'Resultados superiores ','RS'),(230005,230,'Excede en sus resultados','E'),(241001,241,'Por debajo de los resultados mínimos esperados','BR'),(241002,241,'Resultados mínimos','MR'),(241003,241,'Resultados suficientes','R'),(241004,241,'Resultados superiores ','RS'),(241005,241,'Excede en sus resultados','E'),(242001,242,'Por debajo de los resultados mínimos esperados','BR'),(242002,242,'Resultados mínimos','MR'),(242003,242,'Resultados suficientes','R'),(242004,242,'Resultados superiores ','RS'),(242005,242,'Excede en sus resultados','E'),(243001,243,'Por debajo de los resultados mínimos esperados','BR'),(243002,243,'Resultados mínimos','MR'),(243003,243,'Resultados suficientes','R'),(243004,243,'Resultados superiores ','RS'),(243005,243,'Excede en sus resultados','E'),(244001,244,'Por debajo de los resultados mínimos esperados','BR'),(244002,244,'Resultados mínimos','MR'),(244003,244,'Resultados suficientes','R'),(244004,244,'Resultados superiores ','RS'),(244005,244,'Excede en sus resultados','E'),(245001,245,'Por debajo de los resultados mínimos esperados','BR'),(245002,245,'Resultados mínimos','MR'),(245003,245,'Resultados suficientes','R'),(245004,245,'Resultados superiores ','RS'),(245005,245,'Excede en sus resultados','E'),(246001,246,'Por debajo de los resultados mínimos esperados','BR'),(246002,246,'Resultados mínimos','MR'),(246003,246,'Resultados suficientes','R'),(246004,246,'Resultados superiores ','RS'),(246005,245,'Excede en sus resultados','E'),(247001,247,'Por debajo de los resultados mínimos esperados','BR'),(247002,247,'Resultados mínimos','MR'),(247003,247,'Resultados suficientes','R'),(247004,247,'Resultados superiores ','RS'),(247005,247,'Excede en sus resultados','E'),(248001,248,'Por debajo de los resultados mínimos esperados','BR'),(248002,248,'Resultados mínimos','MR'),(248003,248,'Resultados suficientes','R'),(248004,248,'Resultados superiores ','RS'),(248005,248,'Excede en sus resultados','E'),(249001,249,'Por debajo de los resultados mínimos esperados','BR'),(249002,249,'Resultados mínimos','MR'),(249003,249,'Resultados suficientes','R'),(249004,249,'Resultados superiores ','RS'),(249005,249,'Excede en sus resultados','E'),(250001,250,'Por debajo de los resultados mínimos esperados','BR'),(250002,250,'Resultados mínimos','MR'),(250003,250,'Resultados suficientes','R'),(250004,250,'Resultados superiores ','RS'),(250005,250,'Excede en sus resultados','E'),(251001,251,'Por debajo de los resultados mínimos esperados','BR'),(251002,251,'Resultados mínimos','MR'),(251003,251,'Resultados suficientes','R'),(251004,251,'Resultados superiores ','RS'),(251005,251,'Excede en sus resultados','E'),(252001,252,'Por debajo de los resultados mínimos esperados','BR'),(252002,252,'Resultados mínimos','MR'),(252003,252,'Resultados suficientes','R'),(252004,252,'Resultados superiores ','RS'),(252005,252,'Excede en sus resultados','E'),(253001,253,'Por debajo de los resultados mínimos esperados','BR'),(253002,253,'Resultados mínimos','MR'),(253003,253,'Resultados suficientes','R'),(253004,253,'Resultados superiores ','RS'),(253005,253,'Excede en sus resultados','E');
+/*!40000 ALTER TABLE `opcion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `participante`
 --
 
@@ -1455,7 +1512,7 @@ CREATE TABLE `plantilla_cuestionario` (
 
 LOCK TABLES `plantilla_cuestionario` WRITE;
 /*!40000 ALTER TABLE `plantilla_cuestionario` DISABLE KEYS */;
-INSERT INTO `plantilla_cuestionario` VALUES (1,101),(1,102),(1,103),(1,104),(1,105),(1,106),(1,107),(1,108),(1,109),(1,110),(1,111),(1,112);
+INSERT INTO `plantilla_cuestionario` VALUES (1,101),(1,102),(1,103),(1,104),(1,105),(1,106),(1,107),(1,108),(1,109),(1,110),(1,111),(1,112),(2,201),(2,202),(2,203),(2,204),(2,205),(2,206),(2,207),(2,208),(2,209),(2,210),(2,221),(2,222),(2,223),(2,224),(2,225),(2,226),(2,227),(2,228),(2,229),(2,230),(2,241),(2,242),(2,243),(2,244),(2,245),(2,246),(2,247),(2,248),(2,249),(2,250),(2,251),(2,252),(2,253);
 /*!40000 ALTER TABLE `plantilla_cuestionario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1752,8 +1809,9 @@ DROP TABLE IF EXISTS `tema`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `tema` (
   `id_tema` int(11) NOT NULL,
-  `nombre` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `descripcion` varchar(190) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `descripcion` varchar(190) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_tema`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1764,7 +1822,7 @@ CREATE TABLE `tema` (
 
 LOCK TABLES `tema` WRITE;
 /*!40000 ALTER TABLE `tema` DISABLE KEYS */;
-INSERT INTO `tema` VALUES (101,'Imagen','Tema 01 de Clima Laboral'),(102,'Espacio de trabajo','Tema 02 de Clima Laboral'),(103,'Relaciones','Tema 03 de Clima Laboral'),(104,'Comunicación','Tema 04 de Clima Laboral'),(105,'Misión','Tema 05 de Clima Laboral'),(106,'Trabajo en equipo','Tema 06 de Clima Laboral'),(107,'Capacitación y desarrollo','Tema 07 de Clima Laboral'),(108,'Reconocimiento','Tema 08 de Clima Laboral'),(109,'Servicio al cliente','Tema 09 de Clima Laboral'),(110,'Organización','Tema 10 de Clima Laboral'),(111,'Condiciones de trabajo','Tema 11 de Clima Laboral'),(112,'Calidad','Tema 12 de Clima Laboral');
+INSERT INTO `tema` VALUES (101,'Imagen','Tema 01 de Clima Laboral',NULL),(102,'Espacio de trabajo','Tema 02 de Clima Laboral',NULL),(103,'Relaciones','Tema 03 de Clima Laboral',NULL),(104,'Comunicación','Tema 04 de Clima Laboral',NULL),(105,'Misión','Tema 05 de Clima Laboral',NULL),(106,'Trabajo en equipo','Tema 06 de Clima Laboral',NULL),(107,'Capacitación y desarrollo','Tema 07 de Clima Laboral',NULL),(108,'Reconocimiento','Tema 08 de Clima Laboral',NULL),(109,'Servicio al cliente','Tema 09 de Clima Laboral',NULL),(110,'Organización','Tema 10 de Clima Laboral',NULL),(111,'Condiciones de trabajo','Tema 11 de Clima Laboral',NULL),(112,'Calidad','Tema 12 de Clima Laboral',NULL),(201,'Conocimiento del puesto','Factor de Desempeño 01 de EVD','FA'),(202,'Calidad del trabajo','Factor de Desempeño 02 de EVD','FA'),(203,'Efectividad en el trabajo','Factor de Desempeño 03 de EVD','FA'),(204,'Organización','Factor de Desempeño 04 de EVD','FA'),(205,'Control de Actividades','Factor de Desempeño 05 de EVD','FA'),(206,'Capacidad de Aprendizaje','Factor de Desempeño 06 de EVD','FA'),(207,'Cooperación','Factor de Desempeño 07 de EVD','FA'),(208,'Iniciativa','Factor de Desempeño 08 de EVD','FA'),(209,'Puntualidad','Factor de Desempeño 09 de EVD','FA'),(210,'Asistencia','Factor de Desempeño 10 de EVD','FA'),(221,'Adaptacion al medio','Competencia 01 de EVD','CA'),(222,'Energía e iniciativa','Competencia 02 de EVD','CA'),(223,'Tolerancia al stress','Competencia 03 de EVD','CA'),(224,'Orientación al cliente','Competencia 04 de EVD','CA'),(225,'Trabajo en equipo y cooperación','Competencia 05 de EVD','CA'),(226,'Análisis y sentido común','Competencia 06 de EVD','CA'),(227,'Planificación y organización','Competencia 07 de EVD','CA'),(228,'Creatividad','Competencia 08 de EVD','CA'),(229,'Comunicación efectiva','Competencia 09 de EVD','CA'),(230,'Empatía','Competencia 10 de EVD','CA'),(241,'Control','Competencia 11 de EVD','CB'),(242,'Liderazgo','Competencia 12 de EVD','CB'),(243,'Influencia e impacto','Competencia 13 de EVD','CB'),(244,'Delegación','Competencia 14 de EVD','CB'),(245,'Sensatez para los negocios','Competencia 15 de EVD','CB'),(246,'Orientación al logro','Competencia 16 de EVD','CB'),(247,'Toma de riesgos','Competencia 17 de EVD','CB'),(248,'Negociación','Competencia 18 de EVD','CB'),(249,'Persuasión','Competencia 19 de EVD','CB'),(250,'Perspectiva estratégica','Competencia 20 de EVD','CB'),(251,'Deseos de éxito','Competencia 21 de EVD','CB'),(252,'Gestión de recursos','Competencia 22 de EVD','CB'),(253,'Red de relaciones efectivas','Competencia 23 de EVD','CB');
 /*!40000 ALTER TABLE `tema` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2012,4 +2070,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-07  1:39:14
+-- Dump completed on 2018-12-11  0:06:42

@@ -14,13 +14,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
+import com.nirho.dto.CuestionarioConfOpcion;
 import com.nirho.dto.CuestionarioConfiguracion;
 import com.nirho.dto.TemaPreguntas;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.CuestionarioOpcion;
 import com.nirho.model.CuetionarioParticipante;
 import com.nirho.model.EstatusProyecto;
+import com.nirho.model.Opcion;
 import com.nirho.model.Pregunta;
 import com.nirho.model.Proyecto;
 import com.nirho.model.Tema;
@@ -73,14 +76,36 @@ public class CuestionarioProyectoController {
 		return preguntas;
 	}
 	
+	@GetMapping(value = "/opciones")
+	public List<Opcion> opciones(@RequestParam(name="idTema") Integer idTema) throws NirhoControllerException{
+		List<Opcion> preguntas = new ArrayList<>();
+		try {
+			preguntas = temasService.obtenerOpcionesTema(idTema);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
+		}
+		return preguntas;
+	}
+	
 	@RequestMapping(value = "/configurar", method = RequestMethod.POST)
 	@ResponseBody
-	public void guardarParticipantes(@RequestBody CuestionarioConfiguracion cuestionario) throws NirhoControllerException {
+	public void configurar(@RequestBody CuestionarioConfiguracion cuestionario) throws NirhoControllerException {
 		try {
 			Proyecto proyecto = proyectoService.obtenerProyectoPorId(cuestionario.getIdProyecto());
 			proyecto.setIdEstatus(new EstatusProyecto(ProyectoConstants.ESTATUS_CONFIGURACION));
 			proyectoService.registrarProyecto(proyecto, proyecto.getIdModulo());
 			cuestionarioService.guardar(cuestionario);
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al registrar el cuestionario en la BD");
+		}
+		
+	}
+	
+	@RequestMapping(value = "/guardarOpciones", method = RequestMethod.POST)
+	@ResponseBody
+	public void configurar(@RequestBody CuestionarioConfOpcion cuestionario) throws NirhoControllerException {
+		try {
+			cuestionarioService.guardarOpciones(cuestionario);
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al registrar el cuestionario en la BD");
 		}
@@ -114,6 +139,24 @@ public class CuestionarioProyectoController {
 			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
 		}
 		return preguntas;
+	}
+	
+	@GetMapping(value = "/participante/opciones")
+	public List<CuestionarioOpcion> participanteOpciones(@RequestParam(name="token") String token) throws NirhoControllerException{
+		List<CuestionarioOpcion> opciones = new ArrayList<>();
+		try {
+			String[] datos = token.split("-");
+			Integer idProyecto = Integer.parseInt(datos[2]);
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
+        	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
+        	if(estatusActual >= ProyectoConstants.ESTATUS_FINALIZADO.intValue()) {
+        		throw new NirhoControllerException("Se ha finalizado el esdudio del proyecto");
+        	}
+        	opciones = cuestionarioService.obtenerCuestionarioOpcion(idProyecto);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
+		}
+		return opciones;
 	}
 	
 	@RequestMapping(value = "/contestaPregPart", method = RequestMethod.POST)
