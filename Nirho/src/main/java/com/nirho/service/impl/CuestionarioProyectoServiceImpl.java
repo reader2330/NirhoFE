@@ -19,6 +19,7 @@ import com.nirho.dao.TemaDAO;
 import com.nirho.dto.CuestionarioConfEVD;
 import com.nirho.dto.CuestionarioConfOpcion;
 import com.nirho.dto.CuestionarioConfiguracion;
+import com.nirho.dto.CuestionarioParticipanteEVD;
 import com.nirho.dto.PreguntaOpcionesEVD;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoServiceException;
@@ -255,6 +256,35 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 			throw new NirhoServiceException("Problemas al obtener los temas del proyecto [" + idProyecto + "]");
 		}
 		return preguntas;
+	}
+
+	@Override
+	public List<CuestionarioParticipanteEVD> obtenerCuestionarioParticipanteEVD(String token) throws NirhoServiceException {
+		List<CuestionarioParticipanteEVD> cuestPartEVDList = new ArrayList<>();
+		try {
+			ParticipantePK participantePK = NirhoUtil.obtenerParticipanteToken(token);
+			Participante participante = participanteDAO.getOne(participantePK);
+			if(participante != null) {
+				List<CuetionarioParticipante> cuestPart = cuestPartDAO.findByParticipanteProyecto(participante.getParticipantePK().getIdParticipante(),
+						participante.getParticipantePK().getIdProyecto());
+				for(CuetionarioParticipante cp: cuestPart) {
+					CuestionarioParticipanteEVD cuestPartEVD = new CuestionarioParticipanteEVD();
+					cuestPartEVD.setCuestionarioParticipante(cp);
+					List<Opcion> opciones = new ArrayList<>();
+					for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getTema().getIdTema())){
+						opciones.add(cuestOps.getOpcion());
+					}
+					cuestPartEVD.setOpciones(opciones);
+					cuestPartEVDList.add(cuestPartEVD);
+				}
+			}
+		} catch(NirhoServiceException nse) {
+			throw new NirhoServiceException(nse.getMessage());
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas al obtener el cuestionario del participante en la BD token [" + token + "]");
+		}
+		return cuestPartEVDList;
 	}
 	
 }

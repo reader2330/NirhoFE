@@ -17,6 +17,7 @@ import com.nirho.constant.ProyectoConstants;
 import com.nirho.dto.CuestionarioConfEVD;
 import com.nirho.dto.CuestionarioConfOpcion;
 import com.nirho.dto.CuestionarioConfiguracion;
+import com.nirho.dto.CuestionarioParticipanteEVD;
 import com.nirho.dto.PreguntaOpcionesEVD;
 import com.nirho.dto.TemaPreguntas;
 import com.nirho.dto.VerTemaQ;
@@ -173,6 +174,24 @@ public class CuestionarioProyectoController {
         		throw new NirhoControllerException("Se ha finalizado el esdudio del proyecto");
         	}
 			preguntas = cuestionarioService.obtenerCuestionarioParticipante(token);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
+		}
+		return preguntas;
+	}
+	
+	@GetMapping(value = "/participanteEVD")
+	public List<CuestionarioParticipanteEVD> participanteEVD(@RequestParam(name="token") String token) throws NirhoControllerException{
+		List<CuestionarioParticipanteEVD> preguntas = new ArrayList<>();
+		try {
+			String[] datos = token.split("-");
+			Integer idProyecto = Integer.parseInt(datos[2]);
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
+        	int estatusActual = proyecto.getIdEstatus().getIdEstatus().intValue();
+        	if(estatusActual >= ProyectoConstants.ESTATUS_FINALIZADO.intValue()) {
+        		throw new NirhoControllerException("Se ha finalizado el esdudio del proyecto");
+        	}
+			preguntas = cuestionarioService.obtenerCuestionarioParticipanteEVD(token);
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
 		}
