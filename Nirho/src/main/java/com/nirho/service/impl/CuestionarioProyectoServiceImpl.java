@@ -239,7 +239,7 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	public List<PreguntaOpcionesEVD> obtenerPreguntasOpciones(Integer idProyecto) throws NirhoServiceException {
 		List<PreguntaOpcionesEVD> preguntas = new ArrayList<>();
 		try {
-			for(CuestionarioOpcion cp: coDAO.findByIdProyecto(idProyecto)) {
+			for(CuestionarioProyecto cp: dao.findByIdProyecto(idProyecto)) {
 				PreguntaOpcionesEVD poe = new PreguntaOpcionesEVD();
 				Pregunta pregunta = preguntaDAO.findByIdTema(cp.getTema().getIdTema()).get(0);
 				poe.setPregunta(pregunta);
