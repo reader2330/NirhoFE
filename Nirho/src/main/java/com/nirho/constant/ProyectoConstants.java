@@ -9,4 +9,5 @@ public interface ProyectoConstants {
 	Integer ESTATUS_VIGENTE = 6;
 	Integer ESTATUS_FINALIZADO = 7;
 	Integer ESTATUS_RESULTADOS = 8;
+	Integer MODULO_EVD = 2;
 }

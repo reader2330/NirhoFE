@@ -14,6 +14,7 @@ import com.nirho.dto.NivelDTO;
 import com.nirho.dto.ParticipanteDTO;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.Participante;
+import com.nirho.model.ParticipantePK;
 import com.nirho.service.ParticipanteService;
 import com.nirho.util.NirhoUtil;
 
@@ -137,6 +138,16 @@ public class ParticipanteServiceImpl implements ParticipanteService {
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
 		}
 		return participantes;
+	}
+
+	@Override
+	public Participante obtenerParticipante(ParticipantePK pk) throws NirhoServiceException {
+		try {
+			return participanteDAO.getOne(pk);
+		} catch (Exception e) {
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
+		}
 	}
 		
 }

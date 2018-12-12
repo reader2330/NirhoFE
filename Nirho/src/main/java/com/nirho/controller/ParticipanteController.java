@@ -262,7 +262,11 @@ public class ParticipanteController {
 						logger.info("CuestionarioParticipante [" + cuetionarioParticipante + "]");
 						cuestionarioParticipanteService.guardar(cuetionarioParticipante);
 					}
-					enviarCorreoParticipante(participante, request);
+					if(participante.getProyecto().getIdModulo() == ProyectoConstants.MODULO_EVD) {
+						enviarCorreoParticipanteEVD(participante, request);
+					} else {
+						enviarCorreoParticipante(participante, request);
+					}
 				} catch (NirhoServiceException nse) {
 					logger.info("Problemas al enviar el cuestionario a la BD, causa + [" + nse.getMessage() + "]");
 				}
@@ -339,6 +343,22 @@ public class ParticipanteController {
     		EmailDatos datos = new EmailDatos();
     		datos.setEmailDestino(participante.getCorreoElectronico());
     		datos.setNombreParticipante(participante.getNombres());
+    		datos.setNombreProyecto(participante.getProyecto().getNombre());
+    		datos.setToken(participante.getToken());
+    		String usuario = (String) request.getAttribute("username");
+			Usuario usuarioEnSesion = usuarioService.obtenerUsuario(usuario);
+    		emailService.sendEmail(datos, usuarioEnSesion.getEmail());
+    	} catch(NirhoServiceException nse) {
+    		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
+    	}
+	}
+	
+	private void enviarCorreoParticipanteEVD(Participante participante, HttpServletRequest request) {
+		try {
+    		EmailDatos datos = new EmailDatos();
+    		Participante jefe = participanteService.obtenerParticipante(participante.getParticipantePK());
+    		datos.setEmailDestino(jefe.getCorreoElectronico());
+    		datos.setNombreParticipante(jefe.getNombres());
     		datos.setNombreProyecto(participante.getProyecto().getNombre());
     		datos.setToken(participante.getToken());
     		String usuario = (String) request.getAttribute("username");
