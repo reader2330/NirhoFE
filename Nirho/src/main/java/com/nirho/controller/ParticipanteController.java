@@ -262,7 +262,7 @@ public class ParticipanteController {
 						logger.info("CuestionarioParticipante [" + cuetionarioParticipante + "]");
 						cuestionarioParticipanteService.guardar(cuetionarioParticipante);
 					}
-					if(participante.getProyecto().getIdModulo() == ProyectoConstants.MODULO_EVD) {
+					if(participante.getProyecto().getIdModulo().intValue() == ProyectoConstants.MODULO_EVD.intValue()) {
 						enviarCorreoParticipanteEVD(participante, request);
 					} else {
 						enviarCorreoParticipante(participante, request);
