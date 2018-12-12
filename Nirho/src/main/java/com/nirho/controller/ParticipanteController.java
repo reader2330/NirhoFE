@@ -363,7 +363,7 @@ public class ParticipanteController {
     		datos.setToken(participante.getToken());
     		String usuario = (String) request.getAttribute("username");
 			Usuario usuarioEnSesion = usuarioService.obtenerUsuario(usuario);
-    		emailService.sendEmail(datos, usuarioEnSesion.getEmail());
+    		emailService.sendEmailEVD(datos, usuarioEnSesion.getEmail());
     	} catch(NirhoServiceException nse) {
     		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
     	}
