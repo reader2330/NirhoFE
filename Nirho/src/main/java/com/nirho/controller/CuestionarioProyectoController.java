@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
-import com.nirho.dto.CuestionarioConfOpcion;
 import com.nirho.dto.CuestionarioConfEVD;
+import com.nirho.dto.CuestionarioConfOpcion;
 import com.nirho.dto.CuestionarioConfiguracion;
+import com.nirho.dto.PreguntaOpcionesEVD;
 import com.nirho.dto.TemaPreguntas;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoControllerException;
@@ -66,11 +67,33 @@ public class CuestionarioProyectoController {
 		return temas;
 	}
 	
+	@GetMapping(value = "/temasEVD")
+	public List<Tema> temasEVD(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		List<Tema> temas = new ArrayList<>();
+		try {
+			temas = cuestionarioService.obtenerTemasProyecto(idProyecto);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Sin servicio al obtener los temas del modulo");
+		}
+		return temas;
+	}
+	
 	@GetMapping(value = "/preguntas")
 	public List<Pregunta> preguntas(@RequestParam(name="idTema") Integer idTema) throws NirhoControllerException{
 		List<Pregunta> preguntas = new ArrayList<>();
 		try {
 			preguntas = temasService.obtenerPreguntasTema(idTema);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
+		}
+		return preguntas;
+	}
+	
+	@GetMapping(value = "/preguntasEVD")
+	public List<PreguntaOpcionesEVD> preguntasEVD(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		List<PreguntaOpcionesEVD> preguntas = new ArrayList<>();
+		try {
+			preguntas = cuestionarioService.obtenerPreguntasOpciones(idProyecto);
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
 		}

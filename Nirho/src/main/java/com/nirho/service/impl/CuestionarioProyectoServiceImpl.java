@@ -19,6 +19,7 @@ import com.nirho.dao.TemaDAO;
 import com.nirho.dto.CuestionarioConfEVD;
 import com.nirho.dto.CuestionarioConfOpcion;
 import com.nirho.dto.CuestionarioConfiguracion;
+import com.nirho.dto.PreguntaOpcionesEVD;
 import com.nirho.dto.VerTemaQ;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.CuestionarioOpcion;
@@ -218,6 +219,42 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	@Override
 	public List<CuestionarioOpcion> obtenerCuestionarioOpcion(Integer idProyecto) throws NirhoServiceException {
 		return coDAO.findByIdProyecto(idProyecto);
+	}
+
+	@Override
+	public List<Tema> obtenerTemasProyecto(Integer idProyecto) throws NirhoServiceException {
+		List<Tema> temas = new ArrayList<>();
+		try {
+			for(CuestionarioProyecto cp: dao.findByIdProyecto(idProyecto)) {
+				temas.add(cp.getTema());
+			}	
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas al obtener los temas del proyecto [" + idProyecto + "]");
+		}
+		return temas;
+	}
+
+	@Override
+	public List<PreguntaOpcionesEVD> obtenerPreguntasOpciones(Integer idProyecto) throws NirhoServiceException {
+		List<PreguntaOpcionesEVD> preguntas = new ArrayList<>();
+		try {
+			for(CuestionarioOpcion cp: coDAO.findByIdProyecto(idProyecto)) {
+				PreguntaOpcionesEVD poe = new PreguntaOpcionesEVD();
+				Pregunta pregunta = preguntaDAO.findByIdTema(cp.getTema().getIdTema()).get(0);
+				poe.setPregunta(pregunta);
+				List<Opcion> opciones = new ArrayList<>();
+				for(CuestionarioOpcion co: coDAO.findByIdProyectoAndIdTema(idProyecto, cp.getTema().getIdTema())) {
+					opciones.add(co.getOpcion());
+				}
+				poe.setOpciones(opciones);
+				preguntas.add(poe);
+			}	
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas al obtener los temas del proyecto [" + idProyecto + "]");
+		}
+		return preguntas;
 	}
 	
 }
