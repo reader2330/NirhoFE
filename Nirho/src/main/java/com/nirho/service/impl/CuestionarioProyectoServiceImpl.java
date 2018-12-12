@@ -180,6 +180,7 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	@Override
 	public void contestarPregunta(CuetionarioParticipante questPart) throws NirhoServiceException {
 		try {
+			logger.info("CuetionarioParticipante [" + questPart +"]");
 			CuetionarioParticipante cuestPArt = cuestPartDAO.getOne(questPart.getCuetionarioParticipantePK());
 			cuestPArt.setRespuesta(questPart.getRespuesta());
 			//cuestPartDAO.update(questPart);
