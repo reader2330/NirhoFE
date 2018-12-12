@@ -15,7 +15,7 @@ public class OpcionDAOImpl extends AbstractDAO<Opcion, Integer> implements Opcio
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Opcion> findByIdTema(Integer idTema) {
-		String hql = "FROM Opcion op WHERE op.idTema.idTema = :idTema";
+		String hql = "FROM Opcion op WHERE op.idTema.idTema = :idTema AND op.idOpcion < "+idTema+"006";
 		Query query = entityManager.createQuery(hql);
 		query.setParameter("idTema", idTema);
 		return query.getResultList();
