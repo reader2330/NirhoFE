@@ -180,7 +180,10 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	@Override
 	public void contestarPregunta(CuetionarioParticipante questPart) throws NirhoServiceException {
 		try {
-			cuestPartDAO.update(questPart);
+			CuetionarioParticipante cuestPArt = cuestPartDAO.getOne(questPart.getCuetionarioParticipantePK());
+			cuestPArt.setRespuesta(questPart.getRespuesta());
+			//cuestPartDAO.update(questPart);
+			cuestPartDAO.update(cuestPArt);
 		} catch(Exception e) {
 			logger.info("Exception e [" + e.getMessage() +"]");
 			throw new NirhoServiceException("Problemas al registrar la respuesta del participante en la BD");
