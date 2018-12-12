@@ -226,4 +226,15 @@ public class CuestionarioProyectoController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/contestaPregPartEVD", method = RequestMethod.POST)
+	@ResponseBody
+	public void contestaPregPart(@RequestBody CuestionarioParticipanteEVD cuestPart) throws NirhoControllerException {
+		try {
+			cuestionarioService.contestarPregunta(cuestPart.getCuestionarioParticipante());
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al registrar el cuestionario en la BD");
+		}
+		
+	}
 }
