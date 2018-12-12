@@ -1,10 +1,10 @@
 <mat-horizontal-stepper labelPosition="bottom" #stepper>
   <mat-step >
     <ng-template matStepLabel>Configurar temas</ng-template>
-    <app-custom-theme></app-custom-theme>
+    <app-custom-theme-360></app-custom-theme-360>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Configurar respuestas</ng-template>
-    <app-custom-answer (response)="responseChildren($event)" ></app-custom-answer>
+    <app-custom-answer-360 (response)="responseChildren($event)" ></app-custom-answer-360>
   </mat-step>
 </mat-horizontal-stepper>

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomAnswerComponent } from './custom-answer.component';
 
-describe('CustomAnswerComponent', () => {
+describe('CustomAnswer360Component', () => {
   let component: CustomAnswerComponent;
   let fixture: ComponentFixture<CustomAnswerComponent>;
 

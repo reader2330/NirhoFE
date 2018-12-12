@@ -22,6 +22,10 @@ import { PollConfigComponent } from './components/poll-config/poll-config.compon
 import { ViewPollComponent } from './components/view-poll/view-poll.component';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { PollStatusComponent } from './components/poll-status/poll-status.component';
+import {Bandeja360Component} from './components/bandeja-evd360/bandeja-evd360.component';
+import {ConfiguradorCuestionario360Component} from './components/configurador-cuestionario-360/configurador-cuestionario-360.component';
+import {CustomAnswer360Component} from './components/custom-answer-360/custom-answer-360.component';
+import {CustomTheme360Component} from './components/custom-theme-360/custom-theme-360.component';
 
 export function highchartsFactory() {
   const hc = require('highcharts');
@@ -55,7 +59,11 @@ export function highchartsFactory() {
     ViewAssignsComponent,
     PollConfigComponent,
     ViewPollComponent,
-    PollStatusComponent
+    PollStatusComponent,
+    Bandeja360Component,
+    ConfiguradorCuestionario360Component,
+    CustomAnswer360Component,
+    CustomTheme360Component
   ],
   providers: [
     {

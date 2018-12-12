@@ -2,18 +2,19 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Pregunta} from '../../../clb/models/pregunta';
 import {ProyectoService} from '../../../clb/services/proyecto.service';
 import Swal from "sweetalert2";
-import {ProyectoEvdService} from '../../services/proyecto-evd.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
-import {Tema} from '../../models/tema';
+
+import {Proyecto360Service} from '../../services/proyecto360.service';
+import {Tema} from '../../../evd/models/tema';
 
 
 @Component({
-  selector: 'app-custom-theme',
-  templateUrl: './custom-theme.component.html',
-  styleUrls: ['./custom-theme.component.scss']
+  selector: 'app-custom-theme-360',
+  templateUrl: './custom-theme-360.component.html',
+  styleUrls: ['./custom-theme-360.component.scss']
 })
-export class CustomThemeComponent implements OnInit {
+export class CustomTheme360Component implements OnInit {
 
   @Output() response = new EventEmitter();
   mobile = false;
@@ -32,7 +33,7 @@ export class CustomThemeComponent implements OnInit {
 
 
 
-  constructor( private ProyectService: ProyectoEvdService, public snackBar: MatSnackBar) { }
+  constructor( private ProyectService: Proyecto360Service, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getProyects();

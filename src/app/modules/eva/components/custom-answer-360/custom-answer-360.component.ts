@@ -1,16 +1,15 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ProyectoEvdService} from '../../services/proyecto-evd.service';
 import {MatSnackBar} from '@angular/material';
-import {Tema} from '../../models/tema';
-import {Answer} from '../../models/answer';
 import Swal from "sweetalert2";
+import {Proyecto360Service} from '../../services/proyecto360.service';
+import {Answer} from '../../../evd/models/answer';
 
 @Component({
-  selector: 'app-custom-answer',
-  templateUrl: './custom-answer.component.html',
-  styleUrls: ['./custom-answer.component.scss']
+  selector: 'app-custom-answer-360',
+  templateUrl: './custom-answer-360.component.html',
+  styleUrls: ['./custom-answer-360.component.scss']
 })
-export class CustomAnswerComponent implements OnInit {
+export class CustomAnswer360Component implements OnInit {
 
   @Output() response = new EventEmitter();
   mobile = false;
@@ -35,7 +34,7 @@ export class CustomAnswerComponent implements OnInit {
 
 
 
-  constructor( private ProyectService: ProyectoEvdService, public snackBar: MatSnackBar) { }
+  constructor( private ProyectService: Proyecto360Service, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getProyects();
@@ -57,7 +56,7 @@ export class CustomAnswerComponent implements OnInit {
       this.proyects = res;
     });
   }
-  getAnswerByTheme() {
+  /*getAnswerByTheme() {
     this.ProyectService.getThemaByProyect(this.proyect.idProyecto).subscribe(res => {
       console.log(res);
       this.temas = res;
@@ -65,7 +64,7 @@ export class CustomAnswerComponent implements OnInit {
     });
 
 
-  }
+  }*/
 
   addAnswer() {
     let add = true;
@@ -151,7 +150,7 @@ export class CustomAnswerComponent implements OnInit {
           }
           this.temas.splice(index, 1);
           if(this.temas.length === 0){
-            this.response.emit({value: 1});
+            this.response.emit({value:1});
           }
           this.answersSelect = [];
         });
@@ -175,9 +174,10 @@ export class CustomAnswerComponent implements OnInit {
 
   }
 
-  sendQuestion(){
+  sendQuestion() {
 
   }
+  getAnswerByTheme() {}
 
 
 

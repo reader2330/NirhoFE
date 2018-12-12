@@ -233,7 +233,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_formularios_organigrama_organigrama_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/formularios/organigrama/organigrama.component */ "./src/app/modules/clb/components/formularios/organigrama/organigrama.component.ts");
 /* harmony import */ var _components_formularios_steppers_steppers_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/formularios/steppers/steppers.component */ "./src/app/modules/clb/components/formularios/steppers/steppers.component.ts");
 /* harmony import */ var _components_formularios_data_contact_data_contact_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/formularios/data-contact/data-contact.component */ "./src/app/modules/clb/components/formularios/data-contact/data-contact.component.ts");
-/* harmony import */ var _components_bandeja_bandeja_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/bandeja/bandeja.component */ "./src/app/modules/clb/components/bandeja/bandeja.component.ts");
+/* harmony import */ var _components_bandeja_bandeja_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/bandeja/bandeja.component */ "./src/app/modules/clb/components/bandeja/bandeja-evd360.component.ts");
 /* harmony import */ var _components_bandeja_detalle_bandeja_detalle_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/bandeja-detalle/bandeja-detalle.component */ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts");
 /* harmony import */ var _components_cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/cuestionario-select/cuestionario-select.component */ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.ts");
 /* harmony import */ var _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/asignar-consultor/asignar-consultor.component */ "./src/app/modules/clb/components/asignar-consultor/asignar-consultor.component.ts");
@@ -703,7 +703,7 @@ var BandejaDetalleComponent = /** @class */ (function () {
 
 /***/ "./src/app/modules/clb/components/bandeja/bandeja.component.html":
 /*!***********************************************************************!*\
-  !*** ./src/app/modules/clb/components/bandeja/bandeja.component.html ***!
+  !*** ./src/app/modules/clb/components/bandeja/bandeja-evd360.component.html ***!
   \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -714,7 +714,7 @@ module.exports = "<table mat-table [dataSource]=\"dataSource\" class=\"mat-eleva
 
 /***/ "./src/app/modules/clb/components/bandeja/bandeja.component.scss":
 /*!***********************************************************************!*\
-  !*** ./src/app/modules/clb/components/bandeja/bandeja.component.scss ***!
+  !*** ./src/app/modules/clb/components/bandeja/bandeja-evd360.component.scss ***!
   \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -725,7 +725,7 @@ module.exports = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:applica
 
 /***/ "./src/app/modules/clb/components/bandeja/bandeja.component.ts":
 /*!*********************************************************************!*\
-  !*** ./src/app/modules/clb/components/bandeja/bandeja.component.ts ***!
+  !*** ./src/app/modules/clb/components/bandeja/bandeja-evd360.component.ts ***!
   \*********************************************************************/
 /*! exports provided: BandejaComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -797,8 +797,8 @@ var BandejaComponent = /** @class */ (function () {
     BandejaComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-bandeja',
-            template: __webpack_require__(/*! ./bandeja.component.html */ "./src/app/modules/clb/components/bandeja/bandeja.component.html"),
-            styles: [__webpack_require__(/*! ./bandeja.component.scss */ "./src/app/modules/clb/components/bandeja/bandeja.component.scss")]
+            template: __webpack_require__(/*! ./bandeja-evd360.component.html */ "./src/app/modules/clb/components/bandeja/bandeja-evd360.component.html"),
+            styles: [__webpack_require__(/*! ./bandeja-evd360.component.scss */ "./src/app/modules/clb/components/bandeja/bandeja-evd360.component.scss")]
         }),
         __metadata("design:paramtypes", [_services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__["ProyectoService"]])
     ], BandejaComponent);

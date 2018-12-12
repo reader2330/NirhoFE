@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Proyecto} from '../models/proyecto';
-import {Pregunta} from '../models/pregunta';
-
+import {Proyecto} from '../../clb/models/proyecto';
+import {Pregunta} from '../../clb/models/pregunta';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProyectoService {
+export class Proyecto360Service {
+
   api = environment.urlApi;
 
   headers = new HttpHeaders();
@@ -19,10 +19,10 @@ export class ProyectoService {
   }
 
   saveProyect(data): Observable<any> {
-    return this.http.post(this.api + 'proyectoCLB/registrar', data, {headers: this.headers});
+    return this.http.post(this.api + 'proyectoEVO360/registrar', data, {headers: this.headers});
   }
   getProyects(): Observable<Proyecto[]> {
-    return this.http.get<Proyecto[]>(this.api + 'proyectoCLB/todos', {headers: this.headers});
+    return this.http.get<Proyecto[]>(this.api + 'proyectoEVO360/todos', {headers: this.headers});
   }
 
   saveHead(data): Observable<any> {
@@ -36,10 +36,10 @@ export class ProyectoService {
     return this.http.get(this.api + 'participantes/organigrama/', {headers: this.headers, params: {'idProyecto': id}});
   }
   getTemas(): Observable<any> {
-    return this.http.get(this.api + 'cuestionario/temas/', {headers: this.headers, params: {'idModulo': '1'}});
+    return this.http.get(this.api + 'cuestionario/temas/', {headers: this.headers, params: {'idModulo': '3'}});
   }
   getPreguntas(id): Observable<Pregunta[]> {
-    return this.http.get<Pregunta[]>(this.api + 'cuestionario/plantilla', {headers: this.headers, params: {'idModulo': '1' }});
+    return this.http.get<Pregunta[]>(this.api + 'cuestionario/plantilla', {headers: this.headers, params: {'idModulo': '3' }});
   }
   savePreguntas(data): Observable<any> {
     return this.http.post(this.api + 'cuestionario/configurar', data, {headers: this.headers});
@@ -74,13 +74,13 @@ export class ProyectoService {
   }
   getProyect(id) {
     return this.http.get(this.api + 'proyectoCLB/porId', {headers: this.headers, params: {
-      'idProyecto': id
+        'idProyecto': id
       }});
 
   }
   closeProyect(id) {
     return this.http.get(this.api + 'proyectoCLB/cierre' , {headers: this.headers , params: {
-      'idProyecto': id
+        'idProyecto': id
       }});
   }
 
@@ -88,4 +88,16 @@ export class ProyectoService {
     return this.http.post(this.api + 'graficas/guardarComentario', data, {headers: this.headers});
   }
 
+  getThemaByProyect(id): Observable<any> {
+    return this.http.get(this.api + 'cuestionario/temasEVD', {headers: this.headers , params: {'idProyecto': id}});
+  }
+  getAnswerbyTema(id): Observable<any> {
+    return this.http.get(this.api + 'cuestionario/opciones', {headers: this.headers , params: {'idTema': id}});
+  }
+  saveAnswer(data): Observable<any> {
+    return this.http.post(this.api + 'cuestionario/guardarOpciones', data, {headers: this.headers});
+  }
+  sendCuestionarios(id): Observable<any> {
+    return this.http.get(this.api + 'participantes/cuestionariosSend', {headers: this.headers , params: {'idProyecto': id}});
+  }
 }

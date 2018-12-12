@@ -67,7 +67,7 @@ CREATE TABLE `apo_role_modulo_submodulo` (
 
 LOCK TABLES `apo_role_modulo_submodulo` WRITE;
 /*!40000 ALTER TABLE `apo_role_modulo_submodulo` DISABLE KEYS */;
-INSERT INTO `apo_role_modulo_submodulo` VALUES (1,4,1,1,'Bandeja de proyectos'),(2,4,1,2,'Alta de proyectos'),(3,4,2,1,'Bandeja de proyectos'),(4,4,2,1,'Bandeja de proyectos'),(5,4,2,3,'Carga de Head Count'),(6,4,2,4,'Carga de Head Count Ampliado'),(7,4,2,5,'Ver participantes'),(8,4,2,6,'Periodo de garantía'),(9,4,2,7,'Asignar consultor'),(10,4,2,8,'Ver estado de proyecto'),(11,4,3,1,'Bandeja de proyectos'),(12,4,3,2,'Alta de proyectos'),(13,4,3,1,'Bandeja de proyectos'),(14,4,3,4,'Carga de Head Count Ampliado'),(15,4,3,5,'Ver participantes');
+INSERT INTO `apo_role_modulo_submodulo` VALUES (1,4,1,1,'Bandeja de proyectos'),(2,4,1,2,'Alta de proyectos'),(3,4,2,1,'Bandeja de proyectos'),(5,4,2,3,'Carga de Head Count'),(6,4,2,4,'Carga de Head Count Ampliado'),(7,4,2,5,'Ver participantes'),(8,4,2,6,'Periodo de garantía'),(9,4,2,7,'Asignar consultor'),(10,4,2,8,'Ver estado de proyecto'),(11,4,3,1,'Bandeja de proyectos'),(12,4,3,2,'Alta de proyectos'),(13,4,3,3,'Carga de Head Count'),(14,4,3,4,'Carga de Head Count Ampliado'),(15,4,3,5,'Ver participantes');
 /*!40000 ALTER TABLE `apo_role_modulo_submodulo` ENABLE KEYS */;
 UNLOCK TABLES;
 

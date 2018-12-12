@@ -7,7 +7,7 @@ import {MatDialog, MatTableDataSource} from '@angular/material';
 import {EncuestaModalEvdComponent} from '../encuesta-modal-evd/encuesta-modal-evd.component';
 import {laboral_interface} from '../../../adm/components/labor-adm/labor-adm.component';
 import Swal from "sweetalert2";
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 export interface quiz_interface {
   factor: string;
@@ -26,13 +26,14 @@ export class EncuestaEvdComponent implements OnInit {
 
   @Output() responseChildren = new EventEmitter();
 
-  constructor(private ProyectoEvdServices: ProyectoEvdService, public dialog: MatDialog, private router: Router) {
+  constructor(private ProyectoEvdServices: ProyectoEvdService, public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
   }
 
   mobile = false;
   temas = [{
     nombre: 'Imagen'
   }];
+  preguntas = [];
   token = '';
   dataSource = [{
     'nom': 1,
@@ -73,7 +74,7 @@ export class EncuestaEvdComponent implements OnInit {
   ];
 
   ngOnInit() {
-    //this.getProyects();
+    this.getToken();
   }
 
   returnEmoji(id) {
@@ -115,54 +116,17 @@ export class EncuestaEvdComponent implements OnInit {
     }
 
   }
-  returnSize() {
-    if (this.mobile) {
-      return 16;
-    } else {
-      return 24;
-    }
+
+  getToken() {
+    this.route.params.subscribe(res => {
+      this.token = res['token'];
+      this.ProyectoEvdServices.getPreguntasParticipante(this.token).subscribe(res => {
+        console.log(res);
+        this.preguntas = res;
+      });
+    });
   }
 
-  formatLabel(value: number | null) {
-    if (!value) {
-      return 0;
-    }
-
-    switch (value) {
-      case 1:
-        if (this.mobile) {
-          return { id: 'sob', skin: 3, size: 16 };
-        } else {
-          return { id: 'sob', skin: 3, size: 24 };
-        }
-      case 2 :
-        if (this.mobile) {
-          return { id: 'cry', skin: 3 };
-        } else {
-          return { id: 'cry', skin: 3 };
-        }
-      case 3:
-        if (this.mobile) {
-          return { id: 'confused', skin: 3 };
-        } else {
-          return { id: 'confused', skin: 3 };
-        }
-      case 4:
-        if (this.mobile) {
-          return { id: 'grinning', skin: 3 };
-        } else {
-          return { id: 'grinning', skin: 3 };
-        }
-      case 5:
-        if (this.mobile) {
-          return { id: 'hugging_face', skin: 3 };
-        } else {
-          return { id: 'hugging_face', skin: 3 };
-        }
-    }
-
-    return value;
-  }
 
   updateValor(question) {
     console.log(question);

@@ -49,7 +49,7 @@ export class EncuestaComponent implements OnInit {
          this.temas = res;
          this.dataSource = [];
          for (let tema of this.temas) {
-           this.dataSource.push(tema)
+           this.dataSource.push(tema);
          }
          this.goPreguntas = true;
 
