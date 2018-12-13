@@ -7,6 +7,7 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nirho.constant.ProyectoConstants;
 import com.nirho.dao.ConsultorProyectoDAO;
 import com.nirho.dao.ModuloDAO;
 import com.nirho.dao.ProyectoDAO;
@@ -45,7 +46,10 @@ public class ProyectoServiceImpl implements ProyectoService {
 			List<ConsultorProyecto> listaCP = consulProyDAO.findByIdUsuario(idUsuario);
 			for(ConsultorProyecto cp: listaCP) {
 				if(cp.getProyecto().getIdModulo().intValue() == idModulo.intValue()) {
-					lista.add(dao.getOne(cp.getConsultorProyectoPK().getIdProyecto()));
+					Proyecto proyecto = dao.getOne(cp.getConsultorProyectoPK().getIdProyecto());
+					if(proyecto.getIdEstatus().getIdEstatus().intValue() != ProyectoConstants.ESTATUS_FINALIZADO.intValue()) {
+						lista.add(proyecto);
+					}
 				}
 			}
 		} catch(Exception e){
