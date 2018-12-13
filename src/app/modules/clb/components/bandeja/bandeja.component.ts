@@ -24,20 +24,21 @@ export class BandejaComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'empresa', 'empleados', 'participantes', 'FechaFinal', 'frecuenciaEval', 'detail4', 'detail3'];
   dataSource = [];
   user = {};
+  showTable = false;
 
 
   ngOnInit() {
 
-    this.getProyects();
+
     this.getUser();
   }
 
   getProyects() {
 
     this.ProyectoService.getProyects().subscribe((res) => {
-      console.log(res);
       this.proyects = res;
       this.dataSource = this.proyects;
+      this.showTable = true;
     });
 
   }
@@ -72,14 +73,28 @@ export class BandejaComponent implements OnInit {
 
   getUser() {
     this.LoginService.getUser().subscribe(res => {
-      console.log(res);
       this.user = res;
+      if (this.user['id']) {
+        this.getUserProyects();
+      }
     });
   }
+  getUserProyects() {
+    if (this.user['rol'] === 2 || this.user['rol'] === 1) {
+      this.getProyects();
+    } else {
+      this.getProyectsbyRol(this.user['id']);
+    }
+  }
+  getProyectsbyRol(id) {
+    this.showTable = false;
+    this.ProyectoService.getProyectsbyRol(id).subscribe((res) => {
+      if (res && res.length !== 0) {
+        this.proyects = res;
+        this.dataSource = this.proyects;
+        this.showTable = true;
+      }
 
-  getProyectsbyRol() {
-    this.ProyectoService.getProyectsbyRol(4).subscribe((res) => {
-      this.proyects = res;
     });
   }
 
@@ -87,11 +102,11 @@ export class BandejaComponent implements OnInit {
 
     Swal({
       title: '',
-      text: 'Seguro que quieres guardar la información ingresada del proyecto',
+      text: 'Seguro que quieres cerrar el proyecto',
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Si guardar',
-      cancelButtonText: 'No, seguir editando'
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
         this.ProyectoService.closeProyect(element['idProyecto']).subscribe(res => {
@@ -106,10 +121,18 @@ export class BandejaComponent implements OnInit {
   }
 
   checkConcierge() {
-    if (this.user['rol'] == 2) {
+    if (this.user['rol'] === 2) {
       return false;
     }
     return true;
+  }
+
+  checkDetalle() {
+    if (this.user['rol'] === 2 || this.user['rol'] === 3) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 

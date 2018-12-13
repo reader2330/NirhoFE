@@ -48,7 +48,7 @@ export class ProyectoEvdService {
     return this.http.post(this.api + 'proyecto/asignarConsultor', data, {headers: this.headers});
   }
   getProyectsbyRol(id): Observable<Proyecto[]> {
-    return this.http.get<Proyecto[]>(this.api + 'cuestionario/preguntas', {headers: this.headers, params: {'idUsuario': id }});
+    return this.http.get<Proyecto[]>(this.api + 'proyectoEVD/porConsultor', {headers: this.headers, params: {'idUsuario': id }});
   }
   getPreguntasProyect(id): Observable<any> {
     return this.http.get(this.api + 'cuestionario/preguntasEVD', {headers: this.headers, params: {'idProyecto': id}});
@@ -79,6 +79,11 @@ export class ProyectoEvdService {
   }
   sendCuestionarios(id): Observable<any> {
     return this.http.get(this.api + 'participantes/cuestionariosSend', {headers: this.headers , params: {'idProyecto': id}});
+  }
+  closeProyect(id) {
+    return this.http.get(this.api + 'proyectoEVD/cierre' , {headers: this.headers , params: {
+        'idProyecto': id
+      }});
   }
 
 }

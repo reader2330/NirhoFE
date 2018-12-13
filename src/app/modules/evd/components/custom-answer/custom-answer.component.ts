@@ -179,6 +179,10 @@ export class CustomAnswerComponent implements OnInit {
 
   }
 
+  checkStatus(){
+    this.showOptions = false;
+  }
+
 
 
 }

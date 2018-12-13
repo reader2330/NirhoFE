@@ -14,7 +14,7 @@
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <button  mat-raised-button  [disabled]="!proyect.idProyecto" (click)="getTemas()"> Ver competencias</button>
-    <button  mat-raised-button color ="accent" [disabled]="!save" style="color: whitesmoke; margin-left: 10px"  (click)="saveTemas()"> Guardar competencias</button>
+    <button  mat-raised-button color ="accent" [disabled]="!save" style="color: whitesmoke; margin-left: 10px"  (click)="saveTemas()" matStepperNext> Guardar competencias</button>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <mat-spinner  color="accent" mode="indeterminate" *ngIf="load"></mat-spinner>
@@ -26,7 +26,8 @@
 
   <mat-list >
     <mat-list-item *ngFor="let tema of temas">
-      <input *ngIf="tema.nombre === ''"  matInput type="text" placeholder="Nuevo tema" [(ngModel)]="newTema['nombre']"><a *ngIf="tema.nombre === ''"  (click)="addTema()"><mat-icon >add_circle_outline</mat-icon ></a>
+      <input *ngIf="tema.nombre === ''"  matInput type="text" placeholder="Nuevo tema" [(ngModel)]="newTema['nombre']">
+      <input  matInput type="text" *ngIf="tema.nombre == ''" placeholder="Descripción" [(ngModel)]= "newTema['descripcion']"   ><a *ngIf="tema.nombre === ''"  (click)="addTema()"><mat-icon >add_circle_outline</mat-icon ></a>
       <mat-icon *ngIf="tema.nombre !== ''" >book</mat-icon ><mat-checkbox *ngIf="tema.nombre !== ''"  [(ngModel)] = "tema.isSelect">{{tema.nombre}}</mat-checkbox>
     </mat-list-item>
   </mat-list>

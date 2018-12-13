@@ -15,8 +15,8 @@
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <mat-form-field  style="width: 40%; margin-right: 10px" appearance="outline">
       <mat-label>Seleccionar tema</mat-label>
-      <mat-select [(ngModel)]="tema" >
-        <mat-option *ngFor="let tema of temas"  [value]="tema">
+      <mat-select (selectionChange)="checkStatus()" [(ngModel)]="tema" >
+        <mat-option  *ngFor="let tema of temas"  [value]="tema">
           {{tema.nombre}}
         </mat-option>
       </mat-select>
@@ -36,6 +36,7 @@
 
 
   <mat-list >
+    <mat-list-item >{{tema['descripcion']}}</mat-list-item>
     <mat-list-item style="margin-top: 10px" *ngFor="let tema of answers">
       <input *ngIf="tema.enunciado === ''"  matInput type="text" placeholder="Nueva respuesta" [(ngModel)]="newTema['enunciado']"> <mat-select *ngIf="tema.enunciado === ''" [(ngModel)]="newTema['tipo']" >
       <mat-option    *ngFor="let tema of opts"  [value]="tema">
