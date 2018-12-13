@@ -165,6 +165,9 @@ export class EncuestaEvdComponent implements OnInit {
     }
 
   }
+  goAvatarEditing() {
+    this.router.navigate(['avatar-edit', 'EVD']);
+  }
 
 
 

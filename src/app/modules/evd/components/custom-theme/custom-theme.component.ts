@@ -82,11 +82,14 @@ export class CustomThemeComponent implements OnInit {
         let tema = new Tema();
         tema.descripcion = this.newTema['nombre'];
         tema.nombre = this.newTema['nombre'];
+        tema.descripcion = this.newTema['descripcion'];
         tema.tipo = null;
         tema.idTema = this.temas[this.temas.length - 1]['idTema'] + 1;
         tema['isSelect'] = true;
+        console.log(tema);
         this.temas.push(tema);
         this.newTema['nombre'] = '';
+        this.newTema['descripcion'] = '';
         this.temas.push({nombre: '', isSelect: false});
       } else {
         this.snackBar.open('No puedes agregar dos temas con el mismo nombre', 'Claro!' ,{

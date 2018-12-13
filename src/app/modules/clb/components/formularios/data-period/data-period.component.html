@@ -48,7 +48,7 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <button mat-raised-button >Cancelar <mat-icon>cancel</mat-icon></button>
-      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="savePeriod()" [disabled]="!periodForm.valid || !proyect.idProyecto" >Siguiente <mat-icon>arrow_forward</mat-icon></button>
+      <button mat-raised-button color="accent" style="margin-left: 10px" (click)="savePeriod()" [disabled]="!periodForm.valid || !proyect.idProyecto" >Guardar <mat-icon>save</mat-icon></button>
     </mat-grid-tile>
     </form>
   </mat-grid-list>

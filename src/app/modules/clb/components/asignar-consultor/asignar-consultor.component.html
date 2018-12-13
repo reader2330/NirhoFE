@@ -23,7 +23,7 @@
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
-      <button mat-raised-button color="primary" (click)="saveConsultor()">Guarda consultor</button>
+      <button mat-raised-button color="accent" [disabled]="!proyect['idProyecto'] || !consultor['id']" (click)="saveConsultor()">Guardar consultor</button>
   </mat-grid-tile>
 
 

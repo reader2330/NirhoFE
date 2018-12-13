@@ -48,16 +48,14 @@ export class SidebarEvdComponent implements OnInit {
 
   getModules() {
     this.LoginService.getModules().subscribe((res) => {
-      console.log(res);
       this.modules = res;
+      if (this.user['rol'] === 3) {
+        this.modules.pop();
+      }
+
     });
   }
 
-  /*getModules() {
-    this.LoginService.getModules().subscribe((res) => {
-      this.modules = res;
-    });
-  }*/
   getUser() {
     this.LoginService.getUser().subscribe((res) => {
       this.user = res;
@@ -80,14 +78,13 @@ export class SidebarEvdComponent implements OnInit {
 
   cerrarSesion() {
     this.LoginService.closeSession().subscribe((res) => {
-      console.log(res);
     });
     sessionStorage.clear();
     this.route.navigate(['']);
   }
 
   goAvatarEditing() {
-    this.route.navigate(['avatar-edit']);
+    this.route.navigate(['avatar-edit', 'EVD']);
   }
 
   IrInicio() {

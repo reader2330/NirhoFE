@@ -48,10 +48,10 @@ export class ProyectoService {
     return this.http.get(this.api + 'usuario/consultores', {headers: this.headers});
   }
   saveConsultor(data): Observable<any> {
-    return this.http.post(this.api + 'proyecto/asignarConsultor', data, {headers: this.headers});
+    return this.http.post(this.api + 'proyectoCLB/asignarConsultor', data, {headers: this.headers});
   }
   getProyectsbyRol(id): Observable<Proyecto[]> {
-    return this.http.get<Proyecto[]>(this.api + 'cuestionario/preguntas', {headers: this.headers, params: {'idUsuario': id }});
+    return this.http.get<Proyecto[]>(this.api + 'proyectoCLB/porConsultor', {headers: this.headers, params: {'idUsuario': id }});
   }
   getPreguntasProyect(id): Observable<any> {
     return this.http.get(this.api + 'cuestionario/verPreguntas', {headers: this.headers, params: {'idProyecto': id}});
@@ -83,7 +83,6 @@ export class ProyectoService {
       'idProyecto': id
       }});
   }
-
   saveComents(data) {
     return this.http.post(this.api + 'graficas/guardarComentario', data, {headers: this.headers});
   }

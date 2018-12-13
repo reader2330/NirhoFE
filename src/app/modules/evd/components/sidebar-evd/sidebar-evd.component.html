@@ -11,21 +11,18 @@
 
     <mat-nav-list>
            <span *ngIf="!mobile">
-            <div class="logo-nav">
-
-            </div>
-          </span>
-      <span *ngIf="mobile">
-            <div class="logo-nav-mobile">
-
-            </div>
-          </span>
-      <div style="text-align:center;">
-        <div class="avatar">
-
-          <!--<a (click)="goAvatarEditing()"><img class="avatar" src="{{avatar.url}}"></a>-->
+        <div class="logo-nav">
 
         </div>
+      </span>
+      <span *ngIf="mobile">
+        <div class="logo-nav-mobile">
+
+
+        </div>
+      </span>
+      <div>
+        <a (click)="goAvatarEditing()"><img class="avatar" src="{{avatar.url}}"></a>
       </div>
 
 

@@ -49,11 +49,11 @@ export class AsignarConsultorComponent implements OnInit {
   saveConsultor() {
     Swal({
       title: '',
-      text: 'Seguro que quieres guardar la información ingresada del proyecto',
+      text: 'Seguro que quieres asignar al consultor',
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Si guardar',
-      cancelButtonText: 'No, seguir editando'
+      confirmButtonText: 'Si, asignar',
+      cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
         let data = {
