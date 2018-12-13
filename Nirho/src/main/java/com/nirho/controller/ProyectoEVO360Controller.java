@@ -31,10 +31,13 @@ import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.EstatusProyecto;
 import com.nirho.model.EvaluadorEvaluado;
 import com.nirho.model.EvaluadorEvaluadoPK;
+import com.nirho.model.Participante;
+import com.nirho.model.ParticipantePK;
 import com.nirho.model.Proyecto;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.EvaluadorEvaluadoService;
 import com.nirho.service.GraficasProyectoService;
+import com.nirho.service.ParticipanteService;
 import com.nirho.service.ProyectoService;
 import com.nirho.util.SessionUtil;
 
@@ -53,6 +56,8 @@ public class ProyectoEVO360Controller {
 	private GraficasProyectoService graficasService;
 	@Autowired
 	private EvaluadorEvaluadoService evalEvaService;
+	@Autowired
+	private ParticipanteService participanteService;
 	
 	@GetMapping(value = "/todos")
 	public List<Proyecto> todos() throws NirhoControllerException{
@@ -219,9 +224,24 @@ public class ProyectoEVO360Controller {
 	public List<EvaluadorDTO> evaluados(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		List<EvaluadorDTO> lista = new ArrayList<>();
 		try {
-			Map<Integer, Integer> mapa = new HashedMap<>();
+			Map<String, List<Participante>> mapa = new HashedMap<>();
 			for(EvaluadorEvaluado ee: evalEvaService.obtenerEvaluados(idProyecto)) {
-				EvaluadorDTO dto = new EvaluadorDTO();
+				String key = Integer.toString(ee.getEvaluadorEvaluadoPK().getIdEvaluador());
+				if(mapa.get(key) == null) {
+					List<Participante> evaluados = new ArrayList<>();
+					evaluados.add(participanteService.obtenerParticipante(new ParticipantePK(ee.getEvaluadorEvaluadoPK().getIdEvaluado(), idProyecto)));
+					mapa.put(key, evaluados);
+				} else {
+					((List<Participante>) mapa.get(key)).add(
+							participanteService.obtenerParticipante(new ParticipantePK(ee.getEvaluadorEvaluadoPK().getIdEvaluado(),idProyecto)));
+				}
+			}
+			for (Map.Entry<String, List<Participante>> entry : mapa.entrySet()) {
+			    System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+			    EvaluadorDTO dto = new EvaluadorDTO();
+			    dto.setEvaluador(participanteService.obtenerParticipante(new ParticipantePK(new Integer(entry.getKey()), idProyecto)));
+			    dto.setEvaluados(entry.getValue());
+			    lista.add(dto);
 			}
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al registrar el proyecto");
