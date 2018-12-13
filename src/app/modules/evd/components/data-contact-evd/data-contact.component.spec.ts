@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataContactComponent } from './data-contact.component';
+import { DataContactEvdComponent } from './data-contact-evd.component';
 
 describe('DataContactEvdComponent', () => {
-  let component: DataContactComponent;
-  let fixture: ComponentFixture<DataContactComponent>;
+  let component: DataContactEvdComponent;
+  let fixture: ComponentFixture<DataContactEvdComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataContactComponent ]
+      declarations: [ DataContactEvdComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataContactComponent);
+    fixture = TestBed.createComponent(DataContactEvdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

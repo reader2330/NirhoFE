@@ -29,7 +29,7 @@ export class ProyectoEvdService {
     return this.http.post(this.api + 'participantes/headCount', data, {headers: this.headers} );
   }
   savePeriod(data): Observable<any> {
-    return this.http.post(this.api + 'proyecto/agignarPeriodoGarantia', data, {headers: this.headers});
+    return this.http.post(this.api + 'proyectoEVD/agignarPeriodoGarantia', data, {headers: this.headers});
   }
   getOrganigrama(id): Observable<any> {
     return this.http.get(this.api + 'participantes/organigrama/', {headers: this.headers, params: {'idProyecto': id}});

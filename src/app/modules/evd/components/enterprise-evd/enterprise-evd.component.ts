@@ -97,7 +97,7 @@ export class EnterpriseEvdComponent implements OnInit {
   guardarEmpresa() {
     console.log(this.enterpriseForm.value);
     this.empresa = this.enterpriseForm.value;
-    sessionStorage.setItem('enterprise', JSON.stringify(this.empresa));
+    sessionStorage.setItem('enterprise-evd', JSON.stringify(this.empresa));
   }
 
 }

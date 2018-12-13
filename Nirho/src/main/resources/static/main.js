@@ -228,15 +228,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_formularios_formulario_primary_formulario_primary_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/formularios/formulario-primary/formulario-primary.component */ "./src/app/modules/clb/components/formularios/formulario-primary/formulario-primary.component.ts");
 /* harmony import */ var _components_formularios_data_company_data_company_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/formularios/data-company/data-company.component */ "./src/app/modules/clb/components/formularios/data-company/data-company.component.ts");
 /* harmony import */ var _components_formularios_data_proyect_data_proyect_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/formularios/data-proyect/data-proyect.component */ "./src/app/modules/clb/components/formularios/data-proyect/data-proyect.component.ts");
-/* harmony import */ var _components_formularios_data_period_data_period_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/formularios/data-period/data-period.component */ "./src/app/modules/clb/components/formularios/data-period/data-period.component.ts");
+/* harmony import */ var _components_formularios_data_period_data_period_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/formularios/data-period-evd/data-period-evd.component */ "./src/app/modules/clb/components/formularios/data-period-evd/data-period-evd.component.ts");
 /* harmony import */ var _components_formularios_head_count_head_count_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/formularios/head-count/head-count.component */ "./src/app/modules/clb/components/formularios/head-count/head-count.component.ts");
 /* harmony import */ var _components_formularios_organigrama_organigrama_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/formularios/organigrama/organigrama.component */ "./src/app/modules/clb/components/formularios/organigrama/organigrama.component.ts");
 /* harmony import */ var _components_formularios_steppers_steppers_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/formularios/steppers/steppers.component */ "./src/app/modules/clb/components/formularios/steppers/steppers.component.ts");
-/* harmony import */ var _components_formularios_data_contact_data_contact_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/formularios/data-contact/data-contact.component */ "./src/app/modules/clb/components/formularios/data-contact/data-contact.component.ts");
+/* harmony import */ var _components_formularios_data_contact_data_contact_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/formularios/data-contact/data-contact.component */ "./src/app/modules/clb/components/formularios/data-contact/data-contact-evd.component.ts");
 /* harmony import */ var _components_bandeja_bandeja_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/bandeja/bandeja.component */ "./src/app/modules/clb/components/bandeja/bandeja-evd360.component.ts");
 /* harmony import */ var _components_bandeja_detalle_bandeja_detalle_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/bandeja-detalle/bandeja-detalle.component */ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts");
 /* harmony import */ var _components_cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/cuestionario-select/cuestionario-select.component */ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.ts");
-/* harmony import */ var _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/asignar-consultor/asignar-consultor.component */ "./src/app/modules/clb/components/asignar-consultor/asignar-consultor.component.ts");
+/* harmony import */ var _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/asignar-consultor-evd/asignar-consultor-evd.component */ "./src/app/modules/clb/components/asignar-consultor-evd/asignar-consultor-evd.component.ts");
 /* harmony import */ var _components_estadisticas_estadisticas_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/estadisticas/estadisticas.component */ "./src/app/modules/clb/components/estadisticas/estadisticas.component.ts");
 /* harmony import */ var _components_detalle_preguntas_detalle_preguntas_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/detalle-preguntas/detalle-preguntas.component */ "./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas.component.ts");
 /* harmony import */ var _components_encuesta_encuesta_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/encuesta/encuesta.component */ "./src/app/modules/clb/components/encuesta/encuesta.component.ts");
@@ -307,11 +307,11 @@ var CLBModule = /** @class */ (function () {
                 _components_formularios_formulario_primary_formulario_primary_component__WEBPACK_IMPORTED_MODULE_5__["FormularioPrimaryComponent"],
                 _components_formularios_data_company_data_company_component__WEBPACK_IMPORTED_MODULE_6__["DataCompanyComponent"],
                 _components_formularios_data_proyect_data_proyect_component__WEBPACK_IMPORTED_MODULE_7__["DataProyectComponent"],
-                _components_formularios_data_period_data_period_component__WEBPACK_IMPORTED_MODULE_8__["DataPeriodComponent"],
+                _components_formularios_data_period_data_period_component__WEBPACK_IMPORTED_MODULE_8__["DataPeriodEvdComponent"],
                 _components_formularios_head_count_head_count_component__WEBPACK_IMPORTED_MODULE_9__["HeadCountComponent"],
                 _components_formularios_organigrama_organigrama_component__WEBPACK_IMPORTED_MODULE_10__["OrganigramaComponent"],
                 _components_formularios_steppers_steppers_component__WEBPACK_IMPORTED_MODULE_11__["SteppersComponent"],
-                _components_formularios_data_contact_data_contact_component__WEBPACK_IMPORTED_MODULE_12__["DataContactComponent"],
+                _components_formularios_data_contact_data_contact_component__WEBPACK_IMPORTED_MODULE_12__["DataContactEvdComponent"],
                 _components_bandeja_bandeja_component__WEBPACK_IMPORTED_MODULE_13__["BandejaAdmComponent"],
                 _components_bandeja_detalle_bandeja_detalle_component__WEBPACK_IMPORTED_MODULE_14__["BandejaDetalleAdmComponent"],
                 _components_cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_15__["CuestionarioSelectComponent"],
@@ -332,7 +332,7 @@ var CLBModule = /** @class */ (function () {
 
 /***/ "./src/app/modules/clb/components/asignar-consultor/asignar-consultor.component.html":
 /*!*******************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/asignar-consultor/asignar-consultor.component.html ***!
+  !*** ./src/app/modules/clb/components/asignar-consultor-evd/asignar-consultor-evd.component.html ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -343,7 +343,7 @@ module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" ro  wHeight=\"100p
 
 /***/ "./src/app/modules/clb/components/asignar-consultor/asignar-consultor.component.scss":
 /*!*******************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/asignar-consultor/asignar-consultor.component.scss ***!
+  !*** ./src/app/modules/clb/components/asignar-consultor-evd/asignar-consultor-evd.component.scss ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -354,14 +354,14 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ "./src/app/modules/clb/components/asignar-consultor/asignar-consultor.component.ts":
 /*!*****************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/asignar-consultor/asignar-consultor.component.ts ***!
+  !*** ./src/app/modules/clb/components/asignar-consultor-evd/asignar-consultor-evd.component.ts ***!
   \*****************************************************************************************/
-/*! exports provided: AsignarConsultorComponent */
+/*! exports provided: AsignarConsultorEvdComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AsignarConsultorComponent", function() { return AsignarConsultorComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AsignarConsultorEvdComponent", function() { return AsignarConsultorComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/proyecto.service */ "./src/app/modules/clb/services/proyecto.service.ts");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
@@ -450,8 +450,8 @@ var AsignarConsultorComponent = /** @class */ (function () {
     AsignarConsultorComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-asignar-consultor',
-            template: __webpack_require__(/*! ./asignar-consultor.component.html */ "./src/app/modules/clb/components/asignar-consultor/asignar-consultor.component.html"),
-            styles: [__webpack_require__(/*! ./asignar-consultor.component.scss */ "./src/app/modules/clb/components/asignar-consultor/asignar-consultor.component.scss")]
+            template: __webpack_require__(/*! ./asignar-consultor-evd.component.html */ "./src/app/modules/clb/components/asignar-consultor-evd/asignar-consultor-evd.component.html"),
+            styles: [__webpack_require__(/*! ./asignar-consultor-evd.component.scss */ "./src/app/modules/clb/components/asignar-consultor-evd/asignar-consultor-evd.component.scss")]
         }),
         __metadata("design:paramtypes", [_services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__["ProyectoService"]])
     ], AsignarConsultorComponent);
@@ -1656,7 +1656,7 @@ var DataCompanyComponent = /** @class */ (function () {
 
 /***/ "./src/app/modules/clb/components/formularios/data-contact/data-contact.component.html":
 /*!*********************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/formularios/data-contact/data-contact.component.html ***!
+  !*** ./src/app/modules/clb/components/formularios/data-contact/data-contact-evd.component.html ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -1667,7 +1667,7 @@ module.exports = "\n<form [formGroup]=\"contactForm\"  >\n<mat-grid-list  [cols]
 
 /***/ "./src/app/modules/clb/components/formularios/data-contact/data-contact.component.scss":
 /*!*********************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/formularios/data-contact/data-contact.component.scss ***!
+  !*** ./src/app/modules/clb/components/formularios/data-contact/data-contact-evd.component.scss ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -1678,14 +1678,14 @@ module.exports = ".inputForm {\n  width: 96%; }\n\n/*# sourceMappingURL=data:app
 
 /***/ "./src/app/modules/clb/components/formularios/data-contact/data-contact.component.ts":
 /*!*******************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/formularios/data-contact/data-contact.component.ts ***!
+  !*** ./src/app/modules/clb/components/formularios/data-contact/data-contact-evd.component.ts ***!
   \*******************************************************************************************/
-/*! exports provided: DataContactComponent */
+/*! exports provided: DataContactEvdComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataContactComponent", function() { return DataContactComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataContactEvdComponent", function() { return DataContactComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _node_modules_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../node_modules/@angular/cdk/layout */ "./node_modules/@angular/cdk/esm5/layout.es5.js");
 /* harmony import */ var _services_catalogs_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/catalogs.service */ "./src/app/modules/clb/services/catalogs.service.ts");
@@ -1780,8 +1780,8 @@ var DataContactComponent = /** @class */ (function () {
     DataContactComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-data-contact',
-            template: __webpack_require__(/*! ./data-contact.component.html */ "./src/app/modules/clb/components/formularios/data-contact/data-contact.component.html"),
-            styles: [__webpack_require__(/*! ./data-contact.component.scss */ "./src/app/modules/clb/components/formularios/data-contact/data-contact.component.scss")]
+            template: __webpack_require__(/*! ./data-contact-evd.component.html */ "./src/app/modules/clb/components/formularios/data-contact/data-contact-evd.component.html"),
+            styles: [__webpack_require__(/*! ./data-contact-evd.component.scss */ "./src/app/modules/clb/components/formularios/data-contact/data-contact-evd.component.scss")]
         }),
         __metadata("design:paramtypes", [_node_modules_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["BreakpointObserver"], _services_catalogs_service__WEBPACK_IMPORTED_MODULE_2__["CatalogsService"]])
     ], DataContactComponent);
@@ -1794,7 +1794,7 @@ var DataContactComponent = /** @class */ (function () {
 
 /***/ "./src/app/modules/clb/components/formularios/data-period/data-period.component.html":
 /*!*******************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/formularios/data-period/data-period.component.html ***!
+  !*** ./src/app/modules/clb/components/formularios/data-period-evd/data-period-evd.component.html ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -1805,7 +1805,7 @@ module.exports = "\n  <mat-grid-list  [cols]=\"checkMobileCols()\" rowHeight=\"1
 
 /***/ "./src/app/modules/clb/components/formularios/data-period/data-period.component.scss":
 /*!*******************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/formularios/data-period/data-period.component.scss ***!
+  !*** ./src/app/modules/clb/components/formularios/data-period-evd/data-period-evd.component.scss ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -1816,14 +1816,14 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ "./src/app/modules/clb/components/formularios/data-period/data-period.component.ts":
 /*!*****************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/formularios/data-period/data-period.component.ts ***!
+  !*** ./src/app/modules/clb/components/formularios/data-period-evd/data-period-evd.component.ts ***!
   \*****************************************************************************************/
-/*! exports provided: DataPeriodComponent */
+/*! exports provided: DataPeriodEvdComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataPeriodComponent", function() { return DataPeriodComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataPeriodEvdComponent", function() { return DataPeriodComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/layout */ "./node_modules/@angular/cdk/esm5/layout.es5.js");
 /* harmony import */ var _services_catalogs_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/catalogs.service */ "./src/app/modules/clb/services/catalogs.service.ts");
@@ -1933,8 +1933,8 @@ var DataPeriodComponent = /** @class */ (function () {
     DataPeriodComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-data-period',
-            template: __webpack_require__(/*! ./data-period.component.html */ "./src/app/modules/clb/components/formularios/data-period/data-period.component.html"),
-            styles: [__webpack_require__(/*! ./data-period.component.scss */ "./src/app/modules/clb/components/formularios/data-period/data-period.component.scss")]
+            template: __webpack_require__(/*! ./data-period-evd.component.html */ "./src/app/modules/clb/components/formularios/data-period-evd/data-period-evd.component.html"),
+            styles: [__webpack_require__(/*! ./data-period-evd.component.scss */ "./src/app/modules/clb/components/formularios/data-period-evd/data-period-evd.component.scss")]
         }),
         __metadata("design:paramtypes", [_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["BreakpointObserver"], _services_catalogs_service__WEBPACK_IMPORTED_MODULE_2__["CatalogsService"], _services_proyecto_service__WEBPACK_IMPORTED_MODULE_4__["ProyectoService"]])
     ], DataPeriodComponent);
@@ -2807,7 +2807,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-toolbar style=\"background:  black\" >\n  <a *ngIf=\"mobile\" style=\" color:white\" (click)=\"snav.toggle()\"><mat-icon >menu</mat-icon></a>\n  <span style=\"flex: 1 1 auto;\"></span>\n  <button mat-raised-button (click)=\"cerraSesion()\"><mat-icon >people_outline</mat-icon>Cerrar sesión</button>\n</mat-toolbar>\n<mat-sidenav-container class=\"example-container\">\n  <mat-sidenav mode=\"side\" [opened]=\"!mobile\" [fixedInViewport]=\"false\" [fixedTopGap]=\"62\" [fixedBottomGap]=\"60\"  #snav>\n\n    <mat-nav-list>\n           <span *ngIf=\"!mobile\">\n            <div class=\"logo-nav\">\n\n            </div>\n          </span>\n          <span *ngIf=\"mobile\">\n            <div class=\"logo-nav-mobile\">\n\n            </div>\n          </span>\n      <div class=\"avatar\">\n\n      </div>\n\n      <mat-list>\n        <mat-list-item>\n          <p style=\"margin-left: 40px\">{{ 'Jose Lopez' }}</p>\n        </mat-list-item>\n        <mat-list-item *ngFor=\"let module of modules\" (click)=\"goModule(module.id_submodulo)\">\n          <p>{{module.descripcion}}</p>\n        </mat-list-item>\n\n      </mat-list>\n    </mat-nav-list>\n  </mat-sidenav>\n  <mat-sidenav-content>\n    <div class=\"row\">\n\n      <div style=\"margin-left: 20px;margin-top: 50px\"  class=\"col-sm-12 stepper-forms\" >\n        <app-bandeja  (responseChildren)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 1\"></app-bandeja>\n        <app-steppers (responseChildren)=\"recibirRespuestChildren($event)\"   *ngIf=\"selectModule == 2\"></app-steppers>\n        <app-data-period (response)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 3\"></app-data-period>\n        <app-asignar-consultor *ngIf=\"selectModule == 4\"></app-asignar-consultor>\n        <app-head-count (responseHead)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 5\"></app-head-count>\n        <app-organigrama (response)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 6\"> </app-organigrama>\n        <app-cuestionario-select (response)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 7\" ></app-cuestionario-select>\n        <app-detalle-preguntas *ngIf=\"selectModule == 8\"></app-detalle-preguntas>\n        <app-estadisticas *ngIf=\"selectModule == 9\"></app-estadisticas>\n        <app-bandeja-detalle  *ngIf=\"selectModule == 10\"></app-bandeja-detalle>\n\n\n\n      </div>\n\n    </div>\n\n  </mat-sidenav-content>\n</mat-sidenav-container>\n"
+module.exports = "\n<mat-toolbar style=\"background:  black\" >\n  <a *ngIf=\"mobile\" style=\" color:white\" (click)=\"snav.toggle()\"><mat-icon >menu</mat-icon></a>\n  <span style=\"flex: 1 1 auto;\"></span>\n  <button mat-raised-button (click)=\"cerraSesion()\"><mat-icon >people_outline</mat-icon>Cerrar sesión</button>\n</mat-toolbar>\n<mat-sidenav-container class=\"example-container\">\n  <mat-sidenav mode=\"side\" [opened]=\"!mobile\" [fixedInViewport]=\"false\" [fixedTopGap]=\"62\" [fixedBottomGap]=\"60\"  #snav>\n\n    <mat-nav-list>\n           <span *ngIf=\"!mobile\">\n            <div class=\"logo-nav\">\n\n            </div>\n          </span>\n          <span *ngIf=\"mobile\">\n            <div class=\"logo-nav-mobile\">\n\n            </div>\n          </span>\n      <div class=\"avatar\">\n\n      </div>\n\n      <mat-list>\n        <mat-list-item>\n          <p style=\"margin-left: 40px\">{{ 'Jose Lopez' }}</p>\n        </mat-list-item>\n        <mat-list-item *ngFor=\"let module of modules\" (click)=\"goModule(module.id_submodulo)\">\n          <p>{{module.descripcion}}</p>\n        </mat-list-item>\n\n      </mat-list>\n    </mat-nav-list>\n  </mat-sidenav>\n  <mat-sidenav-content>\n    <div class=\"row\">\n\n      <div style=\"margin-left: 20px;margin-top: 50px\"  class=\"col-sm-12 stepper-forms\" >\n        <app-bandeja  (responseChildren)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 1\"></app-bandeja>\n        <app-steppers (responseChildren)=\"recibirRespuestChildren($event)\"   *ngIf=\"selectModule == 2\"></app-steppers>\n        <app-data-period-evd (response)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 3\"></app-data-period-evd>\n        <app-asignar-consultor-evd *ngIf=\"selectModule == 4\"></app-asignar-consultor-evd>\n        <app-head-count (responseHead)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 5\"></app-head-count>\n        <app-organigrama (response)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 6\"> </app-organigrama>\n        <app-cuestionario-select (response)=\"recibirRespuestChildren($event)\" *ngIf=\"selectModule == 7\" ></app-cuestionario-select>\n        <app-detalle-preguntas *ngIf=\"selectModule == 8\"></app-detalle-preguntas>\n        <app-estadisticas *ngIf=\"selectModule == 9\"></app-estadisticas>\n        <app-bandeja-detalle  *ngIf=\"selectModule == 10\"></app-bandeja-detalle>\n\n\n\n      </div>\n\n    </div>\n\n  </mat-sidenav-content>\n</mat-sidenav-container>\n"
 
 /***/ }),
 

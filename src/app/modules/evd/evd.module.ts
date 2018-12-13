@@ -24,6 +24,9 @@ import {ConfiguradorCuestionarioComponent} from './components/configurador-cuest
 import {CustomThemeComponent} from './components/custom-theme/custom-theme.component';
 import {CustomAnswerComponent} from './components/custom-answer/custom-answer.component';
 import {CustomQuestionComponent} from './components/custom-question/custom-question.component';
+import {DataContactEvdComponent} from './components/data-contact-evd/data-contact-evd.component';
+import {AsignarConsultorEvdComponent} from './components/asignar-consultor-evd/asignar-consultor-evd.component';
+import {DataPeriodEvdComponent} from './components/data-period-evd/data-period-evd.component';
 
 
 @NgModule({
@@ -55,7 +58,10 @@ import {CustomQuestionComponent} from './components/custom-question/custom-quest
     ProyectEvdComponent,
     CuestionarioEvdComponent,
     EncuestaEvdComponent,
-    EncuestaModalEvdComponent
+    EncuestaModalEvdComponent,
+    DataContactEvdComponent,
+    AsignarConsultorEvdComponent,
+    DataPeriodEvdComponent
   ],
   entryComponents: [
     TableClient2ModalEvdComponent,

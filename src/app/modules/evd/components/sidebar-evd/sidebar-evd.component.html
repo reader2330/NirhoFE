@@ -52,6 +52,15 @@
           <h3>Alta de proyectos</h3>
           <app-stepper-evd (responseChildren)="recibirRespuestChildren($event)"></app-stepper-evd>
         </div>
+        <div *ngIf="selectModule == 3 ">
+
+          <app-data-period-evd (responseChildren)="recibirRespuestChildren($event)"></app-data-period-evd>
+        </div>
+
+        <div *ngIf="selectModule == 4 ">
+
+          <app-asignar-consultor-evd (responseChildren)="recibirRespuestChildren($event)"></app-asignar-consultor-evd>
+        </div>
         <div *ngIf="selectModule == 6">
           <h3>Head Count</h3>
           <app-head-count-evd (responseChildren)="recibirRespuestChildren($event)"></app-head-count-evd>
@@ -67,6 +76,12 @@
         <div *ngIf="selectModule == 8">
           <h3>Enviar Cuestionarios</h3>
           <app-cuestionario-evd (responseChildren)="recibirRespuestChildren($event)"></app-cuestionario-evd>
+          <!--<app-encuesta-evd (responseChildren)="recibirRespuestChildren($event)"></app-encuesta-evd>-->
+
+        </div>
+        <div *ngIf="selectModule == 10">
+
+          <app-bandeja-detalle-evd (responseChildren)="recibirRespuestChildren($event)"></app-bandeja-detalle-evd>
           <!--<app-encuesta-evd (responseChildren)="recibirRespuestChildren($event)"></app-encuesta-evd>-->
 
         </div>

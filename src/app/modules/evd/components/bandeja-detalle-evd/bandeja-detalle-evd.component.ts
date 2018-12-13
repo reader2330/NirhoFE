@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Proyecto} from '../../../clb/models/proyecto';
 import {CatalogsService} from '../../../clb/services/catalogs.service';
+import Swal from "sweetalert2";
+import {ProyectoEvdService} from '../../services/proyecto-evd.service';
 
 @Component({
   selector: 'app-bandeja-detalle-evd',
@@ -8,7 +10,7 @@ import {CatalogsService} from '../../../clb/services/catalogs.service';
   styleUrls: ['./bandeja-detalle-evd.component.scss']
 })
 export class BandejaDetalleEvdComponent implements OnInit {
-
+  @Output() responseChildren = new EventEmitter();
   paises = [];
   giros = [];
   puestos = [];
@@ -16,7 +18,7 @@ export class BandejaDetalleEvdComponent implements OnInit {
   data: Proyecto;
   panelOpenState = true;
 
-  constructor(private CatalogService: CatalogsService) { }
+  constructor(private CatalogService: CatalogsService, private ProyectServices: ProyectoEvdService) { }
 
   ngOnInit() {
     if (sessionStorage.getItem('detail')) {
@@ -47,21 +49,17 @@ export class BandejaDetalleEvdComponent implements OnInit {
   getCatalogos() {
     this.CatalogService.getPuestos().subscribe((res) => {
       this.puestos = res;
-      this.data.idContacto.puesto = this.getNames(this.puestos, this.data.idContacto.puesto);
-      console.log(this.data);
     });
     this.CatalogService.getGiros().subscribe((res) => {
       this.giros = res;
-      this.data.idEmpresa.giro = this.getNames(this.giros, this.data.idEmpresa.giro);
     });
 
     this.CatalogService.getTypeContact().subscribe((res) => {
       this.tiposContacto = res;
-      this.data.idContacto.tipoContacto = this.getNames(this.tiposContacto, this.data.idContacto.tipoContacto);
+
     });
     this.CatalogService.getCountries().subscribe((res) => {
       this.paises = res;
-      this.data.idEmpresa.pais = this.getNames(this.paises, this.data.idEmpresa.pais);
     });
 
   }
@@ -74,6 +72,42 @@ export class BandejaDetalleEvdComponent implements OnInit {
       }
     }
     return '';
+  }
+  updateProyecto() {
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar la información ingresada del proyecto',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        this.ProyectServices.saveProyect(this.data).subscribe(res => {
+            console.log(res);
+            Swal(
+              'Listo.',
+              'La información se guardo correctamente',
+              'success'
+            ).then(() => {
+              this.responseChildren.emit({value: 1});
+            });
+
+          },
+          (err) => {
+            console.log(err);
+            Swal(
+              'Algo salio mal.',
+              'No se pudo guarda la información',
+              'error'
+            ).then(() => {
+              this.responseChildren.emit({value: 1});
+            });
+
+          });
+      }
+    });
+
   }
 
 }

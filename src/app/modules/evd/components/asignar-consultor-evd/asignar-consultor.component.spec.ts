@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AsignarConsultorComponent } from './asignar-consultor.component';
+import { AsignarConsultorEvdComponent } from './asignar-consultor-evd.component';
 
 describe('AsignarConsultorEvdComponent', () => {
-  let component: AsignarConsultorComponent;
-  let fixture: ComponentFixture<AsignarConsultorComponent>;
+  let component: AsignarConsultorEvdComponent;
+  let fixture: ComponentFixture<AsignarConsultorEvdComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AsignarConsultorComponent ]
+      declarations: [ AsignarConsultorEvdComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AsignarConsultorComponent);
+    fixture = TestBed.createComponent(AsignarConsultorEvdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
