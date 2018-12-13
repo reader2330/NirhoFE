@@ -4,9 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,13 +21,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
+import com.nirho.dto.EvaluadorDTO;
+import com.nirho.dto.GuardarEvaluadoresDTO;
+import com.nirho.dto.ParticipanteEvaluadosDTO;
 import com.nirho.dto.PeriodoProyecto;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.EstatusProyecto;
+import com.nirho.model.EvaluadorEvaluado;
+import com.nirho.model.EvaluadorEvaluadoPK;
 import com.nirho.model.Proyecto;
 import com.nirho.service.EstatusProyectoService;
+import com.nirho.service.EvaluadorEvaluadoService;
 import com.nirho.service.GraficasProyectoService;
 import com.nirho.service.ProyectoService;
 import com.nirho.util.SessionUtil;
@@ -43,6 +51,8 @@ public class ProyectoEVO360Controller {
 	private EstatusProyectoService estatusService;
 	@Autowired
 	private GraficasProyectoService graficasService;
+	@Autowired
+	private EvaluadorEvaluadoService evalEvaService;
 	
 	@GetMapping(value = "/todos")
 	public List<Proyecto> todos() throws NirhoControllerException{
@@ -186,4 +196,36 @@ public class ProyectoEVO360Controller {
 		}
 	}
 	
+	@RequestMapping(value = "/guardarEvaluados", method = RequestMethod.POST)
+	@ResponseBody
+	public void guardarEvaluados(@RequestBody GuardarEvaluadoresDTO datos) throws NirhoControllerException {
+		logger.info(" ********************************* ParticipanteEvaluadosDTO [" + datos + "] *****************************");
+		try {
+			for(ParticipanteEvaluadosDTO ped: datos.getEvaluadores()) {
+				for(Integer evaluado: ped.getEvaluados()) {
+					EvaluadorEvaluado ee = new EvaluadorEvaluado();
+					EvaluadorEvaluadoPK pk = new EvaluadorEvaluadoPK(datos.getIdProyecto(), ped.getIdParticipante(), evaluado);
+					ee.setEvaluadorEvaluadoPK(pk);
+					evalEvaService.guardar(ee);
+				}
+			}
+		} catch (Exception e) {
+			throw new NirhoControllerException("Problemas al registrar los Evaluados en la BD");
+		}
+	}
+	
+	@RequestMapping(value = "/evaluados", method = RequestMethod.GET)
+	@ResponseBody
+	public List<EvaluadorDTO> evaluados(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		List<EvaluadorDTO> lista = new ArrayList<>();
+		try {
+			Map<Integer, Integer> mapa = new HashedMap<>();
+			for(EvaluadorEvaluado ee: evalEvaService.obtenerEvaluados(idProyecto)) {
+				EvaluadorDTO dto = new EvaluadorDTO();
+			}
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al registrar el proyecto");
+		}
+		return lista;
+	}
 }

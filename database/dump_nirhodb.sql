@@ -264,7 +264,7 @@ CREATE TABLE `clb_submodulo` (
 
 LOCK TABLES `clb_submodulo` WRITE;
 /*!40000 ALTER TABLE `clb_submodulo` DISABLE KEYS */;
-INSERT INTO `clb_submodulo` VALUES (1,'Bandeja de Proyectos'),(2,'Alta de Proyecto'),(3,'Asignar Periodo Y Garantía'),(4,'Asignar Consultor'),(5,'Configurar Cuestionario'),(6,'Cargar Head Count'),(7,'Organigrama'),(8,'Enviar Cuestionarios'),(9,'Gráficas de Resultados');
+INSERT INTO `clb_submodulo` VALUES (1,'Bandeja de Proyectos'),(2,'Alta de Proyecto'),(3,'Asignar Periodo Y Garantía'),(4,'Asignar Consultor'),(5,'Configurar Cuestionario'),(6,'Cargar Head Count'),(7,'Organigrama'),(8,'Seleccion de participantes'),(9,'Enviar Cuestionarios'),(10,'Gráficas de Resultados');
 /*!40000 ALTER TABLE `clb_submodulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1127,6 +1127,30 @@ LOCK TABLES `estatus_proyecto` WRITE;
 /*!40000 ALTER TABLE `estatus_proyecto` DISABLE KEYS */;
 INSERT INTO `estatus_proyecto` VALUES (1,'En captura'),(2,'En asignación'),(3,'En configuración de cuestionario'),(4,'En carga de Head Count'),(5,'En enviado a participantes'),(6,'Vigente'),(7,'Cierre'),(8,'Resultados');
 /*!40000 ALTER TABLE `estatus_proyecto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `evaluador_evaluado`
+--
+
+DROP TABLE IF EXISTS `evaluador_evaluado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `evaluador_evaluado` (
+  `id_proyecto` int(11) NOT NULL,
+  `id_evaluador` int(11) NOT NULL,
+  `id_evaluado` int(11) NOT NULL,
+  PRIMARY KEY (`id_proyecto`,`id_evaluador`,`id_evaluado`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `evaluador_evaluado`
+--
+
+LOCK TABLES `evaluador_evaluado` WRITE;
+/*!40000 ALTER TABLE `evaluador_evaluado` DISABLE KEYS */;
+/*!40000 ALTER TABLE `evaluador_evaluado` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
