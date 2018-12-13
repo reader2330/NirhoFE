@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomThemeComponent } from './custom-theme.component';
 
-describe('CustomThemeComponent', () => {
+describe('CustomTheme360Component', () => {
   let component: CustomThemeComponent;
   let fixture: ComponentFixture<CustomThemeComponent>;
 

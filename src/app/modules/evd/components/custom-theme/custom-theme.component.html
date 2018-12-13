@@ -1,6 +1,6 @@
 <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
-    <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">library_books</mat-icon> Configuración de temas</h2>
+    <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">library_books</mat-icon> Configuración de competencias</h2>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <mat-form-field  style="width: 40%; margin-right: 10px" appearance="outline">
@@ -13,8 +13,8 @@
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
-    <button  mat-raised-button  [disabled]="!proyect.idProyecto" (click)="getTemas()"> Ver preguntas</button>
-    <button  mat-raised-button color ="accent" [disabled]="!save" style="color: whitesmoke; margin-left: 10px"  (click)="saveTemas()"> Guardar preguntas</button>
+    <button  mat-raised-button  [disabled]="!proyect.idProyecto" (click)="getTemas()"> Ver competencias</button>
+    <button  mat-raised-button color ="accent" [disabled]="!save" style="color: whitesmoke; margin-left: 10px"  (click)="saveTemas()"> Guardar competencias</button>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <mat-spinner  color="accent" mode="indeterminate" *ngIf="load"></mat-spinner>

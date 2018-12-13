@@ -15,6 +15,7 @@ import {InicioSyncComponent} from './modules/synchronize/components/inicio-sync/
 import {InicioApoComponent} from './modules/apo/components/inicio-apo/inicio-apo.component';
 
 import {LoginGuard} from './guards/login.guard';
+import {EncuestaEvdComponent} from './modules/evd/components/encuesta-evd/encuesta-evd.component';
 
 
 
@@ -66,6 +67,10 @@ const routes: Routes = [
     path: 'APO',
     component: InicioApoComponent,
     canActivate: [LoginGuard]
+  },
+  {
+    path: 'encuesta/EVD/:token',
+    component: EncuestaEvdComponent
   },
   { path: '**', redirectTo: '' }
 ];

@@ -9,6 +9,13 @@
   <mat-step>
     <ng-template matStepLabel>
       <p class="bold">Paso 2 </p>
+      <p>Datos Contacto</p>
+    </ng-template>
+    <app-data-contact-evd></app-data-contact-evd>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <p class="bold">Paso 3 </p>
       <p>Datos Proyecto</p>
     </ng-template>
     <app-proyect-evd></app-proyect-evd>
@@ -17,11 +24,24 @@
 </mat-horizontal-stepper>
 <mat-vertical-stepper [hidden]="!mobile" [linear]="false" #stepper2>
   <mat-step>
-    <ng-template matStepLabel> Datos Empresa</ng-template>
-
+    <ng-template matStepLabel>
+      <p class="bold">Paso 1 </p>
+      <p>Datos Empresa</p>
+    </ng-template>
+    <app-enterprise-evd></app-enterprise-evd>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel> Datos Empleado</ng-template>
-
+    <ng-template matStepLabel>
+      <p class="bold">Paso 2 </p>
+      <p>Datos Contacto</p>
+    </ng-template>
+    <app-data-contact-evd></app-data-contact-evd>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <p class="bold">Paso 3 </p>
+      <p>Datos Proyecto</p>
+    </ng-template>
+    <app-proyect-evd></app-proyect-evd>
   </mat-step>
 </mat-vertical-stepper>

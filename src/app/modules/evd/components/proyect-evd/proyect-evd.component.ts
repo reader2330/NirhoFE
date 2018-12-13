@@ -35,15 +35,15 @@ export class ProyectEvdComponent implements OnInit {
     frecuenciaEval: '',
     idContacto: {
       id: null,
-      telefono: "89789798",
-      puesto: "Contacto de cobranza",
-      tipoContacto: 11,
-      email: "Prueba5@Prueba5",
-      nombre: "Prueba5",
-      celular: "897897",
+      telefono: '',
+      puesto: '',
+      tipoContacto: 0,
+      email: '',
+      nombre: '',
+      celular: '',
       empresa: null
     }
-  }
+  };
   periods = [
     {
       id: 1,
@@ -77,7 +77,6 @@ export class ProyectEvdComponent implements OnInit {
       frecuenciaEval: new FormControl('', Validators.required),
     }
   );
-
   constructor( breakpointObserver: BreakpointObserver, private ProyectoEvdServices: ProyectoEvdService, private EntrepiseService: EnterprisesService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
@@ -126,11 +125,11 @@ export class ProyectEvdComponent implements OnInit {
   guardarProyecto() {
     console.log(sessionStorage);
     let temp = this.proyectForm.value;
-    sessionStorage.setItem('proyect', JSON.stringify(temp));
+    sessionStorage.setItem('proyect-evd', JSON.stringify(temp));
 
-    let enterprise = JSON.parse(sessionStorage.getItem('enterprise'));
-    let proyecto = JSON.parse(sessionStorage.getItem('proyect'));
-    let contacto = '';
+    let enterprise = JSON.parse(sessionStorage.getItem('enterprise-evd'));
+    let proyecto = JSON.parse(sessionStorage.getItem('proyect-evd'));
+    let contacto = JSON.parse(sessionStorage.getItem('contact-evd'));
 
     this.jsonFinal.idEmpresa.empresa = enterprise.empresa;
     this.jsonFinal.idEmpresa.pais = enterprise.pais;
@@ -142,6 +141,12 @@ export class ProyectEvdComponent implements OnInit {
     this.jsonFinal.numParticipantes = proyecto.numParticipantes;
     this.jsonFinal.sedes = proyecto.sede;
     this.jsonFinal.frecuenciaEval = proyecto.frecuenciaEval;
+    this.jsonFinal.idContacto.email = contacto.email;
+    this.jsonFinal.idContacto.celular = contacto.celular;
+    this.jsonFinal.idContacto.telefono = contacto.telefono;
+    this.jsonFinal.idContacto.tipoContacto = contacto.tipoContacto;
+    this.jsonFinal.idContacto.puesto = contacto.puesto;
+    this.jsonFinal.idContacto.nombre = contacto.nombre;
 
     console.log('json final: ', this.jsonFinal);
 

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {CatalogsService} from '../../../../clb/services/catalogs.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ProyectoService} from '../../../../clb/services/proyecto.service';
+import Swal from "sweetalert2";
+import {Proyecto360Service} from '../../../services/proyecto360.service';
 
 @Component({
   selector: 'app-data-project-360',
@@ -9,30 +12,54 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./data-project-360.component.scss']
 })
 export class DataProject360Component implements OnInit {
-  projectType = [];
-  mobile = false;
-  project = {
-    id: Number,
-    projectType: Object,
-    participantsNumber: Number,
-    organicLevels: Number,
-    administrativeLevelEmployees: Number,
-    operativeLevelEmployees: Number,
-    totalEmployees: Number
+  @Output () response = new EventEmitter();
+  proyect = {
+    idProyecto: 0,
+    nombre: '',
+    fechaRegistro: null,
+    fechaFin: null,
+    diasGarantia: null,
+    numEmpleados: 0,
+    sedes: '',
+    numParticipantes: 0,
+    frecuenciaEval: 0,
+    idEmpresa: {},
+    idContacto: {},
   };
-  puestos = [];
+  periods = [
+    {
+      id: 1,
+      description: 'Mensual'
+    },
+    {
+      id: 2,
+      description: 'Bimestral'
+    },
+    {
+      id: 3,
+      description: 'Semestral'
+    },
+    {
+      id: 4,
+      description: 'Anual'
+    },
+    {
+      id: 5,
+      description: 'Única vez'
+    }
 
-  projectForm = new FormGroup({
-    id: new FormControl(null),
-    projectType: new FormControl(null),
-    participantsNumber: new FormControl(null, Validators.required),
-    organicLevels: new FormControl(null, Validators.required),
-    administrativeLevelEmployees: new FormControl(null, Validators.required),
-    operativeLevelEmployees: new FormControl(null, Validators.required),
-    totalEmployees: new FormControl(null, Validators.required),
-  });
-
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
+  ];
+  mobile = false;
+  proyectForm = new FormGroup(
+    {
+      numEmpleados: new FormControl('', Validators.required),
+      sedes: new FormControl('', Validators.required),
+      frecuenciaEval: new FormControl(0, Validators.required),
+      numParticipantes: new FormControl('', Validators.required),
+      nombre: new FormControl('', Validators.required)
+    }
+  );
+  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectoService: Proyecto360Service) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -47,31 +74,64 @@ export class DataProject360Component implements OnInit {
   }
 
   ngOnInit() {
-    this.getProjectTypes();
-  }
-
-  getProjectTypes() {
-    this.CatalogService.getPuestos().subscribe((res) => {
-      if (res) {
-       return this.projectType = res;
-      }
-    });
-
   }
 
   checkMobileCols() {
     if (this.mobile) {
       return 1;
+    } else {
+      return 3;
     }
-    return 3;
+
   }
+  cancelCompany(){}
+  saveProyect() {
 
-  saveProject() {
-    this.project = this.projectForm.value;
-    return console.log(this.project);
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar la información ingresada del proyecto',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        if (sessionStorage.getItem('contact')) {
+          const contact = JSON.parse(sessionStorage.getItem('contact'));
+          const company = JSON.parse(sessionStorage.getItem('company'));
+          this.proyect = this.proyectForm.value;
+          this.proyect.idEmpresa = company;
+          this.proyect.idContacto = contact;
+          this.ProyectoService.saveProyect(this.proyect).subscribe((res) => {
+              console.log(res);
+              Swal(
+                'Listo.',
+                'La información se guardo correctamente',
+                'success'
+              ).then(() => {
+                this.response.emit({key: 1});
+              });
 
-    const empresa = JSON.parse(sessionStorage.getItem('company'));
-    sessionStorage.setItem('project', JSON.stringify(this.project));
+            },
+            (err) => {
+              console.log(err);
+              Swal(
+                'Algo salio mal.',
+                'No se pudo guarda la información',
+                'error'
+              ).then(() => {
+                this.response.emit({key: 1});
+              });
+
+
+            });
+
+
+        }
+
+      }
+    });
+
   }
 
 }

@@ -11,8 +11,8 @@ import {LoginService} from '../../../clb/services/login.service';
 export class SidebarEvdComponent implements OnInit {
 
   mobile = false;
-  selectedItem = 2;
-  selectModule = 2;
+  selectedItem = 1;
+  selectModule = 1;
   modules = [];
   user = {
     fullName: ''
@@ -47,27 +47,10 @@ export class SidebarEvdComponent implements OnInit {
   }
 
   getModules() {
-    this.modules = [{
-      id_submodulo: 2,
-      descripcion: 'Bandeja de proyectos'
-    }, {
-      id_submodulo: 3,
-      descripcion: 'Alta proyecto'
-    }, {
-      id_submodulo: 4,
-      descripcion: 'Head Count'
-    }, {
-      id_submodulo: 5,
-      descripcion: 'Organigrama'
-    }, {
-      id_submodulo: 6,
-      descripcion: 'Ver cuestionario'
-    }, {
-      id_submodulo: 7,
-      descripcion: 'Estado del cuestionario'
-    }];
-    /*this.loginService.getModules().subscribe((res) => {
-    });*/
+    this.LoginService.getModules().subscribe((res) => {
+      console.log(res);
+      this.modules = res;
+    });
   }
 
   /*getModules() {

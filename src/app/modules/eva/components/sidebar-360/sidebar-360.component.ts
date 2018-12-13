@@ -24,6 +24,9 @@ export class Sidebar360Component implements OnInit {
   selectModule = 2;
   modules = [];
   user = {};
+  avatar = {
+    url: ''
+  };
   constructor(breakpointObserver: BreakpointObserver, private route: Router, private loginService: LoginService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
@@ -50,32 +53,19 @@ export class Sidebar360Component implements OnInit {
     this.selectModule = opt;
   }
   getModules() {
-    this.modules = [{
-      id_submodulo: 2,
-      descripcion: 'Revisión de proyecto'
-    }, {
-      id_submodulo: 3,
-      descripcion: 'Asignación de participantes'
-    }, {
-      id_submodulo: 4,
-      descripcion: 'Consultar asignación'
-    }, {
-      id_submodulo: 5,
-      descripcion: 'Configuración de cuestionario'
-    }, {
-      id_submodulo: 6,
-      descripcion: 'Ver cuestionario'
-    }, {
-      id_submodulo: 7,
-      descripcion: 'Estado del cuestionario'
-    }];
+
     this.loginService.getModules().subscribe((res) => {
+      console.log(res);
+      this.modules = res;
     });
   }
   getUser() {
     this.loginService.getUser().subscribe((res) => {
       this.user = res;
       sessionStorage.setItem('user', JSON.stringify(this.user));
+      if (this.user) {
+        this.avatar.url = this.user['avatar'];
+      }
     });
   }
 
@@ -90,7 +80,14 @@ export class Sidebar360Component implements OnInit {
       console.log(res);
     });
     sessionStorage.clear();
+    localStorage.clear();
     this.route.navigate(['']);
+  }
+  IrInicio() {
+    this.route.navigate(['SYNC']);
+  }
+  goAvatarEditing() {
+    this.route.navigate(['avatar-edit', 'EVA360']);
   }
 
 }

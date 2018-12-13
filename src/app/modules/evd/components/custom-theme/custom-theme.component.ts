@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import {ProyectoEvdService} from '../../services/proyecto-evd.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
+import {Tema} from '../../models/tema';
 
 
 @Component({
@@ -54,8 +55,17 @@ export class CustomThemeComponent implements OnInit {
     });
   }
   getTemas() {
-    this.temas.push({nombre: ''});
-    this.showTemas = true;
+    this.ProyectService.getTemas().subscribe(res => {
+      console.log(res);
+      this.temas = res;
+      for (let tema of this.temas) {
+
+      }
+      this.temas.push({nombre: ''});
+      this.showTemas = true;
+      this.save = true;
+    });
+
 
   }
 
@@ -68,8 +78,16 @@ export class CustomThemeComponent implements OnInit {
          }
       }
       if (add) {
-        this.temas.push({nombre: this.newTema['nombre'].trim(), isSelect: true});
+        this.temas.pop();
+        let tema = new Tema();
+        tema.descripcion = this.newTema['nombre'];
+        tema.nombre = this.newTema['nombre'];
+        tema.tipo = null;
+        tema.idTema = this.temas[this.temas.length - 1]['idTema'] + 1;
+        tema['isSelect'] = true;
+        this.temas.push(tema);
         this.newTema['nombre'] = '';
+        this.temas.push({nombre: '', isSelect: false});
       } else {
         this.snackBar.open('No puedes agregar dos temas con el mismo nombre', 'Claro!' ,{
           duration: 1000
@@ -81,6 +99,35 @@ export class CustomThemeComponent implements OnInit {
   }
 
   saveTemas() {
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar las competencias',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        let obj = {
+          idProyecto: this.proyect.idProyecto,
+          lista: []
+        };
+        for (let tema of this.temas) {
+          if (tema.isSelect) {
+            delete tema.isSelect;
+            obj.lista.push(tema);
+          }
+        }
+
+        this.ProyectService.savePreguntas(obj).subscribe(res => {
+          Swal(
+            'Listo.',
+            'Los temas se guardaron correctamente',
+            'success'
+          );
+        });
+      }
+    });
 
   }
 

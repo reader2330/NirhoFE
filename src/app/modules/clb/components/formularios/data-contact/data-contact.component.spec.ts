@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DataContactComponent } from './data-contact.component';
 
-describe('DataContactComponent', () => {
+describe('DataContactEvdComponent', () => {
   let component: DataContactComponent;
   let fixture: ComponentFixture<DataContactComponent>;
 

@@ -1,46 +1,43 @@
-<form [formGroup]="projectForm">
-  <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
+<form [formGroup]="proyectForm"  >
+  <mat-grid-list  [cols]="checkMobileCols()" rowHeight="100px">
+
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Tipo de proyecto</mat-label>
-        <mat-select formControlName="projectType">
-          <mat-option *ngFor="let puesto of puestos " [value]="puesto.descripcionCatalogo">
-            {{puesto.descripcionCatalogo}}
+        <mat-label>Nombre del proyecto</mat-label>
+        <input matInput formControlName="nombre" type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Numero de empleados</mat-label>
+        <input matInput formControlName="numEmpleados" type="number">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Numero de participantes</mat-label>
+        <input matInput formControlName="numParticipantes" type="number">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Sedes</mat-label>
+        <input formControlName="sedes" matInput type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="inputForm" appearance="outline">
+        <mat-label>Frecuencia evaluación</mat-label>
+        <mat-select formControlName="frecuenciaEval" >
+          <mat-option *ngFor="let time of periods" [value]="time.id">
+            {{time.description}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Número de participantes</mat-label>
-        <input type="number" formControlName="participantsNumber" matInput required>
-      </mat-form-field>
+    <mat-grid-tile *ngIf="!mobile">
+
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Niveles de estructura organica</mat-label>
-        <input type="number" formControlName="organicLevels" matInput required>
-      </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Número de empleados a nivel administrativo</mat-label>
-        <input type="number" formControlName="administrativeLevelEmployees" matInput required>
-      </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Número de empleados a nivel operativo</mat-label>
-        <input type="number" formControlName="operativeLevelEmployees" matInput required>
-      </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-form-field class="inputForm" appearance="outline">
-        <mat-label>Número total de empleados</mat-label>
-        <input type="number" formControlName="totalEmployees" matInput required>
-      </mat-form-field>
-    </mat-grid-tile>
-    
     <mat-grid-tile *ngIf="!mobile">
 
     </mat-grid-tile>
@@ -48,9 +45,10 @@
 
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <button mat-raised-button matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
-      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveProject()" [disabled]="!projectForm.valid"
-        matStepperNext>Siguiente <mat-icon>arrow_forward</mat-icon></button>
+      <button mat-raised-button (click)="cancelCompany()" matStepperPrevious>Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-raised-button color="primary" style="margin-left: 10px" (click)="saveProyect()" [disabled]="!proyectForm.valid" matStepperNext>Guardar y enviar <mat-icon>save</mat-icon></button>
     </mat-grid-tile>
+
+
   </mat-grid-list>
 </form>

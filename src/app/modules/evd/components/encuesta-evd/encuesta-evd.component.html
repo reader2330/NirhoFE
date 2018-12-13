@@ -1,35 +1,40 @@
-<mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="150px">
+<mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="400px">
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1"  >
     <div class="logo-nav">
     </div>
   </mat-grid-tile>
 
-  <mat-grid-tile style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2">
+ <mat-grid-tile style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2">
     <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
-      <mat-expansion-panel *ngFor= "let tema of temas" >
+      <mat-expansion-panel *ngFor= "let question of preguntas; let i = index" [expanded]="i === 0" >
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{tema.nombre}} <mat-icon style="margin-left: 10px" color="accent">check_circle_outline</mat-icon>
+            <mat-icon>tab</mat-icon>{{question.cuestionarioParticipante.pregunta.enunciado}}
           </mat-panel-title>
 
         </mat-expansion-panel-header>
         <mat-panel-description style="width: 100%">
-          <table mat-table style="width: 100%" [dataSource]="dataSource" class="mat-elevation-z8">
+          <mat-list>
+            <mat-radio-group (change)="updateValor(question)" [(ngModel)]="question.cuestionarioParticipante.respuesta" >
+              <mat-list-item *ngFor="let opt of question.opciones; let j = index">
+              <mat-radio-button  [value]="j+1" >
+                <p style="font-size: 13px; margin-top: 10px; ">{{opt.enunciado}}</p>
+              </mat-radio-button>
+              </mat-list-item>
+            </mat-radio-group>
+
+          </mat-list>
+
+          <!--<table mat-table style="width: 100%" [dataSource]="dataSource" class="mat-elevation-z8">
 
 
 
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-
-            <!-- Position Column -->
-
-            <!-- Name Column -->
             <ng-container matColumnDef="ENUNCIADO">
               <th mat-header-cell *matHeaderCellDef> Factores de desempeño </th>
               <td mat-cell *matCellDef="let element"> {{element.enunciado}} </td>
             </ng-container>
 
-            <!-- Weight Column -->
+
             <ng-container matColumnDef="1">
               <th mat-header-cell *matHeaderCellDef>
                 <a style="margin-left: 202px;" data-toggle="tooltip" data-placement="top" title="Por debajo de los resultados">BR</a>
@@ -48,7 +53,8 @@
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+          </table>-->
+
         </mat-panel-description>
       </mat-expansion-panel>
     </mat-accordion>

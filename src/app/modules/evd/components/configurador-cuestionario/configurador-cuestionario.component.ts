@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {CustomThemeComponent} from '../custom-theme/custom-theme.component';
 
 @Component({
@@ -7,7 +7,7 @@ import {CustomThemeComponent} from '../custom-theme/custom-theme.component';
   styleUrls: ['./configurador-cuestionario.component.scss']
 })
 export class ConfiguradorCuestionarioComponent implements OnInit {
-
+  @Output() response = new EventEmitter();
   firstStage = false;
   secondStage = false;
   thirdStage = false;
@@ -16,20 +16,9 @@ export class ConfiguradorCuestionarioComponent implements OnInit {
   ngOnInit() {
   }
 
-  toReceiveChildren($evt) {
+  responseChildren($evt) {
     if ($evt.value) {
-      const state = $evt.value;
-      switch (state) {
-        case 1:
-          this.firstStage = true;
-          break;
-        case 2:
-          this.secondStage = true;
-          break;
-        case 3:
-          this.thirdStage = true;
-          break;
-      }
+      this.response.emit({value: 6});
     }
   }
 

@@ -1,6 +1,6 @@
 <mat-grid-list [cols]="checkMobileCols()" rowHeight="100px">
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
-    <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 1px">library_books</mat-icon> Configuración cuestionario</h2>
+    <h2  class="mat-h2 mat-title" ><mat-icon style="margin-top: 15px">mail</mat-icon>Enviar cuestionarios</h2>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <mat-form-field  style="width: 40%; margin-right: 10px" appearance="outline">
@@ -14,7 +14,7 @@
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <button  mat-raised-button  [disabled]="!proyect.idProyecto" (click)="showPreguntas()"> Ver preguntas</button>
-    <button  mat-raised-button color ="accent" [disabled]="!save" style="color: whitesmoke; margin-left: 10px"  (click)="savePreguntas()"> Guardar preguntas</button>
+    <button  mat-raised-button color ="accent" [disabled]="!save" style="color: whitesmoke; margin-left: 10px"  (click)="sendCuestionario()">Enviar cuestionarios</button>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <mat-spinner  color="accent" mode="indeterminate" *ngIf="load"></mat-spinner>
@@ -23,36 +23,20 @@
 
 <mat-accordion style="margin-top: 5px; width: 100%" *ngIf="showPreguntas">
 
-
   <mat-expansion-panel *ngFor="let tema of temas ">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <mat-icon>book</mat-icon> {{tema.tema.nombre}}
+        <mat-icon>book</mat-icon> {{tema.pregunta['idTema']['nombre']}}
       </mat-panel-title>
     </mat-expansion-panel-header>
     <mat-panel-description>
-      <mat-checkbox>&nbsp;&nbsp;<input role="listitem" matInput [value]='tema.tema.descripcion'></mat-checkbox>
+        <mat-list>
+          <mat-list-item style="margin-top: 30px" *ngFor="let item of tema['opciones']">
+            {{item.enunciado}}
+          </mat-list-item>
+        </mat-list>
     </mat-panel-description>
-
-
-
   </mat-expansion-panel>
-
-  <mat-form-field class="inputForm" appearance="outline">
-    <mat-label>Nombre de la competencia</mat-label>
-    <input matInput type="text" required [(ngModel)]="tema">
-  </mat-form-field>
-
-  <mat-form-field class="inputForm" appearance="outline" style="margin-left: 20px;">
-    <mat-label>Descripción de competencia</mat-label>
-    <input matInput type="text" required [(ngModel)]="descripcion">
-  </mat-form-field>
-
-  <button mat-raised-button style="margin-left: 10px; background-color: #A1B712; color: #fff;"
-          (click)="addCompetencia()" [disabled]="!proyect.idProyecto">Agregar
-    <mat-icon>save</mat-icon>
-  </button>
-
 </mat-accordion>
 
 

@@ -3,12 +3,8 @@
     <ng-template matStepLabel>Configurar temas</ng-template>
     <app-custom-theme></app-custom-theme>
   </mat-step>
-  <mat-step >
-    <ng-template matStepLabel>Configurar preguntas</ng-template>
-    <app-custom-question></app-custom-question>
-  </mat-step>
   <mat-step>
     <ng-template matStepLabel>Configurar respuestas</ng-template>
-    <app-custom-answer></app-custom-answer>
+    <app-custom-answer (response)="responseChildren($event)" ></app-custom-answer>
   </mat-step>
 </mat-horizontal-stepper>
