@@ -264,6 +264,8 @@ public class ParticipanteController {
 					}
 					if(participante.getProyecto().getIdModulo().intValue() == ProyectoConstants.MODULO_EVD.intValue()) {
 						enviarCorreoParticipanteEVD(participante, request);
+					} else if(participante.getProyecto().getIdModulo().intValue() == ProyectoConstants.MODULO_EVO360.intValue()) {
+						enviarCorreoParticipanteEVA360(participante, request);
 					} else {
 						enviarCorreoParticipante(participante, request);
 					}
@@ -364,6 +366,22 @@ public class ParticipanteController {
     		String usuario = (String) request.getAttribute("username");
 			Usuario usuarioEnSesion = usuarioService.obtenerUsuario(usuario);
     		emailService.sendEmailEVD(datos, usuarioEnSesion.getEmail());
+    	} catch(NirhoServiceException nse) {
+    		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
+    	}
+	}
+	
+	private void enviarCorreoParticipanteEVA360(Participante participante, HttpServletRequest request) {
+		try {
+    		EmailDatos datos = new EmailDatos();
+    		Participante jefe = participanteService.obtenerParticipante(participante.getParticipantePK());
+    		datos.setEmailDestino(jefe.getCorreoElectronico());
+    		datos.setNombreParticipante(jefe.getNombres());
+    		datos.setNombreProyecto(participante.getProyecto().getNombre());
+    		datos.setToken(participante.getToken());
+    		String usuario = (String) request.getAttribute("username");
+			Usuario usuarioEnSesion = usuarioService.obtenerUsuario(usuario);
+    		emailService.sendEmailEVA360(datos, usuarioEnSesion.getEmail());
     	} catch(NirhoServiceException nse) {
     		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
     	}
