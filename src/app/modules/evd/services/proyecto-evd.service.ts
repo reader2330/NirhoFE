@@ -45,7 +45,7 @@ export class ProyectoEvdService {
     return this.http.get(this.api + 'usuario/consultores', {headers: this.headers});
   }
   saveConsultor(data): Observable<any> {
-    return this.http.post(this.api + 'proyecto/asignarConsultor', data, {headers: this.headers});
+    return this.http.post(this.api + 'proyectoEVD/asignarConsultor', data, {headers: this.headers});
   }
   getProyectsbyRol(id): Observable<Proyecto[]> {
     return this.http.get<Proyecto[]>(this.api + 'proyectoEVD/porConsultor', {headers: this.headers, params: {'idUsuario': id }});

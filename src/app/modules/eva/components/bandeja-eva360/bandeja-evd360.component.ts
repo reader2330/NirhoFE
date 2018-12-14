@@ -30,8 +30,6 @@ export class Bandeja360Component implements OnInit {
 
 
   ngOnInit() {
-
-    this.getProyects();
     this.getUser();
   }
 
@@ -49,7 +47,7 @@ export class Bandeja360Component implements OnInit {
     if (element) {
       console.log(element);
       sessionStorage.setItem('detail', JSON.stringify(element));
-      this.responseChildren.emit({value: 10});
+      this.responseChildren.emit({value: 11});
 
     }
   }
@@ -76,17 +74,27 @@ export class Bandeja360Component implements OnInit {
 
   getUser() {
     this.LoginService.getUser().subscribe(res => {
-      console.log(res);
+
       this.user = res;
+      if (this.user['id']) {
+        this.getUserProyects();
+      }
     });
   }
-
-  getProyectsbyRol() {
-    this.ProyectoService.getProyectsbyRol(4).subscribe((res) => {
+  getUserProyects() {
+    if (this.user['rol'] === 2 || this.user['rol'] === 1) {
+      this.getProyects();
+    } else {
+      this.getProyectsbyRol(this.user['id']);
+    }
+  }
+  getProyectsbyRol(id) {
+    this.ProyectoService.getProyectsbyRol(id).subscribe((res) => {
+      console.log(res);
       this.proyects = res;
+      this.dataSource = this.proyects;
     });
   }
-
   cerrarProyecto(element) {
 
     Swal({
@@ -110,10 +118,17 @@ export class Bandeja360Component implements OnInit {
   }
 
   checkConcierge() {
-    if (this.user['rol'] == 2) {
+    if (this.user['rol'] === 2) {
       return false;
     }
     return true;
+  }
+  checkDetalle() {
+    if (this.user['rol'] === 2 || this.user['rol'] === 3) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 

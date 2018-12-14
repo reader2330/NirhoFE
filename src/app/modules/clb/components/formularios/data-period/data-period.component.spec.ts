@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DataPeriodComponent } from './data-period.component';
 
-describe('DataPeriodEvdComponent', () => {
+describe('DataPeriodEva360Component', () => {
   let component: DataPeriodComponent;
   let fixture: ComponentFixture<DataPeriodComponent>;
 

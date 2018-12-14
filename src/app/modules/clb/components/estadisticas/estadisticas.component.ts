@@ -71,8 +71,10 @@ export class EstadisticasComponent implements OnInit {
         chart: {type: 'column',
           options3d: {
             enabled: true,
-            alpha: 45,
-            beta: 0
+            alpha: 30,
+            beta: 0,
+            depth: 38,
+            viewDistance: 25
           }
         },
         title: {text: data[0]['gaficaProyectoPK']['areaOrg']},
@@ -91,6 +93,7 @@ export class EstadisticasComponent implements OnInit {
         }]
       };
       for (let res of data) {
+        console.log(res);
 
         this.totales[0] += res.numResp1;
         this.totales[1] += res.numResp2;
@@ -105,9 +108,22 @@ export class EstadisticasComponent implements OnInit {
     }
 
     let pies = {
-      chart: {type: 'pie'},
+      chart: {
+        type: 'pie',
+        options3d: {
+          enabled: true,
+          alpha: 45,
+          beta: 0
+        }},
       title: {text: 'Total de participantes'},
       subtitle: {text: 'Por área'},
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          depth: 35,
+        }
+      },
       series: [{
         name: '#Participantes',
         colorByPoint: true,

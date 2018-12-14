@@ -30,7 +30,7 @@ export class Proyecto360Service {
   }
 
   savePeriod(data): Observable<any> {
-    return this.http.post(this.api + 'proyectoCLB/agignarPeriodoGarantia', data, {headers: this.headers});
+    return this.http.post(this.api + 'proyectoEVO360/agignarPeriodoGarantia', data, {headers: this.headers});
   }
   getOrganigrama(id): Observable<any> {
     return this.http.get(this.api + 'participantes/organigrama/', {headers: this.headers, params: {'idProyecto': id}});
@@ -51,7 +51,7 @@ export class Proyecto360Service {
     return this.http.post(this.api + 'proyecto/asignarConsultor', data, {headers: this.headers});
   }
   getProyectsbyRol(id): Observable<Proyecto[]> {
-    return this.http.get<Proyecto[]>(this.api + 'cuestionario/preguntas', {headers: this.headers, params: {'idUsuario': id }});
+    return this.http.get<Proyecto[]>(this.api + 'proyectoEVO360/porConsultor', {headers: this.headers, params: {'idUsuario': id }});
   }
   getPreguntasProyect(id): Observable<any> {
     return this.http.get(this.api + 'cuestionario/verPreguntas', {headers: this.headers, params: {'idProyecto': id}});
@@ -73,13 +73,13 @@ export class Proyecto360Service {
       }});
   }
   getProyect(id) {
-    return this.http.get(this.api + 'proyectoCLB/porId', {headers: this.headers, params: {
+    return this.http.get(this.api + 'proyectoEVO360/porId', {headers: this.headers, params: {
         'idProyecto': id
       }});
 
   }
   closeProyect(id) {
-    return this.http.get(this.api + 'proyectoCLB/cierre' , {headers: this.headers , params: {
+    return this.http.get(this.api + 'proyectoEVO360/cierre' , {headers: this.headers , params: {
         'idProyecto': id
       }});
   }
@@ -89,7 +89,7 @@ export class Proyecto360Service {
   }
 
   getThemaByProyect(id): Observable<any> {
-    return this.http.get(this.api + 'cuestionario/temasEVD', {headers: this.headers , params: {'idProyecto': id}});
+    return this.http.get(this.api + 'cuestionario/temasEVO360', {headers: this.headers , params: {'idProyecto': id}});
   }
   getAnswerbyTema(id): Observable<any> {
     return this.http.get(this.api + 'cuestionario/opciones', {headers: this.headers , params: {'idTema': id}});
@@ -99,5 +99,12 @@ export class Proyecto360Service {
   }
   sendCuestionarios(id): Observable<any> {
     return this.http.get(this.api + 'participantes/cuestionariosSend', {headers: this.headers , params: {'idProyecto': id}});
+  }
+
+  getParticipanteByProyect(id): Observable<any>{
+    return this.http.get(this.api + 'participantes/participantes', {headers: this.headers , params: {'idProyecto': id}});
+  }
+  guardarRelacion(data): Observable<any> {
+    return this.http.post(this.api + 'proyectoEVO360/guardarEvaluados', data, {headers: this.headers});
   }
 }

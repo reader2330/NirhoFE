@@ -22,10 +22,17 @@ import { PollConfigComponent } from './components/poll-config/poll-config.compon
 import { ViewPollComponent } from './components/view-poll/view-poll.component';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { PollStatusComponent } from './components/poll-status/poll-status.component';
-import {Bandeja360Component} from './components/bandeja-evd360/bandeja-evd360.component';
+import {Bandeja360Component} from './components/bandeja-eva360/bandeja-evd360.component';
 import {ConfiguradorCuestionario360Component} from './components/configurador-cuestionario-360/configurador-cuestionario-360.component';
 import {CustomAnswer360Component} from './components/custom-answer-360/custom-answer-360.component';
 import {CustomTheme360Component} from './components/custom-theme-360/custom-theme-360.component';
+import {HeadCountEva360Component} from './components/head-count-eva360/head-count-eva360.component';
+import {OrganigramaEva360Component} from './components/organigrama-eva360/organigrama-eva360.component';
+import {CuestionarioEva360Component} from './components/cuestionario-eva360/cuestionario-eva360.component';
+import {BandejaDetalleEva360Component} from './components/bandeja-detalle-eva360/bandeja-detalle-eva360.component';
+import {AsignarConsultorEva360Component} from './components/asignar-consultor-eva360/asignar-consultor-eva360.component';
+import {DataPeriodEva360Component} from './components/data-period-eva360/data-period-eva360.component';
+
 
 export function highchartsFactory() {
   const hc = require('highcharts');
@@ -63,7 +70,13 @@ export function highchartsFactory() {
     Bandeja360Component,
     ConfiguradorCuestionario360Component,
     CustomAnswer360Component,
-    CustomTheme360Component
+    CustomTheme360Component,
+    HeadCountEva360Component,
+    OrganigramaEva360Component,
+    CuestionarioEva360Component,
+    BandejaDetalleEva360Component,
+    AsignarConsultorEva360Component,
+    DataPeriodEva360Component
   ],
   providers: [
     {

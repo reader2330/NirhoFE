@@ -18,7 +18,7 @@
       <p class="bold">Paso 3 </p>
       <p>Datos Proyecto</p>
     </ng-template>
-    <app-proyect-evd></app-proyect-evd>
+    <app-proyect-evd (response)="recibirRespuesta($event)" ></app-proyect-evd>
   </mat-step>
 
 </mat-horizontal-stepper>

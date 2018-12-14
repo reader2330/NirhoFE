@@ -58,7 +58,7 @@ export class AsignarConsultorEvdComponent implements OnInit {
       if (result.value) {
         let data = {
           idProyecto: this.proyect['idProyecto'],
-          idUsuario: this.consultor['idUsuario']
+          idUsuario: this.consultor['id']
         };
         this.ProyectService.saveConsultor(data).subscribe((res) => {
           console.log(res);

@@ -1,21 +1,21 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ProyectoService} from '../../services/proyecto.service';
 import Swal from "sweetalert2";
+import {Proyecto360Service} from '../../services/proyecto360.service';
 
 @Component({
-  selector: 'app-asignar-consultor',
-  templateUrl: './asignar-consultor.component.html',
-  styleUrls: ['./asignar-consultor.component.scss']
+  selector: 'app-asignar-consultor-eva360',
+  templateUrl: './asignar-consultor-eva360.component.html',
+  styleUrls: ['./asignar-consultor-eva360.component.scss']
 })
-export class AsignarConsultorComponent implements OnInit {
-  @Output() response = new EventEmitter();
+export class AsignarConsultorEva360Component implements OnInit {
+  @Output() responseChildren = new EventEmitter();
   mobile = false;
   proyects = [];
   consultores = [];
   proyect = {};
   consultor = {};
 
-  constructor(private ProyectService: ProyectoService) {
+  constructor(private ProyectService: Proyecto360Service) {
   }
 
   ngOnInit() {
@@ -47,21 +47,19 @@ export class AsignarConsultorComponent implements OnInit {
   }
 
   saveConsultor() {
-    console.log(this.consultor);
     Swal({
       title: '',
-      text: 'Seguro que quieres asignar al consultor',
+      text: 'Seguro que quieres guardar la información ingresada del proyecto',
       type: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Si, asignar',
-      cancelButtonText: 'No'
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
     }).then((result) => {
       if (result.value) {
         let data = {
           idProyecto: this.proyect['idProyecto'],
-          idUsuario: this.consultor['id']
+          idUsuario: this.consultor['idUsuario']
         };
-        console.log(data);
         this.ProyectService.saveConsultor(data).subscribe((res) => {
           console.log(res);
           Swal(
@@ -69,7 +67,7 @@ export class AsignarConsultorComponent implements OnInit {
             'La información se guardo correctamente',
             'success'
           ).then(() => {
-            this.response.emit({value: 1});
+            this.responseChildren.emit({value: 1});
           });
         }, (err) => {
           console.log(err);
@@ -78,7 +76,7 @@ export class AsignarConsultorComponent implements OnInit {
             'No se pudo guarda la información',
             'error'
           ).then(() => {
-            this.response.emit({value: 1});
+            this.responseChildren.emit({value: 1});
           });
         });
       }

@@ -48,25 +48,33 @@
           <app-steppers-360 (responseChildren)="recibirRespuestChildren($event)"></app-steppers-360>
         </div>
         <div *ngIf="selectModule == 3">
-          <h3>Asignación de participantes a evaluar</h3>
-          <app-assign-poll (responseChildren)="recibirRespuestChildren($event)"></app-assign-poll>
+
+          <app-data-period-eva360 (responseChildren)="recibirRespuestChildren($event)"></app-data-period-eva360>
         </div>
-        <div *ngIf="selectModule == 4">
-          <h3>Consultar asignación</h3>
-          <app-view-assigns (responseChildren)="recibirRespuestChildren($event)"></app-view-assigns>
-        </div>
+
         <div *ngIf="selectModule == 5">
-          <h3>Configuración de cuestionario</h3>
-          <app-poll-config (responseChildren)="recibirRespuestChildren($event)"></app-poll-config>
-        </div>
-        <div *ngIf="selectModule == 6">
-          <h3>Ver cuestionario</h3>
           <app-configurador-cuestionario-360 (responseChildren)="recibirRespuestChildren($event)"></app-configurador-cuestionario-360>
         </div>
-        <div *ngIf="selectModule == 7">
-          <h3>Estado de la encuesta</h3>
-          <app-poll-status (responseChildren)="recibirRespuestChildren($event)"></app-poll-status>
+        <div *ngIf="selectModule == 6">
+          <app-head-count-eva360 (responseChildren)="recibirRespuestChildren($event)"></app-head-count-eva360>
         </div>
+        <div *ngIf="selectModule == 7">
+          <app-organigrama-eva360 (responseChildren)="recibirRespuestChildren($event)"></app-organigrama-eva360>
+        </div>
+        <div *ngIf="selectModule == 8">
+          <app-assign-poll (responseChildren)="recibirRespuestChildren($event)"></app-assign-poll>
+        </div>
+        <div *ngIf="selectModule == 9">
+          <app-cuestionario-eva360 (responseChildren)="recibirRespuestChildren($event)"></app-cuestionario-eva360>
+        </div>
+        <div *ngIf="selectModule == 4">
+          <app-asignar-consultor-eva360 (responseChildren)="recibirRespuestChildren($event)"></app-asignar-consultor-eva360>
+        </div>
+
+        <div *ngIf="selectModule == 11">
+          <app-bandeja-detalle-eva360 (responseChildren)="recibirRespuestChildren($event)"></app-bandeja-detalle-eva360>
+        </div>
+
       </div>
     </div>
   </mat-sidenav-content>

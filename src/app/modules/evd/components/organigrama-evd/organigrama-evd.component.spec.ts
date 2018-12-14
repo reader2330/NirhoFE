@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrganigramaEvdComponent } from './organigrama-evd.component';
 
-describe('OrganigramaEvdComponent', () => {
+describe('OrganigramaEva360Component', () => {
   let component: OrganigramaEvdComponent;
   let fixture: ComponentFixture<OrganigramaEvdComponent>;
 

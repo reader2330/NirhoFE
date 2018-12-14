@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { CatalogsService } from '../../../clb/services/catalogs.service';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
+import {Proyecto360Service} from '../../services/proyecto360.service';
 
 @Component({
   selector: 'app-assign-poll',
@@ -11,17 +12,17 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class AssignPollComponent implements OnInit {
   assigned = [];
+  assignedSelect = [];
   dataSource = new MatTableDataSource();
   mobile = false;
-  displayedColumns: string[] = ['evaluador', 'participantes', 'a', 'evaluar'];
-  projectForm = new FormGroup({
-    evaluador: new FormControl(null),
-    participante: new FormControl(null),
-  });
+  displayedColumns: string[] = ['evaluador', 'participantes'];
+  proyect = [];
   evaluador = [];
   participantes = [];
+  proyects = [];
+  participante = {};
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
+  constructor(breakpointObserver: BreakpointObserver, private ProyectoServices: Proyecto360Service) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait
@@ -36,16 +37,45 @@ export class AssignPollComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getProyects();
+  }
 
   assign() {
+    let nuevo = true
     this.assigned.push({
-      evaluador: 'kjsdhfkalsjdhfkas',
-      participantes: 'kjsdhfkalsjdhfkas',
-      to: 'kjsdhfkalsjdhfkas',
-      evaluar: 'kjsdhfkalsjdhfkas',
+      evaluador: this.evaluador,
+      participante: this.participante,
     });
-    this.dataSource = new MatTableDataSource(this.assigned);
+    let obj = {
+      idParticipante: this.evaluador['participantePK']['idParticipante'],
+      evaluados: []
+    };
+    for (let ass of this.assignedSelect) {
+      if (ass.idParticipante === this.evaluador['participantePK']['idParticipante']) {
+        ass.evaluados.push(this.participante['participantePK']['idParticipante']);
+        nuevo = false;
+      }
+    }
+    if (nuevo) {
+      obj.evaluados.push(this.participante['participantePK']['idParticipante'])
+      this.assignedSelect.push(obj);
+    }
+    this.dataSource.data = this.assigned;
+  }
+
+  getParticipantes() {
+    this.ProyectoServices.getParticipanteByProyect(this.proyect['idProyecto']).subscribe(res => {
+      console.log(res);
+      this.participantes = res;
+    });
+
+  }
+  getProyects() {
+    this.ProyectoServices.getProyects().subscribe(res => {
+      console.log(res);
+      this.proyects = res;
+    });
   }
 
   checkMobileCols() {
@@ -53,4 +83,16 @@ export class AssignPollComponent implements OnInit {
     if (this.mobile) { value = 1; }
     return value;
   }
+
+  saveRelacion() {
+    let data = {
+      idProyecto: this.proyect['idProyecto'],
+      evaluadores: this.assignedSelect
+    };
+    this.ProyectoServices.guardarRelacion(data).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+
 }
