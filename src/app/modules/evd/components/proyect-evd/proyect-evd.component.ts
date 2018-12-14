@@ -164,7 +164,7 @@ export class ProyectEvdComponent implements OnInit {
           Swal('Listo.',
             'El proyecto se guardo correctamente',
             'success');
-          this.response.emit({value:1});
+          this.response.emit({value: 1});
         });
       }
     });

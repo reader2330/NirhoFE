@@ -19,12 +19,11 @@ export class EncuestaComponent implements OnInit {
   dataSource = [
 
   ];
+  empty = false;
   displayedColumns: string[] = [
     'ENUNCIADO',
     '1',
-
   ];
-
   constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
@@ -40,22 +39,29 @@ export class EncuestaComponent implements OnInit {
     this.getToken();
   }
 
-
   getToken() {
       this.route.params.subscribe((res) => {
         this.token = res['token'];
         this.ProyectServices.getPreguntasParticipante(this.token).subscribe((res) => {
-          console.log(res);
-         this.temas = res;
-         this.dataSource = [];
-         for (let tema of this.temas) {
-           this.dataSource.push(tema);
-         }
-         this.goPreguntas = true;
-
-        });
-      });
-
+          if (res) {
+            this.temas = res;
+            this.dataSource = [];
+            for (let tema of this.temas) {
+              this.dataSource.push(tema);
+            }
+            this.goPreguntas = true;
+          }
+        },
+          (err) => {
+              this.empty = true;
+            Swal({
+              title: 'Lo siento!',
+              text: 'El proyecto ha finalizado, ya no puede contestar su cuestionario',
+              type: 'warning',
+            }).then(() => {
+              this.router.navigate(['']);
+            });
+          }); });
   }
 
   checkMobileCols() {
@@ -179,7 +185,17 @@ export class EncuestaComponent implements OnInit {
           'El cuestionario se finalizo correctamente',
           'success'
         ).then(() => {
-          this.router.navigate(['']);
+          Swal(
+            'Muchas gracias por tu participación.',
+            'Tu información será administrada de manera\n' +
+            'totalmente confidencial y por profesionales. Muy\n' +
+            'pronto estarémos compartiendo contigo los\n' +
+            'resultados de manera global y nuestros planes de\n' +
+            'desarrollo.',
+            'success').then(() => {
+            this.router.navigate(['']);
+          });
+
         });
       }
       });

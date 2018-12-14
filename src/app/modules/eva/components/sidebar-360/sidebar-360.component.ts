@@ -20,8 +20,8 @@ import {
 })
 export class Sidebar360Component implements OnInit {
   mobile = false;
-  selectedItem = 2;
-  selectModule = 2;
+  selectedItem = 1;
+  selectModule = 1;
   modules = [];
   user = {};
   avatar = {
@@ -55,8 +55,10 @@ export class Sidebar360Component implements OnInit {
   getModules() {
 
     this.loginService.getModules().subscribe((res) => {
-      console.log(res);
       this.modules = res;
+      if (this.user['rol'] === 3) {
+
+      }
     });
   }
   getUser() {

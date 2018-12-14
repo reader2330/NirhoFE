@@ -48,6 +48,14 @@ export class SidebarComponent implements OnInit {
   getModules() {
     this.LoginService.getModules().subscribe((res) => {
       this.modules = res;
+      for (let mod of this.modules) {
+        if (mod['id_submodulo'] === 8){
+          mod.descripcion = "Enviar cuestionarios";
+        }
+        if (mod['id_submodulo'] === 9) {
+          mod.descripcion = "Graficas de resultados";
+        }
+      }
     });
   }
   getUser() {

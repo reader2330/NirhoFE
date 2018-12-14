@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeadCountEvdComponent } from './head-count-evd.component';
 
-describe('HeadCountEvdComponent', () => {
+describe('HeadCountEva360Component', () => {
   let component: HeadCountEvdComponent;
   let fixture: ComponentFixture<HeadCountEvdComponent>;
 

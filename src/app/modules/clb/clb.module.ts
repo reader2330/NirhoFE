@@ -34,8 +34,8 @@ declare var require: any;
 
 export function highchartsFactory() {
   const hc = require('highcharts');
-  const dd = require('highcharts/modules/drilldown');
-  dd(hc);
+  const h3 = require('highcharts/highcharts-3d');
+  h3(hc);
 
   return hc;
 }

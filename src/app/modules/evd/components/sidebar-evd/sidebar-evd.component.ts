@@ -52,6 +52,11 @@ export class SidebarEvdComponent implements OnInit {
       if (this.user['rol'] === 3) {
         this.modules.pop();
       }
+      for (let mod of this.modules) {
+        if (mod['id_submodulo'] === 8){
+          mod.descripcion = "Enviar cuestionarios";
+        }
+      }
 
     });
   }
@@ -84,6 +89,7 @@ export class SidebarEvdComponent implements OnInit {
   }
 
   goAvatarEditing() {
+    console.log('voy');
     this.route.navigate(['avatar-edit', 'EVD']);
   }
 

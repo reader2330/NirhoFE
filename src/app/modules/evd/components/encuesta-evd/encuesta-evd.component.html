@@ -15,6 +15,7 @@
         </mat-expansion-panel-header>
         <mat-panel-description style="width: 100%">
           <mat-list>
+            <mat-list-item style="margin-bottom: 10px">{{question.cuestionarioParticipante.pregunta.idTema.descripcion}}</mat-list-item>
             <mat-radio-group (change)="updateValor(question)" [(ngModel)]="question.cuestionarioParticipante.respuesta" >
               <mat-list-item *ngFor="let opt of question.opciones; let j = index">
               <mat-radio-button  [value]="j+1" >

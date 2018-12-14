@@ -17,25 +17,37 @@
   </mat-grid-tile>
 </mat-grid-list>
 <div class="row" *ngIf="createCharts">
-  <div style=" border: 2px black solid" class="col-sm-12">
-    <div style="width: 100%; margin-left: 500px">
-    <chart   [options]="pies[0]"></chart>
-      <input matInput type="text"  placeholder="Comentario" >
+  <div style=" border: 2px black solid" class="row col-sm-12">
+    <div style="width: 100%;" class="col-sm-8">
+    <chart [options]="pies[0]"></chart>
     </div>
+    <mat-form-field style="margin-top: 50px;" class="col-sm-4" >
+      <mat-label>Comentario</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="2"
+                cdkAutosizeMaxRows="5" type="text" >
+
+      </textarea>
+    </mat-form-field>
+
   </div>
-  <div *ngFor="let opt of options; let i = index"  style=" border: 2px black solid"  class="row col-sm-6">
+  <div *ngFor="let opt of options; let i = index"  style=" border: 2px black solid"  class="row col-sm-12">
     <div class="col-sm-8">
       <chart  [options]="opt"></chart>
     </div>
-    <div class="col-sm-4">
-      <textarea matInput type="text" [(ngModel)]="data['datos'][i][0].comentarios" placeholder="Comentario" ></textarea>
-    </div>
-
-
-
+    <mat-form-field style="margin-top: 50px;" class="col-sm-4" >
+      <mat-label>Comentario</mat-label>
+      <textarea matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="2"
+        cdkAutosizeMaxRows="5"   type="text" [(ngModel)]="data['datos'][i][0].comentarios" ></textarea>
+    </mat-form-field>
   </div>
 
-  <div class="col-sm-4 offset-4" style="margin-top: 30px">
+  <div class="col-sm-4 offset-4" style="margin-top: 30px" >
     <button style="margin-left: 50px" mat-raised-button color="accent" (click)="guardarComentario()"> Guardar comentarios</button>
   </div>
 
