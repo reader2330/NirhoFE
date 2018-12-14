@@ -37,6 +37,9 @@ public class CuetionarioParticipante implements Serializable {
     private Integer respuestaJefe;
     @JoinColumn
     @ManyToOne(optional = false)
+    private Participante participante;
+    @JoinColumn
+    @ManyToOne(optional = false)
     private Pregunta pregunta;
     @JoinColumn
     @ManyToOne(optional = false)
@@ -53,23 +56,23 @@ public class CuetionarioParticipante implements Serializable {
         this.cuetionarioParticipantePK = new CuetionarioParticipantePK(idParticipante, idProyecto, idTema, idPregunta);
     }
 
-    public CuetionarioParticipantePK getCuetionarioParticipantePK() {
-        return cuetionarioParticipantePK;
-    }
+	public CuetionarioParticipantePK getCuetionarioParticipantePK() {
+		return cuetionarioParticipantePK;
+	}
 
-    public void setCuetionarioParticipantePK(CuetionarioParticipantePK cuetionarioParticipantePK) {
-        this.cuetionarioParticipantePK = cuetionarioParticipantePK;
-    }
+	public void setCuetionarioParticipantePK(CuetionarioParticipantePK cuetionarioParticipantePK) {
+		this.cuetionarioParticipantePK = cuetionarioParticipantePK;
+	}
 
-    public Integer getRespuesta() {
-        return respuesta;
-    }
+	public Integer getRespuesta() {
+		return respuesta;
+	}
 
-    public void setRespuesta(Integer respuesta) {
-        this.respuesta = respuesta;
-    }
-    
-    public Integer getRespuestaRh() {
+	public void setRespuesta(Integer respuesta) {
+		this.respuesta = respuesta;
+	}
+
+	public Integer getRespuestaRh() {
 		return respuestaRh;
 	}
 
@@ -85,27 +88,35 @@ public class CuetionarioParticipante implements Serializable {
 		this.respuestaJefe = respuestaJefe;
 	}
 
+	public Participante getParticipante() {
+		return participante;
+	}
+
+	public void setParticipante(Participante participante) {
+		this.participante = participante;
+	}
+
 	public Pregunta getPregunta() {
-        return pregunta;
-    }
+		return pregunta;
+	}
 
-    public void setPregunta(Pregunta pregunta) {
-        this.pregunta = pregunta;
-    }
-    
-    public Tema getTema() {
-        return tema;
-    }
+	public void setPregunta(Pregunta pregunta) {
+		this.pregunta = pregunta;
+	}
 
-    public void setTema(Tema tema) {
-        this.tema = tema;
-    }
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
 
 	@Override
 	public String toString() {
 		return "CuetionarioParticipante [cuetionarioParticipantePK=" + cuetionarioParticipantePK + ", respuesta="
-				+ respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe + ", pregunta="
-				+ pregunta + ", tema=" + tema + "]";
+				+ respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe + ", participante="
+				+ participante + ", pregunta=" + pregunta + ", tema=" + tema + "]";
 	}
-        
+	
 }
