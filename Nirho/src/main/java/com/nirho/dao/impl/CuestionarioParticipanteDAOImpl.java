@@ -17,7 +17,7 @@ public class CuestionarioParticipanteDAOImpl extends AbstractDAO<CuetionarioPart
 	@SuppressWarnings("unchecked")
 	public List<CuetionarioParticipante> findByParticipanteProyecto(Integer idParticipante, Integer idProyecto) {
 		String hql = "FROM CuetionarioParticipante cp WHERE cp.cuetionarioParticipantePK.idParticipante = :idParticipante "
-													+ "AND cp.cuetionarioParticipantePK.idProyecto = :idProyecto";
+													+ "AND cp.cuetionarioParticipantePK.idProyecto = :idProyecto ORDER BY cp.cuetionarioParticipantePK.idPregunta ASC";
 		Query query = entityManager.createQuery(hql);
 		query.setParameter("idParticipante", idParticipante);
 		query.setParameter("idProyecto", idProyecto);

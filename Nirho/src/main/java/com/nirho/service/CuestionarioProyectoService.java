@@ -2,6 +2,7 @@ package com.nirho.service;
 
 import java.util.List;
 
+import com.nirho.dto.CuestPartEvaluadosEVD;
 import com.nirho.dto.CuestionarioConfEVD;
 import com.nirho.dto.CuestionarioConfOpcion;
 import com.nirho.dto.CuestionarioConfiguracion;
@@ -26,4 +27,5 @@ public interface CuestionarioProyectoService {
 	List<Tema> obtenerTemasProyecto(Integer idProyecto) throws NirhoServiceException;
 	List<PreguntaOpcionesEVD> obtenerPreguntasOpciones(Integer idProyecto) throws NirhoServiceException;
 	List<CuestionarioParticipanteEVD> obtenerCuestionarioParticipanteEVD(String token) throws NirhoServiceException;
+	List<CuestPartEvaluadosEVD> obtenerCuestionarioEvaluadosEVD(String token) throws NirhoServiceException;
 }

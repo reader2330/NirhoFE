@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 import com.nirho.dao.CuestionarioOpcionDAO;
 import com.nirho.dao.CuestionarioParticipanteDAO;
 import com.nirho.dao.CuestionarioProyectoDAO;
+import com.nirho.dao.EvaluadorEvaluadoDAO;
 import com.nirho.dao.OpcionDAO;
 import com.nirho.dao.ParticipanteDAO;
 import com.nirho.dao.PreguntaDAO;
 import com.nirho.dao.TemaDAO;
+import com.nirho.dto.CuestPartEvaluadosEVD;
 import com.nirho.dto.CuestionarioConfEVD;
 import com.nirho.dto.CuestionarioConfOpcion;
 import com.nirho.dto.CuestionarioConfiguracion;
@@ -29,6 +31,7 @@ import com.nirho.model.CuestionarioProyecto;
 import com.nirho.model.CuestionarioProyectoPK;
 import com.nirho.model.CuetionarioParticipante;
 import com.nirho.model.CuetionarioParticipantePK;
+import com.nirho.model.EvaluadorEvaluado;
 import com.nirho.model.Opcion;
 import com.nirho.model.Participante;
 import com.nirho.model.ParticipantePK;
@@ -57,6 +60,8 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	private OpcionDAO opcionDAO;
 	@Autowired
 	private CuestionarioOpcionDAO coDAO;
+	@Autowired
+	private EvaluadorEvaluadoDAO evalEvalDAO;
 
 	@Override
 	public void guardar(CuestionarioConfiguracion cuestionario) throws NirhoServiceException {
@@ -285,6 +290,64 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 			throw new NirhoServiceException("Problemas al obtener el cuestionario del participante en la BD token [" + token + "]");
 		}
 		return cuestPartEVDList;
+	}
+
+	@Override
+	public List<CuestPartEvaluadosEVD> obtenerCuestionarioEvaluadosEVD(String token) throws NirhoServiceException {
+		List<CuestPartEvaluadosEVD> cuestPartEvaluadosEVDList = new ArrayList<>();
+		try {
+			List<CuestPartEvaluadosEVD> cuestEvals = obtenerCuestionarioEvaluadorEvaluadosEVD(token);
+			CuestPartEvaluadosEVD cuest0 = cuestEvals.get(0);
+			CuestPartEvaluadosEVD[] cuestPartEval = new CuestPartEvaluadosEVD[cuest0.getCuestionarioParticipantes().size()];
+			for(int i=0; i<cuestPartEval.length; i++) {
+				CuestPartEvaluadosEVD dto = new CuestPartEvaluadosEVD(new ArrayList<>());
+				for(CuestPartEvaluadosEVD cpee: cuestEvals) {
+					dto.getCuestionarioParticipantes().add(cpee.getCuestionarioParticipantes().get(i));
+				}
+				cuestPartEval[i] = dto;
+			}
+			for(CuestPartEvaluadosEVD evd: cuestPartEval) {
+				cuestPartEvaluadosEVDList.add(evd);
+			}
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas al obtener el cuestionario del participante en la BD token [" + token + "]");
+		}
+		return cuestPartEvaluadosEVDList;
+	}
+	
+	private List<CuestPartEvaluadosEVD> obtenerCuestionarioEvaluadorEvaluadosEVD(String token) throws NirhoServiceException {
+		List<CuestPartEvaluadosEVD> cuestPartEvaluadosEVDList = new ArrayList<>();
+		try {
+			ParticipantePK participantePK = NirhoUtil.obtenerParticipanteToken(token);
+			Participante participante = participanteDAO.getOne(participantePK);	
+			if(participante != null) {
+				List<EvaluadorEvaluado> evaluados = evalEvalDAO.findByIdProyectoAndIdEvaluador(participante.getParticipantePK().getIdProyecto() 
+						,participante.getParticipantePK().getIdParticipante());	
+				for(EvaluadorEvaluado ee: evaluados) {
+					List<CuestionarioParticipanteEVD> cuestPartEVDList = new ArrayList<>();
+					List<CuetionarioParticipante> cuestPart = cuestPartDAO.findByParticipanteProyecto(ee.getEvaluadorEvaluadoPK().getIdEvaluado(),
+							participante.getParticipantePK().getIdProyecto());
+					for(CuetionarioParticipante cp: cuestPart) {
+						CuestionarioParticipanteEVD cuestPartEVD = new CuestionarioParticipanteEVD();
+						cuestPartEVD.setCuestionarioParticipante(cp);
+						List<Opcion> opciones = new ArrayList<>();
+						for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getTema().getIdTema())){
+							opciones.add(cuestOps.getOpcion());
+						}
+						cuestPartEVD.setOpciones(opciones);
+						cuestPartEVDList.add(cuestPartEVD);
+					}
+					cuestPartEvaluadosEVDList.add(new CuestPartEvaluadosEVD(cuestPartEVDList));
+				}
+			}
+		} catch(NirhoServiceException nse) {
+			throw new NirhoServiceException(nse.getMessage());
+		} catch(Exception e) {
+			logger.info("Exception e [" + e.getMessage() +"]");
+			throw new NirhoServiceException("Problemas al obtener el cuestionario del participante en la BD token [" + token + "]");
+		}
+		return cuestPartEvaluadosEVDList;
 	}
 	
 }

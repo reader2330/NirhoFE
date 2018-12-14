@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
+import com.nirho.dto.CuestPartEvaluadosEVD;
 import com.nirho.dto.CuestionarioConfEVD;
 import com.nirho.dto.CuestionarioConfOpcion;
 import com.nirho.dto.CuestionarioConfiguracion;
@@ -181,8 +182,8 @@ public class CuestionarioProyectoController {
 	}
 	
 	@GetMapping(value = "/participanteEVD")
-	public List<CuestionarioParticipanteEVD> participanteEVD(@RequestParam(name="token") String token) throws NirhoControllerException{
-		List<CuestionarioParticipanteEVD> preguntas = new ArrayList<>();
+	public List<CuestPartEvaluadosEVD> participanteEVD(@RequestParam(name="token") String token) throws NirhoControllerException{
+		List<CuestPartEvaluadosEVD> preguntas = new ArrayList<>();
 		try {
 			String[] datos = token.split("-");
 			Integer idProyecto = Integer.parseInt(datos[2]);
@@ -191,7 +192,7 @@ public class CuestionarioProyectoController {
         	if(estatusActual >= ProyectoConstants.ESTATUS_FINALIZADO.intValue()) {
         		throw new NirhoControllerException("Se ha finalizado el esdudio del proyecto");
         	}
-			preguntas = cuestionarioService.obtenerCuestionarioParticipanteEVD(token);
+			preguntas = cuestionarioService.obtenerCuestionarioEvaluadosEVD(token);
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Sin servicio al obtener las preguntas del tema");
 		}

@@ -7,4 +7,5 @@ import com.nirho.model.EvaluadorEvaluadoPK;
 
 public interface EvaluadorEvaluadoDAO extends BaseDAO<EvaluadorEvaluado, EvaluadorEvaluadoPK> {
 	List<EvaluadorEvaluado> findByIdProyecto(Integer idProyecto);
+	List<EvaluadorEvaluado> findByIdProyectoAndIdEvaluador(Integer idProyecto, Integer idEvaluador);
 }

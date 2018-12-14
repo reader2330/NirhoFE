@@ -22,4 +22,15 @@ public class EvaluadorEvaluadoDAOImpl extends AbstractDAO<EvaluadorEvaluado, Eva
 		return query.getResultList();
 	}
 	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<EvaluadorEvaluado> findByIdProyectoAndIdEvaluador(Integer idProyecto, Integer idEvaluador) {
+		String hql = "FROM EvaluadorEvaluado ev WHERE "
+				+ "ev.evaluadorEvaluadoPK.idProyecto = :idProyecto AND ev.evaluadorEvaluadoPK.idEvaluador = :idEvaluador";
+		Query query = entityManager.createQuery(hql);
+		query.setParameter("idProyecto", idProyecto);
+		query.setParameter("idEvaluador", idEvaluador);
+		return query.getResultList();
+	}
+	
 }
