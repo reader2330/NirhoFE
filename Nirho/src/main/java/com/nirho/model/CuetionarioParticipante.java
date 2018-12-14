@@ -42,12 +42,12 @@ public class CuetionarioParticipante implements Serializable {
         , @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)})
     @OneToOne(optional = false)
     private Participante participante;
-    @JoinColumn(name = "id_pregunta", referencedColumnName = "id_pregunta", insertable = false, updatable = false)
+    @JoinColumn
     @ManyToOne(optional = false)
-    private Pregunta idPregunta;
-    @JoinColumn(name = "id_tema", referencedColumnName = "id_tema", insertable = false, updatable = false)
+    private Pregunta pregunta;
+    @JoinColumn
     @ManyToOne(optional = false)
-    private Tema idTema;
+    private Tema tema;
     
     public CuetionarioParticipante() {
     }
@@ -100,27 +100,27 @@ public class CuetionarioParticipante implements Serializable {
 		this.participante = participante;
 	}
 
-	public Pregunta getIdPregunta() {
-		return idPregunta;
+	public Pregunta getPregunta() {
+		return pregunta;
 	}
 
-	public void setIdPregunta(Pregunta idPregunta) {
-		this.idPregunta = idPregunta;
+	public void setPregunta(Pregunta pregunta) {
+		this.pregunta = pregunta;
 	}
 
-	public Tema getIdTema() {
-		return idTema;
+	public Tema getTema() {
+		return tema;
 	}
 
-	public void setIdTema(Tema idTema) {
-		this.idTema = idTema;
+	public void setTema(Tema tema) {
+		this.tema = tema;
 	}
 
 	@Override
 	public String toString() {
 		return "CuetionarioParticipante [cuetionarioParticipantePK=" + cuetionarioParticipantePK + ", respuesta="
 				+ respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe + ", participante="
-				+ participante + ", idPregunta=" + idPregunta + ", idTema=" + idTema + "]";
+				+ participante + ", pregunta=" + pregunta + ", tema=" + tema + "]";
 	}
-	
+		
 }

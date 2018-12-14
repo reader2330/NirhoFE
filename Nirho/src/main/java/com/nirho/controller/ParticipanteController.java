@@ -257,8 +257,8 @@ public class ParticipanteController {
 								cp.getCuestionarioProyectoPK().getIdTema(),
 								cp.getCuestionarioProyectoPK().getIdPregunta());
 						cuetionarioParticipante.setCuetionarioParticipantePK(pk);
-						cuetionarioParticipante.setIdPregunta(cp.getPregunta());
-						cuetionarioParticipante.setIdTema(cp.getTema());
+						cuetionarioParticipante.setPregunta(cp.getPregunta());
+						cuetionarioParticipante.setTema(cp.getTema());
 						logger.info("CuestionarioParticipante [" + cuetionarioParticipante + "]");
 						cuestionarioParticipanteService.guardar(cuetionarioParticipante);
 					}

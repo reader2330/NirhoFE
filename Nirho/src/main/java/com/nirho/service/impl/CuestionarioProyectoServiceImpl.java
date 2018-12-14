@@ -276,7 +276,7 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 					CuestionarioParticipanteEVD cuestPartEVD = new CuestionarioParticipanteEVD();
 					cuestPartEVD.setCuestionarioParticipante(cp);
 					List<Opcion> opciones = new ArrayList<>();
-					for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getIdTema().getIdTema())){
+					for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getTema().getIdTema())){
 						opciones.add(cuestOps.getOpcion());
 					}
 					cuestPartEVD.setOpciones(opciones);
@@ -332,7 +332,7 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 						CuestionarioParticipanteEVD cuestPartEVD = new CuestionarioParticipanteEVD();
 						cuestPartEVD.setCuestionarioParticipante(cp);
 						List<Opcion> opciones = new ArrayList<>();
-						for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getIdTema().getIdTema())){
+						for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getTema().getIdTema())){
 							opciones.add(cuestOps.getOpcion());
 						}
 						cuestPartEVD.setOpciones(opciones);
