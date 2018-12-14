@@ -11,9 +11,11 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -35,25 +37,18 @@ public class CuetionarioParticipante implements Serializable {
     private Integer respuestaRh;
     @Column(name = "respuesta_jefe")
     private Integer respuestaJefe;
-    @JoinColumn(name = "tema_id_tema", referencedColumnName = "id_tema")
-    @ManyToOne(optional = false)
-    private Tema temaIdTema;
-    @JoinColumn(name = "pregunta_id_pregunta", referencedColumnName = "id_pregunta")
-    @ManyToOne(optional = false)
-    private Pregunta preguntaIdPregunta;
-    @JoinColumn(name = "id_participante", referencedColumnName = "id_participante", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @JoinColumns({
+        @JoinColumn(name = "id_participante", referencedColumnName = "id_participante", insertable = false, updatable = false)
+        , @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)})
+    @OneToOne(optional = false)
     private Participante participante;
-    @JoinColumn(name = "id_pregunta", referencedColumnName = "id_pregunta", insertable = false, updatable = false)
+    @JoinColumn(name = "id_pregunta", referencedColumnName = "id_pregunta")
     @ManyToOne(optional = false)
-    private Pregunta pregunta;
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)
+    private Pregunta idPregunta;
+    @JoinColumn(name = "id_tema", referencedColumnName = "id_tema")
     @ManyToOne(optional = false)
-    private Proyecto proyecto;
-    @JoinColumn(name = "id_tema", referencedColumnName = "id_tema", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Tema tema;
-
+    private Tema idTema;
+    
     public CuetionarioParticipante() {
     }
 
@@ -97,22 +92,6 @@ public class CuetionarioParticipante implements Serializable {
 		this.respuestaJefe = respuestaJefe;
 	}
 
-	public Tema getTemaIdTema() {
-		return temaIdTema;
-	}
-
-	public void setTemaIdTema(Tema temaIdTema) {
-		this.temaIdTema = temaIdTema;
-	}
-
-	public Pregunta getPreguntaIdPregunta() {
-		return preguntaIdPregunta;
-	}
-
-	public void setPreguntaIdPregunta(Pregunta preguntaIdPregunta) {
-		this.preguntaIdPregunta = preguntaIdPregunta;
-	}
-
 	public Participante getParticipante() {
 		return participante;
 	}
@@ -121,36 +100,27 @@ public class CuetionarioParticipante implements Serializable {
 		this.participante = participante;
 	}
 
-	public Pregunta getPregunta() {
-		return pregunta;
+	public Pregunta getIdPregunta() {
+		return idPregunta;
 	}
 
-	public void setPregunta(Pregunta pregunta) {
-		this.pregunta = pregunta;
+	public void setIdPregunta(Pregunta idPregunta) {
+		this.idPregunta = idPregunta;
 	}
 
-	public Proyecto getProyecto() {
-		return proyecto;
+	public Tema getIdTema() {
+		return idTema;
 	}
 
-	public void setProyecto(Proyecto proyecto) {
-		this.proyecto = proyecto;
-	}
-
-	public Tema getTema() {
-		return tema;
-	}
-
-	public void setTema(Tema tema) {
-		this.tema = tema;
+	public void setIdTema(Tema idTema) {
+		this.idTema = idTema;
 	}
 
 	@Override
 	public String toString() {
 		return "CuetionarioParticipante [cuetionarioParticipantePK=" + cuetionarioParticipantePK + ", respuesta="
-				+ respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe + ", temaIdTema="
-				+ temaIdTema + ", preguntaIdPregunta=" + preguntaIdPregunta + ", participante=" + participante
-				+ ", pregunta=" + pregunta + ", proyecto=" + proyecto + ", tema=" + tema + "]";
+				+ respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe + ", participante="
+				+ participante + ", idPregunta=" + idPregunta + ", idTema=" + idTema + "]";
 	}
 	
 }
