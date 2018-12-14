@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { CatalogsService } from '../../../clb/services/catalogs.service';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
+import {Proyecto360Service} from '../../services/proyecto360.service';
 
 @Component({
   selector: 'app-view-assigns',
@@ -13,7 +14,10 @@ export class ViewAssignsComponent implements OnInit {
   mobile = false;
   evaluators = [];
   displayedColumns: string[] = ['evaluado'];
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService) {
+  proyect = {};
+  proyects = [];
+  showAssign = false;
+  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectServices:Proyecto360Service) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait
@@ -29,9 +33,17 @@ export class ViewAssignsComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.getData();
-    }, 100);
+    this.getProyects();
+  }
+
+  getAsignacion() {
+    this.showAssign = false;
+    this.ProyectServices.getAsignacion(this.proyect['idProyecto']).subscribe(res => {
+      console.log(res);
+      this.evaluators = res;
+      this.showAssign = true;
+    });
+
   }
 
   checkMobileCols() {
@@ -40,20 +52,13 @@ export class ViewAssignsComponent implements OnInit {
     return value;
   }
 
-  getData() {
-    this.evaluators = [{
-      name: 'Jaquin Hernandez',
-      participantes: ['Marcello', 'Luis', '2Pac', 'Esiquio']
-    }, {
-      name: 'Luis Aguirre',
-      participantes: ['Marcello', 'Luis', '2Pac', 'Esiquio']
-    }, {
-      name: 'Julio Fuentes',
-      participantes: ['Marcello', 'Luis', '2Pac', 'Esiquio']
-    }, {
-      name: 'Eder Nocelo',
-      participantes: ['Marcello', 'Luis', '2Pac', 'Esiquio']
-    }];
+
+
+  getProyects() {
+    this.ProyectServices.getProyects().subscribe(res => {
+
+      this.proyects = res;
+    });
   }
 
 }

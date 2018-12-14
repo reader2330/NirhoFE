@@ -16,6 +16,7 @@ import {InicioApoComponent} from './modules/apo/components/inicio-apo/inicio-apo
 
 import {LoginGuard} from './guards/login.guard';
 import {EncuestaEvdComponent} from './modules/evd/components/encuesta-evd/encuesta-evd.component';
+import {EncuestaEva360Component} from './modules/eva/components/encuesta-eva360/encuesta-eva360.component';
 
 
 
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'encuesta/EVD/:token',
     component: EncuestaEvdComponent
+  },
+  {
+    path: 'encuesta/EVA360/:token',
+    component: EncuestaEva360Component
   },
   { path: '**', redirectTo: '' }
 ];

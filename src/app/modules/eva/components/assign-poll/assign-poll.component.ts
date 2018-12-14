@@ -4,6 +4,7 @@ import { CatalogsService } from '../../../clb/services/catalogs.service';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
 import {Proyecto360Service} from '../../services/proyecto360.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-assign-poll',
@@ -89,9 +90,24 @@ export class AssignPollComponent implements OnInit {
       idProyecto: this.proyect['idProyecto'],
       evaluadores: this.assignedSelect
     };
-    this.ProyectoServices.guardarRelacion(data).subscribe(res => {
-      console.log(res);
-    });
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar la asignación',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        this.ProyectoServices.guardarRelacion(data).subscribe(res => {
+          Swal(
+            'Listo.',
+            'La asignación se ha guardado correctamente',
+            'success'
+          );
+        });
+      }
+      });
   }
 
 

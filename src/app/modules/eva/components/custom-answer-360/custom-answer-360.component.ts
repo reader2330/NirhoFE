@@ -80,21 +80,53 @@ export class CustomAnswer360Component implements OnInit {
         let answer = new Answer();
         answer.enunciado = this.newTema['enunciado'];
         answer.tipo = this.newTema['tipo'];
-        answer.idOpcion = this.answers[this.answers.length - 1]['idOpcion'] + 1;
-        answer['isSelect'] = true;
-        for (let ans of this.answers) {
-          if (ans.tipo === this.newTema['tipo']) {
-            index = this.answers.indexOf(ans);
-            answer['idTema'] = ans.idTema;
+        if (this.answers[this.answers.length - 1] && this.answers[this.answers.length - 1]['idOpcion']) {
+          answer.idOpcion = this.answers[this.answers.length - 1]['idOpcion'] + 1;
+          answer['isSelect'] = true;
+          for (let ans of this.answers) {
+            if (ans.tipo === this.newTema['tipo']) {
+              index = this.answers.indexOf(ans);
+              answer['idTema'] = ans.idTema;
+            }
           }
+          if (index !== undefined) {
+            console.log('quito');
+            this.answers.splice(index, 1, answer);
+          } else {
+            console.log('pongo');
+            answer.idTema = this.tema;
+            this.answers.push(answer);
+
+          }
+          this.newTema['enunciado'] = '';
+          this.newTema['tipo'] = '';
+          this.answers.push({enunciado: '', isSelect: false});
         }
-        this.answers.splice(index, 1, answer);
-        this.newTema['enunciado'] = '';
-        this.newTema['tipo'] = '';
-        this.answers.push({enunciado: '', isSelect: false});
+        else {
+          answer.idOpcion = this.generateID(this.tema['idTema']);
+          answer['isSelect'] = true;
+          for (let ans of this.answers) {
+            if (ans.tipo === this.newTema['tipo']) {
+              index = this.answers.indexOf(ans);
+              answer['idTema'] = ans.idTema;
+            }
+          }
+          console.log(index);
+          if (index !== undefined) {
+            console.log('quito');
+            this.answers.splice(index, 1, answer);
+          } else {
+            console.log('pongo');
+            answer.idTema = this.tema;
+            this.answers.push(answer);
+          }
+          this.newTema['enunciado'] = '';
+          this.newTema['tipo'] = '';
+          this.answers.push({enunciado: '', isSelect: false});
+        }
 
       } else {
-        this.snackBar.open('No puedes agregar dos temas con el mismo nombre', 'Claro!' , {
+        this.snackBar.open('No puedes agregar dos respuestas con el mismo enunciado', 'Claro!' , {
           duration: 1000
         });
 
@@ -177,7 +209,20 @@ export class CustomAnswer360Component implements OnInit {
   sendQuestion() {
 
   }
-  getAnswerByTheme() {}
+  getAnswerByTheme() {
+    this.ProyectService.getThemaByProyect(this.proyect.idProyecto).subscribe(res => {
+      console.log(res);
+      this.temas = res;
+      this.showOptions = true;
+    });
+  }
+
+  generateID(id) {
+    let number = id + '001';
+    console.log(number);
+    return parseInt(number);
+
+  }
 
 
 

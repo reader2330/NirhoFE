@@ -203,7 +203,7 @@ export class CustomAnswerComponent implements OnInit {
     });
   }
 
-  showSendQuewstion() {
+  showSendQuestion() {
 
   }
 

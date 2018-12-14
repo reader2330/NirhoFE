@@ -32,6 +32,7 @@ import {CuestionarioEva360Component} from './components/cuestionario-eva360/cues
 import {BandejaDetalleEva360Component} from './components/bandeja-detalle-eva360/bandeja-detalle-eva360.component';
 import {AsignarConsultorEva360Component} from './components/asignar-consultor-eva360/asignar-consultor-eva360.component';
 import {DataPeriodEva360Component} from './components/data-period-eva360/data-period-eva360.component';
+import {EncuestaEva360Component} from './components/encuesta-eva360/encuesta-eva360.component';
 
 
 export function highchartsFactory() {
@@ -76,7 +77,8 @@ export function highchartsFactory() {
     CuestionarioEva360Component,
     BandejaDetalleEva360Component,
     AsignarConsultorEva360Component,
-    DataPeriodEva360Component
+    DataPeriodEva360Component,
+    EncuestaEva360Component
   ],
   providers: [
     {

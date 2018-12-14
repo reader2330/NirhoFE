@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EncuestaEvdComponent } from './encuesta-evd.component';
 
-describe('EncuestaEvdComponent', () => {
+describe('EncuestaEva360Component', () => {
   let component: EncuestaEvdComponent;
   let fixture: ComponentFixture<EncuestaEvdComponent>;
 

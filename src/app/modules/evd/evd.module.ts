@@ -29,6 +29,7 @@ import {AsignarConsultorEvdComponent} from './components/asignar-consultor-evd/a
 import {DataPeriodEvdComponent} from './components/data-period-evd/data-period-evd.component';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -61,7 +62,8 @@ import {DataPeriodEvdComponent} from './components/data-period-evd/data-period-e
     EncuestaModalEvdComponent,
     DataContactEvdComponent,
     AsignarConsultorEvdComponent,
-    DataPeriodEvdComponent
+    DataPeriodEvdComponent,
+
   ],
   entryComponents: [
     TableClient2ModalEvdComponent,

@@ -64,6 +64,9 @@
         <div *ngIf="selectModule == 8">
           <app-assign-poll (responseChildren)="recibirRespuestChildren($event)"></app-assign-poll>
         </div>
+        <div *ngIf="selectModule == 10">
+          <app-view-assigns></app-view-assigns>
+        </div>
         <div *ngIf="selectModule == 9">
           <app-cuestionario-eva360 (responseChildren)="recibirRespuestChildren($event)"></app-cuestionario-eva360>
         </div>
