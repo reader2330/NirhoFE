@@ -42,10 +42,10 @@ public class CuetionarioParticipante implements Serializable {
         , @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)})
     @OneToOne(optional = false)
     private Participante participante;
-    @JoinColumn(name = "id_pregunta", referencedColumnName = "id_pregunta")
+    @JoinColumn(name = "id_pregunta", referencedColumnName = "id_pregunta", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Pregunta idPregunta;
-    @JoinColumn(name = "id_tema", referencedColumnName = "id_tema")
+    @JoinColumn(name = "id_tema", referencedColumnName = "id_tema", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Tema idTema;
     
