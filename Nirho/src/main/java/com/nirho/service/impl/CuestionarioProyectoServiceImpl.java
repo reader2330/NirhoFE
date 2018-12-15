@@ -331,6 +331,8 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 					for(CuetionarioParticipante cp: cuestPart) {
 						CuestionarioParticipanteEVD cuestPartEVD = new CuestionarioParticipanteEVD();
 						cuestPartEVD.setCuestionarioParticipante(cp);
+						cuestPartEVD.setParticipante(participanteDAO.getOne(
+								new ParticipantePK(cp.getCuetionarioParticipantePK().getIdParticipante(), cp.getCuetionarioParticipantePK().getIdProyecto())));
 						List<Opcion> opciones = new ArrayList<>();
 						for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getTema().getIdTema())){
 							opciones.add(cuestOps.getOpcion());

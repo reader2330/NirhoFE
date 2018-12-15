@@ -11,11 +11,9 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -28,7 +26,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "CuetionarioParticipante.findAll", query = "SELECT c FROM CuetionarioParticipante c")})
 public class CuetionarioParticipante implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CuetionarioParticipantePK cuetionarioParticipantePK;
     @Column(name = "respuesta")
@@ -37,18 +35,13 @@ public class CuetionarioParticipante implements Serializable {
     private Integer respuestaRh;
     @Column(name = "respuesta_jefe")
     private Integer respuestaJefe;
-    @JoinColumns({
-        @JoinColumn(name = "id_participante", referencedColumnName = "id_participante", insertable = false, updatable = false)
-        , @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", insertable = false, updatable = false)})
-    @OneToOne(optional = false)
-    private Participante participante;
     @JoinColumn
     @ManyToOne(optional = false)
     private Pregunta pregunta;
     @JoinColumn
     @ManyToOne(optional = false)
     private Tema tema;
-    
+
     public CuetionarioParticipante() {
     }
 
@@ -60,23 +53,23 @@ public class CuetionarioParticipante implements Serializable {
         this.cuetionarioParticipantePK = new CuetionarioParticipantePK(idParticipante, idProyecto, idTema, idPregunta);
     }
 
-	public CuetionarioParticipantePK getCuetionarioParticipantePK() {
-		return cuetionarioParticipantePK;
-	}
+    public CuetionarioParticipantePK getCuetionarioParticipantePK() {
+        return cuetionarioParticipantePK;
+    }
 
-	public void setCuetionarioParticipantePK(CuetionarioParticipantePK cuetionarioParticipantePK) {
-		this.cuetionarioParticipantePK = cuetionarioParticipantePK;
-	}
+    public void setCuetionarioParticipantePK(CuetionarioParticipantePK cuetionarioParticipantePK) {
+        this.cuetionarioParticipantePK = cuetionarioParticipantePK;
+    }
 
-	public Integer getRespuesta() {
-		return respuesta;
-	}
+    public Integer getRespuesta() {
+        return respuesta;
+    }
 
-	public void setRespuesta(Integer respuesta) {
-		this.respuesta = respuesta;
-	}
-
-	public Integer getRespuestaRh() {
+    public void setRespuesta(Integer respuesta) {
+        this.respuesta = respuesta;
+    }
+    
+    public Integer getRespuestaRh() {
 		return respuestaRh;
 	}
 
@@ -92,35 +85,27 @@ public class CuetionarioParticipante implements Serializable {
 		this.respuestaJefe = respuestaJefe;
 	}
 
-	public Participante getParticipante() {
-		return participante;
-	}
-
-	public void setParticipante(Participante participante) {
-		this.participante = participante;
-	}
-
 	public Pregunta getPregunta() {
-		return pregunta;
-	}
+        return pregunta;
+    }
 
-	public void setPregunta(Pregunta pregunta) {
-		this.pregunta = pregunta;
-	}
+    public void setPregunta(Pregunta pregunta) {
+        this.pregunta = pregunta;
+    }
+    
+    public Tema getTema() {
+        return tema;
+    }
 
-	public Tema getTema() {
-		return tema;
-	}
-
-	public void setTema(Tema tema) {
-		this.tema = tema;
-	}
+    public void setTema(Tema tema) {
+        this.tema = tema;
+    }
 
 	@Override
 	public String toString() {
 		return "CuetionarioParticipante [cuetionarioParticipantePK=" + cuetionarioParticipantePK + ", respuesta="
-				+ respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe + ", participante="
-				+ participante + ", pregunta=" + pregunta + ", tema=" + tema + "]";
+				+ respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe + ", pregunta="
+				+ pregunta + ", tema=" + tema + "]";
 	}
-		
+        
 }
