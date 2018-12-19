@@ -7,6 +7,8 @@ import {laboral_interface} from '../../../adm/components/labor-adm/labor-adm.com
 import Swal from "sweetalert2";
 import {ActivatedRoute, Router} from '@angular/router';
 import {Proyecto360Service} from '../../services/proyecto360.service';
+import {ImagenesModalComponent} from '../../../modal/imagenes-modal/imagenes-modal.component';
+import {environment} from '../../../../../environments/environment';
 
 
 
@@ -23,11 +25,16 @@ export class EncuestaEva360Component implements OnInit {
 
   constructor(private ProyectoEvdServices: Proyecto360Service, public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
   }
+  data = {
+    url: ''
+  };
   goPreguntas = false;
   mobile = false;
   temas = [{
     nombre: 'Imagen'
   }];
+  urlMensagge = environment.urlNG + 'assets/Mensajes/360-2.PNG' +
+    '';
   preguntas = [];
   token = '';
   opciones = [];
@@ -74,6 +81,7 @@ export class EncuestaEva360Component implements OnInit {
 
   ngOnInit() {
     this.getToken();
+    this.Imagenes(1);
   }
 
 
@@ -82,14 +90,13 @@ export class EncuestaEva360Component implements OnInit {
     this.route.params.subscribe(res => {
       this.token = res['token'];
       this.ProyectoEvdServices.getPreguntasParticipante(this.token).subscribe(res => {
-        console.log(res.length);
+        console.log(res);
         this.preguntas = res;
-        this.preguntas.pop();
         let auxOpciones = [];
-        for(let cuestionario of this.preguntas) {
+        for (let cuestionario of this.preguntas) {
           let i = 0;
           auxOpciones = [];
-            for(let question of cuestionario.cuestionarioParticipantes){
+            for (let question of cuestionario.cuestionarioParticipantes){
               if (question.opciones && i === 0) {
               for (let opt of  question['opciones']) {
                 auxOpciones.push(opt);
@@ -129,7 +136,10 @@ export class EncuestaEva360Component implements OnInit {
           'El cuestionario se finalizo correctamente',
           'success'
         ).then(() => {
-          this.router.navigate(['']);
+          this.Imagenes(2);
+          setTimeout(() => {
+            window.location.href = 'http://nirho.com/';
+          }, 6000);
         });
       }
     });
@@ -145,6 +155,33 @@ export class EncuestaEva360Component implements OnInit {
   }
   goAvatarEditing() {
     this.router.navigate(['avatar-edit', 'EVD']);
+  }
+
+  openDialogStart(data, time) {
+      this.dialog.open(ImagenesModalComponent, {
+        data: data,
+        height: '500px',
+        width: '700px'
+      });
+
+      setTimeout(() => {
+        this.dialog.closeAll();
+      }, time);
+  }
+
+  Imagenes(num) {
+    switch (num) {
+      case 1:
+        this.data.url =   environment.urlNG + 'assets/Mensajes/360-1.png';
+        this.openDialogStart(this.data,2000);
+        break;
+      case 2:
+        this.data.url =   environment.urlNG + 'assets/Mensajes/360-3.PNG';
+        this.openDialogStart(this.data,6000);
+    }
+
+
+
   }
 
 

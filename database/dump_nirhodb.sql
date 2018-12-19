@@ -741,16 +741,10 @@ CREATE TABLE `cuetionario_participante` (
   `respuesta` int(2) DEFAULT NULL,
   `respuesta_rh` int(2) DEFAULT NULL,
   `respuesta_jefe` int(2) DEFAULT NULL,
-  `pregunta_id_pregunta` int(11) NOT NULL,
-  `tema_id_tema` int(11) NOT NULL,
   PRIMARY KEY (`id_participante`,`id_tema`,`id_pregunta`,`id_proyecto`),
   KEY `fk_cuest_part_id_tema_idx` (`id_tema`),
   KEY `fk_cuest_part_id_preg_idx` (`id_pregunta`),
   KEY `fk_cuest_part_id_proyecto_idx` (`id_proyecto`),
-  KEY `FKt9twi2j2iwai7xcmdwtba6hhu` (`pregunta_id_pregunta`),
-  KEY `FKny0nilg5ji8fqxq33m5nas3lr` (`tema_id_tema`),
-  CONSTRAINT `FKny0nilg5ji8fqxq33m5nas3lr` FOREIGN KEY (`tema_id_tema`) REFERENCES `tema` (`id_tema`),
-  CONSTRAINT `FKt9twi2j2iwai7xcmdwtba6hhu` FOREIGN KEY (`pregunta_id_pregunta`) REFERENCES `pregunta` (`id_pregunta`),
   CONSTRAINT `fk_cuest_part_id_part` FOREIGN KEY (`id_participante`) REFERENCES `participante` (`id_participante`),
   CONSTRAINT `fk_cuest_part_id_pregunta` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id_pregunta`),
   CONSTRAINT `fk_cuest_part_id_proyecto` FOREIGN KEY (`id_proyecto`) REFERENCES `proyecto` (`id_proyecto`),
@@ -1141,7 +1135,11 @@ CREATE TABLE `evaluador_evaluado` (
   `id_evaluador` int(11) NOT NULL,
   `id_evaluado` int(11) NOT NULL,
   PRIMARY KEY (`id_proyecto`,`id_evaluador`,`id_evaluado`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+=======
+) ENGINE=InnoDB DEFAULT COLLATE=utf8_unicode_ci;
+>>>>>>> 18e38e44585b37ab710dc727ce329bf1b0bbbbb9
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
