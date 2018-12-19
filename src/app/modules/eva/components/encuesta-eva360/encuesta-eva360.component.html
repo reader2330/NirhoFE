@@ -5,6 +5,10 @@
 <div class="logo-nav">
 </div>
 
+<div class="col-sm-10" >
+  <img class="avatar" [src]="urlMensagge" alt="">
+</div>
+
 <div style="width: 100%; " class="row col-sm-12" >
   <div style="width: 100%; margin-top: 30px" class="col-sm-12" *ngIf="goPreguntas">
     <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
@@ -27,37 +31,38 @@
             <!-- Position Column -->
             <ng-container matColumnDef="Participante">
               <th mat-header-cell *matHeaderCellDef style="font-size: 10px; margin-right: 10px;"> Participante </th>
-              <td mat-cell *matCellDef="let element"> {{'Participante Prueba'}} </td>
+              <td mat-cell *matCellDef="let element"> {{"Nombre de prueba"}} </td>
             </ng-container>
 
 
-            <!-- Name Column -->
+
             <ng-container matColumnDef="BR">
               <th mat-header-cell *matHeaderCellDef="let element" style="font-size: 10px; margin-right: 10px;"> {{opciones[i][0]['enunciado']}} </th>
-              <td mat-cell *matCellDef="let element">  </td>
+              <td mat-cell *matCellDef="let element"><mat-radio-button  value="1"></mat-radio-button>  </td>
             </ng-container>
 
             <!-- Weight Column -->
             <ng-container matColumnDef="MR">
               <th mat-header-cell *matHeaderCellDef="let element"> {{opciones[i][1]['enunciado']}} </th>
-              <td mat-cell *matCellDef="let element">  </td>
+              <td mat-cell *matCellDef="let element"> <mat-radio-button value="1"></mat-radio-button> </td>
             </ng-container>
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="R">
               <th mat-header-cell *matHeaderCellDef="let element"> {{opciones[i][2]['enunciado']}} </th>
-              <td mat-cell *matCellDef="let element">  </td>
+              <td mat-cell *matCellDef="let element"> <mat-radio-button value="1"></mat-radio-button> </td>
             </ng-container>
 
             <ng-container matColumnDef="RS">
               <th mat-header-cell *matHeaderCellDef="let element"> {{opciones[i][3]['enunciado']}} </th>
-              <td mat-cell *matCellDef="let element">  </td>
+              <td mat-cell *matCellDef="let element"> <mat-radio-button value="1"></mat-radio-button> </td>
             </ng-container>
 
             <ng-container matColumnDef="E">
               <th mat-header-cell *matHeaderCellDef="let element"> {{opciones[i][4]['enunciado']}} </th>
-              <td mat-cell *matCellDef="let element">  </td>
+              <td mat-cell *matCellDef="let element"> <mat-radio-button value="1"> </mat-radio-button> </td>
             </ng-container>
+
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -71,7 +76,7 @@
 </div>
   <mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="100px">
 
-    <mat-grid-tile *ngIf="goPreguntas"  style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="1">
+    <mat-grid-tile   style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="1">
       <button mat-raised-button color="accent" (click)="FinishCuestionario()">Finalizar cuestionario</button>
     </mat-grid-tile>
 

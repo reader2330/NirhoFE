@@ -18,12 +18,14 @@ import {SynchronizeModule} from './modules/synchronize/synchronize.module';
 import {ApoModule} from './modules/apo/apo.module';
 import {MAT_DATE_LOCALE} from '@angular/material';
 import { ParticipantesSelectorComponent } from './modules/apo/components/participantes-selector/participantes-selector.component';
+import { ImagenesModalComponent } from './modules/modal/imagenes-modal/imagenes-modal.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ImagenesModalComponent,
 
 
   ],

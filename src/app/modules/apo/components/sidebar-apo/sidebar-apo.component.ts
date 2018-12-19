@@ -77,7 +77,7 @@ export class SidebarApoComponent implements OnInit {
   }
 
   goAvatarEditing() {
-    this.route.navigate(['avatar-edit']);
+    this.route.navigate(['avatar-edit', 'APO']);
   }
 
   recibirRespuestChildren(evt) {
