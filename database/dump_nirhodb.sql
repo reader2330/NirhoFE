@@ -18,7 +18,7 @@
 --
 -- Table structure for table `actividades_puesto_vacante`
 --
-use nirhodb;
+
 DROP TABLE IF EXISTS `actividades_puesto_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
@@ -1141,7 +1141,7 @@ CREATE TABLE `evaluador_evaluado` (
   `id_evaluador` int(11) NOT NULL,
   `id_evaluado` int(11) NOT NULL,
   PRIMARY KEY (`id_proyecto`,`id_evaluador`,`id_evaluado`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1366,8 +1366,8 @@ DROP TABLE IF EXISTS `opcion`;
 CREATE TABLE `opcion` (
   `id_opcion` int(11) NOT NULL,
   `id_tema` int(11) NOT NULL,
-  `enunciado` varchar(200) NOT NULL,
-  `tipo` varchar(2) NOT NULL,
+  `enunciado` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_opcion`),
   KEY `fk_opcion_tema_idx` (`id_tema`),
   CONSTRAINT `fk_opcion_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`)
@@ -1487,7 +1487,6 @@ DROP TABLE IF EXISTS `participanteapoamp`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `participanteapoamp` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `actividades` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cantidad_meta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `frecuencia_eval` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `funciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2094,4 +2093,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-11  3:41:19
+-- Dump completed on 2018-12-19  0:10:52

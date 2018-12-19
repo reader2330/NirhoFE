@@ -222,7 +222,6 @@ public class ParticipanteAPOController {
 		
 		participante.setObjetivoPuesto(jsonParticipanteAmp.optString("objetivoPuesto", null));
 		participante.setFunciones(jsonParticipanteAmp.optString("funciones", null));
-		participante.setActividades(jsonParticipanteAmp.optString("actividades", null));
 		participante.setMetaKpi(jsonParticipanteAmp.optString("metaKpi", null));
 		participante.setCantidadMeta(jsonParticipanteAmp.optString("cantidadMeta", null));
 		participante.setUnidadMedida(jsonParticipanteAmp.optString("unidadMedida", null));

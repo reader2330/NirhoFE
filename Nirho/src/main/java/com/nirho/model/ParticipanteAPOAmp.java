@@ -40,8 +40,6 @@ public class ParticipanteAPOAmp implements Serializable {
     private String objetivoPuesto;
     @Column(name = "funciones", nullable=true)
     private String funciones;
-    @Column(name = "actividades", nullable=true)
-    private String actividades;
     @Column(name = "meta_kpi", nullable=true)
     private String metaKpi;
     @Column(name = "cantidad_meta", nullable=true)
@@ -61,14 +59,13 @@ public class ParticipanteAPOAmp implements Serializable {
 
 	
 	public ParticipanteAPOAmp(Integer id, Integer idParticipante, String objetivoPuesto, String funciones,
-			String actividades, String metaKpi, String cantidadMeta, String unidadMedida, String tiempo,
+			String metaKpi, String cantidadMeta, String unidadMedida, String tiempo,
 			String frecuenciaEval, Integer idEvaluador) {
 		super();
 		this.id = id;
 		this.idParticipante = idParticipante;
 		this.objetivoPuesto = objetivoPuesto;
 		this.funciones = funciones;
-		this.actividades = actividades;
 		this.metaKpi = metaKpi;
 		this.cantidadMeta = cantidadMeta;
 		this.unidadMedida = unidadMedida;
@@ -107,14 +104,6 @@ public class ParticipanteAPOAmp implements Serializable {
 
     public void setFunciones(String funciones) {
         this.funciones = funciones;
-    }
-
-    public String getActividades() {
-        return actividades;
-    }
-
-    public void setActividades(String actividades) {
-        this.actividades = actividades;
     }
 
     public String getMetaKpi() {
@@ -168,7 +157,7 @@ public class ParticipanteAPOAmp implements Serializable {
 	@Override
 	public String toString() {
 		return "ParticipanteAPOAmp [id=" + id + ", objetivoPuesto=" + objetivoPuesto + ", funciones=" + funciones
-				+ ", actividades=" + actividades + ", metaKpi=" + metaKpi + ", cantidadMeta=" + cantidadMeta
+			    + ", metaKpi=" + metaKpi + ", cantidadMeta=" + cantidadMeta
 				+ ", unidadMedida=" + unidadMedida + ", tiempo=" + tiempo + ", frecuenciaEval=" + frecuenciaEval
 				+ ", idEvaluador=" + idEvaluador + "]";
 	}
