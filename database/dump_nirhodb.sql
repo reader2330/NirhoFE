@@ -741,10 +741,16 @@ CREATE TABLE `cuetionario_participante` (
   `respuesta` int(2) DEFAULT NULL,
   `respuesta_rh` int(2) DEFAULT NULL,
   `respuesta_jefe` int(2) DEFAULT NULL,
+  `pregunta_id_pregunta` int(11) NOT NULL,
+  `tema_id_tema` int(11) NOT NULL,
   PRIMARY KEY (`id_participante`,`id_tema`,`id_pregunta`,`id_proyecto`),
   KEY `fk_cuest_part_id_tema_idx` (`id_tema`),
   KEY `fk_cuest_part_id_preg_idx` (`id_pregunta`),
   KEY `fk_cuest_part_id_proyecto_idx` (`id_proyecto`),
+  KEY `FKt9twi2j2iwai7xcmdwtba6hhu` (`pregunta_id_pregunta`),
+  KEY `FKny0nilg5ji8fqxq33m5nas3lr` (`tema_id_tema`),
+  CONSTRAINT `FKny0nilg5ji8fqxq33m5nas3lr` FOREIGN KEY (`tema_id_tema`) REFERENCES `tema` (`id_tema`),
+  CONSTRAINT `FKt9twi2j2iwai7xcmdwtba6hhu` FOREIGN KEY (`pregunta_id_pregunta`) REFERENCES `pregunta` (`id_pregunta`),
   CONSTRAINT `fk_cuest_part_id_part` FOREIGN KEY (`id_participante`) REFERENCES `participante` (`id_participante`),
   CONSTRAINT `fk_cuest_part_id_pregunta` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id_pregunta`),
   CONSTRAINT `fk_cuest_part_id_proyecto` FOREIGN KEY (`id_proyecto`) REFERENCES `proyecto` (`id_proyecto`),
@@ -1135,11 +1141,7 @@ CREATE TABLE `evaluador_evaluado` (
   `id_evaluador` int(11) NOT NULL,
   `id_evaluado` int(11) NOT NULL,
   PRIMARY KEY (`id_proyecto`,`id_evaluador`,`id_evaluado`)
-<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-=======
-) ENGINE=InnoDB DEFAULT COLLATE=utf8_unicode_ci;
->>>>>>> 18e38e44585b37ab710dc727ce329bf1b0bbbbb9
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1484,16 +1486,9 @@ DROP TABLE IF EXISTS `participanteapoamp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `participanteapoamp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cantidad_meta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `frecuencia_eval` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `funciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `id_evaluador` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
   `id_participante` int(11) DEFAULT NULL,
-  `meta_kpi` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `objetivo_puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tiempo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `unidad_medida` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `participanteapo` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKakrh5b9lony0x95n1gi8jxk3o` (`participanteapo`)
@@ -1507,6 +1502,67 @@ CREATE TABLE `participanteapoamp` (
 LOCK TABLES `participanteapoamp` WRITE;
 /*!40000 ALTER TABLE `participanteapoamp` DISABLE KEYS */;
 /*!40000 ALTER TABLE `participanteapoamp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `participanteapoamp_actividad`
+--
+
+DROP TABLE IF EXISTS `participanteapoamp_actividad`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `participanteapoamp_actividad` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calificacion` int(11) DEFAULT NULL,
+  `fecha_creacion` date DEFAULT NULL,
+  `fecha_termino` date DEFAULT NULL,
+  `fecha_vencimiento` date DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` bit(1) NOT NULL,
+  `funcion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKebtey7ywv9w0822pmmpwn5a3g` (`funcion`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `participanteapoamp_actividad`
+--
+
+LOCK TABLES `participanteapoamp_actividad` WRITE;
+/*!40000 ALTER TABLE `participanteapoamp_actividad` DISABLE KEYS */;
+/*!40000 ALTER TABLE `participanteapoamp_actividad` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `participanteapoamp_funcion`
+--
+
+DROP TABLE IF EXISTS `participanteapoamp_funcion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `participanteapoamp_funcion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `calificacion` int(11) DEFAULT NULL,
+  `cantidad_meta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `frecuencia_eval` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `funcion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_evaluador` int(11) DEFAULT NULL,
+  `meta_kpi` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tiempo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `participante_apo_amp` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKe743lka652xmp05ot98yafmp1` (`participante_apo_amp`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `participanteapoamp_funcion`
+--
+
+LOCK TABLES `participanteapoamp_funcion` WRITE;
+/*!40000 ALTER TABLE `participanteapoamp_funcion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `participanteapoamp_funcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2091,4 +2147,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-19  0:10:52
+-- Dump completed on 2018-12-19  1:57:59

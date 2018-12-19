@@ -24,14 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
-import com.nirho.dto.NivelDTO;
 import com.nirho.dto.ParticipanteDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
-import com.nirho.model.EstatusProyecto;
 import com.nirho.model.ParticipanteAPO;
 import com.nirho.model.ParticipanteAPOAmp;
-import com.nirho.model.ParticipantePK;
+import com.nirho.model.ParticipanteAPOAmpFuncion;
 import com.nirho.model.Proyecto;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.ParticipanteAPOService;
@@ -168,14 +166,61 @@ public class ParticipanteAPOController {
 	@RequestMapping(value = "/headCountAmp", method = RequestMethod.POST)
 	@ResponseBody
 	public void headCountAmp(@RequestBody String headcount) throws NirhoControllerException {
+		
 		logger.info(" ************************ headcount [" + headcount + "] *****************************");
+		
 		try {
+			
 			JSONObject jsonHeadCount = new JSONObject(headcount);
 			JSONArray jsonParticipantesAmp = jsonHeadCount.getJSONArray("participantes");
 			List<ParticipanteAPOAmp> participantesAmp = new ArrayList<>();
-			for(int i = 0; i < jsonParticipantesAmp.length(); i++) {
-				ParticipanteAPOAmp participante = assamblerToParticipanteHCA(jsonParticipantesAmp.getJSONObject(i));
+			for(int i = 0; i < jsonParticipantesAmp.length(); i++) {	
+				
+				ParticipanteAPOAmp participante = null;
+				
+				for(ParticipanteAPOAmp pa: participantesAmp) {
+					if(pa.getId() == Integer.parseInt(jsonParticipantesAmp.getJSONObject(i).optString("id", "0"))) {
+
+						ParticipanteAPOAmpFuncion funcion = new ParticipanteAPOAmpFuncion();
+						funcion.setFuncion(jsonParticipantesAmp.getJSONObject(i).optString("funciones", null));
+						funcion.setMetaKpi(jsonParticipantesAmp.getJSONObject(i).optString("metaKpi", null));
+						funcion.setCantidadMeta(jsonParticipantesAmp.getJSONObject(i).optString("cantidadMeta", null));
+						funcion.setTiempo(jsonParticipantesAmp.getJSONObject(i).optString("tiempo", null));
+						funcion.setFrecuenciaEval(jsonParticipantesAmp.getJSONObject(i).optString("frecuenciaEval", null));
+						try {
+							funcion.setIdEvaluador(Integer.parseInt(jsonParticipantesAmp.getJSONObject(i).optString("idEvaluador", "0")));
+						} catch(Exception e) {
+							logger.info("Exception [" + e.getMessage() + "]");
+						}
+						pa.getFunciones().add(funcion);
+						
+						break;
+					}
+				}
+				
+				if(participante == null) {
+					participante = assamblerToParticipanteHCA(jsonParticipantesAmp.getJSONObject(i));
+					List<ParticipanteAPOAmpFuncion> funciones = new ArrayList<>();
+					
+					ParticipanteAPOAmpFuncion funcion = new ParticipanteAPOAmpFuncion();
+					funcion.setFuncion(jsonParticipantesAmp.getJSONObject(i).optString("funciones", null));
+					funcion.setMetaKpi(jsonParticipantesAmp.getJSONObject(i).optString("metaKpi", null));
+					funcion.setCantidadMeta(jsonParticipantesAmp.getJSONObject(i).optString("cantidadMeta", null));
+					funcion.setTiempo(jsonParticipantesAmp.getJSONObject(i).optString("tiempo", null));
+					funcion.setFrecuenciaEval(jsonParticipantesAmp.getJSONObject(i).optString("frecuenciaEval", null));
+					try {
+						funcion.setIdEvaluador(Integer.parseInt(jsonParticipantesAmp.getJSONObject(i).optString("idEvaluador", "0")));
+					} catch(Exception e) {
+						logger.info("Exception [" + e.getMessage() + "]");
+					}
+					funciones.add(funcion);
+					
+					participante.setFunciones(funciones);
+					
+				}
+
 				participantesAmp.add(participante);
+				
 			} 
 			participanteAPOService.ampliarParticipanteService(participantesAmp);
 		}  catch (NirhoServiceException e) {
@@ -188,6 +233,7 @@ public class ParticipanteAPOController {
 	private ParticipanteAPO assamblerToParticipanteHC(JSONObject jsonParticipante) throws JSONException {
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 		ParticipanteAPO participante = new ParticipanteAPO();
+		participante.setId(Integer.parseInt(jsonParticipante.optString("id", "0")));
 		participante.setNivel(Integer.parseInt(jsonParticipante.optString("nivel", "0")));
 		participante.setNivelTexto(jsonParticipante.optString("nivelTexto", null));
 		participante.setNombres(jsonParticipante.optString("nombres", null));
@@ -219,17 +265,10 @@ public class ParticipanteAPOController {
 
 	private ParticipanteAPOAmp assamblerToParticipanteHCA(JSONObject jsonParticipanteAmp) throws JSONException {
 		ParticipanteAPOAmp participante = new ParticipanteAPOAmp();
-		
+		participante.setId(Integer.parseInt(jsonParticipanteAmp.optString("id", "0")));
 		participante.setObjetivoPuesto(jsonParticipanteAmp.optString("objetivoPuesto", null));
-		participante.setFunciones(jsonParticipanteAmp.optString("funciones", null));
-		participante.setMetaKpi(jsonParticipanteAmp.optString("metaKpi", null));
-		participante.setCantidadMeta(jsonParticipanteAmp.optString("cantidadMeta", null));
-		participante.setUnidadMedida(jsonParticipanteAmp.optString("unidadMedida", null));
-		participante.setTiempo(jsonParticipanteAmp.optString("tiempo", null));
-		participante.setFrecuenciaEval(jsonParticipanteAmp.optString("frecuenciaEval", null));
 		try {
 			participante.setIdParticipante(Integer.parseInt(jsonParticipanteAmp.optString("idParticipante", "0")));
-			participante.setIdEvaluador(Integer.parseInt(jsonParticipanteAmp.optString("idEvaluador", "0")));
 		} catch(Exception e) {
 			logger.info("Exception [" + e.getMessage() + "]");
 		}
