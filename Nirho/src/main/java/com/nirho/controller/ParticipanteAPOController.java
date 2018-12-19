@@ -265,7 +265,6 @@ public class ParticipanteAPOController {
 
 	private ParticipanteAPOAmp assamblerToParticipanteHCA(JSONObject jsonParticipanteAmp) throws JSONException {
 		ParticipanteAPOAmp participante = new ParticipanteAPOAmp();
-		participante.setId(Integer.parseInt(jsonParticipanteAmp.optString("id", "0")));
 		participante.setObjetivoPuesto(jsonParticipanteAmp.optString("objetivoPuesto", null));
 		try {
 			participante.setIdParticipante(Integer.parseInt(jsonParticipanteAmp.optString("idParticipante", "0")));
