@@ -56,9 +56,9 @@ public class ParticipanteAPOAmpActividadServiceImpl implements ParticipanteAPOAm
 			try {
 				ParticipanteAPOAmpActividad f = participanteAPOAmpActividadDAO.getOne(actividad.getId() == null ? 0 : actividad.getId());
 				if(f == null) {
-					participanteAPOAmpActividadDAO.save(f);
+					participanteAPOAmpActividadDAO.save(actividad);
 				} else {
-					participanteAPOAmpActividadDAO.update(f);
+					participanteAPOAmpActividadDAO.update(actividad);
 				}
 			} catch(Exception e) {
 				logger.info("Exception [" + e.getMessage() + "");
