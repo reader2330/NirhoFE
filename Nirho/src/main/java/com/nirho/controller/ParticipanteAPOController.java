@@ -35,6 +35,7 @@ import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.ParticipanteAPOService;
 import com.nirho.service.ProyectoService;
 import com.nirho.service.UsuarioService;
+import com.nirho.util.EmailUtil;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -62,9 +63,9 @@ public class ParticipanteAPOController {
 			ParticipanteDTO organigrama = null;
 			for (ParticipanteAPO p: participantes) {
 				if(p.getIdPartJefeInm() == 0) {
-					organigrama = new ParticipanteDTO(p.getId(), p.getNombres(), p.getPuesto(), p.getIdPartJefeInm());
+					organigrama = new ParticipanteDTO(p.getIdParticipante(), p.getNombres(), p.getPuesto(), p.getIdPartJefeInm());
 				} else {
-					colaParticipantes.add(new ParticipanteDTO(p.getId(), p.getNombres(), p.getPuesto(), p.getIdPartJefeInm()));
+					colaParticipantes.add(new ParticipanteDTO(p.getIdParticipante(), p.getNombres(), p.getPuesto(), p.getIdPartJefeInm()));
 				}
 			}
 			
@@ -81,6 +82,24 @@ public class ParticipanteAPOController {
 			}
 			
 			return organigrama;
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
+		}
+	}
+	
+	@GetMapping(value = "/enviocorreo")
+	public void enviaCorreo(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		try {
+			
+			List<ParticipanteAPO> participantes = participanteAPOService.obtenerParticipantesPorProyecto(idProyecto);
+			
+			for (ParticipanteAPO p: participantes) {
+				if(p.getIdPartJefeInm() == 0) {
+					
+				} 
+			}
+			
+			
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
 		}
@@ -239,7 +258,7 @@ public class ParticipanteAPOController {
 	private ParticipanteAPO assamblerToParticipanteHC(JSONObject jsonParticipante) throws JSONException {
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 		ParticipanteAPO participante = new ParticipanteAPO();
-		participante.setId(Integer.parseInt(jsonParticipante.optString("id", "0")));
+		participante.setIdParticipante(Integer.parseInt(jsonParticipante.optString("idParticipante", "0")));
 		participante.setNivel(Integer.parseInt(jsonParticipante.optString("nivel", "0")));
 		participante.setNivelTexto(jsonParticipante.optString("nivelTexto", null));
 		participante.setNombres(jsonParticipante.optString("nombres", null));
@@ -271,7 +290,6 @@ public class ParticipanteAPOController {
 
 	private ParticipanteAPOAmp assamblerToParticipanteHCA(JSONObject jsonParticipanteAmp) throws JSONException {
 		ParticipanteAPOAmp participante = new ParticipanteAPOAmp();
-		participante.setId(Integer.parseInt(jsonParticipanteAmp.optString("id", "0")));
 		participante.setObjetivoPuesto(jsonParticipanteAmp.optString("objetivoPuesto", null));
 		try {
 			participante.setIdParticipante(Integer.parseInt(jsonParticipanteAmp.optString("idParticipante", "0")));
