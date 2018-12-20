@@ -451,6 +451,8 @@ public class ParticipanteAPOController {
 			ParticipanteAPOAmpFuncion f = participanteAPOAmpFuncionService.getOne(idFuncion);
 			if(a != null && f != null) {
 				a.setCalificacion(calificacion);
+				a.setFechaTermino(new Date());
+				a.setStatus(false);
 				participanteAPOAmpActividadService.guardar(a);
 				int calificacionFuncion = 0;
 				for(ParticipanteAPOAmpActividad actividad: f.getActividades()) {
