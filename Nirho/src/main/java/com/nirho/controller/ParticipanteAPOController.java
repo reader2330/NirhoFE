@@ -458,9 +458,37 @@ public class ParticipanteAPOController {
 				for(ParticipanteAPOAmpActividad actividad: f.getActividades()) {
 					calificacionFuncion += actividad.getCalificacion() == null ? 0 : actividad.getCalificacion();
 				}
-				f.setCalificacion(calificacionFuncion);
+				f.setCalificacion(Math.round(calificacionFuncion/f.getActividades().size()));
 				participanteAPOAmpFuncionService.guardar(f);
 			}
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} 
+	}
+	
+	@RequestMapping(value = "{idParticipante}/funciones/calificaciones", method = RequestMethod.POST)
+	public void funcionCalificaciones(@PathVariable("idParticipante") int idParticipante, @Valid @RequestBody List<ParticipanteAPOAmpActividad> l) throws NirhoControllerException{
+		try {
+			JSONObject response = new JSONObject();
+		    JSONArray funciones = new JSONArray(); 
+		    int sumaCalificaciones = 0;
+		    int numFunciones = 0;
+			ParticipanteAPO participante = participanteAPOService.getOne(idParticipante);
+			for(ParticipanteAPOAmp ampliacion: participante.getAmpliaciones()) {
+				for(ParticipanteAPOAmpFuncion funcion: ampliacion.getFunciones()) {
+					JSONObject jsonFuncion = new JSONObject();
+					jsonFuncion.accumulate("id", funcion.getId());
+					jsonFuncion.accumulate("funcion", funcion.getFuncion());
+					jsonFuncion.accumulate("calificacion", funcion.getCalificacion());
+					funciones.put(jsonFuncion);
+					numFunciones++;
+					sumaCalificaciones += funcion.getCalificacion() == null ? 0 : funcion.getCalificacion();
+				}
+			}
+			response.put("funciones", funciones);
+			response.put("promedio", Math.round(sumaCalificaciones / numFunciones) );
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
 		} catch(Exception exe) {

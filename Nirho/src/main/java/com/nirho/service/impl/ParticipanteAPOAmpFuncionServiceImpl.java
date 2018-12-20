@@ -64,9 +64,9 @@ public class ParticipanteAPOAmpFuncionServiceImpl implements ParticipanteAPOAmpF
 			try {
 				ParticipanteAPOAmpFuncion f = participanteAPOAmpFuncionDAO.getOne(funcion.getId() == null ? 0 : funcion.getId());
 				if(f == null) {
-					participanteAPOAmpFuncionDAO.save(f);
+					participanteAPOAmpFuncionDAO.save(funcion);
 				} else {
-					participanteAPOAmpFuncionDAO.update(f);
+					participanteAPOAmpFuncionDAO.update(funcion);
 				}
 			} catch(Exception e) {
 				logger.info("Exception [" + e.getMessage() + "");
