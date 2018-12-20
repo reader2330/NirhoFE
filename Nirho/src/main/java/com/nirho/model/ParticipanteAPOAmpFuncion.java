@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,7 +61,15 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
     
     @Column(name = "calificacion")
     private Integer calificacion;
-        
+    
+    @Basic(optional = false)
+    @Column(name = "check_participante")
+    private Boolean checkParticipante;
+    
+    @Basic(optional = false)
+    @Column(name = "check_jefe")
+    private Boolean checkJefe;
+    
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "funcion")
 	private List<ParticipanteAPOAmpActividad> actividades = new ArrayList<>();
@@ -69,9 +78,11 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
 		super();
 	}
 
+	
+
 	public ParticipanteAPOAmpFuncion(Integer id, String funcion, String metaKpi, String cantidadMeta, String tiempo,
-			String frecuenciaEval, Integer idEvaluador, Integer calificacion,
-			List<ParticipanteAPOAmpActividad> actividades) {
+			String frecuenciaEval, Integer idEvaluador, Integer calificacion, Boolean checkParticipante,
+			Boolean checkJefe, List<ParticipanteAPOAmpActividad> actividades) {
 		super();
 		this.id = id;
 		this.funcion = funcion;
@@ -81,6 +92,8 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
 		this.frecuenciaEval = frecuenciaEval;
 		this.idEvaluador = idEvaluador;
 		this.calificacion = calificacion;
+		this.checkParticipante = checkParticipante;
+		this.checkJefe = checkJefe;
 		this.actividades = actividades;
 	}
 
@@ -157,13 +170,28 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
 		this.actividades = actividades;
 	}
 
-	@Override
-	public String toString() {
-		return "ParticipanteAPOAmpFunciones [id=" + id + ", funcion=" + funcion + ", metaKpi=" + metaKpi
-				+ ", cantidadMeta=" + cantidadMeta + ", tiempo=" + tiempo + ", frecuenciaEval=" + frecuenciaEval
-				+ ", idEvaluador=" + idEvaluador + ", calificacion=" + calificacion + ", actividades=" + actividades
-				+ "]";
+	public Boolean getCheckParticipante() {
+		return checkParticipante;
 	}
 
-	
+	public void setCheckParticipante(Boolean checkParticipante) {
+		this.checkParticipante = checkParticipante;
+	}
+
+	public Boolean getCheckJefe() {
+		return checkJefe;
+	}
+
+	public void setCheckJefe(Boolean checkJefe) {
+		this.checkJefe = checkJefe;
+	}
+
+	@Override
+	public String toString() {
+		return "ParticipanteAPOAmpFuncion [id=" + id + ", funcion=" + funcion + ", metaKpi=" + metaKpi
+				+ ", cantidadMeta=" + cantidadMeta + ", tiempo=" + tiempo + ", frecuenciaEval=" + frecuenciaEval
+				+ ", idEvaluador=" + idEvaluador + ", calificacion=" + calificacion + ", checkParticipante="
+				+ checkParticipante + ", checkJefe=" + checkJefe + ", actividades=" + actividades + "]";
+	}
+
 }

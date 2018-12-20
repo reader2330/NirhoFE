@@ -188,4 +188,32 @@ public class ProyectoAPOController {
 		}
 	}
 	
+	@RequestMapping(value = "/reporte", method = RequestMethod.GET)
+	@ResponseBody
+	public void genearReporte(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletResponse response) throws NirhoControllerException{
+		try {
+			
+			System.out.println("------------------>" + idProyecto + "");
+			ZipSecureFile.setMinInflateRatio(0);
+	        
+	        XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporte.docx")); 
+			
+	        System.out.println("------------------>" + idProyecto + "");
+	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	        
+	        System.out.println("------------------>" + idProyecto + "");
+	        // Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
+	        System.out.println("------------------>" + baos.size() + "");
+	        
+	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
+	        response.setHeader("Content-Disposition", "attachment; filename=test.docx");
+	        document.write(response.getOutputStream());
+	   
+	        response.flushBuffer();
+
+		} catch(IOException | InvalidFormatException e){
+			throw new NirhoControllerException("Problemas al registrar el proyecto");
+		}
+	}
+	
 }

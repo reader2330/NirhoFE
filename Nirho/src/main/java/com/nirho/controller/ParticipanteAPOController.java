@@ -10,6 +10,7 @@ import java.util.Queue;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.jboss.logging.Logger;
 import org.json.JSONArray;
@@ -34,14 +35,18 @@ import com.nirho.dto.EmailDatos;
 import com.nirho.dto.ParticipanteDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.CuestionarioEmpresaIRH;
 import com.nirho.model.Participante;
 import com.nirho.model.ParticipanteAPO;
 import com.nirho.model.ParticipanteAPOAmp;
+import com.nirho.model.ParticipanteAPOAmpActividad;
 import com.nirho.model.ParticipanteAPOAmpFuncion;
 import com.nirho.model.Proyecto;
 import com.nirho.model.Usuario;
 import com.nirho.service.EmailService;
 import com.nirho.service.EstatusProyectoService;
+import com.nirho.service.ParticipanteAPOAmpActividadService;
+import com.nirho.service.ParticipanteAPOAmpFuncionService;
 import com.nirho.service.ParticipanteAPOService;
 import com.nirho.service.ProyectoService;
 import com.nirho.service.UsuarioService;
@@ -60,6 +65,10 @@ public class ParticipanteAPOController {
 	
 	@Autowired
 	ParticipanteAPOService participanteAPOService;
+	@Autowired
+	ParticipanteAPOAmpFuncionService participanteAPOAmpFuncionService;
+	@Autowired
+	ParticipanteAPOAmpActividadService participanteAPOAmpActividadService;
 	@Autowired
 	ProyectoService proyectoService;
 	@Autowired
@@ -143,7 +152,6 @@ public class ParticipanteAPOController {
 		}
 	}
 	
-	
 	@GetMapping(value = "/{token}")
 	public String porToken(@PathVariable("token") String token) throws NirhoControllerException{
 		try {
@@ -185,7 +193,6 @@ public class ParticipanteAPOController {
 		}
 		
 	}
-	
 	
 	private ParticipanteDTO insertToOrganigrama(ParticipanteDTO organigrama, ParticipanteDTO participante) {
 		if(organigrama == null) {
@@ -337,6 +344,142 @@ public class ParticipanteAPOController {
 		}
 	}
 
+	@RequestMapping(value = "/funciones/todas", method = RequestMethod.GET)
+	public List<ParticipanteAPOAmpFuncion> listFunciones() throws NirhoControllerException{
+		try {
+			return participanteAPOAmpFuncionService.list();			
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener los registros ");
+		}
+	}
+	
+	@RequestMapping(value = "/funciones/{id}", method = RequestMethod.GET)
+	public ParticipanteAPOAmpFuncion getFuncion(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			return participanteAPOAmpFuncionService.getOne(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de cuestionario empresa");
+		}
+	}
+	
+	@RequestMapping(value = "/funciones/guardar", method = RequestMethod.POST)
+	public void saveFuncion(@Valid @RequestBody ParticipanteAPOAmpFuncion f) throws NirhoControllerException{
+		try {
+			participanteAPOAmpFuncionService.guardar(f);	
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} 
+	}
+	
+	@RequestMapping(value = "funciones/todas/guardar", method = RequestMethod.POST)
+	public void editFuncion(@Valid @RequestBody List<ParticipanteAPOAmpFuncion> l) throws NirhoControllerException{
+		try {
+			participanteAPOAmpFuncionService.guardar(l);			
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} 
+	}
+	
+	@RequestMapping(value = "/funciones/{idFuncion}/actividades/todas", method = RequestMethod.GET)
+	public List<ParticipanteAPOAmpActividad> listActividades(@PathVariable("idFuncion") int idFuncion) throws NirhoControllerException{
+		try {
+			ParticipanteAPOAmpFuncion funcion = participanteAPOAmpFuncionService.getOne(idFuncion);
+			if(funcion != null) {
+				return funcion.getActividades();
+			} else {
+				return null;
+			}
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener los registros ");
+		}
+	}
+	
+	@RequestMapping(value = "/funciones/actividades/{id}", method = RequestMethod.GET)
+	public ParticipanteAPOAmpActividad getActividad(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			return participanteAPOAmpActividadService.getOne(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de cuestionario empresa");
+		}
+	}
+	
+	@RequestMapping(value = "/funciones/{idFuncion}/actividades/guardar", method = RequestMethod.POST)
+	public void saveActividad(@PathVariable("idFuncion") int idFuncion,@Valid @RequestBody ParticipanteAPOAmpActividad a) throws NirhoControllerException{
+		try {
+			ParticipanteAPOAmpFuncion funcion = participanteAPOAmpFuncionService.getOne(idFuncion);
+			if(funcion != null) {
+				if(funcion.getActividades() == null) {
+					funcion.setActividades(new ArrayList<>());
+					funcion.getActividades().add(a);
+				} else {
+					funcion.getActividades().add(a);
+				}
+			}	
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} 
+	}
+	
+	@RequestMapping(value = "/funciones/{idFuncion}/actividades/todas/guardar", method = RequestMethod.POST)
+	public void editActividad(@PathVariable("idFuncion") int idFuncion, @Valid @RequestBody List<ParticipanteAPOAmpActividad> l) throws NirhoControllerException{
+		try {
+			ParticipanteAPOAmpFuncion funcion = participanteAPOAmpFuncionService.getOne(idFuncion);
+			if(funcion != null) {
+				if(funcion.getActividades() == null) {
+					funcion.setActividades(l);
+				} else {
+					funcion.getActividades().addAll(l);
+				}
+			}	
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} 
+	}
+	
+	@RequestMapping(value = "/funciones/{idFuncion}/actividades/{idActividad}/calificar/{calificacion}", method = RequestMethod.POST)
+	public void editActividad(@PathVariable("idFuncion") int idFuncion, @PathVariable("idActividad") int idActividad, @PathVariable("calificacion") int calificacion) throws NirhoControllerException{
+		try {
+			ParticipanteAPOAmpActividad a = participanteAPOAmpActividadService.getOne(idActividad);
+			ParticipanteAPOAmpFuncion f = participanteAPOAmpFuncionService.getOne(idFuncion);
+			if(a != null && f != null) {
+				a.setCalificacion(calificacion);
+				participanteAPOAmpActividadService.guardar(a);
+				int calificacionFuncion = 0;
+				for(ParticipanteAPOAmpActividad actividad: f.getActividades()) {
+					calificacionFuncion += actividad.getCalificacion() == null ? 0 : actividad.getCalificacion();
+				}
+				f.setCalificacion(calificacionFuncion);
+				participanteAPOAmpFuncionService.guardar(f);
+			}
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} 
+	}
+	
+	public void reporte(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+		try {
+			
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
+			List<ParticipanteAPO> participantes = participanteAPOService.obtenerParticipantesPorProyecto(idProyecto);
+			
+			
+			
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
+		}
+	}
+	
+	
 	private ParticipanteAPO assamblerToParticipanteHC(JSONObject jsonParticipante) throws JSONException {
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 		ParticipanteAPO participante = new ParticipanteAPO();
