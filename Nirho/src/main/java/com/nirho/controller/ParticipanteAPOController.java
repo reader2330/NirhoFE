@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nirho.constant.ProyectoConstants;
 import com.nirho.dto.EmailDatos;
 import com.nirho.dto.ParticipanteDTO;
@@ -158,12 +160,20 @@ public class ParticipanteAPOController {
 	        
 	        if(claims != null) {
 	        	int idParticipante = (int)claims.get("id");
+	        	
+	        	
+	        	
 	        	JSONObject response = new JSONObject();
 	        	try {
-					response.put("participante", participanteAPOService.getOne(idParticipante));
+	        		ObjectMapper o = new ObjectMapper();
+		        	String userJsonString = o.writeValueAsString(participanteAPOService.getOne(idParticipante));
+					response.put("participante", new JSONObject(userJsonString));
 					response.put("jefe", (boolean)claims.get("jefe"));
 					return response.toString();
 				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (JsonProcessingException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	        }
