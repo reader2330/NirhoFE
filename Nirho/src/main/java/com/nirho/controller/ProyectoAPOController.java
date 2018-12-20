@@ -208,7 +208,7 @@ public class ProyectoAPOController {
 	public void genearReporte(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletResponse response) throws NirhoControllerException{
 		try {
 			
-			URL sqlScriptUrl = ProyectoAPOController.class.getClassLoader().getResource("plantillaReporte.docx");
+			URL sqlScriptUrl = ProyectoAPOController.class.getClassLoader().getResource("plantillaReporteAPO.docx");
 			
 			ZipSecureFile.setMinInflateRatio(0);
 	        
