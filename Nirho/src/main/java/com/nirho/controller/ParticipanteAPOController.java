@@ -413,8 +413,9 @@ public class ParticipanteAPOController {
 			ParticipanteAPOAmpFuncion funcion = participanteAPOAmpFuncionService.getOne(idFuncion);
 			if(funcion != null) {
 				if(funcion.getActividades() == null) {
-					funcion.setActividades(new ArrayList<>());
-					funcion.getActividades().add(a);
+					List<ParticipanteAPOAmpActividad> l = new ArrayList<>();
+					l.add(a);
+					funcion.setActividades(l);
 				} else {
 					funcion.getActividades().add(a);
 				}
