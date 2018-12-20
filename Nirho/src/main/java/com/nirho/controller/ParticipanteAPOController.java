@@ -9,11 +9,14 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.jboss.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,18 +27,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
+import com.nirho.dto.EmailDatos;
 import com.nirho.dto.ParticipanteDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.Participante;
 import com.nirho.model.ParticipanteAPO;
 import com.nirho.model.ParticipanteAPOAmp;
 import com.nirho.model.ParticipanteAPOAmpFuncion;
 import com.nirho.model.Proyecto;
+import com.nirho.model.Usuario;
+import com.nirho.service.EmailService;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.ParticipanteAPOService;
 import com.nirho.service.ProyectoService;
 import com.nirho.service.UsuarioService;
 import com.nirho.util.EmailUtil;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -49,9 +59,14 @@ public class ParticipanteAPOController {
 	@Autowired
 	ProyectoService proyectoService;
 	@Autowired
+	private EmailService emailService;
+	@Autowired
 	private EstatusProyectoService estatusService;
 	@Autowired
 	UsuarioService usuarioService;
+	
+	@Value("${jwt.secret}")
+    private String SECRET;
 
 	@GetMapping(value = "/organigrama")
 	public ParticipanteDTO organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
@@ -88,22 +103,43 @@ public class ParticipanteAPOController {
 	}
 	
 	@GetMapping(value = "/enviocorreo")
-	public void enviaCorreo(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
+	public void enviaCorreo(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletRequest request) throws NirhoControllerException{
 		try {
 			
 			List<ParticipanteAPO> participantes = participanteAPOService.obtenerParticipantesPorProyecto(idProyecto);
 			
 			for (ParticipanteAPO p: participantes) {
-				if(p.getIdPartJefeInm() == 0) {
-					
+				if(p.getCorreoElectronico() != null && !p.getCorreoElectronico().isEmpty()) {
+					Proyecto proyecto = proyectoService.obtenerProyectoPorId(p.getIdProyecto());
+					if(proyecto != null) {	
+						
+						String token = Jwts.builder()
+				                .claim("jefe", false)
+				                .claim("id", p.getIdParticipante())
+				                .signWith( SignatureAlgorithm.HS512, SECRET )
+				                .compact();
+						enviarCorreoParticipanteAPO(p, proyecto, token, request);
+						
+						if(p.getIdPartJefeInm() != 0) {
+							ParticipanteAPO jefe = participanteAPOService.getOne(p.getIdPartJefeInm());
+							String tokenJefe = Jwts.builder()
+					                .claim("jefe", true)
+					                .claim("id", jefe.getIdParticipante())
+					                .signWith( SignatureAlgorithm.HS512, SECRET )
+					                .compact();
+							enviarCorreoParticipanteAPO(jefe, proyecto, tokenJefe, request);
+						}
+						
+					}
 				} 
 			}
-			
 			
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
 		}
 	}
+	
+	
 	
 	private ParticipanteDTO insertToOrganigrama(ParticipanteDTO organigrama, ParticipanteDTO participante) {
 		if(organigrama == null) {
@@ -297,6 +333,21 @@ public class ParticipanteAPOController {
 			logger.info("Exception [" + e.getMessage() + "]");
 		}
 		return participante;
+	}
+	
+	private void enviarCorreoParticipanteAPO(ParticipanteAPO participante, Proyecto proyecto, String token, HttpServletRequest request) {
+		try {
+    		EmailDatos datos = new EmailDatos();
+    		datos.setEmailDestino(participante.getCorreoElectronico());
+    		datos.setNombreParticipante(participante.getNombres());
+    		datos.setNombreProyecto(proyecto.getNombre());
+    		datos.setToken(token);
+    		String usuario = (String) request.getAttribute("username");
+			Usuario usuarioEnSesion = usuarioService.obtenerUsuario(usuario);
+    		emailService.sendEmailAPO(datos, usuarioEnSesion.getEmail());
+    	} catch(NirhoServiceException nse) {
+    		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
+    	}
 	}
 	
 }

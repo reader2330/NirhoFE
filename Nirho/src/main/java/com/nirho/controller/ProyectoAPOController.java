@@ -25,6 +25,7 @@ import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.EstatusProyecto;
 import com.nirho.model.Proyecto;
+import com.nirho.service.EmailService;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.GraficasProyectoService;
 import com.nirho.service.ProyectoService;
