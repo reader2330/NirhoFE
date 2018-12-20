@@ -143,7 +143,7 @@ public class ParticipanteAPOController {
 	
 	
 	@GetMapping(value = "/{token}")
-	public ParticipanteAPO porToken(@PathVariable("token") String token) throws NirhoControllerException{
+	public String porToken(@PathVariable("token") String token) throws NirhoControllerException{
 		try {
 			
 			Claims claims;
@@ -158,7 +158,14 @@ public class ParticipanteAPOController {
 	        
 	        if(claims != null) {
 	        	int idParticipante = (int)claims.get("id");
-	        	return participanteAPOService.getOne(idParticipante);
+	        	JSONObject response = new JSONObject();
+	        	try {
+					response.put("participante", participanteAPOService.getOne(idParticipante));
+					response.put("jefe", (boolean)claims.get("jefe"));
+					return response.toString();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 	        }
 	        
 	        return null;
