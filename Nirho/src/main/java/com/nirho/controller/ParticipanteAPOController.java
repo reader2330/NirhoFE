@@ -468,7 +468,7 @@ public class ParticipanteAPOController {
 		} 
 	}
 	
-	@RequestMapping(value = "{idParticipante}/funciones/calificaciones", method = RequestMethod.POST)
+	@RequestMapping(value = "/{idParticipante}/funciones/calificaciones", method = RequestMethod.POST)
 	public void funcionCalificaciones(@PathVariable("idParticipante") int idParticipante, @Valid @RequestBody List<ParticipanteAPOAmpActividad> l) throws NirhoControllerException{
 		try {
 			JSONObject response = new JSONObject();
@@ -489,6 +489,48 @@ public class ParticipanteAPOController {
 			}
 			response.put("funciones", funciones);
 			response.put("promedio", Math.round(sumaCalificaciones / numFunciones) );
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
+		} 
+	}
+	
+	@GetMapping(value = "/{idParticipante}/funciones/actividades/status")
+	public String funcionStatusActividades(@RequestParam("idParticipante") int idParticipante) throws NirhoControllerException{
+		try {
+			JSONArray jsonResponse = new JSONArray();
+
+			ParticipanteAPO participante = participanteAPOService.getOne(idParticipante);
+			
+			for(ParticipanteAPOAmp ampliacion: participante.getAmpliaciones()) {
+				for(ParticipanteAPOAmpFuncion funcion: ampliacion.getFunciones()){
+					
+					JSONObject jsonFuncion = new JSONObject();
+					int activas = 0;
+					int terminadas = 0;
+					
+					for(ParticipanteAPOAmpActividad actividad: funcion.getActividades()) {
+						if(actividad.getStatus()) {
+							activas++;
+						} else {
+							terminadas++;
+						}
+					}
+					
+					jsonFuncion.accumulate("id", funcion.getId());
+					jsonFuncion.accumulate("funcion", funcion.getFuncion());
+					jsonFuncion.accumulate("activas", activas);
+					jsonFuncion.accumulate("terminadas", terminadas);
+					jsonResponse.put(jsonFuncion);
+					
+				}
+			}
+				
+				
+				
+		
+			return jsonResponse.toString();
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
 		} catch(Exception exe) {
