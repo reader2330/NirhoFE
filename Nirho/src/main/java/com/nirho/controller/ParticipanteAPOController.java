@@ -62,7 +62,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class ParticipanteAPOController {
 	
 	public final static Logger logger = Logger.getLogger(ParticipanteAPOController.class);
-	
+	 
 	@Autowired
 	ParticipanteAPOService participanteAPOService;
 	@Autowired
@@ -80,7 +80,7 @@ public class ParticipanteAPOController {
 	
 	@Value("${jwt.secret}")
     private String SECRET;
-
+    
 	@GetMapping(value = "/organigrama")
 	public ParticipanteDTO organigrama(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		try {
