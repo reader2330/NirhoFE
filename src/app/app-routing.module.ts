@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './modules/clb/components/login/login.component';
 import { InicioComponent } from './modules/clb/components/inicio/inicio.component';
-import { SteppersComponent } from './modules/clb/components/formularios/steppers/steppers.component';
 import { AvatarEditComponent } from './modules/clb/components/avatar-edit/avatar-edit.component';
 import { EncuestaComponent } from './modules/clb/components/encuesta/encuesta.component';
 import { Sidebar360Component } from './modules/eva/components/sidebar-360/sidebar-360.component';
@@ -17,6 +16,8 @@ import {InicioApoComponent} from './modules/apo/components/inicio-apo/inicio-apo
 import {LoginGuard} from './guards/login.guard';
 import {EncuestaEvdComponent} from './modules/evd/components/encuesta-evd/encuesta-evd.component';
 import {EncuestaEva360Component} from './modules/eva/components/encuesta-eva360/encuesta-eva360.component';
+import {ViewActividadesComponent} from './screensOut/view-actividades/view-actividades.component';
+import {SidebarPvcComponent} from './modules/pvc/components/sidebar-pvc/sidebar-pvc.component';
 
 
 
@@ -76,6 +77,15 @@ const routes: Routes = [
   {
     path: 'encuesta/EVA360/:token',
     component: EncuestaEva360Component
+  },
+  {
+    path: 'actividades/participante/:token',
+    component: ViewActividadesComponent
+  },
+  {
+    path: 'PVC',
+    component: SidebarPvcComponent,
+    canActivate: [LoginGuard]
   },
   { path: '**', redirectTo: '' }
 ];

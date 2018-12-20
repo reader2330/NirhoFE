@@ -29,7 +29,6 @@ export class HaedCount2ApoComponent implements OnInit {
   displayedColumns: string[] = [
     'OBJETIVO PUESTO',
     'FUNCIONES',
-    'ACTIVIDADES',
     'NOMBRE DE META',
     'CANTIDAD META',
     'UNIDAD MEDIDA',
@@ -39,26 +38,6 @@ export class HaedCount2ApoComponent implements OnInit {
 
   ];
 
-  names = [
-    'id',
-    'nivel',
-    'nivelTexto',
-    'nombres',
-    'aPaterno',
-    'aMaterno',
-    'genero',
-    'rfc',
-    'puesto',
-    'fechaIngreso',
-    'antigPuesto',
-    'nivelEscolaridad',
-    'otrosEstudios',
-    'idioma',
-    'nivelIdioma',
-    'correoElectronico',
-    'sede',
-    'areaOrg'
-  ];
 
   constructor(breakpointObserver: BreakpointObserver, private ProyectApoService: ProyectoApoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
@@ -136,9 +115,6 @@ export class HaedCount2ApoComponent implements OnInit {
     }
   }
 
-  getName(j) {
-    return this.names[j];
-  }
 
   uploadHeadCount() {
     this.showTable = true;
@@ -151,12 +127,11 @@ export class HaedCount2ApoComponent implements OnInit {
     this.dataSource[index].idParticipante = data[0];
     this.dataSource[index].objetivoPuesto = data[1];
     this.dataSource[index].funciones = data[2];
-    this.dataSource[index].actividades = data[3];
-    this.dataSource[index].metaKpi = data[4];
-    this.dataSource[index].cantidadMeta = data[5];
-    this.dataSource[index].unidadMedida = data[6];
-    this.dataSource[index].tiempo = data[7];
-    this.dataSource[index].frecuenciaEval = data[8];
+    this.dataSource[index].metaKpi = data[3];
+    this.dataSource[index].cantidadMeta = data[4];
+    this.dataSource[index].unidadMedida = data[5];
+    this.dataSource[index].tiempo = data[6];
+    this.dataSource[index].frecuenciaEval = data[7];
 
   }
 

@@ -26,6 +26,7 @@
     "@fortawesome/angular-fontawesome": "^0.3.0",
     "@fortawesome/fontawesome-svg-core": "latest",
     "angular-bootstrap-md": "^6.3.0",
+    "angular-vertical-timeline": "^0.6.0",
     "angular2-highcharts": "^0.5.5",
     "chart.js": "^2.7.3",
     "core-js": "^2.5.4",

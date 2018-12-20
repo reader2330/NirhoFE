@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BandejaDetalleEvdComponent } from './bandeja-detalle-evd.component';
+import { SteppersPvcComponent } from './steppers-pvc.component';
 
-describe('BandejaDetallePvcComponent', () => {
-  let component: BandejaDetalleEvdComponent;
-  let fixture: ComponentFixture<BandejaDetalleEvdComponent>;
+describe('SteppersPvcComponent', () => {
+  let component: SteppersPvcComponent;
+  let fixture: ComponentFixture<SteppersPvcComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BandejaDetalleEvdComponent ]
+      declarations: [ SteppersPvcComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BandejaDetalleEvdComponent);
+    fixture = TestBed.createComponent(SteppersPvcComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
