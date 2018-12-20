@@ -1,7 +1,11 @@
 package com.nirho.controller;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,9 +37,11 @@ import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.EstatusProyecto;
 import com.nirho.model.Proyecto;
 import com.nirho.service.EmailService;
+import com.nirho.service.EmpresaService;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.GraficasProyectoService;
 import com.nirho.service.ProyectoService;
+import com.nirho.util.ReporteUtil;
 import com.nirho.util.SessionUtil;
 
 @RestController
@@ -51,6 +57,8 @@ public class ProyectoAPOController {
 	private EstatusProyectoService estatusService;
 	@Autowired
 	private GraficasProyectoService graficasService;
+	@Autowired
+	EmpresaService empresaService;
 	
 	@GetMapping(value = "/todos")
 	public List<Proyecto> todos() throws NirhoControllerException{
@@ -200,17 +208,125 @@ public class ProyectoAPOController {
 	public void genearReporte(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletResponse response) throws NirhoControllerException{
 		try {
 			
-			System.out.println("------------------>" + idProyecto + "");
+			URL sqlScriptUrl = ProyectoAPOController.class.getClassLoader().getResource("plantillaReporte.docx");
+			
 			ZipSecureFile.setMinInflateRatio(0);
 	        
-	        XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporte.docx")); 
-			
-	        System.out.println("------------------>" + idProyecto + "");
+	        XWPFDocument document = new XWPFDocument(OPCPackage.open(sqlScriptUrl.getPath())); 
 	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	        
-	        System.out.println("------------------>" + idProyecto + "");
-	        // Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
-	        System.out.println("------------------>" + baos.size() + "");
+	        Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
+	     
+	        ReporteUtil.reemplazarParrafo(document, "nombre.empresa", proyecto.getIdEmpresa().getEmpresa());
+	        
+	        ReporteUtil.agregarTitulo(document, "Tabla de contenido");
+	        
+	        ReporteUtil.agregarTablaContenido(document);
+	        
+	        ReporteUtil.nuevaPagina(document);
+	        
+	        ReporteUtil.agregarTitulo1(document, "Introducción");
+	        
+	        ReporteUtil.agregarTitulo2(document, "Administración por Objetivos");
+	        ReporteUtil.agregarParrafo(document, "Los objetivos corporativos son las declaraciones cualitativas y cuantitativas del futuro deseado para la organización.\n" +
+	        "Las organizaciones cuentan con objetivos corporativos, que deberán de ser traducidos en objetivos individuales para cada una de las personas que laboran en la misma empresa. \n" +
+	        "Los responsables de esta tarea son los líderes (Gerentes o Directores) quienes junto con su equipo de trabajo establecen metas comunes. Lo anterior exige un enfoque participativo y el constante apoyo sin importar la jerarquía para el logro de los mismos, ya que en conjunto garantizarán el éxito empresarial.");
+	        
+	        ReporteUtil.agregarTitulo2(document, "Lineamientos para la gestión APO");
+	        List<String> lista1 = new ArrayList<>();
+	        lista1.add("Adhesión de todos los integrantes de la empresa sin importar el nivel jerarquico");
+	        lista1.add("Cascadeo de la metas una vez establecida por alta dirección");
+	        lista1.add("Establecimiento de metas por áreas y por persona");
+	        lista1.add("Autonomía en la gestión de las actividades que garanticen el cumplimiento de la meta");
+	        lista1.add("Evaluación del cumplimiento de las metas");
+	        ReporteUtil.agregarLista(document, lista1);
+	        
+	        ReporteUtil.agregarTitulo2(document, "Nuestros objetivos son:");
+	        List<String> lista2 = new ArrayList<>();
+	        lista2.add("Medibles");
+	        lista2.add("Factibles");
+	        lista2.add("Flexibles");
+	        lista2.add("Motivadores");
+	        lista2.add("Comprensibles");
+	        lista2.add("Convincentes");
+	        ReporteUtil.agregarLista(document, lista2);
+	        
+	        ReporteUtil.agregarTitulo2(document, "Beneficios APO");
+	        List<String> lista3 = new ArrayList<>();
+	        lista3.add("Permite definir para cada personas las expectativas de desempeño");
+	        lista3.add("Mejora la comunicación entre el líder y su equipo");
+	        lista3.add("Ayuda a la planeación y al logro de los objetivos a largo plazo");
+	        lista3.add("Genera niveles más altos de compromiso para cada integrante");
+	        lista3.add("Logra equidad en los procesos de evaluación de desempeño");
+	        ReporteUtil.agregarLista(document, lista3);
+	        
+	        ReporteUtil.nuevaPagina(document);
+	        
+	        ReporteUtil.agregarTitulo1(document, "Resultados por Empresa");
+	        
+	        ReporteUtil.agregarTitulo(document, "Cumplimiento por área respecto al promedio empresarial");
+	        
+	        List<String> headersT1 = new ArrayList<>();
+	        headersT1.add("AREA");
+	        headersT1.add("FUNCION");
+	        headersT1.add("PROMEDIO DE CUMPLIMIENTO");
+	        
+	        List<List<String>> contentT1 = new ArrayList<>();
+	        List<String> row1T1 = new ArrayList<>();
+	        row1T1.add("1");
+	        row1T1.add("2");
+	        row1T1.add("3");
+	        contentT1.add(row1T1);
+	        List<String> row2T1 = new ArrayList<>();
+	        row2T1.add("4");
+	        row2T1.add("5");
+	        row2T1.add("6");
+	        contentT1.add(row2T1);
+	        
+	        ReporteUtil.crearTablaTitle(document, headersT1, contentT1);
+	        
+	        ReporteUtil.agregarSeparadorEnBlanco(document);
+	        
+	        ReporteUtil.agregarTitulo(document, "Resumen de la empresa");
+	        
+	        List<String> headers = new ArrayList<>();
+	        headers.add("Promedio de cumplimiento");
+	        headers.add("Mayor cumplimiento");
+	        headers.add("Mínimo cumplimiento");
+	        headers.add("Consultor niRHo");
+	        
+	        List<List<String>> content = new ArrayList<>();
+	        List<String> row1 = new ArrayList<>();
+	        row1.add("1");
+	        content.add(row1);
+	        List<String> row2 = new ArrayList<>();
+	        row2.add("1");
+	        content.add(row2);
+	        List<String> row3 = new ArrayList<>();
+	        row3.add("1");
+	        content.add(row3);
+	        List<String> row4 = new ArrayList<>();
+	        row4.add("1");
+	        content.add(row4);
+	        
+	        ReporteUtil.crearTablaFirstRowTitle(document, headers, content);
+	        
+	        ReporteUtil.agregarSeparadorEnBlanco(document);
+	        
+	        ReporteUtil.nuevaPagina(document);
+	        
+	        ReporteUtil.agregarTitulo1(document, "Resumen por Área");
+	        
+	        ReporteUtil.agregarTitulo(document, "Resumen de Área");
+	        
+	        ReporteUtil.nuevaPagina(document);
+	        
+	        ReporteUtil.agregarTitulo1(document, "Resultados Individuales");
+	        
+	        ReporteUtil.agregarTitulo(document, "Resumen personal");
+	        
+	        
+	        
 	        
 	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
 	        response.setHeader("Content-Disposition", "attachment; filename=test.docx");
@@ -219,7 +335,9 @@ public class ProyectoAPOController {
 	        response.flushBuffer();
 
 		} catch(IOException | InvalidFormatException e){
-			throw new NirhoControllerException("Problemas al registrar el proyecto");
+			throw new NirhoControllerException("Problemas al generar reporte");
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al generar reporte");
 		}
 	}
 	

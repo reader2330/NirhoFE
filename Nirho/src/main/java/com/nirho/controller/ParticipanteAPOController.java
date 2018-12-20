@@ -466,20 +466,6 @@ public class ParticipanteAPOController {
 		} 
 	}
 	
-	public void reporte(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
-		try {
-			
-			Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
-			List<ParticipanteAPO> participantes = participanteAPOService.obtenerParticipantesPorProyecto(idProyecto);
-			
-			
-			
-		} catch(NirhoServiceException e){
-			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
-		}
-	}
-	
-	
 	private ParticipanteAPO assamblerToParticipanteHC(JSONObject jsonParticipante) throws JSONException {
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 		ParticipanteAPO participante = new ParticipanteAPO();

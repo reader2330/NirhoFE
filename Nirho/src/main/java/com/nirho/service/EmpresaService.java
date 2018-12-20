@@ -11,6 +11,7 @@ import com.nirho.model.view.VwEmpresasSolicitudCuestionario;
 public interface EmpresaService {
 	List<Empresa> obtenerEmpresasTodas() throws NirhoServiceException;
 	Empresa obtenerEmpresaPorRfc(String rfc) throws NirhoServiceException;
+	public Empresa obtenerEmpresaPorId(long id) throws NirhoServiceException;
 	void registraEmpresa(Empresa empresa) throws NirhoServiceException;
 	
 	/**
