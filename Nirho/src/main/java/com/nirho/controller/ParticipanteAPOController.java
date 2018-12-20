@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +45,7 @@ import com.nirho.service.ProyectoService;
 import com.nirho.service.UsuarioService;
 import com.nirho.util.EmailUtil;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -139,6 +141,33 @@ public class ParticipanteAPOController {
 		}
 	}
 	
+	
+	@GetMapping(value = "/{token}")
+	public ParticipanteAPO porToken(@PathVariable("token") String token) throws NirhoControllerException{
+		try {
+			
+			Claims claims;
+	        try {
+	            claims = Jwts.parser()
+	                    .setSigningKey(this.SECRET)
+	                    .parseClaimsJws(token)
+	                    .getBody();
+	        } catch (Exception e) {
+	            claims = null;
+	        }
+	        
+	        if(claims != null) {
+	        	int idParticipante = (int)claims.get("id");
+	        	return participanteAPOService.getOne(idParticipante);
+	        }
+	        
+	        return null;
+	        
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
+		}
+		
+	}
 	
 	
 	private ParticipanteDTO insertToOrganigrama(ParticipanteDTO organigrama, ParticipanteDTO participante) {
