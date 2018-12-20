@@ -468,8 +468,8 @@ public class ParticipanteAPOController {
 		} 
 	}
 	
-	@RequestMapping(value = "/{idParticipante}/funciones/calificaciones", method = RequestMethod.POST)
-	public void funcionCalificaciones(@PathVariable("idParticipante") int idParticipante, @Valid @RequestBody List<ParticipanteAPOAmpActividad> l) throws NirhoControllerException{
+	@RequestMapping(value = "/{idParticipante}/funciones/calificaciones", method = RequestMethod.GET)
+	public String funcionCalificaciones(@PathVariable("idParticipante") int idParticipante, @Valid @RequestBody List<ParticipanteAPOAmpActividad> l) throws NirhoControllerException{
 		try {
 			JSONObject response = new JSONObject();
 		    JSONArray funciones = new JSONArray(); 
@@ -489,6 +489,7 @@ public class ParticipanteAPOController {
 			}
 			response.put("funciones", funciones);
 			response.put("promedio", Math.round(sumaCalificaciones / numFunciones) );
+			return response.toString();
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");
 		} catch(Exception exe) {
