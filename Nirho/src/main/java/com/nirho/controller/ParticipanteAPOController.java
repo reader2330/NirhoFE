@@ -177,9 +177,10 @@ public class ParticipanteAPOController {
 			for(int i = 0; i < jsonParticipantesAmp.length(); i++) {	
 				
 				ParticipanteAPOAmp participante = null;
+				boolean addParticiante = true;
 				
 				for(ParticipanteAPOAmp pa: participantesAmp) {
-					if(pa.getId() == Integer.parseInt(jsonParticipantesAmp.getJSONObject(i).optString("id", "0"))) {
+					if(pa.getIdParticipante() == Integer.parseInt(jsonParticipantesAmp.getJSONObject(i).optString("idParticipante", "0"))) {
 
 						ParticipanteAPOAmpFuncion funcion = new ParticipanteAPOAmpFuncion();
 						funcion.setFuncion(jsonParticipantesAmp.getJSONObject(i).optString("funciones", null));
@@ -193,9 +194,14 @@ public class ParticipanteAPOController {
 							logger.info("Exception [" + e.getMessage() + "]");
 						}
 						pa.getFunciones().add(funcion);
-						
+						addParticiante = false;
 						break;
+						
 					}
+				}
+				
+				if(!addParticiante) {
+					continue;
 				}
 				
 				if(participante == null) {
@@ -265,6 +271,7 @@ public class ParticipanteAPOController {
 
 	private ParticipanteAPOAmp assamblerToParticipanteHCA(JSONObject jsonParticipanteAmp) throws JSONException {
 		ParticipanteAPOAmp participante = new ParticipanteAPOAmp();
+		participante.setId(Integer.parseInt(jsonParticipanteAmp.optString("id", "0")));
 		participante.setObjetivoPuesto(jsonParticipanteAmp.optString("objetivoPuesto", null));
 		try {
 			participante.setIdParticipante(Integer.parseInt(jsonParticipanteAmp.optString("idParticipante", "0")));

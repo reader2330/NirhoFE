@@ -1,13 +1,15 @@
--- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `nirhodb` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `nirhodb`;
+-- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
 --
--- Host: localhost    Database: nirhodb
+-- Host: 127.0.0.1    Database: nirhodb
 -- ------------------------------------------------------
--- Server version	5.7.24-log
+-- Server version	5.7.24
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +23,7 @@
 
 DROP TABLE IF EXISTS `actividades_puesto_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `actividades_puesto_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `descripcion_act_puesto_vacante` varchar(150) NOT NULL,
@@ -50,7 +52,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `apo_role_modulo_submodulo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `apo_role_modulo_submodulo` (
   `id` bigint(20) NOT NULL,
   `id_modulo` int(11) NOT NULL,
@@ -77,7 +79,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `asignacion_consultor_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `asignacion_consultor_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `estado` int(11) NOT NULL,
@@ -107,7 +109,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `candidato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `direccion` varchar(255) DEFAULT NULL,
@@ -140,7 +142,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `caracteristicas_candidato_cv`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `caracteristicas_candidato_cv` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `cambio_residencia` varchar(150) NOT NULL,
@@ -180,7 +182,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `caracteristicas_candidato_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `caracteristicas_candidato_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `cambio_residencia` varchar(150) NOT NULL,
@@ -211,7 +213,7 @@ CREATE TABLE `caracteristicas_candidato_vacante` (
 
 LOCK TABLES `caracteristicas_candidato_vacante` WRITE;
 /*!40000 ALTER TABLE `caracteristicas_candidato_vacante` DISABLE KEYS */;
-INSERT INTO `caracteristicas_candidato_vacante` VALUES (1,'Indistinto','No aplica','Lic. en Diseño gráfico','No aplica','Construcción de paginas web\nsilver light','Indistinto','No',_binary '͜ur\0[IM۠&v겥\0\0xp\0\0\0\0\0\0\0\0\0(','Con tenido web','Indistinto','Indistinto',9,'No aplica','No aplica','Si',1);
+INSERT INTO `caracteristicas_candidato_vacante` VALUES (1,'Indistinto','No aplica','Lic. en Diseño gráfico','No aplica','Construcción de paginas web\nsilver light','Indistinto','No','͜ur\0[IM۠&v겥\0\0xp\0\0\0\0\0\0\0\0\0(','Con tenido web','Indistinto','Indistinto',9,'No aplica','No aplica','Si',1);
 /*!40000 ALTER TABLE `caracteristicas_candidato_vacante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +223,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `catalogo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `catalogo` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `descripcion_catalogo` varchar(255) NOT NULL,
@@ -250,7 +252,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `clb_submodulo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `clb_submodulo` (
   `id_submodulo` int(11) NOT NULL,
   `descripcion` varchar(90) COLLATE utf8_unicode_ci NOT NULL,
@@ -274,7 +276,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `competencias_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `competencias_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `desc_competencia` varchar(400) NOT NULL,
@@ -304,7 +306,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conocimiento_candidato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `conocimiento_candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `descripcion_conocimiento` varchar(150) NOT NULL,
@@ -332,7 +334,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conocimiento_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `conocimiento_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `descripcion_conocimiento_vacante` varchar(150) NOT NULL,
@@ -361,7 +363,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `consultor_proyecto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `consultor_proyecto` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `id_proyecto` int(11) NOT NULL,
@@ -388,7 +390,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `contacto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contacto` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `celular` varchar(255) NOT NULL,
@@ -420,7 +422,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `contacto_candidato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contacto_candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre_contacto` varchar(150) NOT NULL,
@@ -447,7 +449,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `contratacion_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contratacion_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `jornada` varchar(150) NOT NULL,
@@ -477,7 +479,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuestionario_empresa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuestionario_empresa` (
   `id_cuestionario_empresa` int(11) NOT NULL AUTO_INCREMENT,
   `id_tema` int(11) NOT NULL,
@@ -509,7 +511,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuestionario_empresa_irh`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuestionario_empresa_irh` (
   `id_cuestionario_empresa` bigint(20) NOT NULL AUTO_INCREMENT,
   `finalizado` bit(1) DEFAULT NULL,
@@ -525,7 +527,7 @@ CREATE TABLE `cuestionario_empresa_irh` (
 
 LOCK TABLES `cuestionario_empresa_irh` WRITE;
 /*!40000 ALTER TABLE `cuestionario_empresa_irh` DISABLE KEYS */;
-INSERT INTO `cuestionario_empresa_irh` VALUES (0,_binary '\0',0,0);
+INSERT INTO `cuestionario_empresa_irh` VALUES (0,'\0',0,0);
 /*!40000 ALTER TABLE `cuestionario_empresa_irh` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -535,7 +537,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuestionario_empresa_irh_pregunta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuestionario_empresa_irh_pregunta` (
   `id_pregunta` bigint(20) NOT NULL AUTO_INCREMENT,
   `enunciado` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -565,7 +567,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuestionario_empresa_irh_tema`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuestionario_empresa_irh_tema` (
   `id_tema` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -584,7 +586,7 @@ CREATE TABLE `cuestionario_empresa_irh_tema` (
 
 LOCK TABLES `cuestionario_empresa_irh_tema` WRITE;
 /*!40000 ALTER TABLE `cuestionario_empresa_irh_tema` DISABLE KEYS */;
-INSERT INTO `cuestionario_empresa_irh_tema` VALUES (1,'','ESTRUCTURA ORGANIZACIONAL',0,_binary '',0),(2,'','INTEGRACION DE PERSONAL',0,_binary '',0),(3,'','EVALUACIÓN DEL PERSONAL',0,_binary '',0),(4,'','CAPACITACION Y DESARROLLO DE PERSONAL',0,_binary '',0),(5,'','DESARROLLO ORGANIZACIONAL',0,_binary '',0),(6,'','REMUNERACIONES',0,_binary '',0),(7,'','RELACIONES LABORALES',0,_binary '',0),(8,'','SEGURIDAD E HIGIENE',0,_binary '',0);
+INSERT INTO `cuestionario_empresa_irh_tema` VALUES (1,'','ESTRUCTURA ORGANIZACIONAL',0,'',0),(2,'','INTEGRACION DE PERSONAL',0,'',0),(3,'','EVALUACIÓN DEL PERSONAL',0,'',0),(4,'','CAPACITACION Y DESARROLLO DE PERSONAL',0,'',0),(5,'','DESARROLLO ORGANIZACIONAL',0,'',0),(6,'','REMUNERACIONES',0,'',0),(7,'','RELACIONES LABORALES',0,'',0),(8,'','SEGURIDAD E HIGIENE',0,'',0);
 /*!40000 ALTER TABLE `cuestionario_empresa_irh_tema` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -594,7 +596,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuestionario_opcion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuestionario_opcion` (
   `id_proyecto` int(11) NOT NULL,
   `id_tema` int(11) NOT NULL,
@@ -623,7 +625,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuestionario_proyecto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuestionario_proyecto` (
   `id_proyecto` int(11) NOT NULL,
   `id_tema` int(11) NOT NULL,
@@ -653,7 +655,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuestionario_proyecto_tp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuestionario_proyecto_tp` (
   `id_cuestionario_proyecto` bigint(20) NOT NULL AUTO_INCREMENT,
   `finalizado` bit(1) DEFAULT NULL,
@@ -678,7 +680,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuestionario_proyecto_tp_pregunta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuestionario_proyecto_tp_pregunta` (
   `id_pregunta` bigint(20) NOT NULL AUTO_INCREMENT,
   `enunciado` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -705,7 +707,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuestionario_proyecto_tp_tema`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuestionario_proyecto_tp_tema` (
   `id_tema` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -732,7 +734,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuetionario_participante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuetionario_participante` (
   `id_participante` int(11) NOT NULL,
   `id_proyecto` int(11) NOT NULL,
@@ -773,7 +775,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `empleado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `empleado` (
   `id_empleado` bigint(20) NOT NULL,
   `banco` int(11) NOT NULL,
@@ -820,7 +822,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `empleado_contacto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `empleado_contacto` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `beneficiario` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -850,7 +852,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `empleado_escolaridad_certificaciones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `empleado_escolaridad_certificaciones` (
   `empleado_id_empleado` bigint(20) NOT NULL,
   `escolaridad_certificaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -873,7 +875,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `empleado_escolaridad_cursos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `empleado_escolaridad_cursos` (
   `empleado_id_empleado` bigint(20) NOT NULL,
   `escolaridad_cursos` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -896,7 +898,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `empleado_escolaridad_oficios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `empleado_escolaridad_oficios` (
   `empleado_id_empleado` bigint(20) NOT NULL,
   `escolaridad_oficios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -919,7 +921,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `empleado_idioma`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `empleado_idioma` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `habilidades` int(11) NOT NULL,
@@ -946,7 +948,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `empleado_laboral`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `empleado_laboral` (
   `id` bigint(20) NOT NULL,
   `antiguedad` int(11) DEFAULT NULL,
@@ -978,7 +980,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `empresa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `empresa` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `direccion` varchar(255) DEFAULT NULL,
@@ -1015,7 +1017,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `entrevista_asignacion_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `entrevista_asignacion_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `direccion` varchar(255) DEFAULT NULL,
@@ -1048,7 +1050,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `entrevistado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `entrevistado` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre_responsable_llenado` varchar(150) NOT NULL,
@@ -1082,7 +1084,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `espacio_fisico`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `espacio_fisico` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `delimitacion_areas_trabajo` bit(1) NOT NULL,
@@ -1111,7 +1113,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `estatus_proyecto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `estatus_proyecto` (
   `id_estatus` int(11) NOT NULL,
   `descripcion` varchar(90) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1135,7 +1137,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `evaluador_evaluado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `evaluador_evaluado` (
   `id_proyecto` int(11) NOT NULL,
   `id_evaluador` int(11) NOT NULL,
@@ -1159,7 +1161,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `experiencia_candidato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `experiencia_candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `desc_proyecto` varchar(255) DEFAULT NULL,
@@ -1191,7 +1193,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `grafica_proyecto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `grafica_proyecto` (
   `id_proyecto` int(11) NOT NULL,
   `area_org` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
@@ -1225,7 +1227,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `hibernate_sequence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1247,7 +1249,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `idioma_candidato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `idioma_candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `desc_idioma` varchar(400) NOT NULL,
@@ -1275,7 +1277,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `idioma_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `idioma_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `desc_idioma` varchar(400) NOT NULL,
@@ -1304,7 +1306,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `indicadores_nirho`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `indicadores_nirho` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `asignada_candidato` int(11) NOT NULL,
@@ -1337,7 +1339,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `modulo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `modulo` (
   `id_modulo` int(11) NOT NULL,
   `nombre` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
@@ -1362,7 +1364,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `opcion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `opcion` (
   `id_opcion` int(11) NOT NULL,
   `id_tema` int(11) NOT NULL,
@@ -1390,7 +1392,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `participante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `participante` (
   `id_participante` int(11) NOT NULL,
   `id_proyecto` int(11) NOT NULL,
@@ -1443,30 +1445,30 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `participanteapo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `participanteapo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `a_materno` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `a_paterno` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `a_materno` varchar(255) DEFAULT NULL,
+  `a_paterno` varchar(255) DEFAULT NULL,
   `antig_puesto` double DEFAULT NULL,
-  `area_org` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `correo_electronico` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `area_org` varchar(255) DEFAULT NULL,
+  `correo_electronico` varchar(255) DEFAULT NULL,
   `fecha_ingreso` date DEFAULT NULL,
-  `genero` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `genero` varchar(255) DEFAULT NULL,
   `id_part_jefe_inm` int(11) DEFAULT NULL,
   `id_proyecto` int(11) DEFAULT NULL,
-  `idioma` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `idioma` varchar(255) DEFAULT NULL,
   `nivel` int(11) DEFAULT NULL,
-  `nivel_escolaridad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nivel_idioma` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nivel_texto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nombres` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `otros_estudios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rfc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sede` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nivel_escolaridad` varchar(255) DEFAULT NULL,
+  `nivel_idioma` varchar(255) DEFAULT NULL,
+  `nivel_texto` varchar(255) DEFAULT NULL,
+  `nombres` varchar(255) DEFAULT NULL,
+  `otros_estudios` varchar(255) DEFAULT NULL,
+  `puesto` varchar(255) DEFAULT NULL,
+  `rfc` varchar(255) DEFAULT NULL,
+  `sede` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1475,6 +1477,7 @@ CREATE TABLE `participanteapo` (
 
 LOCK TABLES `participanteapo` WRITE;
 /*!40000 ALTER TABLE `participanteapo` DISABLE KEYS */;
+INSERT INTO `participanteapo` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,'nombre',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `participanteapo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1484,15 +1487,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `participanteapoamp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `participanteapoamp` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_participante` int(11) DEFAULT NULL,
-  `objetivo_puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `objetivo_puesto` varchar(255) DEFAULT NULL,
   `participanteapo` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKakrh5b9lony0x95n1gi8jxk3o` (`participanteapo`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1501,6 +1504,7 @@ CREATE TABLE `participanteapoamp` (
 
 LOCK TABLES `participanteapoamp` WRITE;
 /*!40000 ALTER TABLE `participanteapoamp` DISABLE KEYS */;
+INSERT INTO `participanteapoamp` VALUES (9,1,'Optimizar los recursos de la empresa, buscando siempre mejorar los márgenes de utilidad, cnservando la calidad de los productos1',1),(10,1,'Optimizar los recursos de la empresa, buscando siempre mejorar los márgenes de utilidad, cnservando la calidad de los productos2',1),(11,1,'Optimizar los recursos de la empresa, buscando siempre mejorar los márgenes de utilidad, cnservando la calidad de los productos3',1);
 /*!40000 ALTER TABLE `participanteapoamp` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1510,19 +1514,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `participanteapoamp_actividad`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `participanteapoamp_actividad` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `calificacion` int(11) DEFAULT NULL,
   `fecha_creacion` date DEFAULT NULL,
   `fecha_termino` date DEFAULT NULL,
   `fecha_vencimiento` date DEFAULT NULL,
-  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
   `status` bit(1) NOT NULL,
   `funcion` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKebtey7ywv9w0822pmmpwn5a3g` (`funcion`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1540,20 +1544,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `participanteapoamp_funcion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `participanteapoamp_funcion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `calificacion` int(11) DEFAULT NULL,
-  `cantidad_meta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `frecuencia_eval` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `funcion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cantidad_meta` varchar(255) DEFAULT NULL,
+  `frecuencia_eval` varchar(255) DEFAULT NULL,
+  `funcion` varchar(255) DEFAULT NULL,
   `id_evaluador` int(11) DEFAULT NULL,
-  `meta_kpi` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tiempo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_kpi` varchar(255) DEFAULT NULL,
+  `tiempo` varchar(255) DEFAULT NULL,
   `participante_apo_amp` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKe743lka652xmp05ot98yafmp1` (`participante_apo_amp`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1562,6 +1566,7 @@ CREATE TABLE `participanteapoamp_funcion` (
 
 LOCK TABLES `participanteapoamp_funcion` WRITE;
 /*!40000 ALTER TABLE `participanteapoamp_funcion` DISABLE KEYS */;
+INSERT INTO `participanteapoamp_funcion` VALUES (14,NULL,'235.8','Bimestral','Establecer las directrices de la administración de recursos humanos, materiales y financieros de la empresa',0,'Costo de Reursos Humanos y Materiales por unidad producida','Mensual',9),(15,NULL,'76.7','Bimestral','Establecer las directrices de la administración de recursos humanos, materiales y financieros de la empresa',0,'Costo de Reursos Humanos y Materiales por unidad vendida','Mensual',9),(16,NULL,'20%','Bimestral','Establecer las directrices de la administración de recursos humanos, materiales y financieros de la empresa',0,'Margen de utilidad de la empresa','Mensual',9),(17,NULL,'76.7','Bimestral','Establecer las directrices de la administración de recursos humanos, materiales y financieros de la empresa',0,'Costo de Reursos Humanos y Materiales por unidad vendida','Mensual',10),(18,NULL,'20%','Bimestral','Establecer las directrices de la administración de recursos humanos, materiales y financieros de la empresa',0,'Margen de utilidad de la empresa','Mensual',11);
 /*!40000 ALTER TABLE `participanteapoamp_funcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1571,7 +1576,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `plantilla_cuestionario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `plantilla_cuestionario` (
   `id_modulo` int(11) NOT NULL,
   `id_tema` int(11) NOT NULL,
@@ -1599,7 +1604,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pregunta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pregunta` (
   `id_pregunta` int(11) NOT NULL,
   `id_tema` int(11) NOT NULL,
@@ -1627,7 +1632,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pregunta_cuestionario_empresa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pregunta_cuestionario_empresa` (
   `id_pregunta_cuestionario_empresa` int(11) NOT NULL AUTO_INCREMENT,
   `id_cuestionario_empresa` int(11) NOT NULL,
@@ -1656,7 +1661,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pregunta_tema`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pregunta_tema` (
   `id_pregunta` int(11) NOT NULL AUTO_INCREMENT,
   `id_tema` int(11) NOT NULL,
@@ -1686,7 +1691,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pregunta_tema_historico`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pregunta_tema_historico` (
   `id_pregunta` int(11) NOT NULL AUTO_INCREMENT,
   `id_tema` int(11) NOT NULL,
@@ -1720,7 +1725,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `proyecto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `proyecto` (
   `id_proyecto` int(11) NOT NULL AUTO_INCREMENT,
   `id_modulo` int(11) NOT NULL,
@@ -1766,7 +1771,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `psicometrico_asignacion_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `psicometrico_asignacion_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `fecha` varchar(255) DEFAULT NULL,
@@ -1794,7 +1799,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `respuesta_pregunta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `respuesta_pregunta` (
   `id_respuesta_pregunta` int(11) NOT NULL AUTO_INCREMENT,
   `id_participante` int(11) NOT NULL,
@@ -1827,7 +1832,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `respuesta_pregunta_irh`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `respuesta_pregunta_irh` (
   `id_respuesta_pregunta` int(11) NOT NULL,
   `cumplimiento` varchar(180) DEFAULT NULL,
@@ -1857,7 +1862,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rol_clb_submodulo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rol_clb_submodulo` (
   `rol` int(11) NOT NULL,
   `id_submodulo` int(11) NOT NULL,
@@ -1883,7 +1888,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tema`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tema` (
   `id_tema` int(11) NOT NULL,
   `nombre` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
@@ -1909,7 +1914,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tema_cuestionario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tema_cuestionario` (
   `id_tema` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
@@ -1934,7 +1939,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tipo_catalogo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipo_catalogo` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `estado` int(11) NOT NULL,
@@ -1959,7 +1964,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `avatar` varchar(255) DEFAULT NULL,
@@ -1991,7 +1996,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `anios_experiencia` tinyblob NOT NULL,
@@ -2020,7 +2025,7 @@ CREATE TABLE `vacante` (
 
 LOCK TABLES `vacante` WRITE;
 /*!40000 ALTER TABLE `vacante` DISABLE KEYS */;
-INSERT INTO `vacante` VALUES (1,_binary '͜ur\0[IM۠&v겥\0\0xp\0\0\0\0\0\0	\0\0\0','La Martine 280',4,4,46,'Gerente de Diseño',1,'Gerente \"A\"','No aplica','Director General',1,1),(2,_binary '͜ur\0[IM۠&v겥\0\0xp\0\0\0\0\0\0\0\0\0\n','No Aplica',1,6,49,'ASESORA DE MODA',4,'ASESORA DE MODA','NINGUNO','SUPERVISORA DE TIENDA O GERENTE',3,10);
+INSERT INTO `vacante` VALUES (1,'͜ur\0[IM۠&v겥\0\0xp\0\0\0\0\0\0	\0\0\0','La Martine 280',4,4,46,'Gerente de Diseño',1,'Gerente \"A\"','No aplica','Director General',1,1),(2,'͜ur\0[IM۠&v겥\0\0xp\0\0\0\0\0\0\0\0\0\n','No Aplica',1,6,49,'ASESORA DE MODA',4,'ASESORA DE MODA','NINGUNO','SUPERVISORA DE TIENDA O GERENTE',3,10);
 /*!40000 ALTER TABLE `vacante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2030,7 +2035,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vw_cuestionario_preguntas_temas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vw_cuestionario_preguntas_temas` (
   `id_pregunta` int(11) NOT NULL,
   `de_plantilla` int(11) DEFAULT NULL,
@@ -2059,7 +2064,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vw_cuestionario_respuestas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vw_cuestionario_respuestas` (
   `id_respuesta_pregunta` int(11) NOT NULL,
   `cumplimiento` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2092,7 +2097,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vw_empresas_solicitud_cuestionario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vw_empresas_solicitud_cuestionario` (
   `id_cuestionario_empresa` int(11) NOT NULL,
   `finalizado` int(11) DEFAULT NULL,
@@ -2120,7 +2125,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vw_tema_cuestionario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vw_tema_cuestionario` (
   `id_tema` int(11) NOT NULL,
   `descripcion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2147,4 +2152,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-19  1:57:59
+-- Dump completed on 2018-12-19 18:58:20
