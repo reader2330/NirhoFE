@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Sidebar360Component } from './sidebar-360.component';
 
-describe('Sidebar360Component', () => {
+describe('SidebarPvcComponent', () => {
   let component: Sidebar360Component;
   let fixture: ComponentFixture<Sidebar360Component>;
 

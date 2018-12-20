@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { registerLocaleData } from '@angular/common';
+import localeMx from '@angular/common/locales/es-MX';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './modules/material/material.module';
@@ -17,8 +19,12 @@ import {AdmModule} from './modules/adm/adm.module';
 import {SynchronizeModule} from './modules/synchronize/synchronize.module';
 import {ApoModule} from './modules/apo/apo.module';
 import {MAT_DATE_LOCALE} from '@angular/material';
-import { ParticipantesSelectorComponent } from './modules/apo/components/participantes-selector/participantes-selector.component';
+
 import { ImagenesModalComponent } from './modules/modal/imagenes-modal/imagenes-modal.component';
+import {ViewActividadesComponent} from './screensOut/view-actividades/view-actividades.component';
+import {VerticalTimelineModule} from 'angular-vertical-timeline';
+import {PvcModule} from './modules/pvc/pvc.module';
+registerLocaleData(localeMx);
 
 
 
@@ -26,8 +32,7 @@ import { ImagenesModalComponent } from './modules/modal/imagenes-modal/imagenes-
   declarations: [
     AppComponent,
     ImagenesModalComponent,
-
-
+    ViewActividadesComponent
   ],
   imports: [
     BrowserModule,
@@ -43,11 +48,17 @@ import { ImagenesModalComponent } from './modules/modal/imagenes-modal/imagenes-
     EvdModule,
     AdmModule,
     SynchronizeModule,
-    ApoModule
+    ApoModule,
+    PvcModule,
+    VerticalTimelineModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},
+    { provide: LOCALE_ID, useValue: 'es-MX' }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+
+}

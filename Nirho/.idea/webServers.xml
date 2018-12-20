@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4e11e76c-f289-4f4b-99ad-e941bf6f9ec2" name="pruebas" url="http://74.208.131.50">
+        <fileTransfer host="74.208.131.50" port="22" rootFolder="/opt/jboss/jboss-eap-7.1/standalone/deployments" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
