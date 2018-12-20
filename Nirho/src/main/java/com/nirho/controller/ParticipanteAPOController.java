@@ -169,8 +169,6 @@ public class ParticipanteAPOController {
 	        if(claims != null) {
 	        	int idParticipante = (int)claims.get("id");
 	        	
-	        	
-	        	
 	        	JSONObject response = new JSONObject();
 	        	try {
 	        		ObjectMapper o = new ObjectMapper();
@@ -469,7 +467,7 @@ public class ParticipanteAPOController {
 	}
 	
 	@RequestMapping(value = "/{idParticipante}/funciones/calificaciones", method = RequestMethod.GET)
-	public String funcionCalificaciones(@PathVariable("idParticipante") int idParticipante, @Valid @RequestBody List<ParticipanteAPOAmpActividad> l) throws NirhoControllerException{
+	public String funcionCalificaciones(@PathVariable("idParticipante") int idParticipante) throws NirhoControllerException{
 		try {
 			JSONObject response = new JSONObject();
 		    JSONArray funciones = new JSONArray(); 
@@ -498,7 +496,7 @@ public class ParticipanteAPOController {
 	}
 	
 	@GetMapping(value = "/{idParticipante}/funciones/actividades/status")
-	public String funcionStatusActividades(@RequestParam("idParticipante") int idParticipante) throws NirhoControllerException{
+	public String funcionStatusActividades(@PathVariable("idParticipante") int idParticipante) throws NirhoControllerException{
 		try {
 			JSONArray jsonResponse = new JSONArray();
 
@@ -526,10 +524,7 @@ public class ParticipanteAPOController {
 					jsonResponse.put(jsonFuncion);
 					
 				}
-			}
-				
-				
-				
+			}	
 		
 			return jsonResponse.toString();
 		} catch(NirhoServiceException ex){
