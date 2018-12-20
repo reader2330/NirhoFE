@@ -373,7 +373,7 @@ public class ParticipanteAPOController {
 		} 
 	}
 	
-	@RequestMapping(value = "funciones/todas/guardar", method = RequestMethod.POST)
+	@RequestMapping(value = "/funciones/todas/guardar", method = RequestMethod.POST)
 	public void editFuncion(@Valid @RequestBody List<ParticipanteAPOAmpFuncion> l) throws NirhoControllerException{
 		try {
 			participanteAPOAmpFuncionService.guardar(l);			
@@ -418,6 +418,7 @@ public class ParticipanteAPOController {
 				} else {
 					funcion.getActividades().add(a);
 				}
+				participanteAPOAmpFuncionService.guardar(funcion);
 			}	
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar cuestionario empresa");

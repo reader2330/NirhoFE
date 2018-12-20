@@ -325,9 +325,6 @@ public class ProyectoAPOController {
 	        
 	        ReporteUtil.agregarTitulo(document, "Resumen personal");
 	        
-	        
-	        
-	        
 	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
 	        response.setHeader("Content-Disposition", "attachment; filename=test.docx");
 	        document.write(response.getOutputStream());
