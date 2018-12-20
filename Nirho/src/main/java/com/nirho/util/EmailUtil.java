@@ -6,7 +6,7 @@ public class EmailUtil {
 	public static final String URL_CUESTIONARIO = "http://74.208.252.39/#/encuesta/";
 	public static final String URL_CUEST_EVD = "http://74.208.252.39/#/encuesta/EVD/";
 	public static final String URL_CUEST_EVA360 = "http://74.208.252.39/#/encuesta/EVA360/";
-	public static final String URL_CUEST_APO = "http://74.208.252.39/#/encuesta/APO/";
+	public static final String URL_CUEST_APO = "http://74.208.252.39/#/actividades/participante/";
 	public static String getAsunto(String nombreProyecto) {
 		String asunto = "Cuestionario " + nombreProyecto;
 		return asunto;
