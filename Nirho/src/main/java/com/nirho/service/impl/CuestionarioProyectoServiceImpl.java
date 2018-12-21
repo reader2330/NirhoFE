@@ -100,33 +100,41 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 		logger.info("************* CuestionarioConfEVD [" + cuestionario +"] *******************");
 		try {
 			for(Tema tema: cuestionario.getLista()) {
-				Tema temaTem = null;
-				temaTem = temaDAO.getOne(tema.getIdTema());
-				logger.info("************* tema [" + temaTem +"] *******************");
-				Pregunta pregunta = null;
-				if(temaTem == null) {
-					logger.info("************* Es nuevo tema [" + tema +"] *******************");
-					temaDAO.save(tema);
-					pregunta = new Pregunta();
-					pregunta.setIdPregunta(new Integer(tema.getIdTema()+"01"));
-					pregunta.setEnunciado(tema.getNombre());
-					pregunta.setIdTema(tema);
-					preguntaDAO.save(pregunta);
-				} else {
-					pregunta = preguntaDAO.findByIdTema(temaTem.getIdTema()).get(0);
-				}
-				CuestionarioProyecto cp = new CuestionarioProyecto();
-				CuestionarioProyectoPK pk = new CuestionarioProyectoPK(
-						cuestionario.getIdProyecto(), pregunta.getIdTema().getIdTema(), pregunta.getIdPregunta());
-				cp.setCuestionarioProyectoPK(pk);
-				dao.save(cp);
-				for(Participante part: participanteDAO.findByIdProyecto(cuestionario.getIdProyecto())) {
-					CuetionarioParticipante cuestPart = new CuetionarioParticipante();
-					CuetionarioParticipantePK cuestPartPK = new CuetionarioParticipantePK(
-							part.getParticipantePK().getIdParticipante(), part.getParticipantePK().getIdProyecto(),
-									pregunta.getIdTema().getIdTema(), pregunta.getIdPregunta());
-					cuestPart.setCuetionarioParticipantePK(cuestPartPK);
-					cuestDAO.save(cuestPart);
+				try {
+					Tema temaTem = null;
+					temaTem = temaDAO.getOne(tema.getIdTema());
+					logger.info("************* tema [" + temaTem +"] *******************");
+					Pregunta pregunta = null;
+					if(temaTem == null) {
+						logger.info("************* Es nuevo tema [" + tema +"] *******************");
+						temaDAO.save(tema);
+						pregunta = new Pregunta();
+						pregunta.setIdPregunta(new Integer(tema.getIdTema()+"01"));
+						pregunta.setEnunciado(tema.getNombre());
+						pregunta.setIdTema(tema);
+						preguntaDAO.save(pregunta);
+					} else {
+						pregunta = preguntaDAO.findByIdTema(temaTem.getIdTema()).get(0);
+					}
+					CuestionarioProyecto cp = new CuestionarioProyecto();
+					CuestionarioProyectoPK pk = new CuestionarioProyectoPK(
+							cuestionario.getIdProyecto(), pregunta.getIdTema().getIdTema(), pregunta.getIdPregunta());
+					cp.setCuestionarioProyectoPK(pk);
+					dao.save(cp);
+					for(Participante part: participanteDAO.findByIdProyecto(cuestionario.getIdProyecto())) {
+						try {
+							CuetionarioParticipante cuestPart = new CuetionarioParticipante();
+							CuetionarioParticipantePK cuestPartPK = new CuetionarioParticipantePK(
+									part.getParticipantePK().getIdParticipante(), part.getParticipantePK().getIdProyecto(),
+											pregunta.getIdTema().getIdTema(), pregunta.getIdPregunta());
+							cuestPart.setCuetionarioParticipantePK(cuestPartPK);
+							cuestDAO.save(cuestPart);
+						} catch(Exception e) {
+							logger.info("Exception e [" + e.getMessage() +"]");
+						}
+					}
+				} catch(Exception e) {
+					logger.info("Exception e [" + e.getMessage() +"]");
 				}
 			}
 		} catch(Exception e) {
