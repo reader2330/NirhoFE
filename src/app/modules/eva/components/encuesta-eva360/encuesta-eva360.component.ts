@@ -33,8 +33,7 @@ export class EncuestaEva360Component implements OnInit {
   temas = [{
     nombre: 'Imagen'
   }];
-  urlMensagge = environment.urlNG + 'assets/Mensajes/360-2.PNG' +
-    '';
+  urlMensagge = environment.urlNG + 'assets/Mensajes/360-2.PNG';
   preguntas = [];
   token = '';
   opciones = [];

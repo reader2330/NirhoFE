@@ -40,11 +40,12 @@ export class SidebarApoComponent implements OnInit {
 
   getModules() {
     this.ProyectoServicesAPO.getModules(this.user.rol).subscribe((res) => {
-      console.log(res);
       for (let obj of res) {
         this.modules.push({id_submodulo: obj.idSubmodulo, descripcion: obj.descripcion});
       }
-      console.log(this.modules);
+      if (this.user.rol === 3){
+        this.modules.push({id_submodulo: 10, descripcion:'Envio de actividades'});
+      }
     });
   }
   getFrecuencia(num) {

@@ -11,6 +11,11 @@ import {SidebarPvcComponent} from './components/sidebar-pvc/sidebar-pvc.componen
 import {SteppersPvcComponent} from './components/steppers-pvc/steppers-pvc.component';
 import {BandejaDetallePvcComponent} from './components/bandeja-detalle-pvc/bandeja-detalle-pvc.component';
 import {BandejaPVCComponent} from './components/bandeja-pvc/bandeja-pvc.component';
+import {SelectorAreasComponent} from './components/selector-areas/selector-areas.component';
+import {DetallePreguntasPvcComponent} from './components/detalle-preguntas-pvc/detalle-preguntas-pvc.component';
+import {DataCompanyPvcComponent} from './components/forms-pvc/data-company-pvc/data-company-pvc.component';
+import {DataContactPvcComponent} from './components/forms-pvc/data-contact-pvc/data-contact-pvc.component-';
+import {DataProjectPvcComponent} from './components/forms-pvc/data-project-pvc/data-project-pvc.component';
 
 @NgModule({
   imports: [
@@ -26,8 +31,12 @@ import {BandejaPVCComponent} from './components/bandeja-pvc/bandeja-pvc.componen
     SidebarPvcComponent,
     SteppersPvcComponent,
     BandejaDetallePvcComponent,
-    BandejaPVCComponent
-
+    BandejaPVCComponent,
+    SelectorAreasComponent,
+    DetallePreguntasPvcComponent,
+    DataCompanyPvcComponent,
+    DataContactPvcComponent,
+    DataProjectPvcComponent
   ],
   entryComponents: [
 

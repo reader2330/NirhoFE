@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DataProject360Component } from './data-project-360.component';
 
-describe('DataProject360Component', () => {
+describe('DataProjectPvcComponent', () => {
   let component: DataProject360Component;
   let fixture: ComponentFixture<DataProject360Component>;
 

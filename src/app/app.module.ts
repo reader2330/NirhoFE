@@ -24,7 +24,18 @@ import { ImagenesModalComponent } from './modules/modal/imagenes-modal/imagenes-
 import {ViewActividadesComponent} from './screensOut/view-actividades/view-actividades.component';
 import {VerticalTimelineModule} from 'angular-vertical-timeline';
 import {PvcModule} from './modules/pvc/pvc.module';
+import {ChartModule} from 'angular2-highcharts';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+
 registerLocaleData(localeMx);
+
+export function highchartsFactory() {
+  const hc = require('highcharts');
+  const h3 = require('highcharts/highcharts-3d');
+  h3(hc);
+
+  return hc;
+}
 
 
 
@@ -32,7 +43,7 @@ registerLocaleData(localeMx);
   declarations: [
     AppComponent,
     ImagenesModalComponent,
-    ViewActividadesComponent
+    ViewActividadesComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +51,7 @@ registerLocaleData(localeMx);
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
+    ChartModule,
     CLBModule,
     EVAModule,
     FormsModule,
@@ -54,7 +66,11 @@ registerLocaleData(localeMx);
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},
-    { provide: LOCALE_ID, useValue: 'es-MX' }
+    { provide: LOCALE_ID, useValue: 'es-MX' },
+    {
+      provide: HighchartsStatic,
+      useFactory: highchartsFactory
+    }
   ],
   bootstrap: [AppComponent]
 })

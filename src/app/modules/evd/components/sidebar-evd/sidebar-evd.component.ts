@@ -74,6 +74,7 @@ export class SidebarEvdComponent implements OnInit {
   recibirRespuestChildren(evt) {
     if (evt.value) {
       this.selectModule = evt.value;
+      this.selectedItem = evt.value;
     }
     if (evt.key) {
       this.mobile = true;

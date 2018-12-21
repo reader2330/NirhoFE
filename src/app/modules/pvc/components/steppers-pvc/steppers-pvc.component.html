@@ -4,33 +4,34 @@
       <p class="bold">Paso 1 </p>
       <p>Datos Empresa</p>
     </ng-template>
-
+    <app-data-company-pvc></app-data-company-pvc>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>
       <p class="bold">Paso 2 </p>
       <p>Datos Contacto</p>
     </ng-template>
+    <app-data-contact-pvc></app-data-contact-pvc>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>
       <p class="bold">Paso 3 </p>
       <p>Datos Proyecto</p>
     </ng-template>
-
+    <app-data-project-pvc (response)="getResponseChildren($event)"></app-data-project-pvc>
   </mat-step>
 </mat-horizontal-stepper>
 <mat-vertical-stepper [hidden]="!mobile" [linear]="false" #stepper2>
   <mat-step>
     <ng-template matStepLabel> Datos de la Empresa</ng-template>
-
+    <app-data-company-pvc></app-data-company-pvc>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel> Datos Contacto</ng-template>
-
+    <app-data-contact-pvc></app-data-contact-pvc>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Datos Proyecto</ng-template>
-
+    <app-data-project-pvc (response)="getResponseChildren($event)"></app-data-project-pvc>
   </mat-step>
 </mat-vertical-stepper>

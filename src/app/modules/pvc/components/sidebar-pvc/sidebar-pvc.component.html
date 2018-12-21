@@ -41,16 +41,12 @@
       <div style="padding: 10px 30px 0 30px;" class="col-sm-12 stepper-forms">
         <div *ngIf="selectModule == 1">
           <h3>Bandeja de proyectos</h3>
-          <app-bandeja-pvc (responseChildren)="recibirRespuestChildren($event)"></app-bandeja-pvc>
+          <app-selector-areas (responseChildren)="recibirRespuestChildren($event)"></app-selector-areas>
         </div>
         <div *ngIf="selectModule == 2">
-          <h3>Revisión de proyecto</h3>
+          <h3>Alta de proyecto</h3>
           <app-steppers-pvc (responseChildren)="recibirRespuestChildren($event)"></app-steppers-pvc>
         </div>
-
-
-
-
       </div>
     </div>
   </mat-sidenav-content>

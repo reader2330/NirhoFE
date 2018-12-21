@@ -22,7 +22,7 @@ export class ProyectoPVCService {
     return this.http.post(this.api + 'proyectoEVO360/registrar', data, {headers: this.headers});
   }
   getProyects(): Observable<Proyecto[]> {
-    return this.http.get<Proyecto[]>(this.api + 'proyectoEVO360/todos', {headers: this.headers});
+    return this.http.get<Proyecto[]>(this.api + 'proyectoPVC/todos', {headers: this.headers});
   }
 
   saveHead(data): Observable<any> {

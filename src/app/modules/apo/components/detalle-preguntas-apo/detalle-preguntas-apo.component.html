@@ -1,0 +1,44 @@
+  <h3 align="center">Actividades</h3>
+  <br>
+  <div class="row justify-content-md-center ">
+    <mat-form-field style="width: 50%" appearance="outline">
+      <mat-label>Seleccionar proyecto</mat-label>
+      <mat-select [(ngModel)]="proyect">
+        <mat-option *ngFor="let proyect of proyects" [value]="proyect">
+          {{proyect.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class=" row col-sm-12 justify-content-md-center" >
+      <button mat-raised-button color="accent"  (click)="sendCuestionario()" style="color: whitesmoke; margin-left: 10px">Enviar cuestionarios</button>
+    </div>
+    <div  style="margin-top: 50px" class="row col-sm-12 justify-content-md-center">
+      <mat-spinner  color="accent" mode="indeterminate" *ngIf="load"></mat-spinner>
+    </div>
+
+  </div>
+  <br>
+<mat-accordion style="margin-top: 5px" *ngIf="showPreguntas">
+
+
+  <mat-expansion-panel *ngFor="let tema of temas ">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>book</mat-icon> {{tema.nombre}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+      <mat-panel-description>
+        <mat-list role="list" >
+          <mat-list-item role="listitem" *ngFor="let question of tema.preguntas">{{question}}</mat-list-item>
+        </mat-list>
+
+      </mat-panel-description>
+
+
+
+  </mat-expansion-panel>
+
+
+</mat-accordion>
+
+

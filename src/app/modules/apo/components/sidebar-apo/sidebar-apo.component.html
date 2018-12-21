@@ -81,6 +81,10 @@
 
           <app-organigrama-apo></app-organigrama-apo>
         </div>
+
+        <div *ngIf="selectModule == 10">
+          <app-detalle-preguntas-apo></app-detalle-preguntas-apo>
+        </div>
         <!--<div *ngIf="selectModule == 7">
           <h3>Estado del cuestionario</h3>
           <app-encuesta-evd (responseChildren)="recibirRespuestChildren($event)"></app-encuesta-evd>

@@ -19,12 +19,23 @@ import { ContactApoComponent } from './components/contact-apo/contact-apo.compon
 import { PeriodoApoComponent } from './components/periodo-apo/periodo-apo.component';
 import {AsignarConsultorApoComponent} from './components/asignar-consultor-apo/asignar-consultor-apo.component';
 import {ParticipantesSelectorComponent} from './components/participantes-selector/participantes-selector.component';
+import {DetallePreguntasApoComponent} from './components/detalle-preguntas-apo/detalle-preguntas-apo.component';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+import {ImagenesModalComponent} from '../modal/imagenes-modal/imagenes-modal.component';
+import {ChartModule} from 'angular2-highcharts';
+export function highchartsFactory() {
+  const hc = require('highcharts');
+  const h3 = require('highcharts/highcharts-3d');
+  h3(hc);
+
+  return hc;
+}
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
-    //ChartModule.forRoot(required('highcharts')),
+    ChartModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -45,7 +56,17 @@ import {ParticipantesSelectorComponent} from './components/participantes-selecto
     ContactApoComponent,
     PeriodoApoComponent,
     AsignarConsultorApoComponent,
-    ParticipantesSelectorComponent
+    ParticipantesSelectorComponent,
+    DetallePreguntasApoComponent
+  ],
+  entryComponents: [
+    ImagenesModalComponent
+  ],
+  providers: [
+      {
+        provide: HighchartsStatic,
+        useFactory: highchartsFactory
+      }
   ]
 })
 export class ApoModule { }
