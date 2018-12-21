@@ -48,15 +48,14 @@ public class ParticipanteAPOAmp implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "participante_apo_amp")
-	private List<ParticipanteAPOAmpFuncion> funciones = new ArrayList<>();
+	private Set<ParticipanteAPOAmpFuncion> funciones = new HashSet<>();
     
     public ParticipanteAPOAmp() {
 		super();
 	}
 
-
 	public ParticipanteAPOAmp(Integer id, Integer idParticipante, String objetivoPuesto,
-			List<ParticipanteAPOAmpFuncion> funciones) {
+			Set<ParticipanteAPOAmpFuncion> funciones) {
 		super();
 		this.id = id;
 		this.idParticipante = idParticipante;
@@ -88,11 +87,11 @@ public class ParticipanteAPOAmp implements Serializable {
         this.objetivoPuesto = objetivoPuesto;
     }
 
-	public List<ParticipanteAPOAmpFuncion> getFunciones() {
+	public Set<ParticipanteAPOAmpFuncion> getFunciones() {
 		return funciones;
 	}
 
-	public void setFunciones(List<ParticipanteAPOAmpFuncion> funciones) {
+	public void setFunciones(Set<ParticipanteAPOAmpFuncion> funciones) {
 		this.funciones = funciones;
 	}
 

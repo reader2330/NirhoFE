@@ -44,6 +44,7 @@ import com.nirho.util.SessionUtil;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping( value = "/proyectoPVC" )
 public class ProyectoPVCController {
+	
 	public final static Logger logger = Logger.getLogger(ProyectoPVCController.class);
 	public final static Integer ID_MODULO = 4;
 	

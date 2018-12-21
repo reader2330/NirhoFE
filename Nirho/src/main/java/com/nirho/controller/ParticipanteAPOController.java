@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -255,6 +256,7 @@ public class ParticipanteAPOController {
 			for(int i = 0; i < jsonParticipantes.length(); i++) {
 				try {
 					ParticipanteAPO participante = assamblerToParticipanteHC(jsonParticipantes.getJSONObject(i));
+					participante.setIdParticipante( Integer.valueOf((participante.getIdParticipante() + "") + (proyecto.getIdProyecto() + "")) );
 					participante.setIdProyecto(proyecto.getIdProyecto());
 					participantes.add(participante);
 				}catch(Exception e) {
@@ -279,6 +281,7 @@ public class ParticipanteAPOController {
 			
 			JSONObject jsonHeadCount = new JSONObject(headcount);
 			JSONArray jsonParticipantesAmp = jsonHeadCount.getJSONArray("participantes");
+			Proyecto proyecto = proyectoService.obtenerProyectoPorId(jsonHeadCount.getInt("idProyecto"));
 			List<ParticipanteAPOAmp> participantesAmp = new ArrayList<>();
 			for(int i = 0; i < jsonParticipantesAmp.length(); i++) {	
 				
@@ -286,6 +289,7 @@ public class ParticipanteAPOController {
 				boolean addParticiante = true;
 				
 				for(ParticipanteAPOAmp pa: participantesAmp) {
+
 					if(pa.getIdParticipante() == Integer.parseInt(jsonParticipantesAmp.getJSONObject(i).optString("idParticipante", "0"))) {
 
 						ParticipanteAPOAmpFuncion funcion = new ParticipanteAPOAmpFuncion();
@@ -312,7 +316,8 @@ public class ParticipanteAPOController {
 				
 				if(participante == null) {
 					participante = assamblerToParticipanteHCA(jsonParticipantesAmp.getJSONObject(i));
-					List<ParticipanteAPOAmpFuncion> funciones = new ArrayList<>();
+					participante.setIdParticipante(Integer.valueOf((participante.getIdParticipante() + "") + (proyecto.getIdProyecto() + "")) );
+					Set<ParticipanteAPOAmpFuncion> funciones = new HashSet<>();
 					
 					ParticipanteAPOAmpFuncion funcion = new ParticipanteAPOAmpFuncion();
 					funcion.setFuncion(jsonParticipantesAmp.getJSONObject(i).optString("funciones", null));
@@ -383,7 +388,7 @@ public class ParticipanteAPOController {
 	}
 	
 	@RequestMapping(value = "/funciones/{idFuncion}/actividades/todas", method = RequestMethod.GET)
-	public List<ParticipanteAPOAmpActividad> listActividades(@PathVariable("idFuncion") int idFuncion) throws NirhoControllerException{
+	public Set<ParticipanteAPOAmpActividad> listActividades(@PathVariable("idFuncion") int idFuncion) throws NirhoControllerException{
 		try {
 			ParticipanteAPOAmpFuncion funcion = participanteAPOAmpFuncionService.getOne(idFuncion);
 			if(funcion != null) {
@@ -411,7 +416,7 @@ public class ParticipanteAPOController {
 			ParticipanteAPOAmpFuncion funcion = participanteAPOAmpFuncionService.getOne(idFuncion);
 			if(funcion != null) {
 				if(funcion.getActividades() == null) {
-					List<ParticipanteAPOAmpActividad> l = new ArrayList<>();
+					Set<ParticipanteAPOAmpActividad> l = new HashSet<>();
 					l.add(a);
 					funcion.setActividades(l);
 				} else {
@@ -427,7 +432,7 @@ public class ParticipanteAPOController {
 	}
 	
 	@RequestMapping(value = "/funciones/{idFuncion}/actividades/todas/guardar", method = RequestMethod.POST)
-	public void editActividad(@PathVariable("idFuncion") int idFuncion, @Valid @RequestBody List<ParticipanteAPOAmpActividad> l) throws NirhoControllerException{
+	public void editActividad(@PathVariable("idFuncion") int idFuncion, @Valid @RequestBody Set<ParticipanteAPOAmpActividad> l) throws NirhoControllerException{
 		try {
 			ParticipanteAPOAmpFuncion funcion = participanteAPOAmpFuncionService.getOne(idFuncion);
 			if(funcion != null) {

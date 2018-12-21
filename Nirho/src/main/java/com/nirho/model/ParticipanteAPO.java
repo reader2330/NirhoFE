@@ -7,6 +7,7 @@ package com.nirho.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -82,8 +83,8 @@ public class ParticipanteAPO implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "participanteAPO")
-   	private Set<ParticipanteAPOAmp> ampliaciones;
-    
+   	private Set<ParticipanteAPOAmp> ampliaciones = new HashSet<>();;
+
     public ParticipanteAPO() {
 		super();
 	}

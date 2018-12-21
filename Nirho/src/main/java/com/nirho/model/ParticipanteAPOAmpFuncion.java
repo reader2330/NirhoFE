@@ -7,7 +7,9 @@ package com.nirho.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -70,7 +72,7 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "funcion")
-	private List<ParticipanteAPOAmpActividad> actividades = new ArrayList<>();
+	private Set<ParticipanteAPOAmpActividad> actividades = new HashSet<>();
     
 	public ParticipanteAPOAmpFuncion() {
 		super();
@@ -78,7 +80,7 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
 
 	public ParticipanteAPOAmpFuncion(Integer id, String funcion, String metaKpi, String cantidadMeta, String tiempo,
 			String frecuenciaEval, Integer idEvaluador, Integer calificacion, boolean checkParticipante,
-			boolean checkJefe, List<ParticipanteAPOAmpActividad> actividades) {
+			boolean checkJefe, Set<ParticipanteAPOAmpActividad> actividades) {
 		super();
 		this.id = id;
 		this.funcion = funcion;
@@ -158,11 +160,11 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
 		this.calificacion = calificacion;
 	}
 
-	public List<ParticipanteAPOAmpActividad> getActividades() {
+	public Set<ParticipanteAPOAmpActividad> getActividades() {
 		return actividades;
 	}
 
-	public void setActividades(List<ParticipanteAPOAmpActividad> actividades) {
+	public void setActividades(Set<ParticipanteAPOAmpActividad> actividades) {
 		this.actividades = actividades;
 	}
 
