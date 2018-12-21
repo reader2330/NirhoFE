@@ -42,9 +42,9 @@ import com.nirho.util.SessionUtil;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping( value = "/proyectoAPO" )
+@RequestMapping( value = "/proyectoPVC" )
 public class ProyectoPVCController {
-	public final static Logger logger = Logger.getLogger(ProyectoAPOController.class);
+	public final static Logger logger = Logger.getLogger(ProyectoPVCController.class);
 	public final static Integer ID_MODULO = 4;
 	
 	@Autowired
