@@ -7,9 +7,7 @@ package com.nirho.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -64,11 +62,11 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "check_participante")
-    private Boolean checkParticipante;
+    private boolean checkParticipante;
     
     @Basic(optional = false)
     @Column(name = "check_jefe")
-    private Boolean checkJefe;
+    private boolean checkJefe;
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "funcion")
@@ -78,11 +76,9 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
 		super();
 	}
 
-	
-
 	public ParticipanteAPOAmpFuncion(Integer id, String funcion, String metaKpi, String cantidadMeta, String tiempo,
-			String frecuenciaEval, Integer idEvaluador, Integer calificacion, Boolean checkParticipante,
-			Boolean checkJefe, List<ParticipanteAPOAmpActividad> actividades) {
+			String frecuenciaEval, Integer idEvaluador, Integer calificacion, boolean checkParticipante,
+			boolean checkJefe, List<ParticipanteAPOAmpActividad> actividades) {
 		super();
 		this.id = id;
 		this.funcion = funcion;
@@ -170,19 +166,19 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
 		this.actividades = actividades;
 	}
 
-	public Boolean getCheckParticipante() {
+	public boolean getCheckParticipante() {
 		return checkParticipante;
 	}
 
-	public void setCheckParticipante(Boolean checkParticipante) {
+	public void setCheckParticipante(boolean checkParticipante) {
 		this.checkParticipante = checkParticipante;
 	}
 
-	public Boolean getCheckJefe() {
+	public boolean getCheckJefe() {
 		return checkJefe;
 	}
 
-	public void setCheckJefe(Boolean checkJefe) {
+	public void setCheckJefe(boolean checkJefe) {
 		this.checkJefe = checkJefe;
 	}
 

@@ -57,14 +57,14 @@ public class ParticipanteAPOAmpActividad implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "status")
-    private Boolean status;
+    private boolean status;
 
 	public ParticipanteAPOAmpActividad() {
 		super();
 	}
 
 	public ParticipanteAPOAmpActividad(Integer id, String nombre, Date fechaCreacion, Date fechaVencimiento,
-			Date fechaTermino, Integer calificacion, Boolean status) {
+			Date fechaTermino, Integer calificacion, boolean status) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -123,11 +123,11 @@ public class ParticipanteAPOAmpActividad implements Serializable {
 		this.calificacion = calificacion;
 	}
 
-	public Boolean getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
