@@ -2,12 +2,14 @@ package com.nirho.service.impl;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.nirho.dao.ProyectoPVCNivelDAO;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ProyectoPVCNivel;
 import com.nirho.service.ProyectoPVCNivelService;
 
+@Service
 public class ProyectoPVCNivelServiceImpl implements ProyectoPVCNivelService {
 	
 	public final static Logger logger = Logger.getLogger(ParticipanteAPOAmpActividadServiceImpl.class);

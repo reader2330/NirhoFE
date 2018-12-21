@@ -1353,7 +1353,7 @@ CREATE TABLE `modulo` (
 
 LOCK TABLES `modulo` WRITE;
 /*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
-INSERT INTO `modulo` VALUES (1,'Clima Laboral','Módulo CLB'),(2,'Evaluación de Desempeño','Módulo EVD'),(3,'Evaluación Organizacional 360','Módulo EVO-360'),(4,'Administración por Objetivos','Módulo APO');
+INSERT INTO `modulo` VALUES (1,'Clima Laboral','Módulo CLB'),(2,'Evaluación de Desempeño','Módulo EVD'),(3,'Evaluación Organizacional 360','Módulo EVO-360'),(4,'Administración por Objetivos','Módulo APO'),(5,'Plan y Vida Carrera','Módulo PVC');
 /*!40000 ALTER TABLE `modulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1574,6 +1574,47 @@ INSERT INTO `participanteapoamp_funcion` VALUES (14,NULL,'235.8','Bimestral','Es
 UNLOCK TABLES;
 
 --
+-- Table structure for table `participantepvc`
+--
+
+DROP TABLE IF EXISTS `participantepvc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `participantepvc` (
+  `id` int(11) NOT NULL,
+  `a_materno` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `a_paterno` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `antig_puesto` double DEFAULT NULL,
+  `area_org` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `correo_electronico` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fecha_ingreso` date DEFAULT NULL,
+  `genero` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_part_jefe_inm` int(11) DEFAULT NULL,
+  `id_proyecto` int(11) DEFAULT NULL,
+  `idioma` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nivel` int(11) DEFAULT NULL,
+  `nivel_escolaridad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nivel_idioma` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nivel_texto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombres` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `otros_estudios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rfc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sede` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `participantepvc`
+--
+
+LOCK TABLES `participantepvc` WRITE;
+/*!40000 ALTER TABLE `participantepvc` DISABLE KEYS */;
+/*!40000 ALTER TABLE `participantepvc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `plantilla_cuestionario`
 --
 
@@ -1766,6 +1807,109 @@ LOCK TABLES `proyecto` WRITE;
 /*!40000 ALTER TABLE `proyecto` DISABLE KEYS */;
 INSERT INTO `proyecto` VALUES (1,1,'CLIMA LABOLAL KKANA',1,1,'AQUI',1,'2018-10-10 00:00:00','2018-11-22 00:00:00',3,NULL,NULL,NULL,NULL,1,1),(2,1,'CLIMA LABORAL PTITO',2,1000,'PTITO',50,NULL,NULL,NULL,3,NULL,NULL,NULL,2,1),(3,1,'CLIMA LABORAL DE CLIMA AUTOMOTRIZ S.A.',3,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 00:00:00','2019-08-09 00:00:00',30,3,NULL,NULL,NULL,3,1),(4,1,'CLIMA LABORAL TECNOLOGOP',4,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 17:27:41','2018-11-15 00:00:00',10,1,NULL,NULL,NULL,4,1),(5,1,'CLIMA LABORAL MAGALLANES HERMANOS S.A.',31,238,'LAS 5 SEDES',237,NULL,NULL,NULL,2,NULL,NULL,NULL,5,7),(6,4,'Prueba1',32,10,'Prueba1',10,NULL,NULL,NULL,1,NULL,NULL,NULL,6,4),(7,4,'Prueba2',33,10,'Prueba2',10,NULL,NULL,NULL,1,NULL,NULL,NULL,7,4),(8,3,'asdasd',34,10,'santa',1,'2018-12-01 00:00:00','2018-12-11 00:00:00',10,1,NULL,NULL,NULL,8,4),(9,2,'xzcz',35,22,'sdas',2,NULL,NULL,NULL,2,NULL,NULL,NULL,9,1),(10,3,'wesda',36,22,'sadaSA',23,'2018-12-03 00:00:00','2018-12-12 00:00:00',19,1,NULL,NULL,NULL,10,4),(11,4,'jop 1',37,100,'gfsf',1,NULL,NULL,NULL,1,NULL,NULL,NULL,11,4);
 /*!40000 ALTER TABLE `proyecto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `proyecto_pvc_area`
+--
+
+DROP TABLE IF EXISTS `proyecto_pvc_area`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `proyecto_pvc_area` (
+  `id` int(11) NOT NULL,
+  `id_proyecto` int(11) DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` bit(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proyecto_pvc_area`
+--
+
+LOCK TABLES `proyecto_pvc_area` WRITE;
+/*!40000 ALTER TABLE `proyecto_pvc_area` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proyecto_pvc_area` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `proyecto_pvc_esfera`
+--
+
+DROP TABLE IF EXISTS `proyecto_pvc_esfera`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `proyecto_pvc_esfera` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` bit(1) NOT NULL,
+  `area` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK1cq3xhah35eftdg85a4ny9u4` (`area`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proyecto_pvc_esfera`
+--
+
+LOCK TABLES `proyecto_pvc_esfera` WRITE;
+/*!40000 ALTER TABLE `proyecto_pvc_esfera` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proyecto_pvc_esfera` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `proyecto_pvc_especialidad`
+--
+
+DROP TABLE IF EXISTS `proyecto_pvc_especialidad`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `proyecto_pvc_especialidad` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` bit(1) NOT NULL,
+  `nivel` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKl4e9gp87v8ili7l9mlyruylm7` (`nivel`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proyecto_pvc_especialidad`
+--
+
+LOCK TABLES `proyecto_pvc_especialidad` WRITE;
+/*!40000 ALTER TABLE `proyecto_pvc_especialidad` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proyecto_pvc_especialidad` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `proyecto_pvc_nivel`
+--
+
+DROP TABLE IF EXISTS `proyecto_pvc_nivel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `proyecto_pvc_nivel` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` bit(1) NOT NULL,
+  `esfera` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK8nk1s4daehf4cfc5ahinjfyvs` (`esfera`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proyecto_pvc_nivel`
+--
+
+LOCK TABLES `proyecto_pvc_nivel` WRITE;
+/*!40000 ALTER TABLE `proyecto_pvc_nivel` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proyecto_pvc_nivel` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -2155,4 +2299,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-20 22:34:10
+-- Dump completed on 2018-12-21 15:10:45

@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.nirho.dao.ProyectoPVCAreaDAO;
 import com.nirho.exception.NirhoServiceException;
-import com.nirho.model.ParticipanteAPO;
 import com.nirho.model.ProyectoPVCArea;
 import com.nirho.service.ProyectoPVCAreaService;
 
+@Service
 public class ProyectoPVCAreaServiceImpl implements ProyectoPVCAreaService {
 	
 	public final static Logger logger = Logger.getLogger(ParticipanteAPOAmpActividadServiceImpl.class);

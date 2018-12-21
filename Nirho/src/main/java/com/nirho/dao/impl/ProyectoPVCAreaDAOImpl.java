@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
+
 import com.nirho.dao.ProyectoPVCAreaDAO;
 import com.nirho.model.ProyectoPVCArea;
 
+@Repository
 public class ProyectoPVCAreaDAOImpl extends AbstractDAO<ProyectoPVCArea, Integer> implements ProyectoPVCAreaDAO {
 	 
 	@Override
