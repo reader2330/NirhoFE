@@ -36,9 +36,8 @@ public class ParticipanteAPO implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Integer id;
+	private Integer idParticipante;
     
     @Column(name = "id_proyecto")
 	private Integer idProyecto;
@@ -89,13 +88,13 @@ public class ParticipanteAPO implements Serializable {
 		super();
 	}
 
-	public ParticipanteAPO(Integer id, Integer idProyecto, Integer nivel, String nivelTexto, String nombres,
+	public ParticipanteAPO(Integer idParticipante, Integer idProyecto, Integer nivel, String nivelTexto, String nombres,
 			String aPaterno, String aMaterno, String genero, String rfc, String puesto, Date fechaIngreso,
 			Double antigPuesto, String nivelEscolaridad, String otrosEstudios, String idioma, String nivelIdioma,
 			String correoElectronico, String sede, String areaOrg, Integer idPartJefeInm,
 			Set<ParticipanteAPOAmp> ampliaciones) {
 		super();
-		this.id = id;
+		this.idParticipante = idParticipante;
 		this.idProyecto = idProyecto;
 		this.nivel = nivel;
 		this.nivelTexto = nivelTexto;
@@ -118,12 +117,12 @@ public class ParticipanteAPO implements Serializable {
 		this.ampliaciones = ampliaciones;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getIdParticipante() {
+		return idParticipante;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdParticipante(Integer idParticipante) {
+		this.idParticipante = idParticipante;
 	}
 
 	public String getaPaterno() {
@@ -304,7 +303,7 @@ public class ParticipanteAPO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ParticipanteAPO [id=" + id + ", idProyecto=" + idProyecto + ", nivel=" + nivel + ", nivelTexto="
+		return "ParticipanteAPO [idParticipante=" + idParticipante + ", idProyecto=" + idProyecto + ", nivel=" + nivel + ", nivelTexto="
 				+ nivelTexto + ", nombres=" + nombres + ", aPaterno=" + aPaterno + ", aMaterno=" + aMaterno
 				+ ", genero=" + genero + ", rfc=" + rfc + ", puesto=" + puesto + ", fechaIngreso=" + fechaIngreso
 				+ ", antigPuesto=" + antigPuesto + ", nivelEscolaridad=" + nivelEscolaridad + ", otrosEstudios="

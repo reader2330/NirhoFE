@@ -67,4 +67,20 @@ public class EmailServiceImpl implements EmailService {
 		}
 	}
 	
+	@Override
+	public void sendEmailAPO(EmailDatos datos, String cc) throws NirhoServiceException {
+		try {
+			MimeMessage mail = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mail);
+			helper.setTo(datos.getEmailDestino());
+			helper.setSubject(EmailUtil.getAsunto(datos.getNombreProyecto()));
+			helper.setText(EmailUtil.getContenidoAPO(datos));
+			helper.setCc(cc);
+			mailSender.send(mail);
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al enviar el email causa [" + e.getMessage()+ "]");
+		}
+	}
+	
 }

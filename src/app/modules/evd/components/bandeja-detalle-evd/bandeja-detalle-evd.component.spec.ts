@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BandejaDetalleEvdComponent } from './bandeja-detalle-evd.component';
 
-describe('BandejaDetalleEva360Component', () => {
+describe('BandejaDetallePvcComponent', () => {
   let component: BandejaDetalleEvdComponent;
   let fixture: ComponentFixture<BandejaDetalleEvdComponent>;
 

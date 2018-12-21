@@ -48,3 +48,17 @@ table {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+.avatar{
+
+  margin-top: 10px;
+  margin-left: 100px;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto/9; /* Bug de ie8 */
+}
+

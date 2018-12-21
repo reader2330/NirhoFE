@@ -3,7 +3,6 @@ package com.nirho.service;
 import java.util.List;
 import java.util.Set;
 
-import com.nirho.dto.NivelDTO;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ParticipanteAPO;
 import com.nirho.model.ParticipanteAPOAmp;

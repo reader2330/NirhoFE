@@ -6,14 +6,21 @@
 package com.nirho.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -29,7 +36,7 @@ public class ParticipanteAPOAmp implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
     
@@ -38,43 +45,23 @@ public class ParticipanteAPOAmp implements Serializable {
     
     @Column(name = "objetivo_puesto", nullable=true)
     private String objetivoPuesto;
-    @Column(name = "funciones", nullable=true)
-    private String funciones;
-    @Column(name = "actividades", nullable=true)
-    private String actividades;
-    @Column(name = "meta_kpi", nullable=true)
-    private String metaKpi;
-    @Column(name = "cantidad_meta", nullable=true)
-    private String cantidadMeta;
-    @Column(name = "unidad_medida", nullable=true)
-    private String unidadMedida;
-    @Column(name = "tiempo", nullable=true)
-    private String tiempo;
-    @Column(name = "frecuencia_eval", nullable=true)
-    private String frecuenciaEval;
-    @Column(name = "id_evaluador")
-    private Integer idEvaluador;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "participante_apo_amp")
+	private List<ParticipanteAPOAmpFuncion> funciones = new ArrayList<>();
     
     public ParticipanteAPOAmp() {
 		super();
 	}
 
-	
-	public ParticipanteAPOAmp(Integer id, Integer idParticipante, String objetivoPuesto, String funciones,
-			String actividades, String metaKpi, String cantidadMeta, String unidadMedida, String tiempo,
-			String frecuenciaEval, Integer idEvaluador) {
+
+	public ParticipanteAPOAmp(Integer id, Integer idParticipante, String objetivoPuesto,
+			List<ParticipanteAPOAmpFuncion> funciones) {
 		super();
 		this.id = id;
 		this.idParticipante = idParticipante;
 		this.objetivoPuesto = objetivoPuesto;
 		this.funciones = funciones;
-		this.actividades = actividades;
-		this.metaKpi = metaKpi;
-		this.cantidadMeta = cantidadMeta;
-		this.unidadMedida = unidadMedida;
-		this.tiempo = tiempo;
-		this.frecuenciaEval = frecuenciaEval;
-		this.idEvaluador = idEvaluador;
 	}
 
 	public Integer getId() {
@@ -101,76 +88,19 @@ public class ParticipanteAPOAmp implements Serializable {
         this.objetivoPuesto = objetivoPuesto;
     }
 
-    public String getFunciones() {
-        return funciones;
-    }
+	public List<ParticipanteAPOAmpFuncion> getFunciones() {
+		return funciones;
+	}
 
-    public void setFunciones(String funciones) {
-        this.funciones = funciones;
-    }
-
-    public String getActividades() {
-        return actividades;
-    }
-
-    public void setActividades(String actividades) {
-        this.actividades = actividades;
-    }
-
-    public String getMetaKpi() {
-        return metaKpi;
-    }
-
-    public void setMetaKpi(String metaKpi) {
-        this.metaKpi = metaKpi;
-    }
-
-    public String getCantidadMeta() {
-        return cantidadMeta;
-    }
-
-    public void setCantidadMeta(String cantidadMeta) {
-        this.cantidadMeta = cantidadMeta;
-    }
-
-    public String getUnidadMedida() {
-        return unidadMedida;
-    }
-
-    public void setUnidadMedida(String unidadMedida) {
-        this.unidadMedida = unidadMedida;
-    }
-
-    public String getTiempo() {
-        return tiempo;
-    }
-
-    public void setTiempo(String tiempo) {
-        this.tiempo = tiempo;
-    }
-
-    public String getFrecuenciaEval() {
-        return frecuenciaEval;
-    }
-
-    public void setFrecuenciaEval(String frecuenciaEval) {
-        this.frecuenciaEval = frecuenciaEval;
-    }
-
-    public Integer getIdEvaluador() {
-        return idEvaluador;
-    }
-
-    public void setIdEvaluador(Integer idEvaluador) {
-        this.idEvaluador = idEvaluador;
-    }
+	public void setFunciones(List<ParticipanteAPOAmpFuncion> funciones) {
+		this.funciones = funciones;
+	}
 
 	@Override
 	public String toString() {
-		return "ParticipanteAPOAmp [id=" + id + ", objetivoPuesto=" + objetivoPuesto + ", funciones=" + funciones
-				+ ", actividades=" + actividades + ", metaKpi=" + metaKpi + ", cantidadMeta=" + cantidadMeta
-				+ ", unidadMedida=" + unidadMedida + ", tiempo=" + tiempo + ", frecuenciaEval=" + frecuenciaEval
-				+ ", idEvaluador=" + idEvaluador + "]";
+		return "ParticipanteAPOAmp [id=" + id + ", idParticipante=" + idParticipante + ", objetivoPuesto="
+				+ objetivoPuesto + ", funciones=" + funciones + "]";
 	}
+
     
 }

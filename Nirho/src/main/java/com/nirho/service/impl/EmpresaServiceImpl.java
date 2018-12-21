@@ -55,6 +55,16 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
+	public Empresa obtenerEmpresaPorId(long id) throws NirhoServiceException {
+		try {
+			return empresaDAO.getOne(id);
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
+		}		
+	}
+	
+	@Override
 	public void registraEmpresa(Empresa empresa) throws NirhoServiceException {
 		try {
 			if(empresa.getId()==0){

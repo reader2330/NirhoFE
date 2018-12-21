@@ -1,0 +1,54 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef style="padding-right: 50px;"> NOMBRE </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="empresa">
+    <th mat-header-cell *matHeaderCellDef style="padding-right: 55px;"> EMPRESA </th>
+    <td mat-cell *matCellDef="let element"> {{element.idEmpresa.empresa}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="empleados">
+    <th mat-header-cell *matHeaderCellDef style="padding-right: 30px;"> EMPLEADOS </th>
+    <td mat-cell *matCellDef="let element"> {{element.numEmpleados}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="participantes">
+    <th mat-header-cell *matHeaderCellDef style="padding-right: 30px;"> PARTICIPANTES </th>
+    <td mat-cell *matCellDef="let element"> {{element.numParticipantes}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="FechaFinal">
+    <th mat-header-cell *matHeaderCellDef style="padding-right: 30px;"> Fin de proyecto </th>
+    <td mat-cell *matCellDef="let element">{{element.fechaFin | date}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="frecuenciaEval">
+    <th mat-header-cell *matHeaderCellDef style="padding-right: 30px;">  FREC. EVAL. </th>
+    <td mat-cell *matCellDef="let element"> {{getFrecuencia(element.frecuenciaEval)}}</td>
+  </ng-container>
+
+
+  <ng-container  matColumnDef="detail4">
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td mat-cell *matCellDef="let element"> <button [disabled]="checkConcierge()" (click)="cerrarProyecto(element)" mat-button>  <mat-icon>lock</mat-icon></button> </td>
+  </ng-container>
+  <ng-container matColumnDef="detail3">
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td mat-cell *matCellDef="let element"> <button (click)="goDetailProyect(element)" [disabled]="checkDetalle()"  mat-button> Ver detalle <mat-icon>chevron_right</mat-icon></button> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

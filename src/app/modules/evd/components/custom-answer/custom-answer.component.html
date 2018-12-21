@@ -25,7 +25,7 @@
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <button  mat-raised-button  [disabled]="!proyect.idProyecto" (click)="showAnswer()"> Ver respuestas</button>
     <button  mat-raised-button color ="accent" [disabled]="countList()" style="color: whitesmoke; margin-left: 10px"  (click)="saveAnswer()"> Guardar respuestas</button>
-    <button  mat-raised-button color ="accent" *ngIf="showSendQuewstion()" style="color: whitesmoke; margin-left: 10px"  (click)="sendQuestion()"> Enviar cuestionarios</button>
+    <button  mat-raised-button color ="accent" *ngIf="showSendQuestion()" style="color: whitesmoke; margin-left: 10px"  (click)="sendQuestion()"> Enviar cuestionarios</button>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1">
     <mat-spinner  color="accent" mode="indeterminate" *ngIf="load"></mat-spinner>
