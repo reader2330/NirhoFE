@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PeriodoApoComponent } from './periodo-apo.component';
 
-describe('PeriodoApoComponent', () => {
+describe('PeriodoPvcComponent', () => {
   let component: PeriodoApoComponent;
   let fixture: ComponentFixture<PeriodoApoComponent>;
 

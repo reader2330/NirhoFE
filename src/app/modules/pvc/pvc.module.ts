@@ -16,6 +16,8 @@ import {DetallePreguntasPvcComponent} from './components/detalle-preguntas-pvc/d
 import {DataCompanyPvcComponent} from './components/forms-pvc/data-company-pvc/data-company-pvc.component';
 import {DataContactPvcComponent} from './components/forms-pvc/data-contact-pvc/data-contact-pvc.component-';
 import {DataProjectPvcComponent} from './components/forms-pvc/data-project-pvc/data-project-pvc.component';
+import {AsignarConsultorPvcComponent} from './components/asignar-consultor-pvc/asignar-consultor-pvc.component';
+import {PeriodoPvcComponent} from './components/periodo-pvc/periodo-pvc.component';
 
 @NgModule({
   imports: [
@@ -36,7 +38,9 @@ import {DataProjectPvcComponent} from './components/forms-pvc/data-project-pvc/d
     DetallePreguntasPvcComponent,
     DataCompanyPvcComponent,
     DataContactPvcComponent,
-    DataProjectPvcComponent
+    DataProjectPvcComponent,
+    AsignarConsultorPvcComponent,
+    PeriodoPvcComponent
   ],
   entryComponents: [
 

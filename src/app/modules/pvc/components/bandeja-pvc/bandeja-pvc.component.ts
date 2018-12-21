@@ -26,7 +26,7 @@ export class BandejaPVCComponent implements OnInit {
   constructor(private ProyectoService: ProyectoPVCService, private LoginService: LoginService) {
   }
 
-  displayedColumns: string[] = ['nombre', 'empresa', 'empleados', 'participantes', 'FechaFinal', 'frecuenciaEval', 'detail4', 'detail3'];
+  displayedColumns: string[] = ['nombre', 'empresa', 'empleados', 'participantes', 'frecuenciaEval', 'detail4', 'detail3'];
   dataSource = [];
   user = {};
 

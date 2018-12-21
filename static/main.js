@@ -315,7 +315,7 @@ var CLBModule = /** @class */ (function () {
                 _components_bandeja_bandeja_component__WEBPACK_IMPORTED_MODULE_13__["BandejaAdmComponent"],
                 _components_bandeja_detalle_bandeja_detalle_component__WEBPACK_IMPORTED_MODULE_14__["BandejaDetalleAdmComponent"],
                 _components_cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_15__["CuestionarioSelectComponent"],
-                _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_16__["AsignarConsultorApoComponent"],
+                _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_16__["AsignarConsultorPvcComponent"],
                 _components_estadisticas_estadisticas_component__WEBPACK_IMPORTED_MODULE_17__["EstadisticasComponent"],
                 _components_detalle_preguntas_detalle_preguntas_component__WEBPACK_IMPORTED_MODULE_18__["DetallePreguntasApoComponent"],
                 _components_encuesta_encuesta_component__WEBPACK_IMPORTED_MODULE_19__["EncuestaIrhComponent"],

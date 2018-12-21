@@ -55,7 +55,7 @@
       <vertical-timeline-card *ngFor="let act of fuc['actividades']" [dateValue]="act.fechaCreacion" [color]="nirhoColor">
         <div *ngIf=" act.name !== '' " class="row">
           <div  class="col-sm-12">{{act.nombre}}</div>
-          <div class="col-sm-12">{{act.fechaTermino | date}}</div>
+          <div class="col-sm-12">{{act.fechaVencimiento | date}}</div>
           <div class="col-sm-12" *ngIf="!currentUser()"> {{act.calificacion}}</div>
           <div class="col-sm-12" *ngIf="currentUser()">
             <mat-label> Calificación</mat-label>
