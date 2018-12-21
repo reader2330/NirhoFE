@@ -51,7 +51,7 @@ public class EmailTestController {
     		datos.setNombreParticipante("Eisten Roman");
     		datos.setNombreProyecto("Evaluacion 360 ADA");
     		datos.setToken("3-mdc400188krep-6");
-    		emailService.sendEmailEVA360(datos, "rubenbrab@gmail.com");
+    		emailService.sendEmailEVA360(datos, "eisten.gonzalez@gmail.com");
             return "OK";
         } catch (Exception e) {
             e.printStackTrace();
