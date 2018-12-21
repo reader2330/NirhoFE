@@ -302,11 +302,14 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 			for(int i=0; i<cuestPartEval.length; i++) {
 				CuestPartEvaluadosEVD dto = new CuestPartEvaluadosEVD(new ArrayList<>());
 				for(CuestPartEvaluadosEVD cpee: cuestEvals) {
+					logger.info("cpee [" + cpee +"]");
 					dto.getCuestionarioParticipantes().add(cpee.getCuestionarioParticipantes().get(i));
 				}
 				cuestPartEval[i] = dto;
+				logger.info("******************************** [" + dto +"]*******************************************");
 			}
 			for(CuestPartEvaluadosEVD evd: cuestPartEval) {
+				logger.info("evd [" + evd +"]");
 				cuestPartEvaluadosEVDList.add(evd);
 			}
 		} catch(Exception e) {
