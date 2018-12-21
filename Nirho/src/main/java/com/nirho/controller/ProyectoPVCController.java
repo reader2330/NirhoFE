@@ -6,10 +6,13 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
@@ -19,6 +22,7 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,10 +36,20 @@ import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.EstatusProyecto;
+import com.nirho.model.ParticipanteAPOAmpActividad;
+import com.nirho.model.ParticipanteAPOAmpFuncion;
 import com.nirho.model.Proyecto;
+import com.nirho.model.ProyectoPVCArea;
+import com.nirho.model.ProyectoPVCEsfera;
+import com.nirho.model.ProyectoPVCEspecialidad;
+import com.nirho.model.ProyectoPVCNivel;
 import com.nirho.service.EmpresaService;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.GraficasProyectoService;
+import com.nirho.service.ProyectoPVCAreaService;
+import com.nirho.service.ProyectoPVCEsferaService;
+import com.nirho.service.ProyectoPVCEspecialidadService;
+import com.nirho.service.ProyectoPVCNivelService;
 import com.nirho.service.ProyectoService;
 import com.nirho.util.ReporteUtil;
 import com.nirho.util.SessionUtil;
@@ -46,10 +60,18 @@ import com.nirho.util.SessionUtil;
 public class ProyectoPVCController {
 	
 	public final static Logger logger = Logger.getLogger(ProyectoPVCController.class);
-	public final static Integer ID_MODULO = 4;
+	public final static Integer ID_MODULO = 5;
 	
 	@Autowired
 	private ProyectoService proyectoService;
+	@Autowired
+	private ProyectoPVCAreaService proyectoPVCAreaService;
+	@Autowired
+	private ProyectoPVCEsferaService proyectoPVCEsferaService;
+	@Autowired
+	private ProyectoPVCNivelService proyectoPVCNivelService;
+	@Autowired
+	private ProyectoPVCEspecialidadService proyectoPVCEspecialidadService;
 	@Autowired
 	private EstatusProyectoService estatusService;
 	@Autowired
@@ -199,6 +221,145 @@ public class ProyectoPVCController {
 			throw new NirhoControllerException("Problemas al registrar el proyecto");
 		}
 	}
+	
+	
+	
+	
+	@RequestMapping(value = "/{idProyecto}/areas", method = RequestMethod.GET)
+	public List<ProyectoPVCArea> getAreaPorProyecto(@PathVariable("idProyecto") int idProyecto) throws NirhoControllerException{
+		try {
+			return proyectoPVCAreaService.getByProyecto(idProyecto);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro");
+		}
+	}
+	
+	@RequestMapping(value = "/areas/{id}", method = RequestMethod.GET)
+	public ProyectoPVCArea getArea(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			return proyectoPVCAreaService.getOne(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro");
+		}
+	}
+	
+	@RequestMapping(value = "/areas/guardar", method = RequestMethod.POST)
+	public void saveArea(@Valid @RequestBody ProyectoPVCArea f) throws NirhoControllerException{
+		try {
+			proyectoPVCAreaService.guardar(f);	
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/areas/{id}/esferas", method = RequestMethod.GET)
+	public Set<ProyectoPVCEsfera> getEsferaPorArea(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			ProyectoPVCArea area = proyectoPVCAreaService.getOne(id);
+			return area.getEsferas();
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro");
+		}
+	}
+	
+	@RequestMapping(value = "/areas/esferas/{id}", method = RequestMethod.GET)
+	public ProyectoPVCEsfera getEsfera(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			return proyectoPVCEsferaService.getOne(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro");
+		}
+	}
+	
+	@RequestMapping(value = "/areas/esferas/guardar", method = RequestMethod.POST)
+	public void saveEsfera(@Valid @RequestBody ProyectoPVCEsfera f) throws NirhoControllerException{
+		try {
+			proyectoPVCEsferaService.guardar(f);	
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
+	
+	
+
+	
+	
+	
+	@RequestMapping(value = "/esferas/{id}/niveles", method = RequestMethod.GET)
+	public Set<ProyectoPVCNivel> getNivelPorEsfera(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			ProyectoPVCEsfera esfera = proyectoPVCEsferaService.getOne(id);
+			return esfera.getNiveles();
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro");
+		}
+	}
+	
+	@RequestMapping(value = "/esferas/niveles/{id}", method = RequestMethod.GET)
+	public ProyectoPVCNivel getNivel(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			return proyectoPVCNivelService.getOne(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro");
+		}
+	}
+	
+	@RequestMapping(value = "/esferas/niveles/guardar", method = RequestMethod.POST)
+	public void saveNivel(@Valid @RequestBody ProyectoPVCNivel f) throws NirhoControllerException{
+		try {
+			proyectoPVCNivelService.guardar(f);	
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
+	
+	
+	
+	@RequestMapping(value = "/niveles/{id}/especialidades", method = RequestMethod.GET)
+	public Set<ProyectoPVCEspecialidad> getEspecialidadPorNivel(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			ProyectoPVCNivel nivel = proyectoPVCNivelService.getOne(id);
+			return nivel.getEspecialidades();
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro");
+		}
+	}
+	
+	@RequestMapping(value = "/niveles/especialidades/{id}", method = RequestMethod.GET)
+	public ProyectoPVCEspecialidad getEspecialidad(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			return proyectoPVCEspecialidadService.getOne(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro");
+		}
+	}
+	
+	@RequestMapping(value = "/niveles/especialidades/guardar", method = RequestMethod.POST)
+	public void saveEspecialidad(@Valid @RequestBody ProyectoPVCEspecialidad f) throws NirhoControllerException{
+		try {
+			proyectoPVCEspecialidadService.guardar(f);	
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/reporte", method = RequestMethod.GET)
 	@ResponseBody
