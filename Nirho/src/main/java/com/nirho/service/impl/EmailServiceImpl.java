@@ -58,7 +58,7 @@ public class EmailServiceImpl implements EmailService {
 			MimeMessageHelper helper = new MimeMessageHelper(mail);
 			helper.setTo(datos.getEmailDestino());
 			helper.setSubject(EmailUtil.getAsunto(datos.getNombreProyecto()));
-			helper.setText(EmailUtil.getContenidoEVA360(datos));
+			helper.setText(EmailUtil.getContenidoEVA360(datos), true);
 			helper.setCc(cc);
 			mailSender.send(mail);
 		} catch(Exception e){
@@ -74,7 +74,7 @@ public class EmailServiceImpl implements EmailService {
 			MimeMessageHelper helper = new MimeMessageHelper(mail);
 			helper.setTo(datos.getEmailDestino());
 			helper.setSubject(EmailUtil.getAsunto(datos.getNombreProyecto()));
-			helper.setText(EmailUtil.getContenidoAPO(datos));
+			helper.setText(EmailUtil.getContenidoAPO(datos), true);
 			helper.setCc(cc);
 			mailSender.send(mail);
 		} catch(Exception e){
