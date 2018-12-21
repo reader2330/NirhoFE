@@ -60,7 +60,8 @@ export class ParticipantesSelectorComponent implements OnInit {
     console.log(this.participante);
     this.ampliaciones = [];
     this.showTable = false;
-    this.ProyectoApoServices.getAmpliacion(this.participante['id']).subscribe(res => {
+    this.ProyectoApoServices.getAmpliacion(this.participante['idParticipante']).subscribe(res => {
+
       this.ampliaciones = res;
       this.showTable = true;
     });

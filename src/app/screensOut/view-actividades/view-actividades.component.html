@@ -1,21 +1,65 @@
 
-
 <div class="row">
 
-  <div class="col-sm-12">
-    <vertical-timeline *ngFor="let met of metas"  >
+  <div class="col-sm-10 offset-1" >
+    <img class="avatar" [src]="urlMensagge" alt="">
+  </div>
+
+  <div style="margin-top: 85px; margin-left: 15px" class="row col-sm-12 ">
+    <mat-table *ngIf="showTable"   class="mat-elevation-z8 offset-1"  [dataSource]="ampliaciones">
+
+      <!-- Position Column -->
+
+
+
+      <ng-container  matColumnDef="FUNCIONES">
+        <th mat-header-cell style="padding-right: 50px !important;" *matHeaderCellDef>FUNCIONES </th>
+        <td mat-cell   style="padding-right: 50px !important;"*matCellDef="let element"> {{element.funcion}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="TIEMPO">
+        <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> TIEMPO </th>
+        <td style="padding-right: 50px !important;"  mat-cell *matCellDef="let element"> {{element.tiempo}} </td>
+      </ng-container>
+      <ng-container matColumnDef="F.E.V.">
+        <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> F.E.V. </th>
+        <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.frecuenciaEval}} </td>
+      </ng-container>
+      <ng-container matColumnDef="metaKpi">
+        <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> Meta </th>
+        <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.metaKpi}} </td>
+      </ng-container>
+      <ng-container matColumnDef="cantidadMeta">
+        <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> Cantidad Meta </th>
+        <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> {{element.cantidadMeta}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="detalle1">
+        <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> Participante </th>
+        <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> <mat-checkbox [disabled]="isBoss || element.checkParticipante " (change)="updateObjetivos(element)" [(ngModel)]="element.checkParticipante" style="margin-left: 20px; margin-top: 10px "></mat-checkbox> </td>
+      </ng-container>
+      <ng-container matColumnDef="detalle2">
+        <th style="padding-right: 50px !important;" mat-header-cell *matHeaderCellDef> Jefe </th>
+        <td style="padding-right: 50px !important;" mat-cell *matCellDef="let element"> <mat-checkbox style="margin-left: 20px; margin-top: 10px " [disabled]="!isBoss || element.checkJefe" (change)="updateObjetivos(element)" [(ngModel)]="element.checkJefe"></mat-checkbox> </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
+    </mat-table>
+  </div>
+  <div style="margin-top: 50px" class="col-sm-12" *ngFor="let met of metas">
+    <vertical-timeline *ngFor="let fuc of met['funciones']"   >
 
       <!-- Add some cards to the timeline. It works with *ngFor too -->
-      <h2>{{met.title}}</h2>
+      <h2>{{fuc.funcion }}</h2>
       <!-- If no value is passed for the date, the current time is used. -->
-      <vertical-timeline-card *ngFor="let act of met.actividades" [dateValue]="act.start" [color]="nirhoColor">
-        <div *ngIf="act.name !== '' " class="row">
-          <div  class="col-sm-12">{{act.name}}</div>
-          <div class="col-sm-12">{{act.fecha | date}}</div>
+      <vertical-timeline-card *ngFor="let act of fuc['actividades']" [dateValue]="act.fechaCreacion" [color]="nirhoColor">
+        <div *ngIf=" act.name !== '' " class="row">
+          <div  class="col-sm-12">{{act.nombre}}</div>
+          <div class="col-sm-12">{{act.fechaTermino | date}}</div>
           <div class="col-sm-12" *ngIf="!currentUser()"> {{act.calificacion}}</div>
           <div class="col-sm-12" *ngIf="currentUser()">
             <mat-label> Calificación</mat-label>
-            <mat-select [(ngModel)]="act.calificacion" >
+            <mat-select (selectionChange)="updateCalificaionActividad(act, fuc)"  [(ngModel)]="act.calificacion" >
               <mat-option *ngFor="let val of values " [value]="val">
                 {{val}}
               </mat-option>
@@ -38,7 +82,7 @@
             </mat-form-field>
           </div>
           <div class="col-sm-12">
-              <button mat-raised-button color="accent" (click)="generateActividad(met)">Agregar actividad </button>
+              <button mat-raised-button color="accent" (click)="generateActividad(fuc)">Agregar actividad </button>
           </div>
         </div>
       </vertical-timeline-card>
@@ -47,6 +91,13 @@
 
 
     </vertical-timeline>
+  </div>
+  <div  *ngIf="showGraphs" class="row col-sm-12">
+  <div style="margin-top: 100px;" *ngFor="let graph of graphs" class="row col-sm-12">
+
+    <chart  class="col-sm-10 offset-1"    [options]="graph"></chart>
+
+  </div>
   </div>
 </div>
 

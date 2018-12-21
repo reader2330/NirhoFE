@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataContact360Component } from './data-contact-360.component';
+import { SelectorAreasComponent } from './selector-areas.component';
 
-describe('DataContactPvcComponent', () => {
-  let component: DataContact360Component;
-  let fixture: ComponentFixture<DataContact360Component>;
+describe('SelectorAreasComponent', () => {
+  let component: SelectorAreasComponent;
+  let fixture: ComponentFixture<SelectorAreasComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataContact360Component ]
+      declarations: [ SelectorAreasComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataContact360Component);
+    fixture = TestBed.createComponent(SelectorAreasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

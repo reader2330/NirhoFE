@@ -54,6 +54,11 @@ export class ProyectoApoService {
       'idProyecto': id
       }});
   }
+  sendCuestionario(idProyecto) {
+    return this.http.get(this.api + 'participantesAPO/enviocorreo', {headers: this.headers, params:   {
+        idProyecto: idProyecto
+      }});
+  }
   getConsultores(): Observable<any> {
     return this.http.get(this.api + 'usuario/consultores', {headers: this.headers});
   }
@@ -76,5 +81,26 @@ export class ProyectoApoService {
     return this.http.get(this.api + 'participantesAPO/organigrama', {headers: this.headers, params: {'idProyecto': id}});
 
   }
+  getToken(token) {
+    return this.http.get(this.api + 'participantesAPO/' + token, {headers: this.headers} );
+  }
+  guardaActividad(id, data) {
+    console.log(id);
+    console.log(data);
+    return this.http.post(this.api + 'participantesAPO/funciones/' + id + '/actividades/guardar', data, {headers: this.headers});
+  }
+  updateObjetivos(data) {
+    return this.http.post(this.api + 'participantesAPO/funciones/guardar', data, { headers: this.headers});
+  }
+  updateCalificacionActividad(idFunction, idActividad, calificacion) {
+    return this.http.post(this.api + 'participantesAPO/funciones/' + idFunction + '/actividades/' + idActividad + '/calificar/' + calificacion, {}, {headers: this.headers});
+  }
+  getCalificaciones(id) {
+    return this.http.get(this.api + 'participantesAPO/' + id + '/funciones/calificaciones',  {headers: this.headers});
+  }
+  getStatusActividades(id) {
+    return this.http.get(this.api + 'participantesAPO/' + id + '/funciones/actividades/status');
+  }
+
 
 }

@@ -1,0 +1,33 @@
+<div style="margin-top: 20px" class="row">
+  <div  class="col-sm-10 offset-1">
+
+    <mat-form-field style="width: 100%" appearance="outline">
+      <mat-label>Selecciona un proyecto</mat-label>
+      <mat-select [(ngModel)]="proyect">
+        <mat-option *ngFor="let proyect of proyects" [value]="proyect">
+          {{proyect.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div class="row col-sm-10 offset-1">
+    <mat-form-field class="col-sm-12" style="width: 100%" appearance="outline">
+      <mat-label>Nombre de la área</mat-label>
+      <input matInput type="text" placeholder="Recursos Humanos" [(ngModel)]="area">
+    </mat-form-field>
+    <div class="col-sm-4 offset-5">
+      <button  (click)="addArea()" style="color: white; margin-left: 20px" mat-raised-button color="accent">Agregar<mat-icon>add_circle_outline</mat-icon></button>
+    </div>
+  </div>
+  <div *ngIf="areas.length"  style="margin-top: 50px" class="col-sm-10 offset-1">
+    <mat-list style="border: 2px solid gray">
+      <h3 mat-subheader>Areas</h3>
+      <mat-list-item style="border-bottom: 1px solid gray" *ngFor="let area of areas">
+        <mat-icon>assignment_ind</mat-icon>{{area}}
+      </mat-list-item>
+
+    </mat-list>
+  </div>
+
+</div>

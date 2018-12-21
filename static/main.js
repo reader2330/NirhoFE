@@ -238,7 +238,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/cuestionario-select/cuestionario-select.component */ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.ts");
 /* harmony import */ var _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/asignar-consultor-eva360/asignar-consultor-eva360.component */ "./src/app/modules/clb/components/asignar-consultor-eva360/asignar-consultor-eva360.component.ts");
 /* harmony import */ var _components_estadisticas_estadisticas_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/estadisticas/estadisticas.component */ "./src/app/modules/clb/components/estadisticas/estadisticas.component.ts");
-/* harmony import */ var _components_detalle_preguntas_detalle_preguntas_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/detalle-preguntas/detalle-preguntas.component */ "./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas.component.ts");
+/* harmony import */ var _components_detalle_preguntas_detalle_preguntas_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/detalle-preguntas/detalle-preguntas.component */ "./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas-apo.component.ts");
 /* harmony import */ var _components_encuesta_encuesta_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/encuesta/encuesta.component */ "./src/app/modules/clb/components/encuesta/encuesta.component.ts");
 /* harmony import */ var _components_avatar_edit_avatar_edit_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/avatar-edit/avatar-edit.component */ "./src/app/modules/clb/components/avatar-edit/avatar-edit.component.ts");
 /* harmony import */ var _material_material_module__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../material/material.module */ "./src/app/modules/material/material.module.ts");
@@ -317,7 +317,7 @@ var CLBModule = /** @class */ (function () {
                 _components_cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_15__["CuestionarioSelectComponent"],
                 _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_16__["AsignarConsultorApoComponent"],
                 _components_estadisticas_estadisticas_component__WEBPACK_IMPORTED_MODULE_17__["EstadisticasComponent"],
-                _components_detalle_preguntas_detalle_preguntas_component__WEBPACK_IMPORTED_MODULE_18__["DetallePreguntasComponent"],
+                _components_detalle_preguntas_detalle_preguntas_component__WEBPACK_IMPORTED_MODULE_18__["DetallePreguntasApoComponent"],
                 _components_encuesta_encuesta_component__WEBPACK_IMPORTED_MODULE_19__["EncuestaIrhComponent"],
                 _components_avatar_edit_avatar_edit_component__WEBPACK_IMPORTED_MODULE_20__["AvatarEditComponent"],
             ]
@@ -1003,7 +1003,7 @@ var CuestionarioSelectComponent = /** @class */ (function () {
 
 /***/ "./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas.component.html":
 /*!*******************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas.component.html ***!
+  !*** ./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas-apo.component.html ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -1014,7 +1014,7 @@ module.exports = "  <h3 align=\"center\">Preguntas</h3>\n  <br>\n  <div class=\"
 
 /***/ "./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas.component.scss":
 /*!*******************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas.component.scss ***!
+  !*** ./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas-apo.component.scss ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -1025,14 +1025,14 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ "./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas.component.ts":
 /*!*****************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas.component.ts ***!
+  !*** ./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas-apo.component.ts ***!
   \*****************************************************************************************/
-/*! exports provided: DetallePreguntasComponent */
+/*! exports provided: DetallePreguntasApoComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DetallePreguntasComponent", function() { return DetallePreguntasComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DetallePreguntasApoComponent", function() { return DetallePreguntasComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/proyecto.service */ "./src/app/modules/clb/services/proyecto.service.ts");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
@@ -1116,8 +1116,8 @@ var DetallePreguntasComponent = /** @class */ (function () {
     DetallePreguntasComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-detalle-preguntas',
-            template: __webpack_require__(/*! ./detalle-preguntas.component.html */ "./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas.component.html"),
-            styles: [__webpack_require__(/*! ./detalle-preguntas.component.scss */ "./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas.component.scss")]
+            template: __webpack_require__(/*! ./detalle-preguntas-apo.component.html */ "./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas-apo.component.html"),
+            styles: [__webpack_require__(/*! ./detalle-preguntas-apo.component.scss */ "./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas-apo.component.scss")]
         }),
         __metadata("design:paramtypes", [_services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__["ProyectoService"]])
     ], DetallePreguntasComponent);
