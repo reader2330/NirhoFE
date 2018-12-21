@@ -55,16 +55,9 @@ export class SidebarPvcComponent implements OnInit {
   getModules() {
   console.log('inicio');
     this.loginService.getModules().subscribe((res) => {
+      console.log(res);
       this.modules = res;
       if (this.user['rol'] === 3) {
-        console.log("hola")
-        let item = this.modules.pop();
-        let obj = {
-          id_submodulo: 10,
-          descripcion: 'Ver asignación'
-        };
-        this.modules.push(obj);
-        this.modules.push(item);
       }
     });
   }

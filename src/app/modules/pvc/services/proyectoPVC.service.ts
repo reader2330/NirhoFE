@@ -19,10 +19,15 @@ export class ProyectoPVCService {
   }
 
   saveProyect(data): Observable<any> {
-    return this.http.post(this.api + 'proyectoEVO360/registrar', data, {headers: this.headers});
+    return this.http.post(this.api + 'proyectoPVC/registrar', data, {headers: this.headers});
   }
   getProyects(): Observable<Proyecto[]> {
     return this.http.get<Proyecto[]>(this.api + 'proyectoPVC/todos', {headers: this.headers});
+  }
+  getProyectID(id): Observable<any> {
+    return this.http.get(this.api + 'proyectoPVC/porId', {headers: this.headers , params: {
+        'idProyecto': id
+      }});
   }
 
   saveHead(data): Observable<any> {
@@ -30,7 +35,7 @@ export class ProyectoPVCService {
   }
 
   savePeriod(data): Observable<any> {
-    return this.http.post(this.api + 'proyectoEVO360/agignarPeriodoGarantia', data, {headers: this.headers});
+    return this.http.post(this.api + 'proyectoPVC/agignarPeriodoGarantia', data, {headers: this.headers});
   }
   getOrganigrama(id): Observable<any> {
     return this.http.get(this.api + 'participantes/organigrama/', {headers: this.headers, params: {'idProyecto': id}});
@@ -48,10 +53,10 @@ export class ProyectoPVCService {
     return this.http.get(this.api + 'usuario/consultores', {headers: this.headers});
   }
   saveConsultor(data): Observable<any> {
-    return this.http.post(this.api + 'proyectoEVO360/asignarConsultor', data, {headers: this.headers});
+    return this.http.post(this.api + 'proyectoPVC/asignarConsultor', data, {headers: this.headers});
   }
   getProyectsbyRol(id): Observable<Proyecto[]> {
-    return this.http.get<Proyecto[]>(this.api + 'proyectoEVO360/porConsultor', {headers: this.headers, params: {'idUsuario': id }});
+    return this.http.get<Proyecto[]>(this.api + 'proyectoPVC/porConsultor', {headers: this.headers, params: {'idUsuario': id }});
   }
   getPreguntasProyect(id): Observable<any> {
     return this.http.get(this.api + 'cuestionario/preguntasEVD', {headers: this.headers, params: {'idProyecto': id}});

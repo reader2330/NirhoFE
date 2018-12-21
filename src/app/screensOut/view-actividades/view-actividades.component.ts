@@ -174,6 +174,9 @@ export class ViewActividadesComponent implements OnInit {
     element['actividades'].pop();
     this.ProyectServices.updateObjetivos(element).subscribe(res => {
       console.log(res);
+      element['actividades'].push({
+        name: ''
+      });
     });
   }
 
@@ -216,7 +219,7 @@ export class ViewActividadesComponent implements OnInit {
       console.log(res);
       let opt = {
         chart: {
-          zoomType: 'xy',
+          type: 'columng',
           options3d: {
             enabled: true,
             alpha: 30,
