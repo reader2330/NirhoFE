@@ -20,16 +20,22 @@ public class EmailUtil {
 	}
 	public static String getContenidoEVD(EmailDatos datos) {
 		String contenido = "<p>Estimado(a) " + datos.getNombreParticipante() + "</p>" + 
-				"<p>Para ingresar a su cuestionario de participación al proyecto " + datos.getNombreProyecto() +
-				", por favor hacer clic en la siguiente liga: " + URL_CUEST_EVD + datos.getToken() + "</p>" +
-				"<p>Saludos</p>";
+				"<p>Bienvenido a nuestra evaluación de desempeño, para ingresar a su cuestionario de participación al proyecto " + datos.getNombreProyecto() +
+				", por favor hacer clic en la siguiente liga: " + URL_CUEST_EVA360 + datos.getToken() + "</p>" +
+				"<p>¡Tu participación es muy importante! Por lo que te pedimos te tomes un momento en un " +
+				"espacio tranquilo para resolver la siguiente evaluación.</p>" +
+				"<p><img src='http://74.208.252.39/logo.bdfd5939a8d871515e82.png'></p>" +
+				"<p>Agradecemos tu apoyo</p>";
 		return contenido;
 	}
 	public static String getContenidoEVA360(EmailDatos datos) {
 		String contenido = "<p>Estimado(a) " + datos.getNombreParticipante() + "</p>" + 
-				"<p>Para ingresar a su cuestionario de participación al proyecto " + datos.getNombreProyecto() +
+				"<p>Bienvenido a nuestra evaluación 360˚, para ingresar a su cuestionario de participación al proyecto " + datos.getNombreProyecto() +
 				", por favor hacer clic en la siguiente liga: " + URL_CUEST_EVA360 + datos.getToken() + "</p>" +
-				"<p>Saludos</p>";
+				"<p>¡Tu participación es muy importante! Por lo que te pedimos te tomes un momento en un " +
+				"espacio tranquilo para resolver la siguiente evaluación.</p>" +
+				"<p><img src='http://74.208.252.39/logo.bdfd5939a8d871515e82.png'></p>" +
+				"<p>Agradecemos tu apoyo</p>";
 		return contenido;
 	}
 	

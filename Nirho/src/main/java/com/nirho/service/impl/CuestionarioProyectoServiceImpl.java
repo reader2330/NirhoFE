@@ -328,6 +328,7 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 				List<EvaluadorEvaluado> evaluados = evalEvalDAO.findByIdProyectoAndIdEvaluador(participante.getParticipantePK().getIdProyecto() 
 						,participante.getParticipantePK().getIdParticipante());	
 				for(EvaluadorEvaluado ee: evaluados) {
+					logger.info("***====================================== Evaluados ee [" + ee +"]");
 					List<CuestionarioParticipanteEVD> cuestPartEVDList = new ArrayList<>();
 					List<CuetionarioParticipante> cuestPart = cuestPartDAO.findByParticipanteProyecto(ee.getEvaluadorEvaluadoPK().getIdEvaluado(),
 							participante.getParticipantePK().getIdProyecto());
@@ -335,7 +336,7 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 						CuestionarioParticipanteEVD cuestPartEVD = new CuestionarioParticipanteEVD();
 						cuestPartEVD.setCuestionarioParticipante(cp);
 						cuestPartEVD.setParticipante(participanteDAO.getOne(
-								new ParticipantePK(cp.getCuetionarioParticipantePK().getIdParticipante(), cp.getCuetionarioParticipantePK().getIdProyecto())));
+								new ParticipantePK(ee.getEvaluadorEvaluadoPK().getIdEvaluado(), cp.getCuetionarioParticipantePK().getIdProyecto())));
 						List<Opcion> opciones = new ArrayList<>();
 						for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getTema().getIdTema())){
 							opciones.add(cuestOps.getOpcion());
