@@ -250,17 +250,21 @@ public class ParticipanteController {
 			for (Participante participante : participantes) {
 				try {
 					for (CuestionarioProyecto cp : cuestProyList) {
-						CuetionarioParticipante cuetionarioParticipante = new CuetionarioParticipante();
-						CuetionarioParticipantePK pk = new CuetionarioParticipantePK(
-								participante.getParticipantePK().getIdParticipante(),
-								participante.getParticipantePK().getIdProyecto(),
-								cp.getCuestionarioProyectoPK().getIdTema(),
-								cp.getCuestionarioProyectoPK().getIdPregunta());
-						cuetionarioParticipante.setCuetionarioParticipantePK(pk);
-						cuetionarioParticipante.setPregunta(cp.getPregunta());
-						cuetionarioParticipante.setTema(cp.getTema());
-						logger.info("CuestionarioParticipante [" + cuetionarioParticipante + "]");
-						cuestionarioParticipanteService.guardar(cuetionarioParticipante);
+						try {
+							CuetionarioParticipante cuetionarioParticipante = new CuetionarioParticipante();
+							CuetionarioParticipantePK pk = new CuetionarioParticipantePK(
+									participante.getParticipantePK().getIdParticipante(),
+									participante.getParticipantePK().getIdProyecto(),
+									cp.getCuestionarioProyectoPK().getIdTema(),
+									cp.getCuestionarioProyectoPK().getIdPregunta());
+							cuetionarioParticipante.setCuetionarioParticipantePK(pk);
+							cuetionarioParticipante.setPregunta(cp.getPregunta());
+							cuetionarioParticipante.setTema(cp.getTema());
+							logger.info("CuestionarioParticipante [" + cuetionarioParticipante + "]");
+							cuestionarioParticipanteService.guardar(cuetionarioParticipante);
+						} catch (NirhoServiceException nse) {
+							logger.info("Problemas al enviar el cuestionario a la BD, causa + [" + nse.getMessage() + "]");
+						}
 					}
 					if(participante.getProyecto().getIdModulo().intValue() == ProyectoConstants.MODULO_EVD.intValue()) {
 						enviarCorreoParticipanteEVD(participante, request);
@@ -269,7 +273,7 @@ public class ParticipanteController {
 					} else {
 						enviarCorreoParticipante(participante, request);
 					}
-				} catch (NirhoServiceException nse) {
+				} catch (Exception nse) {
 					logger.info("Problemas al enviar el cuestionario a la BD, causa + [" + nse.getMessage() + "]");
 				}
             }
