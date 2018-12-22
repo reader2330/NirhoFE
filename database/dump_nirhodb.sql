@@ -1601,6 +1601,10 @@ CREATE TABLE `participantepvc` (
   `puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `rfc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sede` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `area` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `esfera` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `especialidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nivel_p` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2325,4 +2329,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-21 20:09:15
+-- Dump completed on 2018-12-22  0:54:06
