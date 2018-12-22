@@ -58,4 +58,25 @@ public class ProyectoPVCAreaServiceImpl implements ProyectoPVCAreaService {
 		}
 	}
 	
+	@Override
+	public void guardar(List<ProyectoPVCArea> list) throws NirhoServiceException {
+		try {
+			for(ProyectoPVCArea p: list) {
+				try {
+					ProyectoPVCArea area = proyectoPVCAreaDAO.getOne(p.getId());
+					if(area == null) {
+						proyectoPVCAreaDAO.save(p);
+					} else {
+						proyectoPVCAreaDAO.update(p);
+					}
+				} catch(Exception e) {
+					logger.info("Exception [" + e.getMessage() + "");
+				}	
+			}
+		} catch (Exception e) {
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
+		}
+	}
+	
 }

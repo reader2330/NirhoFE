@@ -1835,6 +1835,32 @@ LOCK TABLES `proyecto_pvc_area` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `proyecto_pvc_conocimiento`
+--
+
+DROP TABLE IF EXISTS `proyecto_pvc_conocimiento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `proyecto_pvc_conocimiento` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo` int(11) DEFAULT NULL,
+  `especialidad` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKbxgmbp8b1n8mbf6t0r3v77hsh` (`especialidad`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proyecto_pvc_conocimiento`
+--
+
+LOCK TABLES `proyecto_pvc_conocimiento` WRITE;
+/*!40000 ALTER TABLE `proyecto_pvc_conocimiento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proyecto_pvc_conocimiento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `proyecto_pvc_esfera`
 --
 
@@ -2299,4 +2325,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-21 15:10:45
+-- Dump completed on 2018-12-21 20:09:15

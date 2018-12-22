@@ -1,5 +1,7 @@
 package com.nirho.service.impl;
 
+import java.util.List;
+
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,27 @@ public class ProyectoPVCEsferaServiceImpl implements ProyectoPVCEsferaService {
 			} catch(Exception e) {
 				logger.info("Exception [" + e.getMessage() + "");
 			}	
+		} catch (Exception e) {
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
+		}
+	}
+	
+	@Override
+	public void guardar(List<ProyectoPVCEsfera> list) throws NirhoServiceException {
+		try {
+			for(ProyectoPVCEsfera p: list) {
+				try {
+					ProyectoPVCEsfera area = proyectoPVCEsferaDAO.getOne(p.getId());
+					if(area == null) {
+						proyectoPVCEsferaDAO.save(p);
+					} else {
+						proyectoPVCEsferaDAO.update(p);
+					}
+				} catch(Exception e) {
+					logger.info("Exception [" + e.getMessage() + "");
+				}	
+			}
 		} catch (Exception e) {
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");

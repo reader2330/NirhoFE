@@ -6,24 +6,24 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nirho.dao.ProyectoPVCEspecialidadDAO;
+import com.nirho.dao.ProyectoPVCConocimientoDAO;
 import com.nirho.exception.NirhoServiceException;
-import com.nirho.model.ProyectoPVCEspecialidad;
-import com.nirho.model.ProyectoPVCEspecialidad;
-import com.nirho.service.ProyectoPVCEspecialidadService;
+import com.nirho.model.ProyectoPVCConocimiento;
+import com.nirho.model.ProyectoPVCConocimiento;
+import com.nirho.service.ProyectoPVCConocimientoService;
 
 @Service
-public class ProyectoPVCEspecialidadServiceImpl implements ProyectoPVCEspecialidadService {
+public class ProyectoPVCConocimientoServiceImpl implements ProyectoPVCConocimientoService {
 	
 	public final static Logger logger = Logger.getLogger(ParticipanteAPOAmpActividadServiceImpl.class);
 	
 	@Autowired
-	private ProyectoPVCEspecialidadDAO proyectoPVCEspecialidadDAO;
+	private ProyectoPVCConocimientoDAO proyectoPVCConocimientoDAO;
 	
 	@Override
-	public ProyectoPVCEspecialidad getOne(Integer id) throws NirhoServiceException {
+	public ProyectoPVCConocimiento getOne(Integer id) throws NirhoServiceException {
 		try {
-			return proyectoPVCEspecialidadDAO.getOne(id);
+			return proyectoPVCConocimientoDAO.getOne(id);
 		} catch (Exception e) {
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
@@ -31,14 +31,14 @@ public class ProyectoPVCEspecialidadServiceImpl implements ProyectoPVCEspecialid
 	}
 	
 	@Override
-	public void guardar(ProyectoPVCEspecialidad entity) throws NirhoServiceException {
+	public void guardar(ProyectoPVCConocimiento entity) throws NirhoServiceException {
 		try {
 			try {
-				ProyectoPVCEspecialidad f = proyectoPVCEspecialidadDAO.getOne(entity.getId());
+				ProyectoPVCConocimiento f = proyectoPVCConocimientoDAO.getOne(entity.getId());
 				if(f == null) {
-					proyectoPVCEspecialidadDAO.save(entity);
+					proyectoPVCConocimientoDAO.save(entity);
 				} else {
-					proyectoPVCEspecialidadDAO.update(entity);
+					proyectoPVCConocimientoDAO.update(entity);
 				}
 			} catch(Exception e) {
 				logger.info("Exception [" + e.getMessage() + "");
@@ -50,15 +50,15 @@ public class ProyectoPVCEspecialidadServiceImpl implements ProyectoPVCEspecialid
 	}
 	
 	@Override
-	public void guardar(List<ProyectoPVCEspecialidad> list) throws NirhoServiceException {
+	public void guardar(List<ProyectoPVCConocimiento> list) throws NirhoServiceException {
 		try {
-			for(ProyectoPVCEspecialidad p: list) {
+			for(ProyectoPVCConocimiento p: list) {
 				try {
-					ProyectoPVCEspecialidad area = proyectoPVCEspecialidadDAO.getOne(p.getId());
+					ProyectoPVCConocimiento area = proyectoPVCConocimientoDAO.getOne(p.getId());
 					if(area == null) {
-						proyectoPVCEspecialidadDAO.save(p);
+						proyectoPVCConocimientoDAO.save(p);
 					} else {
-						proyectoPVCEspecialidadDAO.update(p);
+						proyectoPVCConocimientoDAO.update(p);
 					}
 				} catch(Exception e) {
 					logger.info("Exception [" + e.getMessage() + "");

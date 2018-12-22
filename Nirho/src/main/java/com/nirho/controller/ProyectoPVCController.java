@@ -40,6 +40,7 @@ import com.nirho.model.ParticipanteAPOAmpActividad;
 import com.nirho.model.ParticipanteAPOAmpFuncion;
 import com.nirho.model.Proyecto;
 import com.nirho.model.ProyectoPVCArea;
+import com.nirho.model.ProyectoPVCConocimiento;
 import com.nirho.model.ProyectoPVCEsfera;
 import com.nirho.model.ProyectoPVCEspecialidad;
 import com.nirho.model.ProyectoPVCNivel;
@@ -47,6 +48,7 @@ import com.nirho.service.EmpresaService;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.GraficasProyectoService;
 import com.nirho.service.ProyectoPVCAreaService;
+import com.nirho.service.ProyectoPVCConocimientoService;
 import com.nirho.service.ProyectoPVCEsferaService;
 import com.nirho.service.ProyectoPVCEspecialidadService;
 import com.nirho.service.ProyectoPVCNivelService;
@@ -72,6 +74,8 @@ public class ProyectoPVCController {
 	private ProyectoPVCNivelService proyectoPVCNivelService;
 	@Autowired
 	private ProyectoPVCEspecialidadService proyectoPVCEspecialidadService;
+	@Autowired
+	private ProyectoPVCConocimientoService proyectoPVCConocimientoService;
 	@Autowired
 	private EstatusProyectoService estatusService;
 	@Autowired
@@ -254,8 +258,18 @@ public class ProyectoPVCController {
 		} 
 	}
 	
-	
-	
+	@RequestMapping(value = "/areas/guardarTodas", method = RequestMethod.POST)
+	public void saveArea(@Valid @RequestBody List<ProyectoPVCArea> l) throws NirhoControllerException{
+		try {
+			for(ProyectoPVCArea i: l) {
+				proyectoPVCAreaService.guardar(i);	
+			}
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
 	
 	
 	
@@ -289,7 +303,22 @@ public class ProyectoPVCController {
 		} 
 	}
 	
-	
+	@RequestMapping(value = "/areas/{id}/esferas/guardarTodas", method = RequestMethod.POST)
+	public void saveEsfera(@Valid @RequestBody Set<ProyectoPVCEsfera> l, @PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			ProyectoPVCArea p = proyectoPVCAreaService.getOne(id);
+			if(p.getEsferas() == null) {
+				p.setEsferas(l);
+			} else {
+				p.getEsferas().addAll(l);
+			}
+			proyectoPVCAreaService.guardar(p);
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
 
 	
 	
@@ -324,6 +353,24 @@ public class ProyectoPVCController {
 		} 
 	}
 	
+	@RequestMapping(value = "/esferas/{id}/niveles/guardarTodas", method = RequestMethod.POST)
+	public void saveNivel(@Valid @RequestBody Set<ProyectoPVCNivel> l, @PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			ProyectoPVCEsfera p = proyectoPVCEsferaService.getOne(id);
+			if(p.getNiveles() == null) {
+				p.setNiveles(l);
+			} else {
+				p.getNiveles().addAll(l);
+			}
+			proyectoPVCEsferaService.guardar(p);
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
+	
+	
 	
 	
 	@RequestMapping(value = "/niveles/{id}/especialidades", method = RequestMethod.GET)
@@ -356,8 +403,112 @@ public class ProyectoPVCController {
 		} 
 	}
 	
+	@RequestMapping(value = "/niveles/{id}/especialidades/guardarTodas", method = RequestMethod.POST)
+	public void saveEspecialidad(@Valid @RequestBody Set<ProyectoPVCEspecialidad> l, @PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			ProyectoPVCNivel p = proyectoPVCNivelService.getOne(id);
+			if(p.getEspecialidades() == null) {
+				p.setEspecialidades(l);
+			} else {
+				p.getEspecialidades().addAll(l);
+			}
+			proyectoPVCNivelService.guardar(p);
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
 	
 	
+	
+	
+	@RequestMapping(value = "/especialidades/{id}/conocimiento", method = RequestMethod.GET)
+	public Set<ProyectoPVCConocimiento> getConocimientoPorEspecialidad(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			ProyectoPVCEspecialidad especialidad = proyectoPVCEspecialidadService.getOne(id);
+			return especialidad.getConocimientos();
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro");
+		}
+	}
+	
+	@RequestMapping(value = "/especialidades/conocimientos/{id}", method = RequestMethod.GET)
+	public ProyectoPVCConocimiento getConocimiento(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			return proyectoPVCConocimientoService.getOne(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro");
+		}
+	}
+	
+	@RequestMapping(value = "/especialidades/conocimientos/guardar", method = RequestMethod.POST)
+	public void saveConocimiento(@Valid @RequestBody ProyectoPVCConocimiento f) throws NirhoControllerException{
+		try {
+			proyectoPVCConocimientoService.guardar(f);	
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
+	
+	@RequestMapping(value = "/especialidades/{id}/conocimientos/guardarTodas", method = RequestMethod.POST)
+	public void saveConocimiento(@Valid @RequestBody Set<ProyectoPVCConocimiento> l, @PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			ProyectoPVCEspecialidad p = proyectoPVCEspecialidadService.getOne(id);
+			if(p.getConocimientos() == null) {
+				p.setConocimientos(l);
+			} else {
+				p.getConocimientos().addAll(l);
+			}
+			proyectoPVCEspecialidadService.guardar(p);
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
+	
+	@RequestMapping(value = "/especialidades/{id}/conocimientos/tecnicos/guardarTodas", method = RequestMethod.POST)
+	public void saveConocimiento1(@Valid @RequestBody Set<ProyectoPVCConocimiento> l, @PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			for(ProyectoPVCConocimiento i: l) {
+				i.setTipo(1);
+			}
+			ProyectoPVCEspecialidad p = proyectoPVCEspecialidadService.getOne(id);
+			if(p.getConocimientos() == null) {
+				p.setConocimientos(l);
+			} else {
+				p.getConocimientos().addAll(l);
+			}
+			proyectoPVCEspecialidadService.guardar(p);
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
+	
+	@RequestMapping(value = "/especialidades/{id}/conocimientos/humanisticos/guardarTodas", method = RequestMethod.POST)
+	public void saveConocimiento2(@Valid @RequestBody Set<ProyectoPVCConocimiento> l, @PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			for(ProyectoPVCConocimiento i: l) {
+				i.setTipo(2);
+			}
+			ProyectoPVCEspecialidad p = proyectoPVCEspecialidadService.getOne(id);
+			if(p.getConocimientos() == null) {
+				p.setConocimientos(l);
+			} else {
+				p.getConocimientos().addAll(l);
+			}
+			proyectoPVCEspecialidadService.guardar(p);
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar");
+		} catch(Exception exe) {
+			throw new NirhoControllerException("Problemas al registrar");
+		} 
+	}
 	
 	
 	

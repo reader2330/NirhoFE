@@ -6,13 +6,18 @@
 package com.nirho.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -37,15 +42,20 @@ public class ProyectoPVCEspecialidad implements Serializable {
     @Column(name = "status")
     private boolean status;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "especialidad")
+	private Set<ProyectoPVCConocimiento> conocimientos = new HashSet<>();
+    
 	public ProyectoPVCEspecialidad() {
 		super();
 	}
 
-	public ProyectoPVCEspecialidad(int id, String nombre, boolean status) {
+	public ProyectoPVCEspecialidad(int id, String nombre, boolean status, Set<ProyectoPVCConocimiento> conocimientos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.status = status;
+		this.conocimientos = conocimientos;
 	}
 
 	public int getId() {
@@ -72,9 +82,18 @@ public class ProyectoPVCEspecialidad implements Serializable {
 		this.status = status;
 	}
 
+	public Set<ProyectoPVCConocimiento> getConocimientos() {
+		return conocimientos;
+	}
+
+	public void setConocimientos(Set<ProyectoPVCConocimiento> conocimientos) {
+		this.conocimientos = conocimientos;
+	}
+
 	@Override
 	public String toString() {
-		return "ProyectoPVCEspecialidad [id=" + id + ", nombre=" + nombre + ", status=" + status + "]";
+		return "ProyectoPVCEspecialidad [id=" + id + ", nombre=" + nombre + ", status=" + status + ", conocimientos="
+				+ conocimientos + "]";
 	}
 
 }
