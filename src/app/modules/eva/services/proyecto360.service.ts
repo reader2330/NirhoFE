@@ -98,7 +98,7 @@ export class Proyecto360Service {
     return this.http.post(this.api + 'cuestionario/guardarOpciones', data, {headers: this.headers});
   }
   sendCuestionarios(id): Observable<any> {
-    return this.http.get(this.api + 'participantes/cuestionariosSend', {headers: this.headers , params: {'idProyecto': id}});
+    return this.http.get(this.api + 'participantes/hecjk', {headers: this.headers , params: {'idProyecto': id}});
   }
 
   getParticipanteByProyect(id): Observable<any>{

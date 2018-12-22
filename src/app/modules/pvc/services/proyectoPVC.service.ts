@@ -21,7 +21,7 @@ export class ProyectoPVCService {
   saveProyect(data): Observable<any> {
     return this.http.post(this.api + 'proyectoPVC/registrar', data, {headers: this.headers});
   }
-  getProyects(): Observable<Proyecto[]> {
+    getProyects(): Observable<Proyecto[]> {
     return this.http.get<Proyecto[]>(this.api + 'proyectoPVC/todos', {headers: this.headers});
   }
   getProyectID(id): Observable<any> {
@@ -115,5 +115,25 @@ export class ProyectoPVCService {
 
   getAsignacion(id): Observable<any> {
     return this.http.get(this.api + 'proyectoEVO360/evaluados', {headers: this.headers , params: {'idProyecto': id}});
+  }
+
+  getAreasByProyect(id): Observable<any> {
+    return this.http.get(this.api + 'proyectoPVC/' + id + '/areas', {headers: this.headers});
+  }
+
+  guardarAreas(data): Observable<any> {
+    return this.http.post(this.api + 'proyectoPVC/areas/guardarTodas', data, {headers: this.headers});
+  }
+
+  guardarEsferas(id, data): Observable<any> {
+    return this.http.post(this.api + 'proyectoPVC/areas/' + id + '/esferas/guardarTodas', data, {headers: this.headers});
+  }
+
+  getEsferas(id): Observable<any> {
+    return this.http.get(this.api + 'proyectoPVC/areas/' + id + '/esferas', {headers: this.headers});
+  }
+
+  guardarNiveles(id, data){
+    return this.http.post(this.api + 'proyectoPVC/esferas/' + id + '/niveles/guardarTodas', data, {headers: this.headers});
   }
 }

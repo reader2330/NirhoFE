@@ -126,7 +126,7 @@ export class ViewActividadesComponent implements OnInit {
   ngOnInit() {
     this.Imagenes(1);
     this.route.params.subscribe(res => {
-      this.isBoss = true || res['jefe'];
+      this.isBoss = res['jefe'];
       this.ProyectServices.getToken(res['token']).subscribe(res2 => {
         this.metas = res2['participante']['ampliaciones'];
         this.getCalificaciones(res2['participante']['idParticipante']);

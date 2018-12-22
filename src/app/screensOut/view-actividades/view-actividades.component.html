@@ -47,12 +47,12 @@
     </mat-table>
   </div>
   <div style="margin-top: 50px" class="col-sm-12" *ngFor="let met of metas">
-    <vertical-timeline *ngFor="let fuc of met['funciones']"   >
+    <vertical-timeline style="margin-top: 50px" *ngFor="let fuc of met['funciones']"   >
 
       <!-- Add some cards to the timeline. It works with *ngFor too -->
-      <h2>{{fuc.funcion }}</h2>
+      <h2 >{{fuc.funcion }}</h2>
       <!-- If no value is passed for the date, the current time is used. -->
-      <vertical-timeline-card *ngFor="let act of fuc['actividades']" [dateValue]="act.fechaCreacion" [color]="nirhoColor">
+      <vertical-timeline-card style="margin-top: 50px" *ngFor="let act of fuc['actividades']" [dateValue]="act.fechaCreacion" [color]="nirhoColor">
         <div *ngIf=" act.name !== '' " class="row">
           <div  class="col-sm-12">{{act.nombre}}</div>
           <div class="col-sm-12">{{act.fechaVencimiento | date}}</div>

@@ -18,6 +18,9 @@ import {DataContactPvcComponent} from './components/forms-pvc/data-contact-pvc/d
 import {DataProjectPvcComponent} from './components/forms-pvc/data-project-pvc/data-project-pvc.component';
 import {AsignarConsultorPvcComponent} from './components/asignar-consultor-pvc/asignar-consultor-pvc.component';
 import {PeriodoPvcComponent} from './components/periodo-pvc/periodo-pvc.component';
+import {SelectoEsferasComponent} from './components/selecto-esferas/selecto-esferas.component';
+import {SelectorNivelComponent} from './components/selector-nivel/selector-nivel.component';
+import {SelectoEspecialidadesComponent} from './components/selecto-especialidades/selecto-especialidades.component';
 
 @NgModule({
   imports: [
@@ -40,7 +43,10 @@ import {PeriodoPvcComponent} from './components/periodo-pvc/periodo-pvc.componen
     DataContactPvcComponent,
     DataProjectPvcComponent,
     AsignarConsultorPvcComponent,
-    PeriodoPvcComponent
+    PeriodoPvcComponent,
+    SelectoEsferasComponent,
+    SelectorNivelComponent,
+    SelectoEspecialidadesComponent
   ],
   entryComponents: [
 

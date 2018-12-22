@@ -1,0 +1,59 @@
+<div style="margin-top: 20px" class="row">
+  <div  class="col-sm-10 offset-1">
+
+    <mat-form-field style="width: 100%" appearance="outline">
+      <mat-label>Selecciona un proyecto</mat-label>
+      <mat-select (selectionChange)="getAreas()" [(ngModel)]="proyect">
+        <mat-option *ngFor="let proyect of proyects" [value]="proyect">
+          {{proyect.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div  class="col-sm-10 offset-1">
+
+    <mat-form-field style="width: 100%" appearance="outline">
+      <mat-label>Selecciona una área</mat-label>
+      <mat-select (selectionChange)="getEsferas()" [(ngModel)]="area">
+        <mat-option *ngFor="let area of areas" [value]="area">
+          {{area.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div  class="col-sm-10 offset-1">
+  <mat-form-field style="width: 100%" appearance="outline">
+    <mat-label>Selecciona una esfera</mat-label>
+    <mat-select  [(ngModel)]="esfera">
+      <mat-option *ngFor="let esfera of esferas" [value]="esfera">
+        {{esfera.nombre}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  </div>
+  <div class="row col-sm-10 offset-1">
+    <mat-form-field class="col-sm-12" style="width: 100%" appearance="outline">
+      <mat-label>Nombre del nivel</mat-label>
+      <input matInput type="text" placeholder="Recursos Humanos" [(ngModel)]="nivel">
+    </mat-form-field>
+
+    <div class="col-sm-4 offset-5">
+      <button  (click)="addNivel()" style="margin-left: 20px" mat-raised-button color="default">Agregar<mat-icon>add_circle_outline</mat-icon></button>
+      <button *ngIf="niveles.length" (click)="guardarNivel()" style="color: white; margin-left: 20px" mat-raised-button color="accent">Guardar<mat-icon>add_circle_outline</mat-icon></button>
+    </div>
+  </div>
+  <div *ngIf="niveles.length"  style="margin-top: 50px" class="col-sm-10 offset-1">
+    <mat-list style="border: 2px solid gray">
+      <h3 mat-subheader>Esferas</h3>
+      <mat-list-item style="border-bottom: 1px solid gray" *ngFor="let nivel of niveles">
+        <mat-icon>assignment_ind</mat-icon>  {{nivel.nombre}}
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+</div>
+
+

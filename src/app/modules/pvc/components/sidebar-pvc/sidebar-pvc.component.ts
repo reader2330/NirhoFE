@@ -20,8 +20,8 @@ import {
 })
 export class SidebarPvcComponent implements OnInit {
   mobile = false;
-  selectedItem = 1;
-  selectModule = 1;
+  selectedItem = 13;
+  selectModule = 13;
   modules = [];
   user = {};
   avatar = {

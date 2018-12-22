@@ -55,6 +55,19 @@
 
           <app-asignar-consultor-pvc (responseHead)="recibirRespuestChildren($event)"></app-asignar-consultor-pvc>
         </div>
+        <div *ngIf="selectModule == 11">
+
+          <app-selector-areas (response)="recibirRespuestChildren($event)"></app-selector-areas>
+        </div>
+        <div *ngIf="selectModule == 12">
+
+          <app-selecto-esferas (response)="recibirRespuestChildren($event)"></app-selecto-esferas>
+        </div>
+        <div *ngIf="selectModule == 13">
+
+          <app-selector-nivel (response)="recibirRespuestChildren($event)"></app-selector-nivel>
+        </div>
+
       </div>
     </div>
   </mat-sidenav-content>

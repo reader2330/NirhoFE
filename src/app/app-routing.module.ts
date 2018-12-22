@@ -87,6 +87,9 @@ const routes: Routes = [
     component: SidebarPvcComponent,
     canActivate: [LoginGuard]
   },
+  /*{
+    path: 'seguimiento/participante/:token'
+  },*/
   { path: '**', redirectTo: '' }
 ];
 

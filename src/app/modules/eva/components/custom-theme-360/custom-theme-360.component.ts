@@ -59,9 +59,6 @@ export class CustomTheme360Component implements OnInit {
     this.ProyectService.getTemas().subscribe(res => {
       console.log(res);
       this.temas = res;
-      for (let tema of this.temas) {
-
-      }
       this.temas.push({nombre: ''});
       this.showTemas = true;
       this.save = true;
