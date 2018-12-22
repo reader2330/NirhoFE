@@ -10,7 +10,7 @@ import java.util.Queue;
 import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
-import org.json.JSONArray;
+import org.json.JSONArray; 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +25,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nirho.constant.ProyectoConstants;
+import com.nirho.dto.EmailDatos;
 import com.nirho.dto.ParticipanteDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ParticipantePVC;
 import com.nirho.model.Proyecto;
+import com.nirho.model.ProyectoPVCArea;
+import com.nirho.model.ProyectoPVCConocimiento;
+import com.nirho.model.ProyectoPVCEsfera;
+import com.nirho.model.ProyectoPVCEspecialidad;
+import com.nirho.model.ProyectoPVCNivel;
+import com.nirho.model.Usuario;
+import com.nirho.service.EmailService;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.ParticipantePVCService;
+import com.nirho.service.ProyectoPVCAreaService;
+import com.nirho.service.ProyectoPVCEspecialidadService;
 import com.nirho.service.ProyectoService;
 import com.nirho.service.UsuarioService;
 
@@ -53,6 +61,10 @@ public class ParticipantePVCController {
 	ParticipantePVCService participantePVCService;
 	@Autowired
 	ProyectoService proyectoService;
+	@Autowired
+	private ProyectoPVCAreaService proyectoPVCAreaService;
+	@Autowired
+	EmailService emailService;
 	@Autowired
 	private EstatusProyectoService estatusService;
 	@Autowired
@@ -107,21 +119,11 @@ public class ParticipantePVCController {
 					if(proyecto != null) {	
 						
 						String token = Jwts.builder()
-				                .claim("jefe", false)
 				                .claim("id", p.getIdParticipante())
+				                .claim("idProyecto", idProyecto)
 				                .signWith( SignatureAlgorithm.HS512, SECRET )
 				                .compact();
 						enviarCorreoParticipantePVC(p, proyecto, token, request);
-						
-						if(p.getIdPartJefeInm() != 0) {
-							ParticipantePVC jefe = participantePVCService.getOne(p.getIdPartJefeInm());
-							String tokenJefe = Jwts.builder()
-					                .claim("jefe", true)
-					                .claim("id", jefe.getIdParticipante())
-					                .signWith( SignatureAlgorithm.HS512, SECRET )
-					                .compact();
-							enviarCorreoParticipantePVC(jefe, proyecto, tokenJefe, request);
-						}
 						
 					}
 				} 
@@ -148,18 +150,76 @@ public class ParticipantePVCController {
 	        
 	        if(claims != null) {
 	        	int idParticipante = (int)claims.get("id");
+	        	int idProyecto = (int)claims.get("idProyecto");
 	        	
 	        	JSONObject response = new JSONObject();
 	        	try {
-	        		ObjectMapper o = new ObjectMapper();
-		        	String userJsonString = o.writeValueAsString(participantePVCService.getOne(idParticipante));
-					response.put("participante", new JSONObject(userJsonString));
-					response.put("jefe", (boolean)claims.get("jefe"));
-					return response.toString();
+		        	ParticipantePVC participante = participantePVCService.getOne(idParticipante);
+					JSONObject actual = new JSONObject();
+					actual.accumulate("area", participante.getArea());
+					actual.accumulate("esfera", participante.getEsfera());
+					actual.accumulate("nivel", participante.getNivel());
+					actual.accumulate("especilidad", participante.getEspecialidad());
+					
+					JSONArray conocimientosTecnicos = new JSONArray();
+					JSONArray conocimientosHumanos = new JSONArray();
+					
+					JSONArray conocimientosTecnicosSiguientes = new JSONArray();
+					JSONArray conocimientosHumanosSiguientes = new JSONArray();
+					
+					boolean auxBreak = false;
+					boolean conocimientoSiguiente = false;
+					
+					List<ProyectoPVCArea> areas = proyectoPVCAreaService.getByProyecto(idProyecto);
+					for(ProyectoPVCArea area: areas) {
+						if(area.getNombre().equals(participante.getArea())) {
+							for(ProyectoPVCEsfera esfera: area.getEsferas()) {
+								if(esfera.getNombre().equals(participante.getEsfera())) {
+									for(ProyectoPVCNivel nivel: esfera.getNiveles()) {
+										if(nivel.getNombre().equals(participante.getNivel())) {
+											for(ProyectoPVCEspecialidad especialidad: nivel.getEspecialidades()) {
+												if(especialidad.getNombre().equals(participante.getEspecialidad())) {
+													for(ProyectoPVCConocimiento conocimiento: especialidad.getConocimientos()) {
+														if(conocimientoSiguiente) {
+															if(conocimiento.getTipo() == 1 ) {
+																conocimientosTecnicosSiguientes.put(conocimiento.getNombre());
+															}
+															if(conocimiento.getTipo() == 2) {
+																conocimientosHumanosSiguientes.put(conocimiento.getNombre());
+															}
+															auxBreak = true;
+														} else {
+															if(conocimiento.getTipo() == 1 ) {
+																conocimientosTecnicos.put(conocimiento.getNombre());
+															}
+															if(conocimiento.getTipo() == 2) {
+																conocimientosHumanos.put(conocimiento.getNombre());
+															}
+														}
+													}
+													conocimientoSiguiente = true;
+													break;
+												}
+												if(auxBreak) break;
+											}
+										}
+										if(auxBreak) break;
+									}
+								}
+								if(auxBreak) break;
+							}
+						}
+						if(auxBreak) break;
+					}
+					
+					actual.put("conocimientosTecnicos", conocimientosTecnicos);
+					actual.put("conocimientosHumanos", conocimientosHumanos);
+					actual.put("conocimientosTecnicosSiguientes", conocimientosTecnicosSiguientes);
+					actual.put("conocimientosHumanosSiguientes", conocimientosHumanosSiguientes);
+					
+					
+					return actual.toString();
 				} catch (JSONException e) {
-					e.printStackTrace();
-				} catch (JsonProcessingException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	        }
@@ -279,6 +339,20 @@ public class ParticipantePVCController {
 	}
 	
 	
-	private void enviarCorreoParticipantePVC(ParticipantePVC participante, Proyecto proyecto, String token, HttpServletRequest request) {}
+	private void enviarCorreoParticipantePVC(ParticipantePVC participante, Proyecto proyecto, String token, HttpServletRequest request) {
+		try {
+    		EmailDatos datos = new EmailDatos();
+    		datos.setEmailDestino(participante.getCorreoElectronico());
+    		datos.setNombreParticipante(participante.getNombres());
+    		datos.setNombreProyecto(proyecto.getNombre());
+    		datos.setToken(token);
+    		String usuario = (String) request.getAttribute("username");
+			Usuario usuarioEnSesion = usuarioService.obtenerUsuario(usuario);
+    		emailService.sendEmailPVC(datos, usuarioEnSesion.getEmail());
+    	} catch(NirhoServiceException nse) {
+    		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
+    	}
+	}
+	
 	
 }
