@@ -133,7 +133,30 @@ export class ProyectoPVCService {
     return this.http.get(this.api + 'proyectoPVC/areas/' + id + '/esferas', {headers: this.headers});
   }
 
-  guardarNiveles(id, data){
+  guardarNiveles(id, data): Observable<any> {
     return this.http.post(this.api + 'proyectoPVC/esferas/' + id + '/niveles/guardarTodas', data, {headers: this.headers});
   }
+  getNiveles(id): Observable<any> {
+    return this.http.get(this.api + 'proyectoPVC/esferas/' + id + '/niveles', {headers: this.headers});
+  }
+  getEspecialidades(id): Observable<any> {
+    return this.http.get(this.api + 'proyectoPVC/niveles/' + id + '/especialidades', {headers: this.headers});
+  }
+  saveEspecialidades(id, data): Observable<any> {
+    return this.http.post(this.api + 'proyectoPVC/niveles/' + id + '/especialidades/guardarTodas', data, {headers: this.headers});
+  }
+  getConocimientos(id) : Observable<any> {
+    return this.http.get(this.api + 'proyectoPVC/especialidades/' + id + '/conocimiento', {headers: this.headers} );
+  }
+  saveConocimientos(id, data, tipo): Observable<any> {
+    if (tipo === 1) {
+       return this.http.post(this.api + 'proyectoPVC/especialidades/' + id + '/conocimientos/tecnicos/guardarTodas', data, {headers: this.headers} );
+    } else {
+       return this.http.post(this.api + 'proyectoPVC/especialidades/' + id + '/conocimientos/humanisticos/guardarTodas', data, {headers: this.headers} );
+    }
+
+
+  }
+
+
 }

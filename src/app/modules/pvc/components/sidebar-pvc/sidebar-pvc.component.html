@@ -67,6 +67,22 @@
 
           <app-selector-nivel (response)="recibirRespuestChildren($event)"></app-selector-nivel>
         </div>
+        <div *ngIf="selectModule == 14">
+
+          <app-selector-especialidades (response)="recibirRespuestChildren($event)"></app-selector-especialidades>
+        </div>
+        <div *ngIf="selectModule == 15">
+
+          <app-selector-conocimiento-tecnicos [type]="1"  (response)="recibirRespuestChildren($event)"></app-selector-conocimiento-tecnicos>
+        </div>
+        <div *ngIf="selectModule == 16">
+
+          <app-selector-conocimiento-tecnicos [type]="2" (response)="recibirRespuestChildren($event)"></app-selector-conocimiento-tecnicos>
+        </div>
+        <div *ngIf="selectModule == 17">
+
+          <app-head-count-pvc (response)="recibirRespuestChildren($event)"></app-head-count-pvc>
+        </div>
 
       </div>
     </div>

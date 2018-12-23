@@ -45,6 +45,13 @@ export class SelectorNivelComponent implements OnInit {
     });
   }
 
+  getNiveles() {
+    this.ProyectServices.getNiveles(this.esfera['id']).subscribe( res => {
+      console.log(res);
+      this.niveles = res;
+    });
+  }
+
   addNivel() {
     let add = true;
     for (let nivel of this.niveles) {
@@ -85,16 +92,6 @@ export class SelectorNivelComponent implements OnInit {
             'La información se guardo correctamente',
             'success'
           ).then(() => {
-            let index;
-            for (let esfera of this.esferas) {
-              if (esfera['id'] === this.esfera['id']) {
-                index = this.esferas.indexOf(esfera);
-              }
-            }
-            this.esferas.splice(index, 1);
-            if (!this.esferas.length) {
-              this.response.emit({value: 1});
-            }
             this.niveles = [];
           });
         });

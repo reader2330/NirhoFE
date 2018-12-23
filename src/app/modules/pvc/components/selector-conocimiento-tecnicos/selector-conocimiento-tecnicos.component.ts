@@ -1,17 +1,17 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ProyectoPVCService} from '../../services/proyectoPVC.service';
 import {MatSnackBar} from '@angular/material';
-import {Nivel} from '../../models/nivel';
-import Swal from "sweetalert2";
 import {Especialidad} from '../../models/especialidad';
+import Swal from "sweetalert2";
+import {Conocimiento} from '../../models/conocimiento';
 
 @Component({
-  selector: 'app-selector-especialidades',
-  templateUrl: './selecto-especialidades.component.html',
-  styleUrls: ['./selecto-especialidades.component.scss']
+  selector: 'app-selector-conocimiento-tecnicos',
+  templateUrl: './selector-conocimiento-tecnicos.component.html',
+  styleUrls: ['./selector-conocimiento-tecnicos.component.scss']
 })
-export class SelectoEspecialidadesComponent implements OnInit {
-
+export class SelectorConocimientoTecnicosComponent implements OnInit {
+  @Input('type') type: number;
   proyect = {};
   proyects = [];
   area = {};
@@ -21,7 +21,9 @@ export class SelectoEspecialidadesComponent implements OnInit {
   nivel = {};
   niveles = [];
   especialidades = [];
-  especialidad = '';
+  especialidad = {};
+  conocimiento = '';
+  conocimientos = [] ;
   @Output() response = new EventEmitter();
 
   constructor(public ProyectServices: ProyectoPVCService, public snackBar: MatSnackBar) {
@@ -29,6 +31,7 @@ export class SelectoEspecialidadesComponent implements OnInit {
 
   ngOnInit() {
     this.getProyects();
+    console.log(this.type);
   }
 
   getProyects() {
@@ -49,7 +52,6 @@ export class SelectoEspecialidadesComponent implements OnInit {
 
   getNiveles() {
     this.ProyectServices.getNiveles(this.esfera['id']).subscribe( res => {
-      console.log(res);
       this.niveles = res;
     });
   }
@@ -58,31 +60,35 @@ export class SelectoEspecialidadesComponent implements OnInit {
       this.especialidades = res;
     });
   }
-
-  addEspecialidad() {
+  getConocimientos() {
+    this.ProyectServices.getConocimientos(this.especialidad['id']).subscribe(res => {
+      this.conocimientos = res;
+    });
+  }
+  addConocimiento() {
     let add = true;
-    for (let espec of this.especialidades) {
-      if (espec.nombre.trim().toUpperCase() === this.especialidad.trim().toUpperCase()) {
+    for (let conocimiento of this.conocimientos) {
+      if (conocimiento.nombre.trim().toUpperCase() === this.conocimiento.trim().toUpperCase()) {
         add = false;
         break;
       }
     }
     if (add) {
-      let especialidad = new Especialidad();
-      especialidad.id = null;
-      especialidad.nombre = this.especialidad;
-      especialidad.status = true;
-      this.especialidades.push(especialidad);
+      let conocimiento = new Conocimiento();
+      conocimiento.id = null;
+      conocimiento.nombre = this.conocimiento;
+      conocimiento.tipo = this.type;
+      this.conocimientos.push(conocimiento);
 
     } else {
       this.snackBar.open('No puedes agregar dos areas con el mismo nombre', 'Claro!', {
         duration: 1000
       });
     }
-    this.especialidad = '';
+    this.conocimiento  = '';
   }
 
-  guardarEspecialidades() {
+  guardarConocimientos() {
     Swal({
       title: '',
       text: 'Seguro que quieres guardar las especialidades',
@@ -92,14 +98,13 @@ export class SelectoEspecialidadesComponent implements OnInit {
       cancelButtonText: 'No, seguir editando'
     }).then((result) => {
       if (result.value) {
-        console.log(this.nivel);
-        this.ProyectServices.saveEspecialidades(this.nivel['id'], this.especialidades).subscribe(res => {
+        this.ProyectServices.saveConocimientos(this.especialidad['id'], this.conocimientos, this.type).subscribe(res => {
           Swal(
             'Listo.',
             'La información se guardo correctamente',
             'success'
           ).then(() => {
-            this.especialidades = [];
+            this.conocimientos = [];
           });
         });
       }

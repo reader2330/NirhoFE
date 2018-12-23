@@ -8,11 +8,22 @@
   <component name="ChangeListManager">
     <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/eva/services/proyecto360.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/eva/services/proyecto360.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/components/selector-areas/selector-areas.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/components/selector-areas/selector-areas.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/clb/components/formularios/head-count/head-count.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/clb/components/formularios/head-count/head-count.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/components/selecto-esferas/selecto-esferas.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/components/selecto-esferas/selecto-esferas.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/components/selecto-esferas/selecto-esferas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/components/selecto-esferas/selecto-esferas.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/components/selecto-especialidades/selecto-especialidades.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/components/selecto-especialidades/selecto-especialidades.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/components/selecto-especialidades/selecto-especialidades.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/components/selecto-especialidades/selecto-especialidades.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/components/selector-nivel/selector-nivel.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/components/selector-nivel/selector-nivel.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/components/selector-nivel/selector-nivel.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/components/selector-nivel/selector-nivel.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/components/sidebar-pvc/sidebar-pvc.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/components/sidebar-pvc/sidebar-pvc.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/components/sidebar-pvc/sidebar-pvc.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/components/sidebar-pvc/sidebar-pvc.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/models/conocimiento.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/models/conocimiento.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/models/especialidad.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/models/especialidad.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/pvc.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/pvc.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/modules/pvc/services/proyectoPVC.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/pvc/services/proyectoPVC.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../static/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../static/main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,17 +56,17 @@
           <entry key="project.open.time.12" value="2" />
           <entry key="project.open.time.1392" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.open.time.6" value="2" />
+          <entry key="project.open.time.6" value="3" />
           <entry key="project.open.time.7" value="3" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="6" />
-          <entry key="java" value="123" />
+          <entry key="java" value="125" />
           <entry key="properties" value="1" />
           <entry key="sql" value="1" />
           <entry key="xml" value="2" />
@@ -65,7 +76,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="6" />
-          <entry key="JAVA" value="123" />
+          <entry key="JAVA" value="125" />
           <entry key="Properties" value="1" />
           <entry key="SQL" value="1" />
           <entry key="XML" value="2" />
@@ -88,11 +99,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoPVCController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="326" column="28" lean-forward="true" selection-start-line="326" selection-start-column="28" selection-end-line="326" selection-end-column="28" />
+            <state relative-caret-position="-339">
+              <caret line="473" column="63" selection-start-line="473" selection-start-column="63" selection-end-line="473" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ParticipantePVCController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="855">
+              <caret line="335" column="64" selection-start-line="335" selection-start-column="57" selection-end-line="335" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/model/ProyectoPVCConocimiento.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="163">
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -118,7 +147,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/model/ProyectoPVCArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
+            <state relative-caret-position="540">
               <caret line="55" column="42" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -180,7 +209,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
     <option name="width" value="1920" />
     <option name="height" value="1098" />
@@ -191,7 +220,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -213,12 +241,37 @@
             <path>
               <item name="Nirho" type="b2602c69:ProjectViewProjectNode" />
               <item name="Nirho" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Nirho" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Nirho" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nirho" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Nirho" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Nirho" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="nirho" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Nirho" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Nirho" type="462c0819:PsiDirectoryNode" />
               <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -230,7 +283,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545463519148" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545530008353" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -323,11 +376,12 @@
       <workItem from="1544812535155" duration="6157000" />
       <workItem from="1545200298150" duration="24383000" />
       <workItem from="1545441173389" duration="5927000" />
+      <workItem from="1545519030078" duration="5067000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71582000" />
+    <option name="totallyTimeSpent" value="76649000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -339,9 +393,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1098" extended-state="0" />
+    <frame x="0" y="23" width="1920" height="1098" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25239617" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2550586" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24959612" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -358,7 +413,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946752" weight="0.3297244" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.3297244" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49893504" visible="true" weight="0.35387674" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49893504" visible="true" weight="0.35387674" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50106496" side_tool="true" weight="0.35207102" />
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32938856" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.3297244" />
@@ -461,20 +516,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/service/impl/RoleModuloSubModuloAPOServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoCLBController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="121" column="43" selection-start-line="121" selection-start-column="43" selection-end-line="121" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/constant/ProyectoConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -785,13 +826,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/service/impl/ProyectoPVCAreaServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="45" column="61" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/service/ProyectoPVCAreaService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -799,9 +833,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/service/impl/ProyectoPVCAreaServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="45" column="61" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/model/ProyectoPVCArea.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
+        <state relative-caret-position="540">
           <caret line="55" column="42" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -809,10 +850,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/model/ProyectoPVCConocimiento.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ProyectoPVCController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="326" column="28" lean-forward="true" selection-start-line="326" selection-start-column="28" selection-end-line="326" selection-end-column="28" />
+        <state relative-caret-position="-339">
+          <caret line="473" column="63" selection-start-line="473" selection-start-column="63" selection-end-line="473" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/nirho/controller/ParticipantePVCController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="855">
+          <caret line="335" column="64" selection-start-line="335" selection-start-column="57" selection-end-line="335" selection-end-column="64" />
         </state>
       </provider>
     </entry>

@@ -20,8 +20,8 @@ import {
 })
 export class SidebarPvcComponent implements OnInit {
   mobile = false;
-  selectedItem = 13;
-  selectModule = 13;
+  selectedItem = 16;
+  selectModule = 16;
   modules = [];
   user = {};
   avatar = {
@@ -53,14 +53,62 @@ export class SidebarPvcComponent implements OnInit {
     this.selectModule = opt;
   }
   getModules() {
-  console.log('inicio');
-    this.loginService.getModules().subscribe((res) => {
-      console.log(res);
-      this.modules = res;
-      if (this.user['rol'] === 3) {
-      }
-    });
+    if (this.user['rol'] !== 3 ) {
+      this.loginService.getModules().subscribe((res) => {
+        console.log(res);
+        this.modules = res;
+        if (this.user['rol'] === 3) {
+        }
+      });
+    } else {
+      this.ModulesConsultor();
+    }
+
   }
+
+  ModulesConsultor(){
+    this.modules =
+      [
+        {
+          id_submodulo: 1,
+          descripcion: 'Bandeja de proyectos'
+        },
+        {
+          id_submodulo: 11,
+          descripcion: 'Configurar areas'
+        },
+        {
+          id_submodulo: 12,
+          descripcion: 'Configurar esferas'
+        },
+        {
+          id_submodulo: 13,
+          descripcion: 'Configurar niveles'
+        },
+        {
+          id_submodulo: 14,
+          descripcion: 'Configurar especialidades'
+        },
+        {
+          id_submodulo: 15,
+          descripcion: 'Configurar conocimientos tecnicos'
+        },
+        {
+          id_submodulo: 16,
+          descripcion: 'Configurar conocimientos humanos'
+        },
+        {
+          id_submodulo: 17,
+          descripcion: 'Carga de Head Count'
+        },
+        {
+          id_submodulo: 19,
+          descripcion: 'Envio de correos'
+        },
+
+      ]
+  }
+
   getUser() {
     this.loginService.getUser().subscribe((res) => {
       this.user = res;

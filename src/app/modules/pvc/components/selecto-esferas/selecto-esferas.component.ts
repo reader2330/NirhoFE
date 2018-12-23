@@ -31,9 +31,17 @@ export class SelectoEsferasComponent implements OnInit {
     });
   }
   getAreas() {
+    this.areas = [];
     this.ProyectServices.getAreasByProyect(this.proyect['idProyecto']).subscribe(res => {
-      console.log(res);
       this.areas = res;
+    });
+  }
+
+  getEsferas() {
+    this.esferas = [];
+    console.log(this.area);
+    this.ProyectServices.getEsferas(this.area['id']).subscribe(res => {
+      this.esferas = res;
     });
   }
 
@@ -76,18 +84,6 @@ export class SelectoEsferasComponent implements OnInit {
             'La información se guardo correctamente',
             'success'
           ).then(() => {
-            let index;
-            console.log(this.area);
-            for (let area of this.areas) {
-              console.log(area);
-              if (area['id'] === this.area['id']) {
-                index = this.areas.indexOf(area);
-              }
-            }
-            this.areas.splice(index,1);
-            if (!this.areas.length) {
-              this.response.emit({value: 1});
-            }
             this.esferas = [];
           });
         });

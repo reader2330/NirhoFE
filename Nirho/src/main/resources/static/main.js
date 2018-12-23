@@ -229,13 +229,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_formularios_data_company_data_company_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/formularios/data-company/data-company.component */ "./src/app/modules/clb/components/formularios/data-company/data-company.component.ts");
 /* harmony import */ var _components_formularios_data_proyect_data_proyect_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/formularios/data-proyect/data-proyect.component */ "./src/app/modules/clb/components/formularios/data-proyect/data-proyect.component.ts");
 /* harmony import */ var _components_formularios_data_period_data_period_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/formularios/data-period-eva360/data-period-eva360.component */ "./src/app/modules/clb/components/formularios/data-period-eva360/data-period-eva360.component.ts");
-/* harmony import */ var _components_formularios_head_count_head_count_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/formularios/head-count/head-count.component */ "./src/app/modules/clb/components/formularios/head-count/head-count.component.ts");
+/* harmony import */ var _components_formularios_head_count_head_count_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/formularios/head-count/head-count.component */ "./src/app/modules/clb/components/formularios/head-count/head-count-pvc.component.ts");
 /* harmony import */ var _components_formularios_organigrama_organigrama_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/formularios/organigrama/organigrama.component */ "./src/app/modules/clb/components/formularios/organigrama/organigrama.component.ts");
 /* harmony import */ var _components_formularios_steppers_steppers_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/formularios/steppers/steppers.component */ "./src/app/modules/clb/components/formularios/steppers/steppers.component.ts");
 /* harmony import */ var _components_formularios_data_contact_data_contact_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/formularios/data-contact/data-contact.component */ "./src/app/modules/clb/components/formularios/data-contact/data-contact-evd.component.ts");
 /* harmony import */ var _components_bandeja_bandeja_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/bandeja/bandeja.component */ "./src/app/modules/clb/components/bandeja/bandeja-pvc.component.ts");
 /* harmony import */ var _components_bandeja_detalle_bandeja_detalle_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/bandeja-detalle/bandeja-detalle.component */ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts");
-/* harmony import */ var _components_cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/cuestionario-select/cuestionario-select.component */ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.ts");
+/* harmony import */ var _components_cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/cuestionario-select/cuestionario-select.component */ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select-pvc.component.ts");
 /* harmony import */ var _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/asignar-consultor-eva360/asignar-consultor-eva360.component */ "./src/app/modules/clb/components/asignar-consultor-eva360/asignar-consultor-eva360.component.ts");
 /* harmony import */ var _components_estadisticas_estadisticas_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/estadisticas/estadisticas.component */ "./src/app/modules/clb/components/estadisticas/estadisticas.component.ts");
 /* harmony import */ var _components_detalle_preguntas_detalle_preguntas_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/detalle-preguntas/detalle-preguntas.component */ "./src/app/modules/clb/components/detalle-preguntas/detalle-preguntas-apo.component.ts");
@@ -308,13 +308,13 @@ var CLBModule = /** @class */ (function () {
                 _components_formularios_data_company_data_company_component__WEBPACK_IMPORTED_MODULE_6__["DataCompanyComponent"],
                 _components_formularios_data_proyect_data_proyect_component__WEBPACK_IMPORTED_MODULE_7__["DataProyectComponent"],
                 _components_formularios_data_period_data_period_component__WEBPACK_IMPORTED_MODULE_8__["DataPeriodEva360Component"],
-                _components_formularios_head_count_head_count_component__WEBPACK_IMPORTED_MODULE_9__["HeadCountComponent"],
+                _components_formularios_head_count_head_count_component__WEBPACK_IMPORTED_MODULE_9__["HeadCountPvcComponent"],
                 _components_formularios_organigrama_organigrama_component__WEBPACK_IMPORTED_MODULE_10__["OrganigramaComponent"],
                 _components_formularios_steppers_steppers_component__WEBPACK_IMPORTED_MODULE_11__["SteppersComponent"],
                 _components_formularios_data_contact_data_contact_component__WEBPACK_IMPORTED_MODULE_12__["DataContactEvdComponent"],
                 _components_bandeja_bandeja_component__WEBPACK_IMPORTED_MODULE_13__["BandejaAdmComponent"],
                 _components_bandeja_detalle_bandeja_detalle_component__WEBPACK_IMPORTED_MODULE_14__["BandejaDetalleAdmComponent"],
-                _components_cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_15__["CuestionarioSelectComponent"],
+                _components_cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_15__["CuestionarioSelectPvcComponent"],
                 _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_16__["AsignarConsultorPvcComponent"],
                 _components_estadisticas_estadisticas_component__WEBPACK_IMPORTED_MODULE_17__["EstadisticasComponent"],
                 _components_detalle_preguntas_detalle_preguntas_component__WEBPACK_IMPORTED_MODULE_18__["DetallePreguntasApoComponent"],
@@ -811,7 +811,7 @@ var BandejaComponent = /** @class */ (function () {
 
 /***/ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.html":
 /*!***********************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.html ***!
+  !*** ./src/app/modules/clb/components/cuestionario-select/cuestionario-select-pvc.component.html ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -822,7 +822,7 @@ module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\
 
 /***/ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.scss":
 /*!***********************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.scss ***!
+  !*** ./src/app/modules/clb/components/cuestionario-select/cuestionario-select-pvc.component.scss ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -833,14 +833,14 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.ts":
 /*!*********************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.ts ***!
+  !*** ./src/app/modules/clb/components/cuestionario-select/cuestionario-select-pvc.component.ts ***!
   \*********************************************************************************************/
-/*! exports provided: CuestionarioSelectComponent */
+/*! exports provided: CuestionarioSelectPvcComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CuestionarioSelectComponent", function() { return CuestionarioSelectComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CuestionarioSelectPvcComponent", function() { return CuestionarioSelectComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/proyecto.service */ "./src/app/modules/clb/services/proyecto.service.ts");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
@@ -989,8 +989,8 @@ var CuestionarioSelectComponent = /** @class */ (function () {
     CuestionarioSelectComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-cuestionario-select',
-            template: __webpack_require__(/*! ./cuestionario-select.component.html */ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.html"),
-            styles: [__webpack_require__(/*! ./cuestionario-select.component.scss */ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select.component.scss")]
+            template: __webpack_require__(/*! ./cuestionario-select-pvc.component.html */ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select-pvc.component.html"),
+            styles: [__webpack_require__(/*! ./cuestionario-select-pvc.component.scss */ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select-pvc.component.scss")]
         }),
         __metadata("design:paramtypes", [_services_proyecto_service__WEBPACK_IMPORTED_MODULE_1__["ProyectoService"]])
     ], CuestionarioSelectComponent);
@@ -2184,7 +2184,7 @@ var FormularioPrimaryComponent = /** @class */ (function () {
 
 /***/ "./src/app/modules/clb/components/formularios/head-count/head-count.component.html":
 /*!*****************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/formularios/head-count/head-count.component.html ***!
+  !*** ./src/app/modules/clb/components/formularios/head-count/head-count-pvc.component.html ***!
   \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -2195,7 +2195,7 @@ module.exports = "<mat-grid-list [cols]=\"checkMobileCols()\" rowHeight=\"100px\
 
 /***/ "./src/app/modules/clb/components/formularios/head-count/head-count.component.scss":
 /*!*****************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/formularios/head-count/head-count.component.scss ***!
+  !*** ./src/app/modules/clb/components/formularios/head-count/head-count-pvc.component.scss ***!
   \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -2206,14 +2206,14 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ "./src/app/modules/clb/components/formularios/head-count/head-count.component.ts":
 /*!***************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/formularios/head-count/head-count.component.ts ***!
+  !*** ./src/app/modules/clb/components/formularios/head-count/head-count-pvc.component.ts ***!
   \***************************************************************************************/
-/*! exports provided: HeadCountComponent */
+/*! exports provided: HeadCountPvcComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeadCountComponent", function() { return HeadCountComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeadCountPvcComponent", function() { return HeadCountComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _node_modules_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../node_modules/@angular/cdk/layout */ "./node_modules/@angular/cdk/esm5/layout.es5.js");
 /* harmony import */ var _services_catalogs_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/catalogs.service */ "./src/app/modules/clb/services/catalogs.service.ts");
@@ -2416,8 +2416,8 @@ var HeadCountComponent = /** @class */ (function () {
     HeadCountComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-head-count',
-            template: __webpack_require__(/*! ./head-count.component.html */ "./src/app/modules/clb/components/formularios/head-count/head-count.component.html"),
-            styles: [__webpack_require__(/*! ./head-count.component.scss */ "./src/app/modules/clb/components/formularios/head-count/head-count.component.scss")]
+            template: __webpack_require__(/*! ./head-count-pvc.component.html */ "./src/app/modules/clb/components/formularios/head-count/head-count-pvc.component.html"),
+            styles: [__webpack_require__(/*! ./head-count-pvc.component.scss */ "./src/app/modules/clb/components/formularios/head-count/head-count-pvc.component.scss")]
         }),
         __metadata("design:paramtypes", [_node_modules_angular_cdk_layout__WEBPACK_IMPORTED_MODULE_1__["BreakpointObserver"], _services_catalogs_service__WEBPACK_IMPORTED_MODULE_2__["CatalogsService"], _services_proyecto_service__WEBPACK_IMPORTED_MODULE_4__["ProyectoService"]])
     ], HeadCountComponent);

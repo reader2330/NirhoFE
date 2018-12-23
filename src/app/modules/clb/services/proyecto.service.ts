@@ -26,7 +26,7 @@ export class ProyectoService {
   }
 
   saveHead(data): Observable<any> {
-    return this.http.post(this.api + 'participantes/headCount', data, {headers: this.headers} );
+    return this.http.post(this.api + 'participantesPVC/headCount', data, {headers: this.headers} );
   }
 
   savePeriod(data): Observable<any> {

@@ -21,6 +21,8 @@ import {PeriodoPvcComponent} from './components/periodo-pvc/periodo-pvc.componen
 import {SelectoEsferasComponent} from './components/selecto-esferas/selecto-esferas.component';
 import {SelectorNivelComponent} from './components/selector-nivel/selector-nivel.component';
 import {SelectoEspecialidadesComponent} from './components/selecto-especialidades/selecto-especialidades.component';
+import {SelectorConocimientoTecnicosComponent} from './components/selector-conocimiento-tecnicos/selector-conocimiento-tecnicos.component';
+import {HeadCountPvcComponent} from './components/head-count-pvc/head-count-pvc.component';
 
 @NgModule({
   imports: [
@@ -46,7 +48,9 @@ import {SelectoEspecialidadesComponent} from './components/selecto-especialidade
     PeriodoPvcComponent,
     SelectoEsferasComponent,
     SelectorNivelComponent,
-    SelectoEspecialidadesComponent
+    SelectoEspecialidadesComponent,
+    SelectorConocimientoTecnicosComponent,
+    HeadCountPvcComponent
   ],
   entryComponents: [
 

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CuestionarioSelectComponent } from './cuestionario-select-irh.component';
 
-describe('CuestionarioSelectComponent', () => {
+describe('CuestionarioSelectPvcComponent', () => {
   let component: CuestionarioSelectComponent;
   let fixture: ComponentFixture<CuestionarioSelectComponent>;
 

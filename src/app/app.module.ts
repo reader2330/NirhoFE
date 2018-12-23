@@ -26,8 +26,7 @@ import {VerticalTimelineModule} from 'angular-vertical-timeline';
 import {PvcModule} from './modules/pvc/pvc.module';
 import {ChartModule} from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
-import { SelectorNivelComponent } from './modules/pvc/components/selector-nivel/selector-nivel.component';
-import { SelectoEspecialidadesComponent } from './modules/pvc/components/selecto-especialidades/selecto-especialidades.component';
+
 
 
 registerLocaleData(localeMx);
