@@ -17,7 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.XWPFChart;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,11 +40,15 @@ import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.EstatusProyecto;
+import com.nirho.model.ParticipanteAPO;
+import com.nirho.model.ParticipanteAPOAmp;
+import com.nirho.model.ParticipanteAPOAmpFuncion;
 import com.nirho.model.Proyecto;
 import com.nirho.service.EmailService;
 import com.nirho.service.EmpresaService;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.GraficasProyectoService;
+import com.nirho.service.ParticipanteAPOService;
 import com.nirho.service.ProyectoService;
 import com.nirho.util.ReporteUtil;
 import com.nirho.util.SessionUtil;
@@ -51,6 +60,8 @@ public class ProyectoAPOController {
 	public final static Logger logger = Logger.getLogger(ProyectoAPOController.class);
 	public final static Integer ID_MODULO = 4;
 	
+	@Autowired
+	ParticipanteAPOService participanteAPOService;
 	@Autowired
 	private ProyectoService proyectoService;
 	@Autowired
@@ -208,123 +219,72 @@ public class ProyectoAPOController {
 	public void genearReporte(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletResponse response) throws NirhoControllerException{
 		try {
 			
-			URL sqlScriptUrl = ProyectoAPOController.class.getClassLoader().getResource("plantillaReporteAPO.docx");
+			URL reporteAPOURL = ProyectoAPOController.class.getClassLoader().getResource("plantillaReporteAPO.docx");
 			
 			ZipSecureFile.setMinInflateRatio(0);
-	        
-	        XWPFDocument document = new XWPFDocument(OPCPackage.open(sqlScriptUrl.getPath())); 
+			XWPFDocument document = new XWPFDocument(OPCPackage.open(reporteAPOURL.getPath())); 
 	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	        
 	        Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
-	     
+	        
 	        ReporteUtil.reemplazarParrafo(document, "nombre.empresa", proyecto.getIdEmpresa().getEmpresa());
+	  
+	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Cumplimiento por area");
+	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "Resumen de la empresa");
 	        
-	        ReporteUtil.agregarTitulo(document, "Tabla de contenido");
 	        
-	        ReporteUtil.agregarTablaContenido(document);
+	        List<ParticipanteAPO> participantes = participanteAPOService.obtenerParticipantes(idProyecto);
+	        int maxCalificacion = 0, minCalificacion = 5;
+	        String maxArea = "", minArea = "", maxFuncion = "", minFuncion = "";
 	        
-	        ReporteUtil.nuevaPagina(document);
+	        if(x1 != null){	             
+	            for(int i = 1; i < participantes.size(); i++){
+	            	
+	            	XWPFTableRow row = null;
+	            	if(i > 1) {
+	            		row = x1.createRow();
+	            	} else {
+	            		row = x1.getRow(i);
+	            	}
+	            	
+	            	String area = participantes.get(i - 1).getAreaOrg();
+	            	
+	            	for(ParticipanteAPOAmp ampliacion: participantes.get(i -1).getAmpliaciones()) {
+	            		for(ParticipanteAPOAmpFuncion funcion: ampliacion.getFunciones()) {
+	            			row.getCell(0).setText(area);
+	    	            	row.getCell(1).setText(funcion.getFuncion());
+	    	            	row.getCell(2).setText(funcion.getCalificacion() + "");
+	    	            	if(funcion.getCalificacion() > maxCalificacion) {
+	    	            		maxArea = area;
+	    	            		maxFuncion = funcion.getFuncion();
+	    	            		maxCalificacion = funcion.getCalificacion();
+	    	            	}
+	    	            	if(funcion.getCalificacion() < minCalificacion) {
+	    	            		minArea = area;
+	    	            		minFuncion = funcion.getFuncion();
+	    	            		minCalificacion = funcion.getCalificacion();
+	    	            	}
+		            	}
+	            	}
+	            	
+	            }
+	        }
 	        
-	        ReporteUtil.agregarTitulo1(document, "Introducción");
-	        
-	        ReporteUtil.agregarTitulo2(document, "Administración por Objetivos");
-	        ReporteUtil.agregarParrafo(document, "Los objetivos corporativos son las declaraciones cualitativas y cuantitativas del futuro deseado para la organización.\n" +
-	        "Las organizaciones cuentan con objetivos corporativos, que deberán de ser traducidos en objetivos individuales para cada una de las personas que laboran en la misma empresa. \n" +
-	        "Los responsables de esta tarea son los líderes (Gerentes o Directores) quienes junto con su equipo de trabajo establecen metas comunes. Lo anterior exige un enfoque participativo y el constante apoyo sin importar la jerarquía para el logro de los mismos, ya que en conjunto garantizarán el éxito empresarial.");
-	        
-	        ReporteUtil.agregarTitulo2(document, "Lineamientos para la gestión APO");
-	        List<String> lista1 = new ArrayList<>();
-	        lista1.add("Adhesión de todos los integrantes de la empresa sin importar el nivel jerarquico");
-	        lista1.add("Cascadeo de la metas una vez establecida por alta dirección");
-	        lista1.add("Establecimiento de metas por áreas y por persona");
-	        lista1.add("Autonomía en la gestión de las actividades que garanticen el cumplimiento de la meta");
-	        lista1.add("Evaluación del cumplimiento de las metas");
-	        ReporteUtil.agregarLista(document, lista1);
-	        
-	        ReporteUtil.agregarTitulo2(document, "Nuestros objetivos son:");
-	        List<String> lista2 = new ArrayList<>();
-	        lista2.add("Medibles");
-	        lista2.add("Factibles");
-	        lista2.add("Flexibles");
-	        lista2.add("Motivadores");
-	        lista2.add("Comprensibles");
-	        lista2.add("Convincentes");
-	        ReporteUtil.agregarLista(document, lista2);
-	        
-	        ReporteUtil.agregarTitulo2(document, "Beneficios APO");
-	        List<String> lista3 = new ArrayList<>();
-	        lista3.add("Permite definir para cada personas las expectativas de desempeño");
-	        lista3.add("Mejora la comunicación entre el líder y su equipo");
-	        lista3.add("Ayuda a la planeación y al logro de los objetivos a largo plazo");
-	        lista3.add("Genera niveles más altos de compromiso para cada integrante");
-	        lista3.add("Logra equidad en los procesos de evaluación de desempeño");
-	        ReporteUtil.agregarLista(document, lista3);
-	        
-	        ReporteUtil.nuevaPagina(document);
-	        
-	        ReporteUtil.agregarTitulo1(document, "Resultados por Empresa");
-	        
-	        ReporteUtil.agregarTitulo(document, "Cumplimiento por área respecto al promedio empresarial");
-	        
-	        List<String> headersT1 = new ArrayList<>();
-	        headersT1.add("AREA");
-	        headersT1.add("FUNCION");
-	        headersT1.add("PROMEDIO DE CUMPLIMIENTO");
-	        
-	        List<List<String>> contentT1 = new ArrayList<>();
-	        List<String> row1T1 = new ArrayList<>();
-	        row1T1.add("1");
-	        row1T1.add("2");
-	        row1T1.add("3");
-	        contentT1.add(row1T1);
-	        List<String> row2T1 = new ArrayList<>();
-	        row2T1.add("4");
-	        row2T1.add("5");
-	        row2T1.add("6");
-	        contentT1.add(row2T1);
-	        
-	        ReporteUtil.crearTablaTitle(document, headersT1, contentT1);
-	        
-	        ReporteUtil.agregarSeparadorEnBlanco(document);
-	        
-	        ReporteUtil.agregarTitulo(document, "Resumen de la empresa");
-	        
-	        List<String> headers = new ArrayList<>();
-	        headers.add("Promedio de cumplimiento");
-	        headers.add("Mayor cumplimiento");
-	        headers.add("Mínimo cumplimiento");
-	        headers.add("Consultor niRHo");
-	        
-	        List<List<String>> content = new ArrayList<>();
-	        List<String> row1 = new ArrayList<>();
-	        row1.add("1");
-	        content.add(row1);
-	        List<String> row2 = new ArrayList<>();
-	        row2.add("1");
-	        content.add(row2);
-	        List<String> row3 = new ArrayList<>();
-	        row3.add("1");
-	        content.add(row3);
-	        List<String> row4 = new ArrayList<>();
-	        row4.add("1");
-	        content.add(row4);
-	        
-	        ReporteUtil.crearTablaFirstRowTitle(document, headers, content);
-	        
-	        ReporteUtil.agregarSeparadorEnBlanco(document);
-	        
-	        ReporteUtil.nuevaPagina(document);
-	        
-	        ReporteUtil.agregarTitulo1(document, "Resumen por Área");
-	        
-	        ReporteUtil.agregarTitulo(document, "Resumen de Área");
-	        
-	        ReporteUtil.nuevaPagina(document);
-	        
-	        ReporteUtil.agregarTitulo1(document, "Resultados Individuales");
-	        
-	        ReporteUtil.agregarTitulo(document, "Resumen personal");
-	        
+	        if(x2 != null){
+	        	XWPFTableRow row1 = x2.getRow(0);
+	        	row1.getCell(1).setText("Promedio");
+	        	XWPFTableRow row2 = x2.getRow(1);
+	        	row2.getCell(1).setText("Area: " + maxArea + ", Función: " + maxFuncion + ", Promedio: " + maxCalificacion);
+	        	XWPFTableRow row3 = x2.getRow(2);
+	        	row3.getCell(1).setText("Area: " + minArea + ", Función: " + minFuncion + ", Promedio: " + minCalificacion);
+	        }
+	           
+	        XWPFChart chart = ReporteUtil.getGraficoPorTitulo(document, "Comparativo del promedio de la empresa respecto a las áreas");
+	        XSSFWorkbook wb2 = chart.getWorkbook();
+	        Sheet dataSheet2 = wb2.getSheetAt(0);
+	        System.out.println(dataSheet2.getRow(2).getCell(2));
+	        dataSheet2.getRow(2).getCell(2).setCellValue(99);
+
 	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
 	        response.setHeader("Content-Disposition", "attachment; filename=test.docx");
 	        document.write(response.getOutputStream());

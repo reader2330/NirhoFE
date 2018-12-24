@@ -1,10 +1,17 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.nirho.util;
 
 import java.math.BigInteger;
 import java.util.List;
+import org.apache.poi.ooxml.POIXMLDocumentPart;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.TextAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFAbstractNum;
+import org.apache.poi.xwpf.usermodel.XWPFChart;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFNumbering;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -47,6 +54,43 @@ public class ReporteUtil {
               lnewRun.setText(string); 
         }
         agregarSeparadorEnBlanco(document);
+    }
+    
+    public static XWPFTable getTablaPorTitulo(XWPFDocument document, String title){
+        for(XWPFTable t :document.getTables()){            
+            String tableXML = t.getCTTbl().toString();
+            String[] xml = tableXML.split(System.lineSeparator());
+            for (String x : xml){
+                if (x.contains("w:tblCaption")){
+                    String caption = x.split("w:val=")[1].replace("/>", "");
+                    caption = caption.replace("\"", "");
+                    if(caption.equals(title)){
+                        return t;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    
+    public static int getNumeroColumnasTabla(XWPFTable table){
+        XWPFTableRow lastRow = table.getRows().get(table.getNumberOfRows() - 1);
+        return lastRow.getTableICells().size(); 
+    }
+    
+    public static XWPFChart getGraficoPorTitulo(XWPFDocument document, String titulo){
+        XWPFChart chart = null;
+        for (POIXMLDocumentPart part : document.getRelations()) {
+            if (part instanceof XWPFChart) {
+                chart = (XWPFChart) part;  
+                chart.getTitle().getBody().toString();
+                if(chart.getTitle().getBody().toString().equals(titulo)){
+                    return chart;
+                }
+            }
+        }
+        return chart;
     }
     
     public static void agregarTablaContenido(XWPFDocument document){
@@ -223,7 +267,6 @@ public class ReporteUtil {
             for (XWPFRun r : p.getRuns()) {
                 String text = r.text();
                 if(text != null){
-                    System.out.print(" : " + text);
                     if(text.contains(claveParrafo)){
                         r.setText(nuevoTexto, 0);
                     }
@@ -237,4 +280,3 @@ public class ReporteUtil {
         paragraph.setPageBreak(true);
     }
 }
-
