@@ -310,7 +310,9 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 	public List<CuestPartEvaluadosEVD> obtenerCuestionarioEvaluadosEVD(String token) throws NirhoServiceException {
 		List<CuestPartEvaluadosEVD> cuestPartEvaluadosEVDList = new ArrayList<>();
 		try {
+			logger.info("token [" + token +"]");
 			List<CuestPartEvaluadosEVD> cuestEvals = obtenerCuestionarioEvaluadorEvaluadosEVD(token);
+			logger.info("cuestEvals ee [" + cuestEvals +"]");
 			CuestPartEvaluadosEVD cuest0 = cuestEvals.get(0);
 			CuestPartEvaluadosEVD[] cuestPartEval = new CuestPartEvaluadosEVD[cuest0.getCuestionarioParticipantes().size()];
 			for(int i=0; i<cuestPartEval.length; i++) {
@@ -337,10 +339,13 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 		List<CuestPartEvaluadosEVD> cuestPartEvaluadosEVDList = new ArrayList<>();
 		try {
 			ParticipantePK participantePK = NirhoUtil.obtenerParticipanteToken(token);
+			logger.info("***====================================== participantePK ee [" + participantePK +"]");
 			Participante participante = participanteDAO.getOne(participantePK);	
+			logger.info("***====================================== participante ee [" + participante +"]");
 			if(participante != null) {
 				List<EvaluadorEvaluado> evaluados = evalEvalDAO.findByIdProyectoAndIdEvaluador(participante.getParticipantePK().getIdProyecto() 
 						,participante.getParticipantePK().getIdParticipante());	
+				logger.info("***====================================== evaluados ee [" + evaluados +"]");
 				for(EvaluadorEvaluado ee: evaluados) {
 					logger.info("***====================================== Evaluados ee [" + ee +"]");
 					List<CuestionarioParticipanteEVD> cuestPartEVDList = new ArrayList<>();
