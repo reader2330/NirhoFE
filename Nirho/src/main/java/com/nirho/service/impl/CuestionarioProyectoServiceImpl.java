@@ -129,17 +129,18 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 									part.getParticipantePK().getIdParticipante(), part.getParticipantePK().getIdProyecto(),
 											pregunta.getIdTema().getIdTema(), pregunta.getIdPregunta());
 							cuestPart.setCuetionarioParticipantePK(cuestPartPK);
+							logger.info("***************** !!!!! cuestPart [" + cuestPart +"]   !!!!! **************************");
 							cuestDAO.save(cuestPart);
 						} catch(Exception e) {
-							logger.info("Exception e [" + e.getMessage() +"]");
+							logger.info("Exception al auardar el cuestionario del participante[" + e.getMessage() +"]");
 						}
 					}
 				} catch(Exception e) {
-					logger.info("Exception e [" + e.getMessage() +"]");
+					logger.info("Exception al guardar el cuestionario del proyecto [" + e.getMessage() +"]");
 				}
 			}
 		} catch(Exception e) {
-			logger.info("Exception e [" + e.getMessage() +"]");
+			logger.info("Problemas al guardar el cuestionario del participante Exception e [" + e.getMessage() +"]");
 			throw new NirhoServiceException("Problemas con la BD al guardar el cuestionario");
 		}
 	}
