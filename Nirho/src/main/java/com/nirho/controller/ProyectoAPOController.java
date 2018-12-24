@@ -14,6 +14,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ooxml.POIXMLDocumentPart;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
@@ -217,9 +218,10 @@ public class ProyectoAPOController {
 	@RequestMapping(value = "/reporte", method = RequestMethod.GET)
 	@ResponseBody
 	public void genearReporte(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletResponse response) throws NirhoControllerException{
+		
 		try {
 			
-			URL reporteAPOURL = ProyectoAPOController.class.getClassLoader().getResource("plantillaReporteAPO.docx");
+			URL reporteAPOURL = ProyectoAPOController.class.getClassLoader().getResource("reporteAPO.docx");
 			
 			ZipSecureFile.setMinInflateRatio(0);
 			XWPFDocument document = new XWPFDocument(OPCPackage.open(reporteAPOURL.getPath())); 
@@ -231,8 +233,7 @@ public class ProyectoAPOController {
 	  
 	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Cumplimiento por area");
 	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "Resumen de la empresa");
-	        
-	        
+	        	        
 	        List<ParticipanteAPO> participantes = participanteAPOService.obtenerParticipantes(idProyecto);
 	        int maxCalificacion = 0, minCalificacion = 5;
 	        String maxArea = "", minArea = "", maxFuncion = "", minFuncion = "";
@@ -279,14 +280,30 @@ public class ProyectoAPOController {
 	        	row3.getCell(1).setText("Area: " + minArea + ", Función: " + minFuncion + ", Promedio: " + minCalificacion);
 	        }
 	           
-	        XWPFChart chart = ReporteUtil.getGraficoPorTitulo(document, "Comparativo del promedio de la empresa respecto a las áreas");
-	        XSSFWorkbook wb2 = chart.getWorkbook();
-	        Sheet dataSheet2 = wb2.getSheetAt(0);
-	        System.out.println(dataSheet2.getRow(2).getCell(2));
-	        dataSheet2.getRow(2).getCell(2).setCellValue(99);
-
+	       // XWPFChart chart = ReporteUtil.getGraficoPorTitulo(document, "Comparativo del promedio de la empresa respecto a las áreas");
+	       // if(chart != null) {
+		   //     XSSFWorkbook wb2 = chart.getWorkbook();
+		   //     Sheet dataSheet2 = wb2.getSheetAt(0);
+		   //     System.out.println(dataSheet2.getRow(2).getCell(2));
+		   //     dataSheet2.getRow(2).getCell(2).setCellValue(99);
+	       // }
+	        XWPFChart chart = null;
+	        for (POIXMLDocumentPart part : document.getRelations()) {
+	            if (part instanceof XWPFChart) {
+	                chart = (XWPFChart) part;  
+	                
+	                XSSFWorkbook wb2 = chart.getWorkbook();
+	                Sheet dataSheet2 = wb2.getSheetAt(0);
+	                System.out.println(dataSheet2.getRow(2).getCell(2));
+	                dataSheet2.getRow(2).getCell(2).setCellValue(99);
+	                
+	            }
+	        }
+	        
+	        String nombreReporte = "ReporteAPO_" + proyecto.getNombre() + ".docx";
+	        
 	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
-	        response.setHeader("Content-Disposition", "attachment; filename=test.docx");
+	        response.setHeader("Content-Disposition", "attachment; filename=" + nombreReporte);
 	        document.write(response.getOutputStream());
 	   
 	        response.flushBuffer();
