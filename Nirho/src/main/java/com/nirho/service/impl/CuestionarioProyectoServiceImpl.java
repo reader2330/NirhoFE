@@ -121,6 +121,7 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 					CuestionarioProyectoPK pk = new CuestionarioProyectoPK(
 							cuestionario.getIdProyecto(), pregunta.getIdTema().getIdTema(), pregunta.getIdPregunta());
 					cp.setCuestionarioProyectoPK(pk);
+					logger.info("***************** !!!!! cuestPyoy [" + cp +"]   !!!!! **************************");
 					dao.save(cp);
 					for(Participante part: participanteDAO.findByIdProyecto(cuestionario.getIdProyecto())) {
 						try {
