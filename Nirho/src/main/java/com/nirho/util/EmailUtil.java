@@ -51,7 +51,7 @@ public class EmailUtil {
 	public static String getContenidoPVC(EmailDatos datos) {
 		String contenido = "<p>Estimado(a) " + datos.getNombreParticipante() + "</p>" + 
 				"<p>Para ingresar a su cuestionario de participación al proyecto " + datos.getNombreProyecto() +
-				", por favor hacer clic en la siguiente liga: " + URL_CUEST_APO + datos.getToken() + "</p>" +
+				", por favor hacer clic en la siguiente liga: " + URL_CUEST_PVC + datos.getToken() + "</p>" +
 				"<p>Saludos</p>";
 		return contenido;
 	}
