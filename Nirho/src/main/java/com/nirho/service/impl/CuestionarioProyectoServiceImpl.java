@@ -123,7 +123,10 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 					cp.setCuestionarioProyectoPK(pk);
 					logger.info("***************** !!!!! cuestPyoy [" + cp +"]   !!!!! **************************");
 					dao.save(cp);
-					for(Participante part: participanteDAO.findByIdProyecto(cuestionario.getIdProyecto())) {
+					logger.info("***************** !!!!! id_proyecto [" + cuestionario.getIdProyecto() +"]   !!!!! **************************");
+					List<Participante> participantes = participanteDAO.findByIdProyecto(cuestionario.getIdProyecto());
+					logger.info("***************** !!!!! participantes [" + participantes +"]   !!!!! **************************");
+					for(Participante part: participantes) {
 						try {
 							CuetionarioParticipante cuestPart = new CuetionarioParticipante();
 							CuetionarioParticipantePK cuestPartPK = new CuetionarioParticipantePK(
