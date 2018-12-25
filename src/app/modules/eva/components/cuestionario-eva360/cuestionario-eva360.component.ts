@@ -66,7 +66,7 @@ export class CuestionarioEva360Component implements OnInit {
       cancelButtonText: 'No, seguir editando'
     }).then((result) => {
       if (result.value) {
-        this.ProyectoEvdServices.sendCuestionarios(this.proyect.idProyecto).subscribe((res) => {
+        this.ProyectoEvdServices.sendCuestionario(this.proyect.idProyecto).subscribe((res) => {
           Swal(
             'Listo.',
             'Los cuestionarios se han enviado correctamente',

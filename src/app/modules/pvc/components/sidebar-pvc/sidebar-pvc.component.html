@@ -83,6 +83,11 @@
 
           <app-head-count-pvc (response)="recibirRespuestChildren($event)"></app-head-count-pvc>
         </div>
+        <div *ngIf="selectModule == 18">
+
+          <app-detalle-preguntas-pvc (response)="recibirRespuestChildren($event)"></app-detalle-preguntas-pvc>
+
+        </div>
 
       </div>
     </div>

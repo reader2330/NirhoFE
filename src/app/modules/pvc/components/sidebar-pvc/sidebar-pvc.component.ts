@@ -102,7 +102,7 @@ export class SidebarPvcComponent implements OnInit {
           descripcion: 'Carga de Head Count'
         },
         {
-          id_submodulo: 19,
+          id_submodulo: 18,
           descripcion: 'Envio de correos'
         },
 

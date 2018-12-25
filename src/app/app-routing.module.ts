@@ -18,6 +18,8 @@ import {EncuestaEvdComponent} from './modules/evd/components/encuesta-evd/encues
 import {EncuestaEva360Component} from './modules/eva/components/encuesta-eva360/encuesta-eva360.component';
 import {ViewActividadesComponent} from './screensOut/view-actividades/view-actividades.component';
 import {SidebarPvcComponent} from './modules/pvc/components/sidebar-pvc/sidebar-pvc.component';
+import {VistaPVCParticipanteComponent} from './screensOut/vista-pvcparticipante/vista-pvcparticipante.component';
+import {ConfiguradorClienteComponent} from './modules/synchronize/components/configurador-cliente/configurador-cliente.component';
 
 
 
@@ -87,9 +89,14 @@ const routes: Routes = [
     component: SidebarPvcComponent,
     canActivate: [LoginGuard]
   },
-  /*{
-    path: 'seguimiento/participante/:token'
-  },*/
+  {
+    path: 'seguimiento/participante/:token',
+    component: VistaPVCParticipanteComponent
+  },
+  {
+    path: 'configurador',
+    component: ConfiguradorClienteComponent
+  },
   { path: '**', redirectTo: '' }
 ];
 

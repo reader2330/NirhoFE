@@ -126,8 +126,9 @@ export class ViewActividadesComponent implements OnInit {
   ngOnInit() {
     this.Imagenes(1);
     this.route.params.subscribe(res => {
-      this.isBoss = res['jefe'];
+      this.isBoss = true || res['jefe'];
       this.ProyectServices.getToken(res['token']).subscribe(res2 => {
+        console.log(res2);
         this.metas = res2['participante']['ampliaciones'];
         this.getCalificaciones(res2['participante']['idParticipante']);
         this.getActividadesParticipante(res2['participante']['idParticipante']);
@@ -170,7 +171,6 @@ export class ViewActividadesComponent implements OnInit {
   }
 
   updateObjetivos(element) {
-    console.log(element);
     element['actividades'].pop();
     this.ProyectServices.updateObjetivos(element).subscribe(res => {
       console.log(res);
@@ -181,8 +181,6 @@ export class ViewActividadesComponent implements OnInit {
   }
 
   updateCalificaionActividad(act, fuc) {
-    console.log(act);
-    console.log(fuc);
     this.ProyectServices.updateCalificacionActividad( fuc['id'], act['id'], act['calificacion']).subscribe(res =>{
       console.log(res);
     });

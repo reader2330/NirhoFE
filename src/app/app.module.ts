@@ -26,6 +26,8 @@ import {VerticalTimelineModule} from 'angular-vertical-timeline';
 import {PvcModule} from './modules/pvc/pvc.module';
 import {ChartModule} from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+import { VistaPVCParticipanteComponent } from './screensOut/vista-pvcparticipante/vista-pvcparticipante.component';
+import {ModalUsuariosComponent} from './modules/modal/modal-usuarios/modal-usuarios.component';
 
 
 
@@ -46,6 +48,8 @@ export function highchartsFactory() {
     AppComponent,
     ImagenesModalComponent,
     ViewActividadesComponent,
+    VistaPVCParticipanteComponent,
+    ModalUsuariosComponent
 
   ],
   imports: [

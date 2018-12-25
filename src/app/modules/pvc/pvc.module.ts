@@ -50,7 +50,8 @@ import {HeadCountPvcComponent} from './components/head-count-pvc/head-count-pvc.
     SelectorNivelComponent,
     SelectoEspecialidadesComponent,
     SelectorConocimientoTecnicosComponent,
-    HeadCountPvcComponent
+    HeadCountPvcComponent,
+
   ],
   entryComponents: [
 

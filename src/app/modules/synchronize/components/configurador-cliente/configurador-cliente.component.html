@@ -1,0 +1,56 @@
+<mat-toolbar style="background:  black ">
+  <span style="flex: 1 1 auto;"></span>
+  <button mat-raised-button style="margin-right: 20px;" (click)="IrInicio()"><mat-icon >home</mat-icon>Inicio</button>
+  <button mat-raised-button (click)="cerraSesion()">
+    <mat-icon>people_outline</mat-icon>Cerrar sesión
+  </button>
+
+</mat-toolbar>
+<div class="row col-sm-12" style="margin-top: 20px">
+  <mat-horizontal-stepper  class="col-sm.10 offset-1" [linear]="false" labelPosition="bottom"  #stepper>
+    <mat-step [stepControl]="clienteForm" style="margin-top: 100px">
+      <form [formGroup]="clienteForm">
+        <ng-template matStepLabel>Datos cliente</ng-template>
+        <div style="margin-top: 50px" class=" row col-sm-10 offset-1">
+          <mat-form-field class="col-sm-12" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput  formControlName="nombreCliente" required>
+          </mat-form-field>
+          <mat-form-field class="col-sm-12" appearance="outline">
+            <mat-label>RFC</mat-label>
+            <input matInput  formControlName="rfcCliente" required>
+          </mat-form-field>
+          <mat-form-field class="col-sm-12" appearance="outline">
+            <mat-label>Correo</mat-label>
+            <input matInput  formControlName="correoCliente" required>
+          </mat-form-field>
+          <mat-form-field class="col-sm-12" appearance="outline">
+            <mat-label>Telefono</mat-label>
+            <input matInput  formControlName="telefonoCliente" required>
+          </mat-form-field>
+          <div class="col-sm-4 offset-4">
+            <button color="accent" mat-raised-button (click)="saveCliente()" matStepperNext>Guardar</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="usuarios.length" style="margin-top: 100px">
+        <ng-template matStepLabel> Usuario</ng-template>
+        <div class="col-sm-8 offset-2 ">
+            <button style="margin-top: 20px; margin-left: 100px" (click)="ModalUsuario()" mat-raised-button  color="accent">Agregar usuario <mat-icon>people</mat-icon></button>
+        </div>
+        <div class="col-sm-10 offset-1">
+            <mat-list>
+              <mat-list-item *ngFor="let user of users">
+                {{user.nombre}}
+              </mat-list-item>
+            </mat-list>
+
+        </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</div>
+
+
+

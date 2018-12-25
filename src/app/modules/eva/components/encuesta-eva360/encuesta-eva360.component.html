@@ -30,8 +30,9 @@
 
             <!-- Position Column -->
             <ng-container matColumnDef="Participante">
-              <th mat-header-cell *matHeaderCellDef style="font-size: 10px; margin-right: 10px;"> Participante </th>
-              <td mat-cell *matCellDef="let element"> {{"Nombre de prueba"}} </td>
+              <th mat-header-cell *matHeaderCellDef style="font-size: 10px; margin-right: 10px;"> Opciones </th>
+              <td mat-cell *matCellDef="let element">{{opciones[i][i]['enunciado']}}  </td>
+
             </ng-container>
 
 

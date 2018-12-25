@@ -8,6 +8,8 @@ import { InicioSyncComponent } from './components/inicio-sync/inicio-sync.compon
 import { RoutingSyncComponent } from './components/routing-sync/routing-sync.component';
 import { CarouselModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {ConfiguradorClienteComponent} from './components/configurador-cliente/configurador-cliente.component';
+import {ModalUsuariosComponent} from '../modal/modal-usuarios/modal-usuarios.component';
 
 @NgModule({
   imports: [
@@ -21,8 +23,9 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     CarouselModule,
     WavesModule,
     ButtonsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
-  declarations: [InicioSyncComponent, RoutingSyncComponent]
+  declarations: [InicioSyncComponent, RoutingSyncComponent, ConfiguradorClienteComponent],
+  entryComponents: [ ModalUsuariosComponent]
 })
 export class SynchronizeModule { }

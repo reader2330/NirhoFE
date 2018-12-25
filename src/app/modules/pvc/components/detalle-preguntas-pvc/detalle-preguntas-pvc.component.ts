@@ -5,7 +5,7 @@ import {ProyectoPVCService} from '../../services/proyectoPVC.service';
 
 
 @Component({
-  selector: 'app-detalle-preguntas',
+  selector: 'app-detalle-preguntas-pvc',
   templateUrl: './detalle-preguntas-pvc.component.html',
   styleUrls: ['./detalle-preguntas-pvc.component.scss']
 })

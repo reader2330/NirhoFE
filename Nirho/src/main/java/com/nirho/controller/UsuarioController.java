@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -171,5 +172,15 @@ public class UsuarioController {
         } else {
         	return new ResponseEntity<String>("Unauthorized", HttpStatus.UNAUTHORIZED); 
         }
+	}
+
+	@RequestMapping(value = "/guardar/usuario", method = RequestMethod.POST)
+	@ResponseBody
+	public void guardarUsuario(@Valid @RequestBody Usuario user){
+		try{
+			usuarioService.guardarUsuario(user);
+		}catch (NirhoServiceException e){
+			logger.warn("errror "+ e.getMessage());
+		}
 	}
 }

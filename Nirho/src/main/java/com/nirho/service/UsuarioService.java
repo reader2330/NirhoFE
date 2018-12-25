@@ -9,4 +9,5 @@ public interface UsuarioService {
 	Usuario obtenerUsuario(String username) throws NirhoServiceException;
 	List<Usuario> obtenerConsultores() throws NirhoServiceException;
 	void guardarAvatar(Usuario usuario) throws NirhoServiceException;
+	void guardarUsuario(Usuario usuario) throws NirhoServiceException;
 }

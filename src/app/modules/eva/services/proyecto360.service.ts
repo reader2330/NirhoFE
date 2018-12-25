@@ -68,7 +68,7 @@ export class Proyecto360Service {
       }});
   }
   sendCuestionario(idProyecto) {
-    return this.http.get(this.api + 'participantes/cuestionariosSend',{headers: this.headers, params:   {
+    return this.http.get(this.api + 'participantes/cuestionariosSend', {headers: this.headers, params:   {
         idProyecto: idProyecto
       }});
   }
@@ -96,9 +96,6 @@ export class Proyecto360Service {
   }
   saveAnswer(data): Observable<any> {
     return this.http.post(this.api + 'cuestionario/guardarOpciones', data, {headers: this.headers});
-  }
-  sendCuestionarios(id): Observable<any> {
-    return this.http.get(this.api + 'participantes/hecjk', {headers: this.headers , params: {'idProyecto': id}});
   }
 
   getParticipanteByProyect(id): Observable<any>{

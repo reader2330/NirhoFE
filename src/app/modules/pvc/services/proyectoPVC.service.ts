@@ -31,7 +31,7 @@ export class ProyectoPVCService {
   }
 
   saveHead(data): Observable<any> {
-    return this.http.post(this.api + 'participantes/headCount', data, {headers: this.headers} );
+    return this.http.post(this.api + 'participantesPVC/headCount', data, {headers: this.headers} );
   }
 
   savePeriod(data): Observable<any> {
@@ -73,7 +73,7 @@ export class ProyectoPVCService {
       }});
   }
   sendCuestionario(idProyecto) {
-    return this.http.get(this.api + 'participantes/cuestionariosSend',{headers: this.headers, params:   {
+    return this.http.get(this.api + 'participantesPVC/enviocorreo',{headers: this.headers, params:   {
         idProyecto: idProyecto
       }});
   }
@@ -154,8 +154,9 @@ export class ProyectoPVCService {
     } else {
        return this.http.post(this.api + 'proyectoPVC/especialidades/' + id + '/conocimientos/humanisticos/guardarTodas', data, {headers: this.headers} );
     }
-
-
+  }
+  getToken(token) {
+    return this.http.get(this.api + 'participantesPVC/' + token, { headers: this.headers} );
   }
 
 

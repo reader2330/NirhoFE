@@ -1,0 +1,37 @@
+<h2>Registrar usuario</h2>
+
+<div style="margin-top: 20px" class="rowcol-sm-12">
+
+  <form class="col-sm-10 offset-1" [formGroup]="usuarioForm" >
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput  formControlName="nombreUsuario" required>
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Usuario</mat-label>
+      <input matInput  formControlName="usernameUsuario" required>
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input matInput  formControlName="passwordUsuario" required>
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput  formControlName="emailUsuario" required>
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Rol</mat-label>
+      <mat-select formControlName="rolUsuario">
+        <mat-option *ngFor="let rol of roles" [value]="rol.key">
+          {{rol.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="col-sm-4 offset-4">
+      <button color="accent" mat-raised-button (click)="addUsuario()" >Guardar</button>
+    </div>
+
+  </form>
+
+
+</div>
