@@ -269,6 +269,32 @@ INSERT INTO `clb_submodulo` VALUES (1,'Bandeja de Proyectos'),(2,'Alta de Proyec
 UNLOCK TABLES;
 
 --
+-- Table structure for table `cliente`
+--
+
+DROP TABLE IF EXISTS `cliente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `cliente` (
+  `id` int(11) NOT NULL,
+  `correo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rfc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telefono` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cliente`
+--
+
+LOCK TABLES `cliente` WRITE;
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `competencias_vacante`
 --
 
@@ -734,7 +760,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuetionario_participante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `cuetionario_participante` (
   `id_participante` int(11) NOT NULL,
   `id_proyecto` int(11) NOT NULL,
@@ -2331,4 +2357,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-22  0:54:06
+-- Dump completed on 2018-12-25 12:44:32
