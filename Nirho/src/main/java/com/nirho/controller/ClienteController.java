@@ -87,7 +87,7 @@ public class ClienteController {
 	@RequestMapping(value = "/modulos", method = RequestMethod.GET)
 	public void getModulos() throws NirhoControllerException{
 		try {
-			clienteService.getClienteById(0).getModulos();
+			clienteService.list().get(0).getModulos();
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar cliente");
 		} 
@@ -97,7 +97,7 @@ public class ClienteController {
 	public List<ModulosCliente> getModulosChecked() throws NirhoControllerException{
 		try {
 			List<ModulosCliente> list = new ArrayList<>();
-			for(ModulosCliente modulo: clienteService.getClienteById(0).getModulos()){
+			for(ModulosCliente modulo: clienteService.list().get(0).getModulos()){
 				if(modulo.isCheck()) {
 					list.add(modulo);
 				}
@@ -111,7 +111,7 @@ public class ClienteController {
 	@RequestMapping(value = "/modulos/editar", method = RequestMethod.POST)
 	public void editModulos(@Valid @RequestBody Set<ModulosCliente> l) throws NirhoControllerException{
 		try {
-			clienteService.getClienteById(0).setModulos(l);
+			clienteService.list().get(0).setModulos(l);
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar cliente");
 		} 

@@ -224,7 +224,8 @@ public class ProyectoAPOController {
 			//URL reporteAPOURL = ProyectoAPOController.class.getClassLoader().getResource("reporteAPO.docx");
 			       
 			ZipSecureFile.setMinInflateRatio(0);
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPO.docx")); 
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPO.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteAPO.docx"));
 	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	        
 	        Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
