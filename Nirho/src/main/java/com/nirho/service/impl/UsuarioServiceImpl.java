@@ -61,4 +61,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
 		}
 	}
+	@Override
+	public List<Usuario> getUsuarios() throws NirhoServiceException{
+		List<Usuario> lista = null;
+		lista = dao.findAll();
+		return lista;
+	}
 }

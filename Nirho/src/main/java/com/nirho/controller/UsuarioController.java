@@ -176,11 +176,23 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/guardar/usuario", method = RequestMethod.POST)
 	@ResponseBody
-	public void guardarUsuario(@Valid @RequestBody Usuario user){
+	public void guardarUsuario(@Valid @RequestBody Usuario user) throws NirhoControllerException{
 		try{
+			logger.info("Usuario ["+user+"]" );
 			usuarioService.guardarUsuario(user);
 		}catch (NirhoServiceException e){
-			logger.warn("errror "+ e.getMessage());
+			logger.warn("error "+ e.getMessage());
 		}
+	}
+	@RequestMapping(value = "/todos", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Usuario> getUsuarios() throws NirhoControllerException{
+		List<Usuario> lista = null;
+		try {
+			lista = usuarioService.getUsuarios();
+		}catch (NirhoServiceException e){
+			logger.warn("error "+ e.getMessage());
+		}
+		return lista;
 	}
 }

@@ -108,7 +108,7 @@ public class ClienteController {
 		} 
 	}
 	
-	@RequestMapping(value = "/modulos/editar", method = RequestMethod.GET)
+	@RequestMapping(value = "/modulos/editar", method = RequestMethod.POST)
 	public void editModulos(@Valid @RequestBody Set<ModulosCliente> l) throws NirhoControllerException{
 		try {
 			clienteService.getClienteById(0).setModulos(l);
