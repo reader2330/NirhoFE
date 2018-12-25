@@ -734,7 +734,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cuetionario_participante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuetionario_participante` (
   `id_participante` int(11) NOT NULL,
   `id_proyecto` int(11) NOT NULL,
@@ -745,17 +745,19 @@ CREATE TABLE `cuetionario_participante` (
   `respuesta_jefe` int(2) DEFAULT NULL,
   `pregunta_id_pregunta` int(11) NOT NULL,
   `tema_id_tema` int(11) NOT NULL,
-  PRIMARY KEY (`id_participante`,`id_proyecto`),
+  PRIMARY KEY (`id_participante`,`id_tema`,`id_pregunta`,`id_proyecto`),
   KEY `fk_cuest_part_id_tema_idx` (`id_tema`),
   KEY `fk_cuest_part_id_preg_idx` (`id_pregunta`),
+  KEY `fk_cuest_part_id_proyecto_idx` (`id_proyecto`),
   KEY `FKt9twi2j2iwai7xcmdwtba6hhu` (`pregunta_id_pregunta`),
   KEY `FKny0nilg5ji8fqxq33m5nas3lr` (`tema_id_tema`),
   CONSTRAINT `FKny0nilg5ji8fqxq33m5nas3lr` FOREIGN KEY (`tema_id_tema`) REFERENCES `tema` (`id_tema`),
   CONSTRAINT `FKt9twi2j2iwai7xcmdwtba6hhu` FOREIGN KEY (`pregunta_id_pregunta`) REFERENCES `pregunta` (`id_pregunta`),
-  CONSTRAINT `fk_cuest_part_id_part` FOREIGN KEY (`id_participante`, `id_proyecto`) REFERENCES `participante` (`id_participante`, `id_proyecto`),
+  CONSTRAINT `fk_cuest_part_id_part` FOREIGN KEY (`id_participante`) REFERENCES `participante` (`id_participante`),
   CONSTRAINT `fk_cuest_part_id_pregunta` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id_pregunta`),
+  CONSTRAINT `fk_cuest_part_id_proyecto` FOREIGN KEY (`id_proyecto`) REFERENCES `proyecto` (`id_proyecto`),
   CONSTRAINT `fk_cuest_part_id_tema` FOREIGN KEY (`id_tema`) REFERENCES `tema` (`id_tema`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
