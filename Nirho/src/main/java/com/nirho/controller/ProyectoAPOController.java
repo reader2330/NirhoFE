@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,8 @@ import org.apache.poi.ooxml.POIXMLDocumentPart;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.XWPFChart;
@@ -221,12 +224,10 @@ public class ProyectoAPOController {
 	public void genearReporte(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletResponse response) throws NirhoControllerException{
 		
 		try {
-			
-			//URL reporteAPOURL = ProyectoAPOController.class.getClassLoader().getResource("reporteAPO.docx");
-			       
+			    
 			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPO.docx"));
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteAPO.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPO.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteAPO.docx"));
 	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	        
 	        Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
@@ -239,15 +240,16 @@ public class ProyectoAPOController {
 	        List<ParticipanteAPO> participantes = participanteAPOService.obtenerParticipantes(idProyecto);
 	        int maxCalificacion = 0, minCalificacion = 5;
 	        String maxArea = "", minArea = "", maxFuncion = "", minFuncion = "";
-	        int promedio = 0;
+	        double promedioGeneral = 0;
+	        int numCalificacionesGeneral = 0;
 	        
-	        HashMap<String, Integer> datos = new HashMap<>(); 
+	        HashMap<String, Double> datos = new HashMap<>(); 
 	        
 	        if(x1 != null){	             
 	            for(int i = 1; i < participantes.size(); i++){
 	            	
 	            	String area = participantes.get(i - 1).getAreaOrg();
-	            	int promedioArea = 0;
+	            	double promedioArea = 0;
 	            	int numCalificacionesArea = 0;
 	            	
 	            	for(ParticipanteAPOAmp ampliacion: participantes.get(i -1).getAmpliaciones()) {
@@ -273,59 +275,165 @@ public class ProyectoAPOController {
 	    	            		minFuncion = funcion.getFuncion();
 	    	            		minCalificacion = funcion.getCalificacion();
 	    	            	}
-	    	            	promedio += funcion.getCalificacion();
+	    	            	promedioGeneral += funcion.getCalificacion();
+	    	            	numCalificacionesGeneral++;
 	    	            	promedioArea += funcion.getCalificacion();
 	    	            	numCalificacionesArea++;
 		            	}
 	            	}
 	            	
-	            	promedioArea = Math.round(promedioArea / numCalificacionesArea);
+	            	promedioArea = promedioArea / numCalificacionesArea;
 	            	datos.put(area, promedioArea);
 	            	
 	            }
 	        }
 	        
+	        promedioGeneral = promedioGeneral / numCalificacionesGeneral;
+	        
 	        if(x2 != null){
 	        	XWPFTableRow row1 = x2.getRow(0);
-	        	row1.getCell(1).setText(promedio + "");
+	        	row1.getCell(1).setText(promedioGeneral + "");
 	        	XWPFTableRow row2 = x2.getRow(1);
 	        	row2.getCell(1).setText("Area: " + maxArea + "\n, Función: " + maxFuncion + ", Promedio: " + maxCalificacion);
 	        	XWPFTableRow row3 = x2.getRow(2);
 	        	row3.getCell(1).setText("Area: " + minArea + ", Función: " + minFuncion + ", Promedio: " + minCalificacion);
 	        }
 	           
-	       // XWPFChart chart = ReporteUtil.getGraficoPorTitulo(document, "Comparativo del promedio de la empresa respecto a las áreas");
-	       // if(chart != null) {
-		   //     XSSFWorkbook wb2 = chart.getWorkbook();
-		   //     Sheet dataSheet2 = wb2.getSheetAt(0);
-		   //     System.out.println(dataSheet2.getRow(2).getCell(2));
-		   //     dataSheet2.getRow(2).getCell(2).setCellValue(99);
-	       // }
 	        XWPFChart chart = null;
 	        for (POIXMLDocumentPart part : document.getRelations()) {
 	            if (part instanceof XWPFChart) {
-	                chart = (XWPFChart) part;  
-	                if(chart.getTitle().toString().equals("Comparativo del promedio de la empresa respecto a las áreas")) {
+	                
+	            	chart = (XWPFChart) part;  
+	                String title= chart.getTitle().getBody().getParagraph(0).getText();
+	                
+	                if(title.equals("Comparativo del promedio de la empresa respecto a las áreas")) {
 	                	 XSSFWorkbook wb2 = chart.getWorkbook();
 		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
 		 	             int i = 1;
 		 	             for(String key: datos.keySet()) {
-		 	            	dataSheet2.getRow(i).getCell(0).setCellValue(key);
-		 	            	dataSheet2.getRow(i).getCell(1).setCellValue(datos.get(key));
-		 	            	dataSheet2.getRow(i).getCell(2).setCellValue(promedio);
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datos.get(key));
+		 	            	row.createCell(2).setCellValue(promedioGeneral);
 		 	            	i++;
 		 	             }
 	                }
-	                	
 	                
-	                
-	                
-	               
+	                if(title.equals("Cumplimiento por área")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+		 	             for(String key: datos.keySet()) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datos.get(key));
+		 	            	i++;
+		 	             }
+	                }
 	                
 	            }
 	        }
 	        
 	        String nombreReporte = "ReporteAPO_" + proyecto.getNombre() + ".docx";
+	        
+	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
+	        response.setHeader("Content-Disposition", "attachment; filename=" + nombreReporte);
+	        document.write(response.getOutputStream());
+	   
+	        response.flushBuffer();
+
+		} catch(IOException | InvalidFormatException e){
+			throw new NirhoControllerException("Problemas al generar reporte");
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al generar reporte");
+		}
+	}
+	
+	
+	@RequestMapping(value = "/reporte/participante", method = RequestMethod.GET)
+	@ResponseBody
+	public void genearReporteIndividual(@RequestParam(name="idParticipante") Integer idParticipante, HttpServletResponse response) throws NirhoControllerException{
+		
+		try {
+			    
+			ZipSecureFile.setMinInflateRatio(0);
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPOIndividual.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteAPOIndividual.docx"));
+	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	        
+	        ParticipanteAPO participante = participanteAPOService.getOne(idParticipante);
+	        
+	        ReporteUtil.reemplazarParrafo(document, "nombre.participante", participante.getNombres() + " " + participante.getaPaterno() + " " + participante.getaMaterno());
+	  
+	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Tabla participante individual");
+	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "Resumen individual");
+	        	        
+	        
+	        int maxCalificacion = 0, minCalificacion = 5;
+	        String maxArea = "", minArea = "", maxFuncion = "", minFuncion = "";
+	        double promedioGeneral = 0;
+	        int numCalificacionesGeneral = 0;
+	        
+	        HashMap<String, Double> datos = new HashMap<>(); 
+	        
+	        if(x1 != null){	   
+	        	XWPFTableRow row1 = x2.getRow(0);
+	        	row1.getCell(1).setText(participante.getNombres() + " " + participante.getaPaterno() + " " + participante.getaMaterno());
+	        	XWPFTableRow row2 = x2.getRow(1);
+	        	row2.getCell(1).setText(participante.getAreaOrg());
+	        	XWPFTableRow row3 = x2.getRow(2);
+	        	row3.getCell(1).setText(participante.getPuesto());
+	        	XWPFTableRow row4 = x2.getRow(3);
+	        	row4.getCell(1).setText("");
+	        	XWPFTableRow row5 = x2.getRow(4);
+	        	row5.getCell(1).setText("");
+	        }
+	         
+	        if(x2 != null){
+	        	XWPFTableRow row1 = x2.getRow(0);
+	        	row1.getCell(1).setText(promedioGeneral + "");
+	        	XWPFTableRow row2 = x2.getRow(1);
+	        	row2.getCell(1).setText("Area: " + maxArea + "\n, Función: " + maxFuncion + ", Promedio: " + maxCalificacion);
+	        	XWPFTableRow row3 = x2.getRow(2);
+	        	row3.getCell(1).setText("Area: " + minArea + ", Función: " + minFuncion + ", Promedio: " + minCalificacion);
+	        }
+	           
+	        XWPFChart chart = null;
+	        for (POIXMLDocumentPart part : document.getRelations()) {
+	            if (part instanceof XWPFChart) {
+	                
+	            	chart = (XWPFChart) part;  
+	                String title= chart.getTitle().getBody().getParagraph(0).getText();
+	                
+	                if(title.equals("Comparativo del promedio de la empresa respecto a las áreas")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+		 	             for(String key: datos.keySet()) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datos.get(key));
+		 	            	row.createCell(2).setCellValue(promedioGeneral);
+		 	            	i++;
+		 	             }
+	                }
+	                
+	                if(title.equals("Cumplimiento por área")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+		 	             for(String key: datos.keySet()) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datos.get(key));
+		 	            	i++;
+		 	             }
+	                }
+	                
+	            }
+	        }
+	        
+	        String nombreReporte = "ReporteAPO_" + participante.getNombres() + " " + participante.getaPaterno() + " " + participante.getaMaterno() + ".docx";
 	        
 	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
 	        response.setHeader("Content-Disposition", "attachment; filename=" + nombreReporte);
