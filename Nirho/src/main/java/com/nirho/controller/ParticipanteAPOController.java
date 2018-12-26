@@ -256,8 +256,9 @@ public class ParticipanteAPOController {
 			for(int i = 0; i < jsonParticipantes.length(); i++) {
 				try {
 					ParticipanteAPO participante = assamblerToParticipanteHC(jsonParticipantes.getJSONObject(i));
-					participante.setIdParticipante( Integer.valueOf((participante.getIdParticipante() + "") + (proyecto.getIdProyecto() + "")) );
+					participante.setIdParticipante( Integer.valueOf((proyecto.getIdProyecto() + "") + (participante.getIdParticipante() + "")) );
 					participante.setIdProyecto(proyecto.getIdProyecto());
+					participante.setIdPartJefeInm(Integer.valueOf((proyecto.getIdProyecto() + "") + (participante.getIdPartJefeInm() + "")));
 					participantes.add(participante);
 				}catch(Exception e) {
 					logger.info("Exception [" + e.getMessage() + "]");
@@ -316,7 +317,7 @@ public class ParticipanteAPOController {
 				
 				if(participante == null) {
 					participante = assamblerToParticipanteHCA(jsonParticipantesAmp.getJSONObject(i));
-					participante.setIdParticipante(Integer.valueOf((participante.getIdParticipante() + "") + (proyecto.getIdProyecto() + "")) );
+					participante.setIdParticipante(Integer.valueOf((proyecto.getIdProyecto() + "") + (participante.getIdParticipante() + "")) );
 					Set<ParticipanteAPOAmpFuncion> funciones = new HashSet<>();
 					
 					ParticipanteAPOAmpFuncion funcion = new ParticipanteAPOAmpFuncion();
