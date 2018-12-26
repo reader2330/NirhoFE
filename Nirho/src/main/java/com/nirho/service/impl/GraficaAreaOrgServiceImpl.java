@@ -38,34 +38,35 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 		List<GraficaResultadoDTO> resultados = new ArrayList<>();
 		List<Participante> participantes = new ArrayList<>();
 		try {
-			participantes = participanteDAO.findByAreaOrgProyecto(AreaOrgConstants.CORPORATIVO, idProyecto);
-			for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {
-				GraficaResultadoDTO resDTO = new GraficaResultadoDTO();
-				Pregunta pregunta = cuestProy.getPregunta();
-				resDTO.setPregunta(pregunta);
-				for(Participante p: participantes) {
-					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
-						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
-						switch(respuesta) {
-							case 1:
-								resDTO.setNumResp1(resDTO.getNumResp1()+1);
-								break;
-							case 2:
-								resDTO.setNumResp2(resDTO.getNumResp1()+1);
-								break;
-							case 3:
-								resDTO.setNumResp3(resDTO.getNumResp1()+1);
-								break;	
-							case 4:
-								resDTO.setNumResp4(resDTO.getNumResp1()+1);
-								break;
-							case 5:
-								resDTO.setNumResp5(resDTO.getNumResp1()+1);
-								break;
+			participantes = participanteDAO.findByAreaOrgProyecto(AreaOrgConstants.CORPORATIVO, idProyecto);	
+			for(Participante p: participantes) {
+				for(CuestionarioProyecto cuestProy: cuestProytDAO.findByIdProyecto(idProyecto)) {					
+					GraficaResultadoDTO resDTO = new GraficaResultadoDTO();
+					Pregunta pregunta = cuestProy.getPregunta();
+					resDTO.setPregunta(pregunta);
+					for (CuetionarioParticipante cuestPart : cuestPArtDAO.findByParticipanteProyectoPregunta(
+							p.getParticipantePK().getIdParticipante(), idProyecto, pregunta.getIdPregunta())) {
+						int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
+						switch (respuesta) {
+						case 1:
+							resDTO.setNumResp1(resDTO.getNumResp1() + 1);
+							break;
+						case 2:
+							resDTO.setNumResp2(resDTO.getNumResp1() + 1);
+							break;
+						case 3:
+							resDTO.setNumResp3(resDTO.getNumResp1() + 1);
+							break;
+						case 4:
+							resDTO.setNumResp4(resDTO.getNumResp1() + 1);
+							break;
+						case 5:
+							resDTO.setNumResp5(resDTO.getNumResp1() + 1);
+							break;
 						}
 					}
+					resultados.add(resDTO);
 				}
-				resultados.add(resDTO);
 			}
 			gdto.setResultados(resultados);
 		} catch (Exception e) {
@@ -90,7 +91,8 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				Pregunta pregunta = cuestProy.getPregunta();
 				resDTO.setPregunta(pregunta);
 				for(Participante p: participantes) {
-					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
+					for(CuetionarioParticipante cuestPart : cuestPArtDAO.findByParticipanteProyectoPregunta(
+							p.getParticipantePK().getIdParticipante(), idProyecto, pregunta.getIdPregunta())){
 						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
 						switch(respuesta) {
 							case 1:
@@ -136,7 +138,8 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				Pregunta pregunta = cuestProy.getPregunta();
 				resDTO.setPregunta(pregunta);
 				for(Participante p: participantes) {
-					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
+					for(CuetionarioParticipante cuestPart : cuestPArtDAO.findByParticipanteProyectoPregunta(
+							p.getParticipantePK().getIdParticipante(), idProyecto, pregunta.getIdPregunta())){
 						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
 						switch(respuesta) {
 							case 1:
@@ -182,7 +185,8 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				Pregunta pregunta = cuestProy.getPregunta();
 				resDTO.setPregunta(pregunta);
 				for(Participante p: participantes) {
-					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
+					for(CuetionarioParticipante cuestPart : cuestPArtDAO.findByParticipanteProyectoPregunta(
+							p.getParticipantePK().getIdParticipante(), idProyecto, pregunta.getIdPregunta())){
 						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
 						switch(respuesta) {
 							case 1:
@@ -228,7 +232,8 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				Pregunta pregunta = cuestProy.getPregunta();
 				resDTO.setPregunta(pregunta);
 				for(Participante p: participantes) {
-					for(CuetionarioParticipante cuestPart: cuestPArtDAO.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto)){
+					for(CuetionarioParticipante cuestPart : cuestPArtDAO.findByParticipanteProyectoPregunta(
+							p.getParticipantePK().getIdParticipante(), idProyecto, pregunta.getIdPregunta())){
 						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
 						switch(respuesta) {
 							case 1:

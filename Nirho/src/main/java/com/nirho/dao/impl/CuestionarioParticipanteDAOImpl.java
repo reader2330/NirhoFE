@@ -12,7 +12,7 @@ import com.nirho.model.CuetionarioParticipantePK;
 
 @Repository
 public class CuestionarioParticipanteDAOImpl extends AbstractDAO<CuetionarioParticipante, CuetionarioParticipantePK> implements CuestionarioParticipanteDAO {
-
+	
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<CuetionarioParticipante> findByParticipanteProyecto(Integer idParticipante, Integer idProyecto) {
@@ -23,6 +23,18 @@ public class CuestionarioParticipanteDAOImpl extends AbstractDAO<CuetionarioPart
 		query.setParameter("idProyecto", idProyecto);
 		return query.getResultList();
 	}
-
-		
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<CuetionarioParticipante> findByParticipanteProyectoPregunta(Integer idParticipante, Integer idProyecto,
+			Integer idPregunta) {
+		String hql = "FROM CuetionarioParticipante cp WHERE cp.cuetionarioParticipantePK.idParticipante = :idParticipante "
+				+ "AND cp.cuetionarioParticipantePK.idProyecto = :idProyecto "
+				+ "AND cp.cuetionarioParticipantePK.idPregunta = :idPregunta ORDER BY cp.cuetionarioParticipantePK.idPregunta ASC";
+		Query query = entityManager.createQuery(hql);
+		query.setParameter("idParticipante", idParticipante);
+		query.setParameter("idProyecto", idProyecto);
+		query.setParameter("idPregunta", idPregunta);
+		return query.getResultList();
+	}
 }
