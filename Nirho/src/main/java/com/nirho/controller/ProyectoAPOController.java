@@ -9,6 +9,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -238,45 +239,57 @@ public class ProyectoAPOController {
 	        List<ParticipanteAPO> participantes = participanteAPOService.obtenerParticipantes(idProyecto);
 	        int maxCalificacion = 0, minCalificacion = 5;
 	        String maxArea = "", minArea = "", maxFuncion = "", minFuncion = "";
+	        int promedio = 0;
+	        
+	        HashMap<String, Integer> datos = new HashMap<>(); 
 	        
 	        if(x1 != null){	             
 	            for(int i = 1; i < participantes.size(); i++){
 	            	
-	            	XWPFTableRow row = null;
-	            	if(i > 1) {
-	            		row = x1.createRow();
-	            	} else {
-	            		row = x1.getRow(i);
-	            	}
-	            	
 	            	String area = participantes.get(i - 1).getAreaOrg();
+	            	int promedioArea = 0;
+	            	int numCalificacionesArea = 0;
 	            	
 	            	for(ParticipanteAPOAmp ampliacion: participantes.get(i -1).getAmpliaciones()) {
 	            		for(ParticipanteAPOAmpFuncion funcion: ampliacion.getFunciones()) {
+	            			
+	            			XWPFTableRow row = null;
+	    	            	if(i > 1) {
+	    	            		row = x1.createRow();
+	    	            	} else {
+	    	            		row = x1.getRow(i);
+	    	            	}
+	    	            	
 	            			row.getCell(0).setText(area);
 	    	            	row.getCell(1).setText(funcion.getFuncion());
 	    	            	row.getCell(2).setText(funcion.getCalificacion() + "");
-	    	            	if(funcion.getCalificacion() > maxCalificacion) {
+	    	            	if(funcion.getCalificacion() >= maxCalificacion) {
 	    	            		maxArea = area;
 	    	            		maxFuncion = funcion.getFuncion();
 	    	            		maxCalificacion = funcion.getCalificacion();
 	    	            	}
-	    	            	if(funcion.getCalificacion() < minCalificacion) {
+	    	            	if(funcion.getCalificacion() <= minCalificacion) {
 	    	            		minArea = area;
 	    	            		minFuncion = funcion.getFuncion();
 	    	            		minCalificacion = funcion.getCalificacion();
 	    	            	}
+	    	            	promedio += funcion.getCalificacion();
+	    	            	promedioArea += funcion.getCalificacion();
+	    	            	numCalificacionesArea++;
 		            	}
 	            	}
+	            	
+	            	promedioArea = Math.round(promedioArea / numCalificacionesArea);
+	            	datos.put(area, promedioArea);
 	            	
 	            }
 	        }
 	        
 	        if(x2 != null){
 	        	XWPFTableRow row1 = x2.getRow(0);
-	        	row1.getCell(1).setText("Promedio");
+	        	row1.getCell(1).setText(promedio + "");
 	        	XWPFTableRow row2 = x2.getRow(1);
-	        	row2.getCell(1).setText("Area: " + maxArea + ", Función: " + maxFuncion + ", Promedio: " + maxCalificacion);
+	        	row2.getCell(1).setText("Area: " + maxArea + "\n, Función: " + maxFuncion + ", Promedio: " + maxCalificacion);
 	        	XWPFTableRow row3 = x2.getRow(2);
 	        	row3.getCell(1).setText("Area: " + minArea + ", Función: " + minFuncion + ", Promedio: " + minCalificacion);
 	        }
@@ -292,11 +305,22 @@ public class ProyectoAPOController {
 	        for (POIXMLDocumentPart part : document.getRelations()) {
 	            if (part instanceof XWPFChart) {
 	                chart = (XWPFChart) part;  
+	                if(chart.getTitle().toString().equals("Comparativo del promedio de la empresa respecto a las áreas")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+		 	             for(String key: datos.keySet()) {
+		 	            	dataSheet2.getRow(i).getCell(0).setCellValue(key);
+		 	            	dataSheet2.getRow(i).getCell(1).setCellValue(datos.get(key));
+		 	            	dataSheet2.getRow(i).getCell(2).setCellValue(promedio);
+		 	            	i++;
+		 	             }
+	                }
+	                	
 	                
-	                XSSFWorkbook wb2 = chart.getWorkbook();
-	                Sheet dataSheet2 = wb2.getSheetAt(0);
-	                System.out.println(dataSheet2.getRow(2).getCell(2));
-	                dataSheet2.getRow(2).getCell(2).setCellValue(99);
+	                
+	                
+	               
 	                
 	            }
 	        }

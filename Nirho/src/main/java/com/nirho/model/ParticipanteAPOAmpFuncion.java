@@ -60,7 +60,7 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
     private Integer idEvaluador;
     
     @Column(name = "calificacion")
-    private Integer calificacion;
+    private int calificacion;
     
     @Basic(optional = false)
     @Column(name = "check_participante")
@@ -152,11 +152,11 @@ public class ParticipanteAPOAmpFuncion implements Serializable {
 		this.idEvaluador = idEvaluador;
 	}
 	
-	public Integer getCalificacion() {
+	public int getCalificacion() {
 		return calificacion;
 	}
 
-	public void setCalificacion(Integer calificacion) {
+	public void setCalificacion(int calificacion) {
 		this.calificacion = calificacion;
 	}
 

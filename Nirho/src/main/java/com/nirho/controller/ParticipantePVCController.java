@@ -108,7 +108,7 @@ public class ParticipantePVCController {
 	}
 	
 	@GetMapping(value = "/enviocorreo")
-	public void enviaCorreo(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletRequest request) throws NirhoControllerException{
+	public void enviaCorreo(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		try {
 			
 			List<ParticipantePVC> participantes = participantePVCService.getByProyecto(idProyecto);
@@ -123,7 +123,7 @@ public class ParticipantePVCController {
 				                .claim("idProyecto", idProyecto)
 				                .signWith( SignatureAlgorithm.HS512, SECRET )
 				                .compact();
-						enviarCorreoParticipantePVC(p, proyecto, token, request);
+						enviarCorreoParticipantePVC(p, proyecto, token);
 						
 					}
 				} 
@@ -339,16 +339,14 @@ public class ParticipantePVCController {
 	}
 	
 	
-	private void enviarCorreoParticipantePVC(ParticipantePVC participante, Proyecto proyecto, String token, HttpServletRequest request) {
+	private void enviarCorreoParticipantePVC(ParticipantePVC participante, Proyecto proyecto, String token) {
 		try {
     		EmailDatos datos = new EmailDatos();
     		datos.setEmailDestino(participante.getCorreoElectronico());
     		datos.setNombreParticipante(participante.getNombres());
     		datos.setNombreProyecto(proyecto.getNombre());
     		datos.setToken(token);
-    		String usuario = (String) request.getAttribute("username");
-			Usuario usuarioEnSesion = usuarioService.obtenerUsuario(usuario);
-    		emailService.sendEmailPVC(datos, usuarioEnSesion.getEmail());
+    		emailService.sendEmailPVC(datos);
     	} catch(NirhoServiceException nse) {
     		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
     	}

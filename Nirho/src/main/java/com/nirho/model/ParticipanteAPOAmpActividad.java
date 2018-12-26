@@ -53,7 +53,7 @@ public class ParticipanteAPOAmpActividad implements Serializable {
     private Date fechaTermino;
     
     @Column(name = "calificacion")
-    private Integer calificacion;
+    private int calificacion;
     
     @Basic(optional = false)
     @Column(name = "status")
@@ -115,11 +115,11 @@ public class ParticipanteAPOAmpActividad implements Serializable {
 		this.fechaTermino = fechaTermino;
 	}
 
-	public Integer getCalificacion() {
+	public int getCalificacion() {
 		return calificacion;
 	}
 
-	public void setCalificacion(Integer calificacion) {
+	public void setCalificacion(int calificacion) {
 		this.calificacion = calificacion;
 	}
 

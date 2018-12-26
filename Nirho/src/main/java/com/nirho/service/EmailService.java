@@ -7,6 +7,6 @@ public interface EmailService {
 	void sendEmail(EmailDatos datos, String cc) throws NirhoServiceException;
 	void sendEmailEVD(EmailDatos datos, String cc) throws NirhoServiceException;
 	void sendEmailEVA360(EmailDatos datos, String cc) throws NirhoServiceException;
-	void sendEmailAPO(EmailDatos datos, String cc) throws NirhoServiceException;
-	void sendEmailPVC(EmailDatos datos, String cc) throws NirhoServiceException;
+	void sendEmailAPO(EmailDatos datos) throws NirhoServiceException;
+	void sendEmailPVC(EmailDatos datos) throws NirhoServiceException;
 }

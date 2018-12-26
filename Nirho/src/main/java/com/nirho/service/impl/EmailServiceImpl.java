@@ -68,14 +68,13 @@ public class EmailServiceImpl implements EmailService {
 	}
 	
 	@Override
-	public void sendEmailAPO(EmailDatos datos, String cc) throws NirhoServiceException {
+	public void sendEmailAPO(EmailDatos datos) throws NirhoServiceException {
 		try {
 			MimeMessage mail = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mail);
 			helper.setTo(datos.getEmailDestino());
 			helper.setSubject(EmailUtil.getAsunto(datos.getNombreProyecto()));
 			helper.setText(EmailUtil.getContenidoAPO(datos), true);
-			helper.setCc(cc);
 			mailSender.send(mail);
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");
@@ -84,14 +83,13 @@ public class EmailServiceImpl implements EmailService {
 	}
 	
 	@Override
-	public void sendEmailPVC(EmailDatos datos, String cc) throws NirhoServiceException {
+	public void sendEmailPVC(EmailDatos datos) throws NirhoServiceException {
 		try {
 			MimeMessage mail = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mail);
 			helper.setTo(datos.getEmailDestino());
 			helper.setSubject(EmailUtil.getAsunto(datos.getNombreProyecto()));
 			helper.setText(EmailUtil.getContenidoPVC(datos), true);
-			helper.setCc(cc);
 			mailSender.send(mail);
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");

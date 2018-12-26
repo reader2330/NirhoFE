@@ -117,7 +117,7 @@ public class ParticipanteAPOController {
 	}
 	
 	@GetMapping(value = "/enviocorreo")
-	public void enviaCorreo(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletRequest request) throws NirhoControllerException{
+	public void enviaCorreo(@RequestParam(name="idProyecto") Integer idProyecto) throws NirhoControllerException{
 		try {
 			
 			List<ParticipanteAPO> participantes = participanteAPOService.obtenerParticipantesPorProyecto(idProyecto);
@@ -132,16 +132,16 @@ public class ParticipanteAPOController {
 				                .claim("id", p.getIdParticipante())
 				                .signWith( SignatureAlgorithm.HS512, SECRET )
 				                .compact();
-						enviarCorreoParticipanteAPO(p, proyecto, token, request);
+						enviarCorreoParticipanteAPO(p, proyecto, token);
 						
-						if(p.getIdPartJefeInm() != 0) {
+						if(p.getIdPartJefeInm() != Integer.valueOf((proyecto.getIdProyecto() + "") + "0")) {
 							ParticipanteAPO jefe = participanteAPOService.getOne(p.getIdPartJefeInm());
 							String tokenJefe = Jwts.builder()
 					                .claim("jefe", true)
 					                .claim("id", jefe.getIdParticipante())
 					                .signWith( SignatureAlgorithm.HS512, SECRET )
 					                .compact();
-							enviarCorreoParticipanteAPO(jefe, proyecto, tokenJefe, request);
+							enviarCorreoParticipanteAPO(jefe, proyecto, tokenJefe);
 						}
 						
 					}
@@ -462,7 +462,7 @@ public class ParticipanteAPOController {
 				participanteAPOAmpActividadService.guardar(a);
 				int calificacionFuncion = 0;
 				for(ParticipanteAPOAmpActividad actividad: f.getActividades()) {
-					calificacionFuncion += actividad.getCalificacion() == null ? 0 : actividad.getCalificacion();
+					calificacionFuncion += actividad.getCalificacion();
 				}
 				f.setCalificacion(Math.round(calificacionFuncion/f.getActividades().size()));
 				participanteAPOAmpFuncionService.guardar(f);
@@ -490,7 +490,7 @@ public class ParticipanteAPOController {
 					jsonFuncion.accumulate("calificacion", funcion.getCalificacion());
 					funciones.put(jsonFuncion);
 					numFunciones++;
-					sumaCalificaciones += funcion.getCalificacion() == null ? 0 : funcion.getCalificacion();
+					sumaCalificaciones += funcion.getCalificacion();
 				}
 			}
 			response.put("funciones", funciones);
@@ -586,16 +586,14 @@ public class ParticipanteAPOController {
 		return participante;
 	}
 	
-	private void enviarCorreoParticipanteAPO(ParticipanteAPO participante, Proyecto proyecto, String token, HttpServletRequest request) {
+	private void enviarCorreoParticipanteAPO(ParticipanteAPO participante, Proyecto proyecto, String token) {
 		try {
     		EmailDatos datos = new EmailDatos();
     		datos.setEmailDestino(participante.getCorreoElectronico());
     		datos.setNombreParticipante(participante.getNombres());
     		datos.setNombreProyecto(proyecto.getNombre());
     		datos.setToken(token);
-    		String usuario = (String) request.getAttribute("username");
-			Usuario usuarioEnSesion = usuarioService.obtenerUsuario(usuario);
-    		emailService.sendEmailAPO(datos, usuarioEnSesion.getEmail());
+    		emailService.sendEmailAPO(datos);
     	} catch(NirhoServiceException nse) {
     		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
     	}
