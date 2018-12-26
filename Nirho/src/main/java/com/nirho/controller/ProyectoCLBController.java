@@ -1,6 +1,5 @@
 package com.nirho.controller;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,19 +32,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
-import com.nirho.dao.CuestionarioParticipanteDAO;
+import com.nirho.dto.GraficaAreaOrgDTO;
+import com.nirho.dto.GraficaRespPregDTO;
+import com.nirho.dto.GraficaResultadoDTO;
 import com.nirho.dto.PeriodoProyecto;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConsultorProyectoPK;
-import com.nirho.model.CuetionarioParticipante;
 import com.nirho.model.EstatusProyecto;
-import com.nirho.model.Participante;
 import com.nirho.model.Proyecto;
 import com.nirho.service.CatalogoService;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.GraficasProyectoService;
-import com.nirho.service.ParticipanteService;
 import com.nirho.service.ProyectoService;
 import com.nirho.util.ReporteUtil;
 import com.nirho.util.SessionUtil;
@@ -65,11 +63,7 @@ public class ProyectoCLBController {
 	private EstatusProyectoService estatusService;
 	@Autowired
 	GraficasProyectoService graficasService;
-	@Autowired
-	ParticipanteService participanteService;
-	@Autowired
-	CuestionarioParticipanteDAO cuestPartService;
-	
+		
 	@GetMapping(value = "/todos")
 	public List<Proyecto> todos() throws NirhoControllerException{
 		List<Proyecto> proyectos = new ArrayList<>();
@@ -220,11 +214,13 @@ public class ProyectoCLBController {
 		try {
 						       
 			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPO.docx"));
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteCLB.docx")); 
-			//ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	        
-	        Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteCLB.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteCLB.docx")); 
+			
+			GraficaRespPregDTO resGraficas = graficasService.obtenerGraficasRespuestasPreguntas(idProyecto);
+		    logger.info(" ********************************* GraficaRespPregDTO [" + resGraficas + "] *****************************");
+			
+	        Proyecto proyecto = resGraficas.getProyecto();
 	        
 	        ReporteUtil.reemplazarParrafo(document, "nombre.empresa", proyecto.getIdEmpresa().getEmpresa());
 	  
@@ -233,53 +229,59 @@ public class ProyectoCLBController {
 	        	        
 	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "Resumen de la empresa");
 	        	        
-	        List<Participante> participantes = participanteService.obtenerParticipantes(idProyecto);
-	        logger.info(" ********************************* participantes [" + participantes + "] *****************************");
+	        List<GraficaAreaOrgDTO> resArea = resGraficas.getAreas();
+	        logger.info(" ********************************* graficaAreaOrgList [" + resArea + "] *****************************");
 	        
-	        int maxCalificacion = 5, minCalificacion = 1;
+	        int maxCalificacion = 1, minCalificacion = 1;
 	        String maxArea = "", minArea = "", maxFuncion = "", minFuncion = "";
 	        int promedio = 0;
+	        boolean primerRow = true;
 	        
 	        HashMap<String, Integer> datos = new HashMap<>(); 
 	        
-	        if(x1 != null){	             
-	            for(int i = 1; i < participantes.size(); i++){
+	        if(x1 != null){	            
+	        	        	
+	            for(GraficaAreaOrgDTO gaDTO: resArea){
 	            	
-	            	String area = participantes.get(i - 1).getAreaOrg();
+	            	String area = gaDTO.getAreaOrg();
 	            		      
 	            	int promedioArea = 0;
 	            	int numCalificacionesArea = 0;
 	            	
-	            	Participante p = participantes.get(i - 1);
-	            	List<CuetionarioParticipante> cuestPartList = cuestPartService.findByParticipanteProyecto(p.getParticipantePK().getIdParticipante(), idProyecto);
+	            	XWPFTableRow row = null;
+									
+	            	List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
 	            	
-					for (CuetionarioParticipante cuestPart : cuestPartList) {
+					for (GraficaResultadoDTO resul: graficaResultadoList) {
 						
-						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
-						
-						XWPFTableRow row = null;
-						if (i > 1) {
-							row = x1.createRow();
+						if (primerRow) {
+							row = x1.getRow(1);
+							primerRow = false;
 						} else {
-							row = x1.getRow(i);
+							row = x1.createRow();
 						}
-
+						
 						row.getCell(0).setText(area);
-						row.getCell(1).setText(cuestPart.getPregunta().getEnunciado());
+						row.getCell(1).setText(resul.getPregunta().getEnunciado());
+						
+						int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
+								resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
+						
 						row.getCell(2).setText(respuesta + "");
 						if (respuesta >= maxCalificacion) {
 							maxArea = area;
-							maxFuncion = cuestPart.getPregunta().getEnunciado();
+							maxFuncion = resul.getPregunta().getEnunciado();
 							maxCalificacion = respuesta;
 						}
 						if (respuesta <= minCalificacion) {
 							minArea = area;
-							minFuncion = cuestPart.getPregunta().getEnunciado();
+							minFuncion = resul.getPregunta().getEnunciado();
 							minCalificacion = respuesta;
 						}
 						promedio += respuesta;
 						promedioArea += respuesta;
 						numCalificacionesArea++;
+						
 					}
 	            	
 	            	promedioArea = Math.round(promedioArea / numCalificacionesArea);
