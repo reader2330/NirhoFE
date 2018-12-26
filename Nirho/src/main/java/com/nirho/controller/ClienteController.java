@@ -111,7 +111,9 @@ public class ClienteController {
 	@RequestMapping(value = "/modulos/editar", method = RequestMethod.POST)
 	public void editModulos(@Valid @RequestBody Set<ModulosCliente> l) throws NirhoControllerException{
 		try {
-			clienteService.list().get(0).setModulos(l);
+			Cliente e = clienteService.list().get(0); 
+			e.setModulos(l);
+			clienteService.update(e);
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar cliente");
 		} 
