@@ -112,8 +112,12 @@ public class ClienteController {
 	public void editModulos(@Valid @RequestBody Set<ModulosCliente> l) throws NirhoControllerException{
 		try {
 			Cliente e = clienteService.list().get(0); 
-			e.setModulos(l);
-			clienteService.update(e);
+			Cliente f = clienteService.getClienteById(e.getId());
+			f.getModulos().clear();
+			for(ModulosCliente mc :l) {
+				f.getModulos().add(mc);
+			}
+			clienteService.update(f);
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar cliente");
 		} 
