@@ -98,7 +98,7 @@ public class ClienteController {
 		try {
 			List<ModulosCliente> list = new ArrayList<>();
 			for(ModulosCliente modulo: clienteService.list().get(0).getModulos()){
-				if(modulo.isCheck()) {
+				if(modulo.isCheckModulo()) {
 					list.add(modulo);
 				}
 			}

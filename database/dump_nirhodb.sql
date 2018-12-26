@@ -1386,6 +1386,32 @@ INSERT INTO `modulo` VALUES (1,'Clima Laboral','Módulo CLB'),(2,'Evaluación de
 UNLOCK TABLES;
 
 --
+-- Table structure for table `modulos_cliente`
+--
+
+DROP TABLE IF EXISTS `modulos_cliente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `modulos_cliente` (
+  `id` bigint(20) NOT NULL,
+  `check_modulo` bit(1) NOT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cliente` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKgqktfq1wg3edknsyuobi728rq` (`cliente`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modulos_cliente`
+--
+
+LOCK TABLES `modulos_cliente` WRITE;
+/*!40000 ALTER TABLE `modulos_cliente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `modulos_cliente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `opcion`
 --
 
@@ -2357,4 +2383,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-25 12:44:32
+-- Dump completed on 2018-12-25 18:20:11

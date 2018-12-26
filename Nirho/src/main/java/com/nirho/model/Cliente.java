@@ -6,6 +6,7 @@
 package com.nirho.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -28,6 +29,7 @@ import javax.persistence.Table;
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 12133123123L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
@@ -48,7 +50,7 @@ public class Cliente implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cliente")
-   	private Set<ModulosCliente> modulos;
+	private Set<ModulosCliente> modulos = new HashSet<>();
     
 	public Cliente () {
 		super();

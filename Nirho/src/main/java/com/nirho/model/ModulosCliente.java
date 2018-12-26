@@ -18,12 +18,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "modulo_cliente")
+@Table(name = "modulos_cliente")
 @NamedQueries({
     @NamedQuery(name = "ModulosCliente.findAll", query = "SELECT m FROM ModulosCliente m")})
 public class ModulosCliente implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 71L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,23 +31,22 @@ public class ModulosCliente implements Serializable {
     @Column(name = "id")
     private Long id;
     
-    @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
     
     @Basic(optional = false)
-    @Column(name = "check")
-    private boolean check;
+    @Column(name = "check_modulo")
+    private boolean checkModulo;
 
 	public ModulosCliente() {
 		super();
 	}
 
-	public ModulosCliente(Long id, String nombre, boolean check) {
+	public ModulosCliente(Long id, String nombre, boolean checkModulo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.check = check;
+		this.checkModulo = checkModulo;
 	}
 
 	public Long getId() {
@@ -66,17 +65,18 @@ public class ModulosCliente implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public boolean isCheck() {
-		return check;
+	public boolean isCheckModulo() {
+		return checkModulo;
 	}
 
-	public void setCheck(boolean check) {
-		this.check = check;
+	public void setCheckModulo(boolean checkModulo) {
+		this.checkModulo = checkModulo;
 	}
 
 	@Override
 	public String toString() {
-		return "ModulosCliente [id=" + id + ", nombre=" + nombre + ", check=" + check + "]";
+		return "ModulosCliente [id=" + id + ", nombre=" + nombre + ", checkModulo=" + checkModulo + "]";
 	}
-    
+
+	
 }
