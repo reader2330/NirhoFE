@@ -291,7 +291,7 @@ public class ParticipanteAPOController {
 				
 				for(ParticipanteAPOAmp pa: participantesAmp) {
 
-					if(pa.getIdParticipante() == Integer.parseInt(jsonParticipantesAmp.getJSONObject(i).optString("idParticipante", "0"))) {
+					if(pa.getIdParticipante() == Integer.parseInt((proyecto.getIdProyecto() + "") + jsonParticipantesAmp.getJSONObject(i).optString("idParticipante", "0"))) {
 
 						ParticipanteAPOAmpFuncion funcion = new ParticipanteAPOAmpFuncion();
 						funcion.setFuncion(jsonParticipantesAmp.getJSONObject(i).optString("funciones", null));
