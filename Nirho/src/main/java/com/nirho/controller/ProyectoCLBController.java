@@ -14,6 +14,7 @@ import org.apache.poi.ooxml.POIXMLDocumentPart;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.XWPFChart;
@@ -223,7 +224,10 @@ public class ProyectoCLBController {
 	        Proyecto proyecto = resGraficas.getProyecto();
 	        
 	        ReporteUtil.reemplazarParrafo(document, "nombre.empresa", proyecto.getIdEmpresa().getEmpresa());
-	  
+	        
+	        XWPFTable x0 =  ReporteUtil.getTablaPorTitulo(document, "Categorias por area");
+	        logger.info(" ********************************* x0 [" + x0 + "] *****************************");
+	        
 	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Cumplimiento por area");
 	        logger.info(" ********************************* x1 [" + x1 + "] *****************************");	        
 	        	        
@@ -232,12 +236,34 @@ public class ProyectoCLBController {
 	        List<GraficaAreaOrgDTO> resArea = resGraficas.getAreas();
 	        logger.info(" ********************************* graficaAreaOrgList [" + resArea + "] *****************************");
 	        
+	        boolean primerRow0 = true;
+	        
+			if (x0 != null) {
+				for (GraficaAreaOrgDTO gaDTO : resArea) {
+					String area = gaDTO.getAreaOrg();
+					XWPFTableRow row0 = null;
+					List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
+					for (GraficaResultadoDTO resul : graficaResultadoList) {
+						if (primerRow0) {
+							row0 = x0.getRow(1);
+							primerRow0 = false;
+						} else {
+							row0 = x0.createRow();
+						}
+						row0.getCell(0).setText(area);
+						row0.getCell(1).setText(resul.getPregunta().getEnunciado());
+						row0.getCell(2).setText(resul.getPregunta().getIdTema().getNombre());
+					}
+				}
+			}
+			
 	        int maxCalificacion = 1, minCalificacion = 1;
 	        String maxArea = "", minArea = "", maxFuncion = "", minFuncion = "";
-	        int promedio = 0;
+	        double promedioGeneral = 0;
+	        int numCalificacionesGeneral = 0;
 	        boolean primerRow = true;
 	        
-	        HashMap<String, Integer> datos = new HashMap<>(); 
+	        HashMap<String, Double> datos = new HashMap<>(); 
 	        
 	        if(x1 != null){	            
 	        	        	
@@ -245,7 +271,7 @@ public class ProyectoCLBController {
 	            	
 	            	String area = gaDTO.getAreaOrg();
 	            		      
-	            	int promedioArea = 0;
+	            	double promedioArea = 0;
 	            	int numCalificacionesArea = 0;
 	            	
 	            	XWPFTableRow row = null;
@@ -278,10 +304,10 @@ public class ProyectoCLBController {
 							minFuncion = resul.getPregunta().getEnunciado();
 							minCalificacion = respuesta;
 						}
-						promedio += respuesta;
-						promedioArea += respuesta;
-						numCalificacionesArea++;
-						
+						promedioGeneral += respuesta;
+    	            	numCalificacionesGeneral++;
+    	            	promedioArea += respuesta;
+    	            	numCalificacionesArea++;
 					}
 	            	
 	            	promedioArea = Math.round(promedioArea / numCalificacionesArea);
@@ -290,30 +316,49 @@ public class ProyectoCLBController {
 	            }
 	        }
 	        
+	        promedioGeneral = promedioGeneral / numCalificacionesGeneral;
+	        
 	        if(x2 != null){
 	        	XWPFTableRow row1 = x2.getRow(0);
-	        	row1.getCell(1).setText(promedio + "");
+	        	row1.getCell(1).setText(promedioGeneral + "");
 	        	XWPFTableRow row2 = x2.getRow(1);
-	        	row2.getCell(1).setText("Area: " + maxArea + "\n, Cuestión: " + maxFuncion + ", Promedio: " + maxCalificacion);
+	        	row2.getCell(1).setText("Area: " + maxArea + "\n, Función: " + maxFuncion + ", Promedio: " + maxCalificacion);
 	        	XWPFTableRow row3 = x2.getRow(2);
-	        	row3.getCell(1).setText("Area: " + minArea + ", Cuestión: " + minFuncion + ", Promedio: " + minCalificacion);
+	        	row3.getCell(1).setText("Area: " + minArea + ", Función: " + minFuncion + ", Promedio: " + minCalificacion);
 	        }
 	           
 	        XWPFChart chart = null;
 	        for (POIXMLDocumentPart part : document.getRelations()) {
 	            if (part instanceof XWPFChart) {
-	                chart = (XWPFChart) part;  
-	                if(chart.getTitle().toString().equals("Comparativo del promedio de la empresa respecto a las áreas")) {
+	                
+	            	chart = (XWPFChart) part;  
+	                String title= chart.getTitle().getBody().getParagraph(0).getText();
+	                
+	                if(title.equals("Comparativo del promedio de la empresa respecto a las áreas")) {
 	                	 XSSFWorkbook wb2 = chart.getWorkbook();
 		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
 		 	             int i = 1;
 		 	             for(String key: datos.keySet()) {
-		 	            	dataSheet2.getRow(i).getCell(0).setCellValue(key);
-		 	            	dataSheet2.getRow(i).getCell(1).setCellValue(datos.get(key));
-		 	            	dataSheet2.getRow(i).getCell(2).setCellValue(promedio);
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datos.get(key));
+		 	            	row.createCell(2).setCellValue(promedioGeneral);
 		 	            	i++;
 		 	             }
 	                }
+	                
+	                if(title.equals("Cumplimiento por área")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+		 	             for(String key: datos.keySet()) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datos.get(key));
+		 	            	i++;
+		 	             }
+	                }
+	                
 	            }
 	        }
 	        

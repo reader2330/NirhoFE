@@ -1,12 +1,26 @@
 package com.nirho.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ooxml.POIXMLDocumentPart;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.openxml4j.util.ZipSecureFile;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.XWPFChart;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,6 +33,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
+import com.nirho.dto.GraficaAreaOrgDTO;
+import com.nirho.dto.GraficaRespPregDTO;
+import com.nirho.dto.GraficaResultadoDTO;
 import com.nirho.dto.PeriodoProyecto;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
@@ -28,6 +45,7 @@ import com.nirho.model.Proyecto;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.GraficasProyectoService;
 import com.nirho.service.ProyectoService;
+import com.nirho.util.ReporteUtil;
 import com.nirho.util.SessionUtil;
 
 @RestController
@@ -185,5 +203,172 @@ public class ProyectoEVDController {
 			throw new NirhoControllerException("Problemas al registrar el proyecto");
 		}
 	}
-		
+	
+	@RequestMapping(value = "/reporte", method = RequestMethod.GET)
+	@ResponseBody
+	public void genearReporte(@RequestParam(name="idProyecto") Integer idProyecto, HttpServletResponse response) throws NirhoControllerException{
+		try {
+						       
+			ZipSecureFile.setMinInflateRatio(0);
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteCLB.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVD.docx")); 
+			
+			GraficaRespPregDTO resGraficas = graficasService.obtenerGraficasRespuestasPreguntas(idProyecto);
+		    logger.info(" ********************************* GraficaRespPregDTO [" + resGraficas + "] *****************************");
+			
+	        Proyecto proyecto = resGraficas.getProyecto();
+	        
+	        ReporteUtil.reemplazarParrafo(document, "nombre.empresa", proyecto.getIdEmpresa().getEmpresa());
+	        
+	        XWPFTable x0 =  ReporteUtil.getTablaPorTitulo(document, "Categorias por area");
+	        logger.info(" ********************************* x0 [" + x0 + "] *****************************");
+	        
+	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Cumplimiento por area");
+	        logger.info(" ********************************* x1 [" + x1 + "] *****************************");	        
+	        	        
+	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "Resumen de la empresa");
+	        	        
+	        List<GraficaAreaOrgDTO> resArea = resGraficas.getAreas();
+	        logger.info(" ********************************* graficaAreaOrgList [" + resArea + "] *****************************");
+	        
+	        boolean primerRow = true;
+	        
+			if (x0 != null) {
+				for (GraficaAreaOrgDTO gaDTO : resArea) {
+					String area = gaDTO.getAreaOrg();
+					XWPFTableRow row = null;
+					List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
+					for (GraficaResultadoDTO resul : graficaResultadoList) {
+						if (primerRow) {
+							row = x0.getRow(1);
+							primerRow = false;
+						} else {
+							row = x0.createRow();
+						}
+						row.getCell(0).setText(area);
+						row.getCell(1).setText(resul.getPregunta().getIdTema().getNombre());
+						row.getCell(2).setText(resul.getPregunta().getEnunciado());
+					}
+				}
+			}
+	        
+	        int maxCalificacion = 1, minCalificacion = 1;
+	        String maxArea = "", minArea = "", maxFuncion = "", minFuncion = "";
+	        double promedioGeneral = 0;
+	        int numCalificacionesGeneral = 0;
+	        primerRow = true;
+	        
+	        HashMap<String, Double> datos = new HashMap<>(); 
+	        
+	        if(x1 != null){	            
+	        	        	
+	            for(GraficaAreaOrgDTO gaDTO: resArea){
+	            	
+	            	String area = gaDTO.getAreaOrg();
+	            		      
+	            	double promedioArea = 0;
+	            	int numCalificacionesArea = 0;
+	            	
+	            	XWPFTableRow row = null;
+									
+	            	List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
+	            	
+					for (GraficaResultadoDTO resul: graficaResultadoList) {
+						
+						if (primerRow) {
+							row = x1.getRow(1);
+							primerRow = false;
+						} else {
+							row = x1.createRow();
+						}
+						
+						row.getCell(0).setText(area);
+						row.getCell(1).setText(resul.getPregunta().getEnunciado());
+						
+						int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
+								resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
+						
+						row.getCell(2).setText(respuesta + "");
+						if (respuesta >= maxCalificacion) {
+							maxArea = area;
+							maxFuncion = resul.getPregunta().getEnunciado();
+							maxCalificacion = respuesta;
+						}
+						if (respuesta <= minCalificacion) {
+							minArea = area;
+							minFuncion = resul.getPregunta().getEnunciado();
+							minCalificacion = respuesta;
+						}
+						promedioGeneral += respuesta;
+    	            	numCalificacionesGeneral++;
+    	            	promedioArea += respuesta;
+    	            	numCalificacionesArea++;
+					}
+	            	
+	            	promedioArea = Math.round(promedioArea / numCalificacionesArea);
+	            	datos.put(area, promedioArea);
+	            	
+	            }
+	        }
+	        
+	        promedioGeneral = promedioGeneral / numCalificacionesGeneral;
+	        
+	        if(x2 != null){
+	        	XWPFTableRow row1 = x2.getRow(0);
+	        	row1.getCell(1).setText(promedioGeneral + "");
+	        	XWPFTableRow row2 = x2.getRow(1);
+	        	row2.getCell(1).setText("Area: " + maxArea + "\n, Función: " + maxFuncion + ", Promedio: " + maxCalificacion);
+	        	XWPFTableRow row3 = x2.getRow(2);
+	        	row3.getCell(1).setText("Area: " + minArea + ", Función: " + minFuncion + ", Promedio: " + minCalificacion);
+	        }
+	           
+	        XWPFChart chart = null;
+	        for (POIXMLDocumentPart part : document.getRelations()) {
+	            if (part instanceof XWPFChart) {
+	                
+	            	chart = (XWPFChart) part;  
+	                String title= chart.getTitle().getBody().getParagraph(0).getText();
+	                
+	                if(title.equals("Comparativo del promedio de la empresa respecto a las áreas")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+		 	             for(String key: datos.keySet()) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datos.get(key));
+		 	            	row.createCell(2).setCellValue(promedioGeneral);
+		 	            	i++;
+		 	             }
+	                }
+	                
+	                if(title.equals("Cumplimiento por área")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+		 	             for(String key: datos.keySet()) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datos.get(key));
+		 	            	i++;
+		 	             }
+	                }
+	                
+	            }
+	        }
+	        
+	        String nombreReporte = "ReporteEVD_" + proyecto.getNombre() + ".docx";
+	        
+	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
+	        response.setHeader("Content-Disposition", "attachment; filename=" + nombreReporte);
+	        document.write(response.getOutputStream());
+	   
+	        response.flushBuffer();
+
+		} catch(IOException | InvalidFormatException e){
+			throw new NirhoControllerException("Problemas al generar reporte");
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al generar reporte");
+		}
+	}
 }
