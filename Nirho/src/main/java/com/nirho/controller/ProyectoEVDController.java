@@ -39,7 +39,6 @@ import com.nirho.dto.AreaPromDTO;
 import com.nirho.dto.GraficaAreaOrgDTO;
 import com.nirho.dto.GraficaRespPregDTO;
 import com.nirho.dto.GraficaResultadoDTO;
-import com.nirho.dto.NivelDTO;
 import com.nirho.dto.PeriodoProyecto;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
@@ -65,7 +64,7 @@ public class ProyectoEVDController {
 	private EstatusProyectoService estatusService;
 	@Autowired
 	private GraficasProyectoService graficasService;
-	
+		
 	@GetMapping(value = "/todos")
 	public List<Proyecto> todos() throws NirhoControllerException{
 		List<Proyecto> proyectos = new ArrayList<>();
@@ -214,8 +213,8 @@ public class ProyectoEVDController {
 		try {
 						       
 			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteCLB.docx"));
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVD.docx")); 
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVD.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVD.docx")); 
 			
 			GraficaRespPregDTO resGraficas = graficasService.obtenerGraficasRespuestasPreguntas(idProyecto);
 		    logger.info(" ********************************* GraficaRespPregDTO [" + resGraficas + "] *****************************");
@@ -225,10 +224,8 @@ public class ProyectoEVDController {
 	        ReporteUtil.reemplazarParrafo(document, "nombre.empresa", proyecto.getIdEmpresa().getEmpresa());
 	        
 	        XWPFTable x0 =  ReporteUtil.getTablaPorTitulo(document, "Categorias por area");
-	        logger.info(" ********************************* x0 [" + x0 + "] *****************************");
 	        
 	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Cumplimiento por area");
-	        logger.info(" ********************************* x1 [" + x1 + "] *****************************");	        
 	        	        
 	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "Resumen de la empresa");
 	        	        
@@ -404,4 +401,6 @@ public class ProyectoEVDController {
 			throw new NirhoControllerException("Problemas al generar reporte");
 		}
 	}
+	
+	
 }
