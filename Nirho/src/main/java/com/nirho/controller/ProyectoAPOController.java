@@ -241,6 +241,7 @@ public class ProyectoAPOController {
 	        String maxArea = "", minArea = "", maxFuncion = "", minFuncion = "";
 	        double promedioGeneral = 0;
 	        int numCalificacionesGeneral = 0;
+	        int indexRow = 1;
 	        
 	        HashMap<String, Double> datos = new HashMap<>(); 
 	        
@@ -255,10 +256,10 @@ public class ProyectoAPOController {
 	            		for(ParticipanteAPOAmpFuncion funcion: ampliacion.getFunciones()) {
 	            			
 	            			XWPFTableRow row = null;
-	    	            	if(i > 1) {
+	    	            	if(indexRow > 1) {
 	    	            		row = x1.createRow();
 	    	            	} else {
-	    	            		row = x1.getRow(i);
+	    	            		row = x1.getRow(indexRow);
 	    	            	}
 	    	            	
 	            			row.getCell(0).setText(area);
@@ -278,6 +279,7 @@ public class ProyectoAPOController {
 	    	            	numCalificacionesGeneral++;
 	    	            	promedioArea += funcion.getCalificacion();
 	    	            	numCalificacionesArea++;
+	    	            	indexRow++;
 		            	}
 	            	}
 	            	

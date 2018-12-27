@@ -182,6 +182,8 @@ public class ParticipantePVCController {
 													for(ProyectoPVCConocimiento conocimiento: especialidad.getConocimientos()) {
 														if(conocimientoSiguiente) {
 															if(conocimiento.getTipo() == 1 ) {
+																actual.accumulate("esferaSiguiente", esfera.getNombre());
+																actual.accumulate("nivelSiguiente", nivel.getNombre());
 																conocimientosTecnicosSiguientes.put(conocimiento.getNombre());
 															}
 															if(conocimiento.getTipo() == 2) {
