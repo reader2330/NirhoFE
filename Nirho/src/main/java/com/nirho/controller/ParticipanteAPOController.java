@@ -139,7 +139,7 @@ public class ParticipanteAPOController {
 							if(jefe != null) {
 								String tokenJefe = Jwts.builder()
 						                .claim("jefe", true)
-						                .claim("id", jefe.getIdParticipante())
+						                .claim("id", p.getIdParticipante())
 						                .signWith( SignatureAlgorithm.HS512, SECRET )
 						                .compact();
 								enviarCorreoParticipanteAPO(jefe, proyecto, tokenJefe);
