@@ -46,24 +46,20 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 					resDTO.setPregunta(pregunta);
 					for (CuetionarioParticipante cuestPart : cuestPArtDAO.findByParticipanteProyectoPregunta(
 							p.getParticipantePK().getIdParticipante(), idProyecto, pregunta.getIdPregunta())) {
-						int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
-						switch (respuesta) {
-						case 1:
-							resDTO.setNumResp1(resDTO.getNumResp1() + 1);
-							break;
-						case 2:
-							resDTO.setNumResp2(resDTO.getNumResp1() + 1);
-							break;
-						case 3:
-							resDTO.setNumResp3(resDTO.getNumResp1() + 1);
-							break;
-						case 4:
-							resDTO.setNumResp4(resDTO.getNumResp1() + 1);
-							break;
-						case 5:
-							resDTO.setNumResp5(resDTO.getNumResp1() + 1);
-							break;
+						switch(cuestProy.getProyecto().getIdModulo()) {
+							case 2:
+								int respJefe = cuestPart.getRespuestaJefe() != null ? cuestPart.getRespuestaJefe().intValue() : 0;
+								incrementaEnRespusta(resDTO, respJefe);
+								int respRH = cuestPart.getRespuestaRh() != null ? cuestPart.getRespuestaRh().intValue() : 0;
+								incrementaEnRespusta(resDTO, respRH);
+								break;
+							default:
+								int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
+								incrementaEnRespusta(resDTO, respuesta);
+								break;
 						}
+						
+						
 					}
 					resultados.add(resDTO);
 				}
@@ -93,22 +89,16 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart : cuestPArtDAO.findByParticipanteProyectoPregunta(
 							p.getParticipantePK().getIdParticipante(), idProyecto, pregunta.getIdPregunta())){
-						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
-						switch(respuesta) {
-							case 1:
-								resDTO.setNumResp1(resDTO.getNumResp1()+1);
-								break;
+						switch(cuestProy.getProyecto().getIdModulo()) {
 							case 2:
-								resDTO.setNumResp2(resDTO.getNumResp1()+1);
+								int respJefe = cuestPart.getRespuestaJefe() != null ? cuestPart.getRespuestaJefe().intValue() : 0;
+								incrementaEnRespusta(resDTO, respJefe);
+								int respRH = cuestPart.getRespuestaRh() != null ? cuestPart.getRespuestaRh().intValue() : 0;
+								incrementaEnRespusta(resDTO, respRH);
 								break;
-							case 3:
-								resDTO.setNumResp3(resDTO.getNumResp1()+1);
-								break;	
-							case 4:
-								resDTO.setNumResp4(resDTO.getNumResp1()+1);
-								break;
-							case 5:
-								resDTO.setNumResp5(resDTO.getNumResp1()+1);
+							default:
+								int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
+								incrementaEnRespusta(resDTO, respuesta);
 								break;
 						}
 					}
@@ -140,22 +130,16 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart : cuestPArtDAO.findByParticipanteProyectoPregunta(
 							p.getParticipantePK().getIdParticipante(), idProyecto, pregunta.getIdPregunta())){
-						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
-						switch(respuesta) {
-							case 1:
-								resDTO.setNumResp1(resDTO.getNumResp1()+1);
-								break;
+						switch(cuestProy.getProyecto().getIdModulo()) {
 							case 2:
-								resDTO.setNumResp2(resDTO.getNumResp1()+1);
+								int respJefe = cuestPart.getRespuestaJefe() != null ? cuestPart.getRespuestaJefe().intValue() : 0;
+								incrementaEnRespusta(resDTO, respJefe);
+								int respRH = cuestPart.getRespuestaRh() != null ? cuestPart.getRespuestaRh().intValue() : 0;
+								incrementaEnRespusta(resDTO, respRH);
 								break;
-							case 3:
-								resDTO.setNumResp3(resDTO.getNumResp1()+1);
-								break;	
-							case 4:
-								resDTO.setNumResp4(resDTO.getNumResp1()+1);
-								break;
-							case 5:
-								resDTO.setNumResp5(resDTO.getNumResp1()+1);
+							default:
+								int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
+								incrementaEnRespusta(resDTO, respuesta);
 								break;
 						}
 					}
@@ -187,22 +171,16 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart : cuestPArtDAO.findByParticipanteProyectoPregunta(
 							p.getParticipantePK().getIdParticipante(), idProyecto, pregunta.getIdPregunta())){
-						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
-						switch(respuesta) {
-							case 1:
-								resDTO.setNumResp1(resDTO.getNumResp1()+1);
-								break;
+						switch(cuestProy.getProyecto().getIdModulo()) {
 							case 2:
-								resDTO.setNumResp2(resDTO.getNumResp1()+1);
+								int respJefe = cuestPart.getRespuestaJefe() != null ? cuestPart.getRespuestaJefe().intValue() : 0;
+								incrementaEnRespusta(resDTO, respJefe);
+								int respRH = cuestPart.getRespuestaRh() != null ? cuestPart.getRespuestaRh().intValue() : 0;
+								incrementaEnRespusta(resDTO, respRH);
 								break;
-							case 3:
-								resDTO.setNumResp3(resDTO.getNumResp1()+1);
-								break;	
-							case 4:
-								resDTO.setNumResp4(resDTO.getNumResp1()+1);
-								break;
-							case 5:
-								resDTO.setNumResp5(resDTO.getNumResp1()+1);
+							default:
+								int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
+								incrementaEnRespusta(resDTO, respuesta);
 								break;
 						}
 					}
@@ -234,22 +212,16 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				for(Participante p: participantes) {
 					for(CuetionarioParticipante cuestPart : cuestPArtDAO.findByParticipanteProyectoPregunta(
 							p.getParticipantePK().getIdParticipante(), idProyecto, pregunta.getIdPregunta())){
-						int respuesta = cuestPart.getRespuesta() != null?cuestPart.getRespuesta().intValue():0;
-						switch(respuesta) {
-							case 1:
-								resDTO.setNumResp1(resDTO.getNumResp1()+1);
-								break;
+						switch(cuestProy.getProyecto().getIdModulo()) {
 							case 2:
-								resDTO.setNumResp2(resDTO.getNumResp1()+1);
+								int respJefe = cuestPart.getRespuestaJefe() != null ? cuestPart.getRespuestaJefe().intValue() : 0;
+								incrementaEnRespusta(resDTO, respJefe);
+								int respRH = cuestPart.getRespuestaRh() != null ? cuestPart.getRespuestaRh().intValue() : 0;
+								incrementaEnRespusta(resDTO, respRH);
 								break;
-							case 3:
-								resDTO.setNumResp3(resDTO.getNumResp1()+1);
-								break;	
-							case 4:
-								resDTO.setNumResp4(resDTO.getNumResp1()+1);
-								break;
-							case 5:
-								resDTO.setNumResp5(resDTO.getNumResp1()+1);
+							default:
+								int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
+								incrementaEnRespusta(resDTO, respuesta);
 								break;
 						}
 					}
@@ -263,5 +235,24 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 		}
 		return gdto;
 	}
-
+	
+	private void incrementaEnRespusta(GraficaResultadoDTO resDTO, int respuesta) {
+		switch (respuesta) {
+			case 1:
+				resDTO.setNumResp1(resDTO.getNumResp1() + 1);
+				break;
+			case 2:
+				resDTO.setNumResp2(resDTO.getNumResp1() + 1);
+				break;
+			case 3:
+				resDTO.setNumResp3(resDTO.getNumResp1() + 1);
+				break;
+			case 4:
+				resDTO.setNumResp4(resDTO.getNumResp1() + 1);
+				break;
+			case 5:
+				resDTO.setNumResp5(resDTO.getNumResp1() + 1);
+				break;
+		}
+	}
 }

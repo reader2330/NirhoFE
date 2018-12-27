@@ -44,9 +44,12 @@ import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.EstatusProyecto;
+import com.nirho.model.Participante;
+import com.nirho.model.ParticipantePK;
 import com.nirho.model.Proyecto;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.GraficasProyectoService;
+import com.nirho.service.ParticipanteService;
 import com.nirho.service.ProyectoService;
 import com.nirho.util.ReporteUtil;
 import com.nirho.util.SessionUtil;
@@ -64,7 +67,9 @@ public class ProyectoEVDController {
 	private EstatusProyectoService estatusService;
 	@Autowired
 	private GraficasProyectoService graficasService;
-		
+	@Autowired
+	private ParticipanteService participanteService;
+	
 	@GetMapping(value = "/todos")
 	public List<Proyecto> todos() throws NirhoControllerException{
 		List<Proyecto> proyectos = new ArrayList<>();
@@ -402,5 +407,126 @@ public class ProyectoEVDController {
 		}
 	}
 	
-	
+	@RequestMapping(value = "/reporte/participante", method = RequestMethod.GET)
+	@ResponseBody
+	public void genearReporteIndividual(@RequestParam(name="idProyecto") Integer idProyecto, @RequestParam(name="idParticipante") Integer idParticipante,
+			HttpServletResponse response) throws NirhoControllerException{
+		
+		try {
+			    
+			ZipSecureFile.setMinInflateRatio(0);
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
+
+	        Participante participante = participanteService.obtenerParticipante(new ParticipantePK(idParticipante, idProyecto));
+	        
+	        ReporteUtil.reemplazarParrafo(document, "nombre.participante", participante.getNombres() + " " + participante.getAPaterno() + " " + participante.getAMaterno());
+	  
+	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Tabla participante individual");
+	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "Resumen individual");
+
+	        if(x1 != null){	   
+	        	XWPFTableRow row1 = x1.getRow(0);
+	        	row1.getCell(1).setText(participante.getNombres() + " " + participante.getAPaterno() + " " + participante.getAMaterno());
+	        	XWPFTableRow row2 = x1.getRow(1);
+	        	row2.getCell(1).setText(participante.getAreaOrg());
+	        	XWPFTableRow row3 = x1.getRow(2);
+	        	row3.getCell(1).setText(participante.getPuesto());
+	        	XWPFTableRow row4 = x1.getRow(3);
+	        	row4.getCell(1).setText(participante.getNivelTexto());
+	        	XWPFTableRow row5 = x1.getRow(4);
+	        	String objetivo = "";
+//	        	for (ParticipanteAPOAmp amp : participante.getAmpliaciones()) {
+//	        		objetivo = amp.getObjetivoPuesto();
+//	        	}        		
+	        	row5.getCell(1).setText(objetivo);
+	        }
+	         
+	        
+	        int maxCumplimiento = 0, minCumplimiento = 5;
+	        String maxCumplimientoActividad = "", minCumplimientoActividad = "", maxCumplimientoFuncion = "", minCumplimientoFuncion = "";
+	        double promedioCumplimiento = 0;
+	        int numCumplimientos = 0;
+	        
+	        List<String> headers = new ArrayList<>();
+	        headers.add("Actividad");
+	        headers.add("Nombre de la meta");
+	        headers.add("Indicador");
+	        headers.add("Tiempo");
+	        headers.add("Programado");
+	        headers.add("Real");
+	        headers.add("% Cumplimiento");
+	        
+	        int index = 0;
+//	        for (ParticipanteAPOAmp amp : participante.getAmpliaciones()) {
+//	        	for (ParticipanteAPOAmpFuncion funcion : amp.getFunciones()) {
+//	        		List<List<String>> content = new ArrayList<>();
+//	        		for (ParticipanteAPOAmpActividad act : funcion.getActividades()) {
+//	        			List<String> datos = new ArrayList<>();
+//	        			datos.add(act.getNombre());
+//	        			datos.add(funcion.getMetaKpi());
+//	        			datos.add(funcion.getCantidadMeta());
+//	        			datos.add(funcion.getTiempo());
+//	        			datos.add("5");
+//	        			datos.add(act.getCalificacion() + "");
+//	        			double auxPromedioCumplimiento = ((act.getCalificacion()*100) / 5);
+//	        			datos.add(auxPromedioCumplimiento + "");
+//	        			content.add(datos);
+//	        			numCumplimientos++;
+//	        			promedioCumplimiento += auxPromedioCumplimiento; 
+//	        			if(auxPromedioCumplimiento > maxCumplimiento) {
+//	        				
+//	        			}
+//	        		}    	
+//	        		if(!content.isEmpty()) {
+//	        			ReporteUtil.crearTablaFuncion(document, funcion.getFuncion(), headers, content);
+//	        		}
+//	        	}  
+//        	}  
+	        
+	        promedioCumplimiento = promedioCumplimiento / numCumplimientos;
+	        promedioCumplimiento = Math.round(promedioCumplimiento * 100.0) / 100.0;
+	        
+	        if(x2 != null){
+	        	XWPFTableRow row1 = x2.getRow(0);
+	        	row1.getCell(1).setText(promedioCumplimiento + "");
+	        	XWPFTableRow row2 = x2.getRow(1);
+	        }
+	           
+	        XWPFChart chart = null;
+	        for (POIXMLDocumentPart part : document.getRelations()) {
+	            if (part instanceof XWPFChart) {
+	                
+	            	chart = (XWPFChart) part;  
+	                String title= chart.getTitle().getBody().getParagraph(0).getText();
+	                
+	                if(title.equals("Comparativo del promedio de la empresa respecto a las áreas")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+	                }
+	                
+	                if(title.equals("Cumplimiento por área")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+	                }
+	                
+	            }
+	        }
+	        
+	        String nombreReporte = "ReporteAPO_" + participante.getNombres() + " " + participante.getAPaterno() + " " + participante.getAMaterno() + ".docx";
+	        
+	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
+	        response.setHeader("Content-Disposition", "attachment; filename=" + nombreReporte);
+	        document.write(response.getOutputStream());
+	   
+	        response.flushBuffer();
+
+		} catch(IOException | InvalidFormatException e){
+			throw new NirhoControllerException("Problemas al generar reporte");
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al generar reporte");
+		}
+	}
 }
