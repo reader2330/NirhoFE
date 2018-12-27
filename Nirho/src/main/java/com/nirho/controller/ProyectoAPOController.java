@@ -47,6 +47,7 @@ import com.nirho.model.ConsultorProyectoPK;
 import com.nirho.model.EstatusProyecto;
 import com.nirho.model.ParticipanteAPO;
 import com.nirho.model.ParticipanteAPOAmp;
+import com.nirho.model.ParticipanteAPOAmpActividad;
 import com.nirho.model.ParticipanteAPOAmpFuncion;
 import com.nirho.model.Proyecto;
 import com.nirho.service.EmailService;
@@ -283,12 +284,14 @@ public class ProyectoAPOController {
 	            	}
 	            	
 	            	promedioArea = promedioArea / numCalificacionesArea;
+	            	promedioArea = Math.round(promedioArea * 100.0) / 100.0;
 	            	datos.put(area, promedioArea);
 	            	
 	            }
 	        }
 	        
 	        promedioGeneral = promedioGeneral / numCalificacionesGeneral;
+	        promedioGeneral = Math.round(promedioGeneral * 100.0) / 100.0;
 	        
 	        if(x2 != null){
 	        	XWPFTableRow row1 = x2.getRow(0);
@@ -367,35 +370,72 @@ public class ProyectoAPOController {
 	  
 	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Tabla participante individual");
 	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "Resumen individual");
-	        	        
-	        
-	        int maxCalificacion = 0, minCalificacion = 5;
-	        String maxArea = "", minArea = "", maxFuncion = "", minFuncion = "";
-	        double promedioGeneral = 0;
-	        int numCalificacionesGeneral = 0;
-	        
-	        HashMap<String, Double> datos = new HashMap<>(); 
-	        
+
 	        if(x1 != null){	   
-	        	XWPFTableRow row1 = x2.getRow(0);
+	        	XWPFTableRow row1 = x1.getRow(0);
 	        	row1.getCell(1).setText(participante.getNombres() + " " + participante.getaPaterno() + " " + participante.getaMaterno());
-	        	XWPFTableRow row2 = x2.getRow(1);
+	        	XWPFTableRow row2 = x1.getRow(1);
 	        	row2.getCell(1).setText(participante.getAreaOrg());
-	        	XWPFTableRow row3 = x2.getRow(2);
+	        	XWPFTableRow row3 = x1.getRow(2);
 	        	row3.getCell(1).setText(participante.getPuesto());
-	        	XWPFTableRow row4 = x2.getRow(3);
-	        	row4.getCell(1).setText("");
-	        	XWPFTableRow row5 = x2.getRow(4);
-	        	row5.getCell(1).setText("");
+	        	XWPFTableRow row4 = x1.getRow(3);
+	        	row4.getCell(1).setText(participante.getNivelTexto());
+	        	XWPFTableRow row5 = x1.getRow(4);
+	        	String objetivo = "";
+	        	for (ParticipanteAPOAmp amp : participante.getAmpliaciones()) {
+	        		objetivo = amp.getObjetivoPuesto();
+	        	}        		
+	        	row5.getCell(1).setText(objetivo);
 	        }
 	         
+	        
+	        int maxCalificacion = 0, minCalificacion = 5;
+	        String maxCumplimiento = "", minCumplimiento = "";
+	        double promedioCumplimiento = 0;
+	        int numCumplimientos = 0;
+	        
+	        List<String> headers = new ArrayList<>();
+	        headers.add("Actividad");
+	        headers.add("Nombre de la meta");
+	        headers.add("Indicador");
+	        headers.add("Tiempo");
+	        headers.add("Programado");
+	        headers.add("Real");
+	        headers.add("% Cumplimiento");
+	        
+	        int index = 0;
+	        for (ParticipanteAPOAmp amp : participante.getAmpliaciones()) {
+	        	for (ParticipanteAPOAmpFuncion funcion : amp.getFunciones()) {
+	        		List<List<String>> content = new ArrayList<>();
+	        		for (ParticipanteAPOAmpActividad act : funcion.getActividades()) {
+	        			List<String> datos = new ArrayList<>();
+	        			datos.add(act.getNombre());
+	        			datos.add(funcion.getMetaKpi());
+	        			datos.add(funcion.getCantidadMeta());
+	        			datos.add(funcion.getTiempo());
+	        			datos.add("5");
+	        			datos.add(act.getCalificacion() + "");
+	        			datos.add(((act.getCalificacion()*100) / 5) + "");
+	        			content.add(datos);
+	        			numCumplimientos++;
+	        			promedioCumplimiento += ((act.getCalificacion()*100) / 5); 
+	        		}    	
+	        		if(!content.isEmpty()) {
+	        			ReporteUtil.crearTablaFuncion(document, funcion.getFuncion(), headers, content);
+	        		}
+	        	}  
+        	}  
+	        
+	        promedioCumplimiento = promedioCumplimiento / numCumplimientos;
+	        promedioCumplimiento = Math.round(promedioCumplimiento * 100.0) / 100.0;
+	        
 	        if(x2 != null){
 	        	XWPFTableRow row1 = x2.getRow(0);
-	        	row1.getCell(1).setText(promedioGeneral + "");
+	        	row1.getCell(1).setText(promedioCumplimiento + "");
 	        	XWPFTableRow row2 = x2.getRow(1);
-	        	row2.getCell(1).setText("Area: " + maxArea + "\n, Función: " + maxFuncion + ", Promedio: " + maxCalificacion);
-	        	XWPFTableRow row3 = x2.getRow(2);
-	        	row3.getCell(1).setText("Area: " + minArea + ", Función: " + minFuncion + ", Promedio: " + minCalificacion);
+	        	//row2.getCell(1).setText("Area: " + maxArea + "\n, Función: " + maxFuncion + ", Promedio: " + maxCalificacion);
+	        	//XWPFTableRow row3 = x2.getRow(2);
+	        	//row3.getCell(1).setText("Area: " + minArea + ", Función: " + minFuncion + ", Promedio: " + minCalificacion);
 	        }
 	           
 	        XWPFChart chart = null;
@@ -409,25 +449,25 @@ public class ProyectoAPOController {
 	                	 XSSFWorkbook wb2 = chart.getWorkbook();
 		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
 		 	             int i = 1;
-		 	             for(String key: datos.keySet()) {
-		 	            	Row row = dataSheet2.createRow(i);
-	    	            	row.createCell(0).setCellValue(key);
-	    	            	row.createCell(1).setCellValue(datos.get(key));
-		 	            	row.createCell(2).setCellValue(promedioGeneral);
-		 	            	i++;
-		 	             }
+//		 	             for(String key: datos.keySet()) {
+//		 	            	Row row = dataSheet2.createRow(i);
+//	    	            	row.createCell(0).setCellValue(key);
+//	    	            	row.createCell(1).setCellValue(datos.get(key));
+//		 	            	row.createCell(2).setCellValue(promedioGeneral);
+//		 	            	i++;
+//		 	             }
 	                }
 	                
 	                if(title.equals("Cumplimiento por área")) {
 	                	 XSSFWorkbook wb2 = chart.getWorkbook();
 		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
 		 	             int i = 1;
-		 	             for(String key: datos.keySet()) {
-		 	            	Row row = dataSheet2.createRow(i);
-	    	            	row.createCell(0).setCellValue(key);
-	    	            	row.createCell(1).setCellValue(datos.get(key));
-		 	            	i++;
-		 	             }
+//		 	             for(String key: datos.keySet()) {
+//		 	            	Row row = dataSheet2.createRow(i);
+//	    	            	row.createCell(0).setCellValue(key);
+//	    	            	row.createCell(1).setCellValue(datos.get(key));
+//		 	            	i++;
+//		 	             }
 	                }
 	                
 	            }

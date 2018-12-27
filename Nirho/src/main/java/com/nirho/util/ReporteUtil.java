@@ -200,10 +200,16 @@ public class ReporteUtil {
     
     
     public static void crearTablaFuncion(XWPFDocument document, String funcion, List<String> headers, List<List<String>> content){
-       
-        XWPFTable table = document.createTable(content.get(0).size() + 1, content.size() + 1);
-        table.setWidth(1200);
+        
+        int rows = content.size() + 2;
+        int cols = content.get(0).size();
+        
+        XWPFTable table = document.createTable(rows, cols);
+        table.setWidth(1800);
 
+        mergeCellHorizontally(table, 0, 0, 1);
+        mergeCellHorizontally(table, 0, 2, cols - 2);
+        
         XWPFTableRow tableRowH = table.getRow(0);
         XWPFParagraph c1 = table.getRow(0).getCell(0).getParagraphs().get(0);
         c1.setAlignment(ParagraphAlignment.CENTER);
@@ -213,17 +219,15 @@ public class ReporteUtil {
         rc1.setText("Función");
         tableRowH.getCell(0).getCTTc().addNewTcPr().addNewShd().setFill("b8c426");
         
-        XWPFParagraph x1 = table.getRow(0).getCell(1).getParagraphs().get(0);
+        XWPFParagraph x1 = table.getRow(0).getCell(2).getParagraphs().get(0);
         x1.setAlignment(ParagraphAlignment.CENTER);
         x1.setVerticalAlignment(TextAlignment.CENTER);
         XWPFRun rcx1 = x1.createRun();
         rcx1.setBold(true);
         rcx1.setText(funcion);
 
-        mergeCellHorizontally(table, 0, 1, 2);
-        
         if(headers != null && headers.size() > 0){
-            XWPFTableRow tableRow = table.getRow(1);
+            XWPFTableRow row1 = table.getRow(1);
             for(int i = 0 ; i < headers.size(); i++){              
                 XWPFParagraph p1 = table.getRow(1).getCell(i).getParagraphs().get(0);
                 p1.setAlignment(ParagraphAlignment.CENTER);
@@ -231,14 +235,14 @@ public class ReporteUtil {
                 XWPFRun r1 = p1.createRun();
                 r1.setBold(true);
                 r1.setText(headers.get(i));
-                tableRow.getCell(i).getCTTc().addNewTcPr().addNewShd().setFill("b8c426");
+                row1.getCell(i).getCTTc().addNewTcPr().addNewShd().setFill("b8c426");
             }
         }
         
-        for(int i = 2 ; i <= content.size(); i++){
-            XWPFTableRow tableRow = table.getRow(i);
-            for(int j = 0 ; j < content.get(i - 1).size(); j++){
-                tableRow.getCell(j).setText(content.get(i - 1).get(j));
+        for(int i = 0 ; i < content.size(); i++){
+            XWPFTableRow tableRow = table.getRow(i + 2);
+            for(int j = 0 ; j < content.get(i).size(); j++){
+                tableRow.getCell(j).setText(content.get(i).get(j));
             }
         }
             
