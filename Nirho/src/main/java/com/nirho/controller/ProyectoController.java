@@ -63,7 +63,7 @@ public class ProyectoController {
 		return proyectos;
 	}
 	
-	@GetMapping(value = "/porConsultor")
+	@GetMapping(value = "/todos/porConsultor")
 	public List<Proyecto> porConsultor(@RequestParam(name="idUsuario") Integer idUsuario) throws NirhoControllerException{
 		List<Proyecto> proyectos = new ArrayList<>();
 		try {
