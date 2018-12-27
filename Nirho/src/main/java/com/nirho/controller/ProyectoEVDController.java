@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,9 +34,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
+import com.nirho.dto.AcumDTO;
+import com.nirho.dto.AreaPromDTO;
 import com.nirho.dto.GraficaAreaOrgDTO;
 import com.nirho.dto.GraficaRespPregDTO;
 import com.nirho.dto.GraficaResultadoDTO;
+import com.nirho.dto.NivelDTO;
 import com.nirho.dto.PeriodoProyecto;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
@@ -231,24 +235,53 @@ public class ProyectoEVDController {
 	        List<GraficaAreaOrgDTO> resArea = resGraficas.getAreas();
 	        logger.info(" ********************************* graficaAreaOrgList [" + resArea + "] *****************************");
 	        
-	        boolean primerRow = true;
+	        Map<String, AcumDTO> areasMap = new HashMap<>();
+	        for (GraficaAreaOrgDTO gaDTO : resArea) {
+	        	List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
+	        	for (GraficaResultadoDTO resul : graficaResultadoList) {
+	        		int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
+							resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
+	        		if(areasMap.get(gaDTO.getAreaOrg())!=null){
+	        			areasMap.get(gaDTO.getAreaOrg()).setCont(areasMap.get(gaDTO.getAreaOrg()).getCont()+1);
+	        			areasMap.get(gaDTO.getAreaOrg()).setSuma(areasMap.get(gaDTO.getAreaOrg()).getSuma()+respuesta);
+	        		} else {
+	        			AcumDTO acum = new AcumDTO(respuesta,1);
+	        			areasMap.put(gaDTO.getAreaOrg(), acum);
+	        		}
+	        	}
+	        }
 	        
-			if (x0 != null) {
-				for (GraficaAreaOrgDTO gaDTO : resArea) {
-					String area = gaDTO.getAreaOrg();
-					XWPFTableRow row = null;
-					List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
-					for (GraficaResultadoDTO resul : graficaResultadoList) {
-						if (primerRow) {
-							row = x0.getRow(1);
-							primerRow = false;
-						} else {
-							row = x0.createRow();
-						}
-						row.getCell(0).setText(area);
-						row.getCell(1).setText(resul.getPregunta().getIdTema().getNombre());
-						row.getCell(2).setText(resul.getPregunta().getEnunciado());
+	        List<AreaPromDTO> promAreas = new ArrayList<>();
+	        for (Map.Entry<String, AcumDTO> entry : areasMap.entrySet()) {
+	        	double promedio = Math.round(((double) entry.getValue().getSuma()/entry.getValue().getCont()));
+	        	AreaPromDTO areaProm = new AreaPromDTO(entry.getKey(), promedio);
+				logger.info(areaProm);
+				promAreas.add(areaProm);
+			}
+	        
+	        for (int i = 0; i < promAreas.size() - 1; i++) {
+				for (int j = 0; j < promAreas.size() - 1; j++) {
+					if (promAreas.get(j).getProm() < promAreas.get(j + 1).getProm()) {
+						AreaPromDTO tmp = promAreas.get(j + 1);
+						promAreas.set(j + 1, promAreas.get(j));
+						promAreas.set(j, tmp);
 					}
+				}
+			}
+	        
+	        boolean primerRow = true;
+	        	        
+			if (x0 != null) {
+				for (AreaPromDTO areaProm : promAreas) {
+					XWPFTableRow row = null;
+					if (primerRow) {
+						row = x0.getRow(1);
+						primerRow = false;
+					} else {
+						row = x0.createRow();
+					}
+					row.getCell(0).setText(areaProm.getArea());
+					row.getCell(1).setText("" + areaProm.getProm());
 				}
 			}
 	        
