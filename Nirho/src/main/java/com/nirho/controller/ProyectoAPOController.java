@@ -417,7 +417,7 @@ public class ProyectoAPOController {
 	        			content.add(datos);
 	        			numCumplimientos++;
 	        			promedioCumplimiento += auxPromedioCumplimiento; 
-	        			if(auxPromedioCumplimiento) {
+	        			if(auxPromedioCumplimiento > maxCumplimiento) {
 	        				
 	        			}
 	        		}    	
