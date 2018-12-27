@@ -8,6 +8,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,6 +74,29 @@ public class ProyectoController {
 			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
 		}
 		return proyectos;
+	}
+	
+	@GetMapping(value = "/todos/porConsultor/datos")
+	public String porConsultorDatos(@RequestParam(name="idUsuario") Integer idUsuario) throws NirhoControllerException{
+		List<Proyecto> proyectos = new ArrayList<>();
+		JSONObject response = new JSONObject();
+		try {
+			response.put("proyectos_finalizados", 0);
+			response.put("proyectos_no_finalizados", 0);
+			proyectos = proyectoService.obtenerProyectosConsultor(idUsuario);
+			for(Proyecto p: proyectos) {
+				if(p.getIdEstatus().getIdEstatus().intValue() != ProyectoConstants.ESTATUS_FINALIZADO.intValue()) {
+					response.put("proyectos_finalizados", response.getInt("proyectos_finalizados") + 1);
+				} else {
+					response.put("proyectos_no_finalizados", response.getInt("proyectos_no_finalizados") + 1);
+				}
+			}
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
+		} catch (JSONException e) {
+			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
+		}
+		return response.toString();
 	}
 	
 	@GetMapping(value = "/deConsultorEnSesion")
