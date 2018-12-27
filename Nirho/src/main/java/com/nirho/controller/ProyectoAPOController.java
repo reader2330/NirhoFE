@@ -386,7 +386,7 @@ public class ProyectoAPOController {
 	        }
 	         
 	        
-	        int maxCumplimiento = 0, minCumplimiento = 5;
+	        double maxCumplimiento = 0.0, minCumplimiento = 5.0;
 	        String maxCumplimientoActividad = "", minCumplimientoActividad = "", maxCumplimientoFuncion = "", minCumplimientoFuncion = "";
 	        double promedioCumplimiento = 0;
 	        int numCumplimientos = 0;
@@ -401,6 +401,7 @@ public class ProyectoAPOController {
 	        headers.add("% Cumplimiento");
 	        
 	        int index = 0;
+	        boolean firstData = true;
 	        for (ParticipanteAPOAmp amp : participante.getAmpliaciones()) {
 	        	for (ParticipanteAPOAmpFuncion funcion : amp.getFunciones()) {
 	        		List<List<String>> content = new ArrayList<>();
@@ -417,11 +418,32 @@ public class ProyectoAPOController {
 	        			content.add(datos);
 	        			numCumplimientos++;
 	        			promedioCumplimiento += auxPromedioCumplimiento; 
-	        			if(auxPromedioCumplimiento > maxCumplimiento) {
-	        				
-	        			}
-	        		}    	
+
+	        			if(firstData) {
+	        				maxCumplimiento = auxPromedioCumplimiento;
+	        				maxCumplimientoActividad = act.getNombre();
+	        				maxCumplimientoFuncion = funcion.getFuncion();
+	        				minCumplimiento = auxPromedioCumplimiento;
+	        				minCumplimientoActividad = act.getNombre();
+	        				minCumplimientoFuncion = funcion.getFuncion();
+	            		}
+	            		
+	            		if(auxPromedioCumplimiento > maxCumplimiento) {
+	            			maxCumplimiento = auxPromedioCumplimiento;
+	        				maxCumplimientoActividad = act.getNombre();
+	        				maxCumplimientoFuncion = funcion.getFuncion();
+	            		}
+	            		
+	            		if(auxPromedioCumplimiento < minCumplimiento) {
+	            			minCumplimiento = auxPromedioCumplimiento;
+	        				minCumplimientoActividad = act.getNombre();
+	        				minCumplimientoFuncion = funcion.getFuncion();
+	            		}
+	        			
+	        		}   
+	        		
 	        		if(!content.isEmpty()) {
+	        			ReporteUtil.agregarParrafo(document, " ");
 	        			ReporteUtil.crearTablaFuncion(document, funcion.getFuncion(), headers, content);
 	        		}
 	        	}  
@@ -434,9 +456,9 @@ public class ProyectoAPOController {
 	        	XWPFTableRow row1 = x2.getRow(0);
 	        	row1.getCell(1).setText(promedioCumplimiento + "");
 	        	XWPFTableRow row2 = x2.getRow(1);
-	        	//row2.getCell(1).setText("Area: " + maxArea + "\n, Función: " + maxFuncion + ", Promedio: " + maxCalificacion);
-	        	//XWPFTableRow row3 = x2.getRow(2);
-	        	//row3.getCell(1).setText("Area: " + minArea + ", Función: " + minFuncion + ", Promedio: " + minCalificacion);
+	        	row2.getCell(1).setText("Función: " + maxCumplimientoFuncion + "\n, Actividad: " + maxCumplimientoActividad + ", Cumplimiento: " + maxCumplimiento);
+	        	XWPFTableRow row3 = x2.getRow(2);
+	        	row3.getCell(1).setText("Función: " + minCumplimientoFuncion + "\n, Actividad: " + minCumplimientoActividad + ", Cumplimiento: " + minCumplimiento);
 	        }
 	           
 	        XWPFChart chart = null;
