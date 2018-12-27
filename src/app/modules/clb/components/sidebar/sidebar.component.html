@@ -50,6 +50,7 @@
         <app-detalle-preguntas *ngIf="selectModule == 8"></app-detalle-preguntas>
         <app-estadisticas (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 9"></app-estadisticas>
         <app-bandeja-detalle (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 10"></app-bandeja-detalle>
+        <app-generador-reportes (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 11"></app-generador-reportes>
       </div>
     </div>
   </mat-sidenav-content>

@@ -460,7 +460,7 @@ public class ProyectoPVCController {
 			if(p.getConocimientos() == null) {
 				p.setConocimientos(l);
 			} else {
-				p.getConocimientos().addAll(l);
+				p.getConocimientos().addAll(l	);
 			}
 			proyectoPVCEspecialidadService.guardar(p);
 		} catch(NirhoServiceException ex){

@@ -57,7 +57,7 @@ export class HeadCountComponent implements OnInit {
   'areaOrg'
   ];
 
-  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectService:ProyectoService) {
+  constructor(breakpointObserver: BreakpointObserver, private CatalogService: CatalogsService, private ProyectService: ProyectoService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {

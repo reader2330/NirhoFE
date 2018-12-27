@@ -30,6 +30,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import {LoginInterceptor} from './services/login.interceptor';
+import {GeneradorReportesComponent} from '../shared/components/generador-reportes/generador-reportes.component';
+import {SharedModule} from '../shared/shared.module';
 declare var require: any;
 
 export function highchartsFactory() {
@@ -50,7 +52,8 @@ export function highchartsFactory() {
     FormsModule,
     ReactiveFormsModule,
     EmojiModule,
-    PickerModule
+    PickerModule,
+    SharedModule
 
   ],
   declarations: [

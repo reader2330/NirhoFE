@@ -3,7 +3,7 @@
 
     <mat-form-field style="width: 100%" appearance="outline">
       <mat-label>Selecciona un proyecto</mat-label>
-      <mat-select [(ngModel)]="proyect">
+      <mat-select (selectionChange)="getAreas()" [(ngModel)]="proyect">
         <mat-option *ngFor="let proyect of proyects" [value]="proyect">
           {{proyect.nombre}}
         </mat-option>

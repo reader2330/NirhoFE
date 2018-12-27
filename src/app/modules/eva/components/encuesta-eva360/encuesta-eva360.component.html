@@ -22,13 +22,16 @@
         <mat-panel-description class="col-sm-12 row" style="width: 100%">
           <mat-list class="col-sm-12">
             <mat-list-item style="margin-bottom: 10px">{{question['cuestionarioParticipantes'][0]['cuestionarioParticipante']['pregunta']['enunciado']}}</mat-list-item>
+            <mat-selection-list [disabled]="question['cuestionarioParticipantes'][0]['cuestionarioParticipante']['respuesta'] && !start"  >
+              <mat-list-option  *ngFor="let opt of question['cuestionarioParticipantes'][0]['opciones']; let i = index;" (click)="setRespuesta(question['cuestionarioParticipantes'][0],i)">
+                {{opt.tipo}}  {{opt.enunciado}}
+              </mat-list-option>
+            </mat-selection-list>
           </mat-list>
-          <table style="width: 100%"  mat-table [dataSource]="question['cuestionarioParticipantes']" class="mat-elevation-z8 col-sm-12">
 
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
+          <!--<table style="width: 100%"  mat-table [dataSource]="question['cuestionarioParticipantes']" class="mat-elevation-z8 col-sm-12">
 
-            <!-- Position Column -->
+
             <ng-container matColumnDef="Participante">
               <th mat-header-cell *matHeaderCellDef style="font-size: 10px; margin-right: 10px;"> Opciones </th>
               <td mat-cell *matCellDef="let element">{{opciones[i][i]['enunciado']}}  </td>
@@ -42,13 +45,13 @@
               <td mat-cell *matCellDef="let element"><mat-radio-button  value="1"></mat-radio-button>  </td>
             </ng-container>
 
-            <!-- Weight Column -->
+
             <ng-container matColumnDef="MR">
               <th mat-header-cell *matHeaderCellDef="let element"> {{opciones[i][1]['enunciado']}} </th>
               <td mat-cell *matCellDef="let element"> <mat-radio-button value="1"></mat-radio-button> </td>
             </ng-container>
 
-            <!-- Symbol Column -->
+            ¡
             <ng-container matColumnDef="R">
               <th mat-header-cell *matHeaderCellDef="let element"> {{opciones[i][2]['enunciado']}} </th>
               <td mat-cell *matCellDef="let element"> <mat-radio-button value="1"></mat-radio-button> </td>
@@ -67,7 +70,7 @@
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+          </table>-->
 
 
         </mat-panel-description>

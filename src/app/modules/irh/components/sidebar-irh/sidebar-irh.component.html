@@ -25,7 +25,7 @@
 
       <mat-list>
         <mat-list-item>
-          <p style="margin-left: 40px">{{ 'Jose Lopez' }}</p>
+          <p style="margin-left: 40px">{{ user['fullName'] }}</p>
         </mat-list-item>
         <mat-list-item [ngClass]="{'c-active': selectModule == module.id_submodulo}" *ngFor="let module of modules" (click)="goModule(module.id_submodulo)">
           <p>{{module.descripcion}}</p>
@@ -45,6 +45,7 @@
         <app-cuestionario-select-irh (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 3"></app-cuestionario-select-irh>
         <app-encuesta-irh (response)="recibirRespuestChildren($event)" *ngIf="selectModule == 4"></app-encuesta-irh>
         <app-graficas-irh *ngIf="selectModule == 5" ></app-graficas-irh>
+        <app-generador-reportes *ngIf="selectModule == 6" ></app-generador-reportes>
         <!--<app-rh-admin-irh></app-rh-admin-irh>-->
         <!--<app-organizational-development-irh></app-organizational-development-irh>-->
         <!--<app-training-irh></app-training-irh>-->

@@ -29,6 +29,7 @@ import { GraficasIRHComponent } from './components/graficas-irh/graficas-irh.com
 import {highchartsFactory} from '../clb/clb.module';
 import {ChartModule} from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
     EmojiModule,
     ChartModule,
     PickerModule,
+    SharedModule
 
   ],
   declarations: [

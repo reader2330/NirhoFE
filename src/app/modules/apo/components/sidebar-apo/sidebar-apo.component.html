@@ -47,7 +47,7 @@
 
         <div *ngIf="selectModule == 1">
           <h3>Bandeja de proyectos</h3>
-          <app-bandeja-lista-apo (responseHead)="recibirRespuestChildren($event)"></app-bandeja-lista-apo>
+          <app-bandeja-lista-apo (responseChildren)="recibirRespuestChildren($event)"></app-bandeja-lista-apo>
         </div>
         <div *ngIf="selectModule == 2">
           <h3>Alta de proyectos</h3>
@@ -85,6 +85,13 @@
         <div *ngIf="selectModule == 10">
           <app-detalle-preguntas-apo></app-detalle-preguntas-apo>
         </div>
+        <div *ngIf="selectModule == 11">
+          <app-bandeja-detalle-apo></app-bandeja-detalle-apo>
+        </div>
+        <div *ngIf="selectModule == 12">
+          <app-generador-reportes></app-generador-reportes>
+        </div>
+
         <!--<div *ngIf="selectModule == 7">
           <h3>Estado del cuestionario</h3>
           <app-encuesta-evd (responseChildren)="recibirRespuestChildren($event)"></app-encuesta-evd>

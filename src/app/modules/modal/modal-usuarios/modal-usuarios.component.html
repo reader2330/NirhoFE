@@ -13,7 +13,7 @@
     </mat-form-field>
     <mat-form-field class="col-sm-12" appearance="outline">
       <mat-label>Contraseña</mat-label>
-      <input matInput  formControlName="passwordUsuario" required>
+      <input matInput type="password"  formControlName="passwordUsuario" required>
     </mat-form-field>
     <mat-form-field class="col-sm-12" appearance="outline">
       <mat-label>Email</mat-label>
@@ -28,7 +28,7 @@
       </mat-select>
     </mat-form-field>
     <div class="col-sm-4 offset-4">
-      <button color="accent" mat-raised-button (click)="addUsuario()" >Guardar</button>
+      <button color="accent" mat-raised-button [disabled]="!usuarioForm.valid" (click)="addUsuario()" >Guardar</button>
     </div>
 
   </form>

@@ -49,7 +49,12 @@ export class SidebarIrhComponent implements OnInit {
       {
         id_submodulo: 5,
         descripcion: 'Ver graficas'
-      });
+      },
+      {
+        id_submodulo: 6,
+        descripcion: 'Generar reportes'
+      }
+      );
 
     this.getUser();
   }
@@ -67,14 +72,13 @@ export class SidebarIrhComponent implements OnInit {
       this.selectModule = evt.value;
     }
   }
-  cerrarSesion(){
+  cerrarSesion() {
     sessionStorage.clear();
     this.route.navigate(['/']);
   }
   getUser() {
     this.LoginService.getUser().subscribe((res) => {
       this.user = res;
-      console.log(res);
       sessionStorage.setItem('user', JSON.stringify(this.user));
       if (this.user) {
         this.avatar.url = this.user['avatar'];

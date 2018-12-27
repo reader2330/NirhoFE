@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BandejaDetalleComponent } from './bandeja-detalle.component';
+import { TableroControlComponent } from './tablero-control.component';
 
-describe('BandejaDetalleApoComponent', () => {
-  let component: BandejaDetalleComponent;
-  let fixture: ComponentFixture<BandejaDetalleComponent>;
+describe('TableroControlComponent', () => {
+  let component: TableroControlComponent;
+  let fixture: ComponentFixture<TableroControlComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BandejaDetalleComponent ]
+      declarations: [ TableroControlComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BandejaDetalleComponent);
+    fixture = TestBed.createComponent(TableroControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

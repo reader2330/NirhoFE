@@ -5,6 +5,12 @@
     <img class="avatar" [src]="urlMensagge" alt="">
   </div>
 
+  <div style="margin-top: 100px; margin-bottom: 50px" class="col-sm-4 offset-4 mat-card mat-elevation-z1">
+
+    <mat-icon>people</mat-icon><p>{{participante.nombres}} {{participante.aPaterno}} {{participante.aMaterno}}</p>
+    <mat-icon>card_travel</mat-icon><p>{{participante.puesto}}</p>
+
+  </div>
   <div style="margin-top: 85px; margin-left: 15px" class="row col-sm-12 ">
     <mat-table *ngIf="showTable"   class="mat-elevation-z8 offset-1"  [dataSource]="ampliaciones">
 
@@ -46,54 +52,59 @@
       <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
     </mat-table>
   </div>
-  <div style="margin-top: 50px" class="col-sm-12" *ngFor="let met of metas">
-    <vertical-timeline style="margin-bottom: 50px" *ngFor="let fuc of met['funciones']"   >
+  <div style="margin-top: 50px; margin-bottom: 80px" class="col-sm-12" *ngFor="let met of metas">
+    <div  *ngFor="let fuc of met['funciones']">
+      <h2 align="center" style="margin-bottom: 100px; margin-top: 100px" >{{fuc.funcion }}</h2>
+      <vertical-timeline style="margin-bottom: 100px" >
 
-      <!-- Add some cards to the timeline. It works with *ngFor too -->
-      <h2 style="margin-bottom: 100px; margin-top: 100px" >{{fuc.funcion }}</h2>
-      <!-- If no value is passed for the date, the current time is used. -->
-      <vertical-timeline-card style="margin-top: 50px" *ngFor="let act of fuc['actividades']" [dateValue]="act.fechaCreacion" [color]="nirhoColor">
-        <div *ngIf=" act.name !== '' " class="row">
-          <div  class="col-sm-12">{{act.nombre}}</div>
-          <div class="col-sm-12">{{act.fechaVencimiento | date}}</div>
-          <div class="col-sm-12" *ngIf="!currentUser()"> {{act.calificacion}}</div>
-          <div class="col-sm-12" *ngIf="currentUser()">
-            <mat-label> Calificación</mat-label>
-            <mat-select (selectionChange)="updateCalificaionActividad(act, fuc)"  [(ngModel)]="act.calificacion" >
-              <mat-option *ngFor="let val of values " [value]="val">
-                {{val}}
-              </mat-option>
-            </mat-select>
-          </div>
+        <!-- Add some cards to the timeline. It works with *ngFor too -->
 
-        </div>
-        <div *ngIf="act.name === ''">
-          <div  class="col-sm-12">
-            <mat-form-field>
-              <mat-label> Nombre</mat-label>
-              <input matInput type="text"  [(ngModel)]="newActividad['nombre']">
-            </mat-form-field>
+        <!-- If no value is passed for the date, the current time is used. -->
+        <vertical-timeline-card style="margin-top: 50px" *ngFor="let act of fuc['actividades']" [dateValue]="act.fechaCreacion" [color]="nirhoColor">
+          <div *ngIf=" act.name !== '' " class="row">
+            <div  class="col-sm-12">{{act.nombre}}</div>
+            <div class="col-sm-12">{{act.fechaVencimiento | date}}</div>
+            <div class="col-sm-12" *ngIf="!currentUser()"> {{act.calificacion}}</div>
+            <div class="col-sm-12" *ngIf="currentUser()">
+              <mat-label> Calificación</mat-label>
+              <mat-select (selectionChange)="updateCalificaionActividad(act, fuc)"  [(ngModel)]="act.calificacion" >
+                <mat-option *ngFor="let val of values " [value]="val">
+                  {{val}}
+                </mat-option>
+              </mat-select>
+            </div>
+
           </div>
-          <div  class="col-sm-12">
-            <mat-form-field>
-              <input matInput [(ngModel)]="newActividad['fechaVencimiento']" [matDatepicker]="picker" placeholder="Fecha de vencimiento">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-12">
+          <div *ngIf="act.name === ''">
+            <div  class="col-sm-12">
+              <mat-form-field>
+                <mat-label> Nombre</mat-label>
+                <input matInput type="text"  [(ngModel)]="newActividad['nombre']">
+              </mat-form-field>
+            </div>
+            <div  class="col-sm-12">
+              <mat-form-field>
+                <input matInput [(ngModel)]="newActividad['fechaVencimiento']" [matDatepicker]="picker" placeholder="Fecha de vencimiento">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12">
               <button mat-raised-button color="accent" (click)="generateActividad(fuc)">Agregar actividad </button>
+            </div>
           </div>
-        </div>
-      </vertical-timeline-card>
+        </vertical-timeline-card>
+      </vertical-timeline>
+    </div>
+
 
       <!-- tomorrow = new Date(2017, 9, 20, 14,34); -->
 
 
-    </vertical-timeline>
+
   </div>
   <div  *ngIf="showGraphs" class="row col-sm-12">
-  <div style="margin-top: 100px;" *ngFor="let graph of graphs" class="row col-sm-12">
+  <div style="margin-top: 100px;margin-bottom: 50px" *ngFor="let graph of graphs" class="row col-sm-12">
 
     <chart  class="col-sm-10 offset-1"    [options]="graph"></chart>
 

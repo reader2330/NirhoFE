@@ -36,9 +36,10 @@ export class SidebarComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log("hola");
+    this.getUser();
     setTimeout(() => {
       this.getModules();
-      this.getUser();
     }, 1500);
   }
 
@@ -55,6 +56,12 @@ export class SidebarComponent implements OnInit {
         if (mod['id_submodulo'] === 9) {
           mod.descripcion = "Graficas de resultados";
         }
+      }
+      if (this.user['rol'] === 3) {
+        this.modules.push({
+          id_submodulo: 11,
+          descripcion: 'Generar reportes'
+        });
       }
     });
   }

@@ -25,10 +25,15 @@ export class LoginComponent implements OnInit {
         console.log(res);
         if (res && res['token']) {
           localStorage.setItem('token', res['token']);
-          this.router.navigate(['SYNC']);
+
         }
-
-
+        this.LoginService.getUser().subscribe(res2 => {
+          if (res2['rol'] !== 4) {
+            this.router.navigate(['SYNC']);
+          } else {
+            this.router.navigate(['configurador']);
+          }
+        });
       }, (err: HttpResponse<any>) => {
 
         console.log(err);

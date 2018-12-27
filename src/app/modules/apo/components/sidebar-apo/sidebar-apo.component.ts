@@ -43,9 +43,16 @@ export class SidebarApoComponent implements OnInit {
       for (let obj of res) {
         this.modules.push({id_submodulo: obj.idSubmodulo, descripcion: obj.descripcion});
       }
-      if (this.user.rol === 3){
-        this.modules.push({id_submodulo: 10, descripcion:'Envio de actividades'});
+      if (this.user.rol === 3 || this.user.rol === 2   ) {
+        this.modules.map((item, i) => {
+          if (item.descripcion === 'Ver participantes') {
+            this.modules.splice(i,1) ;
+          }
+        });
+        this.modules.push({id_submodulo: 10, descripcion: 'Envio de actividades'});
+        this.modules.push({id_submodulo: 12, descripcion: 'Generar reportes'});
       }
+      console.log(this.modules);
     });
   }
   getFrecuencia(num) {

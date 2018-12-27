@@ -234,7 +234,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_formularios_steppers_steppers_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/formularios/steppers/steppers.component */ "./src/app/modules/clb/components/formularios/steppers/steppers.component.ts");
 /* harmony import */ var _components_formularios_data_contact_data_contact_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/formularios/data-contact/data-contact.component */ "./src/app/modules/clb/components/formularios/data-contact/data-contact-evd.component.ts");
 /* harmony import */ var _components_bandeja_bandeja_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/bandeja/bandeja.component */ "./src/app/modules/clb/components/bandeja/bandeja-pvc.component.ts");
-/* harmony import */ var _components_bandeja_detalle_bandeja_detalle_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/bandeja-detalle/bandeja-detalle.component */ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts");
+/* harmony import */ var _components_bandeja_detalle_bandeja_detalle_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/bandeja-detalle/bandeja-detalle.component */ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle-apo.component.ts");
 /* harmony import */ var _components_cuestionario_select_cuestionario_select_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/cuestionario-select/cuestionario-select.component */ "./src/app/modules/clb/components/cuestionario-select/cuestionario-select-pvc.component.ts");
 /* harmony import */ var _components_asignar_consultor_asignar_consultor_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/asignar-consultor-eva360/asignar-consultor-eva360.component */ "./src/app/modules/clb/components/asignar-consultor-eva360/asignar-consultor-eva360.component.ts");
 /* harmony import */ var _components_estadisticas_estadisticas_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/estadisticas/estadisticas.component */ "./src/app/modules/clb/components/estadisticas/estadisticas.component.ts");
@@ -581,7 +581,7 @@ var AvatarEditComponent = /** @class */ (function () {
 
 /***/ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.html":
 /*!***************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.html ***!
+  !*** ./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle-apo.component.html ***!
   \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -592,7 +592,7 @@ module.exports = "<mat-accordion style=\"margin-top: 5px\">\n\n\n  <mat-expansio
 
 /***/ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.scss":
 /*!***************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.scss ***!
+  !*** ./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle-apo.component.scss ***!
   \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -603,14 +603,14 @@ module.exports = ".inputForm {\n  width: 96%; }\n\n/*# sourceMappingURL=data:app
 
 /***/ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts":
 /*!*************************************************************************************!*\
-  !*** ./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.ts ***!
+  !*** ./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle-apo.component.ts ***!
   \*************************************************************************************/
-/*! exports provided: BandejaDetalleComponent */
+/*! exports provided: BandejaDetalleApoComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BandejaDetalleComponent", function() { return BandejaDetalleComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BandejaDetalleApoComponent", function() { return BandejaDetalleComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_catalogs_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/catalogs.service */ "./src/app/modules/clb/services/catalogs.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -689,8 +689,8 @@ var BandejaDetalleComponent = /** @class */ (function () {
     BandejaDetalleComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-bandeja-detalle',
-            template: __webpack_require__(/*! ./bandeja-detalle.component.html */ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.html"),
-            styles: [__webpack_require__(/*! ./bandeja-detalle.component.scss */ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle.component.scss")]
+            template: __webpack_require__(/*! ./bandeja-detalle-apo.component.html */ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle-apo.component.html"),
+            styles: [__webpack_require__(/*! ./bandeja-detalle-apo.component.scss */ "./src/app/modules/clb/components/bandeja-detalle/bandeja-detalle-apo.component.scss")]
         }),
         __metadata("design:paramtypes", [_services_catalogs_service__WEBPACK_IMPORTED_MODULE_1__["CatalogsService"]])
     ], BandejaDetalleComponent);

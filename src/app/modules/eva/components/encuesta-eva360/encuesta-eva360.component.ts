@@ -20,6 +20,7 @@ import {environment} from '../../../../../environments/environment';
 export class EncuestaEva360Component implements OnInit {
 
   valor = '';
+  start = true;
 
   @Output() responseChildren = new EventEmitter();
 
@@ -112,6 +113,14 @@ export class EncuestaEva360Component implements OnInit {
   }
 
 
+  setRespuesta(question, id) {
+    console.log(question);
+    console.log(id);
+    if (!question['cuestionarioParticipante']['respuesta'] && this.start ) {
+      question['cuestionarioParticipante']['respuesta'] = id + 1;
+    }
+    this.start = false;
+  }
   updateValor(question) {
     console.log(question);
     this.ProyectoEvdServices.updatePregunta(question).subscribe((res) => {

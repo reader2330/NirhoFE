@@ -28,6 +28,11 @@ export class SelectorAreasComponent implements OnInit {
       this.proyects = res;
     });
   }
+  getAreas() {
+    this.ProyectServices.getAreasByProyect(this.proyect['idProyecto']).subscribe(res => {
+      this.areas = res;
+    });
+  }
 
   addArea() {
     let add = true;

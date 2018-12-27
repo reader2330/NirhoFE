@@ -179,6 +179,7 @@ public class UsuarioController {
 	public void guardarUsuario(@Valid @RequestBody Usuario user) throws NirhoControllerException{
 		try{
 			logger.info("Usuario ["+user+"]" );
+			user.setPassword(SessionUtil.getEncryptMD5(user.getPassword()));
 			usuarioService.guardarUsuario(user);
 		}catch (NirhoServiceException e){
 			logger.warn("error "+ e.getMessage());

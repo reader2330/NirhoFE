@@ -23,6 +23,8 @@ import {DetallePreguntasApoComponent} from './components/detalle-preguntas-apo/d
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import {ImagenesModalComponent} from '../modal/imagenes-modal/imagenes-modal.component';
 import {ChartModule} from 'angular2-highcharts';
+import {BandejaDetalleApoComponent} from './components/bandeja-detalle-apo/bandeja-detalle-apo.component';
+import {SharedModule} from '../shared/shared.module';
 export function highchartsFactory() {
   const hc = require('highcharts');
   const h3 = require('highcharts/highcharts-3d');
@@ -40,6 +42,7 @@ export function highchartsFactory() {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [
     InicioApoComponent,
@@ -57,7 +60,8 @@ export function highchartsFactory() {
     PeriodoApoComponent,
     AsignarConsultorApoComponent,
     ParticipantesSelectorComponent,
-    DetallePreguntasApoComponent
+    DetallePreguntasApoComponent,
+    BandejaDetalleApoComponent
   ],
   entryComponents: [
     ImagenesModalComponent

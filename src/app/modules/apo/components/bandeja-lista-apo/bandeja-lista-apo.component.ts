@@ -35,7 +35,7 @@ export class BandejaListaApoComponent implements OnInit {
   goDetailProyect(element) {
     if (element) {
       sessionStorage.setItem('detail', JSON.stringify(element));
-      this.responseChildren.emit({value: 10});
+      this.responseChildren.emit({value: 11});
 
     }
   }

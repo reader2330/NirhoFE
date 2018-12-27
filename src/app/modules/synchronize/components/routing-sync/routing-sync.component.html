@@ -4,11 +4,11 @@
 
     </div>
     <mat-list style="cursor: pointer">
-      <mat-list-item  (click)="goModule(1)" >
-        <span  class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">1</span>
-        &nbsp;  <p style="font-size: 15px; margin-top: 10px;margin-left: 5px;">Clima Laboral</p>
+      <mat-list-item   (click)="goModule(mod.nombre)" *ngFor="let mod of modules;let i = index" >
+        <span  class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">{{i+1}}</span>
+        &nbsp;  <p style="font-size: 15px; margin-top: 10px;margin-left: 5px;">{{mod.nombre}}</p>
       </mat-list-item>
-      <mat-list-item style="margin-top: 10px;" (click)="goModule(2)" >
+      <!--<mat-list-item style="margin-top: 10px;" (click)="goModule(2)" >
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF; ">2</span>
         &nbsp;  <p style="font-size: 15px; margin-top: 10px; margin-left: 5px;">Ingeniería de Rercusos Humanos</p>
       </mat-list-item>
@@ -36,10 +36,10 @@
       <mat-list-item style="margin-top: 10px;" (click)="goModule(8)" >
         <span class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">8</span>
         <p style="font-size: 15px; margin-top: 10px">Reclutamiento y Selección de Personal</p>&nbsp;
-      </mat-list-item>
+      </mat-list-item>-->
     </mat-list>
   </div>
-  <div class="col-md-8" style="padding-top: 45px;">
+  <div *ngIf="!StateForUser()" class="col-md-8" style="padding-top: 45px;">
     <!--Carousel Wrapper-->
     <mdb-carousel [isControls]="true" class="carousel slide carousel-fade" [type]="'carousel-thumbnails'" [animation]="'fade'">
       <!--First slide-->
@@ -63,6 +63,9 @@
     </mdb-carousel>
     <!--/.Carousel Wrapper-->
 
+  </div>
+  <div *ngIf="StateForUser()" class="col-md-8" style="padding-top: 45px;">
+    <app-tablero-control></app-tablero-control>
   </div>
 
   <div class="col-xs-12 col-md-12">

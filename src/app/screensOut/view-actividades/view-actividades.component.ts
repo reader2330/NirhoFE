@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ProyectoApoService} from '../../modules/apo/services/proyecto-apo.service';
 import {ActivatedRoute} from '@angular/router';
 import {Actividad} from '../models/actividad';
-import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {environment} from '../../../environments/environment';
 import {ImagenesModalComponent} from '../../modules/modal/imagenes-modal/imagenes-modal.component';
 import {MatDialog} from '@angular/material';
@@ -14,6 +13,7 @@ import {MatDialog} from '@angular/material';
 })
 export class ViewActividadesComponent implements OnInit {
   values = [0, 1, 2, 3, 4, 5];
+  participante = {};
   newActividad = {};
   nirhoColor = '#A1B712';
   showGraphs = false;
@@ -126,17 +126,20 @@ export class ViewActividadesComponent implements OnInit {
   ngOnInit() {
     this.Imagenes(1);
     this.route.params.subscribe(res => {
-      this.isBoss = true || res['jefe'];
       this.ProyectServices.getToken(res['token']).subscribe(res2 => {
         console.log(res2);
+        this.isBoss = res2['jefe'];
+        this.participante = res2['participante'];
         this.metas = res2['participante']['ampliaciones'];
         this.getCalificaciones(res2['participante']['idParticipante']);
         this.getActividadesParticipante(res2['participante']['idParticipante']);
         for(let met of this.metas) {
           for (let act of met['funciones']) {
-            act['actividades'].push({
-              name: ''
-            });
+            if (act['actividades'].length < 5) {
+              act['actividades'].push({
+                name: ''
+              });
+            }
           }
         }
         this.ampliaciones = this.metas[0]['funciones'];
@@ -160,11 +163,14 @@ export class ViewActividadesComponent implements OnInit {
     meta['actividades'].push(act);
     this.ProyectServices.guardaActividad(meta['id'], act).subscribe(res => {
     });
-    meta['actividades'].push({
-      start: new Date(),
-      name: '',
-      fecha: ''
-    });
+    if (meta['actividades'] && meta['actividades'].length < 5) {
+      meta['actividades'].push({
+        start: new Date(),
+        name: '',
+        fecha: ''
+      });
+    }
+
     this.newActividad['nombre'] = '';
     this.newActividad['fechaVencimiento'] = '';
 

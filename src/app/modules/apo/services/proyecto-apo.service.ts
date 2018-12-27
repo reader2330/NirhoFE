@@ -18,6 +18,9 @@ export class ProyectoApoService {
   getProyects(): Observable<Proyecto[]> {
     return this.http.get<Proyecto[]>(this.api + 'proyectoAPO/todos', {headers: this.headers});
   }
+  getProyect(id): Observable<any>{
+   return this.http.get(this.api + 'proyectoAPO/porId', {headers: this.headers, params: {'idProyecto': id}});
+  }
 
   saveProyect(data): Observable<any> {
     return this.http.post(this.api + 'proyectoAPO/registrar', data, {headers: this.headers});

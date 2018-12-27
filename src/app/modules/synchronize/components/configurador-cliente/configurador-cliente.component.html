@@ -7,11 +7,11 @@
 
 </mat-toolbar>
 <div class="row col-sm-12" style="margin-top: 20px">
-  <mat-horizontal-stepper  class="col-sm.10 offset-1" [linear]="false" labelPosition="bottom"  #stepper>
+  <mat-horizontal-stepper  class="col-sm.10 offset-1" [linear]="true" labelPosition="bottom"  #stepper>
     <mat-step [stepControl]="clienteForm" style="margin-top: 100px">
       <form [formGroup]="clienteForm">
         <ng-template matStepLabel>Datos cliente</ng-template>
-        <div style="margin-top: 50px" class=" row col-sm-10 offset-1">
+        <div style="margin-top: 50px" class=" row">
           <mat-form-field class="col-sm-12" appearance="outline">
             <mat-label>Nombre</mat-label>
             <input matInput  formControlName="nombreCliente" required>
@@ -26,27 +26,43 @@
           </mat-form-field>
           <mat-form-field class="col-sm-12" appearance="outline">
             <mat-label>Telefono</mat-label>
-            <input matInput  formControlName="telefonoCliente" required>
+            <input matInput type="number"  formControlName="telefonoCliente" required>
           </mat-form-field>
-          <div class="col-sm-4 offset-4">
-            <button color="accent" mat-raised-button (click)="saveCliente()" matStepperNext>Guardar</button>
+          <div class="col-sm-4 offset-5">
+            <button color="accent" mat-raised-button [disabled]="!clienteForm.valid" (click)="saveCliente()" matStepperNext>Guardar</button>
           </div>
         </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="usuarios.length" style="margin-top: 100px">
-        <ng-template matStepLabel> Usuario</ng-template>
-        <div class="col-sm-8 offset-2 ">
+        <ng-template matStepLabel> Usuarios</ng-template>
+        <div class=" ">
             <button style="margin-top: 20px; margin-left: 100px" (click)="ModalUsuario()" mat-raised-button  color="accent">Agregar usuario <mat-icon>people</mat-icon></button>
         </div>
-        <div class="col-sm-10 offset-1">
+        <div style="margin-top: 40px" >
+          <h2>Usuarios</h2>
             <mat-list>
-              <mat-list-item *ngFor="let user of users">
-                {{user.nombre}}
+              <mat-list-item *ngFor="let user of usuarios">
+                <p>{{user.fullName}} </p> <p style="margin-left: 30px" class="text-muted">{{showRol(user.rol)}}</p>
+                <mat-divider></mat-divider>
               </mat-list-item>
             </mat-list>
 
         </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Modulos</ng-template>
+      <div>
+        <mat-selection-list>
+          <mat-list-option *ngFor="let mod of modules" (click)="addModule(mod)" [selected]="mod.checkModulo" [value]="mod.checkModulo">
+              {{mod.nombre}}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <div  style="margin-top: 20px" class="offset-5" >
+        <button mat-raised-button style="margin-left: 50px" color="accent" (click)="saveModules()">Agregar modulos</button>
+      </div>
+
     </mat-step>
 
   </mat-horizontal-stepper>

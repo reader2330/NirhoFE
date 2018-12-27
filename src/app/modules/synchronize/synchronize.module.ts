@@ -10,6 +10,7 @@ import { CarouselModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ConfiguradorClienteComponent} from './components/configurador-cliente/configurador-cliente.component';
 import {ModalUsuariosComponent} from '../modal/modal-usuarios/modal-usuarios.component';
+import {TableroControlComponent} from './components/tablero-control/tablero-control.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import {ModalUsuariosComponent} from '../modal/modal-usuarios/modal-usuarios.com
     ButtonsModule,
     FontAwesomeModule,
   ],
-  declarations: [InicioSyncComponent, RoutingSyncComponent, ConfiguradorClienteComponent],
+  declarations: [InicioSyncComponent, RoutingSyncComponent, ConfiguradorClienteComponent, TableroControlComponent],
   entryComponents: [ ModalUsuariosComponent]
 })
 export class SynchronizeModule { }
