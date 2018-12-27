@@ -135,7 +135,7 @@ public class ParticipanteAPOController {
 						enviarCorreoParticipanteAPO(p, proyecto, token);
 						
 						if(p.getIdPartJefeInm() != Integer.valueOf((proyecto.getIdProyecto() + "") + "0")) {
-							ParticipanteAPO jefe = participanteAPOService.getOne(p.getIdPartJefeInm());
+							ParticipanteAPO jefe = participanteAPOService.getOne(Integer.valueOf((proyecto.getIdProyecto() + "") + "0"));
 							String tokenJefe = Jwts.builder()
 					                .claim("jefe", true)
 					                .claim("id", jefe.getIdParticipante())

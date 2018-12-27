@@ -289,6 +289,23 @@ public class ParticipanteController {
         }
     }
 
+	
+	@RequestMapping(value = "/proyectos", method = RequestMethod.GET)
+	@ResponseBody
+	public Proyecto porId(@RequestParam(name="idParticipante") Integer idParticipante) throws NirhoControllerException{
+		
+		
+		
+		
+		Proyecto proyecto = new Proyecto();
+		try {
+			proyecto = proyectoService.obtenerProyectoPorId(idParticipante);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro del proyecto");
+		}
+		return proyecto;
+	}
+	
 
 	private Participante assamblerToParticipanteHC(ParticipanteHC participanteHC) {
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
