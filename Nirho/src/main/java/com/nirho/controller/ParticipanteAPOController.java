@@ -136,12 +136,14 @@ public class ParticipanteAPOController {
 						
 						if(p.getIdPartJefeInm() != Integer.valueOf((proyecto.getIdProyecto() + "") + "0")) {
 							ParticipanteAPO jefe = participanteAPOService.getOne(Integer.valueOf((proyecto.getIdProyecto() + "") + "0"));
-							String tokenJefe = Jwts.builder()
-					                .claim("jefe", true)
-					                .claim("id", jefe.getIdParticipante())
-					                .signWith( SignatureAlgorithm.HS512, SECRET )
-					                .compact();
-							enviarCorreoParticipanteAPO(jefe, proyecto, tokenJefe);
+							if(jefe != null) {
+								String tokenJefe = Jwts.builder()
+						                .claim("jefe", true)
+						                .claim("id", jefe.getIdParticipante())
+						                .signWith( SignatureAlgorithm.HS512, SECRET )
+						                .compact();
+								enviarCorreoParticipanteAPO(jefe, proyecto, tokenJefe);
+							}
 						}
 						
 					}

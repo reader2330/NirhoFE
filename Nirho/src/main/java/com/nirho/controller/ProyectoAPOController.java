@@ -228,9 +228,7 @@ public class ProyectoAPOController {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
 			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPO.docx"));
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteAPO.docx"));
-	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	        
+
 	        Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
 	        
 	        ReporteUtil.reemplazarParrafo(document, "nombre.empresa", proyecto.getIdEmpresa().getEmpresa());
@@ -360,10 +358,9 @@ public class ProyectoAPOController {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPOIndividual.docx"));
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteAPOIndividual.docx"));
-	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	        
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPOIndividual.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteAPOIndividual.docx"));
+
 	        ParticipanteAPO participante = participanteAPOService.getOne(idParticipante);
 	        
 	        ReporteUtil.reemplazarParrafo(document, "nombre.participante", participante.getNombres() + " " + participante.getaPaterno() + " " + participante.getaMaterno());
@@ -389,8 +386,8 @@ public class ProyectoAPOController {
 	        }
 	         
 	        
-	        int maxCalificacion = 0, minCalificacion = 5;
-	        String maxCumplimiento = "", minCumplimiento = "";
+	        int maxCumplimiento = 0, minCumplimiento = 5;
+	        String maxCumplimientoActividad = "", minCumplimientoActividad = "", maxCumplimientoFuncion = "", minCumplimientoFuncion = "";
 	        double promedioCumplimiento = 0;
 	        int numCumplimientos = 0;
 	        
@@ -415,10 +412,14 @@ public class ProyectoAPOController {
 	        			datos.add(funcion.getTiempo());
 	        			datos.add("5");
 	        			datos.add(act.getCalificacion() + "");
-	        			datos.add(((act.getCalificacion()*100) / 5) + "");
+	        			double auxPromedioCumplimiento = ((act.getCalificacion()*100) / 5);
+	        			datos.add(auxPromedioCumplimiento + "");
 	        			content.add(datos);
 	        			numCumplimientos++;
-	        			promedioCumplimiento += ((act.getCalificacion()*100) / 5); 
+	        			promedioCumplimiento += auxPromedioCumplimiento; 
+	        			if(auxPromedioCumplimiento) {
+	        				
+	        			}
 	        		}    	
 	        		if(!content.isEmpty()) {
 	        			ReporteUtil.crearTablaFuncion(document, funcion.getFuncion(), headers, content);
