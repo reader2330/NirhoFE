@@ -63,6 +63,17 @@ public class ProyectoController {
 		return proyectos;
 	}
 	
+	@GetMapping(value = "/porConsultor")
+	public List<Proyecto> porConsultor(@RequestParam(name="idUsuario") Integer idUsuario) throws NirhoControllerException{
+		List<Proyecto> proyectos = new ArrayList<>();
+		try {
+			proyectos = proyectoService.obtenerProyectosConsultor(idUsuario);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los proyectos");
+		}
+		return proyectos;
+	}
+	
 	@GetMapping(value = "/deConsultorEnSesion")
 	public List<Proyecto> deConsultorEnSesion(HttpServletRequest request,
 								@RequestParam(name="idModulo") Integer idModulo) throws NirhoControllerException{

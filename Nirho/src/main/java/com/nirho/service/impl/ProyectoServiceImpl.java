@@ -24,6 +24,8 @@ public class ProyectoServiceImpl implements ProyectoService {
 	private ProyectoDAO dao;
 	@Autowired
 	private ModuloDAO moduloDAO;
+	@Autowired
+	private ProyectoDAO proyectoDAO;
 	@Autowired 
 	private ConsultorProyectoDAO consulProyDAO;
 	
@@ -52,6 +54,27 @@ public class ProyectoServiceImpl implements ProyectoService {
 					}
 				}
 			}
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD los proyectos, causa [" + e.getMessage()+ "]");
+		}		
+		return lista;
+	}
+	
+	@Override
+	public List<Proyecto> obtenerProyectosConsultor(Integer idUsuario) throws NirhoServiceException {
+		List<Proyecto> lista = new ArrayList<>();
+		try {
+			if(idUsuario == 0) {
+				lista = proyectoDAO.findAll();
+			} else {
+				List<ConsultorProyecto> listaCP = consulProyDAO.findByIdUsuario(idUsuario);
+				for(ConsultorProyecto cp: listaCP) {
+					Proyecto proyecto = dao.getOne(cp.getConsultorProyectoPK().getIdProyecto());
+					lista.add(proyecto);
+				}
+			}
+			
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al consultar en la BD los proyectos, causa [" + e.getMessage()+ "]");
