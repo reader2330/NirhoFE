@@ -224,7 +224,10 @@ public class ProyectoCLBController {
 	        Proyecto proyecto = resGraficas.getProyecto();
 	        
 	        ReporteUtil.reemplazarParrafo(document, "nombre.empresa", proyecto.getIdEmpresa().getEmpresa());
-	  
+	        
+	        XWPFTable x0 =  ReporteUtil.getTablaPorTitulo(document, "Categorias por area");
+	        logger.info(" ********************************* x0 [" + x0 + "] *****************************");
+	        
 	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Cumplimiento por area");
 	        logger.info(" ********************************* x1 [" + x1 + "] *****************************");	        
 	        	        
@@ -233,6 +236,27 @@ public class ProyectoCLBController {
 	        List<GraficaAreaOrgDTO> resArea = resGraficas.getAreas();
 	        logger.info(" ********************************* graficaAreaOrgList [" + resArea + "] *****************************");
 	        
+	        boolean primerRow0 = true;
+	        
+			if (x0 != null) {
+				for (GraficaAreaOrgDTO gaDTO : resArea) {
+					String area = gaDTO.getAreaOrg();
+					XWPFTableRow row0 = null;
+					List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
+					for (GraficaResultadoDTO resul : graficaResultadoList) {
+						if (primerRow0) {
+							row0 = x0.getRow(1);
+							primerRow0 = false;
+						} else {
+							row0 = x0.createRow();
+						}
+						row0.getCell(0).setText(area);
+						row0.getCell(1).setText(resul.getPregunta().getEnunciado());
+						row0.getCell(2).setText(resul.getPregunta().getIdTema().getNombre());
+					}
+				}
+			}
+			
 	        int maxCalificacion = 1, minCalificacion = 1;
 	        String maxArea = "", minArea = "", maxFuncion = "", minFuncion = "";
 	        double promedioGeneral = 0;
