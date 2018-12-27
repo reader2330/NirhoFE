@@ -388,6 +388,7 @@ public class ProyectoAPOController {
 	        }
 	         
 	        
+	        HashMap<String, Double> datosGrafico = new HashMap<>(); 
 	        double maxCumplimiento = 0.0, minCumplimiento = 5.0;
 	        String maxCumplimientoActividad = "", minCumplimientoActividad = "", maxCumplimientoFuncion = "", minCumplimientoFuncion = "";
 	        double promedioCumplimiento = 0;
@@ -442,6 +443,8 @@ public class ProyectoAPOController {
 	        				minCumplimientoFuncion = funcion.getFuncion();
 	            		}
 	        			
+	            		datosGrafico.put(act.getNombre(), auxPromedioCumplimiento);
+	            		
 	        		}   
 	        		
 	        		if(!content.isEmpty()) {
@@ -470,29 +473,29 @@ public class ProyectoAPOController {
 	            	chart = (XWPFChart) part;  
 	                String title= chart.getTitle().getBody().getParagraph(0).getText();
 	                
-	                if(title.equals("Comparativo del promedio de la empresa respecto a las áreas")) {
+	                if(title.equals("Comparativo de cumplimientos")) {
 	                	 XSSFWorkbook wb2 = chart.getWorkbook();
 		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
 		 	             int i = 1;
-//		 	             for(String key: datos.keySet()) {
-//		 	            	Row row = dataSheet2.createRow(i);
-//	    	            	row.createCell(0).setCellValue(key);
-//	    	            	row.createCell(1).setCellValue(datos.get(key));
-//		 	            	row.createCell(2).setCellValue(promedioGeneral);
-//		 	            	i++;
-//		 	             }
+		 	             for(String key: datosGrafico.keySet()) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datosGrafico.get(key));
+		 	            	row.createCell(2).setCellValue(promedioCumplimiento);
+		 	            	i++;
+		 	             }
 	                }
 	                
-	                if(title.equals("Cumplimiento por área")) {
+	                if(title.equals("Cumplimiento")) {
 	                	 XSSFWorkbook wb2 = chart.getWorkbook();
 		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
 		 	             int i = 1;
-//		 	             for(String key: datos.keySet()) {
-//		 	            	Row row = dataSheet2.createRow(i);
-//	    	            	row.createCell(0).setCellValue(key);
-//	    	            	row.createCell(1).setCellValue(datos.get(key));
-//		 	            	i++;
-//		 	             }
+		 	             for(String key: datosGrafico.keySet()) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datosGrafico.get(key));
+		 	            	i++;
+		 	             }
 	                }
 	                
 	            }
