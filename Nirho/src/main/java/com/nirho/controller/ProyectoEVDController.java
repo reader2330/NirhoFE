@@ -43,10 +43,13 @@ import com.nirho.dto.PeriodoProyecto;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConsultorProyectoPK;
+import com.nirho.model.CuetionarioParticipante;
 import com.nirho.model.EstatusProyecto;
+import com.nirho.model.Opcion;
 import com.nirho.model.Participante;
 import com.nirho.model.ParticipantePK;
 import com.nirho.model.Proyecto;
+import com.nirho.service.CuestionarioParticipanteService;
 import com.nirho.service.EstatusProyectoService;
 import com.nirho.service.GraficasProyectoService;
 import com.nirho.service.ParticipanteService;
@@ -69,6 +72,8 @@ public class ProyectoEVDController {
 	private GraficasProyectoService graficasService;
 	@Autowired
 	private ParticipanteService participanteService;
+	@Autowired
+	private CuestionarioParticipanteService cuestPartService;
 	
 	@GetMapping(value = "/todos")
 	public List<Proyecto> todos() throws NirhoControllerException{
@@ -415,19 +420,30 @@ public class ProyectoEVDController {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
 
 	        Participante participante = participanteService.obtenerParticipante(new ParticipantePK(idParticipante, idProyecto));
+	        logger.info(" ********************************* participante [" + participante + "] *****************************");
 	        
-	        ReporteUtil.reemplazarParrafo(document, "nombre.participante", participante.getNombres() + " " + participante.getAPaterno() + " " + participante.getAMaterno());
+	        String apePa = participante.getAPaterno()!=null?participante.getAPaterno():"";
+	        String apeMa = participante.getAMaterno()!=null?participante.getAMaterno():"";
+	        String nom =  participante.getNombres()!=null?participante.getNombres():"";
+	        String nombreParticipante = nom + " " + apePa + " " + apeMa; 
+			
+			logger.info(" ********************************* nombreParticipante [" + nombreParticipante + "] *****************************");
+	        
+			ReporteUtil.reemplazarParrafo(document, "nombre.participante", nombreParticipante);
 	  
 	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Tabla participante individual");
-	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "Resumen individual");
-
+	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "formato de medicion");
+	        XWPFTable x3 =  ReporteUtil.getTablaPorTitulo(document, "competencias de desempeno");
+	        XWPFTable x4 =  ReporteUtil.getTablaPorTitulo(document, "factores");
+	        XWPFTable x5 =  ReporteUtil.getTablaPorTitulo(document, "competencias");
+	        
 	        if(x1 != null){	   
 	        	XWPFTableRow row1 = x1.getRow(0);
-	        	row1.getCell(1).setText(participante.getNombres() + " " + participante.getAPaterno() + " " + participante.getAMaterno());
+	        	row1.getCell(1).setText(nombreParticipante);
 	        	XWPFTableRow row2 = x1.getRow(1);
 	        	row2.getCell(1).setText(participante.getAreaOrg());
 	        	XWPFTableRow row3 = x1.getRow(2);
@@ -435,87 +451,155 @@ public class ProyectoEVDController {
 	        	XWPFTableRow row4 = x1.getRow(3);
 	        	row4.getCell(1).setText(participante.getNivelTexto());
 	        	XWPFTableRow row5 = x1.getRow(4);
-	        	String objetivo = "";
-//	        	for (ParticipanteAPOAmp amp : participante.getAmpliaciones()) {
-//	        		objetivo = amp.getObjetivoPuesto();
-//	        	}        		
-	        	row5.getCell(1).setText(objetivo);
-	        }
-	         
-	        
-	        int maxCumplimiento = 0, minCumplimiento = 5;
-	        String maxCumplimientoActividad = "", minCumplimientoActividad = "", maxCumplimientoFuncion = "", minCumplimientoFuncion = "";
-	        double promedioCumplimiento = 0;
-	        int numCumplimientos = 0;
-	        
-	        List<String> headers = new ArrayList<>();
-	        headers.add("Actividad");
-	        headers.add("Nombre de la meta");
-	        headers.add("Indicador");
-	        headers.add("Tiempo");
-	        headers.add("Programado");
-	        headers.add("Real");
-	        headers.add("% Cumplimiento");
-	        
-	        int index = 0;
-//	        for (ParticipanteAPOAmp amp : participante.getAmpliaciones()) {
-//	        	for (ParticipanteAPOAmpFuncion funcion : amp.getFunciones()) {
-//	        		List<List<String>> content = new ArrayList<>();
-//	        		for (ParticipanteAPOAmpActividad act : funcion.getActividades()) {
-//	        			List<String> datos = new ArrayList<>();
-//	        			datos.add(act.getNombre());
-//	        			datos.add(funcion.getMetaKpi());
-//	        			datos.add(funcion.getCantidadMeta());
-//	        			datos.add(funcion.getTiempo());
-//	        			datos.add("5");
-//	        			datos.add(act.getCalificacion() + "");
-//	        			double auxPromedioCumplimiento = ((act.getCalificacion()*100) / 5);
-//	        			datos.add(auxPromedioCumplimiento + "");
-//	        			content.add(datos);
-//	        			numCumplimientos++;
-//	        			promedioCumplimiento += auxPromedioCumplimiento; 
-//	        			if(auxPromedioCumplimiento > maxCumplimiento) {
-//	        				
-//	        			}
-//	        		}    	
-//	        		if(!content.isEmpty()) {
-//	        			ReporteUtil.crearTablaFuncion(document, funcion.getFuncion(), headers, content);
-//	        		}
-//	        	}  
-//        	}  
-	        
-	        promedioCumplimiento = promedioCumplimiento / numCumplimientos;
-	        promedioCumplimiento = Math.round(promedioCumplimiento * 100.0) / 100.0;
-	        
-	        if(x2 != null){
-	        	XWPFTableRow row1 = x2.getRow(0);
-	        	row1.getCell(1).setText(promedioCumplimiento + "");
-	        	XWPFTableRow row2 = x2.getRow(1);
-	        }
-	           
-	        XWPFChart chart = null;
-	        for (POIXMLDocumentPart part : document.getRelations()) {
-	            if (part instanceof XWPFChart) {
-	                
-	            	chart = (XWPFChart) part;  
-	                String title= chart.getTitle().getBody().getParagraph(0).getText();
-	                
-	                if(title.equals("Comparativo del promedio de la empresa respecto a las áreas")) {
-	                	 XSSFWorkbook wb2 = chart.getWorkbook();
-		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
-		 	             int i = 1;
-	                }
-	                
-	                if(title.equals("Cumplimiento por área")) {
-	                	 XSSFWorkbook wb2 = chart.getWorkbook();
-		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
-		 	             int i = 1;
-	                }
-	                
-	            }
+	        	String jefeDirecto = "";
+	        	try {
+	        		Participante jefe = participanteService.obtenerParticipante(new ParticipantePK(participante.getIdPartJefeInm(), idProyecto));
+	        		String apePaJefe = jefe.getAPaterno()!=null?jefe.getAPaterno():"";
+	    	        String apeMaJefe = jefe.getAMaterno()!=null?jefe.getAMaterno():"";
+	    	        String nomJefe =  jefe.getNombres()!=null?jefe.getNombres():"";
+	    	        jefeDirecto = nomJefe + " " + apePaJefe + " " + apeMaJefe; 
+	    	        logger.info(" ********************************* jefeDirecto [" + jefeDirecto + "] *****************************");
+	        	} catch(Exception e) {
+	        		logger.info("Exception e [" + e.getMessage() + "]");
+	        	}
+	        	row5.getCell(1).setText(jefeDirecto);
 	        }
 	        
-	        String nombreReporte = "ReporteAPO_" + participante.getNombres() + " " + participante.getAPaterno() + " " + participante.getAMaterno() + ".docx";
+	        List<CuetionarioParticipante> factores = new ArrayList<>();
+	        List<CuetionarioParticipante> competencias = new ArrayList<>();
+	        List<CuetionarioParticipante> cuestPartList = cuestPartService.obtenerCuestionarioParticipante(idParticipante, idProyecto);
+	        logger.info(" ********************************* cuestPartList [" + cuestPartList + "] *****************************");
+	        for(CuetionarioParticipante cp: cuestPartList) {
+	        	if(cp.getPregunta().getIdTema().getTipo()!=null && cp.getPregunta().getIdTema().getTipo().equals("FA")) {
+	        		factores.add(cp);
+	        		logger.info(" factor [" + cp + "]");
+	        	} else {
+	        		logger.info(" competencia [" + cp + "]");
+	        		competencias.add(cp);
+	        	}
+	        }
+	        logger.info("********************************* num factores [" + factores.size() + "] *********************************");
+	        logger.info("********************************* num competencias [" + competencias.size() + "] *********************************");
+	        
+	        if(x2 != null) {
+	        	XWPFTableRow row = null;
+	        	for(CuetionarioParticipante cp: factores) {
+	        		boolean primerRow = true;
+		        	if (primerRow) {
+		        		row = x2.getRow(1);
+						primerRow = false;
+					} else {
+						row = x2.createRow();
+					}
+	        		row.getCell(0).setText(cp.getTema().getNombre());
+	        		row.getCell(1).setText(cp.getTema().getDescripcion());
+	        		List<Opcion> opciones = cuestPartService.opcionesTema(cp.getTema().getIdTema());
+	        		logger.info(" *********factores*********** opciones [" + opciones + "] *****************************");
+	        		for(Opcion op: opciones) {
+	        			switch(op.getTipo()) {
+	        				case "BR":
+	        					row.getCell(2).setText(op.getEnunciado());
+	        					break;
+	        				case "MR":
+	        					row.getCell(3).setText(op.getEnunciado());
+	        					break;
+	        				case "R":
+	        					row.getCell(4).setText(op.getEnunciado());
+	        					break;
+	        				case "RS":
+	        					row.getCell(5).setText(op.getEnunciado());
+	        					break;
+	        				case "E":
+	        					row.getCell(6).setText(op.getEnunciado());
+	        					break;
+	        			}
+	        		}
+	        		row.getCell(7).setText("" + cp.getRespuestaJefe());
+	        		row.getCell(8).setText("" + cp.getRespuestaRh());
+	        	}
+	        }
+	        
+	        if(x3 != null) {
+	        	XWPFTableRow row = null;
+	        	boolean primerRow = true;
+	        	for(CuetionarioParticipante cp: competencias) {
+	        		if (primerRow) {
+		        		row = x3.getRow(2);
+						primerRow = false;
+					} else {
+						row = x3.createRow();
+					}
+	        		row.getCell(0).setText(cp.getTema().getNombre());
+	        		row.getCell(1).setText(cp.getTema().getDescripcion());
+	        		List<Opcion> opciones = cuestPartService.opcionesTema(cp.getTema().getIdTema());
+	        		logger.info(" *********competencias*********** opciones [" + opciones + "] *****************************");
+	        		for(Opcion op: opciones) {
+	        			switch(op.getTipo()) {
+	        				case "BR":
+	        					row.getCell(2).setText(op.getEnunciado());
+	        					break;
+	        				case "MR":
+	        					row.getCell(3).setText(op.getEnunciado());
+	        					break;
+	        				case "R":
+	        					row.getCell(4).setText(op.getEnunciado());
+	        					break;
+	        				case "RS":
+	        					row.getCell(5).setText(op.getEnunciado());
+	        					break;
+	        				case "E":
+	        					row.getCell(6).setText(op.getEnunciado());
+	        					break;
+	        			}
+	        		}
+	        		row.getCell(7).setText("" + cp.getRespuestaJefe());
+	        		row.getCell(8).setText("" + cp.getRespuestaRh());
+	        	}
+	        }
+	        
+	        String factoresMejora = "";
+	        String factoresSobresa = "";
+	        for(CuetionarioParticipante cp: factores) {
+	        	int respJefe = cp.getRespuestaJefe()!=null?cp.getRespuestaJefe().intValue():0;
+	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
+	        	int promedio = (respJefe + respRH)/2;
+	        	if(promedio<3) {
+	        		factoresMejora = factoresMejora + (factoresMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        	} else if(promedio>3) {
+	        		factoresSobresa = factoresSobresa + (factoresSobresa.length() != 0?",":"") + cp.getPregunta().getEnunciado();
+	        	}
+	        }
+	        logger.info(" ******************** factoresMejora [" + factoresMejora + "] *****************************");
+	        logger.info(" ******************** factoresSobresa [" + factoresSobresa + "] *****************************");
+	        if(x4 != null){
+	        	XWPFTableRow row1 = x4.getRow(1);
+	        	row1.getCell(2).setText(factoresMejora);
+	        	XWPFTableRow row2 = x4.getRow(3);
+	        	row2.getCell(2).setText(factoresSobresa);
+	        }
+	        
+	        String competenciasMejora = "";
+	        String competenciasSobresa = "";
+	        for(CuetionarioParticipante cp: competencias) {
+	        	int respJefe = cp.getRespuestaJefe()!=null?cp.getRespuestaJefe().intValue():0;
+	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
+	        	int promedio = (respJefe + respRH)/2;
+	        	if(promedio<3) {
+	        		competenciasMejora = competenciasMejora + (competenciasMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        	} else if(promedio>3) {
+	        		competenciasSobresa = competenciasSobresa + (competenciasSobresa.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        	}
+	        }
+	        logger.info(" ******************** competenciasMejora [" + competenciasMejora + "] *****************************");
+	        logger.info(" ******************** competenciasSobresa [" + competenciasSobresa + "] *****************************");
+	        if(x5 != null){
+	        	XWPFTableRow row1 = x5.getRow(1);
+	        	row1.getCell(2).setText(competenciasMejora);
+	        	XWPFTableRow row2 = x5.getRow(3);
+	        	row2.getCell(2).setText(competenciasSobresa);
+	        }
+	        
+	        String nombreReporte = "ReporteEVD_" + nombreParticipante + ".docx";
 	        
 	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
 	        response.setHeader("Content-Disposition", "attachment; filename=" + nombreReporte);
