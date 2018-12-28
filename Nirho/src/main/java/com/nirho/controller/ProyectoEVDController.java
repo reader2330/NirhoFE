@@ -357,9 +357,9 @@ public class ProyectoEVDController {
 	        	XWPFTableRow row1 = x2.getRow(0);
 	        	row1.getCell(1).setText(promedioGeneral + "");
 	        	XWPFTableRow row2 = x2.getRow(1);
-	        	row2.getCell(1).setText("Area: " + maxArea + "\n, Función: " + maxFuncion + ", Promedio: " + maxCalificacion);
+	        	row2.getCell(1).setText("Area: " + maxArea + "\n, Competencia: " + maxFuncion + ", Promedio: " + maxCalificacion);
 	        	XWPFTableRow row3 = x2.getRow(2);
-	        	row3.getCell(1).setText("Area: " + minArea + ", Función: " + minFuncion + ", Promedio: " + minCalificacion);
+	        	row3.getCell(1).setText("Area: " + minArea + ", Competencia: " + minFuncion + ", Promedio: " + minCalificacion);
 	        }
 	           
 	        XWPFChart chart = null;
