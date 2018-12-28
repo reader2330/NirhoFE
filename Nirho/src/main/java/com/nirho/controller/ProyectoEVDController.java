@@ -438,8 +438,7 @@ public class ProyectoEVDController {
 	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Tabla participante individual");
 	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "formato de medicion");
 	        XWPFTable x3 =  ReporteUtil.getTablaPorTitulo(document, "competencias de desempeno");
-	        XWPFTable x4 =  ReporteUtil.getTablaPorTitulo(document, "factores");
-	        XWPFTable x5 =  ReporteUtil.getTablaPorTitulo(document, "competencias");
+	        XWPFTable x4 =  ReporteUtil.getTablaPorTitulo(document, "resultados de desempeno");
 	        
 	        if(x1 != null){	   
 	        	XWPFTableRow row1 = x1.getRow(0);
@@ -578,13 +577,6 @@ public class ProyectoEVDController {
 	        }
 	        logger.info(" ******************** factoresMejora [" + factoresMejora + "] *****************************");
 	        logger.info(" ******************** factoresSobresa [" + factoresSobresa + "] *****************************");
-	        if(x4 != null){
-	        	XWPFTableRow row1 = x4.getRow(1);
-	        	row1.getCell(2).setText(factoresMejora);
-	        	XWPFTableRow row2 = x4.getRow(3);
-	        	row2.getCell(2).setText(factoresSobresa);
-	        }
-	        
 	        String competenciasMejora = "";
 	        String competenciasSobresa = "";
 	        for(CuetionarioParticipante cp: competencias) {
@@ -599,11 +591,12 @@ public class ProyectoEVDController {
 	        }
 	        logger.info(" ******************** competenciasMejora [" + competenciasMejora + "] *****************************");
 	        logger.info(" ******************** competenciasSobresa [" + competenciasSobresa + "] *****************************");
-	        if(x5 != null){
-	        	XWPFTableRow row1 = x5.getRow(1);
-	        	row1.getCell(2).setText(competenciasMejora);
-	        	XWPFTableRow row2 = x5.getRow(3);
-	        	row2.getCell(2).setText(competenciasSobresa);
+	        if(x4 != null){
+	        	XWPFTableRow row2 = x4.getRow(2);
+	        	row2.getCell(0).setText(factoresMejora);
+	        	row2.getCell(1).setText(factoresSobresa);
+	        	row2.getCell(2).setText(competenciasMejora);
+	        	row2.getCell(3).setText(competenciasSobresa);
 	        }
 	        
 	        XWPFChart chart = null;
@@ -613,7 +606,7 @@ public class ProyectoEVDController {
 	            	chart = (XWPFChart) part;  
 	                String title= chart.getTitle().getBody().getParagraph(0).getText();
 	                
-	                if(title.equals("Comparativo del promedio de la empresa respecto a las áreas")) {
+	                if(title.equals("Comparativo del promedio de competencias")) {
 	                	 XSSFWorkbook wb2 = chart.getWorkbook();
 		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
 		 	             int i = 1;
@@ -626,7 +619,7 @@ public class ProyectoEVDController {
 		 	             }
 	                }
 	                
-	                if(title.equals("Cumplimiento por área")) {
+	                if(title.equals("Cumplimiento por competencia")) {
 	                	 XSSFWorkbook wb2 = chart.getWorkbook();
 		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
 		 	             int i = 1;
