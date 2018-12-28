@@ -493,8 +493,7 @@ public class ProyectoEVO360Controller {
 			ReporteUtil.reemplazarParrafo(document, "nombre.participante", nombreParticipante);
 	  
 	        XWPFTable x1 =  ReporteUtil.getTablaPorTitulo(document, "Tabla participante individual");
-	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "formato de medicion");
-	        XWPFTable x3 =  ReporteUtil.getTablaPorTitulo(document, "competencias de desempeno");
+	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "competencias de desempeno");
 	        XWPFTable x4 =  ReporteUtil.getTablaPorTitulo(document, "resultados de desempeno");
 	        
 	        if(x1 != null){	   
@@ -521,76 +520,28 @@ public class ProyectoEVO360Controller {
 	        	row5.getCell(1).setText(jefeDirecto);
 	        }
 	        
-	        List<CuetionarioParticipante> factores = new ArrayList<>();
-	        List<CuetionarioParticipante> competencias = new ArrayList<>();
 	        List<CuetionarioParticipante> cuestPartList = cuestPartService.obtenerCuestionarioParticipante(idParticipante, idProyecto);
 	        logger.info(" ********************************* cuestPartList [" + cuestPartList + "] *****************************");
 	        HashMap<String, Integer> datos = new HashMap<>();
 	        int promedioGeneral = 0;
 	        for(CuetionarioParticipante cp: cuestPartList) {
-	        	dispersionMock(cp); //dispersionMock para efectos de pruebas de reportes
-	        	datos.put(cp.getPregunta().getEnunciado(), Math.round(((cp.getRespuestaJefe() + cp.getRespuestaRh())/2)));
-	        	promedioGeneral = promedioGeneral + Math.round(((cp.getRespuestaJefe() + cp.getRespuestaRh())/2));
-	        	if(cp.getPregunta().getIdTema().getTipo()!=null && cp.getPregunta().getIdTema().getTipo().equals("FA")) {
-	        		factores.add(cp);
-	        		logger.info(" factor [" + cp + "]");
-	        	} else {
-	        		logger.info(" competencia [" + cp + "]");
-	        		competencias.add(cp);
-	        	}
+	        	logger.info(" categoria cp [" + cp + "]");
+	        	datos.put(cp.getPregunta().getEnunciado(), cp.getRespuesta());
+	        	promedioGeneral = promedioGeneral + cp.getRespuesta();
 	        }
 	        promedioGeneral = Math.round(promedioGeneral/cuestPartList.size());
 	        logger.info("********************************* promedioGeneral [" + promedioGeneral + "] *********************************");
-	        logger.info("********************************* num factores [" + factores.size() + "] *********************************");
-	        logger.info("********************************* num competencias [" + competencias.size() + "] *********************************");
-	        
+	        logger.info("********************************* num categorias [" + cuestPartList.size() + "] *********************************");
+	        	        	        
 	        if(x2 != null) {
 	        	XWPFTableRow row = null;
-	        	for(CuetionarioParticipante cp: factores) {
-	        		boolean primerRow = true;
-		        	if (primerRow) {
-		        		row = x2.getRow(1);
+	        	boolean primerRow = true;
+	        	for(CuetionarioParticipante cp: cuestPartList) {
+	        		if (primerRow) {
+		        		row = x2.getRow(2);
 						primerRow = false;
 					} else {
 						row = x2.createRow();
-					}
-	        		row.getCell(0).setText(cp.getTema().getNombre());
-	        		row.getCell(1).setText(cp.getTema().getDescripcion());
-	        		List<Opcion> opciones = cuestPartService.opcionesTema(cp.getTema().getIdTema());
-	        		logger.info(" *********factores*********** opciones [" + opciones + "] *****************************");
-	        		for(Opcion op: opciones) {
-	        			switch(op.getTipo()) {
-	        				case "BR":
-	        					row.getCell(2).setText(op.getEnunciado());
-	        					break;
-	        				case "MR":
-	        					row.getCell(3).setText(op.getEnunciado());
-	        					break;
-	        				case "R":
-	        					row.getCell(4).setText(op.getEnunciado());
-	        					break;
-	        				case "RS":
-	        					row.getCell(5).setText(op.getEnunciado());
-	        					break;
-	        				case "E":
-	        					row.getCell(6).setText(op.getEnunciado());
-	        					break;
-	        			}
-	        		}
-	        		row.getCell(7).setText("" + cp.getRespuestaJefe());
-	        		row.getCell(8).setText("" + cp.getRespuestaRh());
-	        	}
-	        }
-	        
-	        if(x3 != null) {
-	        	XWPFTableRow row = null;
-	        	boolean primerRow = true;
-	        	for(CuetionarioParticipante cp: competencias) {
-	        		if (primerRow) {
-		        		row = x3.getRow(2);
-						primerRow = false;
-					} else {
-						row = x3.createRow();
 					}
 	        		row.getCell(0).setText(cp.getTema().getNombre());
 	        		row.getCell(1).setText(cp.getTema().getDescripcion());
@@ -615,45 +566,28 @@ public class ProyectoEVO360Controller {
 	        					break;
 	        			}
 	        		}
-	        		row.getCell(7).setText("" + cp.getRespuestaJefe());
-	        		row.getCell(8).setText("" + cp.getRespuestaRh());
+	        		row.getCell(7).setText("" + cp.getRespuesta());
 	        	}
 	        }
 	        
-	        String factoresMejora = "";
-	        String factoresSobresa = "";
-	        for(CuetionarioParticipante cp: factores) {
+	        String categoriasMejora = "";
+	        String categoriasSobresa = "";
+	        for(CuetionarioParticipante cp: cuestPartList) {
 	        	int respJefe = cp.getRespuestaJefe()!=null?cp.getRespuestaJefe().intValue():0;
 	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
 	        	int promedio = (respJefe + respRH)/2;
 	        	if(promedio<3) {
-	        		factoresMejora = factoresMejora + (factoresMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        		categoriasMejora = categoriasMejora + (categoriasMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
-	        		factoresSobresa = factoresSobresa + (factoresSobresa.length() != 0?",":"") + cp.getPregunta().getEnunciado();
+	        		categoriasSobresa = categoriasSobresa + (categoriasSobresa.length() != 0?",":"") + cp.getPregunta().getEnunciado();
 	        	}
 	        }
-	        logger.info(" ******************** factoresMejora [" + factoresMejora + "] *****************************");
-	        logger.info(" ******************** factoresSobresa [" + factoresSobresa + "] *****************************");
-	        String competenciasMejora = "";
-	        String competenciasSobresa = "";
-	        for(CuetionarioParticipante cp: competencias) {
-	        	int respJefe = cp.getRespuestaJefe()!=null?cp.getRespuestaJefe().intValue():0;
-	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
-	        	int promedio = (respJefe + respRH)/2;
-	        	if(promedio<3) {
-	        		competenciasMejora = competenciasMejora + (competenciasMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
-	        	} else if(promedio>3) {
-	        		competenciasSobresa = competenciasSobresa + (competenciasSobresa.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
-	        	}
-	        }
-	        logger.info(" ******************** competenciasMejora [" + competenciasMejora + "] *****************************");
-	        logger.info(" ******************** competenciasSobresa [" + competenciasSobresa + "] *****************************");
+	        logger.info(" ******************** factoresMejora [" + categoriasMejora + "] *****************************");
+	        logger.info(" ******************** factoresSobresa [" + categoriasSobresa + "] *****************************");
 	        if(x4 != null){
 	        	XWPFTableRow row2 = x4.getRow(2);
-	        	row2.getCell(0).setText(factoresMejora);
-	        	row2.getCell(1).setText(factoresSobresa);
-	        	row2.getCell(2).setText(competenciasMejora);
-	        	row2.getCell(3).setText(competenciasSobresa);
+	        	row2.getCell(0).setText(categoriasMejora);
+	        	row2.getCell(1).setText(categoriasSobresa);
 	        }
 	        
 	        XWPFChart chart = null;
@@ -663,7 +597,7 @@ public class ProyectoEVO360Controller {
 	            	chart = (XWPFChart) part;  
 	                String title= chart.getTitle().getBody().getParagraph(0).getText();
 	                
-	                if(title.equals("Comparativo del promedio de competencias")) {
+	                if(title.equals("Comparativo del promedio de categorías")) {
 	                	 XSSFWorkbook wb2 = chart.getWorkbook();
 		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
 		 	             int i = 1;
@@ -676,7 +610,7 @@ public class ProyectoEVO360Controller {
 		 	             }
 	                }
 	                
-	                if(title.equals("Cumplimiento por competencia")) {
+	                if(title.equals("Cumplimiento por categoría")) {
 	                	 XSSFWorkbook wb2 = chart.getWorkbook();
 		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
 		 	             int i = 1;
@@ -706,29 +640,4 @@ public class ProyectoEVO360Controller {
 		}
 	}
 	
-	protected void dispersionMock(CuetionarioParticipante cp) {
-		if(cp.getRespuesta()==null) {
-			cp.setRespuesta(0);
-		}
-		switch(cp.getRespuesta()) {
-			case 0: cp.setRespuestaJefe(0);
-	    			cp.setRespuestaRh(0);
-	    		break;
-			case 1: cp.setRespuestaJefe(1);
-					cp.setRespuestaRh(1);
-	    		break;
-			case 2: cp.setRespuestaJefe(1);
-					cp.setRespuestaRh(3);
-				break;
-			case 3: cp.setRespuestaJefe(4);
-					cp.setRespuestaRh(2);
-				break;
-			case 4: cp.setRespuestaJefe(5);
-					cp.setRespuestaRh(3);
-				break;
-			case 5: cp.setRespuestaJefe(5);
-					cp.setRespuestaRh(5);
-				break;
-		}
-	}
 }
