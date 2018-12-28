@@ -158,7 +158,7 @@ public class ParticipantePVCController {
 					JSONObject actual = new JSONObject();
 					actual.accumulate("area", participante.getArea());
 					actual.accumulate("esfera", participante.getEsfera());
-					actual.accumulate("nivel", participante.getNivel());
+					actual.accumulate("nivel", participante.getNivelP());
 					actual.accumulate("especilidad", participante.getEspecialidad());
 					
 					JSONArray conocimientosTecnicos = new JSONArray();
@@ -175,13 +175,11 @@ public class ParticipantePVCController {
 						if(area.getNombre().equals(participante.getArea())) {
 							for(ProyectoPVCEsfera esfera: area.getEsferas()) {
 								if(esfera.getNombre().equals(participante.getEsfera())) {
-									if(conocimientoSiguiente) {
-										actual.accumulate("esferaSiguiente", esfera.getNombre());
-									}
 									for(ProyectoPVCNivel nivel: esfera.getNiveles()) {
-										if(nivel.getNombre().equals(participante.getNivelP())) {
+										if(nivel.getNombre().equals(participante.getNivelP()) || conocimientoSiguiente) {
 											if(conocimientoSiguiente) {
 												actual.accumulate("nivelSiguiente", nivel.getNombre());
+												actual.accumulate("esferaSiguiente", esfera.getNombre());
 											}
 											for(ProyectoPVCEspecialidad especialidad: nivel.getEspecialidades()) {
 												if(especialidad.getNombre().equals(participante.getEspecialidad())) {
@@ -209,6 +207,7 @@ public class ParticipantePVCController {
 													break;
 												}
 												if(auxBreak) break;
+												if(conocimientoSiguiente) break;
 											}
 										}
 										if(auxBreak) break;
