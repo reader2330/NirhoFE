@@ -1,18 +1,40 @@
 package com.nirho.controller;
 
+import java.io.IOException;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ooxml.POIXMLDocumentPart;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.openxml4j.util.ZipSecureFile;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.XWPFAbstractNum;
+import org.apache.poi.xwpf.usermodel.XWPFChart;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFNumbering;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.jboss.logging.Logger;
 import org.json.JSONArray; 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTAbstractNum;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTLvl;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STNumberFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,6 +52,10 @@ import com.nirho.dto.EmailDatos;
 import com.nirho.dto.ParticipanteDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.ParticipanteAPO;
+import com.nirho.model.ParticipanteAPOAmp;
+import com.nirho.model.ParticipanteAPOAmpActividad;
+import com.nirho.model.ParticipanteAPOAmpFuncion;
 import com.nirho.model.ParticipantePVC;
 import com.nirho.model.Proyecto;
 import com.nirho.model.ProyectoPVCArea;
@@ -45,6 +71,7 @@ import com.nirho.service.ProyectoPVCAreaService;
 import com.nirho.service.ProyectoPVCEspecialidadService;
 import com.nirho.service.ProyectoService;
 import com.nirho.service.UsuarioService;
+import com.nirho.util.ReporteUtil;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -357,6 +384,272 @@ public class ParticipantePVCController {
     	} catch(NirhoServiceException nse) {
     		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
     	}
+	}
+	
+	
+	@RequestMapping(value = "/reporte/participante", method = RequestMethod.GET)
+	@ResponseBody
+	public void genearReporteIndividual(@RequestParam(name="idParticipante") Integer idParticipante, HttpServletResponse response) throws NirhoControllerException{
+		
+		try {
+			    
+			ZipSecureFile.setMinInflateRatio(0);
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reportePVC.docx"));
+
+	        ParticipantePVC participante = participantePVCService.getOne(idParticipante);
+
+	        XWPFTable informacionGeneral =  ReporteUtil.getTablaPorTitulo(document, "Información general");
+	        if(informacionGeneral != null){
+	            XWPFTableRow row0 = informacionGeneral.getRow(0);
+	            row0.getCell(1).setText(participante.getNombres() + " " + participante.getaPaterno() + " " + participante.getaMaterno());
+	            row0.getCell(3).setText(participante.getFechaIngreso().toString());
+	            
+	            XWPFTableRow row1 = informacionGeneral.getRow(1);
+	            row1.getCell(1).setText(participante.getPuesto());
+	        }
+
+	        XWPFTable semaforo =  ReporteUtil.getTablaPorTitulo(document, "semaforo");
+	        
+	        if(semaforo != null){
+	          
+	            XWPFParagraph p1 = semaforo.getRow(0).getCell(0).getParagraphs().get(0);
+	            XWPFRun r1 = p1.createRun();
+	            r1.setBold(participante.getAntigPuesto() >= 0 && participante.getAntigPuesto() <= 2);
+	            r1.setText("0 - 2 años", 0);
+	            
+	            XWPFParagraph p2 = semaforo.getRow(1).getCell(0).getParagraphs().get(0);
+	            XWPFRun r2 = p2.createRun();
+	            r2.setBold(participante.getAntigPuesto() >= 2 && participante.getAntigPuesto() <= 4);
+	            r2.setText("2 años 1 mes " +" – " +" 4 años", 0);
+	            
+	            XWPFParagraph p3 = semaforo.getRow(2).getCell(0).getParagraphs().get(0);
+	            XWPFRun r3 = p3.createRun();
+	            r3.setBold(participante.getAntigPuesto() >= 4);
+	            r3.setText("4 años 1 mes", 0);
+	            
+	        }
+	        
+	        XWPFTable conocimientos =  ReporteUtil.getTablaPorTitulo(document, "conocimientos");
+	        
+	        if(conocimientos != null){
+	        
+	        	JSONArray conocimientosTecnicos = new JSONArray();
+				JSONArray conocimientosHumanos = new JSONArray();
+				
+				JSONArray conocimientosTecnicosSiguientes = new JSONArray();
+				JSONArray conocimientosHumanosSiguientes = new JSONArray();
+				
+				boolean auxBreak = false;
+				boolean conocimientoSiguiente = false;
+				
+				List<ProyectoPVCArea> areas = proyectoPVCAreaService.getByProyecto(participante.getIdProyecto());
+				for(ProyectoPVCArea area: areas) {
+					if(area.getNombre().equals(participante.getArea())) {
+						for(ProyectoPVCEsfera esfera: area.getEsferas()) {
+							if(esfera.getNombre().equals(participante.getEsfera())) {
+								for(ProyectoPVCNivel nivel: esfera.getNiveles()) {
+									if(nivel.getNombre().equals(participante.getNivelP()) || conocimientoSiguiente) {
+										
+										for(ProyectoPVCEspecialidad especialidad: nivel.getEspecialidades()) {
+											if(especialidad.getNombre().equals(participante.getEspecialidad())) {
+												
+												for(ProyectoPVCConocimiento conocimiento: especialidad.getConocimientos()) {
+													if(conocimientoSiguiente) {
+														if(conocimiento.getTipo() == 1 ) {
+															conocimientosTecnicosSiguientes.put(conocimiento.getNombre());
+														}
+														if(conocimiento.getTipo() == 2) {
+															conocimientosHumanosSiguientes.put(conocimiento.getNombre());
+														}
+														auxBreak = true;
+													} else {
+														if(conocimiento.getTipo() == 1 ) {
+															conocimientosTecnicos.put(conocimiento.getNombre());
+														}
+														if(conocimiento.getTipo() == 2) {
+															conocimientosHumanos.put(conocimiento.getNombre());
+														}
+													}
+												}
+												
+												conocimientoSiguiente = true;
+												break;
+											}
+											if(auxBreak) break;
+											if(conocimientoSiguiente) break;
+										}
+									}
+									if(auxBreak) break;
+								}
+							}
+							if(auxBreak) break;
+						}
+					}
+					if(auxBreak) break;
+				}
+				
+				for(int i = 0; i < conocimientosTecnicos.length(); i++) {
+					XWPFParagraph parrafo = conocimientos.getRow(1).getCell(0).addParagraph();
+	                parrafo.setStyle("ParrafoNirho");
+	                XWPFRun lnewRun = parrafo.createRun();
+	                try {
+						lnewRun.setText("- " + conocimientosTecnicos.getString(i));
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				for(int i = 0; i < conocimientosHumanos.length(); i++) {
+					XWPFParagraph parrafo = conocimientos.getRow(1).getCell(0).addParagraph();
+	                parrafo.setStyle("ParrafoNirho");
+	                XWPFRun lnewRun = parrafo.createRun();
+	                try {
+						lnewRun.setText("- " + conocimientosHumanos.getString(i));
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				for(int i = 0; i < conocimientosTecnicosSiguientes.length(); i++) {
+					XWPFParagraph parrafo = conocimientos.getRow(3).getCell(0).addParagraph();
+	                parrafo.setStyle("ParrafoNirho");
+	                XWPFRun lnewRun = parrafo.createRun();
+	                try {
+						lnewRun.setText("- " + conocimientosTecnicosSiguientes.getString(i));
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				for(int i = 0; i < conocimientosHumanosSiguientes.length(); i++) {
+					XWPFParagraph parrafo = conocimientos.getRow(3).getCell(0).addParagraph();
+	                parrafo.setStyle("ParrafoNirho");
+	                XWPFRun lnewRun = parrafo.createRun();
+	                try {
+						lnewRun.setText("- " + conocimientosHumanosSiguientes.getString(i));
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+	        	
+	        }
+	        
+	        
+	        XWPFTable esferas =  ReporteUtil.getTablaPorTitulo(document, "esferas");
+	        
+	        if(esferas != null){
+	           
+	        	List<ProyectoPVCArea> areas = proyectoPVCAreaService.getByProyecto(participante.getIdProyecto());
+				for(ProyectoPVCArea area: areas) {
+					if(area.getNombre().equals(participante.getArea())) {
+						for(ProyectoPVCEsfera esfera: area.getEsferas()) {
+							XWPFParagraph parrafo = esferas.getRow(0).getCell(0).addParagraph();
+			                parrafo.setStyle("ParrafoNirho");
+			                XWPFRun lnewRun = parrafo.createRun();
+			                lnewRun.setBold(esfera.getNombre().equals(participante.getEsfera()));
+			                lnewRun.setText("- " + area.getNombre());
+						}
+					}
+				}
+					 
+			}
+	        	
+	        
+	        
+	        HashMap<String, Integer> datosGrafico = new HashMap<>();
+	        
+	        List<ProyectoPVCArea> areas = proyectoPVCAreaService.getByProyecto(participante.getIdProyecto());
+			for(ProyectoPVCArea area: areas) {
+				if(area.getNombre().equals(participante.getArea())) {
+					for(ProyectoPVCEsfera esfera: area.getEsferas()) {
+						int participantes = 0;
+						for(ParticipantePVC p : participantePVCService.getAll(participante.getIdProyecto())) {
+							if(esfera.getNombre().equals(p.getEsfera())) {
+								participantes++;
+							}
+						}
+						datosGrafico.put(esfera.getNombre(), participantes);
+					}
+				}
+			}
+	        
+	        XWPFTable resumen =  ReporteUtil.getTablaPorTitulo(document, "resumen");
+
+	        double max = 0.0, min = 0.0;
+	        String maxEsfera = "", minEsfera = "";
+	        double promedioGeneral = 0;
+	        int numPuestos = 0;
+	        
+	        boolean first = true;
+	        for(String key : datosGrafico.keySet()) {
+	        	int value = (Integer)datosGrafico.get(key);
+	        	if(first) {
+	        		max = value;
+	        		min = value;
+	        		maxEsfera = key;
+	        		minEsfera = key;
+	        		first = false;
+	        	}
+	        	if(value > max) {
+	        		max = value;
+	        		maxEsfera = key;
+	        	}
+	        	if(value < min) {
+	        		min = value;
+	        		minEsfera = key;
+	        	}
+	        	promedioGeneral += value; 
+	        	numPuestos++;
+	        }
+	       
+	        promedioGeneral = promedioGeneral / numPuestos;
+	        promedioGeneral = Math.round(promedioGeneral * 100.0) / 100.0;
+	        
+	        if(resumen != null){
+	        	XWPFTableRow row1 = resumen.getRow(0);
+	        	row1.getCell(1).setText(promedioGeneral + "");
+	        	XWPFTableRow row2 = resumen.getRow(1);
+	        	row2.getCell(1).setText("Esfera: " + maxEsfera + "\n, Personas en el puesto: " + max);
+	        	XWPFTableRow row3 = resumen.getRow(2);
+	        	row3.getCell(1).setText("Esfera: " + minEsfera + "\n, Personas en el puesto: " + min);
+	        }
+	           
+	        XWPFChart chart = null;
+	        for (POIXMLDocumentPart part : document.getRelations()) {
+	            if (part instanceof XWPFChart) {
+	                
+	            	chart = (XWPFChart) part;  
+	                String title= chart.getTitle().getBody().getParagraph(0).getText();
+	                
+	                if(title.equals("Puestos por esfera")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+		 	             for(String key: datosGrafico.keySet()) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datosGrafico.get(key));
+		 	            	row.createCell(2).setCellValue(promedioGeneral);
+		 	            	i++;
+		 	             }
+	                }
+	            }
+	        }
+	        
+	        String nombreReporte = "ReportePVC_" + participante.getNombres() + " " + participante.getaPaterno() + " " + participante.getaMaterno() + ".docx";
+	        
+	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
+	        response.setHeader("Content-Disposition", "attachment; filename=" + nombreReporte);
+	        document.write(response.getOutputStream());
+	   
+	        response.flushBuffer();
+
+		} catch(IOException | InvalidFormatException e){
+			throw new NirhoControllerException("Problemas al generar reporte");
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al generar reporte");
+		}
 	}
 	
 	
