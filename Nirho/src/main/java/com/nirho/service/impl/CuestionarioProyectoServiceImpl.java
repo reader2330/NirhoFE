@@ -9,6 +9,7 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nirho.constant.ProyectoConstants;
 import com.nirho.dao.CuestionarioOpcionDAO;
 import com.nirho.dao.CuestionarioParticipanteDAO;
 import com.nirho.dao.CuestionarioProyectoDAO;
@@ -343,21 +344,41 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 			Participante participante = participanteDAO.getOne(participantePK);	
 			logger.info("***====================================== participante ee [" + participante +"]");
 			if(participante != null) {
-				List<EvaluadorEvaluado> evaluados = evalEvalDAO.findByIdProyectoAndIdEvaluador(participante.getParticipantePK().getIdProyecto() 
-						,participante.getParticipantePK().getIdParticipante());	
-				logger.info("***====================================== evaluados ee [" + evaluados +"]");
-				for(EvaluadorEvaluado ee: evaluados) {
-					logger.info("***====================================== Evaluados ee [" + ee +"]");
+				if(participante.getProyecto().getIdModulo().intValue() == ProyectoConstants.MODULO_EVO360) {
+					List<EvaluadorEvaluado> evaluados = evalEvalDAO.findByIdProyectoAndIdEvaluador(participante.getParticipantePK().getIdProyecto() 
+							,participante.getParticipantePK().getIdParticipante());	
+					logger.info("***====================================== evaluados ee [" + evaluados +"]");
+					for(EvaluadorEvaluado ee: evaluados) {
+						logger.info("***====================================== Evaluados ee [" + ee +"]");
+						List<CuestionarioParticipanteEVD> cuestPartEVDList = new ArrayList<>();
+						List<CuetionarioParticipante> cuestPart = cuestPartDAO.findByParticipanteProyecto(ee.getEvaluadorEvaluadoPK().getIdEvaluado(),
+								participante.getParticipantePK().getIdProyecto());
+						for(CuetionarioParticipante cp: cuestPart) {
+							CuestionarioParticipanteEVD cuestPartEVD = new CuestionarioParticipanteEVD();
+							cuestPartEVD.setCuestionarioParticipante(cp);
+							cuestPartEVD.setParticipante(participanteDAO.getOne(
+									new ParticipantePK(ee.getEvaluadorEvaluadoPK().getIdEvaluado(), cp.getCuetionarioParticipantePK().getIdProyecto())));
+							List<Opcion> opciones = new ArrayList<>();
+							for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getTema().getIdTema())){
+								opciones.add(cuestOps.getOpcion());
+							}
+							cuestPartEVD.setOpciones(opciones);
+							cuestPartEVDList.add(cuestPartEVD);
+						}
+						cuestPartEvaluadosEVDList.add(new CuestPartEvaluadosEVD(cuestPartEVDList));
+					}
+				} else {
 					List<CuestionarioParticipanteEVD> cuestPartEVDList = new ArrayList<>();
-					List<CuetionarioParticipante> cuestPart = cuestPartDAO.findByParticipanteProyecto(ee.getEvaluadorEvaluadoPK().getIdEvaluado(),
+					List<CuetionarioParticipante> cuestPart = cuestPartDAO.findByParticipanteProyecto(
+							participante.getParticipantePK().getIdParticipante(),
 							participante.getParticipantePK().getIdProyecto());
-					for(CuetionarioParticipante cp: cuestPart) {
+					for (CuetionarioParticipante cp : cuestPart) {
 						CuestionarioParticipanteEVD cuestPartEVD = new CuestionarioParticipanteEVD();
 						cuestPartEVD.setCuestionarioParticipante(cp);
-						cuestPartEVD.setParticipante(participanteDAO.getOne(
-								new ParticipantePK(ee.getEvaluadorEvaluadoPK().getIdEvaluado(), cp.getCuetionarioParticipantePK().getIdProyecto())));
+						cuestPartEVD.setParticipante(participante);
 						List<Opcion> opciones = new ArrayList<>();
-						for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getTema().getIdTema())){
+						for (CuestionarioOpcion cuestOps : coDAO
+								.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getTema().getIdTema())) {
 							opciones.add(cuestOps.getOpcion());
 						}
 						cuestPartEVD.setOpciones(opciones);
