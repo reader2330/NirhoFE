@@ -469,7 +469,12 @@ public class ProyectoEVDController {
 	        List<CuetionarioParticipante> competencias = new ArrayList<>();
 	        List<CuetionarioParticipante> cuestPartList = cuestPartService.obtenerCuestionarioParticipante(idParticipante, idProyecto);
 	        logger.info(" ********************************* cuestPartList [" + cuestPartList + "] *****************************");
+	        HashMap<String, Integer> datos = new HashMap<>();
+	        int promedioGeneral = 0;
 	        for(CuetionarioParticipante cp: cuestPartList) {
+	        	dispersionMock(cp); //dispersionMock para efectos de pruebas de reportes
+	        	datos.put(cp.getPregunta().getEnunciado(), Math.round(((cp.getRespuestaJefe() + cp.getRespuestaRh())/2)));
+	        	promedioGeneral = promedioGeneral + Math.round(((cp.getRespuestaJefe() + cp.getRespuestaRh())/2));
 	        	if(cp.getPregunta().getIdTema().getTipo()!=null && cp.getPregunta().getIdTema().getTipo().equals("FA")) {
 	        		factores.add(cp);
 	        		logger.info(" factor [" + cp + "]");
@@ -478,6 +483,8 @@ public class ProyectoEVDController {
 	        		competencias.add(cp);
 	        	}
 	        }
+	        promedioGeneral = Math.round(promedioGeneral/cuestPartList.size());
+	        logger.info("********************************* promedioGeneral [" + promedioGeneral + "] *********************************");
 	        logger.info("********************************* num factores [" + factores.size() + "] *********************************");
 	        logger.info("********************************* num competencias [" + competencias.size() + "] *********************************");
 	        
@@ -599,6 +606,41 @@ public class ProyectoEVDController {
 	        	row2.getCell(2).setText(competenciasSobresa);
 	        }
 	        
+	        XWPFChart chart = null;
+	        for (POIXMLDocumentPart part : document.getRelations()) {
+	            if (part instanceof XWPFChart) {
+	                
+	            	chart = (XWPFChart) part;  
+	                String title= chart.getTitle().getBody().getParagraph(0).getText();
+	                
+	                if(title.equals("Comparativo del promedio de la empresa respecto a las áreas")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+		 	             for(String key: datos.keySet()) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datos.get(key));
+		 	            	row.createCell(2).setCellValue(promedioGeneral);
+		 	            	i++;
+		 	             }
+	                }
+	                
+	                if(title.equals("Cumplimiento por área")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+		 	             for(String key: datos.keySet()) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(key);
+	    	            	row.createCell(1).setCellValue(datos.get(key));
+		 	            	i++;
+		 	             }
+	                }
+	                
+	            }
+	        }
+	        	        
 	        String nombreReporte = "ReporteEVD_" + nombreParticipante + ".docx";
 	        
 	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
@@ -611,6 +653,32 @@ public class ProyectoEVDController {
 			throw new NirhoControllerException("Problemas al generar reporte");
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al generar reporte");
+		}
+	}
+	
+	protected void dispersionMock(CuetionarioParticipante cp) {
+		if(cp.getRespuesta()==null) {
+			cp.setRespuesta(0);
+		}
+		switch(cp.getRespuesta()) {
+			case 0: cp.setRespuestaJefe(0);
+	    			cp.setRespuestaRh(0);
+	    		break;
+			case 1: cp.setRespuestaJefe(1);
+					cp.setRespuestaRh(1);
+	    		break;
+			case 2: cp.setRespuestaJefe(1);
+					cp.setRespuestaRh(3);
+				break;
+			case 3: cp.setRespuestaJefe(4);
+					cp.setRespuestaRh(2);
+				break;
+			case 4: cp.setRespuestaJefe(5);
+					cp.setRespuestaRh(3);
+				break;
+			case 5: cp.setRespuestaJefe(5);
+					cp.setRespuestaRh(5);
+				break;
 		}
 	}
 }

@@ -52,7 +52,7 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 								incrementaEnRespusta(resDTO, respJefe);
 								int respRH = cuestPart.getRespuestaRh() != null ? cuestPart.getRespuestaRh().intValue() : 0;
 								incrementaEnRespusta(resDTO, respRH);
-								break;
+								//break;
 							default:
 								int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
 								incrementaEnRespusta(resDTO, respuesta);
@@ -95,7 +95,7 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 								incrementaEnRespusta(resDTO, respJefe);
 								int respRH = cuestPart.getRespuestaRh() != null ? cuestPart.getRespuestaRh().intValue() : 0;
 								incrementaEnRespusta(resDTO, respRH);
-								break;
+								//break;
 							default:
 								int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
 								incrementaEnRespusta(resDTO, respuesta);
@@ -136,7 +136,7 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 								incrementaEnRespusta(resDTO, respJefe);
 								int respRH = cuestPart.getRespuestaRh() != null ? cuestPart.getRespuestaRh().intValue() : 0;
 								incrementaEnRespusta(resDTO, respRH);
-								break;
+								//break;
 							default:
 								int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
 								incrementaEnRespusta(resDTO, respuesta);
@@ -177,7 +177,7 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 								incrementaEnRespusta(resDTO, respJefe);
 								int respRH = cuestPart.getRespuestaRh() != null ? cuestPart.getRespuestaRh().intValue() : 0;
 								incrementaEnRespusta(resDTO, respRH);
-								break;
+								//break;
 							default:
 								int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
 								incrementaEnRespusta(resDTO, respuesta);
@@ -218,7 +218,7 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 								incrementaEnRespusta(resDTO, respJefe);
 								int respRH = cuestPart.getRespuestaRh() != null ? cuestPart.getRespuestaRh().intValue() : 0;
 								incrementaEnRespusta(resDTO, respRH);
-								break;
+								//break;
 							default:
 								int respuesta = cuestPart.getRespuesta() != null ? cuestPart.getRespuesta().intValue() : 0;
 								incrementaEnRespusta(resDTO, respuesta);
@@ -255,4 +255,5 @@ public class GraficaAreaOrgServiceImpl implements GraficaAreaOrgService {
 				break;
 		}
 	}
+	
 }
