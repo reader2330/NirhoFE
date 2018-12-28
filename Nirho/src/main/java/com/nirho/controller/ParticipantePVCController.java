@@ -175,15 +175,20 @@ public class ParticipantePVCController {
 						if(area.getNombre().equals(participante.getArea())) {
 							for(ProyectoPVCEsfera esfera: area.getEsferas()) {
 								if(esfera.getNombre().equals(participante.getEsfera())) {
+									if(conocimientoSiguiente) {
+										actual.accumulate("esferaSiguiente", esfera.getNombre());
+									}
 									for(ProyectoPVCNivel nivel: esfera.getNiveles()) {
-										if(nivel.getNombre().equals(participante.getNivel())) {
+										if(nivel.getNombre().equals(participante.getNivelP())) {
+											if(conocimientoSiguiente) {
+												actual.accumulate("nivelSiguiente", nivel.getNombre());
+											}
 											for(ProyectoPVCEspecialidad especialidad: nivel.getEspecialidades()) {
 												if(especialidad.getNombre().equals(participante.getEspecialidad())) {
+													
 													for(ProyectoPVCConocimiento conocimiento: especialidad.getConocimientos()) {
 														if(conocimientoSiguiente) {
 															if(conocimiento.getTipo() == 1 ) {
-																actual.accumulate("esferaSiguiente", esfera.getNombre());
-																actual.accumulate("nivelSiguiente", nivel.getNombre());
 																conocimientosTecnicosSiguientes.put(conocimiento.getNombre());
 															}
 															if(conocimiento.getTipo() == 2) {
@@ -199,6 +204,7 @@ public class ParticipantePVCController {
 															}
 														}
 													}
+													
 													conocimientoSiguiente = true;
 													break;
 												}
