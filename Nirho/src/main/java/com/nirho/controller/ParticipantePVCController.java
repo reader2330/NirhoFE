@@ -320,7 +320,7 @@ public class ParticipantePVCController {
 		} catch (ParseException e) {
 			participante.setFechaIngreso(new Date());
 		}
-		try {
+		try { 
 			participante.setAntigPuesto(new Double(jsonParticipante.optString("antigPuesto", "0.0")));
 		} catch(Exception e) {
 			logger.info("Exception [" + e.getMessage() + "]");
@@ -333,10 +333,10 @@ public class ParticipantePVCController {
 		participante.setSede(jsonParticipante.optString("sede", null));
 		participante.setAreaOrg(jsonParticipante.optString("areaOrg", null));
 		participante.setIdPartJefeInm(Integer.parseInt(jsonParticipante.optString("idPartJefeInm", "0")));
-		participante.setSede(jsonParticipante.optString("area", null));
-		participante.setSede(jsonParticipante.optString("esfera", null));
-		participante.setSede(jsonParticipante.optString("nivel_p", null));
-		participante.setSede(jsonParticipante.optString("especialidad", null));
+		participante.setArea(jsonParticipante.optString("area", null));
+		participante.setEsfera(jsonParticipante.optString("esfera", null));
+		participante.setNivelP(jsonParticipante.optString("nivel_p", null));
+		participante.setEspecialidad(jsonParticipante.optString("especialidad", null));
 		return participante;
 	}
 	
