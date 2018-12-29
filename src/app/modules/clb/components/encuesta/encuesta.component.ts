@@ -193,7 +193,7 @@ export class EncuestaComponent implements OnInit {
             'resultados de manera global y nuestros planes de\n' +
             'desarrollo.',
             'success').then(() => {
-            this.router.navigate(['']);
+            window.location.href = 'http://nirho.com/';
           });
 
         });

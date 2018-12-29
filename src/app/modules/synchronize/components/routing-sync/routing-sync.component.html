@@ -57,15 +57,15 @@
         <img class="d-block w-100" src="{{imagenes[2].url}}">
       </mdb-carousel-item>
       <!--/Third slide-->
-      <mdb-carousel-item>
-        <img class="d-block w-100" src="{{imagenes[3].url}}">
-      </mdb-carousel-item>
     </mdb-carousel>
     <!--/.Carousel Wrapper-->
 
   </div>
   <div *ngIf="StateForUser()" class="col-md-8" style="padding-top: 45px;">
     <app-tablero-control></app-tablero-control>
+  </div>
+  <div *ngIf="StateForUser() && showGrafica" class="col-md-8 offset-4" style="padding-top: 45px;">
+    <chart   [options]="pie"></chart>
   </div>
 
   <div class="col-xs-12 col-md-12">

@@ -20,8 +20,8 @@ import {
 })
 export class SidebarPvcComponent implements OnInit {
   mobile = false;
-  selectedItem = 16;
-  selectModule = 16;
+  selectedItem = 1;
+  selectModule = 1;
   modules = [];
   user = {};
   avatar = {
@@ -105,8 +105,12 @@ export class SidebarPvcComponent implements OnInit {
           id_submodulo: 18,
           descripcion: 'Envio de correos'
         },
+        {
+          id_submodulo: 19,
+          descripcion: 'Generar reportes'
+        }
 
-      ]
+      ];
   }
 
   getUser() {

@@ -65,6 +65,10 @@ export class Sidebar360Component implements OnInit {
         };
         this.modules.push(obj);
         this.modules.push(item);
+        this.modules.push({
+          id_submodulo: 12,
+          descripcion: 'Generar reportes'
+        });
       }
     });
   }

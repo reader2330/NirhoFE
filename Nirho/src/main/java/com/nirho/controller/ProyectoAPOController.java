@@ -227,7 +227,8 @@ public class ProyectoAPOController {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPO.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteAPO.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPO.docx"));
 
 	        Proyecto proyecto = proyectoService.obtenerProyectoPorId(idProyecto);
 	        
@@ -360,7 +361,8 @@ public class ProyectoAPOController {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPOIndividual.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteAPOIndividual.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteAPOIndividual.docx"));
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteAPOIndividual.docx"));
 
 	        ParticipanteAPO participante = participanteAPOService.getOne(idParticipante);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProyectoPVCService} from '../../modules/pvc/services/proyectoPVC.service';
 import {ActivatedRoute} from '@angular/router';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-vista-pvcparticipante',
@@ -9,6 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class VistaPVCParticipanteComponent implements OnInit {
   token = '';
+  urlMensagge = environment.urlNG + 'assets/Mensajes/APO-2.PNG';
   participante = {
     nombre: 'Nombre de prueba',
     puestoActualTecnico: {
@@ -51,7 +53,8 @@ export class VistaPVCParticipanteComponent implements OnInit {
     this.route.params.subscribe(res => {
       this.token = res['token'];
       this.ProyectServices.getToken(this.token).subscribe(res2 => {
-        console.log(res2);
+        this.participante = res2;
+        console.log(JSON.stringify(this.participante))
       });
     });
   }

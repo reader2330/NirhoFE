@@ -27,6 +27,8 @@ import {CustomQuestionComponent} from './components/custom-question/custom-quest
 import {DataContactEvdComponent} from './components/data-contact-evd/data-contact-evd.component';
 import {AsignarConsultorEvdComponent} from './components/asignar-consultor-evd/asignar-consultor-evd.component';
 import {DataPeriodEvdComponent} from './components/data-period-evd/data-period-evd.component';
+import {ImagenesModalComponent} from '../modal/imagenes-modal/imagenes-modal.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 
@@ -39,6 +41,7 @@ import {DataPeriodEvdComponent} from './components/data-period-evd/data-period-e
     FormsModule,
     ReactiveFormsModule,
     EmojiModule,
+    SharedModule
   ],
   declarations: [
     InicioEvdComponent,
@@ -67,7 +70,8 @@ import {DataPeriodEvdComponent} from './components/data-period-evd/data-period-e
   ],
   entryComponents: [
     TableClient2ModalEvdComponent,
-    EncuestaModalEvdComponent
+    EncuestaModalEvdComponent,
+    ImagenesModalComponent
   ]
 })
 export class EvdModule { }

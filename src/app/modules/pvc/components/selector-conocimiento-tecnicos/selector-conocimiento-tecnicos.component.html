@@ -48,7 +48,7 @@
   <div  class="col-sm-10 offset-1">
     <mat-form-field style="width: 100%" appearance="outline">
       <mat-label>Selecciona una especialidad </mat-label>
-      <mat-select (selectionChange)="getConocimientos()"  [(ngModel)]="especialidad">
+      <mat-select   [(ngModel)]="especialidad">
         <mat-option *ngFor="let especialidad of especialidades" [value]="especialidad">
           {{especialidad.nombre}}
         </mat-option>

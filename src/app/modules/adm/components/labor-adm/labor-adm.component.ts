@@ -238,7 +238,9 @@ export class LaborAdmComponent implements OnInit {
     this.jsonFinal.escolaridadOficios = scholarship.escolaridadOficios;
     this.jsonFinal.titulo = scholarship.titulo;
     this.jsonFinal.idiomas.push(languageList[0]);
-    this.jsonFinal.laboral.push(this.laborales[0]);
+    for (let lab of this.laborales) {
+      this.jsonFinal.laboral.push(lab);
+    }
    /*this.jsonFinal.puesto = this.laborales[0].puesto;
    this.jsonFinal.nivelLaboral = this.laborales[0].nivelLaboral;
    this.jsonFinal.fechaInicio = this.laborales[0].fechaInicio;

@@ -32,10 +32,15 @@ export class GeneradorReportesComponent implements OnInit {
   }
 
   getProyects() {
-    this.GeneralServices.getProyectsByModule(this.moduleSelect).subscribe(res => {
+    if (this.moduleSelect === 'EVA360') {
+      this.GeneralServices.getProyectsByModule('EVO360').subscribe(res => {
         this.proyects = res;
-
-    });
+      });
+    } else {
+      this.GeneralServices.getProyectsByModule(this.moduleSelect).subscribe(res => {
+        this.proyects = res;
+      });
+    }
   }
   getEmpresas() {
     this.GeneralServices.getEmpresas().subscribe(res => {
@@ -49,35 +54,62 @@ export class GeneradorReportesComponent implements OnInit {
     if (this.moduleSelect === 'CLB' || this.moduleSelect === 'IRH') {
       return;
     } else {
-      this.GeneralServices.getParticipantebyProyect(this.proyect['idProyecto']).subscribe(res => {
-        console.log(res);
-        this.participantes = res;
-      });
+      if (this.moduleSelect === 'EVD' || this.moduleSelect === 'EVA360') {
+        if (this.moduleSelect === 'EVA360') {
+          this.GeneralServices.getParticipantebyProyect(this.proyect['idProyecto']).subscribe(res => {
+            console.log(res);
+            this.participantes = res;
+          });
+        }
+        this.GeneralServices.getParticipantebyProyect(this.proyect['idProyecto']).subscribe(res => {
+          console.log(res);
+          this.participantes = res;
+        });
+      } else {
+        this.GeneralServices.getParticipantebyProyect(this.proyect['idProyecto'], this.moduleSelect).subscribe(res => {
+          console.log(res);
+          this.participantes = res;
+        });
+      }
+
     }
 
   }
 
   generarReporte() {
-
-    if (!this.participante['id']) {
+    console.log(this.participante);
+    if (!this.participante['idParticipante'] && !this.participante['participantePK']) {
       if (this.moduleSelect === 'IRH') {
         this.GeneralServices.generarReporteCompany(this.empresa['id']);
       } else {
+        if (this.moduleSelect === 'EVA360') {
+          this.GeneralServices.generarReporteProyect('EVO360', this.proyect['idProyecto']);
+        }
         this.GeneralServices.generarReporteProyect(this.moduleSelect, this.proyect['idProyecto']);
       }
     } else {
-      this.GeneralServices.generarReporteParticipante(this.moduleSelect, this.proyect['idProyecto']).subscribe(res => {
-        console.log(res);
-      });
+      if (this.moduleSelect === 'EVD' || this.moduleSelect === 'EVA360') {
+        if (this.moduleSelect === 'EVD') {
+          this.GeneralServices.generarReporteParticipante(this.moduleSelect, this.participante['participantePK']['idParticipante'], this.proyect['idProyecto']);
+        }
+        if (this.moduleSelect === 'EVA360') {
+          this.GeneralServices.generarReporteParticipante('EVO360', this.participante['participantePK']['idParticipante'], this.proyect['idProyecto']);
+        }
+      } else {
+        if (this.moduleSelect === 'PVC') {
+          this.GeneralServices.generarReporteParticipantePVC(this.participante['idParticipante']);
+        } else {
+          this.GeneralServices.generarReporteParticipante(this.moduleSelect, this.participante['idParticipante']);
+        }
+
+      }
     }
-
   }
-
   BloqueoBoton() {
     if (this.moduleSelect === 'IRH') {
       return !this.empresa['id'];
     } else {
-      return !this.proyect['id'];
+      return !this.proyect['idProyecto'];
     }
   }
 

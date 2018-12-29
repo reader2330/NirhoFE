@@ -1,72 +1,74 @@
-<mat-grid-list style="width: 100%" [cols]="checkMobileCols()" rowHeight="400px">
-  <mat-grid-tile [colspan]="checkMobileCols()" [rowspan]="1"  >
-    <div class="logo-nav">
+<div class="row col-sm-12">
+    <div class="col-sm-10 offset-1 logo-nav">
+      <img [src]="imgLogo" alt="">
     </div>
-  </mat-grid-tile>
-
- <mat-grid-tile style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="2">
-    <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
-      <mat-expansion-panel *ngFor= "let question of preguntas; let i = index" [expanded]="i === 0" >
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <mat-icon>tab</mat-icon>{{question.cuestionarioParticipante.pregunta.enunciado}}
-          </mat-panel-title>
-
-        </mat-expansion-panel-header>
-        <mat-panel-description style="width: 100%">
-          <mat-list>
-            <mat-list-item style="margin-bottom: 10px">{{question.cuestionarioParticipante.pregunta.idTema.descripcion}}</mat-list-item>
-            <mat-radio-group (change)="updateValor(question)" [(ngModel)]="question.cuestionarioParticipante.respuesta" >
-              <mat-list-item *ngFor="let opt of question.opciones; let j = index">
-              <mat-radio-button  [value]="j+1" >
-                <p style="font-size: 13px; margin-top: 10px; ">{{opt.enunciado}}</p>
-              </mat-radio-button>
-              </mat-list-item>
-            </mat-radio-group>
-
-          </mat-list>
-
-          <!--<table mat-table style="width: 100%" [dataSource]="dataSource" class="mat-elevation-z8">
 
 
+    <div style="margin-top: 20px" class="col-sm-10 offset-1">
+      <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
+        <mat-expansion-panel *ngFor= "let question of preguntas; let i = index" [expanded]="i === 0" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon>tab</mat-icon>{{question.cuestionarioParticipantes[0].cuestionarioParticipante.pregunta.enunciado}}
+            </mat-panel-title>
 
-            <ng-container matColumnDef="ENUNCIADO">
-              <th mat-header-cell *matHeaderCellDef> Factores de desempeño </th>
-              <td mat-cell *matCellDef="let element"> {{element.enunciado}} </td>
-            </ng-container>
+          </mat-expansion-panel-header>
+          <mat-panel-description style="width: 100%">
+            <mat-list>
+              <mat-list-item style="margin-bottom: 10px">{{question.cuestionarioParticipantes[0].cuestionarioParticipante.pregunta.idTema.descripcion}}</mat-list-item>
+              <mat-radio-group (change)="updateValor(question)" [(ngModel)]="question.cuestionarioParticipantes[0].cuestionarioParticipante.respuesta" >
+                <mat-list-item *ngFor="let opt of question.cuestionarioParticipantes[0].opciones; let j = index">
+                  <mat-radio-button  [value]="j+1" >
+                    <p style="font-size: 13px; margin-top: 10px; ">{{opt.enunciado}}</p>
+                  </mat-radio-button>
+                </mat-list-item>
+              </mat-radio-group>
 
+            </mat-list>
 
-            <ng-container matColumnDef="1">
-              <th mat-header-cell *matHeaderCellDef>
-                <a style="margin-left: 202px;" data-toggle="tooltip" data-placement="top" title="Por debajo de los resultados">BR</a>
-                <a style="margin-left: 30px;" data-toggle="tooltip" data-placement="top" title="Resultados mínimos">MR</a>
-                <a style="margin-left: 30px;" data-toggle="tooltip" data-placement="top" title="Resultados suficientes">R</a>
-                <a style="margin-left: 30px;" data-toggle="tooltip" data-placement="top" title="Resultados superiores">RS</a>
-                <a style="margin-left: 30px;" data-toggle="tooltip" data-placement="top" title="Excede en sus resultados">E</a>
-              </th>
-              <td mat-cell *matCellDef="let element">
-
-                <mat-slider  [ngStyle]="{'margin-left':mobile == true ? '20px':'160px', 'width':mobile == true ? '100px':'250px'}" min="0" max="5" step="1"  (change)="updateValor(element)" tickInterval="10" thumbLabel ></mat-slider>
-
-              </td>
-            </ng-container>
-
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>-->
-
-        </mat-panel-description>
-      </mat-expansion-panel>
-    </mat-accordion>
-
-  </mat-grid-tile>
-  <mat-grid-tile  style="width: 100%" [colspan]="checkMobileCols()" [rowspan]="1">
-    <button mat-raised-button color="accent" (click)="FinishCuestionario()">Finalizar cuestionario</button>
-  </mat-grid-tile>
+            <!--<table mat-table style="width: 100%" [dataSource]="dataSource" class="mat-elevation-z8">
 
 
-</mat-grid-list>
+
+              <ng-container matColumnDef="ENUNCIADO">
+                <th mat-header-cell *matHeaderCellDef> Factores de desempeño </th>
+                <td mat-cell *matCellDef="let element"> {{element.enunciado}} </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="1">
+                <th mat-header-cell *matHeaderCellDef>
+                  <a style="margin-left: 202px;" data-toggle="tooltip" data-placement="top" title="Por debajo de los resultados">BR</a>
+                  <a style="margin-left: 30px;" data-toggle="tooltip" data-placement="top" title="Resultados mínimos">MR</a>
+                  <a style="margin-left: 30px;" data-toggle="tooltip" data-placement="top" title="Resultados suficientes">R</a>
+                  <a style="margin-left: 30px;" data-toggle="tooltip" data-placement="top" title="Resultados superiores">RS</a>
+                  <a style="margin-left: 30px;" data-toggle="tooltip" data-placement="top" title="Excede en sus resultados">E</a>
+                </th>
+                <td mat-cell *matCellDef="let element">
+
+                  <mat-slider  [ngStyle]="{'margin-left':mobile == true ? '20px':'160px', 'width':mobile == true ? '100px':'250px'}" min="0" max="5" step="1"  (change)="updateValor(element)" tickInterval="10" thumbLabel ></mat-slider>
+
+                </td>
+              </ng-container>
+
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>-->
+
+          </mat-panel-description>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+
+    <div style="margin-top: 20px" class="row col-sm-4 offset-5">
+      <button class="offset-xl-4" mat-raised-button color="accent" (click)="FinishCuestionario()">Finalizar cuestionario</button>
+    </div>
+
+
+
+</div>
 
 
 

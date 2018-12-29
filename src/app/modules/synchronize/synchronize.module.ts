@@ -11,12 +11,23 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ConfiguradorClienteComponent} from './components/configurador-cliente/configurador-cliente.component';
 import {ModalUsuariosComponent} from '../modal/modal-usuarios/modal-usuarios.component';
 import {TableroControlComponent} from './components/tablero-control/tablero-control.component';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+import {ChartModule} from 'angular2-highcharts';
+
+
+export function highchartsFactory() {
+  const hc = require('highcharts');
+  const h3 = require('highcharts/highcharts-3d');
+  h3(hc);
+
+  return hc;
+}
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
-    //ChartModule.forRoot(required('highcharts')),
+    ChartModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -27,6 +38,12 @@ import {TableroControlComponent} from './components/tablero-control/tablero-cont
     FontAwesomeModule,
   ],
   declarations: [InicioSyncComponent, RoutingSyncComponent, ConfiguradorClienteComponent, TableroControlComponent],
-  entryComponents: [ ModalUsuariosComponent]
+  entryComponents: [ ModalUsuariosComponent],
+  providers: [
+    {
+      provide: HighchartsStatic,
+      useFactory: highchartsFactory
+    }
+  ]
 })
 export class SynchronizeModule { }

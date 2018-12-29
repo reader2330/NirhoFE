@@ -20,6 +20,7 @@ import {ViewActividadesComponent} from './screensOut/view-actividades/view-activ
 import {SidebarPvcComponent} from './modules/pvc/components/sidebar-pvc/sidebar-pvc.component';
 import {VistaPVCParticipanteComponent} from './screensOut/vista-pvcparticipante/vista-pvcparticipante.component';
 import {ConfiguradorClienteComponent} from './modules/synchronize/components/configurador-cliente/configurador-cliente.component';
+import {InformacionFormComponent} from './modules/rys/informacion-form/informacion-form.component';
 
 
 
@@ -96,6 +97,10 @@ const routes: Routes = [
   {
     path: 'configurador',
     component: ConfiguradorClienteComponent
+  },
+  {
+    path: 'prueba',
+    component: InformacionFormComponent
   },
   { path: '**', redirectTo: '' }
 ];

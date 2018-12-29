@@ -1,26 +1,81 @@
 <div class="row col-sm-12">
 
+  <div class="col-sm-10 offset-1" >
+    <img class="avatar" [src]="urlMensagge" alt="">
+  </div>
 
- <!-- <mat-accordion>
-    <mat-expresion-panel>
+  <div style="margin-top: 100px" class="col-sm-4 offset-4 mat-card mat-elevation-z1">
+        <mat-icon>
+          donut_small
+        </mat-icon>
+    <p>ÁREA: {{participante['area']}}</p>
+        <mat-icon>
+          language
+        </mat-icon>
+        <p>ESFERA: {{participante['esfera']}}</p>
+        <mat-icon>
+          label_important
+        </mat-icon>
+        <p>ESPECIALIDAD: {{participante['especilidad']}}</p>
+        <mat-icon>
+          label_important
+        </mat-icon>
+        <p>NIVEL: {{participante['nivel']}}</p>
+        <mat-icon>
+          label_important
+        </mat-icon>
+        <p>NIVEL SIGUIENTE: {{participante['nivelSiguiente']}}</p>
+  </div>
+  <mat-accordion style="margin-top: 40px; margin-bottom: 30px" class="col-sm-10 offset-1">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{participante.nombre}}
+          Conocimientos tecnicos actuales
         </mat-panel-title>
-        <mat-panel-description>
-            Puesto actual :  {{participante.puestoActualTecnico.puesto}}
-        </mat-panel-description>
       </mat-expansion-panel-header>
-       Area: {{participante.puestoActualTecnico.area}}
-       Esfera: {{participante.puestoActualTecnico.esfera}}
-       Nivel: {{participante.puestoActualTecnico.nivel}}
-       Especialidad: {{participante.puestoActualTecnico.especialidad}}
        <mat-list>
-         <mat-list-item *ngFor="let coc of participante.puestoActualTecnico.conocimientos">
+         <mat-list-item *ngFor="let coc of participante['conocimientosTecnicos']">
            {{coc}}
          </mat-list-item>
        </mat-list>
-    </mat-expresion-panel>
-  </mat-accordion>-->
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Conocimientos tecnicos siguientes
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item *ngFor="let coc of participante['conocimientosTecnicosSiguientes']">
+          {{coc}}
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Conocimientos humanos actuales
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item *ngFor="let coc of participante['conocimientosHumanos']">
+          {{coc}}
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Conocimientos humanos siguientes
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item *ngFor="let coc of participante['conocimientosHumanosSiguientes']">
+          {{coc}}
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+
+  </mat-accordion>
 
 </div>

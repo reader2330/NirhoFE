@@ -215,7 +215,8 @@ public class ProyectoCLBController {
 		try {
 						       
 			ZipSecureFile.setMinInflateRatio(0);
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteCLB.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteCLB.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteCLB.docx"));
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteCLB.docx")); 
 			
 			GraficaRespPregDTO resGraficas = graficasService.obtenerGraficasRespuestasPreguntas(idProyecto);

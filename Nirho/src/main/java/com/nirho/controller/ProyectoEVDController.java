@@ -223,7 +223,8 @@ public class ProyectoEVDController {
 		try {
 						       
 			ZipSecureFile.setMinInflateRatio(0);
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVD.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVD.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteEVD.docx"));
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVD.docx")); 
 			
 			GraficaRespPregDTO resGraficas = graficasService.obtenerGraficasRespuestasPreguntas(idProyecto);
@@ -420,7 +421,8 @@ public class ProyectoEVDController {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
 
 	        Participante participante = participanteService.obtenerParticipante(new ParticipantePK(idParticipante, idProyecto));

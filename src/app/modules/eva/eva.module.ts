@@ -34,6 +34,7 @@ import {AsignarConsultorEva360Component} from './components/asignar-consultor-ev
 import {DataPeriodEva360Component} from './components/data-period-eva360/data-period-eva360.component';
 import {EncuestaEva360Component} from './components/encuesta-eva360/encuesta-eva360.component';
 import {ImagenesModalComponent} from '../modal/imagenes-modal/imagenes-modal.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 export function highchartsFactory() {
@@ -56,7 +57,8 @@ export function highchartsFactory() {
     FormsModule,
     ReactiveFormsModule,
     EmojiModule,
-    PickerModule
+    PickerModule,
+    SharedModule
   ],
   declarations: [
     Sidebar360Component,

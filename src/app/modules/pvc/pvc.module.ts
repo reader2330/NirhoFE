@@ -23,6 +23,7 @@ import {SelectorNivelComponent} from './components/selector-nivel/selector-nivel
 import {SelectoEspecialidadesComponent} from './components/selecto-especialidades/selecto-especialidades.component';
 import {SelectorConocimientoTecnicosComponent} from './components/selector-conocimiento-tecnicos/selector-conocimiento-tecnicos.component';
 import {HeadCountPvcComponent} from './components/head-count-pvc/head-count-pvc.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import {HeadCountPvcComponent} from './components/head-count-pvc/head-count-pvc.
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     ChartModule,
   ],
   declarations: [

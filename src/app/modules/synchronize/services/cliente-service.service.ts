@@ -30,8 +30,11 @@ export class ClienteServiceService {
   }
 
   getProyectsTablero(id): Observable<any> {
-    console.log(id);
+
     return this.http.get(this.api + 'proyecto/todos/porConsultor', {headers: this.headers, params: {'idUsuario': id}});
+  }
+  getDatos(id): Observable<any> {
+    return this.http.get(this.api + 'proyecto/todos/porConsultor/datos', {headers: this.headers, params: {'idUsuario': id}});
   }
 
 }

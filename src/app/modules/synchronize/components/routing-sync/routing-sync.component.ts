@@ -14,21 +14,47 @@ import {ClienteServiceService} from '../../services/cliente-service.service';
 export class RoutingSyncComponent implements OnInit {
 
   adm = false;
+  showGrafica = false;
   imagenes = [{
-    url: environment.urlNG + 'assets/imagen1.jpeg'
+    url: environment.urlNG + 'assets/Mensajes/EVD-1.png'
   },
     {
-      url: environment.urlNG + 'assets/imagen2.jpeg'
+      url: environment.urlNG + 'assets/Mensajes/360-1.png'
     },
     {
-      url: environment.urlNG + 'assets/imagen3.jpeg'
+      url: environment.urlNG + 'assets/Mensajes/APO-1.png'
     },
     {
-      url: environment.urlNG + 'assets/imagen4.jpeg'
+      url: environment.urlNG + 'assets/Mensajes/360-1.png'
     },
   ];
   modules = [];
   user = {};
+
+  pie = {
+    chart: {
+      type: 'pie',
+      options3d: {
+        enabled: true,
+        alpha: 45,
+        beta: 0
+      },
+    },
+      title: {text: 'Total de proyectos'},
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          depth: 35,
+        }
+      },
+      series: [{
+        name: '#Proyectos',
+        colorByPoint: true,
+        data: []
+      }]
+  };
+
 
   constructor(private router: Router, private LoginService: LoginService, private ClienteServices: ClienteServiceService) { }
 
@@ -116,6 +142,38 @@ export class RoutingSyncComponent implements OnInit {
           });
 
       });
+      if (this.user['rol'] === 3) {
+         this.ClienteServices.getDatos(this.user['id']).subscribe(data => {
+          this.pie.series[0].data.push(
+            {
+              name: 'Activos',
+              y: data['proyectos_finalizados']
+            }
+          );
+          this.pie.series[0].data.push({
+            name: 'Cerrados',
+            y: data['proyectos_no_finalizados']
+          });
+          console.log(this.pie);
+          this.showGrafica = true;
+        });
+      }
+      if (this.user['rol'] === 2) {
+        this.ClienteServices.getDatos(0).subscribe(data => {
+          this.pie.series[0].data.push(
+            {
+              name: 'Activos',
+              y: data['proyectos_finalizados']
+            }
+          );
+          this.pie.series[0].data.push({
+            name: 'Cerrados',
+            y: data['proyectos_no_finalizados']
+          });
+          console.log(this.pie);
+          this.showGrafica = true;
+        });
+      }
     });
   }
 

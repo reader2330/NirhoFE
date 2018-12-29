@@ -30,6 +30,7 @@ import { VistaPVCParticipanteComponent } from './screensOut/vista-pvcparticipant
 import {ModalUsuariosComponent} from './modules/modal/modal-usuarios/modal-usuarios.component';
 import {GeneradorReportesComponent} from './modules/shared/components/generador-reportes/generador-reportes.component';
 import { TableroControlComponent } from './modules/synchronize/components/tablero-control/tablero-control.component';
+import { InformacionFormComponent } from './modules/rys/informacion-form/informacion-form.component';
 
 
 
@@ -52,6 +53,7 @@ export function highchartsFactory() {
     ViewActividadesComponent,
     VistaPVCParticipanteComponent,
     ModalUsuariosComponent,
+    InformacionFormComponent,
 
   ],
   imports: [

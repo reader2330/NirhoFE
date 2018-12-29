@@ -1,19 +1,11 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Proyecto} from '../../../clb/models/proyecto';
 import {ProyectoEvdService} from '../../services/proyecto-evd.service';
-import {browser} from 'protractor';
-import {LanguageModalAdmComponent} from '../../../adm/components/language-modal-adm/language-modal-adm.component';
 import {MatDialog, MatTableDataSource} from '@angular/material';
-import {EncuestaModalEvdComponent} from '../encuesta-modal-evd/encuesta-modal-evd.component';
-import {laboral_interface} from '../../../adm/components/labor-adm/labor-adm.component';
 import Swal from "sweetalert2";
 import {ActivatedRoute, Router} from '@angular/router';
+import {environment} from '../../../../../environments/environment';
+import {ImagenesModalComponent} from '../../../modal/imagenes-modal/imagenes-modal.component';
 
-export interface quiz_interface {
-  factor: string;
-  descripcion: string;
-  tipo: boolean;
-}
 
 @Component({
   selector: 'app-encuesta-evd',
@@ -23,12 +15,14 @@ export interface quiz_interface {
 export class EncuestaEvdComponent implements OnInit {
 
   valor = '';
+  data = {
+    url: ''
+  };
 
   @Output() responseChildren = new EventEmitter();
-
   constructor(private ProyectoEvdServices: ProyectoEvdService, public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
   }
-
+  imgLogo = environment.urlNG + 'assets/Mensajes/EVD-2.png';
   mobile = false;
   temas = [{
     nombre: 'Imagen'
@@ -75,6 +69,7 @@ export class EncuestaEvdComponent implements OnInit {
 
   ngOnInit() {
     this.getToken();
+    this.Imagenes(1)
   }
 
   returnEmoji(id) {
@@ -120,18 +115,15 @@ export class EncuestaEvdComponent implements OnInit {
   getToken() {
     this.route.params.subscribe(res => {
       this.token = res['token'];
-      this.ProyectoEvdServices.getPreguntasParticipante(this.token).subscribe(res => {
-        console.log(res);
-        this.preguntas = res;
+      this.ProyectoEvdServices.getPreguntasParticipante(this.token).subscribe(res2 => {
+        this.preguntas = res2;
       });
     });
   }
 
 
   updateValor(question) {
-    console.log(question);
-    this.ProyectoEvdServices.updatePregunta(question).subscribe((res) => {
-      console.log(res);
+    this.ProyectoEvdServices.updatePregunta(question.cuestionarioParticipantes[0]).subscribe((res) => {
     });
 
   }
@@ -151,7 +143,10 @@ export class EncuestaEvdComponent implements OnInit {
           'El cuestionario se finalizo correctamente',
           'success'
         ).then(() => {
-          this.router.navigate(['']);
+          this.Imagenes(2)
+          setTimeout(() => {
+            window.location.href = 'http://nirho.com/';
+          }, 6000);
         });
       }
     });
@@ -162,6 +157,30 @@ export class EncuestaEvdComponent implements OnInit {
       return 1;
     } else {
       return 4;
+    }
+
+  }
+  openDialogStart(data, time) {
+    this.dialog.open(ImagenesModalComponent, {
+      data: data,
+      height: '500px',
+      width: '700px'
+    });
+
+    setTimeout(() => {
+      this.dialog.closeAll();
+    }, time);
+  }
+
+  Imagenes(num) {
+    switch (num) {
+      case 1:
+        this.data.url =   environment.urlNG + 'assets/Mensajes/EVD-1.png';
+        this.openDialogStart(this.data,2000);
+        break;
+      case 2:
+        this.data.url =   environment.urlNG + 'assets/Mensajes/EVD-3.png';
+        this.openDialogStart(this.data,6000);
     }
 
   }

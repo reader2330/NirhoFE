@@ -17,13 +17,16 @@
           <mat-panel-title>
             <mat-icon>tab</mat-icon>{{question['cuestionarioParticipantes'][0]['cuestionarioParticipante']['tema']['nombre']}}
           </mat-panel-title>
-
+          <mat-panel-description>
+            {{question['cuestionarioParticipantes'][0]['participante']['nombres']}} {{question['cuestionarioParticipantes'][0]['participante']['aPaterno']}} {{question['cuestionarioParticipantes'][0]['participante']['puesto']}}
+          </mat-panel-description>
         </mat-expansion-panel-header>
+
         <mat-panel-description class="col-sm-12 row" style="width: 100%">
           <mat-list class="col-sm-12">
             <mat-list-item style="margin-bottom: 10px">{{question['cuestionarioParticipantes'][0]['cuestionarioParticipante']['pregunta']['enunciado']}}</mat-list-item>
-            <mat-selection-list [disabled]="question['cuestionarioParticipantes'][0]['cuestionarioParticipante']['respuesta'] && !start"  >
-              <mat-list-option  *ngFor="let opt of question['cuestionarioParticipantes'][0]['opciones']; let i = index;" (click)="setRespuesta(question['cuestionarioParticipantes'][0],i)">
+            <mat-selection-list (selectionChange)="handleSelection($event)"  >
+              <mat-list-option  *ngFor="let opt of question['cuestionarioParticipantes'][0]['opciones']; let i = index;"  [value]="question['cuestionarioParticipantes'][0]['cuestionarioParticipante']['respuesta']"  (click)="setRespuesta(question['cuestionarioParticipantes'][0],i)">
                 {{opt.tipo}}  {{opt.enunciado}}
               </mat-list-option>
             </mat-selection-list>

@@ -13,7 +13,12 @@ import {MatDialog} from '@angular/material';
 })
 export class ViewActividadesComponent implements OnInit {
   values = [0, 1, 2, 3, 4, 5];
-  participante = {};
+  participante = {
+    nombres: '',
+    aPaterno: '',
+    aMaterno: '',
+    puesto: ''
+  };
   newActividad = {};
   nirhoColor = '#A1B712';
   showGraphs = false;
