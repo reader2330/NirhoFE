@@ -25,7 +25,7 @@ public class EmailUtil {
 				", por favor hacer clic en la siguiente liga: " + URL_CUEST_EVD + datos.getToken() + "</p>" +
 				"<p>¡Tu participación es muy importante! Por lo que te pedimos te tomes un momento en un " +
 				"espacio tranquilo para resolver la siguiente evaluación.</p>" +
-				"<p><img src='http://74.208.252.39/logo.bdfd5939a8d871515e82.png'></p>" +
+				//"<p><img src='http://74.208.252.39/logo.bdfd5939a8d871515e82.png'></p>" +
 				"<p>Agradecemos tu apoyo</p>";
 		return contenido;
 	}
@@ -35,8 +35,8 @@ public class EmailUtil {
 				", por favor hacer clic en la siguiente liga: " + URL_CUEST_EVA360 + datos.getToken() + "</p>" +
 				"<p>¡Tu participación es muy importante! Por lo que te pedimos te tomes un momento en un " +
 				"espacio tranquilo para resolver la siguiente evaluación.</p>" +
-				"<p>Agradecemos tu apoyo</p>" +
-				"<div><img style=' max-width: 100%;height: auto;width: auto/9; / Bug de ie8 / margin-top: 10px; background-repeat: no-repeat; background-size: cover;' src='http://74.208.252.39/assets/Mensajes/360-1.png'  alt=''></div>";
+				"<p>Agradecemos tu apoyo</p>";
+				//"<div><img style=' max-width: 100%;height: auto;width: auto/9; / Bug de ie8 / margin-top: 10px; background-repeat: no-repeat; background-size: cover;' src='http://74.208.252.39/assets/Mensajes/360-1.png'  alt=''></div>";
 		return contenido;
 	}
 	
