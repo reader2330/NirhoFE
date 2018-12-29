@@ -52,6 +52,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nirho.constant.ProyectoConstants;
 import com.nirho.dto.EmailDatos;
 import com.nirho.dto.ParticipanteDTO;
+import com.nirho.dto.ProyectoPVCNivelDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ParticipanteAPO;
@@ -204,7 +205,12 @@ public class ParticipantePVCController {
 						if(area.getNombre().equals(participante.getArea())) {
 							for(ProyectoPVCEsfera esfera: area.getEsferas()) {
 								if(esfera.getNombre().equals(participante.getEsfera())) {
+									List<ProyectoPVCNivelDTO> nivelesDTO = new ArrayList<>();
 									for(ProyectoPVCNivel nivel: esfera.getNiveles()) {
+										nivelesDTO.add(new ProyectoPVCNivelDTO(nivel.getId(), nivel.getNombre(), nivel.isStatus(), nivel.getEspecialidades()));
+									}
+									Collections.sort(nivelesDTO);
+									for(ProyectoPVCNivelDTO nivel: nivelesDTO) {
 										if(nivel.getNombre().equals(participante.getNivelP()) || conocimientoSiguiente) {
 											if(conocimientoSiguiente) {
 												actual.accumulate("nivelSiguiente", nivel.getNombre());
@@ -459,9 +465,13 @@ public class ParticipantePVCController {
 					if(area.getNombre().equals(participante.getArea())) {
 						for(ProyectoPVCEsfera esfera: area.getEsferas()) {
 							if(esfera.getNombre().equals(participante.getEsfera())) {
+								List<ProyectoPVCNivelDTO> nivelesDTO = new ArrayList<>();
 								for(ProyectoPVCNivel nivel: esfera.getNiveles()) {
+									nivelesDTO.add(new ProyectoPVCNivelDTO(nivel.getId(), nivel.getNombre(), nivel.isStatus(), nivel.getEspecialidades()));
+								}
+								Collections.sort(nivelesDTO);
+								for(ProyectoPVCNivelDTO nivel: nivelesDTO) {
 									if(nivel.getNombre().equals(participante.getNivelP()) || conocimientoSiguiente) {
-										
 										for(ProyectoPVCEspecialidad especialidad: nivel.getEspecialidades()) {
 											if(especialidad.getNombre().equals(participante.getEspecialidad())) {
 												
