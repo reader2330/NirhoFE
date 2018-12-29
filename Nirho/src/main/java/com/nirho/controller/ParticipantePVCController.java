@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -20,6 +21,7 @@ import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
 import org.apache.poi.xwpf.usermodel.XWPFAbstractNum;
 import org.apache.poi.xwpf.usermodel.XWPFChart;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -404,9 +406,9 @@ public class ParticipantePVCController {
 	            XWPFTableRow row0 = informacionGeneral.getRow(0);
 	            row0.getCell(1).setText(participante.getNombres() + " " + participante.getaPaterno() + " " + participante.getaMaterno());
 	            row0.getCell(3).setText(participante.getFechaIngreso().toString());
-	            
 	            XWPFTableRow row1 = informacionGeneral.getRow(1);
 	            row1.getCell(1).setText(participante.getPuesto());
+	            row1.getCell(3).setText(participante.getAntigPuesto() + "");
 	        }
 
 	        XWPFTable semaforo =  ReporteUtil.getTablaPorTitulo(document, "semaforo");
@@ -415,17 +417,26 @@ public class ParticipantePVCController {
 	          
 	            XWPFParagraph p1 = semaforo.getRow(0).getCell(0).getParagraphs().get(0);
 	            XWPFRun r1 = p1.createRun();
-	            r1.setBold(participante.getAntigPuesto() >= 0 && participante.getAntigPuesto() <= 2);
+	            if(participante.getAntigPuesto() >= 0 && participante.getAntigPuesto() <= 2) {
+	            	r1.setBold(true);
+		            r1.setUnderline(UnderlinePatterns.SINGLE);	
+	            }
 	            r1.setText("0 - 2 años", 0);
 	            
 	            XWPFParagraph p2 = semaforo.getRow(1).getCell(0).getParagraphs().get(0);
 	            XWPFRun r2 = p2.createRun();
-	            r2.setBold(participante.getAntigPuesto() >= 2 && participante.getAntigPuesto() <= 4);
+	            if(participante.getAntigPuesto() >= 2 && participante.getAntigPuesto() <= 4) {
+	            	r2.setBold(true);
+		            r2.setUnderline(UnderlinePatterns.SINGLE);	
+	            }
 	            r2.setText("2 años 1 mes " +" – " +" 4 años", 0);
 	            
 	            XWPFParagraph p3 = semaforo.getRow(2).getCell(0).getParagraphs().get(0);
 	            XWPFRun r3 = p3.createRun();
-	            r3.setBold(participante.getAntigPuesto() >= 4);
+	            if(participante.getAntigPuesto() >= 4) {
+	            	r3.setBold(true);
+		            r3.setUnderline(UnderlinePatterns.SINGLE);	
+	            }
 	            r3.setText("4 años 1 mes", 0);
 	            
 	        }
@@ -547,7 +558,10 @@ public class ParticipantePVCController {
 							XWPFParagraph parrafo = esferas.getRow(0).getCell(0).addParagraph();
 			                parrafo.setStyle("ParrafoNirho");
 			                XWPFRun lnewRun = parrafo.createRun();
-			                lnewRun.setBold(esfera.getNombre().equals(participante.getEsfera()));
+			                if(esfera.getNombre().equals(participante.getEsfera())) {
+			                	lnewRun.setBold(true);
+			                	lnewRun.setUnderline(UnderlinePatterns.SINGLE);	
+				            }
 			                lnewRun.setText("- " + area.getNombre());
 						}
 					}
@@ -555,8 +569,6 @@ public class ParticipantePVCController {
 					 
 			}
 	        	
-	        
-	        
 	        HashMap<String, Integer> datosGrafico = new HashMap<>();
 	        
 	        List<ProyectoPVCArea> areas = proyectoPVCAreaService.getByProyecto(participante.getIdProyecto());
