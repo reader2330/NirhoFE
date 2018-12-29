@@ -10,9 +10,16 @@ import {CatalogsService} from '../../clb/services/catalogs.service';
 export class InformacionFormComponent implements OnInit {
   InformacionForm: FormGroup;
   ContactoForm: FormGroup;
+  VacanteForm: FormGroup;
   paises = [];
   giros = [];
-  contacts =[]
+  contacts = [];
+  newActiviad = {
+    nombreActividad:null,
+    descripcionActividad: null,
+    nivel:null
+  };
+  displayActividades = ['nombre', 'descripcion', 'nivel', 'detail1'];
   constructor(private _form: FormBuilder, private CatalogServices: CatalogsService) { }
 
   ngOnInit() {
@@ -30,6 +37,18 @@ export class InformacionFormComponent implements OnInit {
       emailContacto: ['', Validators.required],
       telefonoContacto: ['', Validators.required],
       celularContacto: ['', Validators.required]
+    });
+    this.VacanteForm = this._form.group({
+      nombreVacante: ['', Validators.required],
+      giro: [null, Validators.required],
+      motivo: [null, Validators.required],
+      numeroVacantes: [null, Validators.required],
+      puestoVacante: this._form.group({
+        nombrePuesto: ['', Validators.required],
+        puestoReporta: ['', Validators.required],
+        yearsExperencia: ['', Validators.required],
+        puestoCargo: ['', Validators.required]
+      })
     });
     this.getPaises();
     this.getGiros();
@@ -51,6 +70,10 @@ export class InformacionFormComponent implements OnInit {
     this.CatalogServices.getTypeContact().subscribe(res => {
       this.contacts = res;
     });
+  }
+
+  mostrarForm(form: any){
+    console.log(form['value']);
   }
 
 }

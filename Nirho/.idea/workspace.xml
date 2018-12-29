@@ -6,7 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="" />
+    <list default="true" id="b79a105a-32df-4a61-83ab-71244066432e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/rys/informacion-form/informacion-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/rys/informacion-form/informacion-form.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/modules/rys/informacion-form/informacion-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/modules/rys/informacion-form/informacion-form.component.ts" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -235,7 +238,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546104239986" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546105517875" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -333,12 +336,12 @@
       <workItem from="1545866155760" duration="14180000" />
       <workItem from="1545927364646" duration="8598000" />
       <workItem from="1546014880795" duration="3799000" />
-      <workItem from="1546103801933" duration="975000" />
+      <workItem from="1546103801933" duration="1239000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129716000" />
+    <option name="totallyTimeSpent" value="129980000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -352,7 +355,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="958" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27045178" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27045178" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24959612" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -375,7 +378,7 @@
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.3297244" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3277559" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="File Transfer" order="14" visible="true" weight="0.27944574" />
+      <window_info active="true" anchor="bottom" id="File Transfer" order="14" visible="true" weight="0.27944574" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24973376" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
