@@ -35,26 +35,7 @@ export class SidebarIrhComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.modules.push({
-      id_submodulo: 1,
-      descripcion: 'Bandeja de empresas'
-    }, {
-      id_submodulo: 2,
-      descripcion: 'Alta de empresa'
-    },
-      {
-       id_submodulo: 4,
-        descripcion: 'Contestar preguntas'
-    },
-      {
-        id_submodulo: 5,
-        descripcion: 'Ver graficas'
-      },
-      {
-        id_submodulo: 6,
-        descripcion: 'Generar reportes'
-      }
-      );
+
 
     this.getUser();
   }
@@ -82,6 +63,37 @@ export class SidebarIrhComponent implements OnInit {
       sessionStorage.setItem('user', JSON.stringify(this.user));
       if (this.user) {
         this.avatar.url = this.user['avatar'];
+        if (this.user['rol'] === 1) {
+          this.modules.push({
+            id_submodulo: 1,
+            descripcion: 'Bandeja de empresas'
+          }, {
+            id_submodulo: 2,
+            descripcion: 'Alta de empresa'
+          });
+        }
+        if (this.user['rol'] === 3) {
+          this.modules.push({
+              id_submodulo: 1,
+              descripcion: 'Bandeja de empresas'
+            }, {
+              id_submodulo: 2,
+              descripcion: 'Alta de empresa'
+            },
+            {
+              id_submodulo: 4,
+              descripcion: 'Contestar preguntas'
+            },
+            {
+              id_submodulo: 5,
+              descripcion: 'Ver graficas'
+            },
+            {
+              id_submodulo: 6,
+              descripcion: 'Generar reportes'
+            }
+          );
+        }
       }
     });
   }

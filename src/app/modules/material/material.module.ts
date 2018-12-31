@@ -23,7 +23,7 @@ import {
   MatSliderModule,
   MatDialogModule,
   MatNativeDateModule,
-  MatDatepickerModule, MatChipsModule, MatSnackBarModule,
+  MatDatepickerModule, MatChipsModule, MatSnackBarModule, MatButtonToggleModule,
 } from '@angular/material';
 
 @NgModule({
@@ -52,7 +52,8 @@ import {
     MatNativeDateModule,
     MatChipsModule,
     MatRippleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatButtonToggleModule
   ],
   declarations: [],
   exports: [
@@ -78,7 +79,8 @@ import {
     MatDatepickerModule,
     MatChipsModule,
     MatRippleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatButtonToggleModule
   ],
   providers: [
     MatDatepickerModule,

@@ -11,22 +11,22 @@
 
 <div style="width: 100%; " class="row col-sm-12" >
   <div style="width: 100%; margin-top: 30px" class="col-sm-12" *ngIf="goPreguntas">
-    <mat-accordion [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
-      <mat-expansion-panel *ngFor= "let question of preguntas; let i = index" [expanded]="i === 0" >
+    <mat-accordion *ngFor= "let cuestParticipante of preguntas;" [ngStyle]="{'width':mobile == true ? '100%':'75%'}" class="example-headers-align">
+      <mat-expansion-panel *ngFor="let question of cuestParticipante['cuestionarioParticipantes']" >
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <mat-icon>tab</mat-icon>{{question['cuestionarioParticipantes'][0]['cuestionarioParticipante']['tema']['nombre']}}
+            <mat-icon>tab</mat-icon>{{question['cuestionarioParticipante']['tema']['nombre']}}
           </mat-panel-title>
           <mat-panel-description>
-            {{question['cuestionarioParticipantes'][0]['participante']['nombres']}} {{question['cuestionarioParticipantes'][0]['participante']['aPaterno']}} {{question['cuestionarioParticipantes'][0]['participante']['puesto']}}
+            {{question['participante']['nombres']}} {{question['participante']['aPaterno']}} {{question['participante']['puesto']}}
           </mat-panel-description>
         </mat-expansion-panel-header>
 
         <mat-panel-description class="col-sm-12 row" style="width: 100%">
           <mat-list class="col-sm-12">
-            <mat-list-item style="margin-bottom: 10px">{{question['cuestionarioParticipantes'][0]['cuestionarioParticipante']['pregunta']['enunciado']}}</mat-list-item>
+            <mat-list-item style="margin-bottom: 10px">{{question['cuestionarioParticipante']['pregunta']['enunciado']}}</mat-list-item>
             <mat-selection-list (selectionChange)="handleSelection($event)"  >
-              <mat-list-option  *ngFor="let opt of question['cuestionarioParticipantes'][0]['opciones']; let i = index;"  [value]="question['cuestionarioParticipantes'][0]['cuestionarioParticipante']['respuesta']"  (click)="setRespuesta(question['cuestionarioParticipantes'][0],i)">
+              <mat-list-option  *ngFor="let opt of question['opciones']; let i = index;"  [value]="question['cuestionarioParticipante']['respuesta']"  (click)="setRespuesta(question['cuestionarioParticipantes'][0],i)">
                 {{opt.tipo}}  {{opt.enunciado}}
               </mat-list-option>
             </mat-selection-list>

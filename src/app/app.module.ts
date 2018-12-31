@@ -31,6 +31,7 @@ import {ModalUsuariosComponent} from './modules/modal/modal-usuarios/modal-usuar
 import {GeneradorReportesComponent} from './modules/shared/components/generador-reportes/generador-reportes.component';
 import { TableroControlComponent } from './modules/synchronize/components/tablero-control/tablero-control.component';
 import { InformacionFormComponent } from './modules/rys/informacion-form/informacion-form.component';
+import {RYSModule} from './modules/rys/rys.module';
 
 
 
@@ -53,7 +54,6 @@ export function highchartsFactory() {
     ViewActividadesComponent,
     VistaPVCParticipanteComponent,
     ModalUsuariosComponent,
-    InformacionFormComponent,
 
   ],
   imports: [
@@ -73,7 +73,8 @@ export function highchartsFactory() {
     SynchronizeModule,
     ApoModule,
     PvcModule,
-    VerticalTimelineModule
+    VerticalTimelineModule,
+    RYSModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},
