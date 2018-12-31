@@ -186,6 +186,40 @@ public class SolicitanteVacante implements Serializable {
 		this.aniosExperiencia = aniosExperiencia;
 	}
 
+	
+	
+	public Set<ActividadesPuestoVacante> getActividades() {
+		return actividades;
+	}
+
+	public void setActividades(Set<ActividadesPuestoVacante> actividades) {
+		this.actividades = actividades;
+	}
+
+	public Set<CaracteristicasCandidatoVacante> getCaracteristicas() {
+		return caracteristicas;
+	}
+
+	public void setCaracteristicas(Set<CaracteristicasCandidatoVacante> caracteristicas) {
+		this.caracteristicas = caracteristicas;
+	}
+
+	public Set<CompetenciasVacante> getCompetencias() {
+		return competencias;
+	}
+
+	public void setCompetencias(Set<CompetenciasVacante> competencias) {
+		this.competencias = competencias;
+	}
+
+	public Set<ConocimientoVacante> getConocimientos() {
+		return conocimientos;
+	}
+
+	public void setConocimientos(Set<ConocimientoVacante> conocimientos) {
+		this.conocimientos = conocimientos;
+	}
+
 	@Override
 	public String toString() {
 		return "SolicitanteVacante [id=" + id + ", aniosExperiencia=" + aniosExperiencia + ", estadoVacante="
