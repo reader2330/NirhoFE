@@ -50,7 +50,7 @@ public class SolicitanteController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Solicitante get(@PathVariable("id") int id) throws NirhoControllerException{
+	public Solicitante get(@PathVariable("id") long id) throws NirhoControllerException{
 		try {
 			return solicitanteService.getOne(id);
 		} catch(NirhoServiceException e){

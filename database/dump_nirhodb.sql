@@ -24,14 +24,13 @@ DROP TABLE IF EXISTS `actividades_puesto_vacante`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `actividades_puesto_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `descripcion_act_puesto_vacante` varchar(150) NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `nivel` int(11) NOT NULL,
-  `nombre_act_puesto_vacante` varchar(150) NOT NULL,
-  `id_vacante` bigint(20) DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `solicitante` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK5ruac94kepn03lqtt532oi6qa` (`id_vacante`),
-  CONSTRAINT `FK5ruac94kepn03lqtt532oi6qa` FOREIGN KEY (`id_vacante`) REFERENCES `vacante` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  KEY `FKe6veti0j3mlntq8kc9jrrjix1` (`solicitante`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +39,6 @@ CREATE TABLE `actividades_puesto_vacante` (
 
 LOCK TABLES `actividades_puesto_vacante` WRITE;
 /*!40000 ALTER TABLE `actividades_puesto_vacante` DISABLE KEYS */;
-INSERT INTO `actividades_puesto_vacante` VALUES (1,'ldkjñdkj oeireou ldk,smv',39,'Diseñar aterial de difución',1),(2,'VENTAS EN BOUTIQUE',39,'ATENCIÓN, SERVICIO Y \nRECEPCIÓN A CLIENTES',2),(3,'MANEJO DE CAJA',39,'MANEJO DE CAJA',2),(4,'ACOMODO Y ETIQUETADO DE MERCANCÍAS',37,'ACOMODO Y ETIQUETADO DE MERCANCÍAS',2),(5,'INVENTARIOS',39,'INVENTARIOS',2),(6,'CUIDAR IMAGEN Y LIMPIEZA DE BOUTIQUE',39,'CUIDAR IMAGEN Y LIMPIEZA DE BOUTIQUE',2);
 /*!40000 ALTER TABLE `actividades_puesto_vacante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,26 +181,26 @@ DROP TABLE IF EXISTS `caracteristicas_candidato_vacante`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `caracteristicas_candidato_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `cambio_residencia` varchar(150) NOT NULL,
-  `caract_adicionales` varchar(150) NOT NULL,
-  `carrera` varchar(150) NOT NULL,
-  `certificaciones` varchar(150) NOT NULL,
-  `cursos` varchar(150) NOT NULL,
-  `discapacitados` varchar(150) NOT NULL,
-  `dispo_viajar` varchar(150) NOT NULL,
-  `edad_rango` tinyblob NOT NULL,
-  `especialidad` varchar(150) NOT NULL,
-  `estado_civil` varchar(150) NOT NULL,
-  `genero` varchar(150) NOT NULL,
-  `nivel_estudios` int(11) NOT NULL,
-  `o_capacidades` varchar(150) NOT NULL,
-  `oficios` varchar(150) NOT NULL,
-  `titulo` varchar(150) NOT NULL,
-  `id_vacante` bigint(20) DEFAULT NULL,
+  `cambio_residencia` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `caract_adicionales` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carrera` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `certificaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cursos` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dispo_viajar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `edad_rango` longblob NOT NULL,
+  `especialidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estado_civil` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `genero` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `grado_estudios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `institucion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `necesidades_especiales` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `o_capacidades` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `oficios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `titulo` bit(1) NOT NULL,
+  `solicitante` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKay3j3elx947gmnflbeyywv943` (`id_vacante`),
-  CONSTRAINT `FKay3j3elx947gmnflbeyywv943` FOREIGN KEY (`id_vacante`) REFERENCES `vacante` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  KEY `FKmc6tngbn0l4eovu0x5treplil` (`solicitante`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +209,6 @@ CREATE TABLE `caracteristicas_candidato_vacante` (
 
 LOCK TABLES `caracteristicas_candidato_vacante` WRITE;
 /*!40000 ALTER TABLE `caracteristicas_candidato_vacante` DISABLE KEYS */;
-INSERT INTO `caracteristicas_candidato_vacante` VALUES (1,'Indistinto','No aplica','Lic. en Diseño gráfico','No aplica','Construcción de paginas web\nsilver light','Indistinto','No',_binary '͜ur\0[IM۠&v겥\0\0xp\0\0\0\0\0\0\0\0\0(','Con tenido web','Indistinto','Indistinto',9,'No aplica','No aplica','Si',1);
 /*!40000 ALTER TABLE `caracteristicas_candidato_vacante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,15 +301,13 @@ DROP TABLE IF EXISTS `competencias_vacante`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `competencias_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `desc_competencia` varchar(400) NOT NULL,
-  `id_competencia` int(11) NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `nivel` int(11) NOT NULL,
   `tipo` int(11) NOT NULL,
-  `id_vacante` bigint(20) DEFAULT NULL,
+  `solicitante` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKr7h12ssyrplrkkv505bgtx5g8` (`id_vacante`),
-  CONSTRAINT `FKr7h12ssyrplrkkv505bgtx5g8` FOREIGN KEY (`id_vacante`) REFERENCES `vacante` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  KEY `FKrhac0rvfng3vj2nogv4tv5pfw` (`solicitante`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,7 +316,6 @@ CREATE TABLE `competencias_vacante` (
 
 LOCK TABLES `competencias_vacante` WRITE;
 /*!40000 ALTER TABLE `competencias_vacante` DISABLE KEYS */;
-INSERT INTO `competencias_vacante` VALUES (1,'Disposición de actuar, sentir y/o pensar en torno a las necesidades del cliente para lo cual dirige toda sus acciones como estrategia para garantizar la satisfacción de los mismos.',41,1,1,1),(2,'Capacidad para trascender de lo lógico a lo abstracto y encontrar las verdaderas causas y soluciones de una situación o problema especifico; cuyos resultados son sustentados con un alto nivel de eficacia y confiabilidad.',43,1,1,1),(3,'Disposición de actuar, sentir y/o pensar en torno a las necesidades del cliente para lo cual dirige toda sus acciones como estrategia para garantizar la satisfacción de los mismos.',41,5,1,2),(4,'Ajustarse a los posibles cambios laborales, sociales y personales, percibiéndolos como oportunidades de aprendizaje.',42,1,1,2),(5,'Capacidad para trascender de lo lógico a lo abstracto y encontrar las verdaderas causas y soluciones de una situación o problema especifico; cuyos resultados son sustentados con un alto nivel de eficacia y confiabilidad.',43,1,1,2),(6,' Es la competencia que posee el líder para escuchar, entender y valorar con empatía información, ideas y opiniones que su equipo le comunique, siendo capaz de retroalimentar asertivamente el proceso comunicativo.',44,4,1,2),(7,' Capacidad para generar y mantener un flujo de comunicación adecuado entre los miembros del grupo o de la organización, utilizando los distintos canales que en cada caso se requieran; además, favorecer el establecimiento de relaciones mutuamente beneficiosas.',45,4,1,2);
 /*!40000 ALTER TABLE `competencias_vacante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,14 +356,14 @@ DROP TABLE IF EXISTS `conocimiento_vacante`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `conocimiento_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `descripcion_conocimiento_vacante` varchar(150) NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `nivel` int(11) NOT NULL,
-  `nombre_conocimiento_vacante` varchar(150) NOT NULL,
-  `id_vacante` bigint(20) DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo` int(11) NOT NULL,
+  `solicitante` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKig2hycti0l2ewb22upijuau2h` (`id_vacante`),
-  CONSTRAINT `FKig2hycti0l2ewb22upijuau2h` FOREIGN KEY (`id_vacante`) REFERENCES `vacante` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  KEY `FKipv9g2bxquwkgrsngsnotrww7` (`solicitante`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,7 +372,6 @@ CREATE TABLE `conocimiento_vacante` (
 
 LOCK TABLES `conocimiento_vacante` WRITE;
 /*!40000 ALTER TABLE `conocimiento_vacante` DISABLE KEYS */;
-INSERT INTO `conocimiento_vacante` VALUES (1,'alksdalk ',4,'lkdjlkg c,mn ',1),(2,'CONOCIMIENTOS DE MODA, \nTELAS, DISEÑADORES, ETC',4,'CONOCIMIENTOS DE MODA, \nTELAS, DISEÑADORES, ETC',2);
 /*!40000 ALTER TABLE `conocimiento_vacante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2123,7 +2116,7 @@ DROP TABLE IF EXISTS `soliciante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `soliciante` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `direccion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `giro` int(11) DEFAULT NULL,
   `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2150,14 +2143,14 @@ DROP TABLE IF EXISTS `solicitante_contacto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `solicitante_contacto` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `celular` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `telefono` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `tipo_contacto` int(11) NOT NULL,
-  `solicitante` int(11) DEFAULT NULL,
+  `solicitante` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKnk8b6q972lgukl8whjpwerlvb` (`solicitante`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -2180,7 +2173,7 @@ DROP TABLE IF EXISTS `solicitante_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `solicitante_vacante` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `anios_experiencia` int(11) NOT NULL,
   `estado_vacante` int(11) NOT NULL,
   `giro` int(11) NOT NULL,
@@ -2190,7 +2183,7 @@ CREATE TABLE `solicitante_vacante` (
   `puesto` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `puesto_cargo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `puesto_reporta` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `solicitante` int(11) DEFAULT NULL,
+  `solicitante` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKh0ieosh7ayt3ua1ucp1ti6s3` (`solicitante`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -2475,4 +2468,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-30 20:46:40
+-- Dump completed on 2018-12-30 23:54:23

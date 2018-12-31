@@ -23,7 +23,7 @@ public class Solicitante implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Integer id;
+	private long id;
 	@Column(name = "direccion")
 	private String direccion;
 	@Column(name = "nombre")
@@ -57,14 +57,14 @@ public class Solicitante implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

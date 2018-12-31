@@ -52,6 +52,10 @@ public class Candidato implements Serializable {
     @Column(name = "situacion")
     private String situacion;
     
+    
+    //username 
+    //password
+    
     public Candidato() {
     }
 

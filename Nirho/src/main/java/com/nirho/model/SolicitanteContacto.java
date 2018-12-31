@@ -24,7 +24,7 @@ public class SolicitanteContacto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private long id;
     @Basic(optional = false)
     @Column(name = "celular")
     private String celular;
@@ -46,11 +46,11 @@ public class SolicitanteContacto implements Serializable {
     public SolicitanteContacto() {
     }
 
-    public SolicitanteContacto(Integer id) {
+    public SolicitanteContacto(long id) {
         this.id = id;
     }
 
-    public SolicitanteContacto(Integer id, String celular, String email, String nombre, String telefono, int tipoContacto) {
+    public SolicitanteContacto(long id, String celular, String email, String nombre, String telefono, int tipoContacto) {
         this.id = id;
         this.celular = celular;
         this.email = email;
@@ -59,11 +59,11 @@ public class SolicitanteContacto implements Serializable {
         this.tipoContacto = tipoContacto;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

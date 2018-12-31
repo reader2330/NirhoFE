@@ -10,7 +10,7 @@ public interface SolicitanteService {
 	List<Solicitante> getByRFC(String rfc) throws NirhoServiceException;
 	void save(Solicitante solicitante) throws NirhoServiceException;
 	void save(List<Solicitante> solicitantes) throws NirhoServiceException;
-	public Solicitante getOne(Integer id) throws NirhoServiceException;
+	public Solicitante getOne(long id) throws NirhoServiceException;
 	public List<Solicitante> getAll() throws NirhoServiceException;
 	
 }

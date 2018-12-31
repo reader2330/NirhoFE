@@ -13,14 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author eisten
- */
+
 @Entity
 @Table(name = "conocimiento_vacante")
 public class ConocimientoVacante implements Serializable {
@@ -30,79 +25,82 @@ public class ConocimientoVacante implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private long id;
     @Basic(optional = false)
-    @Column(name = "descripcion_conocimiento_vacante")
-    private String descripcionConocimientoVacante;
+    @Column(name = "descripcion")
+    private String descripcion;
     @Basic(optional = false)
     @Column(name = "nivel")
     private int nivel;
     @Basic(optional = false)
-    @Column(name = "nombre_conocimiento_vacante")
-    private String nombreConocimientoVacante;
-    @JoinColumn(name = "id_vacante", referencedColumnName = "id")
-    @ManyToOne
-    private Vacante vacante;
+    @Column(name = "tipo")
+    private int tipo;
+    @Basic(optional = false)
+    @Column(name = "nombre")
+    private String nombre;
 
     public ConocimientoVacante() {
     }
+    
+	public ConocimientoVacante(Long id, String descripcion, int nivel, int tipo, String nombre) {
+		super();
+		this.id = id;
+		this.descripcion = descripcion;
+		this.nivel = nivel;
+		this.tipo = tipo;
+		this.nombre = nombre;
+	}
 
-    public ConocimientoVacante(Long id) {
+	public ConocimientoVacante(Long id) {
         this.id = id;
     }
 
-    public ConocimientoVacante(Long id, String descripcionConocimientoVacante, int nivel, String nombreConocimientoVacante) {
-        this.id = id;
-        this.descripcionConocimientoVacante = descripcionConocimientoVacante;
-        this.nivel = nivel;
-        this.nombreConocimientoVacante = nombreConocimientoVacante;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public String getDescripcionConocimientoVacante() {
-        return descripcionConocimientoVacante;
-    }
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
-    public void setDescripcionConocimientoVacante(String descripcionConocimientoVacante) {
-        this.descripcionConocimientoVacante = descripcionConocimientoVacante;
-    }
+	public int getNivel() {
+		return nivel;
+	}
 
-    public int getNivel() {
-        return nivel;
-    }
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
 
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public String getNombreConocimientoVacante() {
-        return nombreConocimientoVacante;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setNombreConocimientoVacante(String nombreConocimientoVacante) {
-        this.nombreConocimientoVacante = nombreConocimientoVacante;
-    }
+	public int getTipo() {
+		return tipo;
+	}
 
-    public Vacante getVacante() {
-        return vacante;
-    }
-
-    public void setVacante(Vacante vacante) {
-        this.vacante = vacante;
-    }
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
 
 	@Override
 	public String toString() {
-		return "ConocimientoVacante [id=" + id + ", descripcionConocimientoVacante=" + descripcionConocimientoVacante
-				+ ", nivel=" + nivel + ", nombreConocimientoVacante=" + nombreConocimientoVacante + ", vacante="
-				+ vacante + "]";
+		return "ConocimientoVacante [id=" + id + ", descripcion=" + descripcion + ", nivel=" + nivel + ", nombre="
+				+ nombre + "]";
 	}
+
+    
 	        
 }

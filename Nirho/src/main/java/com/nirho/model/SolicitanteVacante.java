@@ -6,20 +6,20 @@
 package com.nirho.model;
 
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author eisten
- */
 @Entity
 @Table(name = "solicitante_vacante")
 public class SolicitanteVacante implements Serializable {
@@ -30,7 +30,7 @@ public class SolicitanteVacante implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private long id;
     
     @Basic(optional = false)
     @Column(name = "anios_experiencia")
@@ -68,18 +68,30 @@ public class SolicitanteVacante implements Serializable {
     @Column(name = "puesto_reporta")
     private String puestoReporta;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "solicitante")
+   	private Set<ActividadesPuestoVacante> actividades = new HashSet<>();
     
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "solicitante")
+   	private Set<CaracteristicasCandidatoVacante> caracteristicas = new HashSet<>();
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "solicitante")
+   	private Set<CompetenciasVacante> competencias = new HashSet<>();
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "solicitante")
+   	private Set<ConocimientoVacante> conocimientos = new HashSet<>();
     
     public SolicitanteVacante() {
     }
 
-    public SolicitanteVacante(Integer id) {
+    public SolicitanteVacante(long id) {
         this.id = id;
     }
 
-    
-
-    public SolicitanteVacante(Integer id, int aniosExperiencia, int estadoVacante, int giro, int motivo,
+    public SolicitanteVacante(long id, int aniosExperiencia, int estadoVacante, int giro, int motivo,
 			String nombreVacante, int numVacantes, String puesto, String puestoCargo, String puestoReporta) {
 		super();
 		this.id = id;
@@ -94,11 +106,11 @@ public class SolicitanteVacante implements Serializable {
 		this.puestoReporta = puestoReporta;
 	}
 
-	public Integer getId() {
+	public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

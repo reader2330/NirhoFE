@@ -6,22 +6,22 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nirho.dao.ActividadesPuestoVacanteDAO;
+import com.nirho.dao.CompetenciasVacanteDAO;
 import com.nirho.exception.NirhoServiceException;
-import com.nirho.model.ActividadesPuestoVacante;
-import com.nirho.service.ActividadesPuestoVacanteService;
+import com.nirho.model.CompetenciasVacante;
+import com.nirho.service.CompetenciasVacanteService;
 
 @Service
-public class ActividadesPuestoVacanteServiceImpl implements ActividadesPuestoVacanteService {
+public class CompetenciasVacanteServiceImpl implements CompetenciasVacanteService {
 	
-	public final static Logger logger = Logger.getLogger(ActividadesPuestoVacanteServiceImpl.class);
+	public final static Logger logger = Logger.getLogger(CompetenciasVacanteServiceImpl.class);
 	
 	@Autowired
-	private ActividadesPuestoVacanteDAO actividadesPuestoVacanteDAO;
+	private CompetenciasVacanteDAO competenciasVacanteDAO;
 	
-	public void editar(ActividadesPuestoVacante entidad) throws NirhoServiceException{
+	public void editar(CompetenciasVacante entidad) throws NirhoServiceException{
 		try {
-			actividadesPuestoVacanteDAO.update(entidad);
+			competenciasVacanteDAO.update(entidad);
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
@@ -30,9 +30,9 @@ public class ActividadesPuestoVacanteServiceImpl implements ActividadesPuestoVac
 	
 	public void eliminar(Long id) throws NirhoServiceException{
 		try {
-			ActividadesPuestoVacante entidad = actividadesPuestoVacanteDAO.getOne(id);
+			CompetenciasVacante entidad = competenciasVacanteDAO.getOne(id);
 			if(entidad != null) {
-				actividadesPuestoVacanteDAO.delete(entidad);
+				competenciasVacanteDAO.delete(entidad);
 			}
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");
@@ -40,18 +40,18 @@ public class ActividadesPuestoVacanteServiceImpl implements ActividadesPuestoVac
 		}	
 	}
 	
-	public ActividadesPuestoVacante getOne(Long id) throws NirhoServiceException{
+	public CompetenciasVacante getOne(Long id) throws NirhoServiceException{
 		try {
-			return actividadesPuestoVacanteDAO.getOne(id);
+			return competenciasVacanteDAO.getOne(id);
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
 		}	
 	}
 	
-	public List<ActividadesPuestoVacante> getAll() throws NirhoServiceException{
+	public List<CompetenciasVacante> getAll() throws NirhoServiceException{
 		try {
-			return actividadesPuestoVacanteDAO.findAll();
+			return competenciasVacanteDAO.findAll();
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");

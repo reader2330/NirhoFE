@@ -29,7 +29,7 @@ public class SolicitanteServiceImpl implements SolicitanteService {
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
 		}
 	}
-	
+	 
 	@Override
 	public void save(Solicitante solicitante) throws NirhoServiceException{
 		try {
@@ -67,7 +67,7 @@ public class SolicitanteServiceImpl implements SolicitanteService {
 	}
 	
 	@Override
-	public Solicitante getOne(Integer id) throws NirhoServiceException{
+	public Solicitante getOne(long id) throws NirhoServiceException{
 		try {
 			return solicitanteDAO.getOne(id);
 		} catch (Exception e) {

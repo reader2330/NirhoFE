@@ -10,7 +10,7 @@ import com.nirho.dao.SolicitanteDAO;
 import com.nirho.model.Solicitante;
 
 @Repository
-public class SolicitanteDAOImpl extends AbstractDAO<Solicitante, Integer> implements SolicitanteDAO {
+public class SolicitanteDAOImpl extends AbstractDAO<Solicitante, Long> implements SolicitanteDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
