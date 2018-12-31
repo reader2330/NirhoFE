@@ -2116,6 +2116,96 @@ INSERT INTO `rol_clb_submodulo` VALUES (1,1),(2,1),(3,1),(1,2),(2,2),(2,3),(2,4)
 UNLOCK TABLES;
 
 --
+-- Table structure for table `soliciante`
+--
+
+DROP TABLE IF EXISTS `soliciante`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `soliciante` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `direccion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `giro` int(11) DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pais` int(11) DEFAULT NULL,
+  `rfc` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `soliciante`
+--
+
+LOCK TABLES `soliciante` WRITE;
+/*!40000 ALTER TABLE `soliciante` DISABLE KEYS */;
+/*!40000 ALTER TABLE `soliciante` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `solicitante_contacto`
+--
+
+DROP TABLE IF EXISTS `solicitante_contacto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `solicitante_contacto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `celular` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telefono` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo_contacto` int(11) NOT NULL,
+  `solicitante` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKnk8b6q972lgukl8whjpwerlvb` (`solicitante`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `solicitante_contacto`
+--
+
+LOCK TABLES `solicitante_contacto` WRITE;
+/*!40000 ALTER TABLE `solicitante_contacto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `solicitante_contacto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `solicitante_vacante`
+--
+
+DROP TABLE IF EXISTS `solicitante_vacante`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `solicitante_vacante` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `anios_experiencia` int(11) NOT NULL,
+  `estado_vacante` int(11) NOT NULL,
+  `giro` int(11) NOT NULL,
+  `motivo` int(11) NOT NULL,
+  `nombre_vacante` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `num_vacantes` int(11) NOT NULL,
+  `puesto` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `puesto_cargo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `puesto_reporta` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `solicitante` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKh0ieosh7ayt3ua1ucp1ti6s3` (`solicitante`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `solicitante_vacante`
+--
+
+LOCK TABLES `solicitante_vacante` WRITE;
+/*!40000 ALTER TABLE `solicitante_vacante` DISABLE KEYS */;
+/*!40000 ALTER TABLE `solicitante_vacante` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tema`
 --
 
@@ -2385,4 +2475,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-26 12:01:11
+-- Dump completed on 2018-12-30 20:46:40
