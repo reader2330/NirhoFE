@@ -40,9 +40,6 @@ public class ConocimientoCandidato implements Serializable {
     @Basic(optional = false)
     @Column(name = "nombre_conocimiento")
     private String nombreConocimiento;
-    @JoinColumn(name = "id_candidato", referencedColumnName = "id")
-    @ManyToOne
-    private Candidato candidato;
 
     public ConocimientoCandidato() {
     }
@@ -89,19 +86,5 @@ public class ConocimientoCandidato implements Serializable {
     public void setNombreConocimiento(String nombreConocimiento) {
         this.nombreConocimiento = nombreConocimiento;
     }
-
-    public Candidato getCandidato() {
-        return candidato;
-    }
-
-    public void setCandidato(Candidato candidato) {
-        this.candidato = candidato;
-    }
-
-	@Override
-	public String toString() {
-		return "ConocimientoCandidato [id=" + id + ", descripcionConocimiento=" + descripcionConocimiento + ", nivel="
-				+ nivel + ", nombreConocimiento=" + nombreConocimiento + ", candidato=" + candidato + "]";
-	}
 	        
 }

@@ -15,10 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author eisten
- */
 @Entity
 @Table(name = "candidato")
 public class Candidato implements Serializable {
@@ -29,6 +25,8 @@ public class Candidato implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    @Column(name = "idSolicitate")
+    private Long idSolicitante;
     @Column(name = "direccion")
     private String direccion;
     @Column(name = "disponibilidad")
@@ -51,10 +49,14 @@ public class Candidato implements Serializable {
     private String rfc;
     @Column(name = "situacion")
     private String situacion;
-    
-    
-    //username 
-    //password
+    @Column(name = "username")
+    private String username;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "rol")
+    private String rol;
+    @Column(name = "caracteristicas")
+    private CaracteristicasCandidatoCv caracteristicasCandidatoCv;
     
     public Candidato() {
     }
@@ -76,8 +78,18 @@ public class Candidato implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    
 
-    public String getDireccion() {
+    public Long getIdSolicitante() {
+		return idSolicitante;
+	}
+
+	public void setIdSolicitante(Long idSolicitante) {
+		this.idSolicitante = idSolicitante;
+	}
+
+	public String getDireccion() {
         return direccion;
     }
 
@@ -156,6 +168,38 @@ public class Candidato implements Serializable {
     public void setSituacion(String situacion) {
         this.situacion = situacion;
     }
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+	
+	public CaracteristicasCandidatoCv getCaracteristicasCandidatoCv() {
+		return caracteristicasCandidatoCv;
+	}
+
+	public void setCaracteristicasCandidatoCv(CaracteristicasCandidatoCv caracteristicasCandidatoCv) {
+		this.caracteristicasCandidatoCv = caracteristicasCandidatoCv;
+	}
 
 	@Override
 	public String toString() {

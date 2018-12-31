@@ -118,6 +118,11 @@ CREATE TABLE `candidato` (
   `pretencion` varchar(255) DEFAULT NULL,
   `rfc` varchar(150) NOT NULL,
   `situacion` varchar(255) DEFAULT NULL,
+  `caracteristicas` tinyblob,
+  `id_solicitate` bigint(20) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `rol` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_dqy0j0i4xt3asldaeefnqokxk` (`rfc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -141,26 +146,24 @@ DROP TABLE IF EXISTS `caracteristicas_candidato_cv`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `caracteristicas_candidato_cv` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `cambio_residencia` varchar(150) NOT NULL,
-  `caract_adicionales` varchar(150) NOT NULL,
-  `carrera` varchar(150) NOT NULL,
-  `certificaciones` varchar(150) NOT NULL,
-  `cursos` varchar(150) NOT NULL,
-  `discapacitados` varchar(150) NOT NULL,
-  `dispo_viajar` varchar(150) NOT NULL,
-  `edad_rango` int(11) NOT NULL,
-  `especialidad` varchar(150) NOT NULL,
-  `estado_civil` varchar(150) NOT NULL,
-  `genero` varchar(150) NOT NULL,
-  `nivel_estudios` int(11) NOT NULL,
-  `o_capacidades` varchar(150) NOT NULL,
-  `oficios` varchar(150) NOT NULL,
-  `titulo` varchar(150) NOT NULL,
-  `id_candidato` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKri6wo944buvk9noyj8nps7a62` (`id_candidato`),
-  CONSTRAINT `FKri6wo944buvk9noyj8nps7a62` FOREIGN KEY (`id_candidato`) REFERENCES `candidato` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cambio_residencia` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `caract_adicionales` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carrera` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `certificaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cursos` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dispo_viajar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `edad_rango` longblob NOT NULL,
+  `especialidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estado_civil` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `genero` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `grado_estudios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `institucion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `necesidades_especiales` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `o_capacidades` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `oficios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `titulo` bit(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -328,14 +331,11 @@ DROP TABLE IF EXISTS `conocimiento_candidato`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `conocimiento_candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `descripcion_conocimiento` varchar(150) NOT NULL,
+  `descripcion_conocimiento` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `nivel` int(11) NOT NULL,
-  `nombre_conocimiento` varchar(150) NOT NULL,
-  `id_candidato` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKcm2r82mdg4ckrj8kx5gsyykp8` (`id_candidato`),
-  CONSTRAINT `FKcm2r82mdg4ckrj8kx5gsyykp8` FOREIGN KEY (`id_candidato`) REFERENCES `candidato` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nombre_conocimiento` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2468,4 +2468,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-30 23:54:23
+-- Dump completed on 2018-12-31  2:12:19
