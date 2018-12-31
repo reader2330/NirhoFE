@@ -3,6 +3,8 @@ package com.nirho.controller;
 import java.util.List;
 import javax.validation.Valid;
 import org.jboss.logging.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,11 +61,16 @@ public class SolicitanteController {
 	}
 	
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
-	public void add(@Valid @RequestBody Solicitante solicitante) throws NirhoControllerException{
+	public String add(@Valid @RequestBody Solicitante solicitante) throws NirhoControllerException{
 		try {
 			solicitanteService.save(solicitante);
+			JSONObject json = new JSONObject();
+			json.accumulate("id", solicitante.getId());
+			return json.toString();
 		} catch(NirhoServiceException ex){
-			throw new NirhoControllerException("Problemas al registrar solicitante");
+			throw new NirhoControllerException("Problemas al registrar entidad");
+		} catch (JSONException e1) {
+			throw new NirhoControllerException("Problemas al registrar entidad");
 		} 
 	}
 	
