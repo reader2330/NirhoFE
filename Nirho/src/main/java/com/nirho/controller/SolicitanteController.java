@@ -84,28 +84,40 @@ public class SolicitanteController {
 	}
 	
 	@RequestMapping(value = "/{id}/contacto/guardar", method = RequestMethod.POST)
-	public void add(@PathVariable("id") int id, @Valid @RequestBody SolicitanteContacto l) throws NirhoControllerException{
+	public String add(@PathVariable("id") int id, @Valid @RequestBody SolicitanteContacto l) throws NirhoControllerException{
 		try {
 			Solicitante s = solicitanteService.getOne(id);
 			if(s != null) {
 				s.getContactos().add(l);
 				solicitanteService.save(s);
+				JSONObject json = new JSONObject();
+				json.accumulate("id", l.getId());
+				return json.toString();
 			}
+			return null;
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar solicitante");
+		} catch (JSONException e1) {
+			throw new NirhoControllerException("Problemas al registrar entidad");
 		} 
 	}
 	
 	@RequestMapping(value = "/{id}/vacante/guardar", method = RequestMethod.POST)
-	public void add(@PathVariable("id") int id, @Valid @RequestBody SolicitanteVacante l) throws NirhoControllerException{
+	public String add(@PathVariable("id") int id, @Valid @RequestBody SolicitanteVacante l) throws NirhoControllerException{
 		try {
 			Solicitante s = solicitanteService.getOne(id);
 			if(s != null) {
 				s.getVacantes().add(l);
 				solicitanteService.save(s);
+				JSONObject json = new JSONObject();
+				json.accumulate("id", l.getId());
+				return json.toString();
 			}
+			return null;
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar solicitante");
+		} catch (JSONException e1) {
+			throw new NirhoControllerException("Problemas al registrar entidad");
 		} 
 	}
 	
