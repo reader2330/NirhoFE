@@ -152,12 +152,13 @@ CREATE TABLE `caracteristicas_candidato_cv` (
   `certificaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cursos` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dispo_viajar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `edad_rango` longblob NOT NULL,
   `especialidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `estado_civil` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `genero` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `grado_estudios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `institucion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `max_edad` int(11) DEFAULT NULL,
+  `min_edad` int(11) DEFAULT NULL,
   `necesidades_especiales` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `o_capacidades` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `oficios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -190,12 +191,13 @@ CREATE TABLE `caracteristicas_candidato_vacante` (
   `certificaciones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cursos` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dispo_viajar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `edad_rango` longblob NOT NULL,
   `especialidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `estado_civil` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `genero` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `grado_estudios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `institucion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `max_edad` int(11) DEFAULT NULL,
+  `min_edad` int(11) DEFAULT NULL,
   `necesidades_especiales` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `o_capacidades` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `oficios` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1277,6 +1279,7 @@ CREATE TABLE `idioma_candidato` (
   `id_idioma` int(11) NOT NULL,
   `nivel` int(11) NOT NULL,
   `id_candidato` bigint(20) DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKoxc27v2r29nxssb3ppgi5pmku` (`id_candidato`),
   CONSTRAINT `FKoxc27v2r29nxssb3ppgi5pmku` FOREIGN KEY (`id_candidato`) REFERENCES `candidato` (`id`)
@@ -2468,4 +2471,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-31  2:12:19
+-- Dump completed on 2018-12-31 20:41:18

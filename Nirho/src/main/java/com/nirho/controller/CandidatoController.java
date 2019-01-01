@@ -185,7 +185,7 @@ public class CandidatoController {
 	            
 	            XWPFTableRow row14 = informacionGeneral.getRow(14);
 	            row14.getCell(1).setText(caracteristicas.getNecesidadesEspeciales());
-	            row14.getCell(4).setText(caracteristicas.getEdadRango() + "");
+	            row14.getCell(4).setText(caracteristicas.getMinEdad() + " - " + caracteristicas.getMaxEdad());
 	            
 	            XWPFTableRow row15 = informacionGeneral.getRow(15);
 	            row15.getCell(1).setText(caracteristicas.getCaractAdicionales());

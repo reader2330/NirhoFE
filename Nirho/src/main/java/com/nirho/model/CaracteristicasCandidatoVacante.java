@@ -6,7 +6,6 @@
 package com.nirho.model;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -14,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 
@@ -44,10 +42,11 @@ public class CaracteristicasCandidatoVacante implements Serializable {
     @Column(name = "necesidades_especiales")
     private String necesidadesEspeciales;
     
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "edad_rango")
-    private byte[] edadRango;
+    @Column(name = "min_edad")
+    private int minEdad;
+    
+    @Column(name = "max_edad")
+    private int maxEdad;
     
     @Column(name = "caract_adicionales")
     private String caractAdicionales;
@@ -85,8 +84,10 @@ public class CaracteristicasCandidatoVacante implements Serializable {
 		super();
 	}
 
-	public CaracteristicasCandidatoVacante(Long id, String genero, String estadoCivil, String dispoViajar,
-			String cambioResidencia, String necesidadesEspeciales, byte[] edadRango, String caractAdicionales,
+	
+
+	public CaracteristicasCandidatoVacante(long id, String genero, String estadoCivil, String dispoViajar,
+			String cambioResidencia, String necesidadesEspeciales, int minEdad, int maxEdad, String caractAdicionales,
 			String gradoEstudios, String institucion, boolean titulo, String carrera, String especialidad,
 			String certificaciones, String cursos, String oficios, String oCapacidades) {
 		super();
@@ -96,7 +97,8 @@ public class CaracteristicasCandidatoVacante implements Serializable {
 		this.dispoViajar = dispoViajar;
 		this.cambioResidencia = cambioResidencia;
 		this.necesidadesEspeciales = necesidadesEspeciales;
-		this.edadRango = edadRango;
+		this.minEdad = minEdad;
+		this.maxEdad = maxEdad;
 		this.caractAdicionales = caractAdicionales;
 		this.gradoEstudios = gradoEstudios;
 		this.institucion = institucion;
@@ -108,6 +110,8 @@ public class CaracteristicasCandidatoVacante implements Serializable {
 		this.oficios = oficios;
 		this.oCapacidades = oCapacidades;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -157,13 +161,37 @@ public class CaracteristicasCandidatoVacante implements Serializable {
 		this.necesidadesEspeciales = necesidadesEspeciales;
 	}
 
-	public byte[] getEdadRango() {
-		return edadRango;
+	
+
+	public int getMinEdad() {
+		return minEdad;
 	}
 
-	public void setEdadRango(byte[] edadRango) {
-		this.edadRango = edadRango;
+
+
+	public void setMinEdad(int minEdad) {
+		this.minEdad = minEdad;
 	}
+
+
+
+	public int getMaxEdad() {
+		return maxEdad;
+	}
+
+
+
+	public void setMaxEdad(int maxEdad) {
+		this.maxEdad = maxEdad;
+	}
+
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
 
 	public String getCaractAdicionales() {
 		return caractAdicionales;
@@ -245,15 +273,19 @@ public class CaracteristicasCandidatoVacante implements Serializable {
 		this.oCapacidades = oCapacidades;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "CaracteristicasCandidatoVacante [id=" + id + ", genero=" + genero + ", estadoCivil=" + estadoCivil
 				+ ", dispoViajar=" + dispoViajar + ", cambioResidencia=" + cambioResidencia + ", necesidadesEspeciales="
-				+ necesidadesEspeciales + ", edadRango=" + Arrays.toString(edadRango) + ", caractAdicionales="
+				+ necesidadesEspeciales + ", minEdad=" + minEdad + ", maxEdad=" + maxEdad + ", caractAdicionales="
 				+ caractAdicionales + ", gradoEstudios=" + gradoEstudios + ", institucion=" + institucion + ", titulo="
 				+ titulo + ", carrera=" + carrera + ", especialidad=" + especialidad + ", certificaciones="
 				+ certificaciones + ", cursos=" + cursos + ", oficios=" + oficios + ", oCapacidades=" + oCapacidades
 				+ "]";
 	}
+
+	
 
 }

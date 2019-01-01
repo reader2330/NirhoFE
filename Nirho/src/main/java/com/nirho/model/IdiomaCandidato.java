@@ -13,14 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author eisten
- */
 @Entity
 @Table(name = "idioma_candidato")
 public class IdiomaCandidato implements Serializable {
@@ -31,18 +25,15 @@ public class IdiomaCandidato implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
-    @Column(name = "desc_idioma")
-    private String descIdioma;
+    @Column(name = "nombre")
+    private String nombre;
     @Basic(optional = false)
     @Column(name = "id_idioma")
     private int idIdioma;
     @Basic(optional = false)
     @Column(name = "nivel")
     private int nivel;
-    @JoinColumn(name = "id_candidato", referencedColumnName = "id")
-    @ManyToOne
-    private Candidato candidato;
+    
 
     public IdiomaCandidato() {
     }
@@ -51,9 +42,9 @@ public class IdiomaCandidato implements Serializable {
         this.id = id;
     }
 
-    public IdiomaCandidato(Long id, String descIdioma, int idIdioma, int nivel) {
+    public IdiomaCandidato(Long id, String nombre, int idIdioma, int nivel) {
         this.id = id;
-        this.descIdioma = descIdioma;
+        this.nombre = nombre;
         this.idIdioma = idIdioma;
         this.nivel = nivel;
     }
@@ -67,11 +58,11 @@ public class IdiomaCandidato implements Serializable {
     }
 
     public String getDescIdioma() {
-        return descIdioma;
+        return nombre;
     }
 
-    public void setDescIdioma(String descIdioma) {
-        this.descIdioma = descIdioma;
+    public void setDescIdioma(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getIdIdioma() {
@@ -90,18 +81,9 @@ public class IdiomaCandidato implements Serializable {
         this.nivel = nivel;
     }
 
-    public Candidato getCandidato() {
-        return candidato;
-    }
-
-    public void setCandidato(Candidato candidato) {
-        this.candidato = candidato;
-    }
-
 	@Override
 	public String toString() {
-		return "IdiomaCandidato [id=" + id + ", descIdioma=" + descIdioma + ", idIdioma=" + idIdioma + ", nivel="
-				+ nivel + ", candidato=" + candidato + "]";
+		return "IdiomaCandidato [id=" + id + ", nombre=" + nombre + ", idIdioma=" + idIdioma + ", nivel=" + nivel + "]";
 	}
-	
+
 }
