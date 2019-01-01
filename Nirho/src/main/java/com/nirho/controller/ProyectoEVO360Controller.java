@@ -280,8 +280,8 @@ public class ProyectoEVO360Controller {
 		try {
 						       
 			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360.docx"));
 			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteEVO360.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360.docx"));
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360.docx")); 
 			
 			GraficaRespPregDTO resGraficas = graficasService.obtenerGraficasRespuestasPreguntas(idProyecto);
@@ -306,14 +306,21 @@ public class ProyectoEVO360Controller {
 	        	for (GraficaResultadoDTO resul : graficaResultadoList) {
 	        		int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
 							resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
-	        		if(areasMap.get(gaDTO.getAreaOrg())!=null){
-	        			areasMap.get(gaDTO.getAreaOrg()).setCont(areasMap.get(gaDTO.getAreaOrg()).getCont()+1);
-	        			areasMap.get(gaDTO.getAreaOrg()).setSuma(areasMap.get(gaDTO.getAreaOrg()).getSuma()+respuesta);
-	        		} else {
-	        			AcumDTO acum = new AcumDTO(respuesta,1);
-	        			areasMap.put(gaDTO.getAreaOrg(), acum);
+	        		if(respuesta != 0) {
+	        			if(areasMap.get(gaDTO.getAreaOrg())!=null){
+		        			areasMap.get(gaDTO.getAreaOrg()).setCont(areasMap.get(gaDTO.getAreaOrg()).getCont()+1);
+		        			areasMap.get(gaDTO.getAreaOrg()).setSuma(areasMap.get(gaDTO.getAreaOrg()).getSuma()+respuesta);
+		        		} else {
+		        			AcumDTO acum = new AcumDTO(respuesta,1);
+		        			areasMap.put(gaDTO.getAreaOrg(), acum);
+		        		}
 	        		}
 	        	}
+	        }
+	        
+	        if(areasMap.size() == 0) {
+	        	logger.info("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
+	        	throw new NirhoControllerException("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
 	        }
 	        
 	        List<AreaPromDTO> promAreas = new ArrayList<>();
@@ -372,45 +379,53 @@ public class ProyectoEVO360Controller {
 	            	List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
 	            	
 					for (GraficaResultadoDTO resul: graficaResultadoList) {
-						
-						if (primerRow) {
-							row = x1.getRow(1);
-							primerRow = false;
-						} else {
-							row = x1.createRow();
-						}
-						
-						row.getCell(0).setText(area);
-						row.getCell(1).setText(resul.getPregunta().getEnunciado());
-						
 						int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
 								resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
-						
-						row.getCell(2).setText(respuesta + "");
-						if (respuesta >= maxCalificacion) {
-							maxArea = area;
-							maxFuncion = resul.getPregunta().getEnunciado();
-							maxCalificacion = respuesta;
+						if(respuesta != 0) {
+							
+							if (primerRow) {
+								row = x1.getRow(1);
+								primerRow = false;
+							} else {
+								row = x1.createRow();
+							}
+							
+							row.getCell(0).setText(area);
+							row.getCell(1).setText(resul.getPregunta().getEnunciado());						
+							row.getCell(2).setText(respuesta + "");
+							
+							if (respuesta >= maxCalificacion) {
+								maxArea = area;
+								maxFuncion = resul.getPregunta().getEnunciado();
+								maxCalificacion = respuesta;
+							}
+							if (respuesta <= minCalificacion) {
+								minArea = area;
+								minFuncion = resul.getPregunta().getEnunciado();
+								minCalificacion = respuesta;
+							}
+							promedioGeneral += respuesta;
+	    	            	numCalificacionesGeneral++;
+	    	            	promedioArea += respuesta;
+	    	            	numCalificacionesArea++;
+	    	            	
 						}
-						if (respuesta <= minCalificacion) {
-							minArea = area;
-							minFuncion = resul.getPregunta().getEnunciado();
-							minCalificacion = respuesta;
-						}
-						promedioGeneral += respuesta;
-    	            	numCalificacionesGeneral++;
-    	            	promedioArea += respuesta;
-    	            	numCalificacionesArea++;
 					}
 	            	
-	            	promedioArea = Math.round(promedioArea / numCalificacionesArea);
-	            	datos.put(area, promedioArea);
+					if(numCalificacionesArea != 0) {
+						promedioArea = Math.round(promedioArea / numCalificacionesArea);
+		            	datos.put(area, promedioArea);
+					}
 	            	
 	            }
 	        }
 	        
-	        promedioGeneral = promedioGeneral / numCalificacionesGeneral;
+	        if(numCalificacionesGeneral != 0) {
+	        	logger.info("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
+	        	throw new NirhoControllerException("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
+	        }
 	        
+	        promedioGeneral = promedioGeneral / numCalificacionesGeneral;
 	        if(x2 != null){
 	        	XWPFTableRow row1 = x2.getRow(0);
 	        	row1.getCell(1).setText(promedioGeneral + "");
@@ -478,8 +493,8 @@ public class ProyectoEVO360Controller {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
 			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
 
 	        Participante participante = participanteService.obtenerParticipante(new ParticipantePK(idParticipante, idProyecto));
@@ -526,11 +541,21 @@ public class ProyectoEVO360Controller {
 	        logger.info(" ********************************* cuestPartList [" + cuestPartList + "] *****************************");
 	        HashMap<String, Integer> datos = new HashMap<>();
 	        int promedioGeneral = 0;
+	        int conta = 0;
 	        for(CuetionarioParticipante cp: cuestPartList) {
-	        	logger.info(" categoria cp [" + cp + "]");
-	        	datos.put(cp.getPregunta().getEnunciado(), cp.getRespuesta());
-	        	promedioGeneral = promedioGeneral + cp.getRespuesta();
+	        	if(cp.getRespuesta() != null && cp.getRespuesta().intValue() != 0) {
+	        		logger.info(" categoria cp [" + cp + "]");
+		        	datos.put(cp.getPregunta().getEnunciado(), cp.getRespuesta());
+		        	promedioGeneral = promedioGeneral + cp.getRespuesta();
+		        	conta = conta +1;
+	        	}
 	        }
+	        
+	        if(conta == 0) {
+	        	logger.info("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
+	        	throw new NirhoControllerException("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
+	        }
+	        
 	        promedioGeneral = Math.round(promedioGeneral/cuestPartList.size());
 	        logger.info("********************************* promedioGeneral [" + promedioGeneral + "] *********************************");
 	        logger.info("********************************* num categorias [" + cuestPartList.size() + "] *********************************");
