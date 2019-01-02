@@ -30,6 +30,8 @@ public class CompetenciasVacante implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
+    @Column(name = "nombre")
+    private String nombre;
     @Basic(optional = false)
     @Column(name = "nivel")
     private int nivel;
@@ -70,6 +72,16 @@ public class CompetenciasVacante implements Serializable {
 	}
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	@Override
 	public String toString() {
