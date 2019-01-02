@@ -420,7 +420,7 @@ public class ProyectoEVO360Controller {
 	            }
 	        }
 	        
-	        if(numCalificacionesGeneral != 0) {
+	        if(numCalificacionesGeneral == 0) {
 	        	logger.info("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
 	        	throw new NirhoControllerException("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
 	        }
@@ -565,7 +565,7 @@ public class ProyectoEVO360Controller {
 	        	boolean primerRow = true;
 	        	for(CuetionarioParticipante cp: cuestPartList) {
 	        		if (primerRow) {
-		        		row = x2.getRow(2);
+		        		row = x2.getRow(1);
 						primerRow = false;
 					} else {
 						row = x2.createRow();
@@ -574,30 +574,24 @@ public class ProyectoEVO360Controller {
 	        		row.getCell(1).setText(cp.getTema().getDescripcion());
 	        		List<Opcion> opciones = cuestPartService.opcionesTema(cp.getTema().getIdTema());
 	        		logger.info(" *********competencias*********** opciones [" + opciones + "] *****************************");
+	        		String res = "";
+	        		switch(cp.getRespuesta()) {
+	        			case 1: res = "BR"; break;
+	        			case 2: res = "MR"; break;
+	        			case 3: res = "R"; break;
+	        			case 4: res = "RS"; break;
+	        			case 5: res = "E"; break;
+	        		}  
 	        		for(Opcion op: opciones) {
-	        			switch(op.getTipo()) {
-	        				case "BR":
-	        					row.getCell(2).setText(op.getEnunciado());
-	        					break;
-	        				case "MR":
-	        					row.getCell(3).setText(op.getEnunciado());
-	        					break;
-	        				case "R":
-	        					row.getCell(4).setText(op.getEnunciado());
-	        					break;
-	        				case "RS":
-	        					row.getCell(5).setText(op.getEnunciado());
-	        					break;
-	        				case "E":
-	        					row.getCell(6).setText(op.getEnunciado());
-	        					break;
+	        			if(res.equals(op.getTipo())) {
+	        				row.getCell(2).setText(op.getEnunciado());
 	        			}
 	        		}
-	        		row.getCell(7).setText("" + cp.getRespuesta());
 	        	}
 	        }
 	        
 	        String categoriasMejora = "";
+	        String categoriasSufis = "";
 	        String categoriasSobresa = "";
 	        for(CuetionarioParticipante cp: cuestPartList) {
 	        	int respJefe = cp.getRespuestaJefe()!=null?cp.getRespuestaJefe().intValue():0;
@@ -605,16 +599,20 @@ public class ProyectoEVO360Controller {
 	        	int promedio = (respJefe + respRH)/2;
 	        	if(promedio<3) {
 	        		categoriasMejora = categoriasMejora + (categoriasMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        	} else if(promedio == 3) {
+	        		categoriasSufis = categoriasSufis + (categoriasSufis.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
 	        		categoriasSobresa = categoriasSobresa + (categoriasSobresa.length() != 0?",":"") + cp.getPregunta().getEnunciado();
 	        	}
 	        }
 	        logger.info(" ******************** factoresMejora [" + categoriasMejora + "] *****************************");
+	        logger.info(" ******************** categoriasSufis [" + categoriasSufis + "] *****************************");
 	        logger.info(" ******************** factoresSobresa [" + categoriasSobresa + "] *****************************");
 	        if(x4 != null){
 	        	XWPFTableRow row2 = x4.getRow(2);
 	        	row2.getCell(0).setText(categoriasMejora);
-	        	row2.getCell(1).setText(categoriasSobresa);
+	        	row2.getCell(1).setText(categoriasSufis);
+	        	row2.getCell(2).setText(categoriasSobresa);
 	        }
 	        
 	        XWPFChart chart = null;

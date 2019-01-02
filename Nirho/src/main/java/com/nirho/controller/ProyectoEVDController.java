@@ -358,10 +358,13 @@ public class ProyectoEVDController {
 	            }
 	        }
 	        
-	        if(numCalificacionesGeneral != 0) {
-	        	promedioGeneral = promedioGeneral / numCalificacionesGeneral;
+	        if(numCalificacionesGeneral == 0) {
+	        	logger.info("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
+	        	throw new NirhoControllerException("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
 	        }
-	        	        
+	        
+	        promedioGeneral = promedioGeneral / numCalificacionesGeneral;
+	        	        	        
 	        if(x2 != null){
 	        	XWPFTableRow row1 = x2.getRow(0);
 	        	row1.getCell(1).setText(promedioGeneral + "");
@@ -449,6 +452,7 @@ public class ProyectoEVDController {
 	        XWPFTable x2 =  ReporteUtil.getTablaPorTitulo(document, "formato de medicion");
 	        XWPFTable x3 =  ReporteUtil.getTablaPorTitulo(document, "competencias de desempeno");
 	        XWPFTable x4 =  ReporteUtil.getTablaPorTitulo(document, "resultados de desempeno");
+	        XWPFTable x5 =  ReporteUtil.getTablaPorTitulo(document, "resultados de competencias");
 	        
 	        if(x1 != null){	   
 	        	XWPFTableRow row1 = x1.getRow(0);
@@ -523,27 +527,30 @@ public class ProyectoEVDController {
 	        		row.getCell(1).setText(cp.getTema().getDescripcion());
 	        		List<Opcion> opciones = cuestPartService.opcionesTema(cp.getTema().getIdTema());
 	        		logger.info(" *********factores*********** opciones [" + opciones + "] *****************************");
+	        		String resJefe = "";
+	        		switch(cp.getRespuestaJefe()) {
+	        			case 1: resJefe = "BR"; break;
+	        			case 2: resJefe = "MR"; break;
+	        			case 3: resJefe = "R"; break;
+	        			case 4: resJefe = "RS"; break;
+	        			case 5: resJefe = "E"; break;
+	        		}
+	        		String resRH = "";
+	        		switch(cp.getRespuestaRh()) {
+	        			case 1: resRH = "BR"; break;
+	        			case 2: resRH = "MR"; break;
+	        			case 3: resRH = "R"; break;
+	        			case 4: resRH = "RS"; break;
+	        			case 5: resRH = "E"; break;
+	        		}    
 	        		for(Opcion op: opciones) {
-	        			switch(op.getTipo()) {
-	        				case "BR":
-	        					row.getCell(2).setText(op.getEnunciado());
-	        					break;
-	        				case "MR":
-	        					row.getCell(3).setText(op.getEnunciado());
-	        					break;
-	        				case "R":
-	        					row.getCell(4).setText(op.getEnunciado());
-	        					break;
-	        				case "RS":
-	        					row.getCell(5).setText(op.getEnunciado());
-	        					break;
-	        				case "E":
-	        					row.getCell(6).setText(op.getEnunciado());
-	        					break;
+	        			if(resJefe.equals(op.getTipo())) {
+	        				row.getCell(2).setText(op.getEnunciado());
+	        			}
+	        			if(resRH.equals(op.getTipo())) {
+	        				row.getCell(3).setText(op.getEnunciado());
 	        			}
 	        		}
-	        		row.getCell(7).setText("" + cp.getRespuestaJefe());
-	        		row.getCell(8).setText("" + cp.getRespuestaRh());
 	        	}
 	        }
 	        
@@ -552,7 +559,7 @@ public class ProyectoEVDController {
 	        	boolean primerRow = true;
 	        	for(CuetionarioParticipante cp: competencias) {
 	        		if (primerRow) {
-		        		row = x3.getRow(2);
+		        		row = x3.getRow(1);
 						primerRow = false;
 					} else {
 						row = x3.createRow();
@@ -561,31 +568,35 @@ public class ProyectoEVDController {
 	        		row.getCell(1).setText(cp.getTema().getDescripcion());
 	        		List<Opcion> opciones = cuestPartService.opcionesTema(cp.getTema().getIdTema());
 	        		logger.info(" *********competencias*********** opciones [" + opciones + "] *****************************");
+	        		String resJefe = "";
+	        		switch(cp.getRespuestaJefe()) {
+	        			case 1: resJefe = "BR"; break;
+	        			case 2: resJefe = "MR"; break;
+	        			case 3: resJefe = "R"; break;
+	        			case 4: resJefe = "RS"; break;
+	        			case 5: resJefe = "E"; break;
+	        		}
+	        		String resRH = "";
+	        		switch(cp.getRespuestaRh()) {
+	        			case 1: resRH = "BR"; break;
+	        			case 2: resRH = "MR"; break;
+	        			case 3: resRH = "R"; break;
+	        			case 4: resRH = "RS"; break;
+	        			case 5: resRH = "E"; break;
+	        		}    
 	        		for(Opcion op: opciones) {
-	        			switch(op.getTipo()) {
-	        				case "BR":
-	        					row.getCell(2).setText(op.getEnunciado());
-	        					break;
-	        				case "MR":
-	        					row.getCell(3).setText(op.getEnunciado());
-	        					break;
-	        				case "R":
-	        					row.getCell(4).setText(op.getEnunciado());
-	        					break;
-	        				case "RS":
-	        					row.getCell(5).setText(op.getEnunciado());
-	        					break;
-	        				case "E":
-	        					row.getCell(6).setText(op.getEnunciado());
-	        					break;
+	        			if(resJefe.equals(op.getTipo())) {
+	        				row.getCell(2).setText(op.getEnunciado());
+	        			}
+	        			if(resRH.equals(op.getTipo())) {
+	        				row.getCell(3).setText(op.getEnunciado());
 	        			}
 	        		}
-	        		row.getCell(7).setText("" + cp.getRespuestaJefe());
-	        		row.getCell(8).setText("" + cp.getRespuestaRh());
 	        	}
 	        }
 	        
 	        String factoresMejora = "";
+	        String factoresSufis = "";
 	        String factoresSobresa = "";
 	        for(CuetionarioParticipante cp: factores) {
 	        	int respJefe = cp.getRespuestaJefe()!=null?cp.getRespuestaJefe().intValue():0;
@@ -593,13 +604,17 @@ public class ProyectoEVDController {
 	        	int promedio = (respJefe + respRH)/2;
 	        	if(promedio > 0 && promedio<3) {
 	        		factoresMejora = factoresMejora + (factoresMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        	} else if(promedio == 3) {
+	        		factoresSufis = factoresSufis + (factoresSufis.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
 	        		factoresSobresa = factoresSobresa + (factoresSobresa.length() != 0?",":"") + cp.getPregunta().getEnunciado();
 	        	}
 	        }
 	        logger.info(" ******************** factoresMejora [" + factoresMejora + "] *****************************");
+	        logger.info(" ******************** factoresSufis [" + factoresSufis + "] *****************************");
 	        logger.info(" ******************** factoresSobresa [" + factoresSobresa + "] *****************************");
 	        String competenciasMejora = "";
+	        String competenciasSufis = "";
 	        String competenciasSobresa = "";
 	        for(CuetionarioParticipante cp: competencias) {
 	        	int respJefe = cp.getRespuestaJefe()!=null?cp.getRespuestaJefe().intValue():0;
@@ -607,18 +622,27 @@ public class ProyectoEVDController {
 	        	int promedio = (respJefe + respRH)/2;
 	        	if(promedio > 0 && promedio<3) {
 	        		competenciasMejora = competenciasMejora + (competenciasMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        	} else if(promedio == 3) {
+	        		competenciasSufis = competenciasSufis + (competenciasSufis.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
 	        		competenciasSobresa = competenciasSobresa + (competenciasSobresa.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
 	        	}
 	        }
 	        logger.info(" ******************** competenciasMejora [" + competenciasMejora + "] *****************************");
+	        logger.info(" ******************** competenciasSufis [" + competenciasSufis + "] *****************************");
 	        logger.info(" ******************** competenciasSobresa [" + competenciasSobresa + "] *****************************");
 	        if(x4 != null){
 	        	XWPFTableRow row2 = x4.getRow(2);
 	        	row2.getCell(0).setText(factoresMejora);
-	        	row2.getCell(1).setText(factoresSobresa);
-	        	row2.getCell(2).setText(competenciasMejora);
-	        	row2.getCell(3).setText(competenciasSobresa);
+	        	row2.getCell(1).setText(factoresSufis);
+	        	row2.getCell(2).setText(factoresSobresa);
+	        }
+	        
+	        if(x5 != null){
+	        	XWPFTableRow row2 = x5.getRow(2);
+	        	row2.getCell(0).setText(competenciasMejora);
+	        	row2.getCell(1).setText(competenciasSufis);
+	        	row2.getCell(2).setText(competenciasSobresa);
 	        }
 	        
 	        XWPFChart chart = null;
