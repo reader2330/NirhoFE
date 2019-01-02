@@ -32,14 +32,17 @@ public class ConocimientoCandidato implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "descripcion_conocimiento")
-    private String descripcionConocimiento;
+    @Column(name = "descripcion")
+    private String descripcion;
     @Basic(optional = false)
     @Column(name = "nivel")
     private int nivel;
     @Basic(optional = false)
-    @Column(name = "nombre_conocimiento")
-    private String nombreConocimiento;
+    @Column(name = "tipo")
+    private int tipo;
+    @Basic(optional = false)
+    @Column(name = "nombre")
+    private String nombre;
 
     public ConocimientoCandidato() {
     }
@@ -48,43 +51,59 @@ public class ConocimientoCandidato implements Serializable {
         this.id = id;
     }
 
-    public ConocimientoCandidato(Long id, String descripcionConocimiento, int nivel, String nombreConocimiento) {
-        this.id = id;
-        this.descripcionConocimiento = descripcionConocimiento;
-        this.nivel = nivel;
-        this.nombreConocimiento = nombreConocimiento;
-    }
+	public ConocimientoCandidato(Long id, String descripcion, int nivel, int tipo, String nombre) {
+		super();
+		this.id = id;
+		this.descripcion = descripcion;
+		this.nivel = nivel;
+		this.tipo = tipo;
+		this.nombre = nombre;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getDescripcionConocimiento() {
-        return descripcionConocimiento;
-    }
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public void setDescripcionConocimiento(String descripcionConocimiento) {
-        this.descripcionConocimiento = descripcionConocimiento;
-    }
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
-    public int getNivel() {
-        return nivel;
-    }
+	public int getNivel() {
+		return nivel;
+	}
 
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
 
-    public String getNombreConocimiento() {
-        return nombreConocimiento;
-    }
+	public int getTipo() {
+		return tipo;
+	}
 
-    public void setNombreConocimiento(String nombreConocimiento) {
-        this.nombreConocimiento = nombreConocimiento;
-    }
-	        
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	@Override
+	public String toString() {
+		return "ConocimientoCandidato [id=" + id + ", descripcion=" + descripcion + ", nivel=" + nivel + ", tipo="
+				+ tipo + ", nombre=" + nombre + "]";
+	}
+
 }

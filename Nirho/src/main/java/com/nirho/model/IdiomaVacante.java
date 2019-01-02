@@ -32,17 +32,11 @@ public class IdiomaVacante implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "desc_idioma")
-    private String descIdioma;
-    @Basic(optional = false)
-    @Column(name = "id_idioma")
-    private int idIdioma;
+    @Column(name = "nombre")
+    private String nombre;
     @Basic(optional = false)
     @Column(name = "nivel")
     private int nivel;
-    @JoinColumn(name = "id_vacante", referencedColumnName = "id")
-    @ManyToOne
-    private Vacante vacante;
 
     public IdiomaVacante() {
     }
@@ -51,57 +45,40 @@ public class IdiomaVacante implements Serializable {
         this.id = id;
     }
 
-    public IdiomaVacante(Long id, String descIdioma, int idIdioma, int nivel) {
-        this.id = id;
-        this.descIdioma = descIdioma;
-        this.idIdioma = idIdioma;
-        this.nivel = nivel;
-    }
+	public IdiomaVacante(Long id, String nombre, int nivel) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.nivel = nivel;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getDescIdioma() {
-        return descIdioma;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setDescIdioma(String descIdioma) {
-        this.descIdioma = descIdioma;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public int getIdIdioma() {
-        return idIdioma;
-    }
+	public int getNivel() {
+		return nivel;
+	}
 
-    public void setIdIdioma(int idIdioma) {
-        this.idIdioma = idIdioma;
-    }
-
-    public int getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-
-    public Vacante getVacante() {
-        return vacante;
-    }
-
-    public void setVacante(Vacante vacante) {
-        this.vacante = vacante;
-    }
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
 
 	@Override
 	public String toString() {
-		return "IdiomaVacante [id=" + id + ", descIdioma=" + descIdioma + ", idIdioma=" + idIdioma + ", nivel=" + nivel
-				+ ", vacante=" + vacante + "]";
+		return "IdiomaVacante [id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + "]";
 	}
-	
+
 }

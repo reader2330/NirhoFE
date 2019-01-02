@@ -6,6 +6,7 @@
 package com.nirho.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,8 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,119 +25,120 @@ import javax.persistence.Table;
 public class ExperienciaCandidato implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Column(name = "desc_proyecto")
-    private String descProyecto;
-    @Column(name = "fecha_fin")
-    private String fechaFin;
-    @Basic(optional = false)
-    @Column(name = "fecha_ini")
-    private String fechaIni;
-    @Column(name = "herramientas")
-    private String herramientas;
-    @Column(name = "proyecto")
-    private String proyecto;
+    
     @Column(name = "puesto")
     private String puesto;
-    @Column(name = "recomendacion")
-    private String recomendacion;
-    @JoinColumn(name = "id_candidato", referencedColumnName = "id")
-    @ManyToOne
-    private Candidato candidato;
+    
+    @Column(name = "nivel")
+    private int nivel;
+    
+    @Column(name = "fecha_fin")
+    private Date fechaFin;
+    
+    @Column(name = "fecha_ini")
+    private Date fechaIni;
+    
+    @Column(name = "antiguedad")
+    private int antiguedad;
+    
+    @Column(name = "localidad")
+    private String localidad;
+    
+    @Column(name = "area")
+    private String area;
 
-    public ExperienciaCandidato() {
-    }
+	public ExperienciaCandidato() {
+		super();
+	}
 
-    public ExperienciaCandidato(Long id) {
-        this.id = id;
-    }
+	public ExperienciaCandidato(Long id, String puesto, int nivel, Date fechaFin, Date fechaIni, int antiguedad,
+			String localidad, String area) {
+		super();
+		this.id = id;
+		this.puesto = puesto;
+		this.nivel = nivel;
+		this.fechaFin = fechaFin;
+		this.fechaIni = fechaIni;
+		this.antiguedad = antiguedad;
+		this.localidad = localidad;
+		this.area = area;
+	}
 
-    public ExperienciaCandidato(Long id, String fechaIni) {
-        this.id = id;
-        this.fechaIni = fechaIni;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public String getPuesto() {
+		return puesto;
+	}
 
-    public String getDescProyecto() {
-        return descProyecto;
-    }
+	public void setPuesto(String puesto) {
+		this.puesto = puesto;
+	}
 
-    public void setDescProyecto(String descProyecto) {
-        this.descProyecto = descProyecto;
-    }
+	public int getNivel() {
+		return nivel;
+	}
 
-    public String getFechaFin() {
-        return fechaFin;
-    }
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
 
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
-    }
+	public Date getFechaFin() {
+		return fechaFin;
+	}
 
-    public String getFechaIni() {
-        return fechaIni;
-    }
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
 
-    public void setFechaIni(String fechaIni) {
-        this.fechaIni = fechaIni;
-    }
+	public Date getFechaIni() {
+		return fechaIni;
+	}
 
-    public String getHerramientas() {
-        return herramientas;
-    }
+	public void setFechaIni(Date fechaIni) {
+		this.fechaIni = fechaIni;
+	}
 
-    public void setHerramientas(String herramientas) {
-        this.herramientas = herramientas;
-    }
+	public int getAntiguedad() {
+		return antiguedad;
+	}
 
-    public String getProyecto() {
-        return proyecto;
-    }
+	public void setAntiguedad(int antiguedad) {
+		this.antiguedad = antiguedad;
+	}
 
-    public void setProyecto(String proyecto) {
-        this.proyecto = proyecto;
-    }
+	public String getLocalidad() {
+		return localidad;
+	}
 
-    public String getPuesto() {
-        return puesto;
-    }
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
 
-    public void setPuesto(String puesto) {
-        this.puesto = puesto;
-    }
+	public String getArea() {
+		return area;
+	}
 
-    public String getRecomendacion() {
-        return recomendacion;
-    }
-
-    public void setRecomendacion(String recomendacion) {
-        this.recomendacion = recomendacion;
-    }
-
-    public Candidato getCandidato() {
-        return candidato;
-    }
-
-    public void setCandidato(Candidato candidato) {
-        this.candidato = candidato;
-    }
+	public void setArea(String area) {
+		this.area = area;
+	}
 
 	@Override
 	public String toString() {
-		return "ExperienciaCandidato [id=" + id + ", descProyecto=" + descProyecto + ", fechaFin=" + fechaFin
-				+ ", fechaIni=" + fechaIni + ", herramientas=" + herramientas + ", proyecto=" + proyecto + ", puesto="
-				+ puesto + ", recomendacion=" + recomendacion + ", candidato=" + candidato + "]";
+		return "ExperienciaCandidato [id=" + id + ", puesto=" + puesto + ", nivel=" + nivel + ", fechaFin=" + fechaFin
+				+ ", fechaIni=" + fechaIni + ", antiguedad=" + antiguedad + ", localidad=" + localidad + ", area="
+				+ area + "]";
 	}
 	
 }

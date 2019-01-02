@@ -108,24 +108,22 @@ DROP TABLE IF EXISTS `candidato`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `direccion` varchar(255) DEFAULT NULL,
-  `disponibilidad` varchar(255) DEFAULT NULL,
-  `estado` bigint(20) NOT NULL,
-  `nacimiento` varchar(255) DEFAULT NULL,
-  `nacionalidad` varchar(255) DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  `perfil` varchar(255) DEFAULT NULL,
-  `pretencion` varchar(255) DEFAULT NULL,
-  `rfc` varchar(150) NOT NULL,
-  `situacion` varchar(255) DEFAULT NULL,
   `caracteristicas` tinyblob,
+  `direccion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estado` bigint(20) NOT NULL,
   `id_solicitate` bigint(20) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `rol` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_dqy0j0i4xt3asldaeefnqokxk` (`rfc`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nacimiento` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nacionalidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `perfil` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pretencion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rfc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rol` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `situacion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -336,7 +334,12 @@ CREATE TABLE `conocimiento_candidato` (
   `descripcion_conocimiento` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `nivel` int(11) NOT NULL,
   `nombre_conocimiento` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  `descripcion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo` int(11) NOT NULL,
+  `candidato` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK7jn140i14933kidl0ulmu5day` (`candidato`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -446,13 +449,12 @@ DROP TABLE IF EXISTS `contacto_candidato`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `contacto_candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `nombre_contacto` varchar(150) NOT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `tipo_contacto` int(11) NOT NULL,
-  `id_candidato` bigint(20) DEFAULT NULL,
+  `candidato` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKqe22ka8f0quqyo7qyv8ysp2a4` (`id_candidato`),
-  CONSTRAINT `FKqe22ka8f0quqyo7qyv8ysp2a4` FOREIGN KEY (`id_candidato`) REFERENCES `candidato` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `FKbt6d4iqwntyar3h0dd08yf6ue` (`candidato`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1187,18 +1189,17 @@ DROP TABLE IF EXISTS `experiencia_candidato`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `experiencia_candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `desc_proyecto` varchar(255) DEFAULT NULL,
-  `fecha_fin` varchar(255) DEFAULT NULL,
-  `fecha_ini` varchar(150) NOT NULL,
-  `herramientas` varchar(255) DEFAULT NULL,
-  `proyecto` varchar(255) DEFAULT NULL,
-  `puesto` varchar(255) DEFAULT NULL,
-  `recomendacion` varchar(255) DEFAULT NULL,
-  `id_candidato` bigint(20) DEFAULT NULL,
+  `antiguedad` int(11) DEFAULT NULL,
+  `area` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fecha_fin` datetime DEFAULT NULL,
+  `fecha_ini` datetime DEFAULT NULL,
+  `localidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nivel` int(11) DEFAULT NULL,
+  `puesto` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `candidato` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKf94yron4o8rq5pgpmlnred4bd` (`id_candidato`),
-  CONSTRAINT `FKf94yron4o8rq5pgpmlnred4bd` FOREIGN KEY (`id_candidato`) REFERENCES `candidato` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `FKjqcd3eg33orqf2xja9b2xaxqf` (`candidato`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1275,15 +1276,12 @@ DROP TABLE IF EXISTS `idioma_candidato`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `idioma_candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `desc_idioma` varchar(400) NOT NULL,
-  `id_idioma` int(11) NOT NULL,
   `nivel` int(11) NOT NULL,
-  `id_candidato` bigint(20) DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `candidato` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKoxc27v2r29nxssb3ppgi5pmku` (`id_candidato`),
-  CONSTRAINT `FKoxc27v2r29nxssb3ppgi5pmku` FOREIGN KEY (`id_candidato`) REFERENCES `candidato` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `FKjwx4qpgoqhtyvdpj8lvbw7eqq` (`candidato`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1308,6 +1306,7 @@ CREATE TABLE `idioma_vacante` (
   `id_idioma` int(11) NOT NULL,
   `nivel` int(11) NOT NULL,
   `id_vacante` bigint(20) DEFAULT NULL,
+  `nombre` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK4a3d0c4fj1ax7hwkob9wmjsj4` (`id_vacante`),
   CONSTRAINT `FK4a3d0c4fj1ax7hwkob9wmjsj4` FOREIGN KEY (`id_vacante`) REFERENCES `vacante` (`id`)
@@ -1320,7 +1319,7 @@ CREATE TABLE `idioma_vacante` (
 
 LOCK TABLES `idioma_vacante` WRITE;
 /*!40000 ALTER TABLE `idioma_vacante` DISABLE KEYS */;
-INSERT INTO `idioma_vacante` VALUES (1,'Traducción',19,25,1),(2,'Hablado, CON POSIBILIDAD DE CONVERSACIÓN CON UN CTE EXTRANJERO',19,23,2);
+INSERT INTO `idioma_vacante` VALUES (1,'Traducción',19,25,1,''),(2,'Hablado, CON POSIBILIDAD DE CONVERSACIÓN CON UN CTE EXTRANJERO',19,23,2,'');
 /*!40000 ALTER TABLE `idioma_vacante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2471,4 +2470,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-31 20:41:18
+-- Dump completed on 2019-01-01 19:41:12

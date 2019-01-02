@@ -42,14 +42,23 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nirho.dto.ProyectoPVCNivelDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.ActividadesPuestoVacante;
 import com.nirho.model.Candidato;
 import com.nirho.model.CaracteristicasCandidatoCv;
+import com.nirho.model.CaracteristicasCandidatoVacante;
+import com.nirho.model.CompetenciasVacante;
+import com.nirho.model.ConocimientoCandidato;
+import com.nirho.model.ConocimientoVacante;
+import com.nirho.model.ContactoCandidato;
+import com.nirho.model.ExperienciaCandidato;
+import com.nirho.model.IdiomaCandidato;
 import com.nirho.model.ParticipantePVC;
 import com.nirho.model.ProyectoPVCArea;
 import com.nirho.model.ProyectoPVCConocimiento;
 import com.nirho.model.ProyectoPVCEsfera;
 import com.nirho.model.ProyectoPVCEspecialidad;
 import com.nirho.model.ProyectoPVCNivel;
+import com.nirho.model.SolicitanteVacante;
 import com.nirho.model.Usuario;
 import com.nirho.service.CandidatoService;
 import com.nirho.util.ReporteUtil;
@@ -109,10 +118,105 @@ public class CandidatoController {
 	}
 	
 	
+	@RequestMapping(value = "/{id}/idiomas/guardar", method = RequestMethod.POST)
+	public String addAct(@PathVariable("id") long id, @Valid @RequestBody IdiomaCandidato l) throws NirhoControllerException{
+		try {
+			Candidato s = candidatoService.getOne(id);
+			if(s != null) {
+				s.getIdiomas().add(l);
+				candidatoService.save(s);
+				JSONObject json = new JSONObject();
+				json.accumulate("id", l.getId());
+				return json.toString();
+			}
+			return null;
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar solicitante");
+		} catch (JSONException e1) {
+			throw new NirhoControllerException("Problemas al registrar entidad");
+		} 
+	}
+	
+	@RequestMapping(value = "/{id}/conocimientos/guardar", method = RequestMethod.POST)
+	public String addConocimientos(@PathVariable("id") long id, @Valid @RequestBody ConocimientoCandidato l) throws NirhoControllerException{
+		try {
+			Candidato s = candidatoService.getOne(id);
+			if(s != null) {
+				s.getConocimentos().add(l);
+				candidatoService.save(s);
+				JSONObject json = new JSONObject();
+				json.accumulate("id", l.getId());
+				return json.toString();
+			}
+			return null;
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar solicitante");
+		} catch (JSONException e1) {
+			throw new NirhoControllerException("Problemas al registrar entidad");
+		} 
+	}
+	
+	@RequestMapping(value = "/{id}/contactos/guardar", method = RequestMethod.POST)
+	public String addCompetencias(@PathVariable("id") long id, @Valid @RequestBody ContactoCandidato l) throws NirhoControllerException{
+		try {
+			Candidato s = candidatoService.getOne(id);
+			if(s != null) {
+				s.getContactos().add(l);
+				candidatoService.save(s);
+				JSONObject json = new JSONObject();
+				json.accumulate("id", l.getId());
+				return json.toString();
+			}
+			return null;
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar solicitante");
+		} catch (JSONException e1) {
+			throw new NirhoControllerException("Problemas al registrar entidad");
+		} 
+	}
+	
+	@RequestMapping(value = "/{id}/puestos/guardar", method = RequestMethod.POST)
+	public String addPuestos(@PathVariable("id") long id, @Valid @RequestBody ExperienciaCandidato l) throws NirhoControllerException{
+		try {
+			Candidato s = candidatoService.getOne(id);
+			if(s != null) {
+				s.getPuestos().add(l);
+				candidatoService.save(s);
+				JSONObject json = new JSONObject();
+				json.accumulate("id", l.getId());
+				return json.toString();
+			}
+			return null;
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar solicitante");
+		} catch (JSONException e1) {
+			throw new NirhoControllerException("Problemas al registrar entidad");
+		} 
+	}
+	
+	@RequestMapping(value = "/{id}/caracteristicas/guardar", method = RequestMethod.POST)
+	public String addCaracteristicas(@PathVariable("id") long id, @Valid @RequestBody CaracteristicasCandidatoCv l) throws NirhoControllerException{
+		try {
+			Candidato s = candidatoService.getOne(id);
+			if(s != null) {
+				s.setCaracteristicasCandidatoCv(l);
+				candidatoService.save(s);
+				JSONObject json = new JSONObject();
+				json.accumulate("id", l.getId());
+				return json.toString();
+			}
+			return null;
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar solicitante");
+		} catch (JSONException e1) {
+			throw new NirhoControllerException("Problemas al registrar entidad");
+		} 
+	}
+	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
 	public Candidato login(@RequestBody Candidato c, HttpServletRequest request) throws NirhoControllerException {
 		try {
-			
 			Candidato candidato = candidatoService.getOneByUsername(c.getUsername());
 			if(candidato != null) {
 				if(c.getPassword().equals(candidato.getPassword())) {
@@ -160,7 +264,6 @@ public class CandidatoController {
 	            
 	            XWPFTableRow row6 = informacionGeneral.getRow(6);
 	            row6.getCell(1).setText(candidato.getPerfil());
-	            row6.getCell(4).setText(candidato.getDisponibilidad());
 	            
 	            XWPFTableRow row7 = informacionGeneral.getRow(7);
 	            row7.getCell(1).setText(candidato.getEstado() + "");
@@ -168,9 +271,6 @@ public class CandidatoController {
 	            
 	            XWPFTableRow row8 = informacionGeneral.getRow(8);
 	            row8.getCell(1).setText(candidato.getSituacion());
-	            
-	            
-	            
 	            
 	            CaracteristicasCandidatoCv caracteristicas = candidato.getCaracteristicasCandidatoCv();
 	            

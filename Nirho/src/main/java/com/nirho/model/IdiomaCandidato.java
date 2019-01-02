@@ -28,62 +28,47 @@ public class IdiomaCandidato implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
-    @Column(name = "id_idioma")
-    private int idIdioma;
-    @Basic(optional = false)
     @Column(name = "nivel")
     private int nivel;
     
+	public IdiomaCandidato() {
+		super();
+	}
 
-    public IdiomaCandidato() {
-    }
+	public IdiomaCandidato(Long id, String nombre, int nivel) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.nivel = nivel;
+	}
 
-    public IdiomaCandidato(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public IdiomaCandidato(Long id, String nombre, int idIdioma, int nivel) {
-        this.id = id;
-        this.nombre = nombre;
-        this.idIdioma = idIdioma;
-        this.nivel = nivel;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getDescIdioma() {
-        return nombre;
-    }
+	public int getNivel() {
+		return nivel;
+	}
 
-    public void setDescIdioma(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getIdIdioma() {
-        return idIdioma;
-    }
-
-    public void setIdIdioma(int idIdioma) {
-        this.idIdioma = idIdioma;
-    }
-
-    public int getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
 
 	@Override
 	public String toString() {
-		return "IdiomaCandidato [id=" + id + ", nombre=" + nombre + ", idIdioma=" + idIdioma + ", nivel=" + nivel + "]";
+		return "IdiomaCandidato [id=" + id + ", nombre=" + nombre + ", nivel=" + nivel + "]";
 	}
-
+	
 }

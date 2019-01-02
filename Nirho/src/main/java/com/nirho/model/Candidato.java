@@ -6,14 +6,21 @@
 package com.nirho.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.apache.xmlbeans.impl.common.PushedInputStream;
 
 @Entity
 @Table(name = "candidato")
@@ -26,38 +33,65 @@ public class Candidato implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
+    
     @Column(name = "idSolicitate")
     private Long idSolicitante;
+    
+    @Column(name = "rfc")
+    private String rfc;
+    
+    @Column(name = "nombre")
+    private String nombre;
+    
+    @Column(name = "username")
+    private String username;
+    
+    @Column(name = "password")
+    private String password;
+    
+    @Column(name = "nacionalidad")
+    private String nacionalidad;
+    
+    @Column(name = "nacimiento")
+    private String nacimiento;
+    
+    @Column(name = "perfil")
+    private String perfil;
+    
+    @Column(name = "situacion")
+    private String situacion;
+    
+    @Column(name = "pretencion")
+    private String pretencion;
+    
     @Column(name = "direccion")
     private String direccion;
-    @Column(name = "disponibilidad")
-    private String disponibilidad;
+    
     @Basic(optional = false)
     @Column(name = "estado")
     private long estado;
-    @Column(name = "nacimiento")
-    private String nacimiento;
-    @Column(name = "nacionalidad")
-    private String nacionalidad;
-    @Column(name = "nombre")
-    private String nombre;
-    @Column(name = "perfil")
-    private String perfil;
-    @Column(name = "pretencion")
-    private String pretencion;
-    @Basic(optional = false)
-    @Column(name = "rfc")
-    private String rfc;
-    @Column(name = "situacion")
-    private String situacion;
-    @Column(name = "username")
-    private String username;
-    @Column(name = "password")
-    private String password;
+    
     @Column(name = "rol")
     private String rol;
+    
     @Column(name = "caracteristicas")
     private CaracteristicasCandidatoCv caracteristicasCandidatoCv;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "candidato")
+   	private Set<ContactoCandidato> contactos = new HashSet<>();
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "candidato")
+   	private Set<IdiomaCandidato> idiomas = new HashSet<>();
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "candidato")
+   	private Set<ConocimientoCandidato> conocimentos = new HashSet<>();
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "candidato")
+   	private Set<ExperienciaCandidato> puestos = new HashSet<>();
     
     public Candidato() {
     }
@@ -66,21 +100,40 @@ public class Candidato implements Serializable {
         this.id = id;
     }
 
-    public Candidato(Long id, long estado, String rfc) {
-        this.id = id;
-        this.estado = estado;
-        this.rfc = rfc;
-    }
+	public Candidato(Long id, Long idSolicitante, String rfc, String nombre, String username, String password,
+			String nacionalidad, String nacimiento, String perfil, String situacion, String pretencion,
+			String direccion, long estado, String rol, CaracteristicasCandidatoCv caracteristicasCandidatoCv,
+			Set<ContactoCandidato> contactos, Set<IdiomaCandidato> idiomas, Set<ConocimientoCandidato> conocimentos) {
+		super();
+		this.id = id;
+		this.idSolicitante = idSolicitante;
+		this.rfc = rfc;
+		this.nombre = nombre;
+		this.username = username;
+		this.password = password;
+		this.nacionalidad = nacionalidad;
+		this.nacimiento = nacimiento;
+		this.perfil = perfil;
+		this.situacion = situacion;
+		this.pretencion = pretencion;
+		this.direccion = direccion;
+		this.estado = estado;
+		this.rol = rol;
+		this.caracteristicasCandidatoCv = caracteristicasCandidatoCv;
+		this.contactos = contactos;
+		this.idiomas = idiomas;
+		this.conocimentos = conocimentos;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    public Long getIdSolicitante() {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getIdSolicitante() {
 		return idSolicitante;
 	}
 
@@ -88,85 +141,21 @@ public class Candidato implements Serializable {
 		this.idSolicitante = idSolicitante;
 	}
 
-	public String getDireccion() {
-        return direccion;
-    }
+	public String getRfc() {
+		return rfc;
+	}
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+	public void setRfc(String rfc) {
+		this.rfc = rfc;
+	}
 
-    public String getDisponibilidad() {
-        return disponibilidad;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setDisponibilidad(String disponibilidad) {
-        this.disponibilidad = disponibilidad;
-    }
-
-    public long getEstado() {
-        return estado;
-    }
-
-    public void setEstado(long estado) {
-        this.estado = estado;
-    }
-
-    public String getNacimiento() {
-        return nacimiento;
-    }
-
-    public void setNacimiento(String nacimiento) {
-        this.nacimiento = nacimiento;
-    }
-
-    public String getNacionalidad() {
-        return nacionalidad;
-    }
-
-    public void setNacionalidad(String nacionalidad) {
-        this.nacionalidad = nacionalidad;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
-    }
-
-    public String getPretencion() {
-        return pretencion;
-    }
-
-    public void setPretencion(String pretencion) {
-        this.pretencion = pretencion;
-    }
-
-    public String getRfc() {
-        return rfc;
-    }
-
-    public void setRfc(String rfc) {
-        this.rfc = rfc;
-    }
-
-    public String getSituacion() {
-        return situacion;
-    }
-
-    public void setSituacion(String situacion) {
-        this.situacion = situacion;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 	public String getUsername() {
 		return username;
@@ -184,6 +173,62 @@ public class Candidato implements Serializable {
 		this.password = password;
 	}
 
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
+
+	public String getNacimiento() {
+		return nacimiento;
+	}
+
+	public void setNacimiento(String nacimiento) {
+		this.nacimiento = nacimiento;
+	}
+
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+
+	public String getSituacion() {
+		return situacion;
+	}
+
+	public void setSituacion(String situacion) {
+		this.situacion = situacion;
+	}
+
+	public String getPretencion() {
+		return pretencion;
+	}
+
+	public void setPretencion(String pretencion) {
+		this.pretencion = pretencion;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public long getEstado() {
+		return estado;
+	}
+
+	public void setEstado(long estado) {
+		this.estado = estado;
+	}
+
 	public String getRol() {
 		return rol;
 	}
@@ -191,7 +236,7 @@ public class Candidato implements Serializable {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
-	
+
 	public CaracteristicasCandidatoCv getCaracteristicasCandidatoCv() {
 		return caracteristicasCandidatoCv;
 	}
@@ -200,12 +245,46 @@ public class Candidato implements Serializable {
 		this.caracteristicasCandidatoCv = caracteristicasCandidatoCv;
 	}
 
+	public Set<ContactoCandidato> getContactos() {
+		return contactos;
+	}
+
+	public void setContactos(Set<ContactoCandidato> contactos) {
+		this.contactos = contactos;
+	}
+
+	public Set<IdiomaCandidato> getIdiomas() {
+		return idiomas;
+	}
+
+	public void setIdiomas(Set<IdiomaCandidato> idiomas) {
+		this.idiomas = idiomas;
+	}
+
+	public Set<ConocimientoCandidato> getConocimentos() {
+		return conocimentos;
+	}
+
+	public void setConocimentos(Set<ConocimientoCandidato> conocimentos) {
+		this.conocimentos = conocimentos;
+	}
+
+	public Set<ExperienciaCandidato> getPuestos() {
+		return puestos;
+	}
+
+	public void setPuestos(Set<ExperienciaCandidato> puestos) {
+		this.puestos = puestos;
+	}
+
 	@Override
 	public String toString() {
-		return "Candidato [id=" + id + ", direccion=" + direccion + ", disponibilidad=" + disponibilidad + ", estado="
-				+ estado + ", nacimiento=" + nacimiento + ", nacionalidad=" + nacionalidad + ", nombre=" + nombre
-				+ ", perfil=" + perfil + ", pretencion=" + pretencion + ", rfc=" + rfc + ", situacion=" + situacion
-				+ "]";
+		return "Candidato [id=" + id + ", idSolicitante=" + idSolicitante + ", rfc=" + rfc + ", nombre=" + nombre
+				+ ", username=" + username + ", password=" + password + ", nacionalidad=" + nacionalidad
+				+ ", nacimiento=" + nacimiento + ", perfil=" + perfil + ", situacion=" + situacion + ", pretencion="
+				+ pretencion + ", direccion=" + direccion + ", estado=" + estado + ", rol=" + rol
+				+ ", caracteristicasCandidatoCv=" + caracteristicasCandidatoCv + ", contactos=" + contactos
+				+ ", idiomas=" + idiomas + ", conocimentos=" + conocimentos + "]";
 	}
-    
+
 }

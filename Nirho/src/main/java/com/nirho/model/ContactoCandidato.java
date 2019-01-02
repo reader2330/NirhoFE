@@ -13,8 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -32,14 +30,12 @@ public class ContactoCandidato implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "nombre_contacto")
-    private String nombreContacto;
+    @Column(name = "nombre")
+    private String nombre;
     @Basic(optional = false)
     @Column(name = "tipo_contacto")
     private int tipoContacto;
-    @JoinColumn(name = "id_candidato", referencedColumnName = "id")
-    @ManyToOne
-    private Candidato candidato;
+    
 
     public ContactoCandidato() {
     }
@@ -48,48 +44,40 @@ public class ContactoCandidato implements Serializable {
         this.id = id;
     }
 
-    public ContactoCandidato(Long id, String nombreContacto, int tipoContacto) {
-        this.id = id;
-        this.nombreContacto = nombreContacto;
-        this.tipoContacto = tipoContacto;
-    }
+	public ContactoCandidato(Long id, String nombre, int tipoContacto) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.tipoContacto = tipoContacto;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getNombreContacto() {
-        return nombreContacto;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setNombreContacto(String nombreContacto) {
-        this.nombreContacto = nombreContacto;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public int getTipoContacto() {
-        return tipoContacto;
-    }
+	public int getTipoContacto() {
+		return tipoContacto;
+	}
 
-    public void setTipoContacto(int tipoContacto) {
-        this.tipoContacto = tipoContacto;
-    }
+	public void setTipoContacto(int tipoContacto) {
+		this.tipoContacto = tipoContacto;
+	}
 
-    public Candidato getCandidato() {
-        return candidato;
-    }
-
-    public void setCandidato(Candidato candidato) {
-        this.candidato = candidato;
-    }
-    
 	@Override
 	public String toString() {
-		return "ContactoCandidato [id=" + id + ", nombreContacto=" + nombreContacto + ", tipoContacto=" + tipoContacto
-				+ ", candidato=" + candidato + "]";
+		return "ContactoCandidato [id=" + id + ", nombre=" + nombre + ", tipoContacto=" + tipoContacto + "]";
 	}
-	
+ 
 }

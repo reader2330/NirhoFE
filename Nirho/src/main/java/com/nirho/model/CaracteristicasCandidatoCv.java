@@ -85,8 +85,6 @@ public class CaracteristicasCandidatoCv implements Serializable {
 		super();
 	}
 
-	
-
 	public CaracteristicasCandidatoCv(long id, String genero, String estadoCivil, String dispoViajar,
 			String cambioResidencia, String necesidadesEspeciales, int minEdad, int maxEdad, String caractAdicionales,
 			String gradoEstudios, String institucion, boolean titulo, String carrera, String especialidad,
