@@ -280,45 +280,51 @@ public class ProyectoCLBController {
 	            	List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
 	            	
 					for (GraficaResultadoDTO resul: graficaResultadoList) {
-						
-						if (primerRow) {
-							row = x1.getRow(1);
-							primerRow = false;
-						} else {
-							row = x1.createRow();
-						}
-						
-						row.getCell(0).setText(area);
-						row.getCell(1).setText(resul.getPregunta().getEnunciado());
-						
 						int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
 								resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
-						
-						row.getCell(2).setText(respuesta + "");
-						if (respuesta >= maxCalificacion) {
-							maxArea = area;
-							maxFuncion = resul.getPregunta().getEnunciado();
-							maxCalificacion = respuesta;
+						if(respuesta != 0) {
+							
+							if (primerRow) {
+								row = x1.getRow(1);
+								primerRow = false;
+							} else {
+								row = x1.createRow();
+							}
+							
+							row.getCell(0).setText(area);
+							row.getCell(1).setText(resul.getPregunta().getEnunciado());
+							row.getCell(2).setText(respuesta + "");
+							
+							if (respuesta >= maxCalificacion) {
+								maxArea = area;
+								maxFuncion = resul.getPregunta().getEnunciado();
+								maxCalificacion = respuesta;
+							}
+							if (respuesta <= minCalificacion) {
+								minArea = area;
+								minFuncion = resul.getPregunta().getEnunciado();
+								minCalificacion = respuesta;
+							}
+							promedioGeneral += respuesta;
+	    	            	numCalificacionesGeneral++;
+	    	            	promedioArea += respuesta;
+	    	            	numCalificacionesArea++;
 						}
-						if (respuesta <= minCalificacion) {
-							minArea = area;
-							minFuncion = resul.getPregunta().getEnunciado();
-							minCalificacion = respuesta;
-						}
-						promedioGeneral += respuesta;
-    	            	numCalificacionesGeneral++;
-    	            	promedioArea += respuesta;
-    	            	numCalificacionesArea++;
 					}
-	            	
-	            	promedioArea = Math.round(promedioArea / numCalificacionesArea);
-	            	datos.put(area, promedioArea);
-	            	
+					
+	            	if(numCalificacionesArea != 0) {
+	            		promedioArea = Math.round(promedioArea / numCalificacionesArea);
+		            	datos.put(area, promedioArea);
+	            	}	            	
 	            }
 	        }
 	        
-	        promedioGeneral = promedioGeneral / numCalificacionesGeneral;
+	        if(numCalificacionesGeneral == 0) {
+	        	logger.info("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
+	        	throw new NirhoControllerException("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
+	        }
 	        
+	        promedioGeneral = promedioGeneral / numCalificacionesGeneral;
 	        if(x2 != null){
 	        	XWPFTableRow row1 = x2.getRow(0);
 	        	row1.getCell(1).setText(promedioGeneral + "");

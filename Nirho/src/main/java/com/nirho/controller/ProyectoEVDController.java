@@ -223,8 +223,8 @@ public class ProyectoEVDController {
 		try {
 						       
 			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVD.docx"));
 			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteEVD.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVD.docx"));
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVD.docx")); 
 			
 			GraficaRespPregDTO resGraficas = graficasService.obtenerGraficasRespuestasPreguntas(idProyecto);
@@ -249,14 +249,21 @@ public class ProyectoEVDController {
 	        	for (GraficaResultadoDTO resul : graficaResultadoList) {
 	        		int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
 							resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
-	        		if(areasMap.get(gaDTO.getAreaOrg())!=null){
-	        			areasMap.get(gaDTO.getAreaOrg()).setCont(areasMap.get(gaDTO.getAreaOrg()).getCont()+1);
-	        			areasMap.get(gaDTO.getAreaOrg()).setSuma(areasMap.get(gaDTO.getAreaOrg()).getSuma()+respuesta);
-	        		} else {
-	        			AcumDTO acum = new AcumDTO(respuesta,1);
-	        			areasMap.put(gaDTO.getAreaOrg(), acum);
+	        		if(respuesta != 0) {
+	        			if(areasMap.get(gaDTO.getAreaOrg())!=null){
+		        			areasMap.get(gaDTO.getAreaOrg()).setCont(areasMap.get(gaDTO.getAreaOrg()).getCont()+1);
+		        			areasMap.get(gaDTO.getAreaOrg()).setSuma(areasMap.get(gaDTO.getAreaOrg()).getSuma()+respuesta);
+		        		} else {
+		        			AcumDTO acum = new AcumDTO(respuesta,1);
+		        			areasMap.put(gaDTO.getAreaOrg(), acum);
+		        		}
 	        		}
 	        	}
+	        }
+	        
+	        if(areasMap.size() == 0) {
+	        	logger.info("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
+	        	throw new NirhoControllerException("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
 	        }
 	        
 	        List<AreaPromDTO> promAreas = new ArrayList<>();
@@ -314,46 +321,47 @@ public class ProyectoEVDController {
 									
 	            	List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
 	            	
-					for (GraficaResultadoDTO resul: graficaResultadoList) {
-						
-						if (primerRow) {
-							row = x1.getRow(1);
-							primerRow = false;
-						} else {
-							row = x1.createRow();
-						}
-						
-						row.getCell(0).setText(area);
-						row.getCell(1).setText(resul.getPregunta().getEnunciado());
-						
+					for (GraficaResultadoDTO resul: graficaResultadoList) {				
 						int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
 								resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
-						
-						row.getCell(2).setText(respuesta + "");
-						if (respuesta >= maxCalificacion) {
-							maxArea = area;
-							maxFuncion = resul.getPregunta().getEnunciado();
-							maxCalificacion = respuesta;
+						if(respuesta != 0) {
+							if (primerRow) {
+								row = x1.getRow(1);
+								primerRow = false;
+							} else {
+								row = x1.createRow();
+							}
+							row.getCell(0).setText(area);
+							row.getCell(1).setText(resul.getPregunta().getEnunciado());												
+							row.getCell(2).setText(respuesta + "");
+							
+							if (respuesta >= maxCalificacion) {
+								maxArea = area;
+								maxFuncion = resul.getPregunta().getEnunciado();
+								maxCalificacion = respuesta;
+							}
+							if (respuesta <= minCalificacion) {
+								minArea = area;
+								minFuncion = resul.getPregunta().getEnunciado();
+								minCalificacion = respuesta;
+							}
+							promedioGeneral += respuesta;
+	    	            	numCalificacionesGeneral++;
+	    	            	promedioArea += respuesta;
+	    	            	numCalificacionesArea++;
 						}
-						if (respuesta <= minCalificacion) {
-							minArea = area;
-							minFuncion = resul.getPregunta().getEnunciado();
-							minCalificacion = respuesta;
-						}
-						promedioGeneral += respuesta;
-    	            	numCalificacionesGeneral++;
-    	            	promedioArea += respuesta;
-    	            	numCalificacionesArea++;
 					}
-	            	
-	            	promedioArea = Math.round(promedioArea / numCalificacionesArea);
-	            	datos.put(area, promedioArea);
-	            	
+	            	if(numCalificacionesArea != 0) {
+	            		promedioArea = Math.round(promedioArea / numCalificacionesArea);
+		            	datos.put(area, promedioArea);
+	            	}
 	            }
 	        }
 	        
-	        promedioGeneral = promedioGeneral / numCalificacionesGeneral;
-	        
+	        if(numCalificacionesGeneral != 0) {
+	        	promedioGeneral = promedioGeneral / numCalificacionesGeneral;
+	        }
+	        	        
 	        if(x2 != null){
 	        	XWPFTableRow row1 = x2.getRow(0);
 	        	row1.getCell(1).setText(promedioGeneral + "");
@@ -421,8 +429,8 @@ public class ProyectoEVDController {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
 			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVDIndividual.docx"));
 
 	        Participante participante = participanteService.obtenerParticipante(new ParticipantePK(idParticipante, idProyecto));
@@ -472,19 +480,31 @@ public class ProyectoEVDController {
 	        logger.info(" ********************************* cuestPartList [" + cuestPartList + "] *****************************");
 	        HashMap<String, Integer> datos = new HashMap<>();
 	        int promedioGeneral = 0;
+	        int conta = 0;
 	        for(CuetionarioParticipante cp: cuestPartList) {
 	        	dispersionMock(cp); //dispersionMock para efectos de pruebas de reportes
-	        	datos.put(cp.getPregunta().getEnunciado(), Math.round(((cp.getRespuestaJefe() + cp.getRespuestaRh())/2)));
-	        	promedioGeneral = promedioGeneral + Math.round(((cp.getRespuestaJefe() + cp.getRespuestaRh())/2));
-	        	if(cp.getPregunta().getIdTema().getTipo()!=null && cp.getPregunta().getIdTema().getTipo().equals("FA")) {
-	        		factores.add(cp);
-	        		logger.info(" factor [" + cp + "]");
-	        	} else {
-	        		logger.info(" competencia [" + cp + "]");
-	        		competencias.add(cp);
+	        	Integer promedio = Math.round(((cp.getRespuestaJefe() + cp.getRespuestaRh())/2));
+	        	if(promedio.intValue() != 0) {
+	        		datos.put(cp.getPregunta().getEnunciado(), promedio);
+		        	promedioGeneral = promedioGeneral + Math.round(((cp.getRespuestaJefe() + cp.getRespuestaRh())/2));
+		        	if(cp.getPregunta().getIdTema().getTipo()!=null && cp.getPregunta().getIdTema().getTipo().equals("FA")) {
+		        		factores.add(cp);
+		        		logger.info(" factor [" + cp + "]");
+		        	} else {
+		        		logger.info(" competencia [" + cp + "]");
+		        		competencias.add(cp);
+		        	}
+		        	conta = conta + 1;
 	        	}
 	        }
-	        promedioGeneral = Math.round(promedioGeneral/cuestPartList.size());
+	        
+	        if(conta == 0) {
+	        	logger.info("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
+	        	throw new NirhoControllerException("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
+	        }
+	        
+	        promedioGeneral = Math.round(promedioGeneral/conta);
+	        
 	        logger.info("********************************* promedioGeneral [" + promedioGeneral + "] *********************************");
 	        logger.info("********************************* num factores [" + factores.size() + "] *********************************");
 	        logger.info("********************************* num competencias [" + competencias.size() + "] *********************************");
@@ -571,7 +591,7 @@ public class ProyectoEVDController {
 	        	int respJefe = cp.getRespuestaJefe()!=null?cp.getRespuestaJefe().intValue():0;
 	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
 	        	int promedio = (respJefe + respRH)/2;
-	        	if(promedio<3) {
+	        	if(promedio > 0 && promedio<3) {
 	        		factoresMejora = factoresMejora + (factoresMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
 	        		factoresSobresa = factoresSobresa + (factoresSobresa.length() != 0?",":"") + cp.getPregunta().getEnunciado();
@@ -585,7 +605,7 @@ public class ProyectoEVDController {
 	        	int respJefe = cp.getRespuestaJefe()!=null?cp.getRespuestaJefe().intValue():0;
 	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
 	        	int promedio = (respJefe + respRH)/2;
-	        	if(promedio<3) {
+	        	if(promedio > 0 && promedio<3) {
 	        		competenciasMejora = competenciasMejora + (competenciasMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
 	        		competenciasSobresa = competenciasSobresa + (competenciasSobresa.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
