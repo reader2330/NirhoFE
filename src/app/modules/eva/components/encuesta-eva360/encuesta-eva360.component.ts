@@ -90,7 +90,6 @@ export class EncuestaEva360Component implements OnInit {
     this.route.params.subscribe(res => {
       this.token = res['token'];
       this.ProyectoEvdServices.getPreguntasParticipante(this.token).subscribe(res => {
-        console.log(res);
         this.preguntas = res;
         let auxOpciones = [];
         for (let cuestionario of this.preguntas) {
@@ -114,15 +113,13 @@ export class EncuestaEva360Component implements OnInit {
 
 
   setRespuesta(question, id) {
-    console.log(question);
-    console.log(id);
-    question['cuestionarioParticipante']['respuesta'] = id + 1;
+
+    question['respuesta'] = id + 1;
     this.start = false;
     this.updateValor(question);
   }
   updateValor(question) {
-    console.log(question['cuestionarioParticipante']);
-    this.ProyectoEvdServices.updatePregunta(question['cuestionarioParticipante']).subscribe((res) => {
+    this.ProyectoEvdServices.updatePregunta(question).subscribe((res) => {
       console.log(res);
     });
 

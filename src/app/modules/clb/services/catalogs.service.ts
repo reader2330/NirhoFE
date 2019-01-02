@@ -27,4 +27,7 @@ export class CatalogsService {
   getTypeContact(): Observable<any> {
     return this._http.get(this.api + 'catalogo/tipoContacto');
   }
+  getScholarship(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/empleado/nivelEscolaridad', {headers: this.header});
+  }
 }

@@ -28,4 +28,19 @@ export class ReclutamientoService {
   saveVacante(id, data): Observable<any> {
     return this.http.post(this.api + 'solicitante/' + id + '/vacante/guardar', data, { headers: this.headers});
   }
+  saveActividad(id, data) {
+    return this.http.post(this.api + 'vacante/' + id + '/actividades/guardar', data , {headers: this.headers});
+  }
+  deleteActividad(id) {
+    return this.http.post(this.api + 'actividadesPuestoVacante/eliminar', id, {headers: this.headers});
+  }
+  saveCaracteristicas(id, data){
+    return this.http.post(this.api + 'vacante/' + id + '/caracteristicas/guardar', data, {headers: this.headers});
+  }
+  saveCompetencia(id, data) {
+    return this.http.post(this.api + 'vacante/' + id + '/competencias/guardar', data, {headers: this.headers});
+  }
+  deleteCompetencias(id) {
+    return this.http.post(this.api + 'competenciasVacante/eliminar', id, {headers: this.headers});
+  }
 }
