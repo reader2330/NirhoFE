@@ -560,7 +560,7 @@ public class ParticipantePVCController {
 			                	lnewRun.setBold(true);
 			                	lnewRun.setUnderline(UnderlinePatterns.SINGLE);	
 				            }
-			                lnewRun.setText("- " + area.getNombre());
+			                lnewRun.setText("- " + esfera.getNombre());
 						}
 					}
 				}
