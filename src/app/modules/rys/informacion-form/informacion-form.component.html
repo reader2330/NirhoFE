@@ -35,19 +35,20 @@
         <mat-label>Dirección</mat-label>
         <input matInput type="text"   formControlName="direccion">
       </mat-form-field>
-      <div class="col-sm-4 offset-6">
-        <button mat-raised-button color="accent" (click)="guardarForm(InformacionForm,1)">Guardar</button>
+      <div class="col-sm-4 offset-5">
+        <button mat-raised-button color="accent" (click)="guardarForm(InformacionForm,1)"><mat-icon>save</mat-icon>Guardar</button>
+        <button mat-raised-button color="accent" style="margin-left: 30px" *ngIf="nextFlag" matStepperNext><mat-icon>navigate_next</mat-icon>Siguiente</button>
       </div>
     </mat-step>
     <mat-step [formGroup]="ContactoForm" [editable]="false" [stepControl]="ContactoForm">
       <ng-template matStepLabel>Contacto del solicitante</ng-template>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Nombre</mat-label>
-        <input matInput type="text"   formControlName="nombreContacto">
+        <input matInput type="text"   formControlName="nombre">
       </mat-form-field>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Puesto</mat-label>
-        <input matInput type="text"   formControlName="puestoContacto">
+        <input matInput type="text"   formControlName="puesto">
       </mat-form-field>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Tipo de contacto</mat-label>
@@ -59,18 +60,19 @@
       </mat-form-field>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput type="text"  formControlName="emailContacto">
+        <input matInput type="text"  formControlName="email">
       </mat-form-field>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Telefono</mat-label>
-        <input matInput type="number"   formControlName="telefonoContacto">
+        <input matInput type="number"   formControlName="telefono">
       </mat-form-field>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Celular</mat-label>
-        <input matInput type="number"  formControlName="celularContacto">
+        <input matInput type="number"  formControlName="celular">
       </mat-form-field>
-      <div class="col-sm-4 offset-6">
+      <div class="col-sm-4 offset-5">
         <button (click)="guardarForm(ContactoForm, 2)" mat-raised-button color="accent">Guardar</button>
+        <button mat-raised-button color="accent" style="margin-left: 30px" *ngIf="nextFlag" matStepperNext><mat-icon>navigate_next</mat-icon>Siguiente</button>
       </div>
     </mat-step>
     <mat-step [formGroup]="VacanteForm" [editable]="false" [stepControl]="VacanteForm">
@@ -94,27 +96,28 @@
       </mat-form-field>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Número de vacantes</mat-label>
-        <input matInput type="number"   formControlName="numeroVacantes">
+        <input matInput type="number"   formControlName="numVacantes">
       </mat-form-field>
       <h4>Puesto</h4>
-      <mat-form-field formGroupName="puestoVacante" class="col-sm-10 offset-1" appearance="outline">
+      <mat-form-field  class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Nombre del puesto</mat-label>
-        <input matInput type="text"   formControlName="nombrePuesto">
+        <input matInput type="text"   formControlName="puesto">
       </mat-form-field>
-      <mat-form-field formGroupName="puestoVacante" class="col-sm-10 offset-1" appearance="outline">
+      <mat-form-field  class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Puesto a quien reporta</mat-label>
         <input matInput type="text"   formControlName="puestoReporta">
       </mat-form-field>
-      <mat-form-field formGroupName="puestoVacante" class="col-sm-10 offset-1" appearance="outline">
+      <mat-form-field class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Años de experencia</mat-label>
-        <input matInput type="number"   formControlName="yearsExperencia">
+        <input matInput type="number"   formControlName="aniosExperiencia">
       </mat-form-field>
-      <mat-form-field   formGroupName="puestoVacante" class="col-sm-10 offset-1" appearance="outline">
+      <mat-form-field   class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Puesto a su cargo</mat-label>
         <input matInput type="text"   formControlName="puestoCargo">
       </mat-form-field>
-      <div class="col-sm-4 offset-6">
+      <div class="col-sm-4 offset-5">
         <button mat-raised-button color="accent" (click)="guardarForm(VacanteForm,3)">Guardar</button>
+        <button mat-raised-button color="accent" style="margin-left: 30px" *ngIf="nextFlag" matStepperNext><mat-icon>navigate_next</mat-icon>Siguiente</button>
       </div>
     </mat-step>
     <mat-step>
@@ -145,12 +148,12 @@
 
           <ng-container matColumnDef="nombreActividad">
             <th  mat-header-cell *matHeaderCellDef> Nombre de las actividades </th>
-            <td mat-cell *matCellDef="let element"> {{element.nombreActividad}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
           </ng-container>
 
           <ng-container matColumnDef="descripcionActividad">
             <th mat-header-cell *matHeaderCellDef> Descripción de la actividad </th>
-            <td mat-cell *matCellDef="let element"> {{element.descripcionActividad}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
           </ng-container>
 
           <ng-container matColumnDef="nivel">
@@ -166,41 +169,280 @@
           <tr mat-header-row *matHeaderRowDef="displayActividades"></tr>
           <tr mat-row *matRowDef="let row; columns: displayActividades;"></tr>
         </table>
+        <div style="margin-top: 30px" class="col-sm-4 offset-5">
+          <button mat-raised-button color="accent" style="margin-left: 30px" *ngIf="nextFlag" matStepperNext><mat-icon>navigate_next</mat-icon>Siguiente</button>
+        </div>
+
+      </div>
+
+    </mat-step>
+    <mat-step [formGroup]="CaracteristicasForm" [editable]="false" [stepControl]="CaracteristicasForm">
+      <ng-template matStepLabel>Caracteristicas del candidato</ng-template>
+      <h4>Generales</h4>
+      <div style="margin-top: 20px" class="row col-sm-10">
+        <div class="col-sm-2 ">
+          <mat-label style="margin-top: 100px">Genero</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10 ">
+          <mat-button-toggle-group  style="margin-left: 20px" formControlName="genero" appearance="legacy" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="Indistinto">Indistinto</mat-button-toggle>
+            <mat-button-toggle value="Hombre">Hombre</mat-button-toggle>
+            <mat-button-toggle value="Mujer">Mujer</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <div style="margin-top: 20px"   class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label style="margin-top: 20px" >Estado civil</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-button-toggle-group style="margin-left: 20px" formControlName="estadoCivil" appearance="legacy" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="Indistinto">Indistinto</mat-button-toggle>
+            <mat-button-toggle value="Casado">Casado</mat-button-toggle>
+            <mat-button-toggle value="Soltero">Soltero</mat-button-toggle>
+            <mat-button-toggle value="Unión libre">Unión libre</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Disponibilidad para viajar</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-button-toggle-group style="margin-left: 20px" formControlName="dispoViajar" appearance="legacy" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="Indistinto">Indistinto</mat-button-toggle>
+            <mat-button-toggle value="SI">SI</mat-button-toggle>
+            <mat-button-toggle value="NO">NO</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Cambio de residencia</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-button-toggle-group style="margin-left: 20px" formControlName="cambioResidencia" appearance="legacy" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="Indistinto">Indistinto</mat-button-toggle>
+            <mat-button-toggle value="SI">SI</mat-button-toggle>
+            <mat-button-toggle value="NO">NO</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Necesidades especiales</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-button-toggle-group style="margin-left: 20px" formControlName="necesidadesEspeciales" appearance="legacy" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="Indistinto">Indistinto</mat-button-toggle>
+            <mat-button-toggle value="SI">SI</mat-button-toggle>
+            <mat-button-toggle value="NO">NO</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Edad minima</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-slider style="width: 100%;"
+            thumbLabel
+            [displayWith]="formatLabel"
+            min="1"
+            max="100" formControlName="minEdad"></mat-slider>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Edad maxima</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-slider style="width: 100%;"
+                      thumbLabel
+                      [displayWith]="formatLabel"
+                      min="1"
+                      max="100" formControlName="maxEdad"></mat-slider>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Caracteristicas adicionales</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-form-field style="width: 100%;">
+            <textarea style="width:100%" matInput formControlName="caractAdicionales"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <h4>Escolaridad y capacitación necesaria para el puesto</h4>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Ultimo grado de estudios</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-form-field style="width: 100%;">
+            <mat-select formControlName="gradoEstudios">
+              <mat-option *ngFor="let nivel of niveles" [value]="nivel.descripcionCatalogo">
+                {{nivel.descripcionCatalogo}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Institución</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-form-field style="width: 100%;">
+            <input type="text" formControlName="institucion" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Cuenta con titulo</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-button-toggle-group style="margin-left: 20px" formControlName="titulo" appearance="legacy" name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="true">SI</mat-button-toggle>
+            <mat-button-toggle value="false">NO</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Carrera</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-form-field style="width: 100%;">
+            <input type="text" formControlName="carrera" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Especialidad</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-form-field style="width: 100%;">
+            <input type="text" formControlName="especialidad" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Certificaciones</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-form-field style="width: 100%;">
+            <input type="text" formControlName="certificaciones" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Cursos</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-form-field style="width: 100%;">
+            <input type="text" formControlName="cursos" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Oficios</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-form-field style="width: 100%;">
+            <input type="text" formControlName="oficios" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="margin-top: 20px"  class="row col-sm-12">
+        <div class="col-sm-2">
+          <mat-label>Otras competencias</mat-label>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-10">
+          <mat-form-field style="width: 100%;">
+            <input type="text" formControlName="oCapacidades" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-sm-4 offset-4">
+        <button (click)="guardarForm(CaracteristicasForm, 4)" mat-raised-button color="accent"><mat-icon>save</mat-icon>Guardar</button>
+        <button mat-raised-button color="accent" style="margin-left: 30px" *ngIf="nextFlag" matStepperNext><mat-icon>navigate_next</mat-icon>Siguiente</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Competencias del puesto</ng-template>
+      <div class=" row col-sm-10 offset-1">
+        <mat-form-field class="col-sm-3" appearance="outline">
+          <mat-label>Nombre de la competencia" [(ngModel)]="newActividad.nombre">
+        </mat-form-field>
+        <mat-form-field class="col-sm-3" appearance="outline">
+          <mat-label>Descripción de la  competencia</mat-label>
+          <input matInput type="text" [(ngModel)]="newCompetencia.descripcion"  >
+        </mat-form-field>
+        <mat-form-field class="col-sm-3" appearance="outline">
+          <mat-label>Nivel</mat-label>
+          <mat-select [(ngModel)]="newCompetencia.nivel" >
+            <mat-option *ngFor="let giro of giros" [value]="giro.id">
+              {{giro.descripcionCatalogo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-sm-3" appearance="outline">
+          <mat-label>Tipo</mat-label>
+          <mat-select [(ngModel)]="newCompetencia.tipo" >
+            <mat-option *ngFor="let giro of giros" [value]="giro.id">
+              {{giro.descripcionCatalogo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="col-sm-3  ">
+          <button style="margin-top: 20px" mat-raised-button color="accent" (click)="addCompetencia()"><mat-icon>add_circle</mat-icon>Agregar</button>
+        </div>
+      </div>
+      <div *ngIf="competencias.length" class="row col-sm-10 offset-1">
+        <table style="width: 100%" class="col-sm-12" mat-table [dataSource]="competencias" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="nombreActividad">
+            <th  mat-header-cell *matHeaderCellDef> Nombre de la competencia </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="descripcionActividad">
+            <th mat-header-cell *matHeaderCellDef> Descripción de la competencia </th>
+            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nivel">
+            <th mat-header-cell *matHeaderCellDef> Nivel </th>
+            <td mat-cell *matCellDef="let element"> {{element.nivel}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nivel">
+            <th mat-header-cell *matHeaderCellDef> Tipo </th>
+            <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="detail1">
+            <th mat-header-cell *matHeaderCellDef> Borrar </th>
+            <td mat-cell *matCellDef="let element"><a (click)="removeCompetencia(element)" ><mat-icon>delete</mat-icon></a> </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayCompetencias"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayCompetencias;"></tr>
+        </table>
         <div style="margin-top: 30px" class="col-sm-4 offset-6">
-          <button mat-raised-button color="accent" (click)="mostrarForm(VacanteForm)">Guardar</button>
+          <button mat-raised-button color="accent" style="margin-left: 30px" *ngIf="nextFlag" matStepperNext><mat-icon>navigate_next</mat-icon>Siguiente</button>
         </div>
       </div>
     </mat-step>
-    <mat-step [formGroup]="VacanteForm" [editable]="false" [stepControl]="VacanteForm">
-      <ng-template matStepLabel>Caracteristicas del candidato</ng-template>
-      <h4>Generales</h4>
-      <div class="row col-sm-10">
-        <mat-label>Genero</mat-label>
-        <mat-button-toggle-group class="col-sm-12" style="margin-left: 20px" appearance="legacy" name="fontStyle" aria-label="Font Style">
-          <mat-button-toggle value="bold">Bold</mat-button-toggle>
-          <mat-button-toggle value="italic">Italic</mat-button-toggle>
-          <mat-button-toggle value="underline">Underline</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-      <div class="row col-sm-12">
-        <mat-label>Genero</mat-label>
-        <mat-button-toggle-group class="col-sm-12" style="margin-left: 20px" appearance="legacy" name="fontStyle" aria-label="Font Style">
-          <mat-button-toggle value="bold">Bold</mat-button-toggle>
-          <mat-button-toggle value="italic">Italic</mat-button-toggle>
-          <mat-button-toggle value="underline">Underline</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-      <div class="col-sm-10">
-        <mat-label>Genero</mat-label>
-        <mat-button-toggle-group style="margin-left: 20px" appearance="legacy" name="fontStyle" aria-label="Font Style">
-          <mat-button-toggle value="bold">Bold</mat-button-toggle>
-          <mat-button-toggle value="italic">Italic</mat-button-toggle>
-          <mat-button-toggle value="underline">Underline</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
 
-
-    </mat-step>
 
   </mat-horizontal-stepper>
 

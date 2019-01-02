@@ -25,8 +25,8 @@
         <mat-panel-description class="col-sm-12 row" style="width: 100%">
           <mat-list class="col-sm-12">
             <mat-list-item style="margin-bottom: 10px">{{question['cuestionarioParticipante']['pregunta']['enunciado']}}</mat-list-item>
-            <mat-selection-list (selectionChange)="handleSelection($event)"  >
-              <mat-list-option  *ngFor="let opt of question['opciones']; let i = index;"  [value]="question['cuestionarioParticipante']['respuesta']"  (click)="setRespuesta(question['cuestionarioParticipantes'][0],i)">
+            <mat-selection-list  (selectionChange)="handleSelection($event)"  >
+              <mat-list-option  *ngFor="let opt of question['opciones']; let i = index;"  [value]="question['cuestionarioParticipante']['respuesta']"  (click)="setRespuesta(question['cuestionarioParticipante'],i)">
                 {{opt.tipo}}  {{opt.enunciado}}
               </mat-list-option>
             </mat-selection-list>
