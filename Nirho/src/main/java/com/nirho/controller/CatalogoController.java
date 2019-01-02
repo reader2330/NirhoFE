@@ -221,5 +221,38 @@ public class CatalogoController {
 		}
 		return catalogo;
 	}
+
+	@GetMapping(value = "/tipoCompetencia")
+	public List<Catalogo> tipocompetencia() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("25"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
+	
+	@GetMapping(value = "/nivelCompetencia")
+	public List<Catalogo> nivelcompetencia() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("26"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
+	
+	@GetMapping(value = "/motivoVacante")
+	public List<Catalogo> motivovacante() throws NirhoControllerException{
+		List<Catalogo> catalogo = new ArrayList<>();
+		try {
+			catalogo = catalogoService.obtenerCatalogo(new Long("27"));
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el catalogo");
+		}
+		return catalogo;
+	}
 	
 }
