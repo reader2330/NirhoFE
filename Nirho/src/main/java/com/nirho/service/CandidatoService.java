@@ -11,5 +11,6 @@ public interface CandidatoService {
 	public void eliminar(Long id) throws NirhoServiceException;
 	public Candidato getOne(Long id) throws NirhoServiceException;
 	public Candidato getOneByUsername(String username) throws NirhoServiceException;
+	public Candidato getOneByRFC(String rfc) throws NirhoServiceException;
 	public List<Candidato> getAll() throws NirhoServiceException;
 }

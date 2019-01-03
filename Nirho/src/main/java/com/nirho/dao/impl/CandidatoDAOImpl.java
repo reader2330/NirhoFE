@@ -22,4 +22,13 @@ public class CandidatoDAOImpl extends AbstractDAO<Candidato, Long> implements Ca
 		return query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Candidato> findByRfc(String rfc) {
+		String hql = "FROM Candidato e WHERE e.rfc = :rfc";
+		Query query = entityManager.createQuery(hql);
+		query.setParameter("rfc", rfc);
+		return query.getResultList();
+	}
+	
 }

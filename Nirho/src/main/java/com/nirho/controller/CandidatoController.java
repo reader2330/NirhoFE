@@ -58,6 +58,7 @@ import com.nirho.model.ProyectoPVCConocimiento;
 import com.nirho.model.ProyectoPVCEsfera;
 import com.nirho.model.ProyectoPVCEspecialidad;
 import com.nirho.model.ProyectoPVCNivel;
+import com.nirho.model.Solicitante;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.model.Usuario;
 import com.nirho.service.CandidatoService;
@@ -89,6 +90,15 @@ public class CandidatoController {
 	public Candidato get(@PathVariable("id") long id) throws NirhoControllerException{
 		try {
 			return candidatoService.getOne(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de candidato");
+		}
+	}
+	
+	@GetMapping(value = "/porRFC")
+	public Candidato porRFC(@RequestParam(name="rfc") String rfc) throws NirhoControllerException{
+		try {
+			return candidatoService.getOneByRFC(rfc);
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de candidato");
 		}
