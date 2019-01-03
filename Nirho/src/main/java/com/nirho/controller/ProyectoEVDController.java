@@ -603,11 +603,14 @@ public class ProyectoEVDController {
 	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
 	        	int promedio = (respJefe + respRH)/2;
 	        	if(promedio > 0 && promedio<3) {
-	        		factoresMejora = factoresMejora + (factoresMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        		factoresMejora = factoresMejora + (factoresMejora.length() != 0?"                              ":"") 
+	        				+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio == 3) {
-	        		factoresSufis = factoresSufis + (factoresSufis.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        		factoresSufis = factoresSufis + (factoresSufis.length() != 0?"                              ":"") 
+	        				+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
-	        		factoresSobresa = factoresSobresa + (factoresSobresa.length() != 0?",":"") + cp.getPregunta().getEnunciado();
+	        		factoresSobresa = factoresSobresa + (factoresSobresa.length() != 0?"                              ":"") 
+	        				+ cp.getPregunta().getEnunciado();
 	        	}
 	        }
 	        logger.info(" ******************** factoresMejora [" + factoresMejora + "] *****************************");
@@ -621,11 +624,14 @@ public class ProyectoEVDController {
 	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
 	        	int promedio = (respJefe + respRH)/2;
 	        	if(promedio > 0 && promedio<3) {
-	        		competenciasMejora = competenciasMejora + (competenciasMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        		competenciasMejora = competenciasMejora + (competenciasMejora.length() != 0?"                              ":"") 
+	        								+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio == 3) {
-	        		competenciasSufis = competenciasSufis + (competenciasSufis.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        		competenciasSufis = competenciasSufis + (competenciasSufis.length() != 0?"                              ":"") 
+	        								+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
-	        		competenciasSobresa = competenciasSobresa + (competenciasSobresa.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        		competenciasSobresa = competenciasSobresa + (competenciasSobresa.length() != 0?"                              ":"") 
+	        								+ cp.getPregunta().getEnunciado();
 	        	}
 	        }
 	        logger.info(" ******************** competenciasMejora [" + competenciasMejora + "] *****************************");

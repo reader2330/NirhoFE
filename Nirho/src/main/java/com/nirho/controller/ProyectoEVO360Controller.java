@@ -598,11 +598,14 @@ public class ProyectoEVO360Controller {
 	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
 	        	int promedio = (respJefe + respRH)/2;
 	        	if(promedio<3) {
-	        		categoriasMejora = categoriasMejora + (categoriasMejora.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        		categoriasMejora = categoriasMejora + (categoriasMejora.length() != 0?"                              ":"") 
+	        								+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio == 3) {
-	        		categoriasSufis = categoriasSufis + (categoriasSufis.length() != 0?", ":"") + cp.getPregunta().getEnunciado();
+	        		categoriasSufis = categoriasSufis + (categoriasSufis.length() != 0?"                              ":"") 
+	        								+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
-	        		categoriasSobresa = categoriasSobresa + (categoriasSobresa.length() != 0?",":"") + cp.getPregunta().getEnunciado();
+	        		categoriasSobresa = categoriasSobresa + (categoriasSobresa.length() != 0?"                              ":"") 
+	        								+ cp.getPregunta().getEnunciado();
 	        	}
 	        }
 	        logger.info(" ******************** factoresMejora [" + categoriasMejora + "] *****************************");
