@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CatalogsService} from '../../clb/services/catalogs.service';
 import {MatTableDataSource} from '@angular/material';
 import {ActividadSolicitante} from '../../../screensOut/models/actividad-solicitante';
+import {CatalogsService} from '../../clb/services/catalogs.service';
 import {ReclutamientoService} from '../services/reclutamiento.service';
 import {Competencia} from '../models/competencia';
 import {ConocimientoRYS} from '../models/conocimientoRYS';
-
+import {ContactoRYS} from '../models/contacto-rys';
 
 @Component({
-  selector: 'app-informacion-form',
-  templateUrl: './informacion-form.component.html',
-  styleUrls: ['./informacion-form.component.scss']
+  selector: 'app-candidato-form',
+  templateUrl: './candidato-form.component.html',
+  styleUrls: ['./candidato-form.component.scss']
 })
-export class InformacionFormComponent implements OnInit {
+export class CandidatoFormComponent implements OnInit {
+
   InformacionForm: FormGroup;
   ContactoForm: FormGroup;
   VacanteForm: FormGroup;
@@ -25,21 +26,31 @@ export class InformacionFormComponent implements OnInit {
   conocimientos = [];
   nivelCompetencias = [];
   tipoCompetencias = [];
+  nacionalidades = [];
+  habilidades = [];
   niveles = [];
   giros = [];
   motivos = [];
-  dataSource = new MatTableDataSource<ActividadSolicitante>();
   contacts = [];
-  newActividad = {
-    nombreActividad: null,
-    descripcionActividad: null,
-    nivel: null
-  };
-  newCompetencia = {
+  idiomas = [];
+  idiomasCandidato = [];
+  dataSource = new MatTableDataSource<ActividadSolicitante>();
+  contactos = [];
+  newContacto = {
     nombre: null,
-    descripcion: null,
+    tipo_contacto: null,
+  };
+  newIdioma = {
+    nombre: null,
+    habilidad: null,
     nivel: null,
-    tipo: null,
+  };
+  newPuesto = {
+    puesto: null,
+    nivel: null,
+    fechaFin: null,
+    fechaIni: null,
+    antiguedad: null,
   };
   newConocimiento = {
     nombre: null,
@@ -49,9 +60,9 @@ export class InformacionFormComponent implements OnInit {
   };
 
   actividades: ActividadSolicitante[] = [];
-  displayActividades = ['nombreActividad', 'descripcionActividad', 'nivel', 'detail1'];
+  displayContactos = ['nombre', 'tipo', 'detail1'];
+  displayIdioma = ['idioma', 'nivel', 'habilidad', 'detail1'];
   displayCompetencias = ['nombreCompetencia', 'descripcionCompetencia', 'nivelCompetencia', 'detail1'];
-  displayPuestos = ['puesto', 'nivel', 'fechaInicio', 'fechaFinal', 'antiguedad','' ]
   constructor(private _form: FormBuilder, private CatalogServices: CatalogsService, private Recultamiento: ReclutamientoService) { }
 
   ngOnInit() {
@@ -59,9 +70,13 @@ export class InformacionFormComponent implements OnInit {
       id: [null],
       rfc: [null, [Validators.required, Validators.maxLength(13)]],
       nombre: ['', Validators.required],
-      pais: [null, Validators.required],
-      giro: [null, Validators.required],
+      nacionalidad: [null, Validators.required],
+      nacimiento: [null, Validators.required],
+      perfil: [null, Validators.required],
+      situacion: [null, Validators.required],
+      pretencion: [null, Validators.required],
       direccion: [null, Validators.required]
+
     });
     this.ContactoForm = this._form.group({
       nombre: ['', Validators.required],
@@ -102,67 +117,51 @@ export class InformacionFormComponent implements OnInit {
       oCapacidades: [null, Validators.required]
 
     });
-    this.getPaises();
-    this.getGiros();
     this.getContactos();
-    this.getEstudios();
-    this.getMotivos();
     this.getTipoCompetencia();
     this.getNivelCompetencia();
+    this.getNacionalidades();
+    this.getHabilidades();
   }
 
-  addCompetencia() {
-    let id = sessionStorage.getItem('idVacante');
-    let competencia = new Competencia();
-    competencia.nombre = this.newCompetencia.nombre;
-    competencia.descripcion = this.newCompetencia.descripcion;
-    competencia.nivel = this.newCompetencia.nivel;
-    competencia.tipo = this.newCompetencia.tipo;
-    if (id){
-      this.Recultamiento.saveCompetencia(id, competencia).subscribe(res => {
-        this.competencias.push(competencia);
-      });
-    }
+  addIdioma() {
+
   }
-  removeCompetencia(comp) {
-    this.competencias.map((item, i ) => {
-      if (item.nombre === comp.nombre) {
-        this.competencias.splice(i, 1);
+
+
+
+  removeIdioma(element){
+    this.idiomasCandidato.map((item, i) => {
+      if (item.nombre === element.nombre) {
+        this.idiomasCandidato.splice(i, 1);
       }
     });
-    this.Recultamiento.deleteCompetencias(comp.id).subscribe(res => {
-      console.log(res);
+  }
+
+  addPuesto()
+
+  addContacto() {
+    let id = sessionStorage.getItem('idCandidato');
+    let contacto = new ContactoRYS();
+    contacto.id = null;
+    contacto.nombre = this.newContacto.nombre;
+    contacto.tipo_contacto = this.newContacto.tipo_contacto;
+    this.newContacto.nombre = null;
+    this.newContacto.tipo_contacto = null;
+    this.contactos.push(contacto);
+    this.Recultamiento.saveContactoCandidato(id, contacto).subscribe(res => {
+
     });
-  }
-
-  addActividad() {
-    let id = sessionStorage.getItem('idVacante');
-    let actividad = new ActividadSolicitante();
-    actividad.nombre = this.newActividad.nombreActividad;
-    actividad.descripcion = this.newActividad.descripcionActividad;
-    actividad.nivel = this.newActividad.nivel;
-    this.newActividad.descripcionActividad = null;
-    this.newActividad.nombreActividad = null;
-    this.newActividad.nivel = null;
-    if (id) {
-      this.Recultamiento.saveActividad(id, actividad).subscribe(res => {
-        this.actividades.push(actividad);
-        this.dataSource.data = this.actividades;
-        this.showTable = true;
-      });
-    }
 
   }
-  removeActividad(elt) {
-    this.actividades.map((item, i ) => {
+  removeContacto(elt) {
+    this.contactos.map((item, i ) => {
       if (item.nombre === elt.nombre) {
-        this.actividades.splice(i, 1);
+        this.contactos.splice(i, 1);
       }
     });
-    this.Recultamiento.deleteActividad(elt.id).subscribe(res => {
-      console.log(res);
+    this.Recultamiento.deleteContacto(elt.id).subscribe(res => {
     });
-    this.dataSource.data = this.actividades;
   }
 
   addConocimiento() {
@@ -209,7 +208,7 @@ export class InformacionFormComponent implements OnInit {
     });
   }
   getContactos() {
-    this.CatalogServices.getTypeContact().subscribe(res => {
+    this.CatalogServices.getTypeContactEmpleado().subscribe(res => {
       this.contacts = res;
     });
   }
@@ -229,12 +228,22 @@ export class InformacionFormComponent implements OnInit {
       this.tipoCompetencias = res;
     });
   }
+  getNacionalidades(){
+    this.CatalogServices.getNacionalidades().subscribe(res => {
+      this.nacionalidades = res;
+    });
+  }
+  getHabilidades() {
+    this.CatalogServices.getHabilidades().subscribe(res => {
+      this.habilidades = res;
+    });
+  }
   searchByRFC() {
     if (this.InformacionForm.value['rfc']) {
       const rfc = this.InformacionForm.value['rfc'];
       this.Recultamiento.getSolicitanteByRFC(rfc).subscribe(res => {
         console.log(res);
-        if(res.length) {
+        if (res.length) {
           this.InformacionForm.patchValue(res[0]);
           if (res[0]['contactos']) {
             this.ContactoForm.patchValue(res[0]['contactos'][0]);
@@ -266,18 +275,14 @@ export class InformacionFormComponent implements OnInit {
       });
     }
   }
-
-  mostrarForm(form: any) {
-    console.log(form['value']);
-  }
   guardarForm (form , step) {
 
     switch (step) {
 
       case 1:
-        this.Recultamiento.saveSolicitante(form['value']).subscribe(res => {
+        this.Recultamiento.saveCandidato(form['value']).subscribe(res => {
           console.log(res);
-          sessionStorage.setItem('idSolicitante', JSON.stringify(res));
+          sessionStorage.setItem('idCandidato', JSON.stringify(res));
         });
         break;
       case 2:
@@ -320,6 +325,5 @@ export class InformacionFormComponent implements OnInit {
         break;
     }
   }
-
 
 }

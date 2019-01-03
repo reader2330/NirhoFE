@@ -21,6 +21,8 @@ import {SidebarPvcComponent} from './modules/pvc/components/sidebar-pvc/sidebar-
 import {VistaPVCParticipanteComponent} from './screensOut/vista-pvcparticipante/vista-pvcparticipante.component';
 import {ConfiguradorClienteComponent} from './modules/synchronize/components/configurador-cliente/configurador-cliente.component';
 import {InformacionFormComponent} from './modules/rys/informacion-form/informacion-form.component';
+import {VacanteTableComponent} from './modules/rys/vacante-table/vacante-table.component';
+import {SidebarRysComponent} from './modules/rys/sidebar-rys/sidebar-rys.component';
 
 
 
@@ -99,9 +101,10 @@ const routes: Routes = [
     component: ConfiguradorClienteComponent
   },
   {
-    path: 'prueba',
-    component: InformacionFormComponent
+    path: 'RYS',
+    component: SidebarRysComponent
   },
+
   { path: '**', redirectTo: '' }
 ];
 

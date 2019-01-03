@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Sidebar360Component } from './sidebar-360.component';
+import { CandidatoFormComponent } from './candidato-form.component';
 
-describe('SidebarRysComponent', () => {
-  let component: Sidebar360Component;
-  let fixture: ComponentFixture<Sidebar360Component>;
+describe('CandidatoFormComponent', () => {
+  let component: CandidatoFormComponent;
+  let fixture: ComponentFixture<CandidatoFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ Sidebar360Component ]
+      declarations: [ CandidatoFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Sidebar360Component);
+    fixture = TestBed.createComponent(CandidatoFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

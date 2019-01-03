@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Sidebar360Component } from './sidebar-360.component';
+import { VacanteTableComponent } from './vacante-table.component';
 
-describe('SidebarRysComponent', () => {
-  let component: Sidebar360Component;
-  let fixture: ComponentFixture<Sidebar360Component>;
+describe('VacanteTableComponent', () => {
+  let component: VacanteTableComponent;
+  let fixture: ComponentFixture<VacanteTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ Sidebar360Component ]
+      declarations: [ VacanteTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Sidebar360Component);
+    fixture = TestBed.createComponent(VacanteTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -30,4 +30,22 @@ export class CatalogsService {
   getScholarship(): Observable<any> {
     return this._http.get(this.api + 'catalogo/empleado/nivelEscolaridad', {headers: this.header});
   }
+  getMotivos(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/motivoVacante', {headers: this.header});
+  }
+  getNivelCompetencia(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/nivelCompetencia', {headers: this.header});
+  }
+  getTipoCompetencia(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/tipoCompetencia', { headers: this.header});
+  }
+  getNacionalidades(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/empleado/nacionalidad', { headers: this.header})
+  }
+  getTypeContactEmpleado(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/empleado/tipoContacto', { headers: this.header})
+  }
+  getHabilidades(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/empleado/habilidades', {headers: this.header});
+  }
 }

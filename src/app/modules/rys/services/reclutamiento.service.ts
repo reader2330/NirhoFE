@@ -43,4 +43,25 @@ export class ReclutamientoService {
   deleteCompetencias(id) {
     return this.http.post(this.api + 'competenciasVacante/eliminar', id, {headers: this.headers});
   }
+  saveConocimiento(id, data) {
+    return this.http.post(this.api + 'vacante/' + id + '/conocimientos/guardar', data, {headers: this.headers})
+  }
+  deleteConocimiento(id) {
+    return this.http.post(this.api + 'conocimientoVacante/eliminar', id, {headers: this.headers});
+  }
+  getVacantes(): Observable<any> {
+    return this.http.get(this.api + 'vacante/todos', { headers: this.headers});
+  }
+  removeVacante(id): Observable<any> {
+    return this.http.post(this.api + 'vacante/eliminar', id, {headers: this.headers});
+  }
+  saveCandidato(data): Observable<any> {
+    return this.http.post(this.api + 'candidato/guardar', data, {headers: this.headers});
+  }
+  saveContactoCandidato(id , data): Observable<any> {
+    return this.http.post(this.api + 'candidato/' + id + '/contactos/guardar', data, {headers: this.headers})
+  }
+  deleteContacto(id): Observable<any> {
+    return this.http.post(this.api + 'contactoCandidato/eliminar', id, {headers: this.headers})
+  }
 }
