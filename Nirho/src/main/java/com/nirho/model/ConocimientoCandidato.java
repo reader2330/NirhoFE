@@ -30,7 +30,7 @@ public class ConocimientoCandidato implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private long id;
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
@@ -47,11 +47,11 @@ public class ConocimientoCandidato implements Serializable {
     public ConocimientoCandidato() {
     }
 
-    public ConocimientoCandidato(Long id) {
+    public ConocimientoCandidato(long id) {
         this.id = id;
     }
 
-	public ConocimientoCandidato(Long id, String descripcion, int nivel, int tipo, String nombre) {
+	public ConocimientoCandidato(long id, String descripcion, int nivel, int tipo, String nombre) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -60,11 +60,11 @@ public class ConocimientoCandidato implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

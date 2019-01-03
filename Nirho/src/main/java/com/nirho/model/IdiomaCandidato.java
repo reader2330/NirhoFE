@@ -24,9 +24,11 @@ public class IdiomaCandidato implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private long id;
     @Column(name = "nombre")
     private String nombre;
+    @Column(name = "habilidad")
+    private String habilidad;
     @Basic(optional = false)
     @Column(name = "nivel")
     private int nivel;
@@ -35,18 +37,18 @@ public class IdiomaCandidato implements Serializable {
 		super();
 	}
 
-	public IdiomaCandidato(Long id, String nombre, int nivel) {
+	public IdiomaCandidato(long id, String nombre, int nivel) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.nivel = nivel;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -56,6 +58,14 @@ public class IdiomaCandidato implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getHabilidad() {
+		return habilidad;
+	}
+
+	public void setHabilidad(String habilidad) {
+		this.habilidad = habilidad;
 	}
 
 	public int getNivel() {

@@ -30,7 +30,7 @@ public class AsignacionConsultorVacante implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private long id;
     @Basic(optional = false)
     @Column(name = "estado")
     private int estado;
@@ -44,20 +44,20 @@ public class AsignacionConsultorVacante implements Serializable {
     public AsignacionConsultorVacante() {
     }
 
-    public AsignacionConsultorVacante(Long id) {
+    public AsignacionConsultorVacante(long id) {
         this.id = id;
     }
 
-    public AsignacionConsultorVacante(Long id, int estado) {
+    public AsignacionConsultorVacante(long id, int estado) {
         this.id = id;
         this.estado = estado;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -112,11 +112,11 @@ public class CaracteristicasCandidatoCv implements Serializable {
 
 
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -183,13 +183,6 @@ public class CaracteristicasCandidatoCv implements Serializable {
 	public void setMaxEdad(int maxEdad) {
 		this.maxEdad = maxEdad;
 	}
-
-
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 
 
 	public String getCaractAdicionales() {

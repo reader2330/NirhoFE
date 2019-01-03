@@ -42,7 +42,7 @@ public class ConocimientoVacante implements Serializable {
     public ConocimientoVacante() {
     }
     
-	public ConocimientoVacante(Long id, String descripcion, int nivel, int tipo, String nombre) {
+	public ConocimientoVacante(long id, String descripcion, int nivel, int tipo, String nombre) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -51,15 +51,15 @@ public class ConocimientoVacante implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public ConocimientoVacante(Long id) {
+	public ConocimientoVacante(long id) {
         this.id = id;
     }
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

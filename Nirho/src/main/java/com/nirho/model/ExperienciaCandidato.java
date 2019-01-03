@@ -30,7 +30,7 @@ public class ExperienciaCandidato implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private long id;
     
     @Column(name = "puesto")
     private String puesto;
@@ -57,7 +57,7 @@ public class ExperienciaCandidato implements Serializable {
 		super();
 	}
 
-	public ExperienciaCandidato(Long id, String puesto, int nivel, Date fechaFin, Date fechaIni, int antiguedad,
+	public ExperienciaCandidato(long id, String puesto, int nivel, Date fechaFin, Date fechaIni, int antiguedad,
 			String localidad, String area) {
 		super();
 		this.id = id;
@@ -70,11 +70,11 @@ public class ExperienciaCandidato implements Serializable {
 		this.area = area;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

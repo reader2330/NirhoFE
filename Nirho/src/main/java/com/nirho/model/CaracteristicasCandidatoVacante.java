@@ -113,13 +113,10 @@ public class CaracteristicasCandidatoVacante implements Serializable {
 
 
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getGenero() {
 		return genero;

@@ -28,7 +28,7 @@ public class ContactoCandidato implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private long id;
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
@@ -40,22 +40,22 @@ public class ContactoCandidato implements Serializable {
     public ContactoCandidato() {
     }
 
-    public ContactoCandidato(Long id) {
+    public ContactoCandidato(long id) {
         this.id = id;
     }
 
-	public ContactoCandidato(Long id, String nombre, int tipoContacto) {
+	public ContactoCandidato(long id, String nombre, int tipoContacto) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.tipoContacto = tipoContacto;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

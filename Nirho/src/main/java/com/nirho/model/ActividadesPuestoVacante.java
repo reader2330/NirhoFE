@@ -39,11 +39,11 @@ public class ActividadesPuestoVacante implements Serializable {
     public ActividadesPuestoVacante() {
     }
 
-    public ActividadesPuestoVacante(Long id) {
+    public ActividadesPuestoVacante(long id) {
         this.id = id;
     }
 
-	public ActividadesPuestoVacante(Long id, String descripcion, int nivel, String nombre) {
+	public ActividadesPuestoVacante(long id, String descripcion, int nivel, String nombre) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -51,11 +51,11 @@ public class ActividadesPuestoVacante implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

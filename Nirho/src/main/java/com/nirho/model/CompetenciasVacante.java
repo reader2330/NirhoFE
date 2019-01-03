@@ -42,19 +42,17 @@ public class CompetenciasVacante implements Serializable {
 	public CompetenciasVacante() {
 		super();
 	}
-	public CompetenciasVacante(Long id, String descripcion, int nivel, int tipo) {
+	public CompetenciasVacante(long id, String descripcion, int nivel, int tipo) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.nivel = nivel;
 		this.tipo = tipo;
 	}
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}

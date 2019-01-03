@@ -32,10 +32,10 @@ public class Candidato implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private long id;
     
     @Column(name = "idSolicitate")
-    private Long idSolicitante;
+    private long idSolicitante;
     
     @Column(name = "rfc")
     private String rfc;
@@ -96,11 +96,11 @@ public class Candidato implements Serializable {
     public Candidato() {
     }
 
-    public Candidato(Long id) {
+    public Candidato(long id) {
         this.id = id;
     }
 
-	public Candidato(Long id, Long idSolicitante, String rfc, String nombre, String username, String password,
+	public Candidato(long id, long idSolicitante, String rfc, String nombre, String username, String password,
 			String nacionalidad, String nacimiento, String perfil, String situacion, String pretencion,
 			String direccion, long estado, String rol, CaracteristicasCandidatoCv caracteristicasCandidatoCv,
 			Set<ContactoCandidato> contactos, Set<IdiomaCandidato> idiomas, Set<ConocimientoCandidato> conocimentos) {
@@ -125,19 +125,19 @@ public class Candidato implements Serializable {
 		this.conocimentos = conocimentos;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public Long getIdSolicitante() {
+	public long getIdSolicitante() {
 		return idSolicitante;
 	}
 
-	public void setIdSolicitante(Long idSolicitante) {
+	public void setIdSolicitante(long idSolicitante) {
 		this.idSolicitante = idSolicitante;
 	}
 

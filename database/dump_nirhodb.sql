@@ -332,10 +332,8 @@ DROP TABLE IF EXISTS `conocimiento_candidato`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `conocimiento_candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `descripcion_conocimiento` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `nivel` int(11) NOT NULL,
-  `nombre_conocimiento` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `descripcion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `nivel` int(11) NOT NULL,
   `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `tipo` int(11) NOT NULL,
   `candidato` bigint(20) DEFAULT NULL,
@@ -1277,6 +1275,7 @@ DROP TABLE IF EXISTS `idioma_candidato`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `idioma_candidato` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `habilidad` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nivel` int(11) NOT NULL,
   `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `candidato` bigint(20) DEFAULT NULL,
@@ -1303,15 +1302,10 @@ DROP TABLE IF EXISTS `idioma_vacante`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `idioma_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `desc_idioma` varchar(400) NOT NULL,
-  `id_idioma` int(11) NOT NULL,
   `nivel` int(11) NOT NULL,
-  `id_vacante` bigint(20) DEFAULT NULL,
-  `nombre` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK4a3d0c4fj1ax7hwkob9wmjsj4` (`id_vacante`),
-  CONSTRAINT `FK4a3d0c4fj1ax7hwkob9wmjsj4` FOREIGN KEY (`id_vacante`) REFERENCES `vacante` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1320,7 +1314,6 @@ CREATE TABLE `idioma_vacante` (
 
 LOCK TABLES `idioma_vacante` WRITE;
 /*!40000 ALTER TABLE `idioma_vacante` DISABLE KEYS */;
-INSERT INTO `idioma_vacante` VALUES (1,'Traducción',19,25,1,''),(2,'Hablado, CON POSIBILIDAD DE CONVERSACIÓN CON UN CTE EXTRANJERO',19,23,2,'');
 /*!40000 ALTER TABLE `idioma_vacante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2471,4 +2464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-01 23:55:25
+-- Dump completed on 2019-01-02 22:49:28

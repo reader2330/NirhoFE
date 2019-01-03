@@ -21,6 +21,7 @@ public class CandidatoServiceImpl implements CandidatoService {
 	
 	public void save(Candidato entidad) throws NirhoServiceException{
 		try {
+			
 			Candidato s = candidatoDAO.getOne(entidad.getId());
 			if(s == null) {
 				candidatoDAO.save(entidad);

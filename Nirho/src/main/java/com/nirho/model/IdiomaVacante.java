@@ -30,7 +30,7 @@ public class IdiomaVacante implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private long id;
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
@@ -41,22 +41,22 @@ public class IdiomaVacante implements Serializable {
     public IdiomaVacante() {
     }
 
-    public IdiomaVacante(Long id) {
+    public IdiomaVacante(long id) {
         this.id = id;
     }
 
-	public IdiomaVacante(Long id, String nombre, int nivel) {
+	public IdiomaVacante(long id, String nombre, int nivel) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.nivel = nivel;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
