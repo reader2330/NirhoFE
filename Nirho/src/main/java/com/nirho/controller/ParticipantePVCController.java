@@ -415,8 +415,8 @@ public class ParticipantePVCController {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reportePVC.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reportePVC.docx"));
 
 	        ParticipantePVC participante = participantePVCService.getOne(idParticipante);
 
@@ -424,7 +424,7 @@ public class ParticipantePVCController {
 	        if(informacionGeneral != null){
 	            XWPFTableRow row0 = informacionGeneral.getRow(0);
 	            row0.getCell(1).setText(participante.getNombres() + " " + participante.getaPaterno() + " " + participante.getaMaterno());
-	            row0.getCell(3).setText(new SimpleDateFormat("yyyy-MM-dd").format(participante.getFechaIngreso()));
+	            row0.getCell(3).setText(new SimpleDateFormat("yy-MM-dd").format(participante.getFechaIngreso()));
 	            XWPFTableRow row1 = informacionGeneral.getRow(1);
 	            row1.getCell(1).setText(participante.getPuesto());
 	            row1.getCell(3).setText(participante.getAntigPuesto() + "");
@@ -473,7 +473,7 @@ public class ParticipantePVCController {
 				boolean auxBreak = false;
 				boolean conocimientoSiguiente = false;
 				
-				List<ProyectoPVCArea> areas = proyectoPVCAreaService.getByProyecto(participante.getIdParticipante());
+				List<ProyectoPVCArea> areas = proyectoPVCAreaService.getByProyecto(participante.getIdProyecto());
 				for(ProyectoPVCArea area: areas) {
 					if(area.getNombre().equals(participante.getArea())) {
 						for(ProyectoPVCEsfera esfera: area.getEsferas()) {
