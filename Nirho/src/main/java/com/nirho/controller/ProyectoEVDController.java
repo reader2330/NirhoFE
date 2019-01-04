@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
+import com.nirho.constant.ReporteConstants;
 import com.nirho.dto.AcumDTO;
 import com.nirho.dto.AreaPromDTO;
 import com.nirho.dto.GraficaAreaOrgDTO;
@@ -248,7 +249,8 @@ public class ProyectoEVDController {
 	        	List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
 	        	for (GraficaResultadoDTO resul : graficaResultadoList) {
 	        		int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
-							resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
+							resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5)
+	        				/(resul.getNumResp1() + resul.getNumResp2() + resul.getNumResp3() + resul.getNumResp4() + resul.getNumResp5());
 	        		if(respuesta != 0) {
 	        			if(areasMap.get(gaDTO.getAreaOrg())!=null){
 		        			areasMap.get(gaDTO.getAreaOrg()).setCont(areasMap.get(gaDTO.getAreaOrg()).getCont()+1);
@@ -323,7 +325,8 @@ public class ProyectoEVDController {
 	            	
 					for (GraficaResultadoDTO resul: graficaResultadoList) {				
 						int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
-								resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
+								resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5)
+								/(resul.getNumResp1() + resul.getNumResp2() + resul.getNumResp3() + resul.getNumResp4() + resul.getNumResp5());
 						if(respuesta != 0) {
 							if (primerRow) {
 								row = x1.getRow(1);
@@ -603,13 +606,13 @@ public class ProyectoEVDController {
 	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
 	        	int promedio = (respJefe + respRH)/2;
 	        	if(promedio > 0 && promedio<3) {
-	        		factoresMejora = factoresMejora + (factoresMejora.length() != 0?"                              ":"") 
+	        		factoresMejora = factoresMejora + (factoresMejora.length() != 0?ReporteConstants.BLANK_SPACES:"") 
 	        				+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio == 3) {
-	        		factoresSufis = factoresSufis + (factoresSufis.length() != 0?"                              ":"") 
+	        		factoresSufis = factoresSufis + (factoresSufis.length() != 0?ReporteConstants.BLANK_SPACES:"") 
 	        				+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
-	        		factoresSobresa = factoresSobresa + (factoresSobresa.length() != 0?"                              ":"") 
+	        		factoresSobresa = factoresSobresa + (factoresSobresa.length() != 0?ReporteConstants.BLANK_SPACES:"") 
 	        				+ cp.getPregunta().getEnunciado();
 	        	}
 	        }
@@ -624,13 +627,13 @@ public class ProyectoEVDController {
 	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
 	        	int promedio = (respJefe + respRH)/2;
 	        	if(promedio > 0 && promedio<3) {
-	        		competenciasMejora = competenciasMejora + (competenciasMejora.length() != 0?"                              ":"") 
+	        		competenciasMejora = competenciasMejora + (competenciasMejora.length() != 0?ReporteConstants.BLANK_SPACES:"") 
 	        								+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio == 3) {
-	        		competenciasSufis = competenciasSufis + (competenciasSufis.length() != 0?"                              ":"") 
+	        		competenciasSufis = competenciasSufis + (competenciasSufis.length() != 0?ReporteConstants.BLANK_SPACES:"") 
 	        								+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
-	        		competenciasSobresa = competenciasSobresa + (competenciasSobresa.length() != 0?"                              ":"") 
+	        		competenciasSobresa = competenciasSobresa + (competenciasSobresa.length() != 0?ReporteConstants.BLANK_SPACES:"") 
 	        								+ cp.getPregunta().getEnunciado();
 	        	}
 	        }
