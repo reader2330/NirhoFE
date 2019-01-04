@@ -424,7 +424,7 @@ public class ParticipantePVCController {
 	        if(informacionGeneral != null){
 	            XWPFTableRow row0 = informacionGeneral.getRow(0);
 	            row0.getCell(1).setText(participante.getNombres() + " " + participante.getaPaterno() + " " + participante.getaMaterno());
-	            row0.getCell(3).setText(participante.getFechaIngreso().toString());
+	            row0.getCell(3).setText(new SimpleDateFormat("yyyy-MM-dd").format(participante.getFechaIngreso()));
 	            XWPFTableRow row1 = informacionGeneral.getRow(1);
 	            row1.getCell(1).setText(participante.getPuesto());
 	            row1.getCell(3).setText(participante.getAntigPuesto() + "");
