@@ -305,9 +305,12 @@ public class ProyectoEVO360Controller {
 	        for (GraficaAreaOrgDTO gaDTO : resArea) {
 	        	List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
 	        	for (GraficaResultadoDTO resul : graficaResultadoList) {
-	        		int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
-							resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5)
-	        				/(resul.getNumResp1() + resul.getNumResp2() + resul.getNumResp3() + resul.getNumResp4() + resul.getNumResp5());
+	        		int suma = (resul.getNumResp1() + resul.getNumResp2() + resul.getNumResp3() + resul.getNumResp4() + resul.getNumResp5());
+					int respuesta = 0;
+					if(suma != 0) {
+						respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
+								resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5)/suma;
+					}
 	        		if(respuesta != 0) {
 	        			if(areasMap.get(gaDTO.getAreaOrg())!=null){
 		        			areasMap.get(gaDTO.getAreaOrg()).setCont(areasMap.get(gaDTO.getAreaOrg()).getCont()+1);
@@ -381,9 +384,12 @@ public class ProyectoEVO360Controller {
 	            	List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
 	            	
 					for (GraficaResultadoDTO resul: graficaResultadoList) {
-						int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
-								resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5)
-								/(resul.getNumResp1() + resul.getNumResp2() + resul.getNumResp3() + resul.getNumResp4() + resul.getNumResp5());
+						int suma = (resul.getNumResp1() + resul.getNumResp2() + resul.getNumResp3() + resul.getNumResp4() + resul.getNumResp5());
+						int respuesta = 0;
+						if(suma != 0) {
+							respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
+									resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5)/suma;
+						}
 						if(respuesta != 0) {
 							
 							if (primerRow) {
