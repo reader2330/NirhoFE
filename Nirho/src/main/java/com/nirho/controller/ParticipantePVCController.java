@@ -415,8 +415,8 @@ public class ParticipantePVCController {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reportePVC.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reportePVC.docx"));
 
 	        ParticipantePVC participante = participantePVCService.getOne(idParticipante);
 
