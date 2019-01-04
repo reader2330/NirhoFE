@@ -33,6 +33,9 @@ public class ProyectoPVCConocimiento implements Serializable {
     
     @Column(name = "tipo")
     private int tipo;
+    
+    @Column(name = "calificacion")
+    private int calificacion;
 
 	public ProyectoPVCConocimiento() {
 		super();
@@ -67,6 +70,14 @@ public class ProyectoPVCConocimiento implements Serializable {
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
+	}
+
+	public int getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(int calificacion) {
+		this.calificacion = calificacion;
 	}
 
 	@Override

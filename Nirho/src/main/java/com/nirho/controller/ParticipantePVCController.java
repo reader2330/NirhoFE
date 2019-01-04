@@ -197,14 +197,20 @@ public class ParticipantePVCController {
 										nivelesDTO.add(new ProyectoPVCNivelDTO(nivel.getId(), nivel.getNombre(), nivel.isStatus(), nivel.getEspecialidades()));
 									}
 									Collections.sort(nivelesDTO);
+									
+
 									for(ProyectoPVCNivelDTO nivel: nivelesDTO) {
+										
 										if(nivel.getNombre().equals(participante.getNivelP()) || conocimientoSiguiente) {
-											if(conocimientoSiguiente) {
-												actual.accumulate("nivelSiguiente", nivel.getNombre());
-												actual.accumulate("esferaSiguiente", esfera.getNombre());
-											}
+											
 											for(ProyectoPVCEspecialidad especialidad: nivel.getEspecialidades()) {
 												if(especialidad.getNombre().equals(participante.getEspecialidad())) {
+													
+													if(conocimientoSiguiente) {
+														actual.accumulate("nivelSiguiente", nivel.getNombre());
+														actual.accumulate("esferaSiguiente", esfera.getNombre());
+														auxBreak = true;
+													}
 													
 													for(ProyectoPVCConocimiento conocimiento: especialidad.getConocimientos()) {
 														if(conocimientoSiguiente) {
@@ -214,7 +220,6 @@ public class ParticipantePVCController {
 															if(conocimiento.getTipo() == 2) {
 																conocimientosHumanosSiguientes.put(conocimiento.getNombre());
 															}
-															auxBreak = true;
 														} else {
 															if(conocimiento.getTipo() == 1 ) {
 																conocimientosTecnicos.put(conocimiento.getNombre());
@@ -228,12 +233,16 @@ public class ParticipantePVCController {
 													conocimientoSiguiente = true;
 													break;
 												}
+												
 												if(auxBreak) break;
-												if(conocimientoSiguiente) break;
 											}
+																				
+											
 										}
 										if(auxBreak) break;
 									}
+									
+
 								}
 								if(auxBreak) break;
 							}
@@ -448,7 +457,7 @@ public class ParticipantePVCController {
 				boolean auxBreak = false;
 				boolean conocimientoSiguiente = false;
 				
-				List<ProyectoPVCArea> areas = proyectoPVCAreaService.getByProyecto(participante.getIdProyecto());
+				List<ProyectoPVCArea> areas = proyectoPVCAreaService.getByProyecto(participante.getIdParticipante());
 				for(ProyectoPVCArea area: areas) {
 					if(area.getNombre().equals(participante.getArea())) {
 						for(ProyectoPVCEsfera esfera: area.getEsferas()) {
@@ -458,10 +467,17 @@ public class ParticipantePVCController {
 									nivelesDTO.add(new ProyectoPVCNivelDTO(nivel.getId(), nivel.getNombre(), nivel.isStatus(), nivel.getEspecialidades()));
 								}
 								Collections.sort(nivelesDTO);
+								
 								for(ProyectoPVCNivelDTO nivel: nivelesDTO) {
+									
 									if(nivel.getNombre().equals(participante.getNivelP()) || conocimientoSiguiente) {
+										
 										for(ProyectoPVCEspecialidad especialidad: nivel.getEspecialidades()) {
 											if(especialidad.getNombre().equals(participante.getEspecialidad())) {
+												
+												if(conocimientoSiguiente) {
+													auxBreak = true;
+												}
 												
 												for(ProyectoPVCConocimiento conocimiento: especialidad.getConocimientos()) {
 													if(conocimientoSiguiente) {
@@ -471,7 +487,6 @@ public class ParticipantePVCController {
 														if(conocimiento.getTipo() == 2) {
 															conocimientosHumanosSiguientes.put(conocimiento.getNombre());
 														}
-														auxBreak = true;
 													} else {
 														if(conocimiento.getTipo() == 1 ) {
 															conocimientosTecnicos.put(conocimiento.getNombre());
@@ -485,12 +500,16 @@ public class ParticipantePVCController {
 												conocimientoSiguiente = true;
 												break;
 											}
+											
 											if(auxBreak) break;
-											if(conocimientoSiguiente) break;
 										}
+																			
+										
 									}
 									if(auxBreak) break;
 								}
+								
+
 							}
 							if(auxBreak) break;
 						}

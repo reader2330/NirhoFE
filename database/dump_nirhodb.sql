@@ -1895,6 +1895,7 @@ CREATE TABLE `proyecto_pvc_conocimiento` (
   `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tipo` int(11) DEFAULT NULL,
   `especialidad` int(11) DEFAULT NULL,
+  `calificacion` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKbxgmbp8b1n8mbf6t0r3v77hsh` (`especialidad`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -2464,4 +2465,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-02 22:49:28
+-- Dump completed on 2019-01-03 21:01:25
