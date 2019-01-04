@@ -269,8 +269,7 @@ public class CandidatoController {
 			throw new NirhoControllerException("Problemas al registrar entidad");
 		} 
 	}
-	
-	
+		
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
 	public Candidato login(@RequestBody Candidato c, HttpServletRequest request) throws NirhoControllerException {
 		try {

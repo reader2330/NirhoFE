@@ -327,7 +327,7 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 			}
 			String[] datos = token.split("-");
 			for(CuestPartEvaluadosEVD evd: cuestPartEval) {
-				if(datos[1].equals(NirhoUtil.AUTO_EVAL)) {
+				if(datos[1].equals(NirhoUtil.AUTO_EVAL)) { 
 					evd.setAutoEval("true");
 				} else {
 					evd.setAutoEval("false");

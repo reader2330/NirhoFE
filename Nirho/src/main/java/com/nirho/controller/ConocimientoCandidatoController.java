@@ -18,8 +18,6 @@ import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConocimientoCandidato;
 import com.nirho.service.ConocimientoCandidatoService;
 
-
-
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping( value = "/conocimientoCandidato" )
