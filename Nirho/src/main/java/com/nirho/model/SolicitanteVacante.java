@@ -49,6 +49,10 @@ public class SolicitanteVacante implements Serializable {
     private int motivo;
     
     @Basic(optional = false)
+    @Column(name = "status")
+    private int status;
+    
+    @Basic(optional = false)
     @Column(name = "nombre_vacante")
     private String nombreVacante;
     
@@ -138,7 +142,15 @@ public class SolicitanteVacante implements Serializable {
         this.motivo = motivo;
     }
 
-    public String getNombreVacante() {
+    public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getNombreVacante() {
         return nombreVacante;
     }
 

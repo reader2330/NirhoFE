@@ -62,6 +62,7 @@ import com.nirho.model.Solicitante;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.model.Usuario;
 import com.nirho.service.CandidatoService;
+import com.nirho.service.SolicitanteVacanteService;
 import com.nirho.util.ReporteUtil;
 import com.nirho.util.SessionUtil;
 
@@ -76,12 +77,27 @@ public class CandidatoController {
 	 
 	@Autowired
 	CandidatoService candidatoService;
+	@Autowired
+	SolicitanteVacanteService solicitanteVacanteService;
 	
 	@GetMapping(value = "/todos")
 	public List<Candidato> todos() throws NirhoControllerException{
 		try {
 			return candidatoService.getAll();
 		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los candidatos");
+		}
+	}
+	
+	@GetMapping(value = "/conteo")
+	public String count() throws NirhoControllerException{
+		try {
+			JSONObject response = new JSONObject();
+			response.accumulate("total", candidatoService.getAll().size());
+			return response.toString();
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los candidatos");
+		} catch (JSONException e) {
 			throw new NirhoControllerException("Problemas al obtener el registro de los candidatos");
 		}
 	}
@@ -127,6 +143,37 @@ public class CandidatoController {
 		} 
 	}
 	
+	@RequestMapping(value = "/{id}/vacante/guardar", method = RequestMethod.POST)
+	public void saveVacante(@PathVariable("id") long id, @Valid @RequestBody SolicitanteVacante l) throws NirhoControllerException{
+		try {
+			Candidato s = candidatoService.getOne(id);
+			if(s != null) {
+				s.setIdVacante(l.getId());
+				candidatoService.save(s);
+				SolicitanteVacante v = solicitanteVacanteService.getOne(l.getId());
+				v.setStatus(2);
+				solicitanteVacanteService.editar(v);
+			}
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar solicitante");
+		} 
+	}
+	
+	@RequestMapping(value = "/{id}/vacante/{idVacante}/guardar", method = RequestMethod.POST)
+	public void saveVacante(@PathVariable("id") long id, @PathVariable("idVacante") long idVacante) throws NirhoControllerException{
+		try {
+			Candidato s = candidatoService.getOne(id);
+			if(s != null) {
+				s.setIdVacante(idVacante);
+				candidatoService.save(s);
+				SolicitanteVacante v = solicitanteVacanteService.getOne(idVacante);
+				v.setStatus(2);
+				solicitanteVacanteService.editar(v);
+			}
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar solicitante");
+		} 
+	}
 	
 	@RequestMapping(value = "/{id}/idiomas/guardar", method = RequestMethod.POST)
 	public String addAct(@PathVariable("id") long id, @Valid @RequestBody IdiomaCandidato l) throws NirhoControllerException{

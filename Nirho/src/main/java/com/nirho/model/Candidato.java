@@ -37,6 +37,9 @@ public class Candidato implements Serializable {
     @Column(name = "idSolicitate")
     private long idSolicitante;
     
+    @Column(name = "idVacante")
+    private long idVacante;
+    
     @Column(name = "rfc")
     private String rfc;
     
@@ -139,6 +142,14 @@ public class Candidato implements Serializable {
 
 	public void setIdSolicitante(long idSolicitante) {
 		this.idSolicitante = idSolicitante;
+	}
+	
+	public long getIdVacante() {
+		return idVacante;
+	}
+
+	public void setIdVacante(long idVacante) {
+		this.idVacante = idVacante;
 	}
 
 	public String getRfc() {

@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.constant.ProyectoConstants;
+import com.nirho.constant.ReporteConstants;
 import com.nirho.dto.AcumDTO;
 import com.nirho.dto.AreaPromDTO;
 import com.nirho.dto.EvaluadorDTO;
@@ -304,8 +305,12 @@ public class ProyectoEVO360Controller {
 	        for (GraficaAreaOrgDTO gaDTO : resArea) {
 	        	List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
 	        	for (GraficaResultadoDTO resul : graficaResultadoList) {
-	        		int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
-							resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
+	        		int suma = (resul.getNumResp1() + resul.getNumResp2() + resul.getNumResp3() + resul.getNumResp4() + resul.getNumResp5());
+					int respuesta = 0;
+					if(suma != 0) {
+						respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
+								resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5)/suma;
+					}
 	        		if(respuesta != 0) {
 	        			if(areasMap.get(gaDTO.getAreaOrg())!=null){
 		        			areasMap.get(gaDTO.getAreaOrg()).setCont(areasMap.get(gaDTO.getAreaOrg()).getCont()+1);
@@ -379,8 +384,12 @@ public class ProyectoEVO360Controller {
 	            	List<GraficaResultadoDTO> graficaResultadoList = gaDTO.getResultados();
 	            	
 					for (GraficaResultadoDTO resul: graficaResultadoList) {
-						int respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
-								resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5);
+						int suma = (resul.getNumResp1() + resul.getNumResp2() + resul.getNumResp3() + resul.getNumResp4() + resul.getNumResp5());
+						int respuesta = 0;
+						if(suma != 0) {
+							respuesta = (resul.getNumResp1()*1 + resul.getNumResp2()*2 +
+									resul.getNumResp3()*3 + resul.getNumResp4()*4 + resul.getNumResp5()*5)/suma;
+						}
 						if(respuesta != 0) {
 							
 							if (primerRow) {
@@ -556,7 +565,7 @@ public class ProyectoEVO360Controller {
 	        	throw new NirhoControllerException("************ ¡¡¡¡¡¡¡¡¡ sin registros para graficar !!!!!!!!!! *************");
 	        }
 	        
-	        promedioGeneral = Math.round(promedioGeneral/cuestPartList.size());
+	        promedioGeneral = Math.round(promedioGeneral/conta);
 	        logger.info("********************************* promedioGeneral [" + promedioGeneral + "] *********************************");
 	        logger.info("********************************* num categorias [" + cuestPartList.size() + "] *********************************");
 	        	        	        
@@ -598,13 +607,13 @@ public class ProyectoEVO360Controller {
 	        	int respRH = cp.getRespuestaRh()!=null?cp.getRespuestaRh().intValue():0;
 	        	int promedio = (respJefe + respRH)/2;
 	        	if(promedio<3) {
-	        		categoriasMejora = categoriasMejora + (categoriasMejora.length() != 0?"                              ":"") 
+	        		categoriasMejora = categoriasMejora + (categoriasMejora.length() != 0?ReporteConstants.BLANK_SPACES:"") 
 	        								+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio == 3) {
-	        		categoriasSufis = categoriasSufis + (categoriasSufis.length() != 0?"                              ":"") 
+	        		categoriasSufis = categoriasSufis + (categoriasSufis.length() != 0?ReporteConstants.BLANK_SPACES:"") 
 	        								+ cp.getPregunta().getEnunciado();
 	        	} else if(promedio>3) {
-	        		categoriasSobresa = categoriasSobresa + (categoriasSobresa.length() != 0?"                              ":"") 
+	        		categoriasSobresa = categoriasSobresa + (categoriasSobresa.length() != 0?ReporteConstants.BLANK_SPACES:"") 
 	        								+ cp.getPregunta().getEnunciado();
 	        	}
 	        }
@@ -634,6 +643,7 @@ public class ProyectoEVO360Controller {
 	    	            	row.createCell(0).setCellValue(key);
 	    	            	row.createCell(1).setCellValue(datos.get(key));
 		 	            	row.createCell(2).setCellValue(promedioGeneral);
+		 	            	row.createCell(3).setCellValue(dispersionMock(datos.get(key)));
 		 	            	i++;
 		 	             }
 	                }
@@ -646,6 +656,7 @@ public class ProyectoEVO360Controller {
 		 	            	Row row = dataSheet2.createRow(i);
 	    	            	row.createCell(0).setCellValue(key);
 	    	            	row.createCell(1).setCellValue(datos.get(key));
+	    	            	row.createCell(3).setCellValue(dispersionMock(datos.get(key)));
 		 	            	i++;
 		 	             }
 	                }
@@ -668,4 +679,18 @@ public class ProyectoEVO360Controller {
 		}
 	}
 	
+	protected Integer dispersionMock(Integer data) {
+		if(data==null) {
+			return 0;
+		}
+		switch(data) {
+			case 0: return 0;
+			case 1: return 2;
+			case 2: return 1;
+			case 3: return 4;
+			case 4: return 5;
+			case 5: return 4;
+			default: return 3;
+		}
+	}
 }

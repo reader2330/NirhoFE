@@ -197,30 +197,51 @@ public class ParticipantePVCController {
 										nivelesDTO.add(new ProyectoPVCNivelDTO(nivel.getId(), nivel.getNombre(), nivel.isStatus(), nivel.getEspecialidades()));
 									}
 									Collections.sort(nivelesDTO);
+									
+
 									for(ProyectoPVCNivelDTO nivel: nivelesDTO) {
+										
 										if(nivel.getNombre().equals(participante.getNivelP()) || conocimientoSiguiente) {
-											if(conocimientoSiguiente) {
-												actual.accumulate("nivelSiguiente", nivel.getNombre());
-												actual.accumulate("esferaSiguiente", esfera.getNombre());
-											}
+											
 											for(ProyectoPVCEspecialidad especialidad: nivel.getEspecialidades()) {
 												if(especialidad.getNombre().equals(participante.getEspecialidad())) {
+													
+													if(conocimientoSiguiente) {
+														actual.accumulate("nivelSiguiente", nivel.getNombre());
+														actual.accumulate("esferaSiguiente", esfera.getNombre());
+														auxBreak = true;
+													}
 													
 													for(ProyectoPVCConocimiento conocimiento: especialidad.getConocimientos()) {
 														if(conocimientoSiguiente) {
 															if(conocimiento.getTipo() == 1 ) {
-																conocimientosTecnicosSiguientes.put(conocimiento.getNombre());
+																JSONObject c = new JSONObject();
+																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("calificacion", conocimiento.getCalificacion());
+																c.accumulate("id", conocimiento.getId());
+																conocimientosTecnicosSiguientes.put(c);
 															}
 															if(conocimiento.getTipo() == 2) {
-																conocimientosHumanosSiguientes.put(conocimiento.getNombre());
+																JSONObject c = new JSONObject();
+																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("calificacion", conocimiento.getCalificacion());
+																c.accumulate("id", conocimiento.getId());
+																conocimientosHumanosSiguientes.put(c);
 															}
-															auxBreak = true;
 														} else {
 															if(conocimiento.getTipo() == 1 ) {
-																conocimientosTecnicos.put(conocimiento.getNombre());
+																JSONObject c = new JSONObject();
+																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("calificacion", conocimiento.getCalificacion());
+																c.accumulate("id", conocimiento.getId());
+																conocimientosTecnicos.put(c);
 															}
 															if(conocimiento.getTipo() == 2) {
-																conocimientosHumanos.put(conocimiento.getNombre());
+																JSONObject c = new JSONObject();
+																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("calificacion", conocimiento.getCalificacion());
+																c.accumulate("id", conocimiento.getId());
+																conocimientosHumanos.put(c);
 															}
 														}
 													}
@@ -228,12 +249,16 @@ public class ParticipantePVCController {
 													conocimientoSiguiente = true;
 													break;
 												}
+												
 												if(auxBreak) break;
-												if(conocimientoSiguiente) break;
 											}
+																				
+											
 										}
 										if(auxBreak) break;
 									}
+									
+
 								}
 								if(auxBreak) break;
 							}
@@ -391,7 +416,7 @@ public class ParticipantePVCController {
 			ZipSecureFile.setMinInflateRatio(0);
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
 			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reportePVC.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reportePVC.docx"));
 
 	        ParticipantePVC participante = participantePVCService.getOne(idParticipante);
 
@@ -399,7 +424,7 @@ public class ParticipantePVCController {
 	        if(informacionGeneral != null){
 	            XWPFTableRow row0 = informacionGeneral.getRow(0);
 	            row0.getCell(1).setText(participante.getNombres() + " " + participante.getaPaterno() + " " + participante.getaMaterno());
-	            row0.getCell(3).setText(participante.getFechaIngreso().toString());
+	            row0.getCell(3).setText(new SimpleDateFormat("yy-MM-dd").format(participante.getFechaIngreso()));
 	            XWPFTableRow row1 = informacionGeneral.getRow(1);
 	            row1.getCell(1).setText(participante.getPuesto());
 	            row1.getCell(3).setText(participante.getAntigPuesto() + "");
@@ -458,10 +483,17 @@ public class ParticipantePVCController {
 									nivelesDTO.add(new ProyectoPVCNivelDTO(nivel.getId(), nivel.getNombre(), nivel.isStatus(), nivel.getEspecialidades()));
 								}
 								Collections.sort(nivelesDTO);
+								
 								for(ProyectoPVCNivelDTO nivel: nivelesDTO) {
+									
 									if(nivel.getNombre().equals(participante.getNivelP()) || conocimientoSiguiente) {
+										
 										for(ProyectoPVCEspecialidad especialidad: nivel.getEspecialidades()) {
 											if(especialidad.getNombre().equals(participante.getEspecialidad())) {
+												
+												if(conocimientoSiguiente) {
+													auxBreak = true;
+												}
 												
 												for(ProyectoPVCConocimiento conocimiento: especialidad.getConocimientos()) {
 													if(conocimientoSiguiente) {
@@ -471,7 +503,6 @@ public class ParticipantePVCController {
 														if(conocimiento.getTipo() == 2) {
 															conocimientosHumanosSiguientes.put(conocimiento.getNombre());
 														}
-														auxBreak = true;
 													} else {
 														if(conocimiento.getTipo() == 1 ) {
 															conocimientosTecnicos.put(conocimiento.getNombre());
@@ -485,12 +516,16 @@ public class ParticipantePVCController {
 												conocimientoSiguiente = true;
 												break;
 											}
+											
 											if(auxBreak) break;
-											if(conocimientoSiguiente) break;
 										}
+																			
+										
 									}
 									if(auxBreak) break;
 								}
+								
+
 							}
 							if(auxBreak) break;
 						}
