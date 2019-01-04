@@ -643,6 +643,7 @@ public class ProyectoEVO360Controller {
 	    	            	row.createCell(0).setCellValue(key);
 	    	            	row.createCell(1).setCellValue(datos.get(key));
 		 	            	row.createCell(2).setCellValue(promedioGeneral);
+		 	            	row.createCell(3).setCellValue(dispersionMock(datos.get(key)));
 		 	            	i++;
 		 	             }
 	                }
@@ -655,6 +656,7 @@ public class ProyectoEVO360Controller {
 		 	            	Row row = dataSheet2.createRow(i);
 	    	            	row.createCell(0).setCellValue(key);
 	    	            	row.createCell(1).setCellValue(datos.get(key));
+	    	            	row.createCell(3).setCellValue(dispersionMock(datos.get(key)));
 		 	            	i++;
 		 	             }
 	                }
@@ -677,4 +679,18 @@ public class ProyectoEVO360Controller {
 		}
 	}
 	
+	protected Integer dispersionMock(Integer data) {
+		if(data==null) {
+			return 0;
+		}
+		switch(data) {
+			case 0: return 0;
+			case 1: return 2;
+			case 2: return 1;
+			case 3: return 4;
+			case 4: return 5;
+			case 5: return 4;
+			default: return 3;
+		}
+	}
 }
