@@ -4,6 +4,7 @@ import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ParticipantePK;
 
 public class NirhoUtil {
+	public static final String AUTO_EVAL = "autoeval";
 	public static String obtenerToken(int idParticipante, int idProyecto, String rfc) {
 		String sCadenaInvertida = "";
 		if(rfc == null || rfc.trim().isEmpty()) {

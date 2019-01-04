@@ -325,7 +325,13 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 				cuestPartEval[i] = dto;
 				logger.info("******************************** [" + dto +"]*******************************************");
 			}
+			String[] datos = token.split("-");
 			for(CuestPartEvaluadosEVD evd: cuestPartEval) {
+				if(datos[1].equals(NirhoUtil.AUTO_EVAL)) {
+					evd.setAutoEval("true");
+				} else {
+					evd.setAutoEval("false");
+				}
 				logger.info("evd [" + evd +"]");
 				cuestPartEvaluadosEVDList.add(evd);
 			}

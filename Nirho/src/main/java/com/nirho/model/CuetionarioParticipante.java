@@ -35,6 +35,8 @@ public class CuetionarioParticipante implements Serializable {
     private Integer respuestaRh;
     @Column(name = "respuesta_jefe")
     private Integer respuestaJefe;
+    @Column(name = "auto_eval")
+    private Integer autoEval;
     @JoinColumn
     @ManyToOne(optional = false)
     private Pregunta pregunta;
@@ -85,6 +87,14 @@ public class CuetionarioParticipante implements Serializable {
 		this.respuestaJefe = respuestaJefe;
 	}
 
+	public Integer getAutoEval() {
+		return autoEval;
+	}
+
+	public void setAutoEval(Integer autoEval) {
+		this.autoEval = autoEval;
+	}
+
 	public Pregunta getPregunta() {
         return pregunta;
     }
@@ -104,8 +114,8 @@ public class CuetionarioParticipante implements Serializable {
 	@Override
 	public String toString() {
 		return "CuetionarioParticipante [cuetionarioParticipantePK=" + cuetionarioParticipantePK + ", respuesta="
-				+ respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe + ", pregunta="
-				+ pregunta + ", tema=" + tema + "]";
+				+ respuesta + ", respuestaRh=" + respuestaRh + ", respuestaJefe=" + respuestaJefe + ", autoEval="
+				+ autoEval + ", pregunta=" + pregunta + ", tema=" + tema + "]";
 	}
-        
+	        
 }
