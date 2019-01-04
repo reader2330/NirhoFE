@@ -217,12 +217,14 @@ public class ParticipantePVCController {
 															if(conocimiento.getTipo() == 1 ) {
 																JSONObject c = new JSONObject();
 																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("calificacion", conocimiento.getCalificacion());
 																c.accumulate("id", conocimiento.getId());
 																conocimientosTecnicosSiguientes.put(c);
 															}
 															if(conocimiento.getTipo() == 2) {
 																JSONObject c = new JSONObject();
 																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("calificacion", conocimiento.getCalificacion());
 																c.accumulate("id", conocimiento.getId());
 																conocimientosHumanosSiguientes.put(c);
 															}
@@ -230,12 +232,14 @@ public class ParticipantePVCController {
 															if(conocimiento.getTipo() == 1 ) {
 																JSONObject c = new JSONObject();
 																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("calificacion", conocimiento.getCalificacion());
 																c.accumulate("id", conocimiento.getId());
 																conocimientosTecnicos.put(c);
 															}
 															if(conocimiento.getTipo() == 2) {
 																JSONObject c = new JSONObject();
 																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("calificacion", conocimiento.getCalificacion());
 																c.accumulate("id", conocimiento.getId());
 																conocimientosHumanos.put(c);
 															}
