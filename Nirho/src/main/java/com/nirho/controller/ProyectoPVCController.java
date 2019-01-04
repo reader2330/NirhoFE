@@ -442,6 +442,17 @@ public class ProyectoPVCController {
 		}
 	}
 	
+	@RequestMapping(value = "/especialidades/conocimientos/{id}/calificar/{calificacion}", method = RequestMethod.GET)
+	public void calificarConocimiento(@PathVariable("id") int id, @PathVariable("calificacion") int calificacion) throws NirhoControllerException{
+		try {
+			ProyectoPVCConocimiento conocimiento = proyectoPVCConocimientoService.getOne(id);
+			conocimiento.setCalificacion(calificacion);
+			proyectoPVCConocimientoService.guardar(conocimiento);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro");
+		}
+	}
+	
 	@RequestMapping(value = "/especialidades/conocimientos/guardar", method = RequestMethod.POST)
 	public void saveConocimiento(@Valid @RequestBody ProyectoPVCConocimiento f) throws NirhoControllerException{
 		try {
