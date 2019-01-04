@@ -107,6 +107,7 @@ public class SolicitanteController {
 		try {
 			Solicitante s = solicitanteService.getOne(id);
 			if(s != null) {
+				l.setStatus(1);
 				s.getVacantes().add(l);
 				solicitanteService.save(s);
 				JSONObject json = new JSONObject();

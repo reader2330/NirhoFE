@@ -122,6 +122,7 @@ CREATE TABLE `candidato` (
   `rol` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `situacion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_vacante` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2181,6 +2182,7 @@ CREATE TABLE `solicitante_vacante` (
   `puesto_cargo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `puesto_reporta` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `solicitante` bigint(20) DEFAULT NULL,
+  `status` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKh0ieosh7ayt3ua1ucp1ti6s3` (`solicitante`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -2465,4 +2467,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-03 21:01:25
+-- Dump completed on 2019-01-03 23:52:26

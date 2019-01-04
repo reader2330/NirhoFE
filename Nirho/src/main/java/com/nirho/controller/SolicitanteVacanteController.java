@@ -43,6 +43,43 @@ public class SolicitanteVacanteController {
 		}
 	}
 	
+	@GetMapping(value = "/conteo")
+	public String count() throws NirhoControllerException{
+		try {
+			JSONObject response = new JSONObject();
+			response.accumulate("total", solicitanteVacanteService.getAll().size());
+			return response.toString();
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los entidads");
+		} catch (JSONException e) {
+			throw new NirhoControllerException("Problemas al obtener el registro de los entidads");
+		}
+	}
+	
+	@GetMapping(value = "/totales")
+	public String totales() throws NirhoControllerException{
+		try {
+			JSONObject response = new JSONObject();
+			int abiertas = 0;
+			int asignadas = 0;
+			for(SolicitanteVacante v: solicitanteVacanteService.getAll()) {
+				if(v.getStatus() == 1) {
+					abiertas++;
+				}
+				if(v.getStatus() == 2) {
+					asignadas++;
+				}
+			}
+			response.accumulate("abiertas", abiertas);
+			response.accumulate("asignadas", asignadas);
+			return response.toString();
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los entidads");
+		} catch (JSONException e) {
+			throw new NirhoControllerException("Problemas al obtener el registro de los entidads");
+		}
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public SolicitanteVacante get(@PathVariable("id") long id) throws NirhoControllerException{
 		try {

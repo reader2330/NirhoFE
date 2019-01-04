@@ -142,7 +142,15 @@ public class SolicitanteVacante implements Serializable {
         this.motivo = motivo;
     }
 
-    public String getNombreVacante() {
+    public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getNombreVacante() {
         return nombreVacante;
     }
 
