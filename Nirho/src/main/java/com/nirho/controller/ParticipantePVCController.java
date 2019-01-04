@@ -215,17 +215,29 @@ public class ParticipantePVCController {
 													for(ProyectoPVCConocimiento conocimiento: especialidad.getConocimientos()) {
 														if(conocimientoSiguiente) {
 															if(conocimiento.getTipo() == 1 ) {
-																conocimientosTecnicosSiguientes.put(conocimiento.getNombre());
+																JSONObject c = new JSONObject();
+																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("id", conocimiento.getId());
+																conocimientosTecnicosSiguientes.put(c);
 															}
 															if(conocimiento.getTipo() == 2) {
-																conocimientosHumanosSiguientes.put(conocimiento.getNombre());
+																JSONObject c = new JSONObject();
+																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("id", conocimiento.getId());
+																conocimientosHumanosSiguientes.put(c);
 															}
 														} else {
 															if(conocimiento.getTipo() == 1 ) {
-																conocimientosTecnicos.put(conocimiento.getNombre());
+																JSONObject c = new JSONObject();
+																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("id", conocimiento.getId());
+																conocimientosTecnicos.put(c);
 															}
 															if(conocimiento.getTipo() == 2) {
-																conocimientosHumanos.put(conocimiento.getNombre());
+																JSONObject c = new JSONObject();
+																c.accumulate("nombre", conocimiento.getNombre());
+																c.accumulate("id", conocimiento.getId());
+																conocimientosHumanos.put(c);
 															}
 														}
 													}

@@ -49,6 +49,10 @@ public class SolicitanteVacante implements Serializable {
     private int motivo;
     
     @Basic(optional = false)
+    @Column(name = "status")
+    private int status;
+    
+    @Basic(optional = false)
     @Column(name = "nombre_vacante")
     private String nombreVacante;
     
