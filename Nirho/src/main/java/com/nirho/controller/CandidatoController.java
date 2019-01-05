@@ -123,6 +123,7 @@ public class CandidatoController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody Candidato candidato) throws NirhoControllerException{
 		try {
+      candidato.setRol("5");
 			candidatoService.save(candidato);
 			JSONObject json = new JSONObject();
 			json.accumulate("id", candidato.getId());
