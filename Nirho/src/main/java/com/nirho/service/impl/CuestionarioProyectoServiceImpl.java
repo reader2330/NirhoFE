@@ -356,7 +356,8 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 								participante.getParticipantePK().getIdProyecto());
 						for(CuetionarioParticipante cp: cuestPart) {
 							CuestionarioParticipanteEVD cuestPartEVD = new CuestionarioParticipanteEVD();
-							if(ee.getEvaluadorEvaluadoPK().getIdEvaluador() == cp.getCuetionarioParticipantePK().getIdParticipante()) { 
+							if(cp.getAutoEval() == null && 
+									(ee.getEvaluadorEvaluadoPK().getIdEvaluador() == cp.getCuetionarioParticipantePK().getIdParticipante())) { 
 								cp.setAutoEval(0);
 							} 
 							cuestPartEVD.setCuestionarioParticipante(cp);
