@@ -26,7 +26,7 @@ import com.nirho.service.SolicitanteService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping( value = "/caracteristicasCandidatoCv" )
+	@RequestMapping( value = "/caracteristicasCandidatoCv" )
 public class CaracteristicasCandidatoCvController {
 	
 	public final static Logger logger = Logger.getLogger(CaracteristicasCandidatoCvController.class);

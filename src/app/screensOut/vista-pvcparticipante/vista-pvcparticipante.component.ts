@@ -11,38 +11,21 @@ import {environment} from '../../../environments/environment';
 export class VistaPVCParticipanteComponent implements OnInit {
   token = '';
   urlMensagge = environment.urlNG + 'assets/Mensajes/APO-2.PNG';
-  participante = {
-    nombre: 'Nombre de prueba',
-    puestoActualTecnico: {
-      puesto: 'Desarrollador java JR',
-      area: 'Desarrollo',
-      esfera: 'Desarrollo en Backend',
-      nivel: 'JR',
-      especialidad: 'Java',
-      conocimientos: [
-        'Relación de base de datos',
-        'Rest FULL API',
-        'Cambio en los backs',
-        'DAO y DTO'
-      ]
+  participante = {};
+  options = [
+    {
+      key: 1,
+      name: 'No apto'
     },
-    puestoSiguienteTecnico: {
-      puesto: 'Desarrollador java MD',
-      area: 'Desarrollo',
-      esfera: 'Desarrollo en Backend',
-      nivel: 'MD',
-      especialidad: 'Java',
-      conocimientos: [
-        'Relación de base de datos',
-        'Rest FULL API',
-        'Cambio en los backs',
-        'DAO y DTO',
-        'Cambio en redes',
-        'cambio en todos las apps',
-        'cambio de pruebas negras'
-      ]
+    {
+      key: 2,
+      name: 'En desarrollo'
+    },
+    {
+      key: 3,
+      name: 'Apto'
     }
-  };
+  ];
   constructor(private ProyectServices: ProyectoPVCService,  private route: ActivatedRoute) { }
   ngOnInit() {
     this.getToken();
@@ -56,6 +39,12 @@ export class VistaPVCParticipanteComponent implements OnInit {
         this.participante = res2;
         console.log(JSON.stringify(this.participante))
       });
+    });
+  }
+
+  guardarCalificacion(element) {
+    this.ProyectServices.CalificarConocimiento(element.id, element.calificacion).subscribe(res => {
+      console.log(res);
     });
   }
 

@@ -59,9 +59,49 @@ export class ReclutamientoService {
     return this.http.post(this.api + 'candidato/guardar', data, {headers: this.headers});
   }
   saveContactoCandidato(id , data): Observable<any> {
-    return this.http.post(this.api + 'candidato/' + id + '/contactos/guardar', data, {headers: this.headers})
+    return this.http.post(this.api + 'candidato/' + id + '/contactos/guardar', data, {headers: this.headers});
   }
   deleteContacto(id): Observable<any> {
-    return this.http.post(this.api + 'contactoCandidato/eliminar', id, {headers: this.headers})
+    return this.http.post(this.api + 'contactoCandidato/eliminar', id, {headers: this.headers});
   }
+  saveIdioma(id, data): Observable<any> {
+    return this.http.post(this.api + 'candidato/' + id + '/idiomas/guardar', data, {headers: this.headers});
+  }
+  deleteIdioma(id): Observable<any> {
+    return this.http.post(this.api + 'idiomaCandidato/eliminar', id, {headers: this.headers});
+  }
+  savePuestos(id, data) {
+    return this.http.post(this.api + 'candidato/' + id + '/puestos/guardar', data, {headers: this.headers});
+  }
+  deletePuesto(id): Observable<any> {
+    return this.http.post(this.api + 'experienciaCandidato/eliminar', id, {headers: this.headers});
+  }
+  getCandidatoRFC(rfc): Observable<any> {
+    return this.http.get(this.api + 'candidato/porRFC', {headers: this.headers, params: {'rfc': rfc}});
+  }
+  saveCaractesristicasCandidato(id,data): Observable<any> {
+    return this.http.post(this.api + 'candidato/' + id + '/caracteristicas/guardar', data, { headers: this.headers});
+  }
+  saveConocimientoCandidato(id, data): Observable<any> {
+    return this.http.post(this.api + 'candidato/' + id + '/conocimientos/guardar', data, {headers: this.headers});
+  }
+  deleteConocimientoCandidato(id): Observable<any> {
+    return this.http.post(this.api + 'conocimientoCandidato/eliminar', id, {headers: this.headers});
+  }
+  sendLogin(data): Observable<any> {
+    return this.http.post(this.api + 'candidato/login', data, {headers: this.headers});
+  }
+  getCandidatosTotales(): Observable<any> {
+    return this.http.get(this.api + 'candidato/conteo', {headers: this.headers});
+  }
+  getVacantesTotales(): Observable<any> {
+    return this.http.get(this.api + 'vacante/conteo', {headers: this.headers});
+  }
+  getVacanteTipo(): Observable<any> {
+    return this.http.get(this.api + 'vacante/totales', {headers: this.headers});
+  }
+  setVacante(idCand, id): Observable<any> {
+    return this.http.post(this.api + 'candidato/' + idCand + '/vacante/' + id + '/guardar', {}, {headers: this.headers});
+  }
+
 }

@@ -44,6 +44,12 @@ export class GeneralService {
   generarReporteParticipantePVC(id) {
     window.open(this.api + 'participantesPVC' +  '/reporte/participante' + '?idParticipante=' + id);
   }
+  getCandidatos(): Observable<any>{
+    return this.http.get(this.api + 'candidato/todos', {headers:this.headers});
+  }
+  generarReporteCandidato(id) {
+    window.open(this.api + 'candidato' +  '/reporte/participante' + '?idCandidato=' + id);
+  }
 
 
 

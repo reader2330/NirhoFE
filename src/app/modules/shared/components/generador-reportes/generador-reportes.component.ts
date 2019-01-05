@@ -14,12 +14,14 @@ export class GeneradorReportesComponent implements OnInit {
   participantes = [];
   empresas = [];
   empresa = {};
+  proyectsNull = false;
   constructor(private GeneralServices: GeneralService) { }
 
   ngOnInit() {
     if (sessionStorage.getItem('moduleActive')) {
       this.moduleSelect = sessionStorage.getItem('moduleActive');
     }
+
     this.distribuitorModules();
   }
 
@@ -27,11 +29,20 @@ export class GeneradorReportesComponent implements OnInit {
     if (this.moduleSelect === 'IRH') {
       this.getEmpresas();
     } else {
-      this.getProyects();
+      if (this.moduleSelect === 'RYS') {
+        this.getParticipantes();
+      } else{
+        this.getProyects();
+      }
+
     }
   }
 
   getProyects() {
+    if (this.moduleSelect === 'RYS') {
+      this.proyectsNull = true;
+      return;
+    }
     if (this.moduleSelect === 'EVA360') {
       this.GeneralServices.getProyectsByModule('EVO360').subscribe(res => {
         this.proyects = res;
@@ -66,10 +77,20 @@ export class GeneradorReportesComponent implements OnInit {
           this.participantes = res;
         });
       } else {
-        this.GeneralServices.getParticipantebyProyect(this.proyect['idProyecto'], this.moduleSelect).subscribe(res => {
-          console.log(res);
-          this.participantes = res;
-        });
+        if (this.moduleSelect === 'RYS') {
+          this.GeneralServices.getCandidatos().subscribe(res => {
+            console.log(res);
+            this.participantes = res;
+
+          });
+        } else {
+          this.GeneralServices.getParticipantebyProyect(this.proyect['idProyecto'], this.moduleSelect).subscribe(res => {
+            console.log(res);
+            this.participantes = res;
+          });
+        }
+
+
       }
 
     }
@@ -77,8 +98,11 @@ export class GeneradorReportesComponent implements OnInit {
   }
 
   generarReporte() {
-    console.log(this.participante);
     if (!this.participante['idParticipante'] && !this.participante['participantePK']) {
+      if (this.moduleSelect === 'RYS'){
+        this.GeneralServices.generarReporteCandidato(this.participante['id']);
+        return;
+      }
       if (this.moduleSelect === 'IRH') {
         this.GeneralServices.generarReporteCompany(this.empresa['id']);
       } else {
@@ -106,6 +130,9 @@ export class GeneradorReportesComponent implements OnInit {
     }
   }
   BloqueoBoton() {
+    if (this.moduleSelect === 'RYS') {
+      return false;
+    }
     if (this.moduleSelect === 'IRH') {
       return !this.empresa['id'];
     } else {

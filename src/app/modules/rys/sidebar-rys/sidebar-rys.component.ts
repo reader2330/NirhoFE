@@ -23,6 +23,7 @@ export class SidebarRysComponent implements OnInit {
   selectModule = 1;
   modules = [];
   user = {};
+  candidato = {};
   avatar = {
     url: ''
   };
@@ -41,10 +42,16 @@ export class SidebarRysComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUser();
-    setTimeout(() => {
-      this.getModules();
-    }, 1500);
+    if (sessionStorage.getItem('Candidato')) {
+      this.candidato = sessionStorage.getItem('Candidato');
+      this.ModulesCandidato();
+    } else {
+      this.getUser();
+
+      setTimeout(() => {
+        this.getModules();
+      }, 1500);
+    }
   }
 
   goModule(opt) {
@@ -52,12 +59,39 @@ export class SidebarRysComponent implements OnInit {
     this.selectModule = opt;
   }
   getModules() {
-    if (this.user['rol'] !== 3 ) {
-      this.loginService.getModules().subscribe((res) => {
-        console.log(res);
-        this.modules = res;
-      });
-    } else {
+    if (this.user['rol'] === 1) {
+      this.modules = [
+        {
+          id_submodulo: 1,
+          descripcion: 'Bandeja de vacantes'
+        },
+        {
+          id_submodulo: 2,
+          descripcion: 'Alta de vacante'
+        },
+      ];
+    }
+    if ( this.user['rol'] === 2) {
+      this.modules = [
+        {
+          id_submodulo: 1,
+          descripcion: 'Bandeja de vacantes'
+        },
+        {
+          id_submodulo: 2,
+          descripcion: 'Alta de vacante'
+        },
+        {
+          id_submodulo: 4,
+          descripcion: 'Información candidato'
+        },
+        {
+          id_submodulo: 6,
+          descripcion: 'Estadisticas'
+        }
+      ];
+    }
+    if (this.user['rol'] === 3) {
       this.ModulesConsultor();
     }
 
@@ -77,10 +111,27 @@ export class SidebarRysComponent implements OnInit {
         {
           id_submodulo: 4,
           descripcion: 'Información candidato'
+        },
+        {
+          id_submodulo: 5,
+          descripcion: 'Generar reportes'
         }
-
       ];
   }
+
+  ModulesCandidato() {
+    this.modules = [
+      {
+        id_submodulo: 1,
+        descripcion: 'Bandeja de vacantes'
+      },
+      {
+        id_submodulo: 4,
+        descripcion: 'Información candidato'
+      },
+    ];
+  }
+
 
   getUser() {
     this.loginService.getUser().subscribe((res) => {

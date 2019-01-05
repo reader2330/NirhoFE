@@ -1,3 +1,41 @@
-<p>
-  estadisticas-vacantes works!
-</p>
+<div class="row col-sm-12">
+
+  <div class="row col-sm-10 offset-1">
+    <div class="col-sm-3">
+      <mat-card>
+        <h4>Numero de vacantes</h4>
+        <h2>{{totalVacantes.total}}</h2>
+      </mat-card>
+    </div>
+    <div class="col-sm-3">
+      <mat-card>
+        <h4>Numero de candidatos</h4>
+        <h2>{{totalCandidatos.total}}</h2>
+      </mat-card>
+    </div>
+    <div class="col-sm-3">
+      <mat-card>
+        <h4>Numero de vacantes abiertas</h4>
+        <h2>{{totalVacantesTipo['asignadas']}}</h2>
+      </mat-card>
+    </div>
+    <div class="col-sm-3">
+      <mat-card>
+        <h4>Numero de vacantes asignadas </h4>
+        <h2>{{totalVacantesTipo['abiertas']}}</h2>
+      </mat-card>
+    </div>
+
+  </div>
+  <div style="margin-top: 100px"  class="col-sm-6 offset-4">
+
+    <chart [options]="pies"></chart>
+
+
+  </div>
+
+
+
+
+
+</div>
