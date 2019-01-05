@@ -12,6 +12,7 @@ public class CuestionarioParticipanteEVD implements Serializable {
 	private CuetionarioParticipante cuestionarioParticipante;
 	private Participante participante;
 	private List<Opcion> opciones;
+	private String autoEval;
 	public CuetionarioParticipante getCuestionarioParticipante() {
 		return cuestionarioParticipante;
 	}
@@ -30,9 +31,15 @@ public class CuestionarioParticipanteEVD implements Serializable {
 	public void setOpciones(List<Opcion> opciones) {
 		this.opciones = opciones;
 	}
+	public String getAutoEval() {
+		return autoEval;
+	}
+	public void setAutoEval(String autoEval) {
+		this.autoEval = autoEval;
+	}
 	@Override
 	public String toString() {
 		return "CuestionarioParticipanteEVD [cuestionarioParticipante=" + cuestionarioParticipante + ", participante="
-				+ participante + ", opciones=" + opciones + "]";
+				+ participante + ", opciones=" + opciones + ", autoEval=" + autoEval + "]";
 	}
 }

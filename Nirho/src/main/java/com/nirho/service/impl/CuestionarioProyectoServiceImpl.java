@@ -325,13 +325,8 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 				cuestPartEval[i] = dto;
 				logger.info("******************************** [" + dto +"]*******************************************");
 			}
-			String[] datos = token.split("-");
+			
 			for(CuestPartEvaluadosEVD evd: cuestPartEval) {
-				if(datos[1].equals(NirhoUtil.AUTO_EVAL)) { 
-					evd.setAutoEval("true");
-				} else {
-					evd.setAutoEval("false");
-				}
 				logger.info("evd [" + evd +"]");
 				cuestPartEvaluadosEVDList.add(evd);
 			}
@@ -367,6 +362,12 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 							List<Opcion> opciones = new ArrayList<>();
 							for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getTema().getIdTema())){
 								opciones.add(cuestOps.getOpcion());
+							}
+							String[] datos = token.split("-");
+							if(datos[1].equals(NirhoUtil.AUTO_EVAL)) { 
+								cuestPartEVD.setAutoEval("true");
+							} else {
+								cuestPartEVD.setAutoEval("false");
 							}
 							cuestPartEVD.setOpciones(opciones);
 							cuestPartEVDList.add(cuestPartEVD);
