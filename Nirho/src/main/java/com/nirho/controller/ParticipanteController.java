@@ -403,8 +403,11 @@ public class ParticipanteController {
     		String usuario = (String) request.getAttribute("username");
 			Usuario usuarioEnSesion = usuarioService.obtenerUsuario(usuario);
     		emailService.sendEmailEVA360(datos, usuarioEnSesion.getEmail());
-    		datos.setToken(NirhoUtil.AUTO_EVAL);
-    		emailService.sendEmailEVD(datos, usuarioEnSesion.getEmail());
+    		if(datos.getToken() != null && !datos.getToken().isEmpty()) {
+    			String[] datosToken = datos.getToken().split("-");
+        		datos.setToken(datosToken[0] + NirhoUtil.AUTO_EVAL + datosToken[2]);
+        		emailService.sendEmailEVD(datos, usuarioEnSesion.getEmail());
+    		}
     	} catch(NirhoServiceException nse) {
     		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
     	}
