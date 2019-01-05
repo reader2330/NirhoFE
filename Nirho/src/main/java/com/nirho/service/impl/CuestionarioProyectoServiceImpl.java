@@ -356,18 +356,15 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 								participante.getParticipantePK().getIdProyecto());
 						for(CuetionarioParticipante cp: cuestPart) {
 							CuestionarioParticipanteEVD cuestPartEVD = new CuestionarioParticipanteEVD();
+							if(ee.getEvaluadorEvaluadoPK().getIdEvaluador() == cp.getCuetionarioParticipantePK().getIdParticipante()) { 
+								cp.setAutoEval(0);
+							} 
 							cuestPartEVD.setCuestionarioParticipante(cp);
 							cuestPartEVD.setParticipante(participanteDAO.getOne(
 									new ParticipantePK(ee.getEvaluadorEvaluadoPK().getIdEvaluado(), cp.getCuetionarioParticipantePK().getIdProyecto())));
 							List<Opcion> opciones = new ArrayList<>();
 							for(CuestionarioOpcion cuestOps: coDAO.findByIdProyectoAndIdTema(participantePK.getIdProyecto(), cp.getTema().getIdTema())){
 								opciones.add(cuestOps.getOpcion());
-							}
-							String[] datos = token.split("-");
-							if(datos[1].equals(NirhoUtil.AUTO_EVAL)) { 
-								cuestPartEVD.setAutoEval("true");
-							} else {
-								cuestPartEVD.setAutoEval("false");
 							}
 							cuestPartEVD.setOpciones(opciones);
 							cuestPartEVDList.add(cuestPartEVD);
