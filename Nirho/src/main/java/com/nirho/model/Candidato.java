@@ -6,6 +6,7 @@
 package com.nirho.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -56,7 +57,7 @@ public class Candidato implements Serializable {
     private String nacionalidad;
     
     @Column(name = "nacimiento")
-    private String nacimiento;
+    private Date nacimiento;
     
     @Column(name = "perfil")
     private String perfil;
@@ -104,7 +105,7 @@ public class Candidato implements Serializable {
     }
 
 	public Candidato(long id, long idSolicitante, String rfc, String nombre, String username, String password,
-			String nacionalidad, String nacimiento, String perfil, String situacion, String pretencion,
+			String nacionalidad, Date nacimiento, String perfil, String situacion, String pretencion,
 			String direccion, long estado, String rol, CaracteristicasCandidatoCv caracteristicasCandidatoCv,
 			Set<ContactoCandidato> contactos, Set<IdiomaCandidato> idiomas, Set<ConocimientoCandidato> conocimentos) {
 		super();
@@ -192,11 +193,11 @@ public class Candidato implements Serializable {
 		this.nacionalidad = nacionalidad;
 	}
 
-	public String getNacimiento() {
+	public Date getNacimiento() {
 		return nacimiento;
 	}
 
-	public void setNacimiento(String nacimiento) {
+	public void setNacimiento(Date nacimiento) {
 		this.nacimiento = nacimiento;
 	}
 

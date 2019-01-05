@@ -1,6 +1,7 @@
 package com.nirho.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -317,7 +318,7 @@ public class CandidatoController {
 	            
 	            XWPFTableRow row5 = informacionGeneral.getRow(5);
 	            row5.getCell(1).setText(candidato.getNacionalidad());
-	            row5.getCell(4).setText(candidato.getNacimiento());
+	            row5.getCell(4).setText(new SimpleDateFormat("yy-MM-dd").format(candidato.getNacimiento()));
 	            
 	            XWPFTableRow row6 = informacionGeneral.getRow(6);
 	            row6.getCell(1).setText(candidato.getPerfil());
