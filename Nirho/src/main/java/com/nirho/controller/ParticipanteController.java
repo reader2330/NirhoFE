@@ -406,7 +406,7 @@ public class ParticipanteController {
     		if(datos.getToken() != null && !datos.getToken().isEmpty()) {
     			String[] datosToken = datos.getToken().split("-");
         		datos.setToken(datosToken[0] + "-" + NirhoUtil.AUTO_EVAL + "-" + datosToken[2]);
-        		emailService.sendEmailEVA360(datos, usuarioEnSesion.getEmail());
+        		emailService.sendEmailEVD(datos, usuarioEnSesion.getEmail());
     		}
     	} catch(NirhoServiceException nse) {
     		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
