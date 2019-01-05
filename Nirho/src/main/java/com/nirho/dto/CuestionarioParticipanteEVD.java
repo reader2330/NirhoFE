@@ -12,6 +12,7 @@ public class CuestionarioParticipanteEVD implements Serializable {
 	private CuetionarioParticipante cuestionarioParticipante;
 	private Participante participante;
 	private List<Opcion> opciones;
+	private Integer idEvaluador;
 	public CuetionarioParticipante getCuestionarioParticipante() {
 		return cuestionarioParticipante;
 	}
@@ -30,9 +31,16 @@ public class CuestionarioParticipanteEVD implements Serializable {
 	public void setOpciones(List<Opcion> opciones) {
 		this.opciones = opciones;
 	}
+	public Integer getIdEvaluador() {
+		return idEvaluador;
+	}
+	public void setIdEvaluador(Integer idEvaluador) {
+		this.idEvaluador = idEvaluador;
+	}
+	
 	@Override
 	public String toString() {
 		return "CuestionarioParticipanteEVD [cuestionarioParticipante=" + cuestionarioParticipante + ", participante="
-				+ participante + ", opciones=" + opciones + "]";
+				+ participante + ", opciones=" + opciones + ", idEvaluador=" + idEvaluador + "]";
 	}
 }

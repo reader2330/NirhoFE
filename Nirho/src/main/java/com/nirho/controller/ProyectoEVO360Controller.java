@@ -45,6 +45,7 @@ import com.nirho.dto.GraficaResultadoDTO;
 import com.nirho.dto.GuardarEvaluadoresDTO;
 import com.nirho.dto.ParticipanteEvaluadosDTO;
 import com.nirho.dto.PeriodoProyecto;
+import com.nirho.dto.RespEval360;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ConsultorProyectoPK;
@@ -281,8 +282,8 @@ public class ProyectoEVO360Controller {
 		try {
 						       
 			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteEVO360.docx"));
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteEVO360.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360.docx"));
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360.docx")); 
 			
 			GraficaRespPregDTO resGraficas = graficasService.obtenerGraficasRespuestasPreguntas(idProyecto);
@@ -548,13 +549,13 @@ public class ProyectoEVO360Controller {
 	        
 	        List<CuetionarioParticipante> cuestPartList = cuestPartService.obtenerCuestionarioParticipante(idParticipante, idProyecto);
 	        logger.info(" ********************************* cuestPartList [" + cuestPartList + "] *****************************");
-	        HashMap<String, Integer> datos = new HashMap<>();
+	        HashMap<String, RespEval360> datos = new HashMap<>();
 	        int promedioGeneral = 0;
 	        int conta = 0;
 	        for(CuetionarioParticipante cp: cuestPartList) {
 	        	if(cp.getRespuesta() != null && cp.getRespuesta().intValue() != 0) {
 	        		logger.info(" categoria cp [" + cp + "]");
-		        	datos.put(cp.getPregunta().getEnunciado(), cp.getRespuesta());
+		        	datos.put(cp.getPregunta().getEnunciado(), new RespEval360(cp.getRespuesta(), cp.getAutoEval()));
 		        	promedioGeneral = promedioGeneral + cp.getRespuesta();
 		        	conta = conta +1;
 	        	}
@@ -641,9 +642,9 @@ public class ProyectoEVO360Controller {
 		 	             for(String key: datos.keySet()) {
 		 	            	Row row = dataSheet2.createRow(i);
 	    	            	row.createCell(0).setCellValue(key);
-	    	            	row.createCell(1).setCellValue(datos.get(key));
+	    	            	row.createCell(1).setCellValue(datos.get(key).getRespuesta());
 		 	            	row.createCell(2).setCellValue(promedioGeneral);
-		 	            	row.createCell(3).setCellValue(dispersionMock(datos.get(key)));
+		 	            	row.createCell(3).setCellValue((datos).get(key).getAutoEval());
 		 	            	i++;
 		 	             }
 	                }
@@ -655,8 +656,8 @@ public class ProyectoEVO360Controller {
 		 	             for(String key: datos.keySet()) {
 		 	            	Row row = dataSheet2.createRow(i);
 	    	            	row.createCell(0).setCellValue(key);
-	    	            	row.createCell(1).setCellValue(datos.get(key));
-	    	            	row.createCell(3).setCellValue(dispersionMock(datos.get(key)));
+	    	            	row.createCell(1).setCellValue(datos.get(key).getRespuesta());
+	    	            	row.createCell(3).setCellValue((datos).get(key).getAutoEval());
 		 	            	i++;
 		 	             }
 	                }

@@ -1,6 +1,6 @@
 <div class="row col-sm-12" >
   <mat-horizontal-stepper   labelPosition="bottom" class="col-sm-10 offset-1" [linear]="false" #stepper>
-    <mat-step [formGroup]="InformacionForm" [editable]="false" [stepControl]="InformacionForm">
+    <mat-step [formGroup]="InformacionForm"  [stepControl]="InformacionForm">
       <ng-template matStepLabel>Información del solicitante</ng-template>
       <div class="row col-sm-10 offset-1">
         <mat-form-field class="col-sm-10 " appearance="outline">
@@ -36,7 +36,7 @@
         <input matInput type="text"   formControlName="direccion">
       </mat-form-field>
       <div class="col-sm-4 offset-5">
-        <button mat-raised-button color="accent" (click)="guardarForm(InformacionForm,1)"><mat-icon>save</mat-icon>Guardar</button>
+        <button mat-raised-button color="accent" (click)="guardarForm(InformacionForm,1)" matStepperNext><mat-icon>save</mat-icon>Guardar</button>
         <button mat-raised-button color="accent" style="margin-left: 30px" *ngIf="nextFlag" matStepperNext><mat-icon>navigate_next</mat-icon>Siguiente</button>
       </div>
     </mat-step>
@@ -71,11 +71,11 @@
         <input matInput type="number"  formControlName="celular">
       </mat-form-field>
       <div class="col-sm-4 offset-5">
-        <button (click)="guardarForm(ContactoForm, 2)" mat-raised-button color="accent" matStepperNext>Guardar</button>
+        <button (click)="guardarForm(ContactoForm, 2)" mat-raised-button color="accent" matStepperNext><mat-icon>save</mat-icon>Guardar</button>
         <button mat-raised-button color="accent" style="margin-left: 30px" *ngIf="nextFlag" matStepperNext><mat-icon>navigate_next</mat-icon>Siguiente</button>
       </div>
     </mat-step>
-    <mat-step [formGroup]="VacanteForm" [editable]="false" [stepControl]="VacanteForm">
+    <mat-step [formGroup]="VacanteForm"  [stepControl]="VacanteForm">
       <ng-template matStepLabel>Puesto y Vacante</ng-template>
       <h4>Vacante</h4>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
@@ -148,7 +148,7 @@
         </div>
       </div>
       <div *ngIf="actividades.length" class="row col-sm-10 offset-1">
-        <table style="width: 100%" class="col-sm-12" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table style="width: 100%" class="col-sm-12" mat-table [dataSource]="actividades" class="mat-elevation-z8">
 
           <ng-container matColumnDef="nombreActividad">
             <th  mat-header-cell *matHeaderCellDef> Nombre de las actividades </th>

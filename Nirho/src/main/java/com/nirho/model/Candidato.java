@@ -19,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.xmlbeans.impl.common.PushedInputStream;
@@ -78,7 +79,8 @@ public class Candidato implements Serializable {
     @Column(name = "rol")
     private String rol;
     
-    @Column(name = "caracteristicas")
+    @OneToOne (cascade=CascadeType.ALL)
+    @JoinColumn(name="caracteristicas", unique= true, nullable=true, insertable=true, updatable=true)
     private CaracteristicasCandidatoCv caracteristicasCandidatoCv;
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

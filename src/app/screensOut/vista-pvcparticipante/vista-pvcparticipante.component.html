@@ -34,8 +34,13 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
        <mat-list>
-         <mat-list-item *ngFor="let coc of participante['conocimientosTecnicos']">
-           {{coc}}
+         <mat-list-item class="row" *ngFor="let coc of participante['conocimientosTecnicos']">
+           <p class="col-sm-4">{{coc.nombre}}</p>
+           <mat-select class="col-sm-8" [(ngModel)]="coc.calificacion" (selectionChange)="guardarCalificacion(coc)">
+            <mat-option *ngFor="let opt of options" [value]="opt.key">
+              {{opt.name}}
+            </mat-option>
+          </mat-select>
          </mat-list-item>
        </mat-list>
     </mat-expansion-panel>
@@ -46,8 +51,13 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <mat-list>
-        <mat-list-item *ngFor="let coc of participante['conocimientosTecnicosSiguientes']">
-          {{coc}}
+        <mat-list-item class="row" *ngFor="let coc of participante['conocimientosTecnicosSiguientes']">
+          <p class="col-sm-4">{{coc.nombre}}</p>
+          <mat-select class="col-sm-8" [(ngModel)]="coc.calificacion" (selectionChange)="guardarCalificacion(coc)">
+            <mat-option *ngFor="let opt of options" [value]="opt.key">
+              {{opt.name}}
+            </mat-option>
+          </mat-select>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
@@ -58,8 +68,13 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <mat-list>
-        <mat-list-item *ngFor="let coc of participante['conocimientosHumanos']">
-          {{coc}}
+        <mat-list-item class="row" *ngFor="let coc of participante['conocimientosHumanos']">
+          <p class="col-sm-4">{{coc.nombre}}</p>
+          <mat-select class="col-sm-8" [(ngModel)]="coc.calificacion" (selectionChange)="guardarCalificacion(coc)">
+            <mat-option *ngFor="let opt of options" [value]="opt.key">
+              {{opt.name}}
+            </mat-option>
+          </mat-select>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
@@ -70,8 +85,13 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <mat-list>
-        <mat-list-item *ngFor="let coc of participante['conocimientosHumanosSiguientes']">
-          {{coc}}
+        <mat-list-item class="row" *ngFor="let coc of participante['conocimientosHumanosSiguientes']">
+          <p class="col-sm-4">{{coc.nombre}}</p>
+          <mat-select class="col-sm-8" [(ngModel)]="coc.calificacion" (selectionChange)="guardarCalificacion(coc)">
+            <mat-option *ngFor="let opt of options" [value]="opt.key">
+              {{opt.name}}
+            </mat-option>
+          </mat-select>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>

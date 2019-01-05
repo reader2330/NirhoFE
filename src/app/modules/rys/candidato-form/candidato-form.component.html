@@ -1,13 +1,17 @@
 <div class="row col-sm-12" >
-  <mat-horizontal-stepper   labelPosition="bottom" class="col-sm-10 offset-1" [linear]="false" #stepper>
+  <mat-horizontal-stepper   labelPosition="bottom" class="col-sm-10 offset-1" [linear]="nextFlag" #stepper>
     <mat-step [formGroup]="InformacionForm" [editable]="false" [stepControl]="InformacionForm">
       <ng-template matStepLabel>Información del candidato</ng-template>
-      <div class="col-sm-10 offset-1">
-        <mat-form-field  appearance="outline">
+      <div class="row col-sm-10 offset-1">
+        <mat-form-field class="col-sm-10"  appearance="outline">
           <mat-label>RFC</mat-label>
           <input matInput type="text" maxlength="13"  formControlName="rfc">
         </mat-form-field>
+        <div class="col-sm-2">
+          <button (click)="searchByRFC()" mat-raised-button style="margin-top: 15px;" color="accent"> <mat-icon>search</mat-icon>Buscar</button>
+        </div>
       </div>
+
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Nombre completo</mat-label>
         <input matInput type="text"   formControlName="nombre">
@@ -22,11 +26,18 @@
       </mat-form-field>
         <mat-form-field class="col-sm-10 offset-1" appearance="outline" >
           <mat-label>Fecha nacimiento</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="nacimiento">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <input matInput [matDatepicker]="picker1" formControlName="nacimiento">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
-
+      <mat-form-field class="col-sm-10 offset-1" appearance="outline">
+        <mat-label>Nombre de usuario</mat-label>
+        <input matInput type="text"   formControlName="username">
+      </mat-form-field>
+      <mat-form-field class="col-sm-10 offset-1" appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password"   formControlName="password">
+      </mat-form-field>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Perfil</mat-label>
         <input matInput type="text"   formControlName="perfil">
@@ -57,7 +68,7 @@
         </mat-form-field>
         <mat-form-field class="col-sm-3" appearance="outline">
           <mat-label>Tipo de contacto</mat-label>
-          <mat-select [(ngModel)]="newContacto.tipo_contacto" >
+          <mat-select [(ngModel)]="newContacto.tipoContacto" >
             <mat-option *ngFor="let type of contacts" [value]="type.id">
               {{type.descripcionCatalogo}}
             </mat-option>
@@ -77,7 +88,7 @@
 
           <ng-container matColumnDef="tipo">
             <th mat-header-cell *matHeaderCellDef> Tipo de contacto </th>
-            <td mat-cell *matCellDef="let element"> {{element.tipo_contacto}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.tipoContacto}} </td>
           </ng-container>
 
 
@@ -309,8 +320,8 @@
         </mat-form-field>
         <mat-form-field class="col-sm-3" appearance="outline">
           <mat-label>Habilidad</mat-label>
-          <mat-select [(ngModel)]="newIdioma.nombre" >
-            <mat-option *ngFor="let hab of habilidades" [value]="hab.descripcionCatalogo">
+          <mat-select [(ngModel)]="newIdioma.habilidad" >
+            <mat-option *ngFor="let hab of habilidadesNivel" [value]="hab.descripcionCatalogo">
               {{hab.descripcionCatalogo}}
             </mat-option>
           </mat-select>
@@ -318,30 +329,30 @@
         <mat-form-field class="col-sm-3" appearance="outline">
           <mat-label>Nivel</mat-label>
           <mat-select [(ngModel)]="newIdioma.nivel" >
-            <mat-option *ngFor="let type of contacts" [value]="type.id">
+            <mat-option *ngFor="let type of nivelesIdiomas" [value]="type.id">
               {{type.descripcionCatalogo}}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <div class="col-sm-3">
-          <button style="margin-top: 20px" mat-raised-button color="accent" (click)="addContacto()"><mat-icon>add_circle</mat-icon>Agregar</button>
+          <button style="margin-top: 20px" mat-raised-button color="accent" (click)="addIdioma()"><mat-icon>add_circle</mat-icon>Agregar</button>
         </div>
       </div>
-      <div *ngIf="contactos.length" class="row col-sm-10 offset-1">
-        <table style="width: 100%" class="col-sm-12" mat-table [dataSource]="contactos" class="mat-elevation-z8">
+      <div *ngIf="idiomasCandidato.length" class="row col-sm-10 offset-1">
+        <table style="width: 100%" class="col-sm-12" mat-table [dataSource]="idiomasCandidato" class="mat-elevation-z8">
 
           <ng-container matColumnDef="idioma">
-            <th  mat-header-cell *matHeaderCellDef> Nombre del contacto </th>
+            <th  mat-header-cell *matHeaderCellDef> Idioma </th>
             <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
           </ng-container>
 
           <ng-container matColumnDef="nivel">
-            <th mat-header-cell *matHeaderCellDef> Tipo de contacto </th>
+            <th mat-header-cell *matHeaderCellDef> Habilidad del idioma </th>
             <td mat-cell *matCellDef="let element"> {{element.habilidad}} </td>
           </ng-container>
 
           <ng-container matColumnDef="habilidad">
-            <th mat-header-cell *matHeaderCellDef> Tipo de contacto </th>
+            <th mat-header-cell *matHeaderCellDef> Nivel del idioma </th>
             <td mat-cell *matCellDef="let element"> {{element.nivel}} </td>
           </ng-container>
 
@@ -425,55 +436,69 @@
         </mat-form-field>
         <mat-form-field class="col-sm-3" appearance="outline">
           <mat-label>Nivel</mat-label>
-          <input matInput type="text" [(ngModel)]="newPuesto.nivel"  >
+          <mat-select [(ngModel)]="newPuesto.nivel" >
+            <mat-option *ngFor="let nivel of nivelCompetencias" [value]="nivel.id">
+              {{nivel.descripcionCatalogo}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field class="col-sm-3 " appearance="outline" >
           <mat-label>Fecha Inicio</mat-label>
-          <input matInput [matDatepicker]="picker" [(ngModel)]="newPuesto.fechaIni" >
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <input matInput [matDatepicker]="picker2" [(ngModel)]="newPuesto.fechaIni" >
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-sm-3" appearance="outline" >
           <mat-label>Fecha Termino</mat-label>
-          <input matInput [matDatepicker]="picker" [(ngModel)]="newPuesto.fechaFin">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <input matInput [matDatepicker]="picker3" [(ngModel)]="newPuesto.fechaFin">
+          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="col-sm-3" appearance="outline">
           <mat-label>Antiguedad</mat-label>
           <input matInput type="number"  [(ngModel)]="newPuesto.antiguedad"  >
         </mat-form-field>
-        <div class="col-sm-3 offset-5">
+        <div class="col-sm-12 offset-5">
           <button style="margin-top: 20px" mat-raised-button color="accent" (click)="addPuesto()"><mat-icon>add_circle</mat-icon>Agregar</button>
         </div>
       </div>
-      <div *ngIf="conocimientos.length" style="margin-top: 20px" class="row col-sm-10 offset-1">
-        <table style="width: 100%" class="col-sm-12" mat-table [dataSource]="conocimientos" class="mat-elevation-z8">
+      <div *ngIf="puestos.length" style="margin-top: 20px" class="row col-sm-10 offset-1">
+        <table style="width: 100%" class="col-sm-12" mat-table [dataSource]="puestos" class="mat-elevation-z8">
 
-          <ng-container matColumnDef="nombreCompetencia">
-            <th  mat-header-cell *matHeaderCellDef> Nombre del conocimiento </th>
-            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          <ng-container matColumnDef="puesto">
+            <th  mat-header-cell *matHeaderCellDef> Nombre del puesto </th>
+            <td mat-cell *matCellDef="let element"> {{element.puesto}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="descripcionCompetencia">
-            <th mat-header-cell *matHeaderCellDef> Descripción del conocimiento </th>
-            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="nivelCompetencia">
+          <ng-container matColumnDef="nivel">
             <th mat-header-cell *matHeaderCellDef> Nivel </th>
             <td mat-cell *matCellDef="let element"> {{element.nivel}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fechaIni">
+            <th mat-header-cell *matHeaderCellDef> Fecha inicio </th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaIni | date }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fechaFin">
+            <th mat-header-cell *matHeaderCellDef> Fecha termino </th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaFin | date}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="antiguedad">
+            <th mat-header-cell *matHeaderCellDef> Antiguedad </th>
+            <td mat-cell *matCellDef="let element"> {{element.antiguedad}} </td>
           </ng-container>
 
 
 
           <ng-container matColumnDef="detail1">
             <th mat-header-cell *matHeaderCellDef> Borrar </th>
-            <td mat-cell *matCellDef="let element"><a (click)="removeConocimiento(element)" ><mat-icon>delete</mat-icon></a> </td>
+            <td mat-cell *matCellDef="let element"><a (click)="removePuesto(element)" ><mat-icon>delete</mat-icon></a> </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayCompetencias"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayCompetencias;"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayPuestos"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayPuestos;"></tr>
         </table>
         <div style="margin-top: 30px" class="col-sm-4 offset-5">
           <button mat-raised-button color="accent" style="margin-left: 30px" *ngIf="nextFlag" matStepperNext><mat-icon>navigate_next</mat-icon>Siguiente</button>

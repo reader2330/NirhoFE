@@ -414,9 +414,15 @@ public class ParticipantePVCController {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
+<<<<<<< HEAD
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
 			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reportePVC.docx"));
+=======
+			 //XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reportePVC.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reportePVC.docx"));
+>>>>>>> 1d1f9f4ee20390a07e4c24561ff799de70e7ec7c
 
 	        ParticipantePVC participante = participantePVCService.getOne(idParticipante);
 
@@ -462,14 +468,13 @@ public class ParticipantePVCController {
 	        
 	        XWPFTable conocimientos =  ReporteUtil.getTablaPorTitulo(document, "conocimientos");
 	        
+	        JSONArray conocimientosTecnicos = new JSONArray();
+			JSONArray conocimientosHumanos = new JSONArray();
+			JSONArray conocimientosTecnicosSiguientes = new JSONArray();
+			JSONArray conocimientosHumanosSiguientes = new JSONArray();
+			
 	        if(conocimientos != null){
 	        
-	        	JSONArray conocimientosTecnicos = new JSONArray();
-				JSONArray conocimientosHumanos = new JSONArray();
-				
-				JSONArray conocimientosTecnicosSiguientes = new JSONArray();
-				JSONArray conocimientosHumanosSiguientes = new JSONArray();
-				
 				boolean auxBreak = false;
 				boolean conocimientoSiguiente = false;
 				
@@ -498,17 +503,33 @@ public class ParticipantePVCController {
 												for(ProyectoPVCConocimiento conocimiento: especialidad.getConocimientos()) {
 													if(conocimientoSiguiente) {
 														if(conocimiento.getTipo() == 1 ) {
-															conocimientosTecnicosSiguientes.put(conocimiento.getNombre());
+															JSONObject c = new JSONObject();
+															c.accumulate("nombre", conocimiento.getNombre());
+															c.accumulate("calificacion", conocimiento.getCalificacion());
+															c.accumulate("id", conocimiento.getId());
+															conocimientosTecnicosSiguientes.put(c);
 														}
 														if(conocimiento.getTipo() == 2) {
-															conocimientosHumanosSiguientes.put(conocimiento.getNombre());
+															JSONObject c = new JSONObject();
+															c.accumulate("nombre", conocimiento.getNombre());
+															c.accumulate("calificacion", conocimiento.getCalificacion());
+															c.accumulate("id", conocimiento.getId());
+															conocimientosHumanosSiguientes.put(c);
 														}
 													} else {
 														if(conocimiento.getTipo() == 1 ) {
-															conocimientosTecnicos.put(conocimiento.getNombre());
+															JSONObject c = new JSONObject();
+															c.accumulate("nombre", conocimiento.getNombre());
+															c.accumulate("calificacion", conocimiento.getCalificacion());
+															c.accumulate("id", conocimiento.getId());
+															conocimientosTecnicos.put(c);
 														}
 														if(conocimiento.getTipo() == 2) {
-															conocimientosHumanos.put(conocimiento.getNombre());
+															JSONObject c = new JSONObject();
+															c.accumulate("nombre", conocimiento.getNombre());
+															c.accumulate("calificacion", conocimiento.getCalificacion());
+															c.accumulate("id", conocimiento.getId());
+															conocimientosHumanos.put(c);
 														}
 													}
 												}
@@ -538,7 +559,7 @@ public class ParticipantePVCController {
 	                parrafo.setStyle("ParrafoNirho");
 	                XWPFRun lnewRun = parrafo.createRun();
 	                try {
-						lnewRun.setText("- " + conocimientosTecnicos.getString(i));
+						lnewRun.setText("- " + conocimientosTecnicos.getJSONObject(i).getString("nombre"));
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
@@ -549,7 +570,7 @@ public class ParticipantePVCController {
 	                parrafo.setStyle("ParrafoNirho");
 	                XWPFRun lnewRun = parrafo.createRun();
 	                try {
-						lnewRun.setText("- " + conocimientosHumanos.getString(i));
+						lnewRun.setText("- " + conocimientosHumanos.getJSONObject(i).getString("nombre"));
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
@@ -560,7 +581,7 @@ public class ParticipantePVCController {
 	                parrafo.setStyle("ParrafoNirho");
 	                XWPFRun lnewRun = parrafo.createRun();
 	                try {
-						lnewRun.setText("- " + conocimientosTecnicosSiguientes.getString(i));
+						lnewRun.setText("- " + conocimientosTecnicosSiguientes.getJSONObject(i).getString("nombre"));
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
@@ -571,7 +592,7 @@ public class ParticipantePVCController {
 	                parrafo.setStyle("ParrafoNirho");
 	                XWPFRun lnewRun = parrafo.createRun();
 	                try {
-						lnewRun.setText("- " + conocimientosHumanosSiguientes.getString(i));
+						lnewRun.setText("- " + conocimientosHumanosSiguientes.getJSONObject(i).getString("nombre"));
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
@@ -679,6 +700,56 @@ public class ParticipantePVCController {
 		 	            	i++;
 		 	             }
 	                }
+	                
+	                if(title.equals("Calificaciones de conocimientos humanos")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             for(int i = 0; i < conocimientosHumanos.length(); i++) {
+		 	            	Row row = dataSheet2.createRow(i + 1);
+	    	            	row.createCell(0).setCellValue(conocimientosHumanos.getJSONObject(i).optString("nombre", ""));
+	    	            	row.createCell(1).setCellValue(conocimientosHumanos.getJSONObject(i).optInt("calificacion", 0));
+		 	             }
+	                }
+	                
+	                if(title.equals("Calificaciones de conocimientos técnicos")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             for(int i = 0; i < conocimientosTecnicos.length(); i++) {
+		 	            	Row row = dataSheet2.createRow(i + 1);
+	    	            	row.createCell(0).setCellValue(conocimientosTecnicos.getJSONObject(i).optString("nombre", ""));
+	    	            	row.createCell(1).setCellValue(conocimientosTecnicos.getJSONObject(i).optInt("calificacion", 0));
+		 	             }
+	                }
+	                
+	                if(title.equals("Promedio de calificaciones")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             
+		 	             double promedioConocimientosTecnicos = 0.0;
+		 	             double promedioConocimientosHumanos = 0.0;
+		 	             
+		 	             for(int i = 0; i < conocimientosTecnicos.length(); i++) {
+		 	            	promedioConocimientosTecnicos += conocimientosTecnicos.getJSONObject(i).optInt("calificacion", 0);
+		 	             }
+		 	             
+		 	             for(int i = 0; i < conocimientosHumanos.length(); i++) {
+		 	            	promedioConocimientosHumanos += conocimientosHumanos.getJSONObject(i).optInt("calificacion", 0);
+		 	             }
+		 	             
+		 	            promedioConocimientosTecnicos = promedioConocimientosTecnicos / conocimientosTecnicos.length();
+		 	            promedioConocimientosHumanos = promedioConocimientosHumanos / conocimientosHumanos.length();
+		 	           
+		 	           Row row1 = dataSheet2.createRow(1);
+		 	           row1.createCell(0).setCellValue("Conocimientos humanos");
+  	            	   row1.createCell(1).setCellValue(promedioConocimientosHumanos);
+  	            	
+		 	           Row row2 = dataSheet2.createRow(2);
+		 	           row2.createCell(0).setCellValue("Conocimientos técnicos");
+  	            	   row2.createCell(1).setCellValue(promedioConocimientosTecnicos);
+  	            	
+	                }
+	                
+	                
 	            }
 	        }
 	        
@@ -693,6 +764,8 @@ public class ParticipantePVCController {
 		} catch(IOException | InvalidFormatException e){
 			throw new NirhoControllerException("Problemas al generar reporte");
 		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al generar reporte");
+		} catch (JSONException e) {
 			throw new NirhoControllerException("Problemas al generar reporte");
 		}
 	}

@@ -6,6 +6,7 @@ import {ActividadSolicitante} from '../../../screensOut/models/actividad-solicit
 import {ReclutamientoService} from '../services/reclutamiento.service';
 import {Competencia} from '../models/competencia';
 import {ConocimientoRYS} from '../models/conocimientoRYS';
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -147,7 +148,6 @@ export class InformacionFormComponent implements OnInit {
     if (id) {
       this.Recultamiento.saveActividad(id, actividad).subscribe(res => {
         this.actividades.push(actividad);
-        this.dataSource.data = this.actividades;
         this.showTable = true;
       });
     }
@@ -162,7 +162,6 @@ export class InformacionFormComponent implements OnInit {
     this.Recultamiento.deleteActividad(elt.id).subscribe(res => {
       console.log(res);
     });
-    this.dataSource.data = this.actividades;
   }
 
   addConocimiento() {
@@ -239,13 +238,13 @@ export class InformacionFormComponent implements OnInit {
           if (res[0]['contactos']) {
             this.ContactoForm.patchValue(res[0]['contactos'][0]);
           }
-          if (res[0]['vacantes']) {
+          if (res[0]['vacantes'].length) {
             sessionStorage.setItem('idVacante', res[0]['vacantes'][0]['id']);
             this.VacanteForm.patchValue(res[0]['vacantes'][0]);
             if (res[0]['vacantes'][0] && res[0]['vacantes'][0]['actividades'].length ) {
               console.log(res[0]['vacantes'][0]['actividades']);
               this.actividades = res[0]['vacantes'][0]['actividades'];
-              this.dataSource.data = this.actividades;
+
             }
             if (res[0]['vacantes'][0]['caracteristicas'].length) {
               this.CaracteristicasForm.patchValue(res[0]['vacantes'][0]['caracteristicas'][0]);
@@ -272,53 +271,95 @@ export class InformacionFormComponent implements OnInit {
   }
   guardarForm (form , step) {
 
-    switch (step) {
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar los datos',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        switch (step) {
 
-      case 1:
-        this.Recultamiento.saveSolicitante(form['value']).subscribe(res => {
-          console.log(res);
-          sessionStorage.setItem('idSolicitante', JSON.stringify(res));
-        });
-        break;
-      case 2:
-        if (sessionStorage.getItem('idSolicitante')) {
-          const id = JSON.parse(sessionStorage.getItem('idSolicitante'));
-          if (id.id) {
-            this.Recultamiento.saveContacto(id.id, form['value']).subscribe(res => {
+          case 1:
+            this.Recultamiento.saveSolicitante(form['value']).subscribe(res => {
               console.log(res);
+              sessionStorage.setItem('idSolicitante', JSON.stringify(res));
+              Swal(
+                'Listo.',
+                'La información se guardo correctamente',
+                'success'
+              );
             });
-          } else {
-            this.Recultamiento.saveContacto(id, form['value']).subscribe(res => {
-              console.log(res);
-            });
-          }
-        }
-        break;
-      case 3:
-        if (sessionStorage.getItem('idSolicitante')) {
-          console.log(form['value']);
-          const id = JSON.parse(sessionStorage.getItem('idSolicitante'));
-          if (id.id) {
-            this.Recultamiento.saveVacante(id.id, form['value']).subscribe(res => {
-              console.log(res);
+            break;
+          case 2:
+            if (sessionStorage.getItem('idSolicitante')) {
+              const id = JSON.parse(sessionStorage.getItem('idSolicitante'));
+              if (id.id) {
+                this.Recultamiento.saveContacto(id.id, form['value']).subscribe(res => {
+                  console.log(res);
+                  Swal(
+                    'Listo.',
+                    'La información se guardo correctamente',
+                    'success'
+                  );
+                });
+              } else {
+                this.Recultamiento.saveContacto(id, form['value']).subscribe(res => {
+                  console.log(res);
+                  Swal(
+                    'Listo.',
+                    'La información se guardo correctamente',
+                    'success'
+                  );
+                });
+              }
+            }
+            break;
+          case 3:
+            if (sessionStorage.getItem('idSolicitante')) {
+              console.log(form['value']);
+              const id = JSON.parse(sessionStorage.getItem('idSolicitante'));
+              if (id.id) {
+                this.Recultamiento.saveVacante(id.id, form['value']).subscribe(res => {
+                  console.log(res);
+                  sessionStorage.setItem('idVacante', JSON.stringify(res));
+                  Swal(
+                    'Listo.',
+                    'La información se guardo correctamente',
+                    'success'
+                  );
 
-            });
-          } else {
-            this.Recultamiento.saveVacante(id, form['value']).subscribe(res => {
-              console.log(res);
-            });
-          }
+                });
+              } else {
+                this.Recultamiento.saveVacante(id, form['value']).subscribe(res => {
+                  console.log(res);
+                  Swal(
+                    'Listo.',
+                    'La información se guardo correctamente',
+                    'success'
+                  );
+                });
+              }
+            }
+            break;
+          case 4:
+            if (sessionStorage.getItem('idVacante')) {
+              let id = JSON.parse(sessionStorage.getItem('idVacante'));
+              this.Recultamiento.saveCaracteristicas(id, form['value']).subscribe(res => {
+                console.log(res);
+                Swal(
+                  'Listo.',
+                  'La información se guardo correctamente',
+                  'success'
+                );
+              });
+            }
+            break;
         }
-        break;
-      case 4:
-        if (sessionStorage.getItem('idVacante')) {
-          let id = sessionStorage.getItem('idVacante');
-          this.Recultamiento.saveCaracteristicas(id, form['value']).subscribe(res => {
-            console.log(res);
-          });
-        }
-        break;
-    }
+      }
+    });
   }
 
 

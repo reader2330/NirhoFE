@@ -124,6 +124,7 @@ public class CandidatoController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody Candidato candidato) throws NirhoControllerException{
 		try {
+      candidato.setRol("5");
 			candidatoService.save(candidato);
 			JSONObject json = new JSONObject();
 			json.accumulate("id", candidato.getId());
@@ -270,8 +271,7 @@ public class CandidatoController {
 			throw new NirhoControllerException("Problemas al registrar entidad");
 		} 
 	}
-	
-	
+		
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
 	public Candidato login(@RequestBody Candidato c, HttpServletRequest request) throws NirhoControllerException {
 		try {

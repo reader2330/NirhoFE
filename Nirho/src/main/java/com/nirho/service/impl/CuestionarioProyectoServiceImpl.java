@@ -325,6 +325,7 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 				cuestPartEval[i] = dto;
 				logger.info("******************************** [" + dto +"]*******************************************");
 			}
+			
 			for(CuestPartEvaluadosEVD evd: cuestPartEval) {
 				logger.info("evd [" + evd +"]");
 				cuestPartEvaluadosEVDList.add(evd);
@@ -355,6 +356,11 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 								participante.getParticipantePK().getIdProyecto());
 						for(CuetionarioParticipante cp: cuestPart) {
 							CuestionarioParticipanteEVD cuestPartEVD = new CuestionarioParticipanteEVD();
+							if(cp.getAutoEval() == null && 
+									(ee.getEvaluadorEvaluadoPK().getIdEvaluador() == cp.getCuetionarioParticipantePK().getIdParticipante())) { 
+								cp.setAutoEval(0);
+							}
+							cuestPartEVD.setIdEvaluador(ee.getEvaluadorEvaluadoPK().getIdEvaluador());
 							cuestPartEVD.setCuestionarioParticipante(cp);
 							cuestPartEVD.setParticipante(participanteDAO.getOne(
 									new ParticipantePK(ee.getEvaluadorEvaluadoPK().getIdEvaluado(), cp.getCuetionarioParticipantePK().getIdProyecto())));

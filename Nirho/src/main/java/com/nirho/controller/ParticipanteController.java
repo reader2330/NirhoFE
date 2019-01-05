@@ -407,5 +407,5 @@ public class ParticipanteController {
     		logger.info("Problemas al enviar un email, causa + [" + nse.getMessage() +"]");
     	}
 	}
-	
+	 
 }

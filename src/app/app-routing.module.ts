@@ -32,6 +32,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'Login/:Candidato',
+    component: LoginComponent
+  },
+  {
     path: 'CLB',
     component: InicioComponent,
     canActivate: [LoginGuard]
