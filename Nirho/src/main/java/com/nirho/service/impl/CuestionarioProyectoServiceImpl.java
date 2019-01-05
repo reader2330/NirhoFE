@@ -359,7 +359,8 @@ public class CuestionarioProyectoServiceImpl implements CuestionarioProyectoServ
 							if(cp.getAutoEval() == null && 
 									(ee.getEvaluadorEvaluadoPK().getIdEvaluador() == cp.getCuetionarioParticipantePK().getIdParticipante())) { 
 								cp.setAutoEval(0);
-							} 
+							}
+							cuestPartEVD.setIdEvaluador(ee.getEvaluadorEvaluadoPK().getIdEvaluador());
 							cuestPartEVD.setCuestionarioParticipante(cp);
 							cuestPartEVD.setParticipante(participanteDAO.getOne(
 									new ParticipantePK(ee.getEvaluadorEvaluadoPK().getIdEvaluado(), cp.getCuetionarioParticipantePK().getIdProyecto())));
