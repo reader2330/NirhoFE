@@ -48,4 +48,15 @@ export class CatalogsService {
   getHabilidades(): Observable<any> {
     return this._http.get(this.api + 'catalogo/empleado/habilidades', {headers: this.header});
   }
+  getIdiomas(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/idioma', {headers: this.header});
+  }
+  getHabilidadesIdioma(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/nivelConocimiento', {headers: this.header});
+  }
+  getNivelesIdioma(): Observable<any> {
+    return this._http.get(this.api + 'catalogo/empleado/nivelIdioma', {headers: this.header});
+  }
+
 }
+

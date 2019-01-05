@@ -7,6 +7,9 @@ import {ReclutamientoService} from '../services/reclutamiento.service';
 import {Competencia} from '../models/competencia';
 import {ConocimientoRYS} from '../models/conocimientoRYS';
 import {ContactoRYS} from '../models/contacto-rys';
+import {IdiomaRYS} from '../models/idioma-rys';
+import {PuestoRYS} from '../models/puesto-rys';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-candidato-form',
@@ -34,11 +37,14 @@ export class CandidatoFormComponent implements OnInit {
   contacts = [];
   idiomas = [];
   idiomasCandidato = [];
+  habilidadesNivel = [];
+  nivelesIdiomas = [];
+  puestos = [];
   dataSource = new MatTableDataSource<ActividadSolicitante>();
   contactos = [];
   newContacto = {
     nombre: null,
-    tipo_contacto: null,
+    tipoContacto: null,
   };
   newIdioma = {
     nombre: null,
@@ -63,6 +69,7 @@ export class CandidatoFormComponent implements OnInit {
   displayContactos = ['nombre', 'tipo', 'detail1'];
   displayIdioma = ['idioma', 'nivel', 'habilidad', 'detail1'];
   displayCompetencias = ['nombreCompetencia', 'descripcionCompetencia', 'nivelCompetencia', 'detail1'];
+  displayPuestos = ['puesto', 'nivel', 'fechaFin', 'fechaIni', 'antiguedad', 'detail1'];
   constructor(private _form: FormBuilder, private CatalogServices: CatalogsService, private Recultamiento: ReclutamientoService) { }
 
   ngOnInit() {
@@ -75,7 +82,9 @@ export class CandidatoFormComponent implements OnInit {
       perfil: [null, Validators.required],
       situacion: [null, Validators.required],
       pretencion: [null, Validators.required],
-      direccion: [null, Validators.required]
+      direccion: [null, Validators.required],
+      username: [null, Validators.required],
+      password: [null, Validators.required]
 
     });
     this.ContactoForm = this._form.group({
@@ -98,6 +107,7 @@ export class CandidatoFormComponent implements OnInit {
 
     });
     this.CaracteristicasForm = this._form.group({
+      id: [null],
       genero: [null, Validators.required],
       estadoCivil: [null, Validators.required],
       dispoViajar: [null, Validators.required],
@@ -122,32 +132,69 @@ export class CandidatoFormComponent implements OnInit {
     this.getNivelCompetencia();
     this.getNacionalidades();
     this.getHabilidades();
+    this.getIdiomas();
+    this.getEstudios();
+    this.getHabilidadesNiveles();
+    this.getNivelesIdioma();
   }
 
   addIdioma() {
-
+    let id = sessionStorage.getItem('idCandidato');
+    let idioma = new IdiomaRYS();
+    idioma.nombre = this.newIdioma.nombre;
+    idioma.habilidad = this.newIdioma.habilidad;
+    idioma.nivel = this.newIdioma.nivel;
+    this.newIdioma.nombre = null;
+    this.newIdioma.habilidad = null;
+    this.newIdioma.nivel = null;
+    this.Recultamiento.saveIdioma(id, idioma).subscribe(res => {
+    });
+    this.idiomasCandidato.push(idioma);
   }
 
-
-
-  removeIdioma(element){
-    this.idiomasCandidato.map((item, i) => {
-      if (item.nombre === element.nombre) {
-        this.idiomasCandidato.splice(i, 1);
-      }
+  getIdiomas() {
+    this.CatalogServices.getIdiomas().subscribe(res => {
+      this.idiomas = res;
     });
   }
 
-  addPuesto()
+
+
+  removeIdioma(elt) {
+
+    this.idiomasCandidato.map((item, i ) => {
+      if (item.nombre === elt.nombre) {
+        this.idiomasCandidato.splice(i, 1);
+      }
+    });
+    this.Recultamiento.deleteIdioma(elt.id).subscribe(res => {
+    });
+  }
+
+  addPuesto() {
+    let id = sessionStorage.getItem('idCandidato');
+    let puesto = new PuestoRYS();
+    puesto.puesto = this.newPuesto.puesto;
+    puesto.nivel = this.newPuesto.nivel;
+    puesto.fechaIni = this.newPuesto.fechaIni;
+    puesto.fechaFin = this.newPuesto.fechaFin;
+    puesto.antiguedad = this.newPuesto.antiguedad;
+    for (let key in this.newPuesto){
+      this.newPuesto[key] = null;
+    }
+    this.Recultamiento.savePuestos(id, puesto).subscribe(res => {
+    });
+    this.puestos.push(puesto);
+  }
 
   addContacto() {
     let id = sessionStorage.getItem('idCandidato');
     let contacto = new ContactoRYS();
     contacto.id = null;
     contacto.nombre = this.newContacto.nombre;
-    contacto.tipo_contacto = this.newContacto.tipo_contacto;
+    contacto.tipoContacto = this.newContacto.tipoContacto;
     this.newContacto.nombre = null;
-    this.newContacto.tipo_contacto = null;
+    this.newContacto.tipoContacto = null;
     this.contactos.push(contacto);
     this.Recultamiento.saveContactoCandidato(id, contacto).subscribe(res => {
 
@@ -163,9 +210,18 @@ export class CandidatoFormComponent implements OnInit {
     this.Recultamiento.deleteContacto(elt.id).subscribe(res => {
     });
   }
+  removePuesto(elt) {
+    this.puestos.map((item, i ) => {
+      if (item.nombre === elt.nombre) {
+        this.puestos.splice(i, 1);
+      }
+    });
+    this.Recultamiento.deletePuesto(elt.id).subscribe(res => {
+    });
+  }
 
   addConocimiento() {
-    let id = sessionStorage.getItem('idVacante');
+    let id = sessionStorage.getItem('idCandidato');
     let conocimiento = new ConocimientoRYS();
     conocimiento.id = null;
     conocimiento.nombre = this.newConocimiento.nombre;
@@ -175,7 +231,7 @@ export class CandidatoFormComponent implements OnInit {
     this.newConocimiento.nombre = null;
     this.newConocimiento.nivel = null;
     if (id) {
-      this.Recultamiento.saveConocimiento(id, conocimiento).subscribe(res => {
+      this.Recultamiento.saveConocimientoCandidato(id, conocimiento).subscribe(res => {
         this.conocimientos.push(conocimiento);
       });
     }
@@ -187,7 +243,7 @@ export class CandidatoFormComponent implements OnInit {
         this.conocimientos.splice(i, 1);
       }
     });
-    this.Recultamiento.deleteConocimiento(elt.id).subscribe(res => {
+    this.Recultamiento.deleteConocimientoCandidato(elt.id).subscribe(res => {
     });
   }
 
@@ -238,37 +294,42 @@ export class CandidatoFormComponent implements OnInit {
       this.habilidades = res;
     });
   }
+  getNivelesIdioma() {
+    this.CatalogServices.getNivelesIdioma().subscribe(res => {
+      console.log(res);
+      this.nivelesIdiomas = res;
+    });
+  }
+  getHabilidadesNiveles() {
+    this.CatalogServices.getHabilidadesIdioma().subscribe(res => {
+      this.habilidadesNivel = res;
+    });
+
+  }
   searchByRFC() {
     if (this.InformacionForm.value['rfc']) {
       const rfc = this.InformacionForm.value['rfc'];
-      this.Recultamiento.getSolicitanteByRFC(rfc).subscribe(res => {
+      this.Recultamiento.getCandidatoRFC(rfc).subscribe(res => {
         console.log(res);
-        if (res.length) {
-          this.InformacionForm.patchValue(res[0]);
-          if (res[0]['contactos']) {
-            this.ContactoForm.patchValue(res[0]['contactos'][0]);
+        if (res) {
+          this.InformacionForm.patchValue(res);
+          if (res['contactos']) {
+              this.contactos = res['contactos'];
           }
-          if (res[0]['vacantes']) {
-            sessionStorage.setItem('idVacante', res[0]['vacantes'][0]['id']);
-            this.VacanteForm.patchValue(res[0]['vacantes'][0]);
-            if (res[0]['vacantes'][0] && res[0]['vacantes'][0]['actividades'].length ) {
-              console.log(res[0]['vacantes'][0]['actividades']);
-              this.actividades = res[0]['vacantes'][0]['actividades'];
-              this.dataSource.data = this.actividades;
-            }
-            if (res[0]['vacantes'][0]['caracteristicas'].length) {
-              this.CaracteristicasForm.patchValue(res[0]['vacantes'][0]['caracteristicas'][0]);
-            }
-            if (res[0]['vacantes'][0] && res[0]['vacantes'][0]['competencias'].length ) {
-              this.competencias = res[0]['vacantes'][0]['competencias'];
-            }
-            if (res[0]['vacantes'][0] && res[0]['vacantes'][0]['conocimientos'].length ) {
-              this.conocimientos = res[0]['vacantes'][0]['conocimientos'];
-            }
-
+          if (res['idiomas']) {
+            this.idiomasCandidato = res['idiomas'];
+          }
+          if (res['conocimentos']) {
+            this.conocimientos = res['conocimentos'];
+          }
+          if (res['puestos']) {
+            this.puestos = res['puestos'];
+          }
+          if (res['caracteristicasCandidatoCv']){
+            this.CaracteristicasForm.patchValue(res['caracteristicasCandidatoCv']);
           }
 
-          sessionStorage.setItem('idSolicitante', this.InformacionForm.value['id']);
+          sessionStorage.setItem('idCandidato', this.InformacionForm.value['id']);
           this.nextFlag = true;
         }
 
@@ -277,53 +338,93 @@ export class CandidatoFormComponent implements OnInit {
   }
   guardarForm (form , step) {
 
-    switch (step) {
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar los datos',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+        switch (step) {
+          case 1:
+            this.Recultamiento.saveCandidato(form['value']).subscribe(res => {
+              console.log(res);
+              Swal(
+                'Listo.',
+                'La información se guardo correctamente',
+                'success'
+              );
+              sessionStorage.setItem('idCandidato', JSON.stringify(res));
+            });
+            break;
+          case 2:
+            if (sessionStorage.getItem('idCandidato')) {
+              const id = JSON.parse(sessionStorage.getItem('idCandidato'));
+              if (id.id) {
+                this.Recultamiento.saveContacto(id.id, form['value']).subscribe(res => {
+                  console.log(res);
+                  Swal(
+                    'Listo.',
+                    'La información se guardo correctamente',
+                    'success'
+                  );
+                });
+              } else {
+                this.Recultamiento.saveContacto(id, form['value']).subscribe(res => {
+                  console.log(res);
+                  Swal(
+                    'Listo.',
+                    'La información se guardo correctamente',
+                    'success'
+                  );
+                });
+              }
+            }
+            break;
+          case 3:
+            if (sessionStorage.getItem('idCandidato')) {
+              console.log(form['value']);
+              const id = JSON.parse(sessionStorage.getItem('idCandidato'));
+              if (id.id) {
+                this.Recultamiento.saveVacante(id.id, form['value']).subscribe(res => {
+                  console.log(res);
+                  Swal(
+                    'Listo.',
+                    'La información se guardo correctamente',
+                    'success'
+                  );
 
-      case 1:
-        this.Recultamiento.saveCandidato(form['value']).subscribe(res => {
-          console.log(res);
-          sessionStorage.setItem('idCandidato', JSON.stringify(res));
-        });
-        break;
-      case 2:
-        if (sessionStorage.getItem('idSolicitante')) {
-          const id = JSON.parse(sessionStorage.getItem('idSolicitante'));
-          if (id.id) {
-            this.Recultamiento.saveContacto(id.id, form['value']).subscribe(res => {
-              console.log(res);
-            });
-          } else {
-            this.Recultamiento.saveContacto(id, form['value']).subscribe(res => {
-              console.log(res);
-            });
-          }
+                });
+              } else {
+                this.Recultamiento.saveVacante(id, form['value']).subscribe(res => {
+                  console.log(res);
+                  Swal(
+                    'Listo.',
+                    'La información se guardo correctamente',
+                    'success'
+                  );
+                });
+              }
+            }
+            break;
+          case 4:
+            if (sessionStorage.getItem('idCandidato')) {
+              let id = sessionStorage.getItem('idCandidato');
+              this.Recultamiento.saveCaractesristicasCandidato(id, form['value']).subscribe(res => {
+                console.log(res);
+                Swal(
+                  'Listo.',
+                  'La información se guardo correctamente',
+                  'success'
+                );
+              });
+            }
+            break;
         }
-        break;
-      case 3:
-        if (sessionStorage.getItem('idSolicitante')) {
-          console.log(form['value']);
-          const id = JSON.parse(sessionStorage.getItem('idSolicitante'));
-          if (id.id) {
-            this.Recultamiento.saveVacante(id.id, form['value']).subscribe(res => {
-              console.log(res);
-
-            });
-          } else {
-            this.Recultamiento.saveVacante(id, form['value']).subscribe(res => {
-              console.log(res);
-            });
-          }
-        }
-        break;
-      case 4:
-        if (sessionStorage.getItem('idVacante')) {
-          let id = sessionStorage.getItem('idVacante');
-          this.Recultamiento.saveCaracteristicas(id, form['value']).subscribe(res => {
-            console.log(res);
-          });
-        }
-        break;
-    }
+      }
+    });
   }
 
 }

@@ -155,8 +155,11 @@ export class ProyectoPVCService {
        return this.http.post(this.api + 'proyectoPVC/especialidades/' + id + '/conocimientos/humanisticos/guardarTodas', data, {headers: this.headers} );
     }
   }
-  getToken(token) : Observable<any> {
+  getToken(token): Observable<any> {
     return this.http.get(this.api + 'participantesPVC/' + token, { headers: this.headers} );
+  }
+  CalificarConocimiento(id, cal): Observable<any> {
+    return this.http.get(this.api + 'proyectoPVC/especialidades/conocimientos/' + id + '/calificar/' + cal, {headers: this.headers});
   }
 
 

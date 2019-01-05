@@ -54,7 +54,6 @@ export function highchartsFactory() {
     ViewActividadesComponent,
     VistaPVCParticipanteComponent,
     ModalUsuariosComponent,
-
   ],
   imports: [
     BrowserModule,
