@@ -17,13 +17,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author eisten
- */
 @Entity
 @Table(name = "entrevista_asignacion_vacante")
-public class EntrevistaAsignacionVacante implements Serializable {
+public class EntrevistaVacante implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,23 +39,34 @@ public class EntrevistaAsignacionVacante implements Serializable {
     private String horaInicial;
     @Column(name = "observaciones_cliente")
     private String observacionesCliente;
+    @Column(name = "observaciones_consultor")
+    private String observacionesConsultor;
+    @Column(name = "observaciones_solicitante")
+    private String observacionesSolicitante;    
     @Basic(optional = false)
     @Column(name = "tipo_entrevista")
     private int tipoEntrevista;
     @Column(name = "titulo")
     private String titulo;
-    @JoinColumn(name = "id_asignacion_consultor", referencedColumnName = "id")
-    @ManyToOne
-    private AsignacionConsultorVacante asignacionConsultorVacante;
-
-    public EntrevistaAsignacionVacante() {
+    
+    @Column(name = "idSolicitante")
+    private long idSolicitante;
+    
+    @Column(name = "idConsultor")
+    private long idConsultor;
+    
+    @Column(name = "idCandidato")
+    private long idCandidato;
+    
+    
+    public EntrevistaVacante() {
     }
 
-    public EntrevistaAsignacionVacante(Long id) {
+    public EntrevistaVacante(Long id) {
         this.id = id;
     }
 
-    public EntrevistaAsignacionVacante(Long id, int tipoEntrevista) {
+    public EntrevistaVacante(Long id, int tipoEntrevista) {
         this.id = id;
         this.tipoEntrevista = tipoEntrevista;
     }
@@ -120,7 +127,23 @@ public class EntrevistaAsignacionVacante implements Serializable {
         this.observacionesCliente = observacionesCliente;
     }
 
-    public int getTipoEntrevista() {
+    public String getObservacionesConsultor() {
+		return observacionesConsultor;
+	}
+
+	public void setObservacionesConsultor(String observacionesConsultor) {
+		this.observacionesConsultor = observacionesConsultor;
+	}
+
+	public String getObservacionesSolicitante() {
+		return observacionesSolicitante;
+	}
+
+	public void setObservacionesSolicitante(String observacionesSolicitante) {
+		this.observacionesSolicitante = observacionesSolicitante;
+	}
+
+	public int getTipoEntrevista() {
         return tipoEntrevista;
     }
 
@@ -136,21 +159,39 @@ public class EntrevistaAsignacionVacante implements Serializable {
         this.titulo = titulo;
     }
 
-    public AsignacionConsultorVacante getAsignacionConsultorVacante() {
-        return asignacionConsultorVacante;
-    }
+	public long getIdSolicitante() {
+		return idSolicitante;
+	}
 
-    public void setAsignacionConsultorVacante(AsignacionConsultorVacante asignacionConsultorVacante) {
-        this.asignacionConsultorVacante = asignacionConsultorVacante;
-    }
+	public void setIdSolicitante(long idSolicitante) {
+		this.idSolicitante = idSolicitante;
+	}
+
+	public long getIdConsultor() {
+		return idConsultor;
+	}
+
+	public void setIdConsultor(long idConsultor) {
+		this.idConsultor = idConsultor;
+	}
+
+	public long getIdCandidato() {
+		return idCandidato;
+	}
+
+	public void setIdCandidato(long idCandidato) {
+		this.idCandidato = idCandidato;
+	}
 
 	@Override
 	public String toString() {
-		return "EntrevistaAsignacionVacante [id=" + id + ", direccion=" + direccion + ", encargadoEntrevista="
+		return "EntrevistaVacante [id=" + id + ", direccion=" + direccion + ", encargadoEntrevista="
 				+ encargadoEntrevista + ", fechaEntrevista=" + fechaEntrevista + ", horaFinal=" + horaFinal
 				+ ", horaInicial=" + horaInicial + ", observacionesCliente=" + observacionesCliente
-				+ ", tipoEntrevista=" + tipoEntrevista + ", titulo=" + titulo + ", asignacionConsultorVacante="
-				+ asignacionConsultorVacante + "]";
+				+ ", observacionesConsultor=" + observacionesConsultor + ", observacionesSolicitante="
+				+ observacionesSolicitante + ", tipoEntrevista=" + tipoEntrevista + ", titulo=" + titulo
+				+ ", idSolicitante=" + idSolicitante + ", idConsultor=" + idConsultor + ", idCandidato=" + idCandidato
+				+ "]";
 	}
-	    
+    
 }

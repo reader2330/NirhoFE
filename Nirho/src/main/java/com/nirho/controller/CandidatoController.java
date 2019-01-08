@@ -177,6 +177,19 @@ public class CandidatoController {
 		} 
 	}
 	
+	@RequestMapping(value = "/{id}/vacante/eliminar", method = RequestMethod.POST)
+	public void eliminarRelacionVacante(@PathVariable("id") long id) throws NirhoControllerException{
+		try {
+			Candidato s = candidatoService.getOne(id);
+			if(s != null) {
+				s.setIdVacante(0);
+				candidatoService.save(s);
+			}
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar solicitante");
+		} 
+	}
+	
 	@RequestMapping(value = "/{id}/idiomas/guardar", method = RequestMethod.POST)
 	public String addAct(@PathVariable("id") long id, @Valid @RequestBody IdiomaCandidato l) throws NirhoControllerException{
 		try {

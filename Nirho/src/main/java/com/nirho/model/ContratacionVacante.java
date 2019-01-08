@@ -43,9 +43,12 @@ public class ContratacionVacante implements Serializable {
     @Basic(optional = false)
     @Column(name = "tipo_contrato")
     private int tipoContrato;
-    @JoinColumn(name = "id_vacante", referencedColumnName = "id")
-    @ManyToOne
-    private Vacante vacante;
+    
+    @Column(name = "idVacante")
+    private long idVacante;
+    @Column(name = "idCandidato")
+    private long idCandidato;
+    
 
     public ContratacionVacante() {
     }
@@ -70,7 +73,23 @@ public class ContratacionVacante implements Serializable {
         this.id = id;
     }
 
-    public String getJornada() {
+    public long getIdVacante() {
+		return idVacante;
+	}
+
+	public void setIdVacante(long idVacante) {
+		this.idVacante = idVacante;
+	}
+
+	public long getIdCandidato() {
+		return idCandidato;
+	}
+
+	public void setIdCandidato(long idCandidato) {
+		this.idCandidato = idCandidato;
+	}
+
+	public String getJornada() {
         return jornada;
     }
 
@@ -102,18 +121,11 @@ public class ContratacionVacante implements Serializable {
         this.tipoContrato = tipoContrato;
     }
 
-    public Vacante getVacante() {
-        return vacante;
-    }
-
-    public void setVacante(Vacante vacante) {
-        this.vacante = vacante;
-    }
-
 	@Override
 	public String toString() {
 		return "ContratacionVacante [id=" + id + ", jornada=" + jornada + ", prestaciones=" + prestaciones + ", sueldo="
-				+ sueldo + ", tipoContrato=" + tipoContrato + ", vacante=" + vacante + "]";
+				+ sueldo + ", tipoContrato=" + tipoContrato + ", idVacante=" + idVacante + ", idCandidato="
+				+ idCandidato + "]";
 	}
 	
 }
