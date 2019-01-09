@@ -72,6 +72,7 @@ public class SolicitanteController {
 	public String add(@Valid @RequestBody Solicitante solicitante) throws NirhoControllerException{
 		try {
 			Usuario u = new Usuario();
+			u.setEmail(solicitante.getEmail());
 			u.setUsername(solicitante.getUsername());
 			u.setPassword(SessionUtil.getEncryptMD5(solicitante.getPassword()));
 			u.setRol(6);
