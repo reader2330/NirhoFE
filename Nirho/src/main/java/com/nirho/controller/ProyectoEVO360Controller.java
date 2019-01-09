@@ -45,6 +45,7 @@ import com.nirho.dto.GraficaResultadoDTO;
 import com.nirho.dto.GuardarEvaluadoresDTO;
 import com.nirho.dto.ParticipanteEvaluadosDTO;
 import com.nirho.dto.PeriodoProyecto;
+import com.nirho.dto.PromPartDTO;
 import com.nirho.dto.RespEval360;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
@@ -503,9 +504,9 @@ public class ProyectoEVO360Controller {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
 
 	        Participante participante = participanteService.obtenerParticipante(new ParticipantePK(idParticipante, idProyecto));
 	        logger.info(" ********************************* participante [" + participante + "] *****************************");
@@ -642,9 +643,13 @@ public class ProyectoEVO360Controller {
 		 	             for(String key: datos.keySet()) {
 		 	            	Row row = dataSheet2.createRow(i);
 	    	            	row.createCell(0).setCellValue(key);
-	    	            	row.createCell(1).setCellValue(datos.get(key).getRespuesta());
-		 	            	row.createCell(2).setCellValue(promedioGeneral);
-		 	            	row.createCell(3).setCellValue((datos).get(key).getAutoEval());
+	    	            	try {
+		    	            	row.createCell(1).setCellValue(datos.get(key).getRespuesta());
+			 	            	row.createCell(2).setCellValue(promedioGeneral);
+			 	            	row.createCell(3).setCellValue((datos).get(key).getAutoEval());
+	    	            	}catch(NullPointerException e) {
+		 	            		logger.info("Sin datos en ["+ key +"]");
+		 	            	 }
 		 	            	i++;
 		 	             }
 	                }
@@ -656,8 +661,29 @@ public class ProyectoEVO360Controller {
 		 	             for(String key: datos.keySet()) {
 		 	            	Row row = dataSheet2.createRow(i);
 	    	            	row.createCell(0).setCellValue(key);
-	    	            	row.createCell(1).setCellValue(datos.get(key).getRespuesta());
-	    	            	row.createCell(3).setCellValue((datos).get(key).getAutoEval());
+		 	            	 try {
+		    	            	row.createCell(1).setCellValue(datos.get(key).getRespuesta());
+		    	            	row.createCell(3).setCellValue((datos).get(key).getAutoEval());
+			 	            	i++;
+		 	            	 }catch(NullPointerException e) {
+		 	            		logger.info("Sin datos en ["+ key +"]");
+		 	            	 }
+		 	             }
+	                }
+	                
+	                logger.info(" ******************** Promedio general de participantes *****************************");
+	                
+	                if(title.equals("Promedio general de participantes")) {
+	                	 XSSFWorkbook wb2 = chart.getWorkbook();
+		 	             Sheet dataSheet2 = wb2.getSheetAt(0);
+		 	             int i = 1;
+		 	             for(PromPartDTO pp: obtenerPromediosParticipantes(idProyecto)) {
+		 	            	Row row = dataSheet2.createRow(i);
+	    	            	row.createCell(0).setCellValue(pp.getIdParticipante());
+	    	            	row.createCell(1).setCellValue(pp.getPromedio());
+	    	            	if(idParticipante.intValue() == pp.getIdParticipante()) {
+	    	            		row.createCell(2).setCellValue(pp.getPromedio());
+	    	            	}
 		 	            	i++;
 		 	             }
 	                }
@@ -678,6 +704,34 @@ public class ProyectoEVO360Controller {
 		} catch (NirhoServiceException e) {
 			throw new NirhoControllerException("Problemas al generar reporte");
 		}
+	}
+	
+	private List<PromPartDTO> obtenerPromediosParticipantes(Integer idProyecto){
+		List<PromPartDTO> promedios = new ArrayList<>();
+		try {
+			List<Participante> participantes = participanteService.obtenerParticipantes(idProyecto);
+			for(Participante participante: participantes) {
+				List<CuetionarioParticipante> cuestPartList = 
+						cuestPartService.obtenerCuestionarioParticipante(participante.getParticipantePK().getIdParticipante(), idProyecto);
+		        int promedioGeneral = 0;
+		        int conta = 0;
+		        for(CuetionarioParticipante cp: cuestPartList) {
+		        	if(cp.getRespuesta() != null && cp.getRespuesta().intValue() != 0) {
+		        		promedioGeneral = promedioGeneral + cp.getRespuesta();
+			        	conta = conta +1;
+		        	}
+		        }   
+		        if(conta != 0) {
+			        promedioGeneral = Math.round(promedioGeneral/conta);
+			        PromPartDTO pp = new PromPartDTO(participante.getParticipantePK().getIdParticipante(), promedioGeneral);
+			        logger.info("PormPart [" + pp + "]");
+			        promedios.add(pp);
+		        }
+		    }
+		} catch(Exception e) {
+			logger.info("Exception [" + e.getMessage() + "]");
+		}
+		return promedios;
 	}
 	
 	protected Integer dispersionMock(Integer data) {
