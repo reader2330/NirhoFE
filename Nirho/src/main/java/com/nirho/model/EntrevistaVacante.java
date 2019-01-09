@@ -45,7 +45,7 @@ public class EntrevistaVacante implements Serializable {
     private String observacionesSolicitante;    
     @Basic(optional = false)
     @Column(name = "tipo_entrevista")
-    private int tipoEntrevista;
+    private String tipoEntrevista;
     @Column(name = "titulo")
     private String titulo;
     
@@ -66,7 +66,7 @@ public class EntrevistaVacante implements Serializable {
         this.id = id;
     }
 
-    public EntrevistaVacante(Long id, int tipoEntrevista) {
+    public EntrevistaVacante(Long id, String tipoEntrevista) {
         this.id = id;
         this.tipoEntrevista = tipoEntrevista;
     }
@@ -143,11 +143,11 @@ public class EntrevistaVacante implements Serializable {
 		this.observacionesSolicitante = observacionesSolicitante;
 	}
 
-	public int getTipoEntrevista() {
+	public String getTipoEntrevista() {
         return tipoEntrevista;
     }
 
-    public void setTipoEntrevista(int tipoEntrevista) {
+    public void setTipoEntrevista(String tipoEntrevista) {
         this.tipoEntrevista = tipoEntrevista;
     }
 

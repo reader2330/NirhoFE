@@ -48,6 +48,7 @@ public class UsuarioController {
 	@Autowired
     TokenHelper tokenHelper;
 	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
 	public String login(@RequestBody Usuario usuario, HttpServletRequest request) throws NirhoControllerException {
 		try {
@@ -185,6 +186,7 @@ public class UsuarioController {
 			logger.warn("error "+ e.getMessage());
 		}
 	}
+	
 	@RequestMapping(value = "/todos", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Usuario> getUsuarios() throws NirhoControllerException{
@@ -196,4 +198,5 @@ public class UsuarioController {
 		}
 		return lista;
 	}
+	
 }

@@ -1,6 +1,8 @@
 package com.nirho.controller;
 
 import java.util.List;
+import java.util.Set;
+
 import javax.validation.Valid;
 import org.jboss.logging.Logger;
 import org.json.JSONException;
@@ -19,7 +21,9 @@ import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.Solicitante;
 import com.nirho.model.SolicitanteContacto;
 import com.nirho.model.SolicitanteVacante;
+import com.nirho.model.Usuario;
 import com.nirho.service.SolicitanteService;
+import com.nirho.service.UsuarioService;
 
 
 
@@ -32,6 +36,8 @@ public class SolicitanteController {
 	 
 	@Autowired
 	SolicitanteService solicitanteService;
+	@Autowired
+	UsuarioService usuarioService;
 	
 	@GetMapping(value = "/todos")
 	public List<Solicitante> todos() throws NirhoControllerException{
@@ -119,6 +125,19 @@ public class SolicitanteController {
 			throw new NirhoControllerException("Problemas al registrar solicitante");
 		} catch (JSONException e1) {
 			throw new NirhoControllerException("Problemas al registrar entidad");
+		} 
+	}
+
+	@RequestMapping(value = "/{id}/vacantes", method = RequestMethod.POST)
+	public Set<SolicitanteVacante> vacantes(@PathVariable("id") int id) throws NirhoControllerException{
+		try {
+			Solicitante s = solicitanteService.getOne(id);
+			if(s != null) {
+				return s.getVacantes();
+			}
+			return null;
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar solicitante");
 		} 
 	}
 	

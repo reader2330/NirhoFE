@@ -64,6 +64,7 @@ import com.nirho.model.SolicitanteVacante;
 import com.nirho.model.Usuario;
 import com.nirho.service.CandidatoService;
 import com.nirho.service.SolicitanteVacanteService;
+import com.nirho.service.UsuarioService;
 import com.nirho.util.ReporteUtil;
 import com.nirho.util.SessionUtil;
 
@@ -80,6 +81,8 @@ public class CandidatoController {
 	CandidatoService candidatoService;
 	@Autowired
 	SolicitanteVacanteService solicitanteVacanteService;
+	@Autowired
+	UsuarioService usuarioService;
 	
 	@GetMapping(value = "/todos")
 	public List<Candidato> todos() throws NirhoControllerException{
@@ -124,7 +127,11 @@ public class CandidatoController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody Candidato candidato) throws NirhoControllerException{
 		try {
-      candidato.setRol("5");
+			Usuario u = new Usuario();
+			u.setUsername(candidato.getUsername());
+			u.setPassword(SessionUtil.getEncryptMD5(candidato.getPassword()));
+			usuarioService.guardarUsuario(u);
+			candidato.setRol("5");
 			candidatoService.save(candidato);
 			JSONObject json = new JSONObject();
 			json.accumulate("id", candidato.getId());

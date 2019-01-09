@@ -1056,7 +1056,7 @@ CREATE TABLE `entrevista_asignacion_vacante` (
   `observaciones_cliente` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `observaciones_consultor` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `observaciones_solicitante` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tipo_entrevista` int(11) NOT NULL,
+  `tipo_entrevista` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `titulo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -2470,4 +2470,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-08 14:08:15
+-- Dump completed on 2019-01-08 19:13:56

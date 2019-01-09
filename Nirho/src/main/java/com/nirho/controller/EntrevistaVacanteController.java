@@ -1,32 +1,16 @@
 package com.nirho.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.apache.poi.ooxml.POIXMLDocumentPart;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
-import org.apache.poi.xwpf.usermodel.XWPFChart;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.jboss.logging.Logger;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,28 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nirho.dto.ProyectoPVCNivelDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
-import com.nirho.model.ActividadesPuestoVacante;
 import com.nirho.model.EntrevistaVacante;
-import com.nirho.model.CompetenciasVacante;
-import com.nirho.model.ConocimientoVacante;
-import com.nirho.model.ParticipantePVC;
-import com.nirho.model.ProyectoPVCArea;
-import com.nirho.model.ProyectoPVCConocimiento;
-import com.nirho.model.ProyectoPVCEsfera;
-import com.nirho.model.ProyectoPVCEspecialidad;
-import com.nirho.model.ProyectoPVCNivel;
-import com.nirho.model.Solicitante;
-import com.nirho.model.SolicitanteVacante;
-import com.nirho.model.Usuario;
 import com.nirho.service.EntrevistaVacanteService;
 import com.nirho.service.SolicitanteVacanteService;
-import com.nirho.util.ReporteUtil;
-import com.nirho.util.SessionUtil;
-
-
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -207,7 +174,6 @@ public class EntrevistaVacanteController {
 		} 
 	}
 
-	
 	@RequestMapping(value = "/reporte/participante", method = RequestMethod.GET)
 	@ResponseBody
 	public void genearReporteIndividual(@RequestParam(name="idEntrevistaVacante") long idEntrevistaVacante, HttpServletResponse response) throws NirhoControllerException{
