@@ -274,7 +274,7 @@ public class SolicitanteVacanteController {
         	if(caracteristicas != null) {
 	        	for(CaracteristicasCandidatoVacante e : vacante.getCaracteristicas()) {
 	        		XWPFTableRow row = caracteristicas.createRow();
-	        		row.createCell().setText("Nombre: " + e. + " Descripción: " + e.getDescripcion());
+	        		//row.createCell().setText("Nombre: " + e. + " Descripción: " + e.getDescripcion());
 	        	}
 	        }
 
