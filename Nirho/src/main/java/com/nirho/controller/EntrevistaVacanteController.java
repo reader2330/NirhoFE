@@ -221,10 +221,12 @@ public class EntrevistaVacanteController {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYS.docx"));
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reporteRYS.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYS.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reporteRYSEntrevista.docx"));
 
-	        String nombreReporte = "ReporteRYS_" + ".docx";
+			
+			
+	        String nombreReporte = "ReporteRYS_Entrevista" + ".docx";
 	        
 	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
 	        response.setHeader("Content-Disposition", "attachment; filename=" + nombreReporte);
@@ -248,4 +250,5 @@ public class EntrevistaVacanteController {
 		emailBody += "Encargado de entrevista: " + entrevista.getEncargadoEntrevista() + "\n";
 		emailService.sendEmail(to, "Entrevista", emailBody);
 	}
+	
 }

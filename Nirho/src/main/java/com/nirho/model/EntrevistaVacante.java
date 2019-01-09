@@ -26,7 +26,7 @@ public class EntrevistaVacante implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private long id;
     @Column(name = "direccion")
     private String direccion;
     @Column(name = "encargado_entrevista")
@@ -71,11 +71,11 @@ public class EntrevistaVacante implements Serializable {
         this.tipoEntrevista = tipoEntrevista;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
