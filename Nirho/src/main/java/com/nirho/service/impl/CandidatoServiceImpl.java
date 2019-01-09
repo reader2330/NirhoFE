@@ -89,6 +89,15 @@ public class CandidatoServiceImpl implements CandidatoService {
 		}	
 	}
 	
+	public List<Candidato> getAllByVacante(long idVacante) throws NirhoServiceException{
+		try {
+			return candidatoDAO.findByVacante(idVacante);
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
+		}	
+	}
+	
 	public List<Candidato> getAll() throws NirhoServiceException{
 		try {
 			return candidatoDAO.findAll();

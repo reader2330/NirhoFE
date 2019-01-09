@@ -130,6 +130,7 @@ public class CandidatoController {
 			Usuario u = new Usuario();
 			u.setUsername(candidato.getUsername());
 			u.setPassword(SessionUtil.getEncryptMD5(candidato.getPassword()));
+			u.setRol(5);
 			usuarioService.guardarUsuario(u);
 			candidato.setRol("5");
 			candidatoService.save(candidato);

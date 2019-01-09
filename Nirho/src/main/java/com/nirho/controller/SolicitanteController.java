@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.Candidato;
 import com.nirho.model.Solicitante;
 import com.nirho.model.SolicitanteContacto;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.model.Usuario;
 import com.nirho.service.SolicitanteService;
 import com.nirho.service.UsuarioService;
+import com.nirho.util.SessionUtil;
 
 
 
@@ -69,6 +71,11 @@ public class SolicitanteController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody Solicitante solicitante) throws NirhoControllerException{
 		try {
+			Usuario u = new Usuario();
+			u.setUsername(solicitante.getUsername());
+			u.setPassword(SessionUtil.getEncryptMD5(solicitante.getPassword()));
+			u.setRol(6);
+			usuarioService.guardarUsuario(u);
 			solicitanteService.save(solicitante);
 			JSONObject json = new JSONObject();
 			json.accumulate("id", solicitante.getId());
@@ -79,7 +86,7 @@ public class SolicitanteController {
 			throw new NirhoControllerException("Problemas al registrar entidad");
 		} 
 	}
-	
+		
 	@RequestMapping(value = "/guardarTodos", method = RequestMethod.POST)
 	public void add(@Valid @RequestBody List<Solicitante> l) throws NirhoControllerException{
 		try {

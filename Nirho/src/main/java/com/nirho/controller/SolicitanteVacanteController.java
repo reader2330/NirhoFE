@@ -1,5 +1,6 @@
 package com.nirho.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.jboss.logging.Logger;
@@ -13,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.nirho.dto.SolicitanteVacanteDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ActividadesPuestoVacante;
+import com.nirho.model.Candidato;
 import com.nirho.model.CaracteristicasCandidatoVacante;
 import com.nirho.model.CompetenciasVacante;
 import com.nirho.model.ConocimientoVacante;
 import com.nirho.model.SolicitanteVacante;
+import com.nirho.service.CandidatoService;
 import com.nirho.service.SolicitanteVacanteService;
 
 
@@ -33,11 +38,27 @@ public class SolicitanteVacanteController {
 	 
 	@Autowired
 	SolicitanteVacanteService solicitanteVacanteService;
+	@Autowired
+	CandidatoService candidatoService;
 	
 	@GetMapping(value = "/todos")
 	public List<SolicitanteVacante> todos() throws NirhoControllerException{
 		try {
 			return solicitanteVacanteService.getAll();
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los entidads");
+		}
+	}
+	
+	@GetMapping(value = "/todos/candidatos")
+	public List<SolicitanteVacanteDTO> todosConCandidatos() throws NirhoControllerException{
+		try {
+			List<SolicitanteVacanteDTO> response = new ArrayList<>();
+			for(SolicitanteVacante v: solicitanteVacanteService.getAll()) {
+				List<Candidato> candidatos = candidatoService.getAllByVacante(v.getId());
+				SolicitanteVacanteDTO s = new SolicitanteVacanteDTO(v.getId(), v.getAniosExperiencia(), v.getEstadoVacante(), v.getGiro(), v.getMotivo(), v.getStatus(), v.getNombreVacante(), v.getNumVacantes(), v.getPuesto(), v.getPuestoCargo(), v.getPuestoReporta(), candidatos, v.getActividades() , v.getCaracteristicas(), v.getCompetencias(), v.getConocimientos());
+			}
+			return response;
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de los entidads");
 		}

@@ -3,113 +3,55 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nirho.model;
+package com.nirho.dto;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import com.nirho.model.CaracteristicasCandidatoCv;
+import com.nirho.model.ConocimientoCandidato;
+import com.nirho.model.ContactoCandidato;
+import com.nirho.model.ExperienciaCandidato;
+import com.nirho.model.IdiomaCandidato;
 
-import org.apache.xmlbeans.impl.common.PushedInputStream;
+public class CandidatoDTO implements Serializable {
 
-@Entity
-@Table(name = "candidato")
-public class Candidato implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private long id;
-    
-    @Column(name = "idSolicitate")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6788L;
+	
+	private long id;
     private long idSolicitante;
-    
-    @Column(name = "idVacante")
     private long idVacante;
-    
-    @Column(name = "rfc")
     private String rfc;
-    
-    @Column(name = "nombre")
     private String nombre;
-    
-    @Column(name = "username")
     private String username;
-    
-    @Column(name = "password")
     private String password;
-    
-    @Column(name = "email")
-    private String email;
-    
-    @Column(name = "nacionalidad")
     private String nacionalidad;
-    
-    @Column(name = "nacimiento")
     private Date nacimiento;
-    
-    @Column(name = "perfil")
     private String perfil;
-    
-    @Column(name = "situacion")
     private String situacion;
-    
-    @Column(name = "pretencion")
     private String pretencion;
-    
-    @Column(name = "direccion")
     private String direccion;
-    
-    @Basic(optional = false)
-    @Column(name = "estado")
     private long estado;
-    
-    @Column(name = "rol")
     private String rol;
-    
-    @OneToOne (cascade=CascadeType.ALL)
-    @JoinColumn(name="caracteristicas", unique= true, nullable=true, insertable=true, updatable=true)
     private CaracteristicasCandidatoCv caracteristicasCandidatoCv;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "candidato")
    	private Set<ContactoCandidato> contactos = new HashSet<>();
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "candidato")
    	private Set<IdiomaCandidato> idiomas = new HashSet<>();
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "candidato")
    	private Set<ConocimientoCandidato> conocimentos = new HashSet<>();
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "candidato")
    	private Set<ExperienciaCandidato> puestos = new HashSet<>();
     
-    public Candidato() {
+    public CandidatoDTO() {
     }
 
-    public Candidato(long id) {
+    public CandidatoDTO(long id) {
         this.id = id;
     }
 
-	public Candidato(long id, long idSolicitante, String rfc, String nombre, String username, String password,
+	public CandidatoDTO(long id, long idSolicitante, String rfc, String nombre, String username, String password,
 			String nacionalidad, Date nacimiento, String perfil, String situacion, String pretencion,
 			String direccion, long estado, String rol, CaracteristicasCandidatoCv caracteristicasCandidatoCv,
 			Set<ContactoCandidato> contactos, Set<IdiomaCandidato> idiomas, Set<ConocimientoCandidato> conocimentos) {
