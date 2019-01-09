@@ -128,6 +128,7 @@ public class CandidatoController {
 	public String add(@Valid @RequestBody Candidato candidato) throws NirhoControllerException{
 		try {
 			Usuario u = new Usuario();
+			u.setEmail(candidato.getEmail());
 			u.setUsername(candidato.getUsername());
 			u.setPassword(SessionUtil.getEncryptMD5(candidato.getPassword()));
 			u.setRol(5);
