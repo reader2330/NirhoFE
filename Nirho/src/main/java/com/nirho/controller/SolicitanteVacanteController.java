@@ -1,8 +1,19 @@
 package com.nirho.controller;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.openxml4j.util.ZipSecureFile;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.jboss.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +24,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.dto.SolicitanteVacanteDTO;
@@ -20,12 +33,14 @@ import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ActividadesPuestoVacante;
 import com.nirho.model.Candidato;
+import com.nirho.model.CaracteristicasCandidatoCv;
 import com.nirho.model.CaracteristicasCandidatoVacante;
 import com.nirho.model.CompetenciasVacante;
 import com.nirho.model.ConocimientoVacante;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.service.CandidatoService;
 import com.nirho.service.SolicitanteVacanteService;
+import com.nirho.util.ReporteUtil;
 
 
 
@@ -207,6 +222,89 @@ public class SolicitanteVacanteController {
 		} catch (JSONException e1) {
 			throw new NirhoControllerException("Problemas al registrar entidad");
 		} 
+	}
+	
+	@RequestMapping(value = "/reporte", method = RequestMethod.GET)
+	@ResponseBody
+	public void genearReporteIndividual(@RequestParam(name="idVacante") long idVacante, HttpServletResponse response) throws NirhoControllerException{
+		
+		try {
+			    
+			ZipSecureFile.setMinInflateRatio(0);
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYS.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reporteRYS.docx"));
+
+			SolicitanteVacante vacante = solicitanteVacanteService.getOne(idVacante);
+
+	        XWPFTable informacionGeneral =  ReporteUtil.getTablaPorTitulo(document, "Datos de vacante");
+	        XWPFTable actividades =  ReporteUtil.getTablaPorTitulo(document, "Actividades");
+	        XWPFTable caracteristicas =  ReporteUtil.getTablaPorTitulo(document, "Características");
+	        XWPFTable competencias =  ReporteUtil.getTablaPorTitulo(document, "Competencias");
+	        XWPFTable conocimientos =  ReporteUtil.getTablaPorTitulo(document, "Conocimientos");
+	        
+	        if(informacionGeneral != null){
+	        	
+	            XWPFTableRow row3 = informacionGeneral.getRow(3);
+	            row3.getCell(1).setText(vacante.getNombreVacante());
+	            row3.getCell(4).setText(vacante.getPuesto());
+	            
+	            XWPFTableRow row4 = informacionGeneral.getRow(4);
+	            row4.getCell(1).setText(vacante.getAniosExperiencia() + "");
+	            row4.getCell(4).setText(vacante.getEstadoVacante() == 1 ? "Creado" : "Asignado");
+	            
+	            XWPFTableRow row5 = informacionGeneral.getRow(5);
+	            row5.getCell(1).setText(vacante.getGiro() + "");
+	            row5.getCell(4).setText(vacante.getMotivo() + "");
+	            
+	            XWPFTableRow row6 = informacionGeneral.getRow(6);
+	            row6.getCell(1).setText(vacante.getNumVacantes() + "");
+	            row6.getCell(4).setText(vacante.getPuestoCargo());
+	            
+	            XWPFTableRow row7 = informacionGeneral.getRow(7);
+	            row7.getCell(1).setText(vacante.getPuestoReporta());
+	        }
+	        
+	        if(actividades != null) {        	
+	        	for(ActividadesPuestoVacante e : vacante.getActividades()) {
+	        		XWPFTableRow row = actividades.createRow();
+	        		row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+	        	}
+	        }
+
+        	if(caracteristicas != null) {
+	        	for(CaracteristicasCandidatoVacante e : vacante.getCaracteristicas()) {
+	        		XWPFTableRow row = caracteristicas.createRow();
+	        		row.createCell().setText("Nombre: " + e. + " Descripción: " + e.getDescripcion());
+	        	}
+	        }
+
+			if(competencias != null) {
+				for(CompetenciasVacante e : vacante.getCompetencias()) {
+					XWPFTableRow row = competencias.createRow();
+					row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+				}
+			}
+			
+			if(conocimientos != null) {
+	        	for(ConocimientoVacante e : vacante.getConocimientos()) {
+	        		XWPFTableRow row = conocimientos.createRow();
+	        		row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+	        	}
+	        }
+	        
+	        String nombreReporte = "ReporteRYS_Vacante_" + vacante.getNombreVacante() + ".docx";
+	        
+	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
+	        response.setHeader("Content-Disposition", "attachment; filename=" + nombreReporte);
+	        document.write(response.getOutputStream());
+	   
+	        response.flushBuffer();
+
+		} catch(IOException | InvalidFormatException e){
+			throw new NirhoControllerException("Problemas al generar reporte");
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al generar reporte");
+		}
 	}
 	
 }

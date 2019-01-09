@@ -26,9 +26,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.Candidato;
 import com.nirho.model.EntrevistaVacante;
+import com.nirho.model.Solicitante;
+import com.nirho.model.Usuario;
+import com.nirho.service.CandidatoService;
+import com.nirho.service.EmailService;
 import com.nirho.service.EntrevistaVacanteService;
+import com.nirho.service.SolicitanteService;
 import com.nirho.service.SolicitanteVacanteService;
+import com.nirho.service.UsuarioService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -41,6 +48,14 @@ public class EntrevistaVacanteController {
 	EntrevistaVacanteService entrevistaVacanteService;
 	@Autowired
 	SolicitanteVacanteService solicitanteVacanteService;
+	@Autowired
+	EmailService emailService;
+	@Autowired
+	UsuarioService usuarioService;
+	@Autowired
+	SolicitanteService solicitanteService;
+	@Autowired
+	CandidatoService candidatoService;
 	
 	@GetMapping(value = "/todos")
 	public List<EntrevistaVacante> todos() throws NirhoControllerException{
@@ -76,7 +91,32 @@ public class EntrevistaVacanteController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody EntrevistaVacante entrevistaVacante) throws NirhoControllerException{
 		try {
+			
 			entrevistaVacanteService.save(entrevistaVacante);
+			
+			Candidato candidato = candidatoService.getOne(entrevistaVacante.getIdCandidato());
+			if( candidato != null) {
+				enviarEntrevista(candidato.getEmail(), entrevistaVacante);
+			}
+			
+			Usuario consultor = null;
+			List<Usuario> consultores = usuarioService.obtenerConsultores();
+			for(Usuario usuario: consultores) {
+				if(usuario.getId() == entrevistaVacante.getIdConsultor()) {
+					consultor = usuario;
+				}
+			}
+			
+			if( consultor != null) {
+				enviarEntrevista(consultor.getEmail(), entrevistaVacante);
+			}
+			
+			
+			Solicitante solicitante = solicitanteService.getOne(entrevistaVacante.getIdSolicitante());
+			if( solicitante != null) {
+				enviarEntrevista(solicitante.getEmail(), entrevistaVacante);
+			}
+			
 			JSONObject json = new JSONObject();
 			json.accumulate("id", entrevistaVacante.getId());
 			return json.toString();
@@ -198,4 +238,14 @@ public class EntrevistaVacanteController {
 	}
 	
 	
+	private void enviarEntrevista(String to, EntrevistaVacante entrevista) throws NirhoServiceException {
+		String emailBody = "";
+		emailBody += "Título: " + entrevista.getTitulo() + "\n\n";
+		emailBody += "Fecha: " + entrevista.getFechaEntrevista() + "\n";
+		emailBody += "Hora inicial: " + entrevista.getHoraInicial() + "\n";
+		emailBody += "Hora final: " + entrevista.getHoraFinal() + "\n";
+		emailBody += "Dirección: " + entrevista.getDireccion() + "\n";
+		emailBody += "Encargado de entrevista: " + entrevista.getEncargadoEntrevista() + "\n";
+		emailService.sendEmail(to, "Entrevista", emailBody);
+	}
 }
