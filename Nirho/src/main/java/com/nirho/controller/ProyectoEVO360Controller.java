@@ -643,9 +643,13 @@ public class ProyectoEVO360Controller {
 		 	             for(String key: datos.keySet()) {
 		 	            	Row row = dataSheet2.createRow(i);
 	    	            	row.createCell(0).setCellValue(key);
-	    	            	row.createCell(1).setCellValue(datos.get(key).getRespuesta());
-		 	            	row.createCell(2).setCellValue(promedioGeneral);
-		 	            	row.createCell(3).setCellValue((datos).get(key).getAutoEval());
+	    	            	try {
+		    	            	row.createCell(1).setCellValue(datos.get(key).getRespuesta());
+			 	            	row.createCell(2).setCellValue(promedioGeneral);
+			 	            	row.createCell(3).setCellValue((datos).get(key).getAutoEval());
+	    	            	}catch(NullPointerException e) {
+		 	            		logger.info("Sin datos en ["+ key +"]");
+		 	            	 }
 		 	            	i++;
 		 	             }
 	                }
