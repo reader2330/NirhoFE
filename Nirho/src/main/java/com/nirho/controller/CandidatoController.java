@@ -131,25 +131,22 @@ public class CandidatoController {
 			Usuario usuario = usuarioService.obtenerUsuario(candidato.getUsername());
 			
 			if(usuario == null) {
-				Usuario u = new Usuario();
-				u.setEmail(candidato.getEmail());
-				u.setUsername(candidato.getUsername());
-				u.setPassword(SessionUtil.getEncryptMD5(candidato.getPassword()));
-				u.setRol(5);
-				usuarioService.guardarUsuario(u);
-			} else {
-				usuario.setEmail(candidato.getEmail());
-				usuario.setUsername(candidato.getUsername());
-				usuario.setPassword(SessionUtil.getEncryptMD5(candidato.getPassword()));
-				usuario.setRol(5);
-				usuarioService.guardarUsuario(usuario);
+				usuario = new Usuario(); 
 			}
+
+			usuario.setEmail(candidato.getEmail());
+			usuario.setUsername(candidato.getUsername());
+			usuario.setFullName(candidato.getNombre());
+			usuario.setPassword(SessionUtil.getEncryptMD5(candidato.getPassword()));
+			usuario.setRol(5);
+			usuarioService.guardarUsuario(usuario);
 			
 			candidato.setRol("5");
 			candidatoService.save(candidato);
 			JSONObject json = new JSONObject();
 			json.accumulate("id", candidato.getId());
 			return json.toString();
+			
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar entidad");
 		} catch (JSONException e1) {

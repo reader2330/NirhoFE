@@ -1,5 +1,6 @@
 package com.nirho.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.nirho.dto.SolicitanteVacanteDTO;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.Candidato;
@@ -23,6 +26,7 @@ import com.nirho.model.Solicitante;
 import com.nirho.model.SolicitanteContacto;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.model.Usuario;
+import com.nirho.service.CandidatoService;
 import com.nirho.service.SolicitanteService;
 import com.nirho.service.UsuarioService;
 import com.nirho.util.SessionUtil;
@@ -40,6 +44,8 @@ public class SolicitanteController {
 	SolicitanteService solicitanteService;
 	@Autowired
 	UsuarioService usuarioService;
+	@Autowired
+	CandidatoService candidatoService;
 	
 	@GetMapping(value = "/todos")
 	public List<Solicitante> todos() throws NirhoControllerException{
@@ -71,16 +77,25 @@ public class SolicitanteController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody Solicitante solicitante) throws NirhoControllerException{
 		try {
-			Usuario u = new Usuario();
-			u.setEmail(solicitante.getEmail());
-			u.setUsername(solicitante.getUsername());
-			u.setPassword(SessionUtil.getEncryptMD5(solicitante.getPassword()));
-			u.setRol(6);
-			usuarioService.guardarUsuario(u);
+			
+			Usuario usuario = usuarioService.obtenerUsuario(solicitante.getUsername());
+			
+			if(usuario == null) {
+				usuario = new Usuario();
+			}
+
+			usuario.setEmail(solicitante.getEmail());
+			usuario.setUsername(solicitante.getUsername());
+			usuario.setFullName(solicitante.getNombre());
+			usuario.setPassword(SessionUtil.getEncryptMD5(solicitante.getPassword()));
+			usuario.setRol(6);
+			usuarioService.guardarUsuario(usuario);
+			
 			solicitanteService.save(solicitante);
 			JSONObject json = new JSONObject();
 			json.accumulate("id", solicitante.getId());
 			return json.toString();
+			
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar entidad");
 		} catch (JSONException e1) {
@@ -136,17 +151,22 @@ public class SolicitanteController {
 		} 
 	}
 
-	@RequestMapping(value = "/{id}/vacantes", method = RequestMethod.POST)
-	public Set<SolicitanteVacante> vacantes(@PathVariable("id") int id) throws NirhoControllerException{
+	
+	@GetMapping(value = "/{id}/vacantes")
+	public List<SolicitanteVacanteDTO> todosConCandidatos(@PathVariable("id") int id) throws NirhoControllerException{
 		try {
-			Solicitante s = solicitanteService.getOne(id);
-			if(s != null) {
-				return s.getVacantes();
+			Solicitante solicitante = solicitanteService.getOne(id);
+			List<SolicitanteVacanteDTO> response = new ArrayList<>();
+			for(SolicitanteVacante v: solicitante.getVacantes()) {
+				List<Candidato> candidatos = candidatoService.getAllByVacante(v.getId());
+				SolicitanteVacanteDTO s = new SolicitanteVacanteDTO(v.getId(), v.getAniosExperiencia(), v.getEstadoVacante(), v.getGiro(), v.getMotivo(), v.getStatus(), v.getNombreVacante(), v.getNumVacantes(), v.getPuesto(), v.getPuestoCargo(), v.getPuestoReporta(), candidatos, v.getActividades() , v.getCaracteristicas(), v.getCompetencias(), v.getConocimientos());
+				response.add(s);
 			}
-			return null;
-		} catch(NirhoServiceException ex){
-			throw new NirhoControllerException("Problemas al registrar solicitante");
-		} 
+			return response;
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los entidads");
+		}
 	}
+	
 	
 }
