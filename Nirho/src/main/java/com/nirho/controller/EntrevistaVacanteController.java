@@ -88,6 +88,33 @@ public class EntrevistaVacanteController {
 		}
 	}
 	
+	@GetMapping(value = "/porCandidato")
+	public List<EntrevistaVacante> porCandidato(@RequestParam(name="idCandidato") long idCandidato) throws NirhoControllerException{
+		try {
+			return entrevistaVacanteService.getByIdCandidato(idCandidato);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los solicitantes");
+		}
+	}
+	
+	@GetMapping(value = "/porConsultor")
+	public List<EntrevistaVacante> porConsultor(@RequestParam(name="idConsultor") long idConsultor) throws NirhoControllerException{
+		try {
+			return entrevistaVacanteService.getByIdConsultor(idConsultor);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los solicitantes");
+		}
+	}
+	
+	@GetMapping(value = "/porSolicitante")
+	public List<EntrevistaVacante> porSolicitante(@RequestParam(name="idSolicitante") long idSolicitante) throws NirhoControllerException{
+		try {
+			return entrevistaVacanteService.getByIdSolicitante(idSolicitante);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los solicitantes");
+		}
+	}
+	
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody EntrevistaVacante entrevistaVacante) throws NirhoControllerException{
 		try {
@@ -244,12 +271,12 @@ public class EntrevistaVacanteController {
 	
 	private void enviarEntrevista(String to, EntrevistaVacante entrevista) throws NirhoServiceException {
 		String emailBody = "";
-		emailBody += "Título: " + entrevista.getTitulo() + "\n\n";
-		emailBody += "Fecha: " + entrevista.getFechaEntrevista() + "\n";
-		emailBody += "Hora inicial: " + entrevista.getHoraInicial() + "\n";
-		emailBody += "Hora final: " + entrevista.getHoraFinal() + "\n";
-		emailBody += "Dirección: " + entrevista.getDireccion() + "\n";
-		emailBody += "Encargado de entrevista: " + entrevista.getEncargadoEntrevista() + "\n";
+		emailBody += "<p>Título: " + entrevista.getTitulo() + "</p><br/>";
+		emailBody += "<p>Fecha: " + entrevista.getFechaEntrevista() + "</p>";
+		emailBody += "<p>Hora inicial: " + entrevista.getHoraInicial() + "</p>";
+		emailBody += "<p>Hora final: " + entrevista.getHoraFinal() + "</p>";
+		emailBody += "<p>Dirección: " + entrevista.getDireccion() + "</p>";
+		emailBody += "<p>Encargado de entrevista: " + entrevista.getEncargadoEntrevista() + "</p>";
 		emailService.sendEmail(to, "Entrevista", emailBody);
 	}
 	

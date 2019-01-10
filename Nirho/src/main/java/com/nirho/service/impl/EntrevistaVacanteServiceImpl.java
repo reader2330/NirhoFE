@@ -80,4 +80,31 @@ public class EntrevistaVacanteServiceImpl implements EntrevistaVacanteService {
 		}		
 	}
 	
+	public List<EntrevistaVacante> getByIdCandidato(long idCandidato) throws NirhoServiceException{
+		try {
+			return entrevistaVacanteDAO.findByIdCandidato(idCandidato);
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
+		}		
+	}
+	
+	public List<EntrevistaVacante> getByIdConsultor(long idConsultor) throws NirhoServiceException{
+		try {
+			return entrevistaVacanteDAO.findByIdConsultor(idConsultor);
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
+		}		
+	}
+	
+	public List<EntrevistaVacante> getByIdSolicitante(long idSolicitante) throws NirhoServiceException{
+		try {
+			return entrevistaVacanteDAO.findByIdSolicitante(idSolicitante);
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
+		}		
+	}
+	
 }
