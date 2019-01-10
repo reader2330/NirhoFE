@@ -19,6 +19,7 @@ import {LoginService} from '../../clb/services/login.service';
 })
 export class SidebarRysComponent implements OnInit {
   mobile = false;
+  showButtonHome = false;
   selectedItem = 1;
   selectModule = 1;
   modules = [];
@@ -42,16 +43,10 @@ export class SidebarRysComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('Candidato')) {
-      this.candidato = sessionStorage.getItem('Candidato');
-      this.ModulesCandidato();
-    } else {
       this.getUser();
-
       setTimeout(() => {
         this.getModules();
       }, 1500);
-    }
   }
 
   goModule(opt) {
@@ -70,6 +65,7 @@ export class SidebarRysComponent implements OnInit {
           descripcion: 'Alta de vacante'
         },
       ];
+      this.showButtonHome = true;
     }
     if ( this.user['rol'] === 2) {
       this.modules = [
@@ -90,9 +86,19 @@ export class SidebarRysComponent implements OnInit {
           descripcion: 'Estadisticas'
         }
       ];
+      this.showButtonHome = true;
     }
     if (this.user['rol'] === 3) {
       this.ModulesConsultor();
+      this.showButtonHome = true;
+    }
+    if (this.user['rol'] === 5) {
+      this.ModulesCandidato();
+      this.showButtonHome = false;
+    }
+    if (this.user['rol'] === 6 ) {
+      this.ModulesSolicitante();
+      this.showButtonHome = false;
     }
 
   }
@@ -103,6 +109,10 @@ export class SidebarRysComponent implements OnInit {
         {
           id_submodulo: 1,
           descripcion: 'Bandeja de vacantes'
+        },
+        {
+          id_submodulo: 7,
+          descripcion: 'Bandeja de candidatos'
         },
         {
           id_submodulo: 2,
@@ -132,7 +142,18 @@ export class SidebarRysComponent implements OnInit {
     ];
   }
 
-
+  ModulesSolicitante() {
+    this.modules = [
+      {
+        id_submodulo: 1,
+        descripcion: 'Bandeja de vacantes'
+      },
+      {
+        id_submodulo: 2,
+        descripcion: 'Información solicitante'
+      },
+    ];
+  }
   getUser() {
     this.loginService.getUser().subscribe((res) => {
       this.user = res;
@@ -146,6 +167,7 @@ export class SidebarRysComponent implements OnInit {
   recibirRespuestChildren(evt) {
     if (evt.value) {
       this.selectModule = evt.value;
+      this.selectedItem = evt.value;
     }
   }
 
@@ -161,7 +183,7 @@ export class SidebarRysComponent implements OnInit {
     this.route.navigate(['SYNC']);
   }
   goAvatarEditing() {
-    this.route.navigate(['avatar-edit', 'EVA360']);
+    this.route.navigate(['avatar-edit', 'RYS']);
   }
 
 }

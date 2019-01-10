@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ReclutamientoService} from '../services/reclutamiento.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {MatTableDataSource} from '@angular/material';
+import {LoginService} from '../../clb/services/login.service';
 
 
 @Component({
@@ -16,46 +18,61 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ],
 })
 export class VacanteTableComponent implements OnInit {
-  vacantes = [];
+  vacantes = new MatTableDataSource();
   showTable = false;
-  displayVacantes = ['Vacante', 'numeroVacantes', 'checkCandidato', 'detail1'];
+  displayVacantes = ['Vacante', 'numeroVacantes', 'checkCandidato'];
   hasCandidato = false;
   hasGerente = false;
   expandedElement: null;
-  constructor(private ReclutamientoServices: ReclutamientoService) { }
+  user = {};
+  solicitante = {};
+  constructor(private ReclutamientoServices: ReclutamientoService, private Login: LoginService) { }
 
   ngOnInit() {
     if (sessionStorage.getItem('Candidato')) {
       this.hasCandidato = true;
     }
     this.getVacantes();
+    this.getUser();
   }
+  getVacantesBySolicitante() {
+    this.ReclutamientoServices.getVacantesBySolicitante().subscribe(res => {
+      this.vacantes = res;
+    });
+  }
+
   getVacantes() {
     this.ReclutamientoServices.getVacantes().subscribe(res => {
-      console.log(res);
-      this.vacantes = res;
-      this.showTable = true;
+      this.vacantes.data = res;
+      setTimeout(() => {
+        this.showTable = true;
+      }, 1000);
+
     });
   }
   removeVacante(element) {
     console.log(element);
-    this.vacantes.map((item, i) => {
-      if (item.id === element.id) {
-        this.vacantes.slice(i, 1);
+    this.vacantes.data.map((item, i) => {
+      if (item['id'] === element.id) {
+        this.vacantes.data.slice(i, 1);
       }
     });
     this.ReclutamientoServices.removeVacante(element.id).subscribe(res => {
-      console.log(res);
     });
   }
-
   setVacante(element) {
-    console.log(element);
     let candidato = JSON.parse(sessionStorage.getItem('Candidato'));
     this.ReclutamientoServices.setVacante(candidato['id'], element.id).subscribe(res => {
       console.log(res);
     });
-
+  }
+  applyFilter(filterValue: string) {
+    this.vacantes.filter = filterValue.trim().toLowerCase();
+  }
+  getUser() {
+    this.Login.getUser().subscribe(res => {
+      this.user = res;
+    });
   }
 
 

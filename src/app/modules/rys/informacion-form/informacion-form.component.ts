@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CatalogsService} from '../../clb/services/catalogs.service';
 import {MatTableDataSource} from '@angular/material';
@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./informacion-form.component.scss']
 })
 export class InformacionFormComponent implements OnInit {
+  @Output() response = new EventEmitter();
   InformacionForm: FormGroup;
   ContactoForm: FormGroup;
   VacanteForm: FormGroup;
@@ -52,7 +53,8 @@ export class InformacionFormComponent implements OnInit {
   actividades: ActividadSolicitante[] = [];
   displayActividades = ['nombreActividad', 'descripcionActividad', 'nivel', 'detail1'];
   displayCompetencias = ['nombreCompetencia', 'descripcionCompetencia', 'nivelCompetencia', 'detail1'];
-  displayPuestos = ['puesto', 'nivel', 'fechaInicio', 'fechaFinal', 'antiguedad','' ]
+  displayPuestos = ['puesto', 'nivel', 'fechaInicio', 'fechaFinal', 'antiguedad', '' ];
+  displayEntrevistas = ['candidato', 'solicitante', 'fecha', 'Comentario'];
   constructor(private _form: FormBuilder, private CatalogServices: CatalogsService, private Recultamiento: ReclutamientoService) { }
 
   ngOnInit() {
@@ -62,7 +64,10 @@ export class InformacionFormComponent implements OnInit {
       nombre: ['', Validators.required],
       pais: [null, Validators.required],
       giro: [null, Validators.required],
-      direccion: [null, Validators.required]
+      direccion: [null, Validators.required],
+      username: [null, Validators.required],
+      password: [null, Validators.required],
+      email: [null, Validators.required]
     });
     this.ContactoForm = this._form.group({
       nombre: ['', Validators.required],
@@ -112,32 +117,72 @@ export class InformacionFormComponent implements OnInit {
     this.getNivelCompetencia();
   }
 
+  mostrarDescripcion(catalog, element) {
+    let desc = '';
+    switch (catalog) {
+      case 1:
+        this.contacts.map((item, i) => {
+          if (item.id === element) {
+            desc = item.descripcionCatalogo;
+            return;
+          }
+        });
+        break;
+      case 2:
+        this.giros.map((item, i) => {
+          if (item.id === element) {
+            desc = item.descripcionCatalogo;
+            return;
+          }
+        });
+        break;
+      case 3:
+        this.nivelCompetencias.map((item, id) => {
+          if (item.id === element) {
+            desc = item.descripcionCatalogo;
+            return;
+          }
+        });
+        break;
+    }
+    return desc;
+  }
+
+
   addCompetencia() {
-    let id = sessionStorage.getItem('idVacante');
+    this.showTable = false;
+    let id = JSON.parse(sessionStorage.getItem('idVacante'));
     let competencia = new Competencia();
     competencia.nombre = this.newCompetencia.nombre;
     competencia.descripcion = this.newCompetencia.descripcion;
     competencia.nivel = this.newCompetencia.nivel;
     competencia.tipo = this.newCompetencia.tipo;
+    this.newCompetencia.nombre = null;
+    this.newCompetencia.descripcion = null;
+    this.newCompetencia.tipo = null;
     if (id){
-      this.Recultamiento.saveCompetencia(id, competencia).subscribe(res => {
+      this.Recultamiento.saveCompetencia(id.id, competencia).subscribe(res => {
+        competencia.id = res.id;
         this.competencias.push(competencia);
+        this.showTable = true;
       });
     }
   }
   removeCompetencia(comp) {
+    this.showTable = false;
     this.competencias.map((item, i ) => {
       if (item.nombre === comp.nombre) {
         this.competencias.splice(i, 1);
       }
     });
     this.Recultamiento.deleteCompetencias(comp.id).subscribe(res => {
-      console.log(res);
+      this.showTable = true;
     });
   }
 
   addActividad() {
-    let id = sessionStorage.getItem('idVacante');
+    this.showTable = false;
+    let id = JSON.parse(sessionStorage.getItem('idVacante'));
     let actividad = new ActividadSolicitante();
     actividad.nombre = this.newActividad.nombreActividad;
     actividad.descripcion = this.newActividad.descripcionActividad;
@@ -146,7 +191,8 @@ export class InformacionFormComponent implements OnInit {
     this.newActividad.nombreActividad = null;
     this.newActividad.nivel = null;
     if (id) {
-      this.Recultamiento.saveActividad(id, actividad).subscribe(res => {
+      this.Recultamiento.saveActividad(id.id, actividad).subscribe(res => {
+        actividad.id = res.id;
         this.actividades.push(actividad);
         this.showTable = true;
       });
@@ -154,6 +200,7 @@ export class InformacionFormComponent implements OnInit {
 
   }
   removeActividad(elt) {
+    this.showTable = false;
     this.actividades.map((item, i ) => {
       if (item.nombre === elt.nombre) {
         this.actividades.splice(i, 1);
@@ -161,11 +208,13 @@ export class InformacionFormComponent implements OnInit {
     });
     this.Recultamiento.deleteActividad(elt.id).subscribe(res => {
       console.log(res);
+      this.showTable = true;
     });
   }
 
   addConocimiento() {
-    let id = sessionStorage.getItem('idVacante');
+    this.showTable = false;
+    let id = JSON.parse(sessionStorage.getItem('idVacante'));
     let conocimiento = new ConocimientoRYS();
     conocimiento.id = null;
     conocimiento.nombre = this.newConocimiento.nombre;
@@ -175,19 +224,22 @@ export class InformacionFormComponent implements OnInit {
     this.newConocimiento.nombre = null;
     this.newConocimiento.nivel = null;
     if (id) {
-      this.Recultamiento.saveConocimiento(id, conocimiento).subscribe(res => {
+      this.Recultamiento.saveConocimiento(id.id, conocimiento).subscribe(res => {
+        conocimiento.id = res.id;
         this.conocimientos.push(conocimiento);
+        this.showTable = true
       });
     }
   }
   removeConocimiento(elt) {
-    console.log(elt);
+    this.showTable = false;
     this.conocimientos.map((item, i ) => {
       if (item.nombre === elt.nombre) {
         this.conocimientos.splice(i, 1);
       }
     });
     this.Recultamiento.deleteConocimiento(elt.id).subscribe(res => {
+      this.showTable = true;
     });
   }
 
@@ -220,7 +272,7 @@ export class InformacionFormComponent implements OnInit {
   }
   getNivelCompetencia(){
     this.CatalogServices.getNivelCompetencia().subscribe(res => {
-      this.nivelCompetencias = res
+      this.nivelCompetencias = res;
     });
   }
   getTipoCompetencia() {
@@ -235,15 +287,18 @@ export class InformacionFormComponent implements OnInit {
         console.log(res);
         if(res.length) {
           this.InformacionForm.patchValue(res[0]);
-          if (res[0]['contactos']) {
+          if (res[0]['contactos'].length  ) {
             this.ContactoForm.patchValue(res[0]['contactos'][0]);
           }
           if (res[0]['vacantes'].length) {
-            sessionStorage.setItem('idVacante', res[0]['vacantes'][0]['id']);
+            let json = {
+              id: res[0]['vacantes'][0]['id']
+            };
+            sessionStorage.setItem('idVacante', JSON.stringify(json));
             this.VacanteForm.patchValue(res[0]['vacantes'][0]);
             if (res[0]['vacantes'][0] && res[0]['vacantes'][0]['actividades'].length ) {
-              console.log(res[0]['vacantes'][0]['actividades']);
               this.actividades = res[0]['vacantes'][0]['actividades'];
+              this.showTable = true;
 
             }
             if (res[0]['vacantes'][0]['caracteristicas'].length) {
@@ -251,14 +306,18 @@ export class InformacionFormComponent implements OnInit {
             }
             if (res[0]['vacantes'][0] && res[0]['vacantes'][0]['competencias'].length ) {
               this.competencias = res[0]['vacantes'][0]['competencias'];
+              this.showTable = true;
             }
             if (res[0]['vacantes'][0] && res[0]['vacantes'][0]['conocimientos'].length ) {
               this.conocimientos = res[0]['vacantes'][0]['conocimientos'];
+              this.showTable = true;
             }
 
           }
-
-          sessionStorage.setItem('idSolicitante', this.InformacionForm.value['id']);
+          let json = {
+            id: this.InformacionForm.value['id']
+          };
+          sessionStorage.setItem('idSolicitante', JSON.stringify(json));
           this.nextFlag = true;
         }
 
@@ -281,7 +340,6 @@ export class InformacionFormComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         switch (step) {
-
           case 1:
             this.Recultamiento.saveSolicitante(form['value']).subscribe(res => {
               console.log(res);
@@ -319,7 +377,6 @@ export class InformacionFormComponent implements OnInit {
             break;
           case 3:
             if (sessionStorage.getItem('idSolicitante')) {
-              console.log(form['value']);
               const id = JSON.parse(sessionStorage.getItem('idSolicitante'));
               if (id.id) {
                 this.Recultamiento.saveVacante(id.id, form['value']).subscribe(res => {
@@ -347,8 +404,7 @@ export class InformacionFormComponent implements OnInit {
           case 4:
             if (sessionStorage.getItem('idVacante')) {
               let id = JSON.parse(sessionStorage.getItem('idVacante'));
-              this.Recultamiento.saveCaracteristicas(id, form['value']).subscribe(res => {
-                console.log(res);
+              this.Recultamiento.saveCaracteristicas(id.id, form['value']).subscribe(res => {
                 Swal(
                   'Listo.',
                   'La información se guardo correctamente',
@@ -360,6 +416,10 @@ export class InformacionFormComponent implements OnInit {
         }
       }
     });
+  }
+
+  goInicio() {
+    this.response.emit({value: 1});
   }
 
 

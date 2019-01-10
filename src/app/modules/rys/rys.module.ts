@@ -10,6 +10,9 @@ import {CandidatoFormComponent} from './candidato-form/candidato-form.component'
 import {SharedModule} from '../shared/shared.module';
 import {ChartModule} from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+import {CandidatoTableComponent} from './candidato-table/candidato-table.component';
+import {SelectorModalComponent} from '../modal/selector-modal/selector-modal.component';
+import {ModalComentarioComponent} from '../modal/modal-comentario/modal-comentario.component';
 
 export function highchartsFactory() {
   const hc = require('highcharts');
@@ -34,6 +37,13 @@ export function highchartsFactory() {
     SidebarRysComponent,
     EstadisticasVacantesComponent,
     CandidatoFormComponent,
+    CandidatoTableComponent,
+    SelectorModalComponent,
+    ModalComentarioComponent
+  ],
+  entryComponents: [
+    SelectorModalComponent,
+    ModalComentarioComponent
   ],
   providers: [
     {

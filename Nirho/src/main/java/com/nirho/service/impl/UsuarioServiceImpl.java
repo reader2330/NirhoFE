@@ -57,7 +57,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public void guardarUsuario(Usuario usuario) throws NirhoServiceException {
 		try {
 			List<Usuario> l = dao.findByUsername(usuario.getUsername());
-			if(l == null || l.isEmpty()) {
+			logger.info("Lista [" + l + "]" );
+			if(l == null) {
 				dao.save(usuario);
 			} else {
 				dao.update(usuario);

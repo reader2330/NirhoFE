@@ -16,7 +16,7 @@
         <input matInput type="text"   formControlName="nombre">
       </mat-form-field>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
-        <mat-label>Pais</mat-label>
+        <mat-label>País</mat-label>
         <mat-select formControlName="pais" >
           <mat-option *ngFor="let pais of paises" [value]="pais.id">
             {{pais.descripcionCatalogo}}
@@ -34,6 +34,18 @@
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
         <mat-label>Dirección</mat-label>
         <input matInput type="text"   formControlName="direccion">
+      </mat-form-field>
+      <mat-form-field class="col-sm-10 offset-1" appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput type="text"   formControlName="username">
+      </mat-form-field>
+      <mat-form-field class="col-sm-10 offset-1" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password"   formControlName="password">
+      </mat-form-field>
+      <mat-form-field class="col-sm-10 offset-1" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="text"   formControlName="email">
       </mat-form-field>
       <div class="col-sm-4 offset-5">
         <button mat-raised-button color="accent" (click)="guardarForm(InformacionForm,1)" matStepperNext><mat-icon>save</mat-icon>Guardar</button>
@@ -63,7 +75,7 @@
         <input matInput type="text"  formControlName="email">
       </mat-form-field>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
-        <mat-label>Telefono</mat-label>
+        <mat-label>Teléfono</mat-label>
         <input matInput type="number"   formControlName="telefono">
       </mat-form-field>
       <mat-form-field class="col-sm-10 offset-1" appearance="outline">
@@ -147,7 +159,7 @@
           <button style="margin-top: 20px" mat-raised-button color="accent" (click)="addActividad()"><mat-icon>add_circle</mat-icon>Agregar</button>
         </div>
       </div>
-      <div *ngIf="actividades.length" class="row col-sm-10 offset-1">
+      <div *ngIf="showTable" class="row col-sm-10 offset-1">
         <table style="width: 100%" class="col-sm-12" mat-table [dataSource]="actividades" class="mat-elevation-z8">
 
           <ng-container matColumnDef="nombreActividad">
@@ -161,8 +173,8 @@
           </ng-container>
 
           <ng-container matColumnDef="nivel">
-            <th mat-header-cell *matHeaderCellDef> Nivel </th>
-            <td mat-cell *matCellDef="let element"> {{element.nivel}} </td>
+            <th mat-header-cell *matHeaderCellDef> Giro </th>
+            <td mat-cell *matCellDef="let element"> {{mostrarDescripcion(2,element.nivel)}} </td>
           </ng-container>
 
           <ng-container matColumnDef="detail1">
@@ -181,11 +193,11 @@
 
     </mat-step>
     <mat-step [formGroup]="CaracteristicasForm" [editable]="false" [stepControl]="CaracteristicasForm">
-      <ng-template matStepLabel>Caracteristicas del candidato</ng-template>
+      <ng-template matStepLabel>Características del candidato</ng-template>
       <h4>Generales</h4>
       <div style="margin-top: 20px" class="row col-sm-10">
         <div class="col-sm-2 ">
-          <mat-label style="margin-top: 100px">Genero</mat-label>
+          <mat-label style="margin-top: 100px">Género</mat-label>
         </div>
         <div style="margin-top: 20px" class="col-sm-10 ">
           <mat-button-toggle-group  style="margin-left: 20px" formControlName="genero" appearance="legacy" name="fontStyle" aria-label="Font Style">
@@ -247,29 +259,29 @@
       </div>
       <div style="margin-top: 20px"  class="row col-sm-12">
         <div class="col-sm-2">
-          <mat-label>Edad minima</mat-label>
+          <mat-label>Edad miníma</mat-label>
         </div>
         <div style="margin-top: 20px" class="col-sm-10">
           <mat-slider style="width: 100%;"
             thumbLabel
-            min="1"
-            max="100" formControlName="minEdad"></mat-slider>
+            min="18"
+            max="70" formControlName="minEdad"></mat-slider>
         </div>
       </div>
       <div style="margin-top: 20px"  class="row col-sm-12">
         <div class="col-sm-2">
-          <mat-label>Edad maxima</mat-label>
+          <mat-label>Edad máxima</mat-label>
         </div>
         <div style="margin-top: 20px" class="col-sm-10">
           <mat-slider style="width: 100%;"
                       thumbLabel
-                      min="1"
-                      max="100" formControlName="maxEdad"></mat-slider>
+                      min="18"
+                      max="70" formControlName="maxEdad"></mat-slider>
         </div>
       </div>
       <div style="margin-top: 20px"  class="row col-sm-12">
         <div class="col-sm-2">
-          <mat-label>Caracteristicas adicionales</mat-label>
+          <mat-label>Características adicionales</mat-label>
         </div>
         <div style="margin-top: 20px" class="col-sm-10">
           <mat-form-field style="width: 100%;">
@@ -280,7 +292,7 @@
       <h4>Escolaridad y capacitación necesaria para el puesto</h4>
       <div style="margin-top: 20px"  class="row col-sm-12">
         <div class="col-sm-2">
-          <mat-label>Ultimo grado de estudios</mat-label>
+          <mat-label>Último grado de estudios</mat-label>
         </div>
         <div style="margin-top: 20px" class="col-sm-10">
           <mat-form-field style="width: 100%;">
@@ -304,7 +316,7 @@
       </div>
       <div style="margin-top: 20px"  class="row col-sm-12">
         <div class="col-sm-2">
-          <mat-label>Cuenta con titulo</mat-label>
+          <mat-label>Cuenta con título</mat-label>
         </div>
         <div style="margin-top: 20px" class="col-sm-10">
           <mat-button-toggle-group style="margin-left: 20px" formControlName="titulo" appearance="legacy" name="fontStyle" aria-label="Font Style">
@@ -405,7 +417,7 @@
           <button style="margin-top: 20px" mat-raised-button color="accent" (click)="addCompetencia()"><mat-icon>add_circle</mat-icon>Agregar</button>
         </div>
       </div>
-      <div *ngIf="competencias.length" style="margin-top: 20px" class="row col-sm-10 offset-1">
+      <div *ngIf="showTable" style="margin-top: 20px" class="row col-sm-10 offset-1">
         <table style="width: 100%" class="col-sm-12" mat-table [dataSource]="competencias" class="mat-elevation-z8">
 
           <ng-container matColumnDef="nombreCompetencia">
@@ -420,7 +432,7 @@
 
           <ng-container matColumnDef="nivelCompetencia">
             <th mat-header-cell *matHeaderCellDef> Nivel </th>
-            <td mat-cell *matCellDef="let element"> {{element.nivel}} </td>
+            <td mat-cell *matCellDef="let element"> {{mostrarDescripcion(3,element.nivel)}} </td>
           </ng-container>
 
           <ng-container matColumnDef="tipo">
@@ -464,7 +476,7 @@
           <button style="margin-top: 20px" mat-raised-button color="accent" (click)="addConocimiento()"><mat-icon>add_circle</mat-icon>Agregar</button>
         </div>
       </div>
-      <div *ngIf="conocimientos.length" style="margin-top: 20px" class="row col-sm-10 offset-1">
+      <div *ngIf="showTable" style="margin-top: 20px" class="row col-sm-10 offset-1">
         <table style="width: 100%" class="col-sm-12" mat-table [dataSource]="conocimientos" class="mat-elevation-z8">
 
           <ng-container matColumnDef="nombreCompetencia">
@@ -479,7 +491,7 @@
 
           <ng-container matColumnDef="nivelCompetencia">
             <th mat-header-cell *matHeaderCellDef> Nivel </th>
-            <td mat-cell *matCellDef="let element"> {{element.nivel}} </td>
+            <td mat-cell *matCellDef="let element"> {{mostrarDescripcion(3,element.nivel)}} </td>
           </ng-container>
 
 
@@ -493,7 +505,7 @@
           <tr mat-row *matRowDef="let row; columns: displayCompetencias;"></tr>
         </table>
         <div style="margin-top: 30px" class="col-sm-4 offset-5">
-          <button mat-raised-button color="accent" style="margin-left: 30px" *ngIf="nextFlag" matStepperNext><mat-icon>navigate_next</mat-icon>Siguiente</button>
+          <button mat-raised-button color="accent" style="margin-left: 30px"  (click)="goInicio()" ><mat-icon>exit_to_app</mat-icon>Terminar</button>
         </div>
       </div>
     </mat-step>

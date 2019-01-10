@@ -28,25 +28,25 @@ export class ReclutamientoService {
   saveVacante(id, data): Observable<any> {
     return this.http.post(this.api + 'solicitante/' + id + '/vacante/guardar', data, { headers: this.headers});
   }
-  saveActividad(id, data) {
+  saveActividad(id, data): Observable<any> {
     return this.http.post(this.api + 'vacante/' + id + '/actividades/guardar', data , {headers: this.headers});
   }
-  deleteActividad(id) {
+  deleteActividad(id): Observable<any> {
     return this.http.post(this.api + 'actividadesPuestoVacante/eliminar', id, {headers: this.headers});
   }
-  saveCaracteristicas(id, data){
+  saveCaracteristicas(id, data): Observable<any> {
     return this.http.post(this.api + 'vacante/' + id + '/caracteristicas/guardar', data, {headers: this.headers});
   }
-  saveCompetencia(id, data) {
+  saveCompetencia(id, data): Observable<any> {
     return this.http.post(this.api + 'vacante/' + id + '/competencias/guardar', data, {headers: this.headers});
   }
-  deleteCompetencias(id) {
+  deleteCompetencias(id): Observable<any> {
     return this.http.post(this.api + 'competenciasVacante/eliminar', id, {headers: this.headers});
   }
-  saveConocimiento(id, data) {
+  saveConocimiento(id, data): Observable<any> {
     return this.http.post(this.api + 'vacante/' + id + '/conocimientos/guardar', data, {headers: this.headers})
   }
-  deleteConocimiento(id) {
+  deleteConocimiento(id): Observable<any> {
     return this.http.post(this.api + 'conocimientoVacante/eliminar', id, {headers: this.headers});
   }
   getVacantes(): Observable<any> {
@@ -70,7 +70,7 @@ export class ReclutamientoService {
   deleteIdioma(id): Observable<any> {
     return this.http.post(this.api + 'idiomaCandidato/eliminar', id, {headers: this.headers});
   }
-  savePuestos(id, data) {
+  savePuestos(id, data): Observable<any> {
     return this.http.post(this.api + 'candidato/' + id + '/puestos/guardar', data, {headers: this.headers});
   }
   deletePuesto(id): Observable<any> {
@@ -79,7 +79,7 @@ export class ReclutamientoService {
   getCandidatoRFC(rfc): Observable<any> {
     return this.http.get(this.api + 'candidato/porRFC', {headers: this.headers, params: {'rfc': rfc}});
   }
-  saveCaractesristicasCandidato(id,data): Observable<any> {
+  saveCaractesristicasCandidato(id, data): Observable<any> {
     return this.http.post(this.api + 'candidato/' + id + '/caracteristicas/guardar', data, { headers: this.headers});
   }
   saveConocimientoCandidato(id, data): Observable<any> {
@@ -102,6 +102,27 @@ export class ReclutamientoService {
   }
   setVacante(idCand, id): Observable<any> {
     return this.http.post(this.api + 'candidato/' + idCand + '/vacante/' + id + '/guardar', {}, {headers: this.headers});
+  }
+  getCandidatos(): Observable<any> {
+    return this.http.get(this.api + 'candidato/todos', {headers: this.headers});
+  }
+  getEntrevista(): Observable<any> {
+    return this.http.get(this.api + 'entrevistaVacante/todos', {headers: this.headers});
+  }
+  saveEntrevista(data): Observable<any> {
+    return this.http.post(this.api + 'entrevistaVacante/guardar', data, {headers: this.headers});
+  }
+  getVacantesBySolicitante(): Observable<any> {
+    return this.http.get(this.api + 'vacante');
+  }
+  saveComentario(id, type, data) {
+    return this.http.post(this.api + 'entrevistaVacante/' + id + '/' + type + '/comentario', data, {headers: this.headers});
+  }
+  deleteCandidatoVacante(idCandidato) {
+    return this.http.get(this.api + 'candidato/' + idCandidato + '/vacante/' + '/eliminar');
+  }
+  saveContrato(data) {
+    return this.http.post(this.api + 'contratacionVacante/guardar', data, {headers: this.headers});
   }
 
 }

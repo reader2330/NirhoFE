@@ -102,7 +102,6 @@ export class DataProyectComponent implements OnInit {
           this.proyect.idEmpresa = company;
           this.proyect.idContacto = contact;
           this.ProyectoService.saveProyect(this.proyect).subscribe((res) => {
-            console.log(res);
               Swal(
                 'Listo.',
                 'La información se guardo correctamente',

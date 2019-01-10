@@ -1,0 +1,77 @@
+<div *ngIf="data['type'] === 1" class="container row">
+  <div  class="row col-sm-10 offset-1">
+    <mat-form-field class="col-sm-12">
+      <mat-label>Selecciona una vacante</mat-label>
+      <mat-select [(ngModel)]="selectVacante">
+        <mat-option *ngFor="let vac of vacantes" [value]="vac">
+          {{vac['nombreVacante']}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-sm-12">
+      <mat-label>Selecciona a un candidato</mat-label>
+      <mat-select [(ngModel)]="selectCandidato">
+        <mat-option *ngFor="let cand of candidatos" [value]="cand">
+          {{cand['nombre']}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-sm-4 offset-4">
+    <button (click)="asignarVacante()"  mat-raised-button color="accent"><mat-icon>people_outline</mat-icon>Asignar vacante </button>
+  </div>
+</div>
+<div *ngIf="data['type'] === 2" class="container row">
+  <div class="row col-sm-10 offset-1">
+    <h2>Entrevista</h2>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Selecciona a un cliente</mat-label>
+      <mat-select [(ngModel)]="entrevista.idSolicitante">
+        <mat-option *ngFor="let sol of solicitantes" [value]="sol.id">
+          {{sol['nombre']}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Selecciona a un candidato</mat-label>
+      <mat-select [(ngModel)]="entrevista.idCandidato">
+        <mat-option *ngFor="let cand of candidatos" [value]="cand.id">
+          {{cand['nombre']}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Título</mat-label>
+      <input [(ngModel)]="entrevista.titulo" type="text" matInput  >
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Tipo de entrevista</mat-label>
+      <input [(ngModel)]="entrevista.tipoEntrevista" type="text" matInput  >
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Encargado de entrevista</mat-label>
+      <input [(ngModel)]="entrevista.encargadoEntrevista" type="text" matInput  >
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Dirección</mat-label>
+      <input [(ngModel)]="entrevista.direccion" type="text" matInput  >
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <input matInput [(ngModel)]="entrevista.fechaEntrevista" [matDatepicker]="picker" placeholder="Escoge un dia">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Hora inicial</mat-label>
+      <input [(ngModel)]="entrevista.horaInicial" type="time" matInput  >
+    </mat-form-field>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Hora final</mat-label>
+      <input [(ngModel)]="entrevista.horaFinal" type="time" matInput  >
+    </mat-form-field>
+    <div class="col-sm-4 offset-4">
+      <button (click)="saveEntrevista(1)" mat-raised-button color="default"><mat-icon>cancel</mat-icon>Cancelar</button>
+      <button (click)="saveEntrevista()" mat-raised-button color="accent" style="margin-left: 20px"><mat-icon>save</mat-icon>Agregar</button>
+    </div>
+  </div>
+</div>
