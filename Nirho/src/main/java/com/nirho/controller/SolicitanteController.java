@@ -152,10 +152,10 @@ public class SolicitanteController {
 	}
 
 	
-	@GetMapping(value = "/{id}/vacantes")
-	public List<SolicitanteVacanteDTO> todosConCandidatos(@PathVariable("id") int id) throws NirhoControllerException{
+	@GetMapping(value = "/vacantes")
+	public List<SolicitanteVacanteDTO> todosConCandidatos(@RequestParam(name="username") String username) throws NirhoControllerException{
 		try {
-			Solicitante solicitante = solicitanteService.getOne(id);
+			Solicitante solicitante = solicitanteService.getByUsername(username);
 			List<SolicitanteVacanteDTO> response = new ArrayList<>();
 			for(SolicitanteVacante v: solicitante.getVacantes()) {
 				List<Candidato> candidatos = candidatoService.getAllByVacante(v.getId());

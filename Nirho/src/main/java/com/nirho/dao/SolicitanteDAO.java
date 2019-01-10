@@ -9,4 +9,5 @@ import com.nirho.model.view.VwEmpresasSolicitudCuestionario;
 
 public interface SolicitanteDAO extends BaseDAO<Solicitante, Long> {
 	List<Solicitante> findByRfc(String rfc); 
+	List<Solicitante> findByUsername(String username);
 }

@@ -31,6 +31,16 @@ public class SolicitanteServiceImpl implements SolicitanteService {
 	}
 	 
 	@Override
+	public Solicitante getByUsername(String username) throws NirhoServiceException{
+		try {
+			return solicitanteDAO.findByUsername(username).get(0);
+		} catch (Exception e) {
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
+		}
+	}
+	
+	@Override
 	public void save(Solicitante solicitante) throws NirhoServiceException{
 		try {
 			Solicitante s = solicitanteDAO.getOne(solicitante.getId());

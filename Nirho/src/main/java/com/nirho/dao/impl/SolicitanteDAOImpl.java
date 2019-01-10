@@ -21,4 +21,13 @@ public class SolicitanteDAOImpl extends AbstractDAO<Solicitante, Long> implement
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Solicitante> findByUsername(String username) {
+		String hql = "FROM Solicitante e WHERE e.username = :username";
+		Query query = entityManager.createQuery(hql);
+		query.setParameter("username", username);
+		return query.getResultList();
+	}
+	
 }

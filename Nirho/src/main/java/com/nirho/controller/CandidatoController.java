@@ -63,6 +63,7 @@ import com.nirho.model.Solicitante;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.model.Usuario;
 import com.nirho.service.CandidatoService;
+import com.nirho.service.ContratacionVacanteService;
 import com.nirho.service.SolicitanteVacanteService;
 import com.nirho.service.UsuarioService;
 import com.nirho.util.ReporteUtil;
@@ -83,6 +84,8 @@ public class CandidatoController {
 	SolicitanteVacanteService solicitanteVacanteService;
 	@Autowired
 	UsuarioService usuarioService;
+	@Autowired
+	ContratacionVacanteService contratacionVacanteService;
 	
 	@GetMapping(value = "/todos")
 	public List<Candidato> todos() throws NirhoControllerException{
@@ -110,6 +113,16 @@ public class CandidatoController {
 	public Candidato get(@PathVariable("id") long id) throws NirhoControllerException{
 		try {
 			return candidatoService.getOne(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de candidato");
+		}
+	}
+	
+	@RequestMapping(value = "/contrato", method = RequestMethod.GET)
+	public void get(@RequestParam(name="username") String username) throws NirhoControllerException{
+		try {
+			Candidato candidato = candidatoService.getOneByUsername(username);
+			
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de candidato");
 		}

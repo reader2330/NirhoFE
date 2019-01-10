@@ -8,6 +8,7 @@ import com.nirho.model.Solicitante;
 public interface SolicitanteService {
 	
 	List<Solicitante> getByRFC(String rfc) throws NirhoServiceException;
+	Solicitante getByUsername(String username) throws NirhoServiceException;
 	void save(Solicitante solicitante) throws NirhoServiceException;
 	void save(List<Solicitante> solicitantes) throws NirhoServiceException;
 	public Solicitante getOne(long id) throws NirhoServiceException;
