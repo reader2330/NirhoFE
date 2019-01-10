@@ -505,8 +505,8 @@ public class ProyectoEVO360Controller {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:/Users/DELL/Documents/NIRHO/jboss/jboss-eap-7.1/standalone/deployments/reporteEVO360Individual.docx"));
 
 	        Participante participante = participanteService.obtenerParticipante(new ParticipantePK(idParticipante, idProyecto));
 	        logger.info(" ********************************* participante [" + participante + "] *****************************");
@@ -585,19 +585,23 @@ public class ProyectoEVO360Controller {
 	        		row.getCell(1).setText(cp.getTema().getDescripcion());
 	        		List<Opcion> opciones = cuestPartService.opcionesTema(cp.getTema().getIdTema());
 	        		logger.info(" *********competencias*********** opciones [" + opciones + "] *****************************");
-	        		String res = "";
-	        		switch(cp.getRespuesta()) {
-	        			case 1: res = "BR"; break;
-	        			case 2: res = "MR"; break;
-	        			case 3: res = "R"; break;
-	        			case 4: res = "RS"; break;
-	        			case 5: res = "E"; break;
-	        		}  
-	        		for(Opcion op: opciones) {
-	        			if(res.equals(op.getTipo())) {
-	        				row.getCell(2).setText(op.getEnunciado());
+	        		try {
+	        			String res = "";
+	        			switch(cp.getRespuesta()) {
+		        			case 1: res = "BR"; break;
+		        			case 2: res = "MR"; break;
+		        			case 3: res = "R"; break;
+		        			case 4: res = "RS"; break;
+		        			case 5: res = "E"; break;
 	        			}
-	        		}
+	        			for(Opcion op: opciones) {
+		        			if(res.equals(op.getTipo())) {
+		        				row.getCell(2).setText(op.getEnunciado());
+		        			}
+		        		}
+	        		} catch(NullPointerException e) {
+ 	            		logger.info("Sin datos en ["+ cp +"]");
+ 	            	}
 	        	}
 	        }
 	        
@@ -649,7 +653,7 @@ public class ProyectoEVO360Controller {
 			 	            	row.createCell(3).setCellValue((datos).get(key).getAutoEval());
 	    	            	}catch(NullPointerException e) {
 		 	            		logger.info("Sin datos en ["+ key +"]");
-		 	            	 }
+		 	            	}
 		 	            	i++;
 		 	             }
 	                }
