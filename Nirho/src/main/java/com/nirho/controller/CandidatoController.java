@@ -127,12 +127,23 @@ public class CandidatoController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody Candidato candidato) throws NirhoControllerException{
 		try {
-			Usuario u = new Usuario();
-			u.setEmail(candidato.getEmail());
-			u.setUsername(candidato.getUsername());
-			u.setPassword(SessionUtil.getEncryptMD5(candidato.getPassword()));
-			u.setRol(5);
-			usuarioService.guardarUsuario(u);
+			
+			Usuario usuario = usuarioService.obtenerUsuario(candidato.getUsername());
+			if(usuario == null) {
+				Usuario u = new Usuario();
+				u.setEmail(candidato.getEmail());
+				u.setUsername(candidato.getUsername());
+				u.setPassword(SessionUtil.getEncryptMD5(candidato.getPassword()));
+				u.setRol(5);
+				usuarioService.guardarUsuario(u);
+			} else {
+				usuario.setEmail(candidato.getEmail());
+				usuario.setUsername(candidato.getUsername());
+				usuario.setPassword(SessionUtil.getEncryptMD5(candidato.getPassword()));
+				usuario.setRol(5);
+				usuarioService.guardarUsuario(usuario);
+			}
+			
 			candidato.setRol("5");
 			candidatoService.save(candidato);
 			JSONObject json = new JSONObject();
