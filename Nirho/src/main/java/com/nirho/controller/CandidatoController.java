@@ -129,6 +129,7 @@ public class CandidatoController {
 		try {
 			
 			Usuario usuario = usuarioService.obtenerUsuario(candidato.getUsername());
+			
 			if(usuario == null) {
 				Usuario u = new Usuario();
 				u.setEmail(candidato.getEmail());
