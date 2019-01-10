@@ -1,42 +1,65 @@
 <div class="row col-sm-12">
-  <table *ngIf="showTable"  class="col-sm-10 offset-1 mat-elevation-z1" mat-table [dataSource]="vacantes"  multiTemplateDataRows>
-    <ng-container matColumnDef="Vacante">
-      <th  mat-header-cell *matHeaderCellDef> Vacante </th>
-      <td mat-cell *matCellDef="let element"> {{element.nombreVacante}} </td>
-    </ng-container>
-    <ng-container matColumnDef="numeroVacantes">
-      <th mat-header-cell *matHeaderCellDef> Número de vacantes </th>
-      <td mat-cell *matCellDef="let element"> {{element.numVacantes}} </td>
-    </ng-container>
-    <ng-container  matColumnDef="checkCandidato">
-      <th mat-header-cell *matHeaderCellDef> Escoger vacante </th>
-      <td mat-cell *matCellDef="let element"><mat-checkbox (change)="setVacante(element)" [checked]="element.status == 2" [disabled]="!hasCandidato"> </mat-checkbox> </td>
-    </ng-container>
-    <ng-container matColumnDef="detail1">
-      <th mat-header-cell *matHeaderCellDef> Borrar </th>
-      <td mat-cell *matCellDef="let element"><a (click)="removeVacante(element)" ><mat-icon>delete</mat-icon></a> </td>
-    </ng-container>
-    <ng-container matColumnDef="expandedDetail">
-      <td mat-cell *matCellDef="let element" [attr.colspan]="displayVacantes.length">
-        <div class="example-element-detail"
-             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <div class="example-element-description">
-            <p>Puesto: {{element['puesto']}} </p>
-            <p>Genero: {{element['caracteristicas'][0].genero}}</p>
-            <p>Edad maxima: {{element['caracteristicas'][0].maxEdad}}</p>
-            <p>Edad minima: {{element['caracteristicas'][0].minEdad}}</p>
+  <div class="col-sm-10 offset-1">
+    <h4 align="center">Vacantes</h4>
+    <mat-form-field class="col-sm-10 offset-1">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+    <table *ngIf="showTable" class="col-sm-10 offset-1 mat-elevation-z1" mat-table [dataSource]="vacantes"
+           multiTemplateDataRows>
+      <ng-container matColumnDef="Vacante">
+        <th mat-header-cell *matHeaderCellDef> Vacante</th>
+        <td mat-cell *matCellDef="let element"> {{element.nombreVacante}}</td>
+      </ng-container>
+      <ng-container matColumnDef="numeroVacantes">
+        <th mat-header-cell *matHeaderCellDef> Número de vacantes</th>
+        <td mat-cell *matCellDef="let element"> {{element.numVacantes}}</td>
+      </ng-container>
+      <ng-container matColumnDef="checkCandidato">
+        <th mat-header-cell *matHeaderCellDef> Escoger vacante</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox (change)="setVacante(element)" [checked]="element.status == 2"
+                        [disabled]="!hasCandidato"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayVacantes.length">
+          <div class="example-element-detail"
+               [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="example-element-description">
+              <p>Puesto: {{element['puesto']}} </p>
+              <p>Genero: {{element['caracteristicas'][0]['genero']}}</p>
+              <p>Edad maxima: {{element['caracteristicas'][0]['maxEdad']}}</p>
+              <p>Edad minima: {{element['caracteristicas'][0]['minEdad']}}</p>
+            </div>
           </div>
-        </div>
-      </td>
-    </ng-container>
+        </td>
+      </ng-container>
 
 
-    <tr mat-header-row *matHeaderRowDef="displayVacantes"></tr>
-    <tr mat-row *matRowDef="let element; columns: displayVacantes;" class="example-element-row"
-        [class.example-expanded-row]="expandedElement === element"
-        (click)="expandedElement = expandedElement === element ? null : element"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayVacantes"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayVacantes;" class="example-element-row"
+          [class.example-expanded-row]="expandedElement === element"
+          (click)="expandedElement = expandedElement === element ? null : element"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+  </div>
+  <div style="margin-top: 50px" class="col-sm-10 offset-1">
+    <h4 align="center">Entrevista</h4>
+    <mat-form-field class="col-sm-10 offset-1">
+      <input matInput (keyup)="applyFilter($event.target.value, 2)" placeholder="Buscar">
+    </mat-form-field>
+    <table *ngIf="showTable2" class="col-sm-10 offset-1 mat-elevation-z1" mat-table [dataSource]="entrevistas">
+      <ng-container [matColumnDef]="column" *ngFor="let column of displayEntrevistas">
+        <th mat-header-cell *matHeaderCellDef> {{ column.toUpperCase()}}</th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} <a *ngIf="column === 'Comentario'">
+          <mat-icon>comment</mat-icon>
+        </a></td>
 
+      </ng-container>
 
+      <tr mat-header-row *matHeaderRowDef="displayEntrevistas"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayEntrevistas;"></tr>
+    </table>
+  </div>
 </div>

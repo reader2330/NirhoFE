@@ -18,12 +18,11 @@ import {environment} from '../../../../../environments/environment';
   styleUrls: ['./encuesta-eva360.component.scss']
 })
 export class EncuestaEva360Component implements OnInit {
-
   valor = '';
   start = true;
-
+  autoEvaluacion = false;
+  idEvaluador;
   @Output() responseChildren = new EventEmitter();
-
   constructor(private ProyectoEvdServices: Proyecto360Service, public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
   }
   data = {
@@ -90,7 +89,9 @@ export class EncuestaEva360Component implements OnInit {
     this.route.params.subscribe(res => {
       this.token = res['token'];
       this.ProyectoEvdServices.getPreguntasParticipante(this.token).subscribe(res => {
+        console.log(res);
         this.preguntas = res;
+        this.idEvaluador = this.preguntas[0]['cuestionarioParticipantes'][0]['idEvaluador'];
         let auxOpciones = [];
         for (let cuestionario of this.preguntas) {
           let i = 0;
@@ -113,12 +114,17 @@ export class EncuestaEva360Component implements OnInit {
 
 
   setRespuesta(question, id) {
-
-    question['respuesta'] = id + 1;
+    console.log(question);
+    if (question.cuetionarioParticipantePK.idParticipante === this.idEvaluador) {
+      question['autoEval'] = id + 1;
+    } else {
+      question['respuesta'] = id + 1;
+    }
     this.start = false;
     this.updateValor(question);
   }
   updateValor(question) {
+    console.log(question);
     this.ProyectoEvdServices.updatePregunta(question).subscribe((res) => {
       console.log(res);
     });

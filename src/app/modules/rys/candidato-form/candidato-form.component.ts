@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material';
 import {ActividadSolicitante} from '../../../screensOut/models/actividad-solicitante';
@@ -10,6 +10,7 @@ import {ContactoRYS} from '../models/contacto-rys';
 import {IdiomaRYS} from '../models/idioma-rys';
 import {PuestoRYS} from '../models/puesto-rys';
 import Swal from "sweetalert2";
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
   selector: 'app-candidato-form',
@@ -17,7 +18,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./candidato-form.component.scss']
 })
 export class CandidatoFormComponent implements OnInit {
-
+  @Output() response = new EventEmitter();
   InformacionForm: FormGroup;
   ContactoForm: FormGroup;
   VacanteForm: FormGroup;
@@ -84,7 +85,8 @@ export class CandidatoFormComponent implements OnInit {
       pretencion: [null, Validators.required],
       direccion: [null, Validators.required],
       username: [null, Validators.required],
-      password: [null, Validators.required]
+      password: [null, Validators.required],
+      email: [null, Validators.required]
 
     });
     this.ContactoForm = this._form.group({
@@ -139,7 +141,8 @@ export class CandidatoFormComponent implements OnInit {
   }
 
   addIdioma() {
-    let id = sessionStorage.getItem('idCandidato');
+    this.showTable = false;
+    let id = JSON.parse(sessionStorage.getItem('idCandidato'));
     let idioma = new IdiomaRYS();
     idioma.nombre = this.newIdioma.nombre;
     idioma.habilidad = this.newIdioma.habilidad;
@@ -147,9 +150,11 @@ export class CandidatoFormComponent implements OnInit {
     this.newIdioma.nombre = null;
     this.newIdioma.habilidad = null;
     this.newIdioma.nivel = null;
-    this.Recultamiento.saveIdioma(id, idioma).subscribe(res => {
+    this.Recultamiento.saveIdioma(id.id, idioma).subscribe(res => {
+      idioma.id = res.id;
+      this.idiomasCandidato.push(idioma);
+      this.showTable = true;
     });
-    this.idiomasCandidato.push(idioma);
   }
 
   getIdiomas() {
@@ -161,67 +166,109 @@ export class CandidatoFormComponent implements OnInit {
 
 
   removeIdioma(elt) {
-
+    this.showTable = false;
     this.idiomasCandidato.map((item, i ) => {
       if (item.nombre === elt.nombre) {
         this.idiomasCandidato.splice(i, 1);
       }
     });
     this.Recultamiento.deleteIdioma(elt.id).subscribe(res => {
+      this.showTable = true;
     });
   }
 
   addPuesto() {
-    let id = sessionStorage.getItem('idCandidato');
+    this.showTable = false;
+    let id = JSON.parse(sessionStorage.getItem('idCandidato'));
     let puesto = new PuestoRYS();
     puesto.puesto = this.newPuesto.puesto;
     puesto.nivel = this.newPuesto.nivel;
     puesto.fechaIni = this.newPuesto.fechaIni;
     puesto.fechaFin = this.newPuesto.fechaFin;
     puesto.antiguedad = this.newPuesto.antiguedad;
-    for (let key in this.newPuesto){
+    for (let key in this.newPuesto) {
       this.newPuesto[key] = null;
     }
-    this.Recultamiento.savePuestos(id, puesto).subscribe(res => {
+    this.Recultamiento.savePuestos(id.id, puesto).subscribe(res => {
+      puesto.id = res['id'];
+      this.puestos.push(puesto);
+      this.showTable = true;
     });
-    this.puestos.push(puesto);
   }
 
   addContacto() {
-    let id = sessionStorage.getItem('idCandidato');
+    this.showTable = false;
+    let id = JSON.parse(sessionStorage.getItem('idCandidato'));
     let contacto = new ContactoRYS();
     contacto.id = null;
     contacto.nombre = this.newContacto.nombre;
     contacto.tipoContacto = this.newContacto.tipoContacto;
     this.newContacto.nombre = null;
     this.newContacto.tipoContacto = null;
-    this.contactos.push(contacto);
-    this.Recultamiento.saveContactoCandidato(id, contacto).subscribe(res => {
-
+    this.Recultamiento.saveContactoCandidato(id.id, contacto).subscribe(res => {
+      console.log(res);
+      contacto.id = res.id;
+      this.contactos.push(contacto);
+      this.showTable = true;
     });
 
   }
+  mostrarDescripcion(catalog, element) {
+    let desc = '';
+    switch (catalog) {
+      case 1:
+        this.contacts.map((item, i) => {
+          if (item.id === element) {
+            desc = item.descripcionCatalogo;
+            return;
+          }
+        });
+        break;
+      case 2:
+        this.nivelesIdiomas.map((item, i) => {
+          if (item.id === element){
+            desc = item.descripcionCatalogo;
+            return;
+          }
+        });
+        break;
+      case 3:
+        this.nivelCompetencias.map((item, id) => {
+          if (item.id === element) {
+            desc = item.descripcionCatalogo;
+            return;
+          }
+        });
+        break
+    }
+    return desc;
+  }
   removeContacto(elt) {
+    this.showTable = false;
     this.contactos.map((item, i ) => {
       if (item.nombre === elt.nombre) {
         this.contactos.splice(i, 1);
       }
     });
     this.Recultamiento.deleteContacto(elt.id).subscribe(res => {
+      this.showTable = true;
     });
   }
   removePuesto(elt) {
+    this.showTable = true;
     this.puestos.map((item, i ) => {
       if (item.nombre === elt.nombre) {
         this.puestos.splice(i, 1);
       }
     });
     this.Recultamiento.deletePuesto(elt.id).subscribe(res => {
+      this.showTable = false;
     });
   }
 
   addConocimiento() {
-    let id = sessionStorage.getItem('idCandidato');
+    this.showTable = false;
+    let id = JSON.parse(sessionStorage.getItem('idCandidato'));
     let conocimiento = new ConocimientoRYS();
     conocimiento.id = null;
     conocimiento.nombre = this.newConocimiento.nombre;
@@ -231,19 +278,22 @@ export class CandidatoFormComponent implements OnInit {
     this.newConocimiento.nombre = null;
     this.newConocimiento.nivel = null;
     if (id) {
-      this.Recultamiento.saveConocimientoCandidato(id, conocimiento).subscribe(res => {
+      this.Recultamiento.saveConocimientoCandidato(id.id, conocimiento).subscribe(res => {
+        conocimiento.id = res.id;
         this.conocimientos.push(conocimiento);
+        this.showTable = true;
       });
     }
   }
   removeConocimiento(elt) {
-    console.log(elt);
+    this.showTable = false;
     this.conocimientos.map((item, i ) => {
       if (item.nombre === elt.nombre) {
         this.conocimientos.splice(i, 1);
       }
     });
     this.Recultamiento.deleteConocimientoCandidato(elt.id).subscribe(res => {
+      this.showTable = true;
     });
   }
 
@@ -259,7 +309,7 @@ export class CandidatoFormComponent implements OnInit {
   }
   getEstudios() {
     this.CatalogServices.getScholarship().subscribe(res => {
-      console.log(res);
+
       this.niveles = res;
     });
   }
@@ -270,7 +320,7 @@ export class CandidatoFormComponent implements OnInit {
   }
   getMotivos() {
     this.CatalogServices.getMotivos().subscribe(res => {
-      console.log(res);
+
       this.motivos = res;
     });
   }
@@ -296,7 +346,7 @@ export class CandidatoFormComponent implements OnInit {
   }
   getNivelesIdioma() {
     this.CatalogServices.getNivelesIdioma().subscribe(res => {
-      console.log(res);
+
       this.nivelesIdiomas = res;
     });
   }
@@ -310,26 +360,34 @@ export class CandidatoFormComponent implements OnInit {
     if (this.InformacionForm.value['rfc']) {
       const rfc = this.InformacionForm.value['rfc'];
       this.Recultamiento.getCandidatoRFC(rfc).subscribe(res => {
-        console.log(res);
         if (res) {
           this.InformacionForm.patchValue(res);
+          this.InformacionForm.patchValue({
+            'nacimiento': new Date(this.InformacionForm.value['nacimiento'])
+          });
           if (res['contactos']) {
               this.contactos = res['contactos'];
+              this.showTable = true;
           }
           if (res['idiomas']) {
             this.idiomasCandidato = res['idiomas'];
+            this.showTable = true;
           }
           if (res['conocimentos']) {
             this.conocimientos = res['conocimentos'];
+            this.showTable = true;
           }
           if (res['puestos']) {
             this.puestos = res['puestos'];
+            this.showTable = true;
           }
           if (res['caracteristicasCandidatoCv']){
             this.CaracteristicasForm.patchValue(res['caracteristicasCandidatoCv']);
           }
-
-          sessionStorage.setItem('idCandidato', this.InformacionForm.value['id']);
+          let json = {
+            id: this.InformacionForm.value['id']
+          };
+          sessionStorage.setItem('idCandidato', JSON.stringify(json));
           this.nextFlag = true;
         }
 
@@ -350,7 +408,6 @@ export class CandidatoFormComponent implements OnInit {
         switch (step) {
           case 1:
             this.Recultamiento.saveCandidato(form['value']).subscribe(res => {
-              console.log(res);
               Swal(
                 'Listo.',
                 'La información se guardo correctamente',
@@ -364,7 +421,6 @@ export class CandidatoFormComponent implements OnInit {
               const id = JSON.parse(sessionStorage.getItem('idCandidato'));
               if (id.id) {
                 this.Recultamiento.saveContacto(id.id, form['value']).subscribe(res => {
-                  console.log(res);
                   Swal(
                     'Listo.',
                     'La información se guardo correctamente',
@@ -373,7 +429,6 @@ export class CandidatoFormComponent implements OnInit {
                 });
               } else {
                 this.Recultamiento.saveContacto(id, form['value']).subscribe(res => {
-                  console.log(res);
                   Swal(
                     'Listo.',
                     'La información se guardo correctamente',
@@ -385,11 +440,9 @@ export class CandidatoFormComponent implements OnInit {
             break;
           case 3:
             if (sessionStorage.getItem('idCandidato')) {
-              console.log(form['value']);
               const id = JSON.parse(sessionStorage.getItem('idCandidato'));
               if (id.id) {
                 this.Recultamiento.saveVacante(id.id, form['value']).subscribe(res => {
-                  console.log(res);
                   Swal(
                     'Listo.',
                     'La información se guardo correctamente',
@@ -399,7 +452,6 @@ export class CandidatoFormComponent implements OnInit {
                 });
               } else {
                 this.Recultamiento.saveVacante(id, form['value']).subscribe(res => {
-                  console.log(res);
                   Swal(
                     'Listo.',
                     'La información se guardo correctamente',
@@ -411,9 +463,9 @@ export class CandidatoFormComponent implements OnInit {
             break;
           case 4:
             if (sessionStorage.getItem('idCandidato')) {
-              let id = sessionStorage.getItem('idCandidato');
-              this.Recultamiento.saveCaractesristicasCandidato(id, form['value']).subscribe(res => {
-                console.log(res);
+              let id = JSON.parse(sessionStorage.getItem('idCandidato'));
+              this.Recultamiento.saveCaractesristicasCandidato(id.id, form['value']).subscribe(res => {
+
                 Swal(
                   'Listo.',
                   'La información se guardo correctamente',
@@ -425,6 +477,10 @@ export class CandidatoFormComponent implements OnInit {
         }
       }
     });
+  }
+
+  goInicio() {
+    this.response.emit({value: 1});
   }
 
 }

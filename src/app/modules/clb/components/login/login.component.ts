@@ -16,75 +16,104 @@ export class LoginComponent implements OnInit {
     username: '',
     password: '',
   };
+  typeUser = 0;
   candidato = {
     username: '',
     password: '',
-    rfc: ''
+    rfc: '',
+    email: ''
   };
-  hasCandidato = false;
+  options = [
+    {
+      id: 1,
+      name: 'Candidato'
+    },
+    {
+      id: 2,
+      name: 'Empresa'
+    }
+  ];
   newUser = false;
-  constructor(private LoginService: LoginService, private router: Router, private route: ActivatedRoute, private Reclutamiento: ReclutamientoService) { }
-
+  constructor(private LoginService: LoginService, private router: Router, private Reclutamiento: ReclutamientoService) { }
   ngOnInit() {
-    this.route.params.subscribe(res => {
-      if (res.hasOwnProperty('Candidato')) {
-        this.hasCandidato = true;
-      }
-      console.log(res);
-    });
   }
 
   sendLogin() {
-    if (!this.hasCandidato){
       this.LoginService.sendLogin(this.params).subscribe((res: HttpResponse<any>) => {
         console.log(res);
         if (res && res['token']) {
           localStorage.setItem('token', res['token']);
-
         }
         this.LoginService.getUser().subscribe(res2 => {
-          if (res2['rol'] !== 4) {
+          if (res2['rol'] < 4) {
             this.router.navigate(['SYNC']);
           } else {
-            this.router.navigate(['configurador']);
+            switch (res2['rol']) {
+              case 4:
+                this.router.navigate(['configurador']);
+                break;
+              case 5:
+                this.router.navigate(['RYS']);
+                break;
+              case 6:
+                this.router.navigate(['RYS']);
+                break;
+            }
           }
         });
       }, (err: HttpResponse<any>) => {
-
-        console.log(err);
         Swal('Algo salio mal', 'Credenciales incorrectas', 'error');
 
-      }, () => {
-        console.log('acabe');
       });
-
-    } else {
-      this.sendLoginCandidato();
-    }
-
   }
+
+
   showNewForm() {
     this.newUser = true;
   }
   generarUsuario() {
-    console.log(this.candidato);
+    Swal({
+      title: '',
+      text: 'Seguro que quieres guardar los datos',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si guardar',
+      cancelButtonText: 'No, seguir editando'
+    }).then((result) => {
+      if (result.value) {
+
+        switch (this.typeUser) {
+          case 1:
+            this.crearCandidato();
+            break;
+          case 2:
+            this.crearSolicitante();
+            break;
+        }
+      }
+    });
+  }
+
+  crearCandidato() {
     this.Reclutamiento.saveCandidato(this.candidato).subscribe(res => {
-      console.log(res);
-      this.newUser = !this.newUser;
+      Swal(
+        'Listo.',
+        'La información se guardo correctamente',
+        'success'
+      ).then(() => {
+        this.newUser = !this.newUser;
+      });
     });
   }
-
-  sendLoginCandidato() {
-    this.Reclutamiento.sendLogin(this.params).subscribe(res => {
-      console.log(res);
-      sessionStorage.setItem('Candidato', JSON.stringify(res));
-      this.router.navigate(['RYS']);
-    }, (err: HttpResponse<any>) => {
-
-      console.log(err);
-      Swal('Algo salio mal', 'Credenciales incorrectas', 'error');
-
+  crearSolicitante() {
+    this.Reclutamiento.saveSolicitante(this.candidato).subscribe(res => {
+      Swal(
+        'Listo.',
+        'La información se guardo correctamente',
+        'success'
+      ).then(() => {
+        this.newUser = !this.newUser;
+      });
     });
   }
-
 }
