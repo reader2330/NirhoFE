@@ -80,5 +80,4 @@ public class EntrevistaVacanteServiceImpl implements EntrevistaVacanteService {
 		}		
 	}
 	
-	
 }
