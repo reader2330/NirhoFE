@@ -13,14 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author eisten
- */
+
 @Entity
 @Table(name = "contratacion_vacante")
 public class ContratacionVacante implements Serializable {
@@ -30,34 +25,33 @@ public class ContratacionVacante implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private long id;
     @Basic(optional = false)
     @Column(name = "jornada")
     private String jornada;
     @Basic(optional = false)
     @Column(name = "prestaciones")
-    private int prestaciones;
+    private String prestaciones;
     @Basic(optional = false)
     @Column(name = "sueldo")
     private String sueldo;
     @Basic(optional = false)
     @Column(name = "tipo_contrato")
-    private int tipoContrato;
+    private String tipoContrato;
     
     @Column(name = "idVacante")
     private long idVacante;
     @Column(name = "idCandidato")
     private long idCandidato;
     
-
     public ContratacionVacante() {
     }
 
-    public ContratacionVacante(Long id) {
+    public ContratacionVacante(long id) {
         this.id = id;
     }
 
-    public ContratacionVacante(Long id, String jornada, int prestaciones, String sueldo, int tipoContrato) {
+    public ContratacionVacante(long id, String jornada, String prestaciones, String sueldo, String tipoContrato) {
         this.id = id;
         this.jornada = jornada;
         this.prestaciones = prestaciones;
@@ -97,11 +91,11 @@ public class ContratacionVacante implements Serializable {
         this.jornada = jornada;
     }
 
-    public int getPrestaciones() {
+    public String getPrestaciones() {
         return prestaciones;
     }
 
-    public void setPrestaciones(int prestaciones) {
+    public void setPrestaciones(String prestaciones) {
         this.prestaciones = prestaciones;
     }
 
@@ -113,11 +107,11 @@ public class ContratacionVacante implements Serializable {
         this.sueldo = sueldo;
     }
 
-    public int getTipoContrato() {
+    public String getTipoContrato() {
         return tipoContrato;
     }
 
-    public void setTipoContrato(int tipoContrato) {
+    public void setTipoContrato(String tipoContrato) {
         this.tipoContrato = tipoContrato;
     }
 
