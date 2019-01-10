@@ -115,6 +115,45 @@ public class EntrevistaVacanteController {
 		}
 	}
 	
+	@GetMapping(value = "/porUsernameCandidato")
+	public List<EntrevistaVacante> porUsernameCandidato(@RequestParam(name="username") String username) throws NirhoControllerException{
+		try {
+			Candidato c = candidatoService.getOneByUsername(username);
+			if(c != null) {
+				return entrevistaVacanteService.getByIdCandidato(c.getId());
+			}
+			return null;
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los solicitantes");
+		}
+	}
+	
+	@GetMapping(value = "/porUsernameConsultor")
+	public List<EntrevistaVacante> porUsernameConsultor(@RequestParam(name="username") String username) throws NirhoControllerException{
+		try {
+			Usuario u = usuarioService.obtenerUsuario(username);
+			if(u != null) {
+				return entrevistaVacanteService.getByIdConsultor(u.getId()); 
+			}
+			return null;
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los solicitantes");
+		}
+	}
+	
+	@GetMapping(value = "/porUsernameSolicitante")
+	public List<EntrevistaVacante> porUsernameSolicitante(@RequestParam(name="username") String username) throws NirhoControllerException{
+		try {
+			Solicitante s = solicitanteService.getByUsername(username);
+			if(s != null) {
+				return entrevistaVacanteService.getByIdSolicitante(s.getId());
+			} 
+			return null;
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de los solicitantes");
+		}
+	}
+	
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody EntrevistaVacante entrevistaVacante) throws NirhoControllerException{
 		try {

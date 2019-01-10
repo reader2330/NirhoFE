@@ -80,5 +80,22 @@ public class ContratacionVacanteServiceImpl implements ContratacionVacanteServic
 		}		
 	}
 	
+	public List<ContratacionVacante> getByIdVacante(long id) throws NirhoServiceException{
+		try {
+			return contratacionVacanteDAO.findByIdVacante(id);
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
+		}
+	}
+	
+	public List<ContratacionVacante> getByIdCandidato(long id) throws NirhoServiceException{
+		try {
+			return contratacionVacanteDAO.findByIdCandidato(id);
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
+		}
+	}
 	
 }

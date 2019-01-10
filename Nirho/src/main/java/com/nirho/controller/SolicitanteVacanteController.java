@@ -37,8 +37,10 @@ import com.nirho.model.CaracteristicasCandidatoCv;
 import com.nirho.model.CaracteristicasCandidatoVacante;
 import com.nirho.model.CompetenciasVacante;
 import com.nirho.model.ConocimientoVacante;
+import com.nirho.model.ContratacionVacante;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.service.CandidatoService;
+import com.nirho.service.ContratacionVacanteService;
 import com.nirho.service.SolicitanteVacanteService;
 import com.nirho.util.ReporteUtil;
 
@@ -55,6 +57,8 @@ public class SolicitanteVacanteController {
 	SolicitanteVacanteService solicitanteVacanteService;
 	@Autowired
 	CandidatoService candidatoService;
+	@Autowired
+	ContratacionVacanteService contratacionVacanteService;
 	
 	@GetMapping(value = "/todos")
 	public List<SolicitanteVacante> todos() throws NirhoControllerException{
@@ -72,10 +76,20 @@ public class SolicitanteVacanteController {
 			for(SolicitanteVacante v: solicitanteVacanteService.getAll()) {
 				List<Candidato> candidatos = candidatoService.getAllByVacante(v.getId());
 				SolicitanteVacanteDTO s = new SolicitanteVacanteDTO(v.getId(), v.getAniosExperiencia(), v.getEstadoVacante(), v.getGiro(), v.getMotivo(), v.getStatus(), v.getNombreVacante(), v.getNumVacantes(), v.getPuesto(), v.getPuestoCargo(), v.getPuestoReporta(), candidatos, v.getActividades() , v.getCaracteristicas(), v.getCompetencias(), v.getConocimientos());
+				response.add(s);
 			}
 			return response;
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de los entidads");
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/contrato", method = RequestMethod.GET)
+	public List<ContratacionVacante> getContrato(@PathVariable("id") long id) throws NirhoControllerException{
+		try {
+			return contratacionVacanteService.getByIdVacante(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de candidato");
 		}
 	}
 	

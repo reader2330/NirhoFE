@@ -51,6 +51,7 @@ import com.nirho.model.CompetenciasVacante;
 import com.nirho.model.ConocimientoCandidato;
 import com.nirho.model.ConocimientoVacante;
 import com.nirho.model.ContactoCandidato;
+import com.nirho.model.ContratacionVacante;
 import com.nirho.model.ExperienciaCandidato;
 import com.nirho.model.IdiomaCandidato;
 import com.nirho.model.ParticipantePVC;
@@ -119,10 +120,10 @@ public class CandidatoController {
 	}
 	
 	@RequestMapping(value = "/contrato", method = RequestMethod.GET)
-	public void get(@RequestParam(name="username") String username) throws NirhoControllerException{
+	public List<ContratacionVacante> getContrato(@RequestParam(name="username") String username) throws NirhoControllerException{
 		try {
 			Candidato candidato = candidatoService.getOneByUsername(username);
-			
+			return contratacionVacanteService.getByIdCandidato(candidato.getId());
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de candidato");
 		}
