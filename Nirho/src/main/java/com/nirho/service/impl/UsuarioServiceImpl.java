@@ -52,10 +52,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");
 		}
 	}
+	
 	@Override
 	public void guardarUsuario(Usuario usuario) throws NirhoServiceException {
 		try {
-			dao.save(usuario);
+			List<Usuario> l = dao.findByUsername(usuario.getUsername());
+			if(l == null || l.isEmpty()) {
+				dao.save(usuario);
+			} else {
+				dao.update(usuario);
+			}
 		}catch (Exception e){
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al interactuar con la BD, causa [" + e.getMessage()+ "]");

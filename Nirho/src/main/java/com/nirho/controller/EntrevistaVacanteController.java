@@ -226,6 +226,8 @@ public class EntrevistaVacanteController {
 
 			
 			
+			
+			
 	        String nombreReporte = "ReporteRYS_Entrevista" + ".docx";
 	        
 	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
