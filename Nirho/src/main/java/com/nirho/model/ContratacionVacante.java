@@ -41,6 +41,7 @@ public class ContratacionVacante implements Serializable {
     @Basic(optional = false)
     @Column(name = "aceptado")
     private boolean aceptado;
+    
     @Column(name = "idVacante")
     private long idVacante;
     @Column(name = "idCandidato")

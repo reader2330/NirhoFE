@@ -6,7 +6,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.jboss.logging.Logger;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
-import com.nirho.model.ActividadesPuestoVacante;
 import com.nirho.model.ContratacionVacante;
 import com.nirho.service.ContratacionVacanteService;
 import com.nirho.service.SolicitanteVacanteService;

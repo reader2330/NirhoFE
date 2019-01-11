@@ -20,6 +20,7 @@ import javax.persistence.Table;
 public class EntrevistaVacante implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -46,6 +47,9 @@ public class EntrevistaVacante implements Serializable {
     private String tipoEntrevista;
     @Column(name = "titulo")
     private String titulo;
+    
+    @Column(name = "idVacante")
+    private long idVacante;
     
     @Column(name = "idSolicitante")
     private long idSolicitante;
@@ -178,6 +182,14 @@ public class EntrevistaVacante implements Serializable {
 
 	public void setIdCandidato(long idCandidato) {
 		this.idCandidato = idCandidato;
+	}
+	
+	public long getIdVacante() {
+		return idVacante;
+	}
+
+	public void setIdVacante(long idVacante) {
+		this.idVacante = idVacante;
 	}
 
 	@Override

@@ -39,10 +39,12 @@ import com.nirho.model.CompetenciasVacante;
 import com.nirho.model.ConocimientoVacante;
 import com.nirho.model.ContratacionVacante;
 import com.nirho.model.EntrevistaVacante;
+import com.nirho.model.Solicitante;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.service.CandidatoService;
 import com.nirho.service.ContratacionVacanteService;
 import com.nirho.service.EntrevistaVacanteService;
+import com.nirho.service.SolicitanteService;
 import com.nirho.service.SolicitanteVacanteService;
 import com.nirho.util.ReporteUtil;
 
@@ -63,6 +65,8 @@ public class SolicitanteVacanteController {
 	ContratacionVacanteService contratacionVacanteService;
 	@Autowired
 	EntrevistaVacanteService entrevistaVacanteService;
+	@Autowired
+	SolicitanteService solicitanteService;
 	
 	@GetMapping(value = "/todos")
 	public List<SolicitanteVacante> todos() throws NirhoControllerException{
@@ -343,16 +347,28 @@ public class SolicitanteVacanteController {
 			ZipSecureFile.setMinInflateRatio(0);
 			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYS.docx"));
 			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reporteRYSEntrevista.docx"));
-
-			List<Candidato> candidatos = candidatoService.getAllByVacante(idVacante);
+				
+			Solicitante solicitante = null;
+			SolicitanteVacante vacante = null;
 			
-			for(Candidato candidato: candidatos) {
+			for(Solicitante s:  solicitanteService.getAll()) {
+				for(SolicitanteVacante v: s.getVacantes()) {
+					if(v.getId() == idVacante) {
+						vacante = v;
+						solicitante = s;
+					}
+				}
+			}
+			
+			for(Candidato candidato: candidatoService.getAllByVacante(idVacante)) {
 
 				for(EntrevistaVacante entrevista : entrevistaVacanteService.getByIdCandidato(candidato.getId())) {
-				//	solicitanteVacanteService.
+				   //	solicitanteVacanteService.
 				}
 				
-				//for(ConcontratacionVacanteService.getByIdCandidato(candidato.getId());
+				for(ContratacionVacante contratacion : contratacionVacanteService.getByIdCandidato(candidato.getId())){
+					
+				}
 			}
 
 	        String nombreReporte = "ReporteRYS_Entrevista" + ".docx";
