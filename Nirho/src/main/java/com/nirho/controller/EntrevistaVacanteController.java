@@ -280,34 +280,6 @@ public class EntrevistaVacanteController {
 		} 
 	}
 
-	@RequestMapping(value = "/reporte/participante", method = RequestMethod.GET)
-	@ResponseBody
-	public void genearReporteIndividual(@RequestParam(name="idEntrevistaVacante") long idEntrevistaVacante, HttpServletResponse response) throws NirhoControllerException{
-		
-		try {
-			    
-			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYS.docx"));
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reporteRYSEntrevista.docx"));
-
-			
-			
-			
-			
-	        String nombreReporte = "ReporteRYS_Entrevista" + ".docx";
-	        
-	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
-	        response.setHeader("Content-Disposition", "attachment; filename=" + nombreReporte);
-	        document.write(response.getOutputStream());
-	   
-	        response.flushBuffer();
-
-		} catch(IOException | InvalidFormatException e){
-			throw new NirhoControllerException("Problemas al generar reporte");
-		} 
-	}
-	
-	
 	private void enviarEntrevista(String to, EntrevistaVacante entrevista) throws NirhoServiceException {
 		String emailBody = "";
 		emailBody += "<p>Título: " + entrevista.getTitulo() + "</p><br/>";

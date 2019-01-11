@@ -38,9 +38,11 @@ import com.nirho.model.CaracteristicasCandidatoVacante;
 import com.nirho.model.CompetenciasVacante;
 import com.nirho.model.ConocimientoVacante;
 import com.nirho.model.ContratacionVacante;
+import com.nirho.model.EntrevistaVacante;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.service.CandidatoService;
 import com.nirho.service.ContratacionVacanteService;
+import com.nirho.service.EntrevistaVacanteService;
 import com.nirho.service.SolicitanteVacanteService;
 import com.nirho.util.ReporteUtil;
 
@@ -59,6 +61,8 @@ public class SolicitanteVacanteController {
 	CandidatoService candidatoService;
 	@Autowired
 	ContratacionVacanteService contratacionVacanteService;
+	@Autowired
+	EntrevistaVacanteService entrevistaVacanteService;
 	
 	@GetMapping(value = "/todos")
 	public List<SolicitanteVacante> todos() throws NirhoControllerException{
@@ -320,5 +324,42 @@ public class SolicitanteVacanteController {
 			throw new NirhoControllerException("Problemas al generar reporte");
 		}
 	}
+	
+	@RequestMapping(value = "/reporteEntrevista", method = RequestMethod.GET)
+	@ResponseBody
+	public void generarReporteEntrevista(@RequestParam(name="idVacante") long idVacante, HttpServletResponse response) throws NirhoControllerException{
+		
+		try {
+			    
+			ZipSecureFile.setMinInflateRatio(0);
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYS.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reporteRYSEntrevista.docx"));
+
+			List<Candidato> candidatos = candidatoService.getAllByVacante(idVacante);
+			
+			for(Candidato candidato: candidatos) {
+
+				for(EntrevistaVacante entrevista : entrevistaVacanteService.getByIdCandidato(candidato.getId())) {
+				//	solicitanteVacanteService.
+				}
+				
+				//for(ConcontratacionVacanteService.getByIdCandidato(candidato.getId());
+			}
+
+	        String nombreReporte = "ReporteRYS_Entrevista" + ".docx";
+	        
+	        response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); 
+	        response.setHeader("Content-Disposition", "attachment; filename=" + nombreReporte);
+	        document.write(response.getOutputStream());
+	   
+	        response.flushBuffer();
+
+		} catch(IOException | InvalidFormatException e){
+			throw new NirhoControllerException("Problemas al generar reporte");
+		} catch (NirhoServiceException e) {
+			throw new NirhoControllerException("Problemas al generar reporte");
+		} 
+	}
+	
 	
 }
