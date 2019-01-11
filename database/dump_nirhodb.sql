@@ -477,6 +477,7 @@ DROP TABLE IF EXISTS `contratacion_vacante`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `contratacion_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `aceptado` bit(1) NOT NULL,
   `id_candidato` bigint(20) DEFAULT NULL,
   `id_vacante` bigint(20) DEFAULT NULL,
   `jornada` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -2473,4 +2474,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-09 22:37:34
+-- Dump completed on 2019-01-10 21:57:07

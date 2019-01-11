@@ -38,7 +38,9 @@ public class ContratacionVacante implements Serializable {
     @Basic(optional = false)
     @Column(name = "tipo_contrato")
     private String tipoContrato;
-    
+    @Basic(optional = false)
+    @Column(name = "aceptado")
+    private boolean aceptado;
     @Column(name = "idVacante")
     private long idVacante;
     @Column(name = "idCandidato")
@@ -81,6 +83,18 @@ public class ContratacionVacante implements Serializable {
 
 	public void setIdCandidato(long idCandidato) {
 		this.idCandidato = idCandidato;
+	}
+
+	public boolean isAceptado() {
+		return aceptado;
+	}
+
+	public void setAceptado(boolean aceptado) {
+		this.aceptado = aceptado;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getJornada() {

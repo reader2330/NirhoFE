@@ -70,6 +70,19 @@ public class ContratacionVacanteController {
 		}
 	}
 	
+	@RequestMapping(value = "/{id}/aceptado/{aceptado}", method = RequestMethod.GET)
+	public void setStatus(@PathVariable("id") long id, @PathVariable("aceptado") boolean aceptado) throws NirhoControllerException{
+		try {
+			ContratacionVacante c = contratacionVacanteService.getOne(id);
+			if(c != null) {
+				c.setAceptado(aceptado);
+				contratacionVacanteService.save(c);
+			}
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de contratacionVacante");
+		}
+	}
+	
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody ContratacionVacante contratacionVacante) throws NirhoControllerException{
 		try {
