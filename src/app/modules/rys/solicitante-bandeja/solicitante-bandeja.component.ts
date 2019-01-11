@@ -6,6 +6,8 @@ import {ModalComentarioComponent} from '../../modal/modal-comentario/modal-comen
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {ModalContratoComponent} from '../../modal/modal-contrato/modal-contrato.component';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
+import {ModalCandidatosComponent} from '../../modal/modal-candidatos/modal-candidatos.component';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-solicitante-bandeja',
@@ -22,7 +24,8 @@ import {el} from '@angular/platform-browser/testing/src/browser_util';
 export class SolicitanteBandejaComponent implements OnInit {
   vacantes = new MatTableDataSource();
   showTable = false;
-  displayVacantes = ['Vacante', 'numeroVacantes', 'detail1' ];
+  displayVacantes = ['Vacante', 'numeroVacantes', 'detail1', 'detail2' ];
+  colums = ['Vacante', 'numeroVacantes' ];
   displayEntrevistas = ['direccion', 'titulo', 'fechaEntrevista', 'Comentario'];
   hasCandidato = false;
   hasGerente = false;
@@ -39,6 +42,7 @@ export class SolicitanteBandejaComponent implements OnInit {
   }
   getVacantesBySolicitante() {
     this.ReclutamientoServices.getVacantesBySolicitante(this.user['username']).subscribe(res => {
+      console.log(res);
       this.vacantes = res;
       this.showTable = true;
     });
@@ -54,9 +58,7 @@ export class SolicitanteBandejaComponent implements OnInit {
     });
   }
   getEntrevistasBySolicitante() {
-
     this.ReclutamientoServices.getEntrevistaByType('Solicitante', this.user['username']).subscribe(res => {
-      console.log(res);
       this.entrevistas = res;
       this.showTable2 = true;
     });
@@ -75,7 +77,23 @@ export class SolicitanteBandejaComponent implements OnInit {
     console.log(element);
     this.modal.open(ModalContratoComponent, {
       data: {
-        idVacante: element.id
+        idVacante: element.id,
+        type: true
+      }
+    });
+  }
+
+  OpenModalCandidatos(element) {
+    if (!element.candidatos.length) {
+      return Swal(
+        'Lo siento!',
+        'No tiene candidatos asignados',
+        'warning'
+      );
+    }
+    this.modal.open(ModalCandidatosComponent, {
+      data: {
+        candidatos: element.candidatos
       }
     });
   }

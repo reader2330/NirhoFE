@@ -121,7 +121,7 @@ export class ReclutamientoService {
     return this.http.post(this.api + 'entrevistaVacante/' + id + '/' + type + '/comentario', data, {headers: this.headers});
   }
   deleteCandidatoVacante(idCandidato) {
-    return this.http.get(this.api + 'candidato/' + idCandidato + '/vacante/' + '/eliminar');
+    return this.http.post(this.api + 'candidato/' + idCandidato + '/vacante/eliminar', {}, {headers: this.headers});
   }
   saveContrato(data) {
     return this.http.post(this.api + 'contratacionVacante/guardar', data, {headers: this.headers});
@@ -130,6 +130,15 @@ export class ReclutamientoService {
       return this.http.get(this.api + 'entrevistaVacante/porUsername' + type, {headers: this.headers, params: {
       'username': username
       }});
+  }
+  getContrato(id): Observable<any> {
+    return this.http.get(this.api + 'vacante/' + id + '/contrato', { headers: this.headers});
+  }
+  getContratosCandidato(username): Observable<any> {
+    return this.http.get(this.api + 'candidato/contrato', {headers: this.headers, params: {'username': username}});
+  }
+  setAceptado(id, value) {
+   return this.http.get(this.api + 'contratacionVacante/' + id + '/aceptado/' + value, {headers: this.headers});
   }
 
 }

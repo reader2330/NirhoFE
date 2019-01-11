@@ -57,6 +57,9 @@ export class CandidatoTableComponent implements OnInit {
         type: num
       }
     });
+    this.modal.afterAllClosed.subscribe(res => {
+      this.getEntrevistas();
+    });
   }
   getEntrevistas() {
     this.ReclutamientoServices.getEntrevista().subscribe(res => {

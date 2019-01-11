@@ -4,6 +4,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {LoginService} from '../../clb/services/login.service';
 import {ModalComentarioComponent} from '../../modal/modal-comentario/modal-comentario.component';
+import Swal from "sweetalert2";
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 
 @Component({
@@ -23,13 +25,17 @@ export class VacanteTableComponent implements OnInit {
   showTable = false;
   displayVacantes = ['Vacante', 'numeroVacantes', ];
   displayEntrevistas = ['direccion', 'titulo', 'fechaEntrevista', 'Comentario'];
+  displayContratos = ['jornada', 'prestaciones', 'sueldo' , 'Tipo Contrato', 'Aceptado' ];
+  columnContrato = ['jornada', 'prestaciones', 'sueldo'];
   hasCandidato = false;
   hasGerente = false;
   expandedElement: null;
   user = {};
   solicitante = {};
   entrevistas = [];
+  contratos = [];
   showTable2 = false;
+  showTable3 = false;
   constructor(private ReclutamientoServices: ReclutamientoService, private Login: LoginService, public modal: MatDialog) { }
 
   ngOnInit() {
@@ -72,6 +78,7 @@ export class VacanteTableComponent implements OnInit {
         this.getEntrevistas();
       } else {
         this.getEntrevistasByCandidato();
+        this.getContratosCandidato();
       }
     });
   }
@@ -98,7 +105,38 @@ export class VacanteTableComponent implements OnInit {
       }
     });
   }
+  getContratosCandidato() {
+   this.ReclutamientoServices.getContratosCandidato(this.user['username']).subscribe(res => {
+     console.log(res);
+     this.contratos = res;
+     this.showTable3 = true;
+   });
+  }
 
+  setAceptadoContrato(element) {
+    Swal({
+      title: '',
+      text: 'Seguro que quieres aceptar el contrato',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, acepto',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.ReclutamientoServices.setAceptado(element.id, element.aceptado).subscribe(res => {
+          Swal(
+            'Listo.',
+            'Se acepto el contrato',
+            'success'
+          );
+        });
+      } else {
+        element.aceptado = false;
+      }
+    });
+
+
+  }
 
 
 }

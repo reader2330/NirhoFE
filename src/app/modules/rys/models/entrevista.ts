@@ -13,5 +13,6 @@ export class Entrevista {
   idSolicitante: number;
   idConsultor: number;
   idCandidato: number;
+  idVacante: number;
   constructor () {}
 }

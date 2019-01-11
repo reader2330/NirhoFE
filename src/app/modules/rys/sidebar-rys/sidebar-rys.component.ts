@@ -133,7 +133,7 @@ export class SidebarRysComponent implements OnInit {
     this.modules = [
       {
         id_submodulo: 1,
-        descripcion: 'Bandeja de vacantes'
+        descripcion: 'Bandeja de entrevistas'
       },
       {
         id_submodulo: 4,

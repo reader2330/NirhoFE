@@ -2,7 +2,7 @@
   <div class="row col-sm-10 offset-1">
     <mat-form-field class="col-sm-12" appearance="outline">
       <mat-label>Selecciona un candidato</mat-label>
-      <mat-select [(ngModel)]="contrato.idCandidato" >
+      <mat-select [disabled]="!type" [(ngModel)]="contrato.idCandidato" >
         <mat-option *ngFor="let cand of candidatos" [value]="cand.id">
           {{cand['nombre']}}
         </mat-option>
@@ -10,22 +10,22 @@
     </mat-form-field>
     <mat-form-field class="col-sm-12" appearance="outline">
       <mat-label>Jornada</mat-label>
-      <input [(ngModel)]="contrato.jornada" type="text" matInput>
+      <input [disabled]="!type" [(ngModel)]="contrato.jornada" type="text" matInput>
     </mat-form-field>
     <mat-form-field class="col-sm-12" appearance="outline">
       <mat-label>Prestaciones</mat-label>
-      <input [(ngModel)]="contrato.prestaciones" type="text" matInput>
+      <input [disabled]="!type" [(ngModel)]="contrato.prestaciones" type="text" matInput>
     </mat-form-field>
     <mat-form-field class="col-sm-12" appearance="outline">
       <mat-label>Sueldo</mat-label>
-      <input [(ngModel)]="contrato.sueldo" type="text" matInput>
+      <input [disabled]="!type" [(ngModel)]="contrato.sueldo" type="text" matInput>
     </mat-form-field>
     <mat-form-field class="col-sm-12" appearance="outline">
       <mat-label>Tipo de contrato</mat-label>
-      <input [(ngModel)]="contrato.tipoContrato" type="text" matInput>
+      <input [disabled]="!type" [(ngModel)]="contrato.tipoContrato" type="text" matInput>
     </mat-form-field>
     <div class="col-sm-4 offset-5">
-      <button mat-raised-button  color="accent" (click)="saveContrato()">Agregar contrato</button>
+      <button [disabled]="!type" mat-raised-button  color="accent" (click)="saveContrato()">Agregar contrato</button>
     </div>
   </div>
 </div>

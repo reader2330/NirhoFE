@@ -1,0 +1,14 @@
+<div *ngFor="let cand of candidatos" class="card text-white bg-info mb-3" style="max-width: 18rem;">
+  <div class="card-header">Nombre: {{cand.nombre}}</div>
+  <div class="card-body">
+    <p class="card-text">Carrera: {{cand.caracteristicasCandidatoCv.carrera}}</p>
+    <p class="card-text">Género: {{cand.caracteristicasCandidatoCv.genero}}</p>
+    <p class="card-text">Perfil: {{cand.perfil}}</p>
+    <p class="card-text">Email: {{cand.email}}</p>
+    <p class="card-text">Dirección: {{cand.direccion}}</p>
+    <p class="card-text">Nacionalidad: {{cand.nacionalidad}}</p>
+  </div>
+  <div class="card-footer  border-success">
+    <button mat-raised-button color="accent" (click)="eliminarCandidato(cand)"> Eliminar Candidato</button>
+  </div>
+</div>

@@ -1,6 +1,7 @@
+<mat-dialog-content>
 <div *ngIf="data['type'] === 1" class="container row">
   <div  class="row col-sm-10 offset-1">
-    <mat-form-field class="col-sm-12">
+    <mat-form-field class="col-sm-12" appearance="outline">
       <mat-label>Selecciona una vacante</mat-label>
       <mat-select [(ngModel)]="selectVacante">
         <mat-option *ngFor="let vac of vacantes" [value]="vac">
@@ -8,7 +9,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="col-sm-12">
+    <mat-form-field class="col-sm-12" appearance="outline">
       <mat-label>Selecciona a un candidato</mat-label>
       <mat-select [(ngModel)]="selectCandidato">
         <mat-option *ngFor="let cand of candidatos" [value]="cand">
@@ -24,6 +25,14 @@
 <div *ngIf="data['type'] === 2" class="container row">
   <div class="row col-sm-10 offset-1">
     <h2>Entrevista</h2>
+    <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Selecciona una vacante</mat-label>
+      <mat-select [(ngModel)]="entrevista.idVacante">
+        <mat-option *ngFor="let vac of vacantes" [value]="vac.id">
+          {{vac['nombreVacante']}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-form-field class="col-sm-12" appearance="outline">
       <mat-label>Selecciona a un cliente</mat-label>
       <mat-select [(ngModel)]="entrevista.idSolicitante">
@@ -57,6 +66,7 @@
       <input [(ngModel)]="entrevista.direccion" type="text" matInput  >
     </mat-form-field>
     <mat-form-field class="col-sm-12" appearance="outline">
+      <mat-label>Fecha entrevista</mat-label>
       <input matInput [(ngModel)]="entrevista.fechaEntrevista" [matDatepicker]="picker" placeholder="Escoge un dia">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -75,3 +85,4 @@
     </div>
   </div>
 </div>
+</mat-dialog-content>

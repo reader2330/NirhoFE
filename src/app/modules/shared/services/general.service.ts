@@ -50,6 +50,9 @@ export class GeneralService {
   generarReporteCandidato(id) {
     window.open(this.api + 'candidato' +  '/reporte/participante' + '?idCandidato=' + id);
   }
+  generarReporteInicial(id) {
+    window.open(this.api + 'vacante' +  '/reporte' + '?idVacante=' + id);
+  }
 
 
 

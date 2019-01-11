@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GeneralService} from '../../services/general.service';
+import {ReclutamientoService} from '../../../rys/services/reclutamiento.service';
 
 @Component({
   selector: 'app-generador-reportes',
@@ -12,10 +13,29 @@ export class GeneradorReportesComponent implements OnInit {
   proyects = [];
   participante = {};
   participantes = [];
+  candidato = {};
+  vacante = {}
+  candidatos = [];
+  vacantes = [];
   empresas = [];
   empresa = {};
   proyectsNull = false;
-  constructor(private GeneralServices: GeneralService) { }
+  typeReporte = {};
+  tipos = [
+    {
+      key: 1,
+      name: 'CV Nirho'
+    },
+    {
+      key: 2,
+      name: 'Reporte inicial'
+    },
+    {
+      key: 3,
+      name: 'Reporte final'
+    }
+  ]
+  constructor(private GeneralServices: GeneralService, private Reclutamiento: ReclutamientoService) { }
 
   ngOnInit() {
     if (sessionStorage.getItem('moduleActive')) {
@@ -31,7 +51,7 @@ export class GeneradorReportesComponent implements OnInit {
     } else {
       if (this.moduleSelect === 'RYS') {
         this.getParticipantes();
-      } else{
+      } else {
         this.getProyects();
       }
 
@@ -138,6 +158,42 @@ export class GeneradorReportesComponent implements OnInit {
     } else {
       return !this.proyect['idProyecto'];
     }
+  }
+  distribuitorGenerarReporte() {
+    switch (this.typeReporte['key']) {
+      case 1:
+        this.generarCVNirho();
+        break;
+      case 2:
+        this.generaReporteInicial();
+    }
+  }
+  distribuitorTipoReporte() {
+    this.candidatos = [];
+    this.vacantes = [];
+    if (this.typeReporte['key'] === 1) {
+      this.getCandidatos();
+    } else {
+      this.getVacantes();
+    }
+  }
+  getVacantes() {
+    this.Reclutamiento.getVacantes().subscribe(res => {
+      console.log(res);
+      this.vacantes = res;
+    });
+  }
+
+  getCandidatos() {
+    this.Reclutamiento.getCandidatos().subscribe(res => {
+      this.candidatos = res;
+    });
+  }
+  generarCVNirho() {
+    this.GeneralServices.generarReporteCandidato(this.candidato['id']);
+  }
+  generaReporteInicial() {
+    this.GeneralServices.generarReporteInicial(this.vacante['id']);
   }
 
 }

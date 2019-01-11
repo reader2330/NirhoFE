@@ -6,6 +6,7 @@ export class Contrato {
   tipoContrato: string;
   idVacante: number;
   idCandidato: number;
+  aceptado: boolean;
   constructor() {
   }
 

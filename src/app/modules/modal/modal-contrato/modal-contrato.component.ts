@@ -18,6 +18,19 @@ export class ModalContratoComponent implements OnInit {
     this.getCandidatos();
     if (this.data.idVacante) {
       this.contrato.idVacante = this.data.idVacante;
+      this.Reclutamiento.getContrato(this.data.idVacante).subscribe(res => {
+        console.log(res);
+        if  (res && res[0]) {
+          this.contrato.id = res[0].id;
+          this.contrato.jornada = res[0].jornada;
+          this.contrato.prestaciones = res[0].prestaciones;
+          this.contrato.sueldo = res[0].sueldo;
+          this.contrato.tipoContrato = res[0].tipoContrato;
+          this.contrato.aceptado = res[0].aceptado;
+          this.contrato.idVacante = res[0].idVacante;
+          this.contrato.idCandidato = res[0].idCandidato;
+        }
+      });
     }
     if (this.data.type) {
       this.type = this.data.type;
