@@ -78,7 +78,13 @@ public class SolicitanteController {
 	public String add(@Valid @RequestBody Solicitante solicitante) throws NirhoControllerException{
 		try {
 			
-			Usuario usuario = usuarioService.obtenerUsuario(solicitante.getUsername());
+			Usuario usuario;
+			
+			try {
+				usuario = usuarioService.obtenerUsuario(solicitante.getUsername());
+			} catch(Exception e) {
+				usuario = null;
+			}
 			
 			if(usuario == null) {
 				usuario = new Usuario();
