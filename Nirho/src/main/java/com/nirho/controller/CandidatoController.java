@@ -142,7 +142,13 @@ public class CandidatoController {
 	public String add(@Valid @RequestBody Candidato candidato) throws NirhoControllerException{
 		try {
 			
-			Usuario usuario = usuarioService.obtenerUsuario(candidato.getUsername());
+			Usuario usuario;
+			
+			try {
+				usuario = usuarioService.obtenerUsuario(candidato.getUsername());
+			} catch(Exception e) {
+				usuario = null;
+			}
 			
 			if(usuario == null) {
 				usuario = new Usuario(); 
