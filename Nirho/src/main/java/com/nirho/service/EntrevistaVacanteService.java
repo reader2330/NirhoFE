@@ -15,4 +15,5 @@ public interface EntrevistaVacanteService {
 	public List<EntrevistaVacante> getByIdCandidato(long idCandiato) throws NirhoServiceException;
 	public List<EntrevistaVacante> getByIdConsultor(long idConsultor) throws NirhoServiceException;
 	public List<EntrevistaVacante> getByIdSolicitante(long idSolicitante) throws NirhoServiceException;
+	public List<EntrevistaVacante> getByIdVacante(long idVacante) throws NirhoServiceException;
 }

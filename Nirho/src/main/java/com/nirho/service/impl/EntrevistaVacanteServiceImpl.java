@@ -107,4 +107,13 @@ public class EntrevistaVacanteServiceImpl implements EntrevistaVacanteService {
 		}		
 	}
 	
+	public List<EntrevistaVacante> getByIdVacante(long idVacante) throws NirhoServiceException{
+		try {
+			return entrevistaVacanteDAO.findByIdVacante(idVacante);
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
+		}		
+	}
+	
 }

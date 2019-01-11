@@ -17,6 +17,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.jboss.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,9 +37,12 @@ import com.nirho.model.Candidato;
 import com.nirho.model.CaracteristicasCandidatoCv;
 import com.nirho.model.CaracteristicasCandidatoVacante;
 import com.nirho.model.CompetenciasVacante;
+import com.nirho.model.ConocimientoCandidato;
 import com.nirho.model.ConocimientoVacante;
 import com.nirho.model.ContratacionVacante;
 import com.nirho.model.EntrevistaVacante;
+import com.nirho.model.ExperienciaCandidato;
+import com.nirho.model.IdiomaCandidato;
 import com.nirho.model.Solicitante;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.service.CandidatoService;
@@ -360,15 +364,211 @@ public class SolicitanteVacanteController {
 				}
 			}
 			
-			for(Candidato candidato: candidatoService.getAllByVacante(idVacante)) {
+			
+			XWPFTable informacionGeneral =  ReporteUtil.getTablaPorTitulo(document, "Datos de vacante");
+	        XWPFTable actividades =  ReporteUtil.getTablaPorTitulo(document, "Actividades");
+	        XWPFTable caracteristicas =  ReporteUtil.getTablaPorTitulo(document, "Características");
+	        XWPFTable competencias =  ReporteUtil.getTablaPorTitulo(document, "Competencias");
+	        XWPFTable conocimientos =  ReporteUtil.getTablaPorTitulo(document, "Conocimientos");
+	        
+	        if(informacionGeneral != null){
+	        	
+	            XWPFTableRow row3 = informacionGeneral.getRow(3);
+	            row3.getCell(1).setText(vacante.getNombreVacante());
+	            row3.getCell(4).setText(vacante.getPuesto());
+	            
+	            XWPFTableRow row4 = informacionGeneral.getRow(4);
+	            row4.getCell(1).setText(vacante.getAniosExperiencia() + "");
+	            row4.getCell(4).setText(vacante.getEstadoVacante() == 1 ? "Creado" : "Asignado");
+	            
+	            XWPFTableRow row5 = informacionGeneral.getRow(5);
+	            row5.getCell(1).setText(vacante.getGiro() + "");
+	            row5.getCell(4).setText(vacante.getMotivo() + "");
+	            
+	            XWPFTableRow row6 = informacionGeneral.getRow(6);
+	            row6.getCell(1).setText(vacante.getNumVacantes() + "");
+	            row6.getCell(4).setText(vacante.getPuestoCargo());
+	            
+	            XWPFTableRow row7 = informacionGeneral.getRow(7);
+	            row7.getCell(1).setText(vacante.getPuestoReporta());
+	        }
+	        
+	        if(actividades != null) {        	
+	        	for(ActividadesPuestoVacante e : vacante.getActividades()) {
+	        		XWPFTableRow row = actividades.createRow();
+	        		row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+	        	}
+	        }
 
-				for(EntrevistaVacante entrevista : entrevistaVacanteService.getByIdCandidato(candidato.getId())) {
-				   //	solicitanteVacanteService.
+        	if(caracteristicas != null) {
+	        	for(CaracteristicasCandidatoVacante e : vacante.getCaracteristicas()) {
+	        		XWPFTableRow row = caracteristicas.createRow();
+	        		row.createCell().setText("Género: " + e.getGenero() + " Edad mínima: " + e.getMinEdad() + " Edad maáxima: " + e.getMaxEdad());
+	        	}
+	        }
+
+			if(competencias != null) {
+				for(CompetenciasVacante e : vacante.getCompetencias()) {
+					XWPFTableRow row = competencias.createRow();
+					row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
 				}
+			}
+			
+			if(conocimientos != null) {
+	        	for(ConocimientoVacante e : vacante.getConocimientos()) {
+	        		XWPFTableRow row = conocimientos.createRow();
+	        		row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+	        	}
+	        }
+			
+			
+			XWPFTable informacionSolicitante =  ReporteUtil.getTablaPorTitulo(document, "Datos de solicitante");
+			
+			if(informacionGeneral != null){
+	        	
+	            XWPFTableRow row3 = informacionSolicitante.getRow(3);
+	            row3.getCell(1).setText(solicitante.getNombre());
+	            row3.getCell(4).setText(solicitante.getRfc());
+	            
+	            XWPFTableRow row4 = informacionSolicitante.getRow(4);
+	            row4.getCell(1).setText(solicitante.getGiro() + "");
+	            row4.getCell(4).setText(solicitante.getPais() + "");
+	            
+	            XWPFTableRow row5 = informacionSolicitante.getRow(5);
+	            row5.getCell(1).setText(solicitante.getDireccion());
+	            
+	        }
+			
+			
+			//document.getPosOfTable(t)
+			//document.removeBodyElement(pos)
+			
+			XWPFTable tablaEntrevista =  ReporteUtil.getTablaPorTitulo(document, "Entrevista");
+			XWPFTable tablaContrato =  ReporteUtil.getTablaPorTitulo(document, "Contrato");
+			XWPFTable tablaCandidato =  ReporteUtil.getTablaPorTitulo(document, "Candidato contratado");
+			XWPFTable tablaCaracteristicas =  ReporteUtil.getTablaPorTitulo(document, "Candidato contratado cv");
+			XWPFTable tablaConocimientos =  ReporteUtil.getTablaPorTitulo(document, "Conocimientos contratado");
+			XWPFTable tablaIdiomas =  ReporteUtil.getTablaPorTitulo(document, "Idiomas contratado");
+			XWPFTable tablaPuestos =  ReporteUtil.getTablaPorTitulo(document, "Puestos contratado");
+
+			int numEntrevista = 1;
+			
+			for(EntrevistaVacante entrevista : entrevistaVacanteService.getByIdVacante(idVacante)) {
+				
+				CTTbl ctTbl = CTTbl.Factory.newInstance();
+                ctTbl.set(tablaEntrevista.getCTTbl());
+                XWPFTable tablaEntrevistaAux = new XWPFTable(ctTbl, document); 
+                
+                XWPFTableRow row3 = tablaEntrevista.getRow(3);
+	            row3.getCell(1).setText(entrevista.getTipoEntrevista());
+	            row3.getCell(4).setText(entrevista.getFechaEntrevista());
+	            
+	            XWPFTableRow row4 = tablaEntrevista.getRow(4);
+	            row4.getCell(1).setText(entrevista.getHoraInicial() + "");
+	            row4.getCell(4).setText(entrevista.getHoraFinal() + "");
+	            
+	            XWPFTableRow row5 = tablaEntrevista.getRow(5);
+	            row5.getCell(1).setText(entrevista.getDireccion());
+                
+	            XWPFTableRow row6 = tablaEntrevista.getRow(6);
+	            row6.getCell(1).setText(entrevista.getEncargadoEntrevista());
+	            row6.getCell(4).setText(entrevista.getTitulo());
+                
+	            XWPFTableRow row9 = tablaEntrevista.getRow(9);
+	            row9.getCell(0).setText(entrevista.getObservacionesCliente());
+	            
+	            XWPFTableRow row11 = tablaEntrevista.getRow(11);
+	            row11.getCell(0).setText(entrevista.getObservacionesConsultor());
+	            
+	            XWPFTableRow row13 = tablaEntrevista.getRow(13);
+	            row13.getCell(0).setText(entrevista.getObservacionesSolicitante());
+	            
+                document.createTable();          
+                document.setTable(document.getPosOfTable(tablaEntrevista) + numEntrevista, tablaEntrevistaAux);
+				
+				
+				Candidato candidato = candidatoService.getOne(entrevista.getIdCandidato());
 				
 				for(ContratacionVacante contratacion : contratacionVacanteService.getByIdCandidato(candidato.getId())){
 					
+					
+					XWPFTableRow row3Contrato = tablaContrato.getRow(3);
+		            row3Contrato.getCell(1).setText(contratacion.getJornada());
+		            row3Contrato.getCell(4).setText(contratacion.getTipoContrato());
+		            
+		            XWPFTableRow row4Contrato = tablaContrato.getRow(4);
+		            row4Contrato.getCell(1).setText(contratacion.getSueldo());
+		            row4Contrato.getCell(4).setText(contratacion.isAceptado() ? "Sí" : "No");
+		            
+		            XWPFTableRow row5Contrato = tablaContrato.getRow(5);
+		            row5Contrato.getCell(1).setText(contratacion.getPrestaciones());
+
+		            
+		            
+		            XWPFTableRow row3Candidato = tablaCandidato.getRow(3);
+		            row3Candidato.getCell(1).setText(candidato.getNombre());
+		            row3Candidato.getCell(4).setText(candidato.getRfc());
+		            
+		            XWPFTableRow row4Candidato = tablaCandidato.getRow(4);
+		            row4Candidato.getCell(1).setText(candidato.getNacionalidad());
+		            row4Candidato.getCell(4).setText(candidato.getNacimiento() + "");
+		            
+		            XWPFTableRow row5Candidato = tablaCandidato.getRow(5);
+		            row5Candidato.getCell(1).setText(candidato.getPerfil());
+		            row5Candidato.getCell(4).setText(candidato.getSituacion());
+		            
+		            XWPFTableRow row6Candidato = tablaCandidato.getRow(6);
+		            row6Candidato.getCell(1).setText(candidato.getDireccion());
+		            
+		            
+		            if(candidato.getCaracteristicasCandidatoCv() != null) {
+		            	
+			            XWPFTableRow row3CandidatoCV = tablaCaracteristicas.getRow(3);
+			            row3CandidatoCV.getCell(1).setText(candidato.getCaracteristicasCandidatoCv().getGenero());
+			            row3CandidatoCV.getCell(4).setText(candidato.getCaracteristicasCandidatoCv().getCarrera());
+			            
+			            XWPFTableRow row4CandidatoCV = tablaCaracteristicas.getRow(4);
+			            row4CandidatoCV.getCell(1).setText(candidato.getCaracteristicasCandidatoCv().getGradoEstudios());
+			            row4CandidatoCV.getCell(4).setText(candidato.getCaracteristicasCandidatoCv().getInstitucion());
+			            
+			            XWPFTableRow row5CandidatoCV = tablaCaracteristicas.getRow(5);
+			            row5CandidatoCV.getCell(1).setText(candidato.getCaracteristicasCandidatoCv().getCursos());
+			            row5CandidatoCV.getCell(4).setText(candidato.getCaracteristicasCandidatoCv().getEspecialidad());
+			            
+			            XWPFTableRow row6CandidatoCV = tablaCaracteristicas.getRow(6);
+			            row6CandidatoCV.getCell(1).setText(candidato.getCaracteristicasCandidatoCv().getEstadoCivil());
+			            row6CandidatoCV.getCell(1).setText(candidato.getCaracteristicasCandidatoCv().getDispoViajar());
+			            
+			            XWPFTableRow row7CandidatoCV = tablaCaracteristicas.getRow(6);
+			            row7CandidatoCV.getCell(1).setText(candidato.getCaracteristicasCandidatoCv().getCaractAdicionales());
+			            
+		            }
+
+					if(tablaIdiomas != null) {
+						for(IdiomaCandidato e : candidato.getIdiomas()) {
+							XWPFTableRow row = tablaIdiomas.createRow();
+							row.createCell().setText("Nombre: " + e.getNombre() + " Nivel: " + e.getNivel());
+						}
+					}
+					
+					if(tablaConocimientos != null) {
+			        	for(ConocimientoCandidato e : candidato.getConocimentos()) {
+			        		XWPFTableRow row = tablaConocimientos.createRow();
+			        		row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+			        	}
+			        }
+		            
+					if(tablaPuestos != null) {
+						for(ExperienciaCandidato e : candidato.getPuestos()) {
+							XWPFTableRow row = tablaPuestos.createRow();
+							row.createCell().setText("Nombre: " + e.getArea() + " Descripción: " + e.getPuesto());
+						}
+					}
+		            
+					break;
 				}
+				
+				numEntrevista++;
 			}
 
 	        String nombreReporte = "ReporteRYS_Entrevista" + ".docx";

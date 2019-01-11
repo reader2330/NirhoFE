@@ -40,4 +40,13 @@ public class EntrevistaVacanteDAOImpl extends AbstractDAO<EntrevistaVacante, Lon
 		return query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<EntrevistaVacante> findByIdVacante(long idVacante) {
+		String hql = "FROM EntrevistaVacante e WHERE e.idVacante = :idVacante";
+		Query query = entityManager.createQuery(hql);
+		query.setParameter("idVacante", idVacante);
+		return query.getResultList();
+	}
+	
 }
