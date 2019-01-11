@@ -7,6 +7,7 @@ import {ReclutamientoService} from '../services/reclutamiento.service';
 import {Competencia} from '../models/competencia';
 import {ConocimientoRYS} from '../models/conocimientoRYS';
 import Swal from "sweetalert2";
+import {LoginService} from '../../clb/services/login.service';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class InformacionFormComponent implements OnInit {
   CaracteristicasForm: FormGroup;
   showTable = false;
   paises = [];
+  user = {};
   competencias = [];
   conocimientos = [];
   nivelCompetencias = [];
@@ -55,7 +57,7 @@ export class InformacionFormComponent implements OnInit {
   displayCompetencias = ['nombreCompetencia', 'descripcionCompetencia', 'nivelCompetencia', 'detail1'];
   displayPuestos = ['puesto', 'nivel', 'fechaInicio', 'fechaFinal', 'antiguedad', '' ];
   displayEntrevistas = ['candidato', 'solicitante', 'fecha', 'Comentario'];
-  constructor(private _form: FormBuilder, private CatalogServices: CatalogsService, private Recultamiento: ReclutamientoService) { }
+  constructor(private _form: FormBuilder, private CatalogServices: CatalogsService, private Recultamiento: ReclutamientoService, private Login: LoginService) { }
 
   ngOnInit() {
     this.InformacionForm = this._form.group({
@@ -115,6 +117,7 @@ export class InformacionFormComponent implements OnInit {
     this.getMotivos();
     this.getTipoCompetencia();
     this.getNivelCompetencia();
+    this.getUser()
   }
 
   mostrarDescripcion(catalog, element) {
@@ -419,7 +422,17 @@ export class InformacionFormComponent implements OnInit {
   }
 
   goInicio() {
-    this.response.emit({value: 1});
+    if (this.user['rol'] < 4) {
+      this.response.emit({value: 1});
+    } else {
+      this.response.emit({value: 8});
+    }
+
+  }
+  getUser() {
+    this.Login.getUser().subscribe(res => {
+      this.user = res;
+    });
   }
 
 

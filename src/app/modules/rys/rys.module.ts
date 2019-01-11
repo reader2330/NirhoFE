@@ -13,6 +13,8 @@ import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import {CandidatoTableComponent} from './candidato-table/candidato-table.component';
 import {SelectorModalComponent} from '../modal/selector-modal/selector-modal.component';
 import {ModalComentarioComponent} from '../modal/modal-comentario/modal-comentario.component';
+import {SolicitanteBandejaComponent} from './solicitante-bandeja/solicitante-bandeja.component';
+import {ModalContratoComponent} from '../modal/modal-contrato/modal-contrato.component';
 
 export function highchartsFactory() {
   const hc = require('highcharts');
@@ -39,11 +41,14 @@ export function highchartsFactory() {
     CandidatoFormComponent,
     CandidatoTableComponent,
     SelectorModalComponent,
-    ModalComentarioComponent
+    ModalComentarioComponent,
+    SolicitanteBandejaComponent,
+    ModalContratoComponent
   ],
   entryComponents: [
     SelectorModalComponent,
-    ModalComentarioComponent
+    ModalComentarioComponent,
+    ModalContratoComponent
   ],
   providers: [
     {
