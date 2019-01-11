@@ -20,8 +20,8 @@ import {LoginService} from '../../clb/services/login.service';
 export class SidebarRysComponent implements OnInit {
   mobile = false;
   showButtonHome = false;
-  selectedItem = 1;
-  selectModule = 1;
+  selectedItem = 0;
+  selectModule = 0;
   modules = [];
   user = {};
   candidato = {};
@@ -143,9 +143,11 @@ export class SidebarRysComponent implements OnInit {
   }
 
   ModulesSolicitante() {
+    this.selectedItem = 8;
+    this.selectModule = 8;
     this.modules = [
       {
-        id_submodulo: 1,
+        id_submodulo: 8,
         descripcion: 'Bandeja de vacantes'
       },
       {

@@ -112,8 +112,10 @@ export class ReclutamientoService {
   saveEntrevista(data): Observable<any> {
     return this.http.post(this.api + 'entrevistaVacante/guardar', data, {headers: this.headers});
   }
-  getVacantesBySolicitante(): Observable<any> {
-    return this.http.get(this.api + 'vacante');
+  getVacantesBySolicitante(username): Observable<any> {
+    return this.http.get(this.api + 'solicitante/vacantes', {headers: this.headers, params:{
+      'username': username
+      }});
   }
   saveComentario(id, type, data) {
     return this.http.post(this.api + 'entrevistaVacante/' + id + '/' + type + '/comentario', data, {headers: this.headers});
@@ -123,6 +125,11 @@ export class ReclutamientoService {
   }
   saveContrato(data) {
     return this.http.post(this.api + 'contratacionVacante/guardar', data, {headers: this.headers});
+  }
+  getEntrevistaByType(type, username): Observable<any> {
+      return this.http.get(this.api + 'entrevistaVacante/porUsername' + type, {headers: this.headers, params: {
+      'username': username
+      }});
   }
 
 }
