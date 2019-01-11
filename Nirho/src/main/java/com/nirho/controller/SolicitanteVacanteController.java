@@ -143,6 +143,15 @@ public class SolicitanteVacanteController {
 		}
 	}
 	
+	@RequestMapping(value = "/{id}/contratacion", method = RequestMethod.GET)
+	public List<ContratacionVacante> getContratacion(@PathVariable("id") long id) throws NirhoControllerException{
+		try {
+			return contratacionVacanteService.getByIdVacante(id);
+		} catch(NirhoServiceException e){
+			throw new NirhoControllerException("Problemas al obtener el registro de entidad");
+		}
+	}
+	
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody SolicitanteVacante e) throws NirhoControllerException{
 		try {
