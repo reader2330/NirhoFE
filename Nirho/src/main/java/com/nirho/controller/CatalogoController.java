@@ -27,7 +27,7 @@ public class CatalogoController {
 	@GetMapping(value = "/pais")
 	public List<Catalogo> pais() throws NirhoControllerException{
 		List<Catalogo> catalogo = new ArrayList<>();
-		try {
+		try { 
 			catalogo = catalogoService.obtenerCatalogo(new Long("1"));
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el catalogo");

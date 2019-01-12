@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 
@@ -35,6 +36,7 @@ public class CandidatoDocumento implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     
+    @Lob
     @Column(name = "file")
     private byte[] file;
 
@@ -70,11 +72,12 @@ public class CandidatoDocumento implements Serializable {
 		this.file = file;
 	}
 
-	public CandidatoDocumento(long id, String nombre, byte[] file) {
+	public CandidatoDocumento(long id, long idCandidato, String nombre, byte[] file) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.file = file;
+		this.idCandidato = idCandidato;
 	}
 
 	@Override

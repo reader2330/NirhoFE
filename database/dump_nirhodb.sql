@@ -147,7 +147,7 @@ DROP TABLE IF EXISTS `candidato_documento`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `candidato_documento` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `file` tinyblob,
+  `file` longblob,
   `id_candidato` bigint(20) DEFAULT NULL,
   `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -2500,4 +2500,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-12  2:26:16
+-- Dump completed on 2019-01-12  2:58:32

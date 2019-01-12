@@ -99,7 +99,7 @@ public class CandidatoDocumentoController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody CandidatoDocumentoDTO candidatoDocumento) throws NirhoControllerException{
 		try {
-			CandidatoDocumento cd = new CandidatoDocumento(candidatoDocumento.getId(), candidatoDocumento.getNombre(), new Base64().decode(candidatoDocumento.getFile()));
+			CandidatoDocumento cd = new CandidatoDocumento(candidatoDocumento.getId(), candidatoDocumento.getIdCandidato(), candidatoDocumento.getNombre(), new Base64().decode(candidatoDocumento.getFile()));
 			candidatoDocumentoService.save(cd);
 			JSONObject json = new JSONObject();
 			json.accumulate("id", cd.getId());

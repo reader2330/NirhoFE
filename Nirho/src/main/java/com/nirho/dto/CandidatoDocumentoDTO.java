@@ -57,11 +57,12 @@ public class CandidatoDocumentoDTO implements Serializable {
 		this.file = file;
 	}
 
-	public CandidatoDocumentoDTO(long id, String nombre, String file) {
+	public CandidatoDocumentoDTO(long id, long idCandidato, String nombre, String file) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.file = file;
+		this.idCandidato = idCandidato;
 	}
     
 }
