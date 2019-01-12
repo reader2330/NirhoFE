@@ -78,7 +78,7 @@ public class CandidatoDocumentoController {
 	}
 	
 	@GetMapping(value = "/porCandidato")
-	public List<CandidatoDocumento> porRFC(@RequestParam(name="idCandidato") long idCandidato) throws NirhoControllerException{
+	public String porRFC(@RequestParam(name="idCandidato") long idCandidato) throws NirhoControllerException{
 		try {
 			JSONArray response = new JSONArray();
 			List<CandidatoDocumento> l = candidatoDocumentoService.getAllByCandidato(idCandidato);
@@ -88,7 +88,7 @@ public class CandidatoDocumentoController {
 				json.accumulate("nombre", cd.getNombre());
 				response.put(json);
 			}
-			return candidatoDocumentoService.getAllByCandidato(idCandidato);
+			return response.toString();
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de candidatoDocumento");
 		} catch (JSONException e) {

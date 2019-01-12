@@ -40,6 +40,10 @@ public class CandidatoDocumento implements Serializable {
     @Column(name = "file")
     private byte[] file;
 
+	public CandidatoDocumento() {
+		super();
+	}
+
 	public long getId() {
 		return id;
 	}

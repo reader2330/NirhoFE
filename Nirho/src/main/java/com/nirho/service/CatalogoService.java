@@ -10,4 +10,5 @@ public interface CatalogoService {
 	List<Catalogo> getCatPaises() throws NirhoServiceException;
 	List<Catalogo> getCatGirosEmpresas() throws NirhoServiceException;
 	
+	
 }
