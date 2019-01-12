@@ -139,6 +139,31 @@ LOCK TABLES `candidato` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `candidato_documento`
+--
+
+DROP TABLE IF EXISTS `candidato_documento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `candidato_documento` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `file` tinyblob,
+  `id_candidato` bigint(20) DEFAULT NULL,
+  `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `candidato_documento`
+--
+
+LOCK TABLES `candidato_documento` WRITE;
+/*!40000 ALTER TABLE `candidato_documento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `candidato_documento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `caracteristicas_candidato_cv`
 --
 
@@ -2475,4 +2500,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-11  0:35:28
+-- Dump completed on 2019-01-12  2:26:16
