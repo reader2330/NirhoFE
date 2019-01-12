@@ -71,8 +71,7 @@ public class CandidatoDocumentoController {
 	        response.setHeader("Content-Disposition", "attachment; filename=" + cd.getNombre());
 	        OutputStream outStream = response.getOutputStream();
 	        outStream.write(cd.getFile());
-	        outStream.flush();
-	        outStream.close();
+	        
 	        response.flushBuffer();
 			
 		} catch(NirhoServiceException e){
@@ -104,6 +103,7 @@ public class CandidatoDocumentoController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody CandidatoDocumentoDTO candidatoDocumento) throws NirhoControllerException{
 		try {
+			candidatoDocumento.setFile(candidatoDocumento.getFile().replaceAll("data:application/pdf;base64,", ""));
 			CandidatoDocumento cd = new CandidatoDocumento(candidatoDocumento.getId(), candidatoDocumento.getIdCandidato(), candidatoDocumento.getNombre(), new Base64().decode(candidatoDocumento.getFile()));
 			candidatoDocumentoService.save(cd);
 			JSONObject json = new JSONObject();
