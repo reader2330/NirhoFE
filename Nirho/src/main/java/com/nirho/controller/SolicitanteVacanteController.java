@@ -266,8 +266,8 @@ public class SolicitanteVacanteController {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYS.docx"));
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteRYSVacante.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYSVacante.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteRYSVacante.docx"));
 
 			SolicitanteVacante vacante = solicitanteVacanteService.getOne(idVacante);
 
@@ -309,21 +309,21 @@ public class SolicitanteVacanteController {
         	if(caracteristicas != null) {
 	        	for(CaracteristicasCandidatoVacante e : vacante.getCaracteristicas()) {
 	        		XWPFTableRow row = caracteristicas.createRow();
-	        		row.createCell().setText("Género: " + e.getGenero() + " Edad mínima: " + e.getMinEdad() + " Edad maáxima: " + e.getMaxEdad());
+	        		row.getCell(0).setText("Género: " + e.getGenero() + " Edad mínima: " + e.getMinEdad() + " Edad máxima: " + e.getMaxEdad());
 	        	}
 	        }
 
 			if(competencias != null) {
 				for(CompetenciasVacante e : vacante.getCompetencias()) {
 					XWPFTableRow row = competencias.createRow();
-					row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+					row.getCell(0).setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
 				}
 			}
 			
 			if(conocimientos != null) {
 	        	for(ConocimientoVacante e : vacante.getConocimientos()) {
 	        		XWPFTableRow row = conocimientos.createRow();
-	        		row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+	        		row.getCell(0).setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
 	        	}
 	        }
 	        
@@ -349,8 +349,8 @@ public class SolicitanteVacanteController {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYS.docx"));
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reporteRYSEntrevista.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYSEntrevista.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteRYSEntrevista.docx"));
 				
 			Solicitante solicitante = null;
 			SolicitanteVacante vacante = null;
@@ -396,28 +396,28 @@ public class SolicitanteVacanteController {
 	        if(actividades != null) {        	
 	        	for(ActividadesPuestoVacante e : vacante.getActividades()) {
 	        		XWPFTableRow row = actividades.createRow();
-	        		row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+	        		row.getCell(0).setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
 	        	}
 	        }
 
         	if(caracteristicas != null) {
 	        	for(CaracteristicasCandidatoVacante e : vacante.getCaracteristicas()) {
 	        		XWPFTableRow row = caracteristicas.createRow();
-	        		row.createCell().setText("Género: " + e.getGenero() + " Edad mínima: " + e.getMinEdad() + " Edad maáxima: " + e.getMaxEdad());
+	        		row.getCell(0).setText("Género: " + e.getGenero() + " Edad mínima: " + e.getMinEdad() + " Edad maáxima: " + e.getMaxEdad());
 	        	}
 	        }
 
 			if(competencias != null) {
 				for(CompetenciasVacante e : vacante.getCompetencias()) {
 					XWPFTableRow row = competencias.createRow();
-					row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+					row.getCell(0).setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
 				}
 			}
 			
 			if(conocimientos != null) {
 	        	for(ConocimientoVacante e : vacante.getConocimientos()) {
 	        		XWPFTableRow row = conocimientos.createRow();
-	        		row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+	        		row.getCell(0).setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
 	        	}
 	        }
 			
@@ -484,7 +484,7 @@ public class SolicitanteVacanteController {
 	            row13.getCell(0).setText(entrevista.getObservacionesSolicitante());
 	            
                 document.createTable();          
-                document.setTable(document.getPosOfTable(tablaEntrevista) + numEntrevista, tablaEntrevistaAux);
+            //    document.setTable(document.getPosOfTable(tablaEntrevista) + numEntrevista, tablaEntrevistaAux);
 				
 				
 				Candidato candidato = candidatoService.getOne(entrevista.getIdCandidato());
@@ -514,7 +514,7 @@ public class SolicitanteVacanteController {
 		            
 		            XWPFTableRow row5Candidato = tablaCandidato.getRow(5);
 		            row5Candidato.getCell(1).setText(candidato.getPerfil());
-		            row5Candidato.getCell(4).setText(candidato.getSituacion());
+		            row5Candidato.getCell(4).setText(candidato.getSituacion() == null ? "" : candidato.getSituacion());
 		            
 		            XWPFTableRow row6Candidato = tablaCandidato.getRow(6);
 		            row6Candidato.getCell(1).setText(candidato.getDireccion());
@@ -546,21 +546,21 @@ public class SolicitanteVacanteController {
 					if(tablaIdiomas != null) {
 						for(IdiomaCandidato e : candidato.getIdiomas()) {
 							XWPFTableRow row = tablaIdiomas.createRow();
-							row.createCell().setText("Nombre: " + e.getNombre() + " Nivel: " + e.getNivel());
+							row.getCell(0).setText("Nombre: " + e.getNombre() + " Nivel: " + e.getNivel());
 						}
 					}
 					
 					if(tablaConocimientos != null) {
 			        	for(ConocimientoCandidato e : candidato.getConocimentos()) {
 			        		XWPFTableRow row = tablaConocimientos.createRow();
-			        		row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+			        		row.getCell(0).setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
 			        	}
 			        }
 		            
 					if(tablaPuestos != null) {
 						for(ExperienciaCandidato e : candidato.getPuestos()) {
 							XWPFTableRow row = tablaPuestos.createRow();
-							row.createCell().setText("Nombre: " + e.getArea() + " Descripción: " + e.getPuesto());
+							row.getCell(0).setText("Nombre: " + e.getArea() + " Descripción: " + e.getPuesto());
 						}
 					}
 		            

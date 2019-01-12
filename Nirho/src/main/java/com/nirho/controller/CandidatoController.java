@@ -341,7 +341,7 @@ public class CandidatoController {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
 			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss/jboss-eap-7.1/standalone/deployments/reporteRYS.docx"));
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reporteRYS.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteRYS.docx"));
 
 	        Candidato candidato = candidatoService.getOne(idCandidato);
 
@@ -362,13 +362,10 @@ public class CandidatoController {
 	            
 	            XWPFTableRow row6 = informacionGeneral.getRow(6);
 	            row6.getCell(1).setText(candidato.getPerfil());
+	            row6.getCell(4).setText(candidato.getEstado() + "");
 	            
 	            XWPFTableRow row7 = informacionGeneral.getRow(7);
-	            row7.getCell(1).setText(candidato.getEstado() + "");
-	            row7.getCell(4).setText(candidato.getPerfil());
-	            
-	            XWPFTableRow row8 = informacionGeneral.getRow(8);
-	            row8.getCell(1).setText(candidato.getSituacion());
+	            row7.getCell(1).setText(candidato.getSituacion());
 	            
 	            CaracteristicasCandidatoCv caracteristicas = candidato.getCaracteristicasCandidatoCv();
 	            
