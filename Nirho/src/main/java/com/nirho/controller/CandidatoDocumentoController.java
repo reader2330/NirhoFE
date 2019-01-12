@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,10 +67,12 @@ public class CandidatoDocumentoController {
 			
 			CandidatoDocumento cd = candidatoDocumentoService.getOne(id);
 			
-	        response.setContentType("application/octet-stream"); 
+	        response.setContentType("application/pdf"); 
 	        response.setHeader("Content-Disposition", "attachment; filename=" + cd.getNombre());
 	        OutputStream outStream = response.getOutputStream();
 	        outStream.write(cd.getFile());
+	        outStream.flush();
+	        outStream.close();
 	        response.flushBuffer();
 			
 		} catch(NirhoServiceException e){
