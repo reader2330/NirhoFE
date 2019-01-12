@@ -9,6 +9,6 @@ public interface CatalogoService {
 	List<Catalogo> obtenerCatalogo(Long tipoCatalogo) throws NirhoServiceException;
 	List<Catalogo> getCatPaises() throws NirhoServiceException;
 	List<Catalogo> getCatGirosEmpresas() throws NirhoServiceException;
-	
+	Catalogo getOne(long id) throws NirhoServiceException;
 	
 }

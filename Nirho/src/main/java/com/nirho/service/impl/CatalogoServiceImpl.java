@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.nirho.dao.CatalogoDAO;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.Candidato;
 import com.nirho.model.Catalogo;
 import com.nirho.service.CatalogoService;
 
@@ -54,5 +55,12 @@ public class CatalogoServiceImpl implements CatalogoService {
 		return cat;
 	}
 
-	
+	public Catalogo getOne(long id) throws NirhoServiceException{
+		try {
+			return dao.getOne(id);
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
+		}	
+	}
 }

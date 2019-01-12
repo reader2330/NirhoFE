@@ -36,6 +36,7 @@ import com.nirho.model.ActividadesPuestoVacante;
 import com.nirho.model.Candidato;
 import com.nirho.model.CaracteristicasCandidatoCv;
 import com.nirho.model.CaracteristicasCandidatoVacante;
+import com.nirho.model.Catalogo;
 import com.nirho.model.CompetenciasVacante;
 import com.nirho.model.ConocimientoCandidato;
 import com.nirho.model.ConocimientoVacante;
@@ -46,6 +47,7 @@ import com.nirho.model.IdiomaCandidato;
 import com.nirho.model.Solicitante;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.service.CandidatoService;
+import com.nirho.service.CatalogoService;
 import com.nirho.service.ContratacionVacanteService;
 import com.nirho.service.EntrevistaVacanteService;
 import com.nirho.service.SolicitanteService;
@@ -71,6 +73,8 @@ public class SolicitanteVacanteController {
 	EntrevistaVacanteService entrevistaVacanteService;
 	@Autowired
 	SolicitanteService solicitanteService;
+	@Autowired
+	CatalogoService catalogoService;
 	
 	@GetMapping(value = "/todos")
 	public List<SolicitanteVacante> todos() throws NirhoControllerException{
@@ -431,8 +435,8 @@ public class SolicitanteVacanteController {
 	            row3.getCell(4).setText(solicitante.getRfc());
 	            
 	            XWPFTableRow row4 = informacionSolicitante.getRow(4);
-	            row4.getCell(1).setText(solicitante.getGiro() + "");
-	            row4.getCell(4).setText(solicitante.getPais() + "");
+	            row4.getCell(1).setText(getFromCatalogo(solicitante.getGiro()));
+	            row4.getCell(4).setText(getFromCatalogo(solicitante.getPais()));
 	            
 	            XWPFTableRow row5 = informacionSolicitante.getRow(5);
 	            row5.getCell(1).setText(solicitante.getDireccion());
@@ -585,5 +589,18 @@ public class SolicitanteVacanteController {
 		} 
 	}
 	
+	
+	private String getFromCatalogo(long id) {
+		Catalogo catalogo = null;
+		try {
+			catalogo = catalogoService.getOne(id);
+			if(catalogo != null) {
+				return catalogo.getDescripcionCatalogo();
+			}
+		} catch (NirhoServiceException e) {
+			
+		}
+		return "";
+	}
 	
 }

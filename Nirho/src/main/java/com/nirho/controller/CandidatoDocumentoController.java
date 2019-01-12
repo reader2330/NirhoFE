@@ -1,6 +1,7 @@
 package com.nirho.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -65,9 +66,10 @@ public class CandidatoDocumentoController {
 			
 			CandidatoDocumento cd = candidatoDocumentoService.getOne(id);
 			
-	        response.setContentType("application/pdf"); 
+	        response.setContentType("application/octet-stream"); 
 	        response.setHeader("Content-Disposition", "attachment; filename=" + cd.getNombre());
-	        response.getOutputStream().write(cd.getFile());
+	        OutputStream outStream = response.getOutputStream();
+	        outStream.write(cd.getFile());
 	        response.flushBuffer();
 			
 		} catch(NirhoServiceException e){
