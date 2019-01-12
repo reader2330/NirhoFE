@@ -140,5 +140,21 @@ export class ReclutamientoService {
   setAceptado(id, value) {
    return this.http.get(this.api + 'contratacionVacante/' + id + '/aceptado/' + value, {headers: this.headers});
   }
+  saveDocument(data) {
+    return this.http.post(this.api + 'candidatoDocumento/guardar', data, {headers: this.headers});
+  }
+  getDocumentosByCandidato(id): Observable<any> {
+    return this.http.get(this.api + 'candidatoDocumento/porCandidato', {headers: this.headers , params: {
+        idCandidato: id
+      }});
+  }
+  getDocumentoByID(id) {
+    window.open(this.api + 'candidatoDocumento/' + id + '/descargar');
+  }
+
+  deleteDocument(id) {
+    return this.http.delete(this.api + 'candidatoDocumento/' + id + '/eliminar', {headers: this.headers});
+  }
+
 
 }

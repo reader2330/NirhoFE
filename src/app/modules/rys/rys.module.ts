@@ -16,6 +16,7 @@ import {ModalComentarioComponent} from '../modal/modal-comentario/modal-comentar
 import {SolicitanteBandejaComponent} from './solicitante-bandeja/solicitante-bandeja.component';
 import {ModalContratoComponent} from '../modal/modal-contrato/modal-contrato.component';
 import {ModalCandidatosComponent} from '../modal/modal-candidatos/modal-candidatos.component';
+import {DocumentosCandidatoComponent} from './documentos-candidato/documentos-candidato.component';
 
 export function highchartsFactory() {
   const hc = require('highcharts');
@@ -45,7 +46,8 @@ export function highchartsFactory() {
     ModalComentarioComponent,
     SolicitanteBandejaComponent,
     ModalContratoComponent,
-    ModalCandidatosComponent
+    ModalCandidatosComponent,
+    DocumentosCandidatoComponent
   ],
   entryComponents: [
     SelectorModalComponent,

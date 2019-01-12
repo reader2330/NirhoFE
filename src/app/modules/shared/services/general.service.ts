@@ -53,6 +53,9 @@ export class GeneralService {
   generarReporteInicial(id) {
     window.open(this.api + 'vacante' +  '/reporte' + '?idVacante=' + id);
   }
+  generarReporteFinal(id) {
+    window.open(this.api + 'vacante' +  '/reporteEntrevista' + '?idVacante=' + id);
+  }
 
 
 

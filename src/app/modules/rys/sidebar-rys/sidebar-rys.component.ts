@@ -91,10 +91,12 @@ export class SidebarRysComponent implements OnInit {
     if (this.user['rol'] === 3) {
       this.ModulesConsultor();
       this.showButtonHome = true;
+      sessionStorage.setItem('candidatoActive', '');
     }
     if (this.user['rol'] === 5) {
       this.ModulesCandidato();
       this.showButtonHome = false;
+      sessionStorage.setItem('candidatoActive', this.user['fullName']);
     }
     if (this.user['rol'] === 6 ) {
       this.ModulesSolicitante();
@@ -125,6 +127,10 @@ export class SidebarRysComponent implements OnInit {
         {
           id_submodulo: 5,
           descripcion: 'Generar reportes'
+        },
+        {
+          id_submodulo: 9,
+          descripcion: 'Subir documentos'
         }
       ];
   }
@@ -139,7 +145,12 @@ export class SidebarRysComponent implements OnInit {
         id_submodulo: 4,
         descripcion: 'Información candidato'
       },
+      {
+        id_submodulo: 9,
+        descripcion: 'Subir documentos'
+      }
     ];
+
   }
 
   ModulesSolicitante() {

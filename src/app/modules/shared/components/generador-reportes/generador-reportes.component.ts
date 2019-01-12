@@ -166,6 +166,8 @@ export class GeneradorReportesComponent implements OnInit {
         break;
       case 2:
         this.generaReporteInicial();
+      case 3:
+        this.generarReporteFinal();
     }
   }
   distribuitorTipoReporte() {
@@ -194,6 +196,9 @@ export class GeneradorReportesComponent implements OnInit {
   }
   generaReporteInicial() {
     this.GeneralServices.generarReporteInicial(this.vacante['id']);
+  }
+  generarReporteFinal() {
+    this.GeneralServices.generarReporteFinal(this.vacante['id']);
   }
 
 }

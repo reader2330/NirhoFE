@@ -1,0 +1,28 @@
+<div class="col-sm-12">
+  <div class="row col-sm-10 offset-1">
+    <mat-form-field *ngIf="!blockSelect" class="col-sm-12" appearance="outline">
+      <mat-label>Selecciona un candidato</mat-label>
+      <mat-select (selectionChange)="getDocumentosByCandidato()" [(ngModel)]="candidato">
+        <mat-option *ngFor="let can of candidatos" [value]="can">
+          {{can['nombre']}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div style="margin-top: 50px" class="image-upload col-sm-10 offset-1">
+      <img [src]="imageSrc" style="max-width:300px;max-height:300px"/>
+      <input name="imageUrl" type="file" accept="application/pdf" (change)="handleInputChange($event)" />
+    </div>
+
+  </div>
+  <div style="margin-top: 50px" *ngIf="documentos.length" class="row col-sm-10 offset-1">
+    <mat-list class="col-sm-12">
+      <mat-list-item *ngFor="let doc of documentos">
+        <mat-icon>description</mat-icon> {{doc.nombre}} <a style="margin-left: 50px; margin-top: 10px" (click)="descargarArchivo(doc)"><mat-icon>arrow_downward</mat-icon></a> <a style="margin-left: 50px; margin-top: 10px" (click)="eliminarArchivo(doc)"><mat-icon>delete</mat-icon></a>
+      </mat-list-item>
+    </mat-list>
+
+
+
+  </div>
+
+</div>

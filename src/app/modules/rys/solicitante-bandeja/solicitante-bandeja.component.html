@@ -50,7 +50,7 @@
   <div style="margin-top: 50px" class="col-sm-10 offset-1">
     <h4 align="center">Entrevista</h4>
     <mat-form-field class="col-sm-10 offset-1">
-      <input matInput (keyup)="applyFilter($event.target.value, 2)" placeholder="Buscar">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
     </mat-form-field>
     <table *ngIf="showTable2" class="col-sm-10 offset-1 mat-elevation-z1" mat-table [dataSource]="entrevistas">
       <ng-container [matColumnDef]="column" *ngFor="let column of displayEntrevistas">
