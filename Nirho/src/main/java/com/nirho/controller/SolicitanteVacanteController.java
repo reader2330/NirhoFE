@@ -266,14 +266,14 @@ public class SolicitanteVacanteController {
 		try {
 			    
 			ZipSecureFile.setMinInflateRatio(0);
-			XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYS.docx"));
-			//XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\pruebas\\elimina\\reporteRYS.docx"));
+			//XWPFDocument document = new XWPFDocument(OPCPackage.open("/opt/jboss-eap-7.1/standalone/deployments/reporteRYS.docx"));
+			XWPFDocument document = new XWPFDocument(OPCPackage.open("C:\\Users\\Alfredo\\elimina\\reporteRYSVacante.docx"));
 
 			SolicitanteVacante vacante = solicitanteVacanteService.getOne(idVacante);
 
 	        XWPFTable informacionGeneral =  ReporteUtil.getTablaPorTitulo(document, "Datos de vacante");
 	        XWPFTable actividades =  ReporteUtil.getTablaPorTitulo(document, "Actividades");
-	        XWPFTable caracteristicas =  ReporteUtil.getTablaPorTitulo(document, "Características");
+	        XWPFTable caracteristicas =  ReporteUtil.getTablaPorTitulo(document, "Caracteristicas");
 	        XWPFTable competencias =  ReporteUtil.getTablaPorTitulo(document, "Competencias");
 	        XWPFTable conocimientos =  ReporteUtil.getTablaPorTitulo(document, "Conocimientos");
 	        
@@ -302,7 +302,7 @@ public class SolicitanteVacanteController {
 	        if(actividades != null) {        	
 	        	for(ActividadesPuestoVacante e : vacante.getActividades()) {
 	        		XWPFTableRow row = actividades.createRow();
-	        		row.createCell().setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
+	        		row.getCell(0).setText("Nombre: " + e.getNombre() + " Descripción: " + e.getDescripcion());
 	        	}
 	        }
 
@@ -503,8 +503,7 @@ public class SolicitanteVacanteController {
 		            XWPFTableRow row5Contrato = tablaContrato.getRow(5);
 		            row5Contrato.getCell(1).setText(contratacion.getPrestaciones());
 
-		            
-		            
+
 		            XWPFTableRow row3Candidato = tablaCandidato.getRow(3);
 		            row3Candidato.getCell(1).setText(candidato.getNombre());
 		            row3Candidato.getCell(4).setText(candidato.getRfc());
