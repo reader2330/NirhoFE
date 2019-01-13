@@ -1073,7 +1073,7 @@ CREATE TABLE `entrevista_asignacion_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `direccion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `encargado_entrevista` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `fecha_entrevista` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fecha_entrevista` datetime DEFAULT NULL,
   `hora_final` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hora_inicial` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_candidato` bigint(20) DEFAULT NULL,
@@ -2500,4 +2500,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-12  2:58:32
+-- Dump completed on 2019-01-12 21:15:46

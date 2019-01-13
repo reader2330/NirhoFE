@@ -6,6 +6,7 @@
 package com.nirho.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ public class EntrevistaVacante implements Serializable {
     @Column(name = "encargado_entrevista")
     private String encargadoEntrevista;
     @Column(name = "fecha_entrevista")
-    private String fechaEntrevista;
+    private Date fechaEntrevista;
     @Column(name = "hora_final")
     private String horaFinal;
     @Column(name = "hora_inicial")
@@ -96,11 +97,11 @@ public class EntrevistaVacante implements Serializable {
         this.encargadoEntrevista = encargadoEntrevista;
     }
 
-    public String getFechaEntrevista() {
+    public Date getFechaEntrevista() {
         return fechaEntrevista;
     }
 
-    public void setFechaEntrevista(String fechaEntrevista) {
+    public void setFechaEntrevista(Date fechaEntrevista) {
         this.fechaEntrevista = fechaEntrevista;
     }
 

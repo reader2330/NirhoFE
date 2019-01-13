@@ -1,6 +1,7 @@
 package com.nirho.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -283,7 +284,7 @@ public class EntrevistaVacanteController {
 	private void enviarEntrevista(String to, EntrevistaVacante entrevista) throws NirhoServiceException {
 		String emailBody = "";
 		emailBody += "<p>Título: " + entrevista.getTitulo() + "</p><br/>";
-		emailBody += "<p>Fecha: " + entrevista.getFechaEntrevista() + "</p>";
+		emailBody += "<p>Fecha: " + new SimpleDateFormat("yyyy-MM-dd").format(entrevista.getFechaEntrevista()) + "</p>";
 		emailBody += "<p>Hora inicial: " + entrevista.getHoraInicial() + "</p>";
 		emailBody += "<p>Hora final: " + entrevista.getHoraFinal() + "</p>";
 		emailBody += "<p>Dirección: " + entrevista.getDireccion() + "</p>";

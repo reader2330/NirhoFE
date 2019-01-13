@@ -292,8 +292,8 @@ public class SolicitanteVacanteController {
 	            row4.getCell(4).setText(vacante.getEstadoVacante() == 1 ? "Creado" : "Asignado");
 	            
 	            XWPFTableRow row5 = informacionGeneral.getRow(5);
-	            row5.getCell(1).setText(vacante.getGiro() + "");
-	            row5.getCell(4).setText(vacante.getMotivo() + "");
+	            row5.getCell(1).setText(getFromCatalogo(vacante.getGiro()));
+	            row5.getCell(4).setText(getFromCatalogo(vacante.getMotivo()));
 	            
 	            XWPFTableRow row6 = informacionGeneral.getRow(6);
 	            row6.getCell(1).setText(vacante.getNumVacantes() + "");
@@ -386,8 +386,8 @@ public class SolicitanteVacanteController {
 	            row4.getCell(4).setText(vacante.getEstadoVacante() == 1 ? "Creado" : "Asignado");
 	            
 	            XWPFTableRow row5 = informacionGeneral.getRow(5);
-	            row5.getCell(1).setText(vacante.getGiro() + "");
-	            row5.getCell(4).setText(vacante.getMotivo() + "");
+	            row5.getCell(1).setText(getFromCatalogo(vacante.getGiro()));
+	            row5.getCell(4).setText(getFromCatalogo(vacante.getMotivo()));
 	            
 	            XWPFTableRow row6 = informacionGeneral.getRow(6);
 	            row6.getCell(1).setText(vacante.getNumVacantes() + "");
@@ -465,7 +465,7 @@ public class SolicitanteVacanteController {
                 
                 XWPFTableRow row3 = tablaEntrevista.getRow(3);
 	            row3.getCell(1).setText(entrevista.getTipoEntrevista());
-	            row3.getCell(4).setText(entrevista.getFechaEntrevista());
+	            row3.getCell(4).setText(new SimpleDateFormat("yyyy-MM-dd").format(entrevista.getFechaEntrevista()));
 	            
 	            XWPFTableRow row4 = tablaEntrevista.getRow(4);
 	            row4.getCell(1).setText(entrevista.getHoraInicial() + "");
