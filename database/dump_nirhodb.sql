@@ -2207,15 +2207,18 @@ CREATE TABLE `solicitante_vacante` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `anios_experiencia` int(11) NOT NULL,
   `estado_vacante` int(11) NOT NULL,
+  `fecha_final` datetime DEFAULT NULL,
+  `fecha_inicial` datetime DEFAULT NULL,
   `giro` int(11) NOT NULL,
   `motivo` int(11) NOT NULL,
   `nombre_vacante` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `num_vacantes` int(11) NOT NULL,
+  `periodo_garantia` int(11) DEFAULT NULL,
   `puesto` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `puesto_cargo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `puesto_reporta` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `solicitante` bigint(20) DEFAULT NULL,
   `status` int(11) NOT NULL,
+  `solicitante` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKh0ieosh7ayt3ua1ucp1ti6s3` (`solicitante`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -2500,4 +2503,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-12 21:15:46
+-- Dump completed on 2019-01-13 11:55:57

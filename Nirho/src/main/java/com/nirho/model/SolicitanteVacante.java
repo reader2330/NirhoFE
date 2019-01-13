@@ -6,6 +6,7 @@
 package com.nirho.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -72,6 +73,15 @@ public class SolicitanteVacante implements Serializable {
     @Column(name = "puesto_reporta")
     private String puestoReporta;
 
+    @Column(name = "fecha_inicial")
+    private Date fechaInicial;
+    
+    @Column(name = "fecha_final")
+    private Date fechaFinal;
+    
+    @Column(name = "periodo_garantia")
+    private int periodoGarantia;
+    
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "solicitante")
    	private Set<ActividadesPuestoVacante> actividades = new HashSet<>();
@@ -95,19 +105,32 @@ public class SolicitanteVacante implements Serializable {
         this.id = id;
     }
 
-    public SolicitanteVacante(long id, int aniosExperiencia, int estadoVacante, int giro, int motivo,
-			String nombreVacante, int numVacantes, String puesto, String puestoCargo, String puestoReporta) {
+    
+
+	public SolicitanteVacante(long id, int aniosExperiencia, int estadoVacante, int giro, int motivo, int status,
+			String nombreVacante, int numVacantes, String puesto, String puestoCargo, String puestoReporta,
+			Date fechaInicial, Date fechaFinal, int periodoGarantia, Set<ActividadesPuestoVacante> actividades,
+			Set<CaracteristicasCandidatoVacante> caracteristicas, Set<CompetenciasVacante> competencias,
+			Set<ConocimientoVacante> conocimientos) {
 		super();
 		this.id = id;
 		this.aniosExperiencia = aniosExperiencia;
 		this.estadoVacante = estadoVacante;
 		this.giro = giro;
 		this.motivo = motivo;
+		this.status = status;
 		this.nombreVacante = nombreVacante;
 		this.numVacantes = numVacantes;
 		this.puesto = puesto;
 		this.puestoCargo = puestoCargo;
 		this.puestoReporta = puestoReporta;
+		this.fechaInicial = fechaInicial;
+		this.fechaFinal = fechaFinal;
+		this.periodoGarantia = periodoGarantia;
+		this.actividades = actividades;
+		this.caracteristicas = caracteristicas;
+		this.competencias = competencias;
+		this.conocimientos = conocimientos;
 	}
 
 	public long getId() {
@@ -230,6 +253,30 @@ public class SolicitanteVacante implements Serializable {
 
 	public void setConocimientos(Set<ConocimientoVacante> conocimientos) {
 		this.conocimientos = conocimientos;
+	}
+
+	public Date getFechaInicial() {
+		return fechaInicial;
+	}
+
+	public void setFechaInicial(Date fechaInicial) {
+		this.fechaInicial = fechaInicial;
+	}
+
+	public Date getFechaFinal() {
+		return fechaFinal;
+	}
+
+	public void setFechaFinal(Date fechaFinal) {
+		this.fechaFinal = fechaFinal;
+	}
+
+	public int getPeriodoGarantia() {
+		return periodoGarantia;
+	}
+
+	public void setPeriodoGarantia(int periodoGarantia) {
+		this.periodoGarantia = periodoGarantia;
 	}
 
 	@Override

@@ -178,6 +178,21 @@ public class SolicitanteVacanteController {
 		} 
 	}
 	
+	@RequestMapping(value = "/{id}/guardarGarantia", method = RequestMethod.POST)
+	public void edit(@PathVariable("id") long id, @Valid @RequestBody SolicitanteVacante e) throws NirhoControllerException{
+		try {
+			SolicitanteVacante vacante = solicitanteVacanteService.getOne(id);
+			if(vacante != null) {
+				vacante.setFechaInicial(e.getFechaInicial());
+				vacante.setFechaFinal(e.getFechaFinal());
+				vacante.setPeriodoGarantia(e.getPeriodoGarantia());
+				solicitanteVacanteService.editar(vacante);
+			}
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar entidad");
+		} 
+	}
+	
 	@RequestMapping(value = "/eliminar", method = RequestMethod.POST)
 	public void delete(@Valid @RequestBody long id) throws NirhoControllerException{
 		try {
