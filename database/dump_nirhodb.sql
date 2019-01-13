@@ -2210,6 +2210,7 @@ CREATE TABLE `solicitante_vacante` (
   `fecha_final` datetime DEFAULT NULL,
   `fecha_inicial` datetime DEFAULT NULL,
   `giro` int(11) NOT NULL,
+  `id_consultor` bigint(20) DEFAULT NULL,
   `motivo` int(11) NOT NULL,
   `nombre_vacante` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `num_vacantes` int(11) NOT NULL,
@@ -2503,4 +2504,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-13 11:55:57
+-- Dump completed on 2019-01-13 12:32:05

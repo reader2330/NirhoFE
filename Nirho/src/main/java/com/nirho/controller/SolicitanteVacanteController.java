@@ -46,12 +46,14 @@ import com.nirho.model.ExperienciaCandidato;
 import com.nirho.model.IdiomaCandidato;
 import com.nirho.model.Solicitante;
 import com.nirho.model.SolicitanteVacante;
+import com.nirho.model.Usuario;
 import com.nirho.service.CandidatoService;
 import com.nirho.service.CatalogoService;
 import com.nirho.service.ContratacionVacanteService;
 import com.nirho.service.EntrevistaVacanteService;
 import com.nirho.service.SolicitanteService;
 import com.nirho.service.SolicitanteVacanteService;
+import com.nirho.service.UsuarioService;
 import com.nirho.util.ReporteUtil;
 
 
@@ -75,6 +77,8 @@ public class SolicitanteVacanteController {
 	SolicitanteService solicitanteService;
 	@Autowired
 	CatalogoService catalogoService;
+	@Autowired
+	UsuarioService usuarioService;
 	
 	@GetMapping(value = "/todos")
 	public List<SolicitanteVacante> todos() throws NirhoControllerException{
@@ -188,6 +192,54 @@ public class SolicitanteVacanteController {
 				vacante.setPeriodoGarantia(e.getPeriodoGarantia());
 				solicitanteVacanteService.editar(vacante);
 			}
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar entidad");
+		} 
+	}
+	
+	@RequestMapping(value = "/{id}/asignarConsultor/{idConsultor}", method = RequestMethod.POST)
+	public void setConsultor(@PathVariable("id") long id, @PathVariable("idConsultor") long idConsultor) throws NirhoControllerException{
+		try {
+			SolicitanteVacante vacante = solicitanteVacanteService.getOne(id);
+			if(vacante != null) {
+				vacante.setIdConsultor(idConsultor);
+				solicitanteVacanteService.editar(vacante);
+			}
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar entidad");
+		} 
+	}
+	
+	@RequestMapping(value = "/{id}/eliminar/consultor", method = RequestMethod.POST)
+	public void eliminarConsultor(@PathVariable("id") long id) throws NirhoControllerException{
+		try {
+			SolicitanteVacante vacante = solicitanteVacanteService.getOne(id);
+			if(vacante != null) {
+				vacante.setIdConsultor(0);
+				solicitanteVacanteService.editar(vacante);
+			}
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar entidad");
+		} 
+	}
+	
+	@RequestMapping(value = "/todos/porUsernameConsultor", method = RequestMethod.POST)
+	public List<SolicitanteVacante> getPorUsernameConsultor(@RequestParam(name="usernameConsultor") String username) throws NirhoControllerException{
+		try {
+			Usuario u = usuarioService.obtenerUsuario(username);			
+			if(u != null) {
+				return solicitanteVacanteService.getByIdConsultor(u.getId());
+			}
+			return null;
+		} catch(NirhoServiceException ex){
+			throw new NirhoControllerException("Problemas al registrar entidad");
+		} 
+	}
+	
+	@RequestMapping(value = "/todos/porIdConsultor", method = RequestMethod.POST)
+	public List<SolicitanteVacante> getPorIdConsultor(@RequestParam(name="idConsultor") long idConsultor) throws NirhoControllerException{
+		try {
+			return solicitanteVacanteService.getByIdConsultor(idConsultor);
 		} catch(NirhoServiceException ex){
 			throw new NirhoControllerException("Problemas al registrar entidad");
 		} 

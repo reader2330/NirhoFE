@@ -33,6 +33,9 @@ public class SolicitanteVacante implements Serializable {
     @Column(name = "id")
     private long id;
     
+    @Column(name = "id_consultor")
+    private long idConsultor;
+    
     @Basic(optional = false)
     @Column(name = "anios_experiencia")
     private int aniosExperiencia;
@@ -140,8 +143,16 @@ public class SolicitanteVacante implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+    
+    public long getIdConsultor() {
+		return idConsultor;
+	}
 
-    public int getEstadoVacante() {
+	public void setIdConsultor(long idConsultor) {
+		this.idConsultor = idConsultor;
+	}
+
+	public int getEstadoVacante() {
         return estadoVacante;
     }
 

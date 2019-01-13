@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.nirho.dao.SolicitanteVacanteDAO;
 import com.nirho.exception.NirhoServiceException;
+import com.nirho.model.EntrevistaVacante;
 import com.nirho.model.SolicitanteVacante;
 import com.nirho.service.SolicitanteVacanteService;
 
@@ -52,6 +53,15 @@ public class SolicitanteVacanteServiceImpl implements SolicitanteVacanteService 
 	public List<SolicitanteVacante> getAll() throws NirhoServiceException{
 		try {
 			return solicitanteVacanteDAO.findAll();
+		} catch(Exception e){
+			logger.info("Exception [" + e.getMessage() + "");
+			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
+		}		
+	}
+	
+	public List<SolicitanteVacante> getByIdConsultor(long idConsultor) throws NirhoServiceException{
+		try {
+			return solicitanteVacanteDAO.findByIdConsultor(idConsultor);
 		} catch(Exception e){
 			logger.info("Exception [" + e.getMessage() + "");
 			throw new NirhoServiceException("Error al consultar en la BD, causa [" + e.getMessage()+ "]");
