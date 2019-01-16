@@ -28,10 +28,8 @@ import {ChartModule} from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { VistaPVCParticipanteComponent } from './screensOut/vista-pvcparticipante/vista-pvcparticipante.component';
 import {ModalUsuariosComponent} from './modules/modal/modal-usuarios/modal-usuarios.component';
-import {GeneradorReportesComponent} from './modules/shared/components/generador-reportes/generador-reportes.component';
-import { TableroControlComponent } from './modules/synchronize/components/tablero-control/tablero-control.component';
-import { InformacionFormComponent } from './modules/rys/informacion-form/informacion-form.component';
 import {RYSModule} from './modules/rys/rys.module';
+
 
 
 
@@ -74,6 +72,9 @@ export function highchartsFactory() {
     PvcModule,
     VerticalTimelineModule,
     RYSModule
+  ],
+  entryComponents: [
+    ImagenesModalComponent
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-MX'},

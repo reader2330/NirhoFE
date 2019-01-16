@@ -4,7 +4,7 @@
 
     </div>
     <mat-list style="cursor: pointer">
-      <mat-list-item   (click)="goModule(mod.nombre)" *ngFor="let mod of modules;let i = index" >
+      <mat-list-item style="margin-top: 50px"   (click)="goModule(mod.nombre)" *ngFor="let mod of modules;let i = index" >
         <span  class="badge badge-pill" style="background-color: #A1B712; color: #FFF;">{{i+1}}</span>
         &nbsp;  <p style="font-size: 15px; margin-top: 10px;margin-left: 5px;">{{mod.nombre}}</p>
       </mat-list-item>

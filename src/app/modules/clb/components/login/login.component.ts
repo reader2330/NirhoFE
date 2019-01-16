@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import {HttpResponse} from '@angular/common/http';
 import {ReclutamientoService} from '../../../rys/services/reclutamiento.service';
 import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
+import {MatDialog} from '@angular/material';
+import {AvisoComponent} from '../aviso/aviso.component';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginComponent implements OnInit {
     username: '',
     password: '',
   };
+  acept = false;
   typeUser = 0;
   candidato = {
     username: '',
@@ -35,7 +38,7 @@ export class LoginComponent implements OnInit {
     }
   ];
   newUser = false;
-  constructor(private LoginService: LoginService, private router: Router, private Reclutamiento: ReclutamientoService) { }
+  constructor(private LoginService: LoginService, private router: Router, private Reclutamiento: ReclutamientoService, private  modal: MatDialog) { }
   ngOnInit() {
   }
 
@@ -116,5 +119,8 @@ export class LoginComponent implements OnInit {
         this.newUser = !this.newUser;
       });
     });
+  }
+  openModal() {
+    this.modal.open(AvisoComponent);
   }
 }

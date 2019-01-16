@@ -30,6 +30,7 @@ import {highchartsFactory} from '../clb/clb.module';
 import {ChartModule} from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import {SharedModule} from '../shared/shared.module';
+import {ImagenesModalComponent} from '../modal/imagenes-modal/imagenes-modal.component';
 
 @NgModule({
   imports: [
@@ -70,7 +71,8 @@ import {SharedModule} from '../shared/shared.module';
     RhAdminModalIrhComponent,
     OrganizationalDevelopmentModalIrhComponent,
     RhAdminModalIrhComponent,
-    TrainingModalIrhComponent
+    TrainingModalIrhComponent,
+    ImagenesModalComponent
   ],
   providers: [
     {

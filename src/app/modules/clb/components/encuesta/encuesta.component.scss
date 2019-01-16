@@ -22,3 +22,9 @@ example-headers-align .mat-expansion-panel-header-title,
 .triste {
   background-image: url("../../../../../sad.png");
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto/9; /* Bug de ie8 */
+}

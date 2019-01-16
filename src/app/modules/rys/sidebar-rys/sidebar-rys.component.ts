@@ -82,6 +82,14 @@ export class SidebarRysComponent implements OnInit {
           descripcion: 'Información candidato'
         },
         {
+          id_submodulo: 10,
+          descripcion : 'Periodo de garantia'
+        },
+        {
+          id_submodulo: 11,
+          descripcion : 'Asignar consultor'
+        },
+        {
           id_submodulo: 6,
           descripcion: 'Estadisticas'
         }

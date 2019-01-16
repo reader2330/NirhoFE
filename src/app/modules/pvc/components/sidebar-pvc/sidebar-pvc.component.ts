@@ -66,7 +66,7 @@ export class SidebarPvcComponent implements OnInit {
 
   }
 
-  ModulesConsultor(){
+  ModulesConsultor() {
     this.modules =
       [
         {
@@ -75,7 +75,7 @@ export class SidebarPvcComponent implements OnInit {
         },
         {
           id_submodulo: 11,
-          descripcion: 'Configurar areas'
+          descripcion: 'Configurar áreas'
         },
         {
           id_submodulo: 12,
@@ -91,7 +91,7 @@ export class SidebarPvcComponent implements OnInit {
         },
         {
           id_submodulo: 15,
-          descripcion: 'Configurar conocimientos tecnicos'
+          descripcion: 'Configurar conocimientos técnicos'
         },
         {
           id_submodulo: 16,
@@ -103,7 +103,7 @@ export class SidebarPvcComponent implements OnInit {
         },
         {
           id_submodulo: 18,
-          descripcion: 'Envio de correos'
+          descripcion: 'Envío de correos'
         },
         {
           id_submodulo: 19,

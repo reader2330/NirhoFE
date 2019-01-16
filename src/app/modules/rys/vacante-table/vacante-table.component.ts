@@ -23,10 +23,11 @@ import {el} from '@angular/platform-browser/testing/src/browser_util';
 export class VacanteTableComponent implements OnInit {
   vacantes = new MatTableDataSource();
   showTable = false;
-  displayVacantes = ['Vacante', 'numeroVacantes', ];
+  displayVacantes = ['Vacante', 'numeroVacantes', 'Estatus' ];
   displayEntrevistas = ['direccion', 'titulo', 'fechaEntrevista', 'Comentario'];
   displayContratos = ['jornada', 'prestaciones', 'sueldo' , 'Tipo Contrato', 'Aceptado' ];
   columnContrato = ['jornada', 'prestaciones', 'sueldo'];
+  nameEntrevistas = ['Dirección', 'Título', 'Fecha de entrevista', 'Comentario'];
   hasCandidato = false;
   hasGerente = false;
   expandedElement: null;
@@ -49,6 +50,7 @@ export class VacanteTableComponent implements OnInit {
   }
   getVacantes() {
     this.ReclutamientoServices.getVacantes().subscribe(res => {
+      console.log(res);
       this.vacantes.data = res;
       this.showTable = true;
     });
@@ -74,8 +76,12 @@ export class VacanteTableComponent implements OnInit {
     this.Login.getUser().subscribe(res => {
       this.user = res;
       if (this.user['rol'] < 4) {
-        this.getVacantes();
-        this.getEntrevistas();
+        if (this.user['rol'] === 3) {
+          this.getVacantesConsultor();
+          this.getEntrevistas();
+        } else {
+          this.getVacantes();
+        }
       } else {
         this.getEntrevistasByCandidato();
         this.getContratosCandidato();
@@ -103,6 +109,13 @@ export class VacanteTableComponent implements OnInit {
         type: this.user['rol'],
         entrevista: element
       }
+    });
+  }
+  getVacantesConsultor() {
+    this.ReclutamientoServices.getVacantesConsultor(this.user['id']).subscribe(res => {
+      console.log(res);
+      this.showTable = true;
+      this.vacantes = res;
     });
   }
   getContratosCandidato() {
@@ -134,8 +147,18 @@ export class VacanteTableComponent implements OnInit {
         element.aceptado = false;
       }
     });
-
-
+  }
+  mostarStatus(value) {
+    switch (value) {
+      case 1:
+        return 'Abierta';
+      case 2:
+        return 'Asignada';
+      case 3:
+        return 'Entrevista';
+      case 4:
+        return 'Contrato';
+    }
   }
 
 

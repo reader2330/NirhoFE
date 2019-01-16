@@ -30,10 +30,10 @@
 
         <mat-grid-list cols="1" rowHeight="50px">
           <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-checkbox>Recordar sesión</mat-checkbox>
+            <mat-checkbox [(ngModel)]="acept" (click)="openModal()">Acepto terminos y condiciones</mat-checkbox>
           </mat-grid-tile>
           <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <button mat-flat-button style="background-color: #A1B712; color: white" (click)="sendLogin()">Inicia
+            <button mat-flat-button color="accent" style=" color: white" [disabled]="!acept" (click)="sendLogin()">Inicia
               sesión
             </button>
           </mat-grid-tile>

@@ -189,7 +189,7 @@ export class EncuestaEva360Component implements OnInit {
   Imagenes(num) {
     switch (num) {
       case 1:
-        this.data.url =   environment.urlNG + 'assets/Mensajes/360-1.png';
+        this.data.url =   environment.urlNG + 'assets/Inicial/360.png';
         this.openDialogStart(this.data,2000);
         break;
       case 2:

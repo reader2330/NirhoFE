@@ -4,6 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {BreakpointObserver, Breakpoints} from '../../../../../../node_modules/@angular/cdk/layout';
 import Swal from "sweetalert2";
 import {EnterprisesService} from '../../services/enterprises.service';
+import {environment} from '../../../../../environments/environment';
+import {ImagenesModalComponent} from '../../../modal/imagenes-modal/imagenes-modal.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-encuesta-irh',
@@ -36,9 +39,12 @@ export class EncuestaIrhComponent implements OnInit {
     {name: 'Formalizado, autorizado y administrado', key: 10}
   ];
   token = '';
+  urlMensagge = environment.urlNG + 'assets/Mensajes/IRH-1.PNG';
+  data = {
+    url: ''
+  };
 
-
-  constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver, private EnterprisesService: EnterprisesService) {
+  constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver, private dialog: MatDialog, private EnterprisesService: EnterprisesService) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -51,10 +57,12 @@ export class EncuestaIrhComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.Imagenes(1);
     this.EnterprisesService.getEnterprises().subscribe(res => {
       console.log(res);
       this.companys = res;
     });
+
   }
 
 
@@ -116,7 +124,11 @@ export class EncuestaIrhComponent implements OnInit {
               'El cuestionario se finalizo correctamente',
               'success'
             ).then(() => {
-              this.response.emit({value: 1});
+              this.Imagenes(2);
+              setTimeout(() => {
+                this.response.emit({value: 1});
+              }, 6000);
+
             });
           });
         });
@@ -155,5 +167,32 @@ export class EncuestaIrhComponent implements OnInit {
     }
     scoreFinal = (total / this.temas.length);
     return scoreFinal;
+  }
+
+  openDialogStart(data, time) {
+    this.dialog.open(ImagenesModalComponent, {
+      data: data,
+      height: '500px',
+      width: '700px'
+    });
+
+    setTimeout(() => {
+      this.dialog.closeAll();
+    }, time);
+  }
+
+  Imagenes(num) {
+    switch (num) {
+      case 1:
+        this.data.url =   environment.urlNG + 'assets/Inicial/IRH.PNG';
+        this.openDialogStart(this.data,3000);
+        break;
+      case 2:
+        this.data.url =   environment.urlNG + 'assets/Mensajes/SALIDA.PNG';
+        this.openDialogStart(this.data,6000);
+    }
+
+
+
   }
 }

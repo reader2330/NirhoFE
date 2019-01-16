@@ -16,16 +16,16 @@ export class RoutingSyncComponent implements OnInit {
   adm = false;
   showGrafica = false;
   imagenes = [{
-    url: environment.urlNG + 'assets/Mensajes/EVD-1.png'
+    url: environment.urlNG + 'assets/Inicial/APO.png'
   },
     {
-      url: environment.urlNG + 'assets/Mensajes/360-1.png'
+      url: environment.urlNG + 'assets/Inicial/360.png'
     },
     {
-      url: environment.urlNG + 'assets/Mensajes/APO-1.png'
+      url: environment.urlNG + 'assets/Inicial/IRH.PNG'
     },
     {
-      url: environment.urlNG + 'assets/Mensajes/360-1.png'
+      url: environment.urlNG + 'assets/Inicial/PVC.PNG'
     },
   ];
   modules = [];

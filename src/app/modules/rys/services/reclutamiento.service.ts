@@ -155,6 +155,20 @@ export class ReclutamientoService {
   deleteDocument(id) {
     return this.http.delete(this.api + 'candidatoDocumento/' + id + '/eliminar', {headers: this.headers});
   }
+  savePeriod(id, data) {
+    return this.http.post(this.api + 'vacante/' + id + '/guardarGarantia',  data, {headers: this.headers});
+  }
+  getConsultores(): Observable<any> {
+    return this.http.get(this.api + 'usuario/consultores', {headers: this.headers});
+  }
+  saveConsultor(idVacante, idCandidato): Observable<any> {
+    return this.http.post(this.api + 'vacante/' + idVacante + '/asignarConsultor/' + idCandidato, {}, { headers: this.headers});
+  }
+  getVacantesConsultor(id): Observable<any> {
+    return this.http.post(this.api + 'vacante/todos/porIdConsultor', {} ,  {headers: this.headers, params: {
+        idConsultor: id
+      }});
+  }
 
 
 }

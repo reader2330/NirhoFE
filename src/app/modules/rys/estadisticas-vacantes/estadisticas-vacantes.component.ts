@@ -11,6 +11,7 @@ export class EstadisticasVacantesComponent implements OnInit {
   totalVacantes;
   totalVacantesTipo;
   pies = {};
+  showDatos = false;
 
   constructor(private Reclutamiento: ReclutamientoService) { }
 
@@ -45,10 +46,11 @@ export class EstadisticasVacantesComponent implements OnInit {
         series: [{
           name: '#Vacantes',
           colorByPoint: true,
-          data: [['Asignadas', res.asignadas], ['Abiertas', res.abiertas]]
+          data: [['Asignadas', res['asignadas']], ['Abiertas', res['abiertas']], ['Entrevista', res['entrevista']], ['Contrato', res['contrato']]]
         }]
       };
       this.totalVacantesTipo = res;
+      this.showDatos = true;
     });
   }
 

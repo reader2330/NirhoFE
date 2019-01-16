@@ -3,6 +3,9 @@ import {ProyectoService} from '../../services/proyecto.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BreakpointObserver, Breakpoints} from '../../../../../../node_modules/@angular/cdk/layout';
 import Swal from "sweetalert2";
+import {MatDialog} from '@angular/material';
+import {ImagenesModalComponent} from '../../../modal/imagenes-modal/imagenes-modal.component';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-encuesta',
@@ -16,15 +19,19 @@ export class EncuestaComponent implements OnInit {
   }];
   goPreguntas = false;
   token = '';
+  data = {
+    url: ''
+  };
   dataSource = [
 
   ];
+  urlMensagge = environment.urlNG + 'assets/Mensajes/CLB-1.PNG';
   empty = false;
   displayedColumns: string[] = [
     'ENUNCIADO',
     '1',
   ];
-  constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver) {
+  constructor(private ProyectServices: ProyectoService, private route: ActivatedRoute, private router: Router, breakpointObserver: BreakpointObserver, private modal: MatDialog) {
     breakpointObserver.isMatched(('(max-width:450)'));
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait]).subscribe(result => {
@@ -37,6 +44,7 @@ export class EncuestaComponent implements OnInit {
   };
   ngOnInit() {
     this.getToken();
+    this.Imagenes(1);
   }
 
   getToken() {
@@ -163,9 +171,7 @@ export class EncuestaComponent implements OnInit {
   }
 
   updateValor(question) {
-    console.log(question);
     this.ProyectServices.updatePregunta(question).subscribe((res) => {
-      console.log(res);
     });
 
   }
@@ -186,19 +192,45 @@ export class EncuestaComponent implements OnInit {
           'success'
         ).then(() => {
           Swal(
-            'Muchas gracias por tu participación.',
-            'Tu información será administrada de manera\n' +
-            'totalmente confidencial y por profesionales. Muy\n' +
-            'pronto estarémos compartiendo contigo los\n' +
-            'resultados de manera global y nuestros planes de\n' +
-            'desarrollo.',
-            'success').then(() => {
-            window.location.href = 'http://nirho.com/';
+            'Listo.',
+            'El cuestionario se finalizo correctamente',
+            'success'
+          ).then(() => {
+            this.Imagenes(2);
+            setTimeout(() => {
+              window.location.href = 'http://nirho.com/';
+            }, 6000);
           });
-
         });
       }
       });
+  }
+
+  openDialogStart(data, time) {
+    this.modal.open(ImagenesModalComponent, {
+      data: data,
+      height: '500px',
+      width: '700px'
+    });
+
+    setTimeout(() => {
+      this.modal.closeAll();
+    }, time);
+  }
+
+  Imagenes(num) {
+    switch (num) {
+      case 1:
+        this.data.url =   environment.urlNG + 'assets/Inicial/CLB.png';
+        this.openDialogStart(this.data, 3000);
+        break;
+      case 2:
+        this.data.url =   environment.urlNG + 'assets/Mensajes/SALIDA.PNG';
+        this.openDialogStart(this.data, 6000);
+    }
+
+
+
   }
 
 

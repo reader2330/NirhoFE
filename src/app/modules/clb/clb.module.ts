@@ -32,6 +32,8 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import {LoginInterceptor} from './services/login.interceptor';
 import {GeneradorReportesComponent} from '../shared/components/generador-reportes/generador-reportes.component';
 import {SharedModule} from '../shared/shared.module';
+import {ImagenesModalComponent} from '../modal/imagenes-modal/imagenes-modal.component';
+import {AvisoComponent} from './components/aviso/aviso.component';
 declare var require: any;
 
 export function highchartsFactory() {
@@ -76,6 +78,11 @@ export function highchartsFactory() {
     DetallePreguntasComponent,
     EncuestaComponent,
     AvatarEditComponent,
+    AvisoComponent
+  ],
+  entryComponents: [
+    ImagenesModalComponent,
+    AvisoComponent
   ],
   exports: [
     CuestionarioSelectComponent

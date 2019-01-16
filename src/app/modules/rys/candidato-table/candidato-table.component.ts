@@ -19,6 +19,7 @@ export class CandidatoTableComponent implements OnInit {
   showTable = false;
   displayVacantes = ['nombre', 'rfc', 'perfil', 'pretencion'];
   displayEntrevistas = ['direccion', 'titulo', 'fechaEntrevista', 'Comentario'];
+  nameEntrevistas = ['Dirección', 'Título', 'Fecha de entrevista', 'Comentario'];
   hasCandidato = false;
   hasGerente = false;
   expandedElement: null;
