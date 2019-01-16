@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nirho.exception.NirhoControllerException;
 import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.ContratacionVacante;
+import com.nirho.model.SolicitanteVacante;
 import com.nirho.service.ContratacionVacanteService;
 import com.nirho.service.SolicitanteVacanteService;
 
@@ -84,6 +85,12 @@ public class ContratacionVacanteController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody ContratacionVacante contratacionVacante) throws NirhoControllerException{
 		try {
+			try {
+				SolicitanteVacante vacante = solicitanteVacanteService.getOne(contratacionVacante.getIdVacante());
+				vacante.setStatus(4);
+				solicitanteVacanteService.editar(vacante);
+			}catch(Exception e) {}
+			
 			contratacionVacanteService.save(contratacionVacante);
 			JSONObject json = new JSONObject();
 			json.accumulate("id", contratacionVacante.getId());

@@ -132,6 +132,8 @@ public class SolicitanteVacanteController {
 			JSONObject response = new JSONObject();
 			int abiertas = 0;
 			int asignadas = 0;
+			int entrevista = 0;
+			int contrato = 0;
 			for(SolicitanteVacante v: solicitanteVacanteService.getAll()) {
 				if(v.getStatus() == 1) {
 					abiertas++;
@@ -139,9 +141,17 @@ public class SolicitanteVacanteController {
 				if(v.getStatus() == 2) {
 					asignadas++;
 				}
+				if(v.getStatus() == 3) {
+					entrevista++;
+				}
+				if(v.getStatus() == 4) {
+					contrato++;
+				}
 			}
 			response.accumulate("abiertas", abiertas);
 			response.accumulate("asignadas", asignadas);
+			response.accumulate("entrevista", entrevista);
+			response.accumulate("contrato", contrato);
 			return response.toString();
 		} catch(NirhoServiceException e){
 			throw new NirhoControllerException("Problemas al obtener el registro de los entidads");
@@ -202,6 +212,7 @@ public class SolicitanteVacanteController {
 		try {
 			SolicitanteVacante vacante = solicitanteVacanteService.getOne(id);
 			if(vacante != null) {
+				vacante.setStatus(2);
 				vacante.setIdConsultor(idConsultor);
 				solicitanteVacanteService.editar(vacante);
 			}

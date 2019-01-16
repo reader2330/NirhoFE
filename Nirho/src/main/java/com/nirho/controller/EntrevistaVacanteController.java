@@ -30,6 +30,7 @@ import com.nirho.exception.NirhoServiceException;
 import com.nirho.model.Candidato;
 import com.nirho.model.EntrevistaVacante;
 import com.nirho.model.Solicitante;
+import com.nirho.model.SolicitanteVacante;
 import com.nirho.model.Usuario;
 import com.nirho.service.CandidatoService;
 import com.nirho.service.EmailService;
@@ -158,6 +159,12 @@ public class EntrevistaVacanteController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String add(@Valid @RequestBody EntrevistaVacante entrevistaVacante) throws NirhoControllerException{
 		try {
+			
+			try {
+				SolicitanteVacante vacante = solicitanteVacanteService.getOne(entrevistaVacante.getIdVacante());
+				vacante.setStatus(3);
+				solicitanteVacanteService.editar(vacante);
+			} catch(Exception e) {}
 			
 			entrevistaVacanteService.save(entrevistaVacante);
 			
