@@ -169,6 +169,9 @@ export class ReclutamientoService {
         idConsultor: id
       }});
   }
+  getCandidatoByID(id): Observable<any> {
+    return this.http.get(this.api + 'candidato/' + id, {headers: this.headers});
+  }
 
 
 }

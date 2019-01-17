@@ -7,25 +7,23 @@ import {ReclutamientoService} from '../services/reclutamiento.service';
   styleUrls: ['./estadisticas-vacantes.component.scss']
 })
 export class EstadisticasVacantesComponent implements OnInit {
-  totalCandidatos;
-  totalVacantes;
-  totalVacantesTipo;
+  totalCandidatos = {};
+  totalVacantes = {};
+  totalVacantesTipo = {};
   pies = {};
   showDatos = false;
 
   constructor(private Reclutamiento: ReclutamientoService) { }
-
   ngOnInit() {
     this.Reclutamiento.getCandidatosTotales().subscribe(res => {
-      console.log(res);
       this.totalCandidatos = res;
     });
     this.Reclutamiento.getVacantesTotales().subscribe(res => {
-      console.log(res);
+
       this.totalVacantes = res;
     });
     this.Reclutamiento.getVacanteTipo().subscribe(res => {
-      console.log(res);
+
        this.pies = {
         chart: {
           type: 'pie',
@@ -51,6 +49,7 @@ export class EstadisticasVacantesComponent implements OnInit {
       };
       this.totalVacantesTipo = res;
       this.showDatos = true;
+
     });
   }
 

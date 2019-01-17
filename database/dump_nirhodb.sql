@@ -18,7 +18,7 @@
 --
 -- Table structure for table `actividades_puesto_vacante`
 --
-
+use nirhodb;
 DROP TABLE IF EXISTS `actividades_puesto_vacante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
@@ -1883,11 +1883,7 @@ CREATE TABLE `proyecto` (
 -- Dumping data for table `proyecto`
 --
 
-LOCK TABLES `proyecto` WRITE;
-/*!40000 ALTER TABLE `proyecto` DISABLE KEYS */;
-INSERT INTO `proyecto` VALUES (1,1,'CLIMA LABOLAL KKANA',1,1,'AQUI',1,'2018-10-10 00:00:00','2018-11-22 00:00:00',3,NULL,NULL,NULL,NULL,1,1),(2,1,'CLIMA LABORAL PTITO',2,1000,'PTITO',50,NULL,NULL,NULL,3,NULL,NULL,NULL,2,1),(3,1,'CLIMA LABORAL DE CLIMA AUTOMOTRIZ S.A.',3,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 00:00:00','2019-08-09 00:00:00',30,3,NULL,NULL,NULL,3,1),(4,1,'CLIMA LABORAL TECNOLOGOP',4,14,'OFICINA CENTRAL Y PLANTA',13,'2018-10-15 17:27:41','2018-11-15 00:00:00',10,1,NULL,NULL,NULL,4,1),(5,1,'CLIMA LABORAL MAGALLANES HERMANOS S.A.',31,238,'LAS 5 SEDES',237,NULL,NULL,NULL,2,NULL,NULL,NULL,5,7),(6,4,'Prueba1',32,10,'Prueba1',10,NULL,NULL,NULL,1,NULL,NULL,NULL,6,4),(7,4,'Prueba2',33,10,'Prueba2',10,NULL,NULL,NULL,1,NULL,NULL,NULL,7,4),(8,3,'asdasd',34,10,'santa',1,'2018-12-01 00:00:00','2018-12-11 00:00:00',10,1,NULL,NULL,NULL,8,4),(9,2,'xzcz',35,22,'sdas',2,NULL,NULL,NULL,2,NULL,NULL,NULL,9,1),(10,3,'wesda',36,22,'sadaSA',23,'2018-12-03 00:00:00','2018-12-12 00:00:00',19,1,NULL,NULL,NULL,10,4),(11,4,'jop 1',37,100,'gfsf',1,NULL,NULL,NULL,1,NULL,NULL,NULL,11,4);
-/*!40000 ALTER TABLE `proyecto` ENABLE KEYS */;
-UNLOCK TABLES;
+
 
 --
 -- Table structure for table `proyecto_pvc_area`

@@ -26,7 +26,7 @@ export class SolicitanteBandejaComponent implements OnInit {
   showTable = false;
   displayVacantes = ['Vacante', 'numeroVacantes', 'detail1', 'detail2' ];
   colums = ['Vacante', 'numeroVacantes' ];
-  displayEntrevistas = ['direccion', 'titulo', 'fechaEntrevista', 'Comentario'];
+  displayEntrevistas = ['Candidato', 'direccion', 'titulo', 'fechaEntrevista', 'Comentario'];
   hasCandidato = false;
   hasGerente = false;
   expandedElement: null;
@@ -34,6 +34,9 @@ export class SolicitanteBandejaComponent implements OnInit {
   solicitante = {};
   entrevistas = [];
   showTable2 = false;
+  candidatos = [];
+
+  first = true;
   constructor(private ReclutamientoServices: ReclutamientoService, private Login: LoginService, public modal: MatDialog) { }
 
   ngOnInit() {
@@ -42,7 +45,6 @@ export class SolicitanteBandejaComponent implements OnInit {
   }
   getVacantesBySolicitante() {
     this.ReclutamientoServices.getVacantesBySolicitante(this.user['username']).subscribe(res => {
-      console.log(res);
       this.vacantes = res;
       this.showTable = true;
     });
@@ -60,6 +62,11 @@ export class SolicitanteBandejaComponent implements OnInit {
   getEntrevistasBySolicitante() {
     this.ReclutamientoServices.getEntrevistaByType('Solicitante', this.user['username']).subscribe(res => {
       this.entrevistas = res;
+      for (let ent of this.entrevistas) {
+        this.ReclutamientoServices.getCandidatoByID(ent.idCandidato).subscribe(res2 => {
+          this.candidatos.push(res2);
+        });
+      }
       this.showTable2 = true;
     });
   }
@@ -74,13 +81,22 @@ export class SolicitanteBandejaComponent implements OnInit {
   }
 
   OpenModalContrato(element) {
-    console.log(element);
     this.modal.open(ModalContratoComponent, {
       data: {
         idVacante: element.id,
         type: true
       }
     });
+  }
+
+  getCandidato(id) {
+    let name = '';
+    for (let cand of this.candidatos) {
+      if (id === cand['id']) {
+        name = cand['nombre'];
+      }
+    }
+    return name;
   }
 
   OpenModalCandidatos(element) {

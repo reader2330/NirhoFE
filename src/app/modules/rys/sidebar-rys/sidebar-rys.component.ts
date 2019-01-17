@@ -83,7 +83,7 @@ export class SidebarRysComponent implements OnInit {
         },
         {
           id_submodulo: 10,
-          descripcion : 'Periodo de garantia'
+          descripcion : 'Periodo de garantía'
         },
         {
           id_submodulo: 11,
@@ -91,9 +91,11 @@ export class SidebarRysComponent implements OnInit {
         },
         {
           id_submodulo: 6,
-          descripcion: 'Estadisticas'
+          descripcion: 'Estadísticas'
         }
       ];
+      this.selectModule = 6;
+      this.selectedItem = 6;
       this.showButtonHome = true;
     }
     if (this.user['rol'] === 3) {
